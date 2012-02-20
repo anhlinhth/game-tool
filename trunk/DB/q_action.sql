@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2012 at 04:41 AM
+-- Generation Time: Feb 20, 2012 at 05:41 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `action`
+-- Table structure for table `q_action`
 --
 
-CREATE TABLE IF NOT EXISTS `action` (
+CREATE TABLE IF NOT EXISTS `q_action` (
   `ActionID` int(11) NOT NULL AUTO_INCREMENT,
   `ActionName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ActionID`)
