@@ -23,6 +23,9 @@ class Zend_View_Helper_TopMenu
 			case 'gift':
 				$selectGift = 'current';
 				break;
+			case 'quest':
+				$selectQuest = 'current';
+				break;	
 		}
 		
 		$strList .= "<div id='topmenu'>
@@ -50,6 +53,8 @@ class Zend_View_Helper_TopMenu
         if(Utility::checkPrivilege($view, "ibshop", "index"))
             $strList .= "<li class='$selectGift'><a href='$view->baseUrl/ibshop/index'>IBShop</a></li>";    
 		
+        if(Utility::checkPrivilege($view, "quest", "index"))
+            $strList .= "<li class='$selectQuest'><a href='$view->baseUrl/quest/index'>Quest</a></li>"; 
 		$strList .=		"</ul>
 					</div>";
 		
