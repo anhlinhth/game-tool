@@ -73,6 +73,13 @@ class Zend_View_Helper_TopPanel
                 if(Utility::checkPrivilege($view, 'ibshop', 'position'))
                     $strList .= "<li><a href='$view->baseUrl/ibshop/arrange' class='report'>Sắp xếp shop</a></li>";
                 break;
+                
+            case 'quest':
+				if(Utility::checkPrivilege($view, 'quest', 'questline'))
+					$strList .= "<li><a href='$view->baseUrl/quest/questline' class='report'>Quest Line</a></li>";
+				if(Utility::checkPrivilege($view, 'quest', 'listquest'))
+					$strList .= "<li><a href='$view->baseUrl/quest/listquest' class='report'>Quest</a></li>";
+				  
 		}	
 		
 		$strList .= "</ul>

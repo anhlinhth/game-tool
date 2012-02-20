@@ -6,7 +6,7 @@ class IndexController extends BaseController
 {
 	public function indexAction()
 	{
-		
+		 $this->_redirect ("/quest");
 	}
 }
 ?>
