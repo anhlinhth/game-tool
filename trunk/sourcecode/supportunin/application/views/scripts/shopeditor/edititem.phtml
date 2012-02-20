@@ -1,0 +1,48 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery-ui.css" />
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery.ui.datetimepicker.js"></script>
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<div id="box">
+	<h3 id="adduser">Cập nhật item</h3>
+	<form id="form" action="" method="post" enctype="multipart/form-data">	  
+		<fieldset id="item">
+		<legend>Thông tin item</legend>
+		<label for="image">Hình : </label> 
+		<input name="image" type="file" tabindex="1" />
+		<br />
+		<label for="image"> </label> 
+		<?php 
+			if($this->form->type == ITEM_TYPE_GIFT)
+				$url = "$this->baseUrl/media/images/item/itemgift/{$this->form->image}";
+			else
+				$url = "$this->baseUrl/media/images/item/{$this->form->image}";
+		?>
+		<img src="<?php echo $url ?>"/>
+		<br />
+		<label for="priceInGame">Giá bằng vàng : </label> 
+		<input name="priceInGame" value="<?php echo $this->form->priceInGame ?>" id="priceInGame" type="text" tabindex="1" />
+		<br />
+		<label for="priceOutGame">Giá bằng xu : </label> 
+		<input name="priceOutGame" value="<?php echo $this->form->priceOutGame ?>" id="priceOutGame" type="text" tabindex="1" />
+		<br />
+		<label for="disCount">Giảm giá(%) : </label> 
+		<input name="disCount" value="<?php echo $this->form->disCount ?>" id="disCount" type="text" tabindex="1" />
+		<br />
+		<label for="enableInShop">Đặt trong shop : </label> 
+		<input name="enableInShop" <?php if($this->form->enableInShop) echo "checked" ?> value="1" id="enableInShop" type="checkbox" tabindex="1" />
+		<br />
+		</fieldset>
+	  <div align="center">
+	  <input id="button1" type="submit" value="Lưu" /> &nbsp;&nbsp; 	  
+	  <input id="button1" type="button" value="Quay lại" onclick="window.location='<?php echo $this->baseUrl ?>/shopeditor/itemmanager'" />
+	  </div>
+	</form>
+</div>
+<script type="text/javascript">
+	
+</script>

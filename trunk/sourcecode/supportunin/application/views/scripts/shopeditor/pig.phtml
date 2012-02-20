@@ -1,0 +1,224 @@
+<!--<script src="<?php echo $this->baseUrl.DS.MEDIA_JS.DS; ?>jquery-1.4.4.min.js"></script>-->
+
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+$("document").ready(function()
+{
+	$("title").html("Danh sách heo");
+	$("#postform").submit(function()
+	{
+		alert($(".deletecheckbox:checked").length)
+		return confirm("Bạn có muốn xóa không ?");
+	});
+});
+
+
+function PigDetail(id)
+{
+	parent.location = "<?php echo $this->baseUrl ?>/shopeditor/" + "pigdetail?id=" + id;
+}
+
+function SelectAll(checkboxall)
+{
+	$(".deletecheckbox").attr("checked", checkboxall.checked);
+}
+
+function Page(url, page)
+{
+	var link;
+	
+	if(url.indexOf('?') == -1)
+	{
+		link = url + "?page=" + page;
+	}
+	else
+	{
+		link = url + "&page=" + page;
+	}
+	
+	parent.location = link;
+}
+
+function ExportPig()
+{
+    parent.location = "<?php echo $this->baseUrl ?>/shopeditor/exportpig";
+}
+</script>
+
+<style>
+.text
+{   
+    background-color: #FFFF80;
+    font-weight: bolder;
+}
+
+.editbox
+{
+	width: 150px;
+	margin: 5px 5px 5px 5px;
+}
+
+.combobox
+{
+	width: 50px;
+	margin: 1px 1px 1px 1px;
+}
+
+.comboboxName
+{
+    border:1px #999 solid;
+    padding: 6px 10px; 
+    margin:2px 0; 
+    font-size:1.3em; 
+    color:#666; 
+    font-family:Verdana, Geneva, sans-serif;
+}
+</style>
+<?php if($this->errMsg) :?>
+    <?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>        
+    <?php $this->showMessage($this->msg)?>    
+<?php endif;?>
+
+<div id="header">Danh sách heo</div>
+
+<div id="main">
+    <form id="form" action="" method="get" >		
+    <table class="centerTable" border="0" style="margin-bottom: 20px;">
+        <tr align="center">  
+		    <td width="50px" style="text-align: center;padding: 0 0">
+                <input style="width: 100px;" type="submit" id="button1" value="Export pig" name="exportPig" />
+                <input style="width: 120px;" type="submit" id="button2" value="Sync" name="sync" />
+            </td>            
+            <td width="120px" style="text-align: center;">Tên heo cần tìm:
+            
+                <input type="text" class="editbox" name="name" />
+            </td>
+            <!--<td width="120px" style="text-align: right;">Giống heo cần tìm:</td>
+            <td>
+                <select class="combobox" name="gender">
+                    <option value=""></option>
+					<option value="1">Đực</option>
+					<option value="0">Cái</option>
+				</select>
+            </td>
+            <td width="120px" style="text-align: right;">Cấp độ cần tìm:</td>    
+            <td>
+                <select class="combobox" name="level">
+                    <option value=""></option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+				</select>
+            </td> -->  
+            <td width="50px" style="text-align: center;padding: 0 0">
+                <input style="width: 50px;" type="submit" id="button1" value="Tìm" name="search" />      
+                <input style="width: 50px;" type="submit" id="button1" value="All" name="searchAll" />
+            </td>
+        </tr>
+    </table>
+    </form>
+	
+    <form id="postform" action="" method="post">
+	<table class="centerTable" border="1px">
+		<thead>
+			<tr align="center">			
+				<!--<th width="50px"><input type="checkbox" onchange="SelectAll(this);" /></th>-->
+				<th width="20px">STT</th>
+				<th width="50px">Loại</th>			
+				<th width="50px">Hình</th>
+				<th width="150px">Tên</th>
+				<th width="50px">Giống</th>
+				<th width="50px">Giá bán</th>
+				<th width="50px">Đơn vị</th>
+				<th width="50px">Bán trong shop</th>
+                <th width="50px">% giảm giá</th>
+				<th width="75px">Thao tác</th>
+			</tr>
+        </thead>
+		<tbody>
+			<?php			
+			for($i = 0; $i < count($this->dislayData); $i++)
+			{
+				$gender = "Cái";
+				if($this->dislayData[$i]->gender)
+				{
+					$gender = "Đực";
+				}
+
+				$imgUrl = $this->baseUrl."/media/images/pig/Pig_". $this->dislayData[$i]->type . ".png";
+                $price = $this->dislayData[$i]->priceInGame ;
+                $unitPrice = "vàng" ;
+                if( $this->dislayData[$i]->priceOutGame > 0 )
+                {
+                    $price = $this->dislayData[$i]->priceOutGame ;
+                    $unitPrice = "xu" ;
+                }
+                
+                $enableInShop = "không" ;
+                if( $this->dislayData[$i]->enableInShop )
+                {
+                    $enableInShop = "có" ;
+                }
+                /*<td width='50px'><input class='deletecheckbox' name='checkbox[]' type='checkbox' value='{$this->dislayData[$i]->id}' /></td>*/
+				echo "
+					<tr align='center'>
+						<td width='20px'>{$this->dislayData[$i]->id}</td>
+						<td width='100px'>{$this->dislayData[$i]->type}</td>
+						<td width='50px'><img width='100px' height='86px' src='{$imgUrl}' /></td>
+						<td width='150px'>{$this->dislayData[$i]->name}</td>
+						<td width='50px'>{$gender}</td>
+						<td width='50px'>{$price}</td>
+						<td width='50px'>{$unitPrice}</td>
+						<td width='50px'>{$enableInShop}</td>
+                        <td width='50px'>{$this->dislayData[$i]->disCount}</td>
+						<td width='75px'><a href='javascript:;' title='Sửa' onclick='PigDetail({$this->dislayData[$i]->id})'><img src='$this->baseUrl/media/images/icons/edit-icon.gif' /></a></td>
+					</tr>";
+			}
+			?>
+			<tr align="center">
+				<!--<td width="50px"><input style="width: 50px;" type="submit" value="Xóa" name="delete" /></td>-->
+				<td colspan="10">
+					<?php
+					if($this->TotalPage > 1)
+					{
+						$url = $this->baseUrl."/shopeditor/pig";
+
+						echo "<table border='1px'>
+								<tr>
+									<td>
+										Page:&nbsp;
+										<select name='page' id='pageselection' onchange='Page(\"$url\", this.selectedIndex + 1);'>";
+											for($i = 1; $i <= $this->TotalPage; $i++)
+											{
+												if($i == $this->CurPage)
+												{
+													echo "<option SELECTED value='$i'>$i</option>";
+												}
+												else
+												{
+													echo "<option value='$i'>$i</option>";
+												}
+											}
+						echo "
+										</select>
+										/ $this->TotalPage
+									</td>
+								</tr>
+							</table>";
+					}
+					?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</form>	
+</div>

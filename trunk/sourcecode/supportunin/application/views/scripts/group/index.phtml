@@ -1,0 +1,19 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<form name="formPaging" action="" method="post">
+<div id="box">
+	<h3>Nhóm</h3>
+	<table width="100%">
+		<thead>
+			<tr>
+				<th width="40"><a href="#">STT</a></th>
+				<th><a href="#">Tên nhóm</a></th>							
+				<th width="80">Thao tác</th>
+			</tr>
+		</thead>
+		<?php $this->listGroup($this->data, $this->page, $this->items, $this) ?>		
+	</table>	
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
+</div>
+</form>

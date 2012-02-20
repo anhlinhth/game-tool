@@ -1,0 +1,104 @@
+<div id="box">
+    <h3>Lý do đền bù</h3>
+    <div>
+        <table id="tblList"></table>
+         <div id="pager"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("document").ready(function()
+    {
+        $('#tblList').jqGrid({
+            url:'<?php echo $this->baseUrl?>/compensation/listreason',
+            editurl:'<?php echo $this->baseUrl?>/compensation/operreason',
+            mtype: 'POST',
+            datatype: 'json',
+            colNames:["ID","Name"],
+            colModel:[
+                {name:"id",index:"id",key:true,width:40,editable:false,hidden:true},
+                {name:"name",index:"name",width:500,editable:true, editrules:{required:true},"formoptions": {elmsuffix: ' *'}},
+            ],
+            rowNum:20,
+            rowList:[10,20,30,60,100],
+            pager: '#pager',
+            shrinkToFit: false,
+            rownumbers:true,
+            hidegrid:false,
+            emptyrecords: "No records.",
+            autoheight: true,
+            autowidth: true,
+            toppager:true,
+            viewrecords: true,
+            caption: "Lý do",
+            subGrid: true,
+            subGridRowExpanded: function(subgrid_id, row_id) {
+                subgrid_table_id = subgrid_id+"_t";
+                subgrid_pager_id = "p_"+subgrid_id;
+                jQuery("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id ='"+ subgrid_pager_id + "' class='scroll'></div>");
+                jQuery("#"+subgrid_table_id).jqGrid({
+                    url:'<?php echo $this->baseUrl?>/compensation/listreasondetail',
+                    editurl:'<?php echo $this->baseUrl?>/compensation/operreasondetail',
+                    mtype: 'POST',
+                    datatype: 'json',
+                    postData:{
+                        reason_id: function() {return row_id;}
+                    },
+                    colNames: ['ID','ReasonId','Name','Enable'],
+                    colModel: [
+                        {name:"id",index:"id",width:80,key:true,hidden:true},
+                        {name:"reason_id",index:"reason_id",width:80,key:true, editable:true,hidden:true, editoptions:{defaultValue:row_id}},
+                        {name:"name",index:"name",width:350,editable:true, editrules:{required:true},"formoptions": {elmsuffix: ' *'}},
+                        {name:"enable",index:"enable",width:60,editable:true, align: 'center', edittype:'checkbox', 
+                            formatter: 'checkbox', editoptions: {value: '1:0'}},
+                    ],
+                    emptyrecords: "No records.",
+                    height: "100%",
+                    autowidth: false,
+                    rowNum:20,
+                    sortorder: "asc",
+                    pager: subgrid_pager_id
+                }).jqGrid('navGrid',"#"+subgrid_pager_id,
+                {
+                    search:false,edit:true,add:true,del:true,cloneToTop:true}, 
+                    editSettings2,
+                    addSettings1
+                );
+            }
+        }).jqGrid('navGrid','#pager',
+            {search:false,edit:true,add:true,del:true,cloneToTop:true}, //options
+            editSettings1, 
+            addSettings1
+        ).setGridHeight(450,true);;
+    });
+    
+    var editSettings1 = {
+        width: 400,
+        closeOnEscape:true,
+    };
+    
+    var editSettings2 = {
+        width: 400,
+        closeOnEscape:true,
+        onclickSubmit: function (params, postdata){
+            if ($('#enable:checked').val())
+            {
+                postdata.enable = 1;
+            }
+            else
+            {
+                postdata.enable = 0;
+            }
+        },
+    };
+    
+    var addSettings1 = {
+        recreateForm:true, 
+        width: 400,
+        modal:false,
+        reloadAfterSubmit:true,
+        closeOnEscape:true,
+        saveKey:[true,13],
+        closeAfterEdit:true,
+        top:0
+    };
+</script>
