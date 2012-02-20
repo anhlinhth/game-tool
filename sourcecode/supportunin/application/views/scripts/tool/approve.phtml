@@ -1,0 +1,277 @@
+<?php
+    $giftType = require_once ROOT_CONFIG.DS.'GiftType.php';
+    $reasonType = require_once ROOT_CONFIG.DS.'ReasonType.php';
+?>
+<div class="msg" id="divMsg"></div>
+<div id="box">
+    <h3>Duyệt đền bù</h3>
+    <form id="form">
+    <div>
+        <fieldset>
+            <legend>Filter</legend>
+            <table border="0" style="border: none; width: 600px;">
+                <tr>
+                    <td style="border: none;">
+                        Trạng thái:
+                    </td>
+                    <td style="border: none;">
+                        <select id="status" class="width150">
+                            <option value="<?php echo AppConstant::COMPENSATION_WAITING ?>">Chờ duyệt</option>
+                            <option value="<?php echo AppConstant::COMPENSATION_DENIED ?>">Không duyệt</option>
+                            <option value="<?php echo AppConstant::COMPENSATION_APRROVED ?>">Đã duyệt</option>
+                            <option value="<?php echo AppConstant::COMPENSATION_EXECUTED ?>">Đã thực thi</option>
+                        </select>
+                    </td>
+                    <td style="border: none;">
+                        Tài khoản:
+                    </td>
+                    <td style="border: none;">
+                        <input id="txtAccount" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: none;">
+                        From date:
+                    </td>
+                    <td style="border: none;">
+                        <input id="fromDate" class="width125" type="text"/>
+                    </td>
+                    <td style="border: none;">
+                        To date:
+                    </td>
+                    <td style="border: none;">
+                        <input id="toDate" class="width125" type="text"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="border: none;">
+                    <hr/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="border: none;">
+                        <input id="waiting" name="waiting" type="button" value="Set waiting"/>
+                        <input id="approve" name="Approve" type="button" value="Approve"/>
+                        <input id="non-approve" name="non-approve" type="button" value="Non Approve"/>
+                        <input id="execute" name="Execute" type="button" value="Execute"/>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    </form>
+
+    <div>
+        <table id="tblList"></table>
+         <div id="pager"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var type = "";
+    var duyet = -1;
+    var lastsel;
+    var lastsel_1;
+
+    $("document").ready(function()
+    {
+        // Add event
+        $("#status").change(loadData);
+        $("#txtAccount").change(loadData);
+        $("#fromDate").change(loadData);
+        $("#toDate").change(loadData);
+        
+        $("#waiting").click(onClickWaiting);
+        $("#approve").click(onClickApprove);
+        $("#non-approve").click(onClickNonApprove);
+        $("#execute").click(executeCompensation);
+        
+        $("#divMsg").hide();
+        
+        $("#fromDate, #toDate").datepicker({dateFormat: "yy-mm-dd"});
+        setDefaultDatePicker("#fromDate", "#toDate");
+
+        $('#tblList').jqGrid({
+            url:'<?php echo $this->baseUrl?>/compensation/listcompensation',
+            editurl:'<?php echo $this->baseUrl?>/compensation/operationcompensation',
+            mtype: 'POST',
+            postData:{
+                status:function(){ return $("#status").val()},
+                account:function(){return $("#txtAccount").val()},
+                fromDate:function(){ return $("#fromDate").val()},
+                toDate:function(){ return $("#toDate").val()},
+            },
+            datatype: 'json',
+            colNames:["ID", "CharName","CharID","Reason", "Reason(New)", "ReasonDesc","ReasonDesc(New)","Comment","Status","CreateDate","CreateBy","ApproveDate","ApporveBy","ExecDate","ExecBy"],
+            colModel:[
+                {name:"CompensationId",index:"CompensationId",key:true,width:40,editable:false,hidden:true},
+                {name:"CharName",index:"CharName",width:100,editable:false},
+                {name:"CharID",index:"CharID",width:40,editable:false,hidden:true},
+                {name:"Reason",index:"Reason",width:100,editable:false, edittype:'select',formatter:'select',
+                    editoptions:{value:<?php echo json_encode($reasonType);?>}},
+                {name:"reason_id",index:"reason_id",width:100,editable:false, edittype:'select',formatter:'select',
+                    editoptions:{
+                        value:{<?php foreach ($this->data['reason'] as $item)
+                            {
+                                echo $item['id'].':\''.$item['name'].'\',';
+                            }
+                            ?>},
+                        dataEvents:[{
+                            type: 'change',
+                            fn: function(e)
+                            {
+                                var value = this.value;
+                                updateReasonDetail(value);
+                            }
+                        }]}},
+                {name:"ReasonDesc",index:"ReasonDesc",width:100,editable:false, edittype:'textarea',editoptions:{rows:5, cols:50}},
+                {name:"reason_detail_id",index:"reason_detail_id",width:100,editable:true, edittype:'select',formatter:'select',
+                    editoptions:{
+                        value:{<?php foreach ($this->data['reasonDetail'] as $item)
+                            {
+                                echo $item['id'].':\''.$item['name'].'\',';
+                            }
+                            ?>}
+                    }
+                },
+                {name:"Comment",index:"Comment",width:150,editable:false,edittype:'textarea'},
+                {name:"Status",index:"Status",width:70,editable:false,edittype:'select',formatter:'select',
+                    editoptions:{rows:5, cols:50, value:"-1:Chờ duyệt;0:Không duyệt;1:Đã duyệt;2: Đã thực thi"}},
+                {name:"CreateDate",index:"CreateDate",width:110,editable:false},
+                {name:"create_by",index:"create_by",width:70,editable:false},
+                {name:"approve_date",index:"approve_date",width:110,editable:false},
+                {name:"approve_by",index:"approve_by",width:70,editable:false},
+                {name:"execute_date",index:"execute_date",width:110,editable:false},
+                {name:"execute_by",index:"execute_by",width:70,editable:false}
+            ],
+            rowNum:20,
+            rowList:[10,20,30,60,100],
+            pager: '#pager',
+            shrinkToFit: false,
+            rownumbers:true,
+            hidegrid:false,
+            emptyrecords: "No records.",
+            autoheight: true,
+            autowidth: true,
+            toppager:true,
+            viewrecords: true,
+            subGrid: true,
+            subGridRowExpanded: function(subgrid_id, row_id) {
+                   var subgrid_table_id;
+                   subgrid_table_id = subgrid_id+"_t";
+                   subgrid_pager_id = "p_"+subgrid_id;  
+                   jQuery("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table>");
+                   jQuery("#"+subgrid_table_id).jqGrid({
+                      url:'<?php echo $this->baseUrl?>/compensation/listcompensationdetail',
+                      mtype: 'POST',
+                      datatype: 'json',
+                      postData:{
+                        compensation_id:function() { return row_id;},
+                      },
+                      colNames: ['id','compensation_id','type','name','rank','image','quantity','object_id'],
+                      colModel: [
+                        {name:"id",index:"id",width:80,key:true,hidden:true},
+                        {name:"compensation_id",index:"compensation_id",width:130,hidden:true,editable:false},
+                        {name:"type",index:"type",width:80,align:"center",editable:true,edittype:'select',formatter:'select',editoptions:{rows:5, cols:50, value:<?php echo json_encode($giftType);?>}
+                        },
+                        {name:"name",index:"name",width:280,align:"left",editable:false,edittype:'text'},    
+                        {name:"rank",index:"rank",width:50,align:"center",editable:false,edittype:'text'},
+                        {name:"image",index:"image",width:100,align:"center",editable:false,edittype:'image',formatter:imageFormat},  
+                        {name:"quantity",index:"quantity",width:55,align:"center",editable:false},           
+                        {name:"object_id",index:"object_id",width:120,align:"right",sortable:false,editable:false,hidden:false}
+                      ],
+                      emptyrecords: "No records.",
+                      height: "100%",
+                      autowidth: false,
+                      rowNum:20,
+                      sortname: 'num',
+                      sortorder: "asc",
+                      pager: subgrid_pager_id
+                   });
+                },
+            caption: "Danh sách đền bù",
+            multiselect:true,
+            multiboxonly:true,
+            afterInsertRow: function(rowid, aData)
+            {
+                jQuery('#tblList').setCell(rowid, 9, '', {color:'red', 'font-weight':'bold'});
+            }
+        });  
+        $('#tblList').jqGrid('navGrid','#pager',
+                        {search:false,edit:false,add:false,del:true,cloneToTop:true}, //options
+                        {} // search options
+                        );
+        $('#tblList').setGridHeight(450,true);
+        $('.ui-jqgrid-titlebar-close','#gview_grid').remove();    
+    });
+    
+    function onClickWaiting()
+    {
+        approveCompensation(<?php echo AppConstant::COMPENSATION_WAITING?>);
+    }
+    
+    function onClickApprove()
+    {
+        approveCompensation(<?php echo AppConstant::COMPENSATION_APRROVED?>);
+    }
+    
+    function onClickNonApprove()
+    {
+        approveCompensation(<?php echo AppConstant::COMPENSATION_DENIED?>);
+    }
+    
+    function approveCompensation(type)
+    {
+            var ids = $('#tblList').jqGrid('getGridParam','selarrrow');
+           if(ids == '')
+           {
+               alert('Chọn item đền bù cần duyệt');
+           }
+           else
+           {
+                $.ajax({
+                    type: "POST",
+                    url: '<?php echo $this->baseUrl?>/compensation/approve',
+                    data: "listId=" + ids + "&type="+type,
+                    dataType: "json",
+                    success: function(data){
+                       $("#tblList").clearGridData();
+                       $("#tblList").trigger("reloadGrid");       
+                    }
+                });
+                
+           }
+    }
+    
+    function executeCompensation()
+    {
+        $.ajax({
+            type: "POST",
+            url: '<?php echo $this->baseUrl?>/compensation/execute',
+            success: function(data){
+                $("#divMsg").text(data);
+                $("#divMsg").show();
+                //$("#divMsg").delay(5000).slideUp('1500');
+                $("#divMsg").delay(5000).fadeOut('slow');
+                $("#tblTask").clearGridData();
+                $("#tblList").trigger("reloadGrid");
+            }
+        });
+    }
+    
+    function loadData()
+    {
+       $("#tblList").clearGridData();
+       $("#tblList").trigger("reloadGrid");               
+    }
+    
+    function imageFormat(cellValue, options, rowObject)
+    {
+        if (cellValue == '')
+        {
+            return '';
+        }
+        type = rowObject[2];
+        return '<img style="width:50px;height:50px" src="<?php echo $this->baseUrl ?>/media/images/'+ type + '/'+ cellValue + '"/>';
+    }
+</script>

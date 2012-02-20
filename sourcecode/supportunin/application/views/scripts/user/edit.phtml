@@ -1,0 +1,40 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<div id="box">
+	<h3 id="adduser">Người dùng</h3>
+	<form id="form" action="" method="post">
+	  <fieldset id="personal">
+		<legend>Thông tin người dùng</legend>
+		<label for="username">Tài khoản : </label> 
+		<input name="username" <?php if($this->actionName == 'edit') echo 'readonly' ?> value="<?php echo $this->form->username ?>" id="username" type="text" tabindex="1" />
+		<br />
+		<label for="fullname">Họ tên : </label>
+		<input name="fullname" value="<?php echo $this->form->fullname ?>" id="fullname" type="text" 
+		tabindex="2" />
+		<br />
+		<label for="fullname">Nhóm : </label>
+		<?php $this->selection($this->groups,$this->form->group_id,'group_id'); ?>
+		<br />
+		<label for="active">Kích hoạt : </label>
+		<input style="vertical-align: middle; margin-top: 5px;" <?php if($this->form->active) echo "checked" ?> name="active" id="yes" type="checkbox" 
+		value="1" tabindex="35" />
+		<br />		
+		<label for="pass">Mật khẩu : </label>
+		<input name="password" id="pass" type="password" 
+			   tabindex="2" />
+		<br />
+		<label for="pass-2">Xác nhận: </label>
+		<input name="password2" id="pass-2" type="password" 
+		tabindex="2" />
+		<br />
+	  </fieldset>	  	  
+	  <div align="center">
+	  <input id="button1" type="submit" value="Lưu" /> &nbsp;&nbsp; 	  
+	  <input id="button1" type="button" value="Quay lại" onclick="history.go(-1)" />
+	  </div>
+	</form>
+</div>

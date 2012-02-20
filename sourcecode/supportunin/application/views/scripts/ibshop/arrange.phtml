@@ -1,0 +1,520 @@
+<div id="template" style="display: none;">
+    <div>
+        <input type="checkbox" value="Check all"/> <input type="button" value="Add" onclick="showEditForm('')"/>
+    </div>
+</div>
+
+<div id="dialog-modal" title="Edit form" style="display: none;">
+    <div id="divAdd{id}" style="display: none;">
+        <table>
+            <tr>
+                <td>Select: </td>
+                <td>
+                    <select id="slType{id}">
+                    <?php
+                        foreach($this->data['itemType'] as $item)
+                        {
+                            $id = $item['id'];
+                            $name = $item['name'];
+                            echo "<option value='$id'>$name</option>";
+                        }
+                    ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td><input type="text" id="txtSearch{id}"/></td>
+            </tr>
+        </table>
+    </div>
+    <input type="hidden" id="hidItemId{id}">
+    <table>
+        <tr>
+            <td>
+                Name: 
+            </td>
+            <td>
+                <label id="lblName{id}"></label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Image: 
+            </td>
+            <td>
+                <img id="imgItem{id}" src="" alt="" style="width:50px;height:50px"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Price: 
+            </td>
+            <td>
+                <input id="txtPrice{id}" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Display Price: 
+            </td>
+            <td>
+                <input id="txtDisplayPrice{id}" type="text"/> [Using for display]
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Discount: 
+            </td>
+            <td>
+                <input id="txtDiscount{id}" type="text"/> [Using for display]
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Currency: 
+            </td>
+            <td>
+                <select id="optCurrency{id}">
+                <?php
+                    foreach($this->data['currency'] as $item)
+                    {
+                        $id = $item['id'];
+                        $name = $item['name'];
+                        echo "<option value='$id'>$name</option>";
+                    }
+                ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Status: 
+            </td>
+            <td>
+                <input id="txtStatus{id}" type="text"/>
+                <select>
+                    <option>Mới</option>
+                    <option>Hot</option>
+                    <option>Giảm giá</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Enable: 
+            </td>
+            <td>
+                <input id="chkEnable{id}" type="checkbox"/> Active
+                <br>
+                <input type="checkbox" name="opt"> Valid in
+            </td>
+        </tr>
+    </table>
+    
+</div>
+
+<div id="box">
+    <h3 id="adduser">Sắp xếp shop</h3>
+    <form>
+    <div>
+        <div>
+            Chọn shop: 
+            <select id="slShop">
+                <option value="">Chọn shop</option>
+                <?php
+                    foreach($this->data['shop'] as $item)
+                    {
+                        $id = $item['id'];
+                        $name = $item['name'];
+                        echo "<option value='$id'>$name</option>";
+                    }
+                ?>
+            </select>
+            <div id="divTab">
+                <ul id="list-tab">
+                </ul>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+<script type="text/javascript">
+    var item_id = ''; // Luu item id khi edit form
+    var current_tab = ''; // Luu id cua tab hien tai dang focus
+    var $div = $('<div/>').css({
+        position: 'absolute',
+        background: 'white',
+        border: '1px solid black',
+        padding: '10px',
+        zIndex: 999,
+        display: 'none'
+    }).appendTo('body');
+
+    $("document").ready(function()
+    {
+        $('#slShop').change(loadTab);
+    });
+    
+    var items = new Object();
+    
+    /**
+    * Goi server de load du lieu cac tab trong shop
+    */
+    function loadTab()
+    {
+        var id = this.value;
+        $.ajax({
+            type: "POST",
+            url: '<?php echo $this->baseUrl?>/ibshop/loadtab',
+            data: "shopid=" + id,
+            dataType: "json",
+            success: function(data){
+               showTab(data);
+            }
+        });
+    }
+    
+    /**
+    * Hien thi danh sach cac tab trong shop
+    */
+    function showTab(data)
+    {
+        $("#list-tab").empty();
+        var strHtml = '';
+        for(tab in data)
+        {
+            strHtml += '<li id="listtab_'+ data[tab]['id'] +'" class="list-tab-li"><img src="<?php echo $this->baseUrl?>/media/images/arrow.png" alt="move" width="16" height="16" class="handle" /><strong>'+data[tab]['name']+'</strong><div></div></li>';
+            strHtml += '';
+        }
+        $("#list-tab").append(strHtml);
+        $("#list-tab li").each(addEventTabClick);
+        $("#list-tab").sortable({
+            handle : '.handle',
+            update : function () {
+                var shopId = $("#slShop").val();
+                var order = $('#list-tab').sortable('serialize');
+                $.ajax({
+                    type: "POST",
+                    url: '<?php echo $this->baseUrl?>/ibshop/tabposition',
+                    data: "shopid=" + shopId + "&"+order,
+                    success: function(data){
+                    }
+                });
+            }
+        });
+        $("#list-tab").disableSelection();
+    }
+    
+    /**
+    * Add su kien cho danh sach cac tab
+    */
+    function addEventTabClick()
+    {
+        var tis = $(this), state = false;
+        var div = tis.children('div').hide().css('height', 'auto').slideUp();
+        //alert(div.get(0).tagName);
+        var id = tis.attr('id');
+        var tabid = id.split('_')[1];
+        tis.click(function()
+        {
+            state = !state;
+            
+            current_tab = tabid;
+            if (state)
+            {
+                
+                loadTabDetail(tabid, div, state);
+            }
+            else
+            {
+                div.slideToggle(state);
+            }
+        });
+    }
+    
+    /**
+    * Goi server de load danh sach cac item trong tab
+    */
+    function loadTabDetail(tabid, parentdiv, state)
+    {
+        var template = $("#template").clone();
+        var html = template.html();
+        $.ajax({
+            type: "POST",
+            url: '<?php echo $this->baseUrl?>/ibshop/tabdetail',
+            data: "tabid=" + tabid,
+            dataType: "json",
+            success: function(data){
+                showTabDetail(tabid, data, template, parentdiv, state);
+            }
+        });
+    }
+    
+    /**
+    * Hien thi noi dung cac item
+    */
+    function showTabDetail(tabid, data, template, parentdiv, state)
+    {
+        parentdiv.empty();
+        // Prevent bubble event
+        $(parentdiv).bind('click',function(){current_tab = tabid; return false;})
+        
+        var sortableId = 'sortable_'+tabid;
+        var listItemId = new Array();
+        var ul = $("<ul/>", {id: sortableId, class: "sortable-detail"});
+        
+        for(tabdetail in data)
+        {
+            var item = data[tabdetail];
+            var itemId = 'listtabdetail_'+item['id'];
+            listItemId.push(itemId);
+            items[itemId] = item;
+            
+            var li = addItem(item);
+            ul.append(li);
+        }
+        
+        template.append(ul);
+        
+        parentdiv.html(template.html());
+        parentdiv.slideToggle(state);
+
+        $("#"+sortableId).sortable({
+            update : function () {
+                var order = $("#"+sortableId).sortable('serialize');
+                $.ajax({
+                    type: "POST",
+                    url: '<?php echo $this->baseUrl?>/ibshop/tabdetailpos',
+                    data: order,
+                    success: function(data){
+                    }
+                });
+            }
+        });
+        $("#"+sortableId).disableSelection();
+        
+        for (var i = 0; i < listItemId.length; i++)
+        {
+            // Add double click event to item
+            $("#"+listItemId[i]).dblclick(function(){
+                showEditForm(this.id);
+            }).hover(function(){
+                showTooltipForm(this.id);
+            }, function(){
+                hideTooltipForm();
+            }).mousemove(function(e){
+                moveTooltipForm(e);
+            });
+        }
+    }
+    
+    /**
+    * Add du lieu vao form
+    */
+    function addFormData(id, name)
+    {
+        if (id == '')
+        {
+            $("#divAdd"+name).show();
+            $("#txtSearch"+name).focus();
+            // Add event auto suggestion
+            $("#txtSearch"+name).autocomplete({
+                source: function(request, response){
+                    //pass request to server
+                    type = $('#slType'+name).val();
+                    typeItem = $('#slType'+name+' option:selected').text().toLowerCase();
+                    var value = $("#txtSearch"+name).val();
+                    $.ajax({
+                        type: "POST",
+                        url: '<?php echo $this->baseUrl?>/ibshop/suggestion',
+                        data: "desc=" + value + "&"+"type=" + type,
+                        dataType: "json",
+                        success: function(data){
+                            //create array for response objects
+                            var suggestions = [];
+                            //process response
+                            $.each(data, function(i, val){                                
+                                //suggestions.push(val.name);
+                                suggestions.push(val);
+                            });
+                            //pass array to callback
+                            response(suggestions);
+                        }
+                    });
+                },
+                focus: function (event, ui){
+                    $("#txtSearch"+name).val(ui.item.name);
+                    return false;
+                },
+                select: function (event, ui){
+                    var src = '<?php echo $this->baseUrl ?>' + "/media/images/" + typeItem + "/" + ui.item.image;
+                    $("#imgItem"+name).attr('src', src);
+                    $("#hidItemId"+name).val(ui.item.id);
+                    $("#lblName"+name).text(ui.item.name);
+                    $("#txtPrice"+name).focus();
+                    return false;
+                }
+            }).data("autocomplete")._renderItem = function(ul, item){
+                var src = '<?php echo $this->baseUrl ?>' + "/media/images/" + typeItem + "/" + item.image;
+                var strAppend = "<a><img style='width:50px;height:50px' src='"+ src +"'/>";
+                
+                strAppend += item.id+ "|" + item.name;
+                strAppend += "</a>"
+                return $("<li></li>")
+                    .data("item.autocomplete", item)
+                    .append(strAppend)
+                    .appendTo(ul);
+            };
+            return;
+        }
+
+        var item = items[id];
+        var src = '<?php echo $this->baseUrl ?>/media/images/'+ item['type'] + '/'+ item['image'];
+
+        $("#lblName"+name).text(item['name']);
+        $("#imgItem"+name).attr('src', src);
+        $("#txtPrice"+name).val(item['price']);
+        $("#txtDisplayPrice"+name).val(item['price_display']);
+        $("#txtDiscount"+name).val(item['discount']);
+        $('#optCurrency'+name).val(item['currency_type']);
+        $('#txtStatus'+name).val(item['status']);
+        if (item['enabled'] == 1)
+        {
+            $('#chkEnable'+name).prop('checked', true);
+        }
+        else
+        {
+            $('#chkEnable'+name).prop('checked', false);
+        }
+    }
+    
+    function showEditForm(id)
+    {
+        item_id = id;
+        
+        var $dialog = $("#dialog-modal").clone();
+        html = $dialog.html();
+        html = html.replace(/{id}/gi, id);
+        
+        $dialog.html(html);
+        $dialog.dialog({
+            width: 400,
+            height: 450,
+            modal: true,
+            buttons: [
+            {
+                text: "Save",
+                click: function(){saveItem($(this));}
+            },
+            {
+                text: "Cancel",
+                click: function(){ $(this).dialog("close");}
+            }],
+            beforeClose: function (event, ui){$(this).empty();}
+        });
+    
+        addFormData(id, id);
+    }
+    
+    function showTooltipForm(id)
+    {
+        $div.empty();
+        var html = $("#dialog-modal").clone().html();
+        html = html.replace(/{id}/gi, 'popup');
+        $div.show().append(html);
+        addFormData(id, 'popup');
+    }
+    
+    function hideTooltipForm()
+    {
+        $div.hide();
+    }
+    
+    function moveTooltipForm(e)
+    {
+        $div.css({
+            top: e.pageY + 10 + 'px',
+            left: e.pageX + 10 + 'px'
+        });
+    }
+    
+    function saveItem(dialog)
+    {
+        id = item_id;
+        
+        var data = items[id];
+        if (id == '')
+        {
+            data = new Object();
+        }
+        data['price'] = $("#txtPrice"+id).val();
+        data['price_display'] = $("#txtDisplayPrice"+id).val();
+        data['discount'] = $("#txtDiscount"+id).val();
+        data['currency_type'] = $('#optCurrency'+id).val();
+        data['status'] = $('#txtStatus'+id).val();
+        if ($('#chkEnable'+id+':checked').val())
+        {
+            data['enabled'] = 1;
+        }
+        else
+        {
+            data['enabled'] = 0;
+        }
+        
+        var act = '';
+        if (id == '')
+        {
+             act = 'add';
+             data['tab_id'] = current_tab;
+             data['tab_item_id'] = $('#hidItemId'+id).val();
+             data['tab_item_type'] = $('#slType'+id).val();
+             data['type'] = $('#slType'+id+' option:selected').text().toLowerCase();
+             data['position'] = $('#listtab_'+current_tab + ' div li').size();
+             data['name'] = $("#lblName"+id).text();
+             var src = $("#imgItem"+id).attr('src');
+             var arr = src.split('/');
+             data['image'] = arr[arr.length-1];
+        }
+        else
+        {
+            act = 'edit';
+        }
+        data['act'] = act;
+        $.ajax({
+            type: "POST",
+            url: '<?php echo $this->baseUrl?>/ibshop/itemoperation',
+            data: data,
+            success: function(dt){
+                // success -> close dialog
+                dialog.dialog("close");
+                if (act == 'add')
+                {
+                    //$('listtab_'+current_tab).trigger('click');
+                    data['id'] = dt;
+                    var li = addItem(data);
+                    var sortableId = 'sortable_'+current_tab;
+                    $('#'+sortableId).append(li);
+                }
+            }
+        });
+    }
+    
+    function addItem(item)
+    {
+        var itemId = 'listtabdetail_'+item['id'];
+        var li = $("<li/>", {id: itemId, class: "ui-state-default"});
+        var src = '<?php echo $this->baseUrl ?>/media/images/'+ item['type'] + '/'+ item['image'];
+        var img = $("<img />", {
+                style: "width:50px;height:50px",
+                alt: item['type'],
+                src: src
+            });
+        var html = '<br/>'+item['name'];
+        li.append(img);
+        li.append(html);
+        
+        return li;
+    }
+    
+</script>

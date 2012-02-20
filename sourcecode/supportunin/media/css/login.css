@@ -1,0 +1,109 @@
+body
+{
+	background-image: url("../images/pattern.gif");
+	background-repeat: repeat;
+	margin: 0;
+	padding: 0;
+}
+
+.page-header {
+    background: url("../images/ns_console_headerbg.png") repeat-x scroll 0 0 transparent;
+    height: 100px;
+	padding-top: 20px;
+	padding-left: 300px;
+	color: white;
+	opacity:0.7;
+	filter:alpha(opacity=70);
+}
+
+.pad {
+    height: 537px;
+    margin: auto;
+    position: relative;
+    top: 0;
+    width: 580px;
+}
+
+.form {
+    background: url("../images/auth_form_bg.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 275px;
+    width: 580px;
+}
+
+.form table .label {
+    color: #E6F5FF;
+    font-size: 18px;
+    padding: 0 7px 0 0;
+    text-align: right;
+}
+
+.inp {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #60696B;
+    font-size: 16px;
+    padding: 12px 5px;
+    width: 390px;
+}
+
+.pat_10 {
+    padding: 10px 0;
+}
+
+.right {
+    text-align: right !important;
+}
+
+.submit {
+    background: url("../images/sign_in_button.gif") no-repeat scroll 0 0 transparent;
+    border: 0 none;
+    color: #FFFFFF;
+    font-size: 22px;
+    height: 45px;
+    overflow: visible;
+    width: 210px;
+}
+
+.alert_red {
+    background: url("../images/alert_red.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    font-size: 14px;
+    height: 71px;
+    left: -8px;
+    line-height: 65px;
+    position: absolute;
+    top: 60px;
+    width: 588px;
+    z-index: 1000;
+}
+
+.form {
+    padding: 10px 0 15px;
+}
+
+.form table {
+    margin: 25px 0 0 25px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+h1 {
+    color: #2F3536;
+    font-size: 28px;
+    padding: 28px 0 30px;
+    position: relative;
+    text-transform: uppercase;
+    top: 13px;
+}
+
+.form table td {
+    padding: 10px 0;
+    vertical-align: middle;
+}
+
+.alert_red .al_text {
+    padding: 0 0 0 30px;
+}

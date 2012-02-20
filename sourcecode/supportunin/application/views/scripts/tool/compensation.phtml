@@ -1,0 +1,17 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>
+	<span style="color: blue; font-weight: bold">Thành công: <?php echo $this->success ?> dòng</span><br/>
+	<span style="color: red; font-weight: bold">Thất bại: <?php echo $this->failed ?> dòng</span><br/><br/>
+<?php endif;?>
+<div id="box">	
+	<h3 id="adduser">Đền bù</h3>
+	<form id="form" action="" method="post" enctype="multipart/form-data"> 	
+	<label for="street">File : </label> 
+	<input type="file" name="file" id="file"/>	
+	&nbsp;<input id="button1" type="submit" value="OK" /> 	
+	<br />
+	</form>
+</div>

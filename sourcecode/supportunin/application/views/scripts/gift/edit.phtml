@@ -1,0 +1,123 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery-ui.css" />
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery.ui.datetimepicker.js"></script>
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<div id="box">
+	<h3 id="adduser">Gói phần thưởng</h3>
+	<form id="form" action="" method="post" enctype="multipart/form-data">
+	  <fieldset id="personal">
+		<legend>Thông tin gói phần thưởng</legend>		
+		<input type="hidden" id="id" name="id" value="<?php echo $this->form->id ?>"/>
+		<?php if(!$this->form->id) : ?>
+		<label for="item">Tạo item mới</label>
+		<input style="vertical-align: middle" <?php if($this->chkNew) echo 'checked' ?> name="chkNewItem" value="1" id="chkNewItem" type="checkbox" tabindex="1" />
+		<br />
+		<?php endif; ?>
+		<label for="alias">Id : </label> 
+		<input name="alias" value="<?php echo $this->form->alias ?>" id="alias" type="text" tabindex="1" />
+		<br />
+		<label for="name">Tên : </label> 
+		<input name="name" value="<?php echo $this->form->name ?>" id="name" type="text" tabindex="1" />
+		<br />
+		<label for="description">Mô tả : </label>
+		<textarea style="margin-top: 5px;" rows="3" cols="50" id="description" name="description"><?php echo $this->form->description ?></textarea>		
+		<br />		
+		<label for="name">Loại : </label> 
+		<?php $this->selectTypeOfGiftPackage($this->form->type) ?>
+		<br />
+		<?php if($this->form->type == GIFT_TYPE_REWARD) $rewardDisplay = ""; else $rewardDisplay = "display: none" ?>
+		<span class="eventType" style="<?php echo $rewardDisplay ?>">
+		<label for="name">Thuộc sự kiện : </label> 
+		<?php $this->selection($this->arrEvent,$this->form->event_id,'event_id'); ?>
+		<br />		
+		<label for="active">Kích hoạt : </label>
+		<input style="vertical-align: middle; margin-top: 5px;" <?php if($this->form->enabled) echo "checked" ?> name="enabled" id="yes" type="checkbox" 
+		value="1" tabindex="35" />		
+		<br />
+		</span>
+		<?php if($this->form->type == GIFT_TYPE_SELLOFF) $sellOffDisplay = ""; else $sellOffDisplay = "display: none" ?>
+		<span class="sellOffType" style="<?php echo $sellOffDisplay ?>">
+		<label for="begin">Bắt đầu : </label>
+		<input name="start_date" value="<?php echo $this->form->start_date ?>" id="start_date" type="text" tabindex="1" />&nbsp;(mm/dd/yyyy)
+		<br />
+		<label for="end">Kết thúc : </label>
+		<input name="end_date" id="end_date" value="<?php echo $this->form->end_date ?>" type="text" tabindex="2" />&nbsp;(mm/dd/yyyy)
+		<br />
+		<label for="name">Giới hạn Server : </label> 
+		<input name="server_limit" value="<?php echo $this->form->server_limit ?>" id="server_limit" type="text" tabindex="1" />
+		<br />
+		<label for="name">Giới hạn Player : </label> 
+		<input name="user_limit" value="<?php echo $this->form->user_limit ?>" id="user_limit" type="text" tabindex="1" />
+		<br />
+		<label for="name">Đợt bán : </label> 
+		<input name="tag" value="<?php echo $this->form->tag ?>" id="tag" type="text" tabindex="1" />
+		<br />
+		</span>
+	  </fieldset>
+		<br/>
+		<?php if($this->chkNew) $display = ''; else $display = "display:none"; ?>
+		<fieldset id="item" style="<?php echo $display; ?>">
+		<legend>Thông tin item</legend>
+		<label for="image">Hình : </label> 
+		<input name="image" type="file" tabindex="1" />
+		<br />
+		<label for="priceInGame">Giá bằng vàng : </label> 
+		<input name="priceInGame" value="<?php echo $this->objItem->priceInGame ?>" id="priceInGame" type="text" tabindex="1" />
+		<br />
+		<label for="priceOutGame">Giá bằng xu : </label> 
+		<input name="priceOutGame" value="<?php echo $this->objItem->priceOutGame ?>" id="priceOutGame" type="text" tabindex="1" />
+		<br />
+		<label for="disCount">Giảm giá(%) : </label> 
+		<input name="disCount" value="<?php echo $this->objItem->disCount ?>" id="disCount" type="text" tabindex="1" />
+		<br />
+		</fieldset>
+	  <div align="center">
+	  <input id="button1" type="submit" value="Lưu" /> &nbsp;&nbsp; 	  
+	  <input id="button1" type="button" value="Quay lại" onclick="window.location='<?php echo $this->baseUrl ?>/gift/index'" />
+	  </div>
+	</form>
+</div>
+<script type="text/javascript">
+	$(function()
+	{
+		$("#type").change(function(){
+			if($(this).val() == "<?php echo GIFT_TYPE_REWARD ?>")
+			{
+				$(".eventType").show();
+				$(".sellOffType").hide();
+			}
+			else if($(this).val() == "<?php echo GIFT_TYPE_SELLOFF ?>")
+			{
+				$(".eventType").hide();
+				$(".sellOffType").show();
+			}
+			else
+			{
+				$(".sellOffType").hide();
+				$(".eventType").hide();
+			}
+		})
+		
+		$("#start_date, #end_date").datetimepicker({
+				dateFormat: 'mm/dd/yyyy',
+				changeYear: true,
+				changeMonth:true,
+				showButtonPanel:true
+			}
+		);
+		
+		$("#chkNewItem").click(function(){
+			if($(this).is(":checked"))
+			{
+				$("#item").show();
+			}
+			else
+				$("#item").hide();
+		});
+	});
+</script>

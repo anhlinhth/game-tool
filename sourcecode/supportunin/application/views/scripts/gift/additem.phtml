@@ -1,0 +1,104 @@
+<div id="box">
+	<h3 id="adduser">Gói phần thưởng</h3>
+	<form id="form" action="" method="post">	  
+		<label for="type">Loại : </label> 
+		<?php $this->selection($this->giftType,null,'type') ?><span><input id="button1" onclick="openPigShop()" style="display: none; width: 70px" name="btnHeo" value="Chọn heo"/><input id="button1" onclick="openItemShop()" style="display: none; width: 70px" name="btnItem" value="Chọn Item"/></span>
+		<br />
+		<label for="name">Số lượng : </label> 
+		<input style="margin-top: 3px;" name="quantity" value="" id="quantity" type="text" tabindex="1" />
+		<input type="hidden" name="hidType" id="hidType"/>
+		<input type="hidden" name="object_id" id="object_id"/>
+		<input type="hidden" name="gift_id" id="gift_id" value="<?php echo $this->id ?>"/>
+		<span id="info" style="display: none">
+			<br/>
+			<label for="name">Tên : </label> 
+			<input name="name" readonly value="" id="name" type="text" tabindex="1" />
+		</span>
+		<span id="level" style="display: none">
+			<br/>
+			<label for="name">Cấp : </label> 
+			<input name="rank" value="" id="rank" type="text" tabindex="1" />
+		</span>
+		<br /><br />		  
+	  <div align="center">
+	  <input id="button1" type="button" onclick="saveItem()" value="Lưu" /> &nbsp;&nbsp; 	  
+	  <input id="button1" type="button" value="Đóng" onclick="window.close()" />
+	  </div>
+	</form>	
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("#type").change(function(){
+			if($("#type").val() == 'pig')
+			{
+				$("input[name='btnItem']").hide();
+				$("input[name='btnHeo']").show();
+				$("#level").hide();
+				
+			}
+			else if($("#type").val() == 'item')
+			{
+				$("input[name='btnHeo']").hide();
+				$("input[name='btnItem']").show();
+				$("#level").show();
+			}
+			else
+			{
+				$("input[name='btnHeo']").hide();
+				$("input[name='btnItem']").hide();
+				$("#info").hide();
+				$("#object_id").val("");
+				$("#hidType").val("");
+				$("#level").hide();
+			}
+		})
+	})
+	
+	function openPigShop()
+	{
+		var url = "<?php echo $this->baseUrl ?>/gift/pigshop";
+		openWindow(url, "Thêm phần thưởng", 750, 750, 'scrollbars');
+	}
+	
+	function openItemShop()
+	{
+		var url = "<?php echo $this->baseUrl ?>/gift/itemshop";
+		openWindow(url, "Thêm phần thưởng", 750, 750, 'scrollbars');
+	}
+	
+	function saveItem()
+	{
+		if($("#type").val() == 0)
+		{
+			alert("Vui lòng chọn loại phần thưởng");
+			return;
+		}
+		
+		if($("#quantity").val() == "")
+		{
+			alert("Vui lòng nhập số lượng");
+			return;
+		}
+		
+		if(($("#type").val() == "pig" || $("#type").val() == "item") && $("#object_id").val() == "")
+		{
+			alert("Chưa chọn item hoặc heo");
+			return;
+		}
+		
+		var param = $("#form").serialize();
+		
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl ?>/gift/additem",
+			data: param,
+			success: function(msg){
+				if(msg == "")
+				{
+					window.opener.location.href = window.opener.location.href;
+					window.close();
+				}				
+			}
+		});
+	}
+</script>

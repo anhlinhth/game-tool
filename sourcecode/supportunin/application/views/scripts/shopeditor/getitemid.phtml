@@ -1,0 +1,12 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<h1>
+<form id="form">
+<p align="center">
+<b>ITEM ID</b><br/>
+<span style="color: red; font-size: 50px"><?php echo $this->newId ?></span><br/>
+<input type="button" id="button2" value="Tạo Id mới" onclick="window.location=location.href"/>
+</p>
+</form>
+</h1>
