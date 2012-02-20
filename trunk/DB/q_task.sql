@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2012 at 05:42 AM
+-- Generation Time: Feb 20, 2012 at 07:34 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `q_task` (
   `TaskID` int(11) NOT NULL,
-  `TaskName` int(255) DEFAULT NULL,
+  `TaskName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `TaskString` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `DescID` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `QTC_ID` int(11) NOT NULL,
@@ -52,9 +52,9 @@ CREATE TABLE IF NOT EXISTS `q_task` (
 -- Constraints for table `q_task`
 --
 ALTER TABLE `q_task`
-  ADD CONSTRAINT `q_task_ibfk_3` FOREIGN KEY (`ActionID`) REFERENCES `q_action` (`ActionID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `q_task_ibfk_1` FOREIGN KEY (`QuestID`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `q_task_ibfk_2` FOREIGN KEY (`QTC_ID`) REFERENCES `q_questtaskclient` (`QTC_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `q_task_ibfk_2` FOREIGN KEY (`QTC_ID`) REFERENCES `q_questtaskclient` (`QTC_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `q_task_ibfk_3` FOREIGN KEY (`ActionID`) REFERENCES `q_action` (`ActionID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
