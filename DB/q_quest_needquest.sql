@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2012 at 04:41 AM
+-- Generation Time: Feb 20, 2012 at 05:42 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -23,15 +23,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questtaskclient`
+-- Table structure for table `q_quest_needquest`
 --
 
-CREATE TABLE IF NOT EXISTS `questtaskclient` (
-  `QTC_ID` int(11) NOT NULL,
-  `QTC_Name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `QTC_Desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`QTC_ID`)
+CREATE TABLE IF NOT EXISTS `q_quest_needquest` (
+  `QuestID` int(11) NOT NULL,
+  `NeedQuest` int(11) NOT NULL,
+  PRIMARY KEY (`QuestID`,`NeedQuest`),
+  KEY `QuestID` (`QuestID`,`NeedQuest`),
+  KEY `NeedQuest` (`NeedQuest`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `q_quest_needquest`
+--
+ALTER TABLE `q_quest_needquest`
+  ADD CONSTRAINT `q_quest_needquest_ibfk_2` FOREIGN KEY (`NeedQuest`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `q_quest_needquest_ibfk_1` FOREIGN KEY (`QuestID`) REFERENCES `q_quest` (`QuestID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

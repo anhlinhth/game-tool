@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2012 at 03:37 AM
+-- Generation Time: Feb 20, 2012 at 05:42 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questline`
+-- Table structure for table `q_questline`
 --
 
-CREATE TABLE IF NOT EXISTS `questline` (
+CREATE TABLE IF NOT EXISTS `q_questline` (
   `QuestLineID` int(11) NOT NULL AUTO_INCREMENT,
   `QuestLineName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`QuestLineID`)
