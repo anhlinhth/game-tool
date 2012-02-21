@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2012 at 05:42 AM
+-- Generation Time: Feb 21, 2012 at 04:05 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -41,7 +41,14 @@ CREATE TABLE IF NOT EXISTS `q_quest` (
   PRIMARY KEY (`QuestID`),
   KEY `QuestLineID` (`QuestLineID`),
   KEY `NextQuest` (`NextQuest`,`QuestLineID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `q_quest`
+--
+
+INSERT INTO `q_quest` (`QuestID`, `QuestName`, `QuestGroupString`, `QuestGroup`, `QuestString`, `QuestDesc`, `QuestDescString`, `AwardGold`, `AwardExp`, `NextQuest`, `QuestLineID`) VALUES
+(2, 'Ngôi nhà hoa hồng ', '@quest#1 ', 'Hoà nhập (Nhiệm vụ 1/10) ', '@quest#2 ', 'Không biết phải làm gì trong đây', '@quest#500 ', 1, 2, 2, 1);
 
 --
 -- Constraints for dumped tables
@@ -51,7 +58,6 @@ CREATE TABLE IF NOT EXISTS `q_quest` (
 -- Constraints for table `q_quest`
 --
 ALTER TABLE `q_quest`
-  ADD CONSTRAINT `q_quest_ibfk_2` FOREIGN KEY (`NextQuest`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `q_quest_ibfk_1` FOREIGN KEY (`QuestLineID`) REFERENCES `q_questline` (`QuestLineID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
