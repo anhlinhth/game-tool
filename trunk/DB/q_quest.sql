@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2012 at 04:05 AM
+-- Generation Time: Feb 21, 2012 at 04:39 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -29,15 +29,15 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `q_quest` (
   `QuestID` int(11) NOT NULL AUTO_INCREMENT,
   `QuestName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `QuestGroupString` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `QuestGroupString` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `QuestGroup` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `QuestString` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `QuestDesc` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `QuestDescString` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `AwardGold` int(11) NOT NULL,
-  `AwardExp` int(11) NOT NULL,
-  `NextQuest` int(11) NOT NULL,
-  `QuestLineID` int(11) NOT NULL,
+  `QuestDesc` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `QuestDescString` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `AwardGold` int(11) DEFAULT NULL,
+  `AwardExp` int(11) DEFAULT NULL,
+  `NextQuest` int(11) DEFAULT NULL,
+  `QuestLineID` int(11) DEFAULT NULL,
   PRIMARY KEY (`QuestID`),
   KEY `QuestLineID` (`QuestLineID`),
   KEY `NextQuest` (`NextQuest`,`QuestLineID`)
