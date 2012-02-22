@@ -65,5 +65,44 @@ class Models_Quest_Detail extends Models_Base
 				
 	}
 	
+	public function getQuest()
+	{
+		$sql = "SELECT
+					*
+				FROM
+					q_quest";
+		
+		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}
+	
+	public function getNeedQuest()
+		{
+			$sql = "SELECT
+						*
+					FROM
+						q_quest_awarditem";
+			
+			$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
+			
+			return $data;
+		}
+	
+	
+		public function getAwardItems($questid)
+		{
+			$sql = "SELECT
+						*
+					FROM
+						q_quest_awarditem
+						WHERE QuestID= $questid";
+			
+			$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
+			
+			return $data;
+		}
 }
+	
+	
 ?>

@@ -107,6 +107,9 @@ class QuestController extends BaseController
 				$this->view->mess = $id;
 				$this->view->obj = $md->_getByKey($id);
 				$this->view->arrValue = $md->getQuestLine();
+				$this->view->arrNeedQuest = $md->getNeedQuest();
+				$this->view->arrAwardItems = $md->getAwardItems($id);
+				$this->view->arrQuest = $md->getQuest();
 			}
 			
 		}
