@@ -5,7 +5,7 @@
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
 
-<?php //print_r($this->obj)?>
+<?php print_r($this->arrAwardItems)?>
 <div id="box">
 	<h3 id="adduser">Chỉnh sửa Quest</h3>
 	<form id="form" action="" method="post" enctype="multipart/form-data">
@@ -56,22 +56,27 @@
 				
 			
 			<tr>
-				<td>
-					///
+				<td rowspan=2">
+		<p>Award: </p>
+		<label>Gold: </label><input name="AwardGold" value="<?php echo $this->obj->AwardGold?>" id="awardgold" type="text" tabindex="1" /><br/>
+		<label>EXP: </label><input name="AwardExp" value="<?php echo $this->obj->AwardExp?>" id="awardexp" type="text" tabindex="1" /><br/>
+		<label for="2">ITems: </label><a title='Add Item' href='javascript:addAwardItem()'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png'></a><br/>
+		        <?php $this->ListQuestAwardItems($this->arrAwardItems) ;?>
+		 
 				</td>
 				<td>
 					<label for="name">Next Quest : </label> 		
-					<?php $this->selectQuestLine2($this->ojb->QuestLineID,$this->arrValue) ;?>
+					<?php $this->selectQuest($this->ojb->NextQuest,$this->arrQuest) ;?>
 				</td>
 			</tr>
 			
 			<tr>
+
+				
 				<td>
-					<p>Award: </p>
-		<label>Gold: </label><input name="QuestDesc" value="<?php echo $this->obj->QuestDesc?>" id="questdesc" type="text" tabindex="1" /><br/>
-		<label>EXP: </label><input name="QuestDesc" value="<?php echo $this->obj->QuestDesc?>" id="questdesc" type="text" tabindex="1" /><br/>
-		<label>ITems: </label><input name="QuestDesc" value="<?php echo $this->obj->QuestDesc?>" id="questdesc" type="text" tabindex="1" /><br/>
-        
+					<label for="name">Need Quest : </label> <br/>
+					<input name="QuestDesc" value="<?php echo $this->obj->QuestDesc?>" id="questdesc" type="text" tabindex="1" />															
+					<a title="Thêm Need Quest" href="javascript:addNeedQuest()"><img style="vertical-align: middle" src="/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png"></a><br/>
 				</td>
 			</tr>
 		</table>
@@ -87,3 +92,16 @@
 	  </fieldset>
 	</form>
 </div>
+<script>
+function  addAwardItem(){
+	alert("add Item");
+}
+
+function  addNeedQuest(){
+	alert("add Need Quest");
+}
+
+function  deleteAwardItem(item){
+	//$("div#item_" + item).remove();
+}
+</script>
