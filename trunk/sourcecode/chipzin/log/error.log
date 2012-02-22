@@ -24,3 +24,79 @@ Stack trace:
 #8 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Front.php(934): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
 #9 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\index.php(32): Zend_Controller_Front->dispatch()
 #10 {main}
+[2012/02/21-07:55:35][D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Action.php:473] Method "_getArrEvent" does not exist and was not trapped in __call()
+[2012/02/21-07:56:01][D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Action.php:473] Method "_getArrEvent" does not exist and was not trapped in __call()
+[2012/02/21-08:02:45][D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\library\utility\utility.php:259] PHP Class 'Memcache' does not exist!
+[2012/02/21-08:27:49][D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''q_questline'
+				WHERE
+					1' at line 4
+[2012/02/21-08:28:19][D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''q_questline'
+				WHERE
+					1' at line 4
+[2012/02/21-08:31:39][D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''q_questline'
+				WHERE
+					1' at line 4
+[2012/02/21-08:33:19][D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''q_questline'
+				WHERE
+					1' at line 4
+[2012/02/21-08:46:51][D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Action.php:473] Method "_getArrEvent" does not exist and was not trapped in __call()
+[2012/02/21-09:34:09][D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''QuestLine'' at line 1
+[2012/02/21-09:34:37][D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\models\Models_Base.php:84] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'supportchipzin.q_quest' doesn't exist' in D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('SELECT????????*...', '')
+#3 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Abstract.php(660): Zend_Db_Adapter_Pdo_Abstract->query('SELECT????????*...', '')
+#4 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\models\Models_Base.php(78): Zend_Db_Adapter_Abstract->fetchRow('SELECT????????*...', '', 5)
+#5 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\controllers\QuestController.php(47): Models_Base->_getByKey(NULL)
+#6 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Action.php(494): QuestController->editAction()
+#7 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Dispatcher\Standard.php(285): Zend_Controller_Action->dispatch('editAction')
+#8 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Front.php(934): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#9 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\index.php(32): Zend_Controller_Front->dispatch()
+#10 {main}
+[2012/02/21-09:35:15][D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''QuestLine'' at line 1
+[2012/02/21-09:36:06][D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''q_questline'' at line 1
+[2012/02/21-09:36:08][D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''q_questline'' at line 1
+[2012/02/21-10:37:38][D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Action.php:473] Method "_getArrQuest" does not exist and was not trapped in __call()
+[2012/02/22-05:55:02][D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\models\Models_Base.php:49] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('UPDATE `q_quest...', Array)
+#3 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Abstract.php(551): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `q_quest...', Array)
+#4 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\models\Models_Base.php(43): Zend_Db_Adapter_Abstract->update('q_quest', Array, 'QuestID = ')
+#5 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\models\Models_Quest_Detail.php(20): Models_Base->_update(Object(Obj_Quest_Detail))
+#6 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\controllers\QuestController.php(100): Models_Quest_Detail->update(Object(Obj_Quest_Detail))
+#7 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Action.php(494): QuestController->editAction()
+#8 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Dispatcher\Standard.php(285): Zend_Controller_Action->dispatch('editAction')
+#9 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Front.php(934): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\index.php(32): Zend_Controller_Front->dispatch()
+#11 {main}
+[2012/02/22-06:01:36][D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\models\Models_Base.php:49] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1' in D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('UPDATE `q_quest...', Array)
+#3 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Abstract.php(551): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `q_quest...', Array)
+#4 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\models\Models_Base.php(43): Zend_Db_Adapter_Abstract->update('q_quest', Array, 'QuestID = ')
+#5 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\models\Models_Quest_Detail.php(20): Models_Base->_update(Object(Obj_Quest_Detail))
+#6 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\controllers\QuestController.php(100): Models_Quest_Detail->update(Object(Obj_Quest_Detail))
+#7 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Action.php(494): QuestController->editAction()
+#8 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Dispatcher\Standard.php(285): Zend_Controller_Action->dispatch('editAction')
+#9 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Front.php(934): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\index.php(32): Zend_Controller_Front->dispatch()
+#11 {main}
+[2012/02/22-08:30:51][D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\models\Models_Base.php:49] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`supportchipzin`.`q_quest`, CONSTRAINT `q_quest_ibfk_1` FOREIGN KEY (`QuestLineID`) REFERENCES `q_questline` (`QuestLineID`) ON DELETE NO ACTION ON UPDATE NO ACTION)' in D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('UPDATE `q_quest...', Array)
+#3 D:\003\xampp\library\Zend.1.6.2\Zend\Db\Adapter\Abstract.php(551): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `q_quest...', Array)
+#4 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\models\Models_Base.php(43): Zend_Db_Adapter_Abstract->update('q_quest', Array, 'QuestID = 4')
+#5 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\models\Models_Quest_Detail.php(20): Models_Base->_update(Object(Obj_Quest_Detail))
+#6 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\application\controllers\QuestController.php(101): Models_Quest_Detail->update(Object(Obj_Quest_Detail))
+#7 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Action.php(494): QuestController->editAction()
+#8 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Dispatcher\Standard.php(285): Zend_Controller_Action->dispatch('editAction')
+#9 D:\003\xampp\library\Zend.1.6.2\Zend\Controller\Front.php(934): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 D:\003\xampp\htdocs\vng\game-tool\sourcecode\chipzin\index.php(32): Zend_Controller_Front->dispatch()
+#11 {main}

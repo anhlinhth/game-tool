@@ -25,7 +25,10 @@ class Zend_View_Helper_TopMenu
 				break;
 			case 'quest':
 				$selectQuest = 'current';
-				break;	
+				break;
+			case 'questline':
+				$selectQuest = 'current';
+				break;		
 		}
 		
 		$strList .= "<div id='topmenu'>

@@ -5,18 +5,75 @@
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
 
-
+<?php print_r($this->obj)?>
 <div id="box">
 	<h3 id="adduser">Chỉnh sửa Quest</h3>
 	<form id="form" action="" method="post" enctype="multipart/form-data">
 	  <fieldset id="personal">
 		<legend>Thông tin Quest</legend>
-		<label for="id">Quest Id : </label> 
-		<input name="id" value="<?php echo $this->form->QuestID ?>" id="alias" type="text" tabindex="1" />
+		<table>
+			<tr>
+				<td>
+					<label for="QuestID">Quest Id : </label> 
+					<input name="QuestID" value="<?php echo $this->obj->QuestID ?>" id="alias" type="text" tabindex="1" /></td>
+				<td>
+					
+					
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="questname">Quest Name : </label> 
+					<input name="QuestName" value="<?php echo $this->obj->QuestName?>" id="questnamestring" type="text" tabindex="1" /></td>
+				<td>
+					<label for="queststring">Quest String: </label> 
+					<input name="QuestString" value="<?php echo $this->obj->QuestString?>" id="queststring" type="text" tabindex="1" />
+					
+				</td>
+			</tr>
+				
+			
+			<tr>
+				<td>
+					<label for="name" >Quest Line : </label> 
+					<<?php print_r($this->arrValue)?>		
+					<?php $this->selectQuestLine2($this->obj->QuestLineID,$this->arrValue) ;?>
+				</td>
+				<td>
+					<label for="name">Next Quest : </label> 		
+					<<?php //$this->selectQuestLine2($this->ojb->QuestLineID,$this->arrValue) ;?>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="questgroup">Quest Group: </label> 
+					<input name="QuestGroup" value="<?php echo $this->obj->QuestGroup?>" id="questgroup" type="text" tabindex="1" />
+				</td>
+				<td>
+					<label for="QuestGroupString">Q_Group String: </label> 
+					<input name="QuestQroupString" value="<?php echo $this->obj->QuestGroupString?>" id="questgroupstring" type="text" tabindex="1" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<label for="QuestDesc">Quest Desc: </label> 
+					<input name="QuestDesc" value="<?php echo $this->obj->QuestDesc?>" id="questdesc" type="text" tabindex="1" />
+				</td>
+				<td>
+					<label for="questdescString">Q_Desc String: </label> 
+					<input name="QuestDescString" value="<?php echo $this->obj->QuestDescString?>" id="questdescstring" type="text" tabindex="1" />
+				</td>
+			</tr>
+
+		</table>
+
+		<input type="submit" name="search" id="button1" value="Save All" />
+	
 		<br />
-		<label for="name">Quest Line : </label> 
-		<?php $this->selectQuestLine(1) ;?>
-		<br />		
+		
+		
+		
 	
 	  </fieldset>
 	</form>

@@ -1,0 +1,115 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<form id ="form" action="" method="post">
+
+<div id="box">
+	<h3>Quest Line</h3>
+	<table class="filter">
+		<tr>
+			<td>Quest Line ID</td>
+			<td><input style="width:110px;" type="text" name="QuestLineID" id="QuestLineID" /></td>
+			<td><input type="submit" name="search" id="button1" value="search" /></td>
+		</tr>
+		
+		<tr>
+			<td>ID</td>
+			<td><input type="text" name="questlineid1" disabled="disabled" id="questlineid1" style="width:110px;" /></td>
+			<td>DESC</td>
+			<td><input type="text" name="desc1" id="desc1" /></td>
+			<td><input type="submit" name="update" id="button1" class="update" value="Update" /></td>
+			<td><input type="submit" name="cancel" id="button1" class="cancel" value="Cancel" /></td>
+			<td><input type="submit" name="add" id="button1" class="add" value="Add" /></td>
+		</tr>
+	</table>
+	<table>	
+		<tr>
+			<table>
+				<thead>
+				<th width="40"><a href="#">STT</a></th>
+				<th width="40"><a href="#">ID</a></th>
+				<th>Description</th>							
+				<th width="80">Thao tác</th>
+				</thead>
+				<tr>
+					<?php $this->listQuestLine($this->data, $this->page, $this->items, $this) ?>
+				</tr>				
+			</table>
+		</tr>
+		
+			<div align="center">
+				<input id="button1" type="submit" value="Lưu">
+				<input id="button2" type="button" value="Sync">
+			</div>
+	
+	</table>
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
+</div>
+</form>
+<script>
+
+$(function(){
+	/// su mot Quest Line
+	
+	$(".update").click(function(){
+		id = document.getElementById('questlineid1').value;	
+		if(id==''){
+			return false;
+		}
+		desc1 = document.getElementById('desc1').value;
+		$.ajax({
+			type: "POST",
+			//url: "http://localhost/vng/game-tool/sourcecode/chipzin/questline/update",
+			url: "<?php echo $this->baseUrl.'/QuestLine/update/'?> ",
+			data: "desc=" + desc1 +"&id="+id,
+			success: function(msg){
+				if(msg != "")
+				{					
+					alert(msg);
+				}
+				else
+				{
+					alert("Update KO thành công");
+					
+				}
+				window.location.reload();
+			}
+		});
+		return false;	
+	});
+
+	////Them 1 quest line
+	$(".add").click(function(){				
+		desc1 = document.getElementById('desc1').value;
+		id = document.getElementById('questlineid1').value;
+		if(desc1=='' ||id!=''){
+			return false;
+		}
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/QuestLine/add/'?> ",
+			data: "desc=" + desc1,
+			success: function(msg){
+				if(msg != "")
+				{					
+					alert(msg);
+				}
+				else
+				{
+					alert("Thêm  không thành công");
+					
+				}
+				window.location.reload();
+			}
+		});
+		return false;	
+	});
+
+	////
+});
+
+
+</script>
