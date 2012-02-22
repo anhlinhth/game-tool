@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2012 at 05:42 AM
+-- Generation Time: Feb 22, 2012 at 08:31 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -29,9 +29,10 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `q_quest_awarditem` (
   `QuestID` int(11) NOT NULL,
   `AwardItem` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`QuestID`,`AwardItem`),
+  `AwardItemID` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`AwardItemID`),
   KEY `QuestID` (`QuestID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Constraints for dumped tables
