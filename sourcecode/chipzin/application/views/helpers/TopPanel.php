@@ -75,10 +75,18 @@ class Zend_View_Helper_TopPanel
                 break;
                 
             case 'quest':
-				if(Utility::checkPrivilege($view, 'quest', 'questline'))
-					$strList .= "<li><a href='$view->baseUrl/quest/questline' class='report'>Quest Line</a></li>";
+				if(Utility::checkPrivilege($view, 'quest', 'index'))
+					$strList .= "<li><a href='$view->baseUrl/questline/index' class='report'>Quest Line</a></li>";
 				if(Utility::checkPrivilege($view, 'quest', 'listquest'))
-					$strList .= "<li><a href='$view->baseUrl/quest/listquest' class='report'>Quest</a></li>";
+					$strList .= "<li><a href='$view->baseUrl/quest/index' class='report'>Quest</a></li>";
+				break;	
+			case 'questline':
+				if(Utility::checkPrivilege($view, 'questline', 'index'))
+					$strList .= "<li><a href='$view->baseUrl/questline/index' class='report'>Quest Line</a></li>";
+				if(Utility::checkPrivilege($view, 'quest', 'listquest'))
+					$strList .= "<li><a href='$view->baseUrl/quest/index' class='report'>Quest</a></li>";
+				break;	
+					
 				  
 		}	
 		

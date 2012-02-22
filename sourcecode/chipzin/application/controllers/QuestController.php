@@ -3,6 +3,8 @@ require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Detail.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 
@@ -26,6 +28,59 @@ class QuestController extends BaseController
 	
 	public function indexAction()
 	{
+	try
+		{
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest.php';
+			$this->_getArrQuest();
+			
+			$pageNo = $this->_request->getParam("page");
+			$items = $this->_request->getParam("items");
+			
+			$form = new Forms_Quest();
+			$form->_requestToForm($this);
+			
+			if($pageNo == 0)
+				$pageNo = 1;
+			if($items == 0)
+				$items = DEFAULT_ITEM_PER_PAGE;
+
+			$md= new Models_Quest();
+			$md_questLine = new Models_Quest_Line();
+			$this->view->item = $form->obj;
+			$this->view->filterQuestLine = $md_questLine->_getByKey($form->obj->QuestLineID);
+			
+			$data = $md->filter($form->obj, "QuestID ASC", ($pageNo - 1)*$items, $items);
+			$dataquestlineID = $md->getQuestlineID();
+			$count = $md->count($form->obj);
+			
+			$this->view->data = $data;
+			$this->view->dataquestlineid = $dataquestlineID;
+			$this->view->items = $items;
+			$this->view->page = $pageNo;
+			$this->view->totalRecord = $count;
+			
+			/*if($this->_request->getParam("hidSync"))
+			{
+				$location = $this->_request->getParam("hidLocation");
+				
+				$data = $md->_filter(null, "id DESC", 0, 0);
+				
+				$mdSaleOffShop = new Models_SaleOff_Shop();
+				$saleOffData = $mdSaleOffShop->_filter();
+				$mdItem = new Models_Item();
+				$items = $mdItem->_filter();
+				
+				$md->sync($data,$items,$saleOffData,$location);
+				$this->view->msg = "Sync dữ liệu thành công";
+			}
+			*/
+			$this->view->form = $form->obj;
+		}
+		catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
 				
 	}	
 	
@@ -39,12 +94,19 @@ class QuestController extends BaseController
 			
 			if($this->_request->isPost())// da post du lieu len
 			{
-				
+				$form = new Forms_Quest_Detail();
+				$form->_requestToForm($this);
+				$form->validate(UPDATE);		
+				//$this->view->obj = $form->obj;		
+				$md->update($form->obj);				
+				Models_Log::insert($this->view->user->username, "act_edit_gift", $form->obj->name);
+				$this->_redirect("/quest/index");
 			}
 			else{		// chua post du lieu-->load du lieu vao Form		
 				$id = $this->_request->getParam("id");
-				$this->view->form = $md->_getByKey($id);
-				$this->view->arr = $md->getQuestLine();
+				$this->view->mess = $id;
+				$this->view->obj = $md->_getByKey($id);
+				$this->view->arrValue = $md->getQuestLine();
 			}
 			
 		}
@@ -57,10 +119,44 @@ class QuestController extends BaseController
 		
 	}
 	
-	public function listquestAction()
+	public function deleteAction()
 	{
-				
+		try
+		{
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNoRender();
+			$id = $this->_request->getParam("id"); //luu y cho nay nen dat id trung csd			
+			$mdquest = new Models_Quest();
+			$mdquest->_delete($id);	
+			Models_Log::insert($this->view->user->username, "act_delete_quest");
+		}
+		catch(Exception $ex)
+        {            
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
 	}
+	
+	
+	private function _getArrQuest()
+	{
+		$md = new Models_Quest();
+		$Quests = $md->_filter();
+		
+		$data = array();
+		if($Quests)
+		{
+			foreach($Quests as $quest)
+			{
+				$data[] = array(
+					'QuestID' => $quest->QuestID,
+					'QuestName' => $quest->QuestName
+				);
+			}
+			
+			$this->view->arrQuest = $data;
+		}
+	}	
 	
 	
 }

@@ -1,18 +1,18 @@
 <?php
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Base.php';
 
-class Models_Quest_Detail extends Models_Base
+class Models_Quest_Line extends Models_Base
 {
 	public function __construct()
 	{
 		parent::__construct();		
-		$this->_key = "QuestID";
-		$this->_table = "q_quest";		
+		$this->_key = "QuestLineID";
+		$this->_table = "q_questline";		
 	}
 	
 	public function insert($obj)
 	{
-		
+		parent::_insert($obj);		
 	}
 	
 	public function update($obj)
@@ -49,19 +49,35 @@ class Models_Quest_Detail extends Models_Base
 		
 	public function filter($objSearch,$order,$offset,$count)
 	{
+		$sql = "SELECT
+					*
+				FROM
+					q_questline
+				WHERE
+					1";
+		
+		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+		
+		return $data;
 	
 	}
 	
 	public function count($objSearch)
 	{
+		$sql = "SELECT
+					COUNT(QuestLineID)
+				FROM
+					q_questline
+				WHERE
+					1";
+				
+		$count = $this->_db->fetchOne($sql);
 		
+		return $count;
 	}
 	
 	public function getQuestLine()
-	{
-		$sql = "SELECT * FROM q_questline";
-		$data = $this->_db->fetchAll($sql,"", Zend_Db::FETCH_OBJ);
-		return $data;
+	{		
 				
 	}
 	
