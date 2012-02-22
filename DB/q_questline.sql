@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2012 at 05:42 AM
+-- Generation Time: Feb 22, 2012 at 03:03 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -28,9 +28,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `q_questline` (
   `QuestLineID` int(11) NOT NULL AUTO_INCREMENT,
-  `QuestLineName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`QuestLineID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `QuestLineName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`QuestLineID`,`QuestLineName`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `q_questline`
+--
+
+INSERT INTO `q_questline` (`QuestLineID`, `QuestLineName`) VALUES
+(1, 'Kinh tế'),
+(2, 'Chiến đấu');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
