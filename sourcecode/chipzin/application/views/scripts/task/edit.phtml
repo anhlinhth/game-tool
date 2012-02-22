@@ -1,0 +1,66 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+
+<!-- 
+<div id="box">
+	<h3 id="adduser">Ch?nh s?a Quest</h3>
+	<form id="form" action="" method="post" enctype="multipart/form-data">
+	  <fieldset id="personal">
+		<legend>Thông tin Quest</legend>
+		<label for="id">Quest Id : </label> 
+		<input name="id" value="<?php/* echo $this->form->QuestID */?>" id="alias" type="text" tabindex="1" />
+		<br />
+		<label for="name">Quest Line : </label> 
+		<?php /*$this->selectQuestLine(1) */;?>
+		<br />		
+	
+	  </fieldset>
+	</form>
+</div> -->
+<div id="box">
+<h3> Task</h3>
+<table>
+	<tr>
+		<td>Name</td>
+		<td><input type="text" id="TaskName" name="TaskName" value="<?php echo $this->obj->TaskName?>"/></td>
+		<td>Task String</td>
+		<td><input type="text" id="TaskString" name="TaskString" value="<?php echo $this->obj->TaskString?>"/></td>
+	</tr>
+	<tr>
+		<td>Action</td>
+		<td>
+		<select id="Action" name="Action">
+			<option value="<?php echo $this->obj->ActionID?>"><?php echo $this->objactionname->ActionName?></option>
+			<?php 
+				foreach($this->arrAction as $row)
+				{
+			?>
+					<option value="<?php echo $row->ActionID ?>"><?php echo $row->ActionName ?></option>
+			<?php
+				}
+			?>
+		</select>
+		</td>
+		<td>Target</td>
+		<td><input type="text" id="TargetID" name="TargetID" value="<?php echo $this->obj->TargetID?>"/></td>
+	</tr>
+	<tr>
+		<td>UnlockCoin</td>
+		<td><input type="text" id="UnlockCoin" name="UnlockCoin" value="<?php echo $this->obj->UnlockCoin?>"/></td>
+		<td>Quantity</td>
+		<td><input type="text" id="Quantity" name="Quantity" value="<?php echo $this->obj->Quantity?>"/></td>
+	</tr>
+	<tr>
+		<td colspan="2">Quest Task Client</td>
+		<td colspan="2"><input type="text" id="QTC_ID" name="QTC_ID" value="<?php echo $this->obj->QTC_ID?>"/></td>
+	</tr>
+	<tr>
+		<td>Icon</td>
+		<td colspan="3"></td>
+	</tr>
+</table>
+</div>
