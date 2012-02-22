@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 22, 2012 at 08:49 AM
+-- Generation Time: Feb 22, 2012 at 09:09 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -29,11 +29,10 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `q_quest_needquest` (
   `QuestID` int(11) NOT NULL,
   `NeedQuest` int(11) NOT NULL,
-  `NeedQuestID` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`NeedQuestID`),
+  PRIMARY KEY (`QuestID`,`NeedQuest`),
   KEY `QuestID` (`QuestID`),
   KEY `NeedQuest` (`NeedQuest`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Constraints for dumped tables
@@ -43,8 +42,8 @@ CREATE TABLE IF NOT EXISTS `q_quest_needquest` (
 -- Constraints for table `q_quest_needquest`
 --
 ALTER TABLE `q_quest_needquest`
-  ADD CONSTRAINT `q_quest_needquest_ibfk_2` FOREIGN KEY (`NeedQuest`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `q_quest_needquest_ibfk_1` FOREIGN KEY (`QuestID`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `q_quest_needquest_ibfk_1` FOREIGN KEY (`QuestID`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `q_quest_needquest_ibfk_2` FOREIGN KEY (`NeedQuest`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
