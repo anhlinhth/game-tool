@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2012 at 04:40 AM
+-- Generation Time: Feb 22, 2012 at 02:39 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -32,12 +32,12 @@ CREATE TABLE IF NOT EXISTS `q_task` (
   `TaskString` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `DescID` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `QTC_ID` int(11) DEFAULT NULL,
-  `UnlockCoin` int(11) DEFAULT NULL,
+  `UnlockCoin` int(11) NOT NULL,
   `IconClassName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Quantity` int(11) DEFAULT NULL,
-  `ActionID` int(11) DEFAULT NULL,
+  `Quantity` int(11) NOT NULL,
+  `ActionID` int(11) NOT NULL,
   `QuestID` int(11) DEFAULT NULL,
-  `TargetID` int(11) DEFAULT NULL,
+  `TargetID` int(11) NOT NULL,
   PRIMARY KEY (`TaskID`),
   KEY `QuestID` (`QuestID`),
   KEY `QTC_ID` (`QTC_ID`,`ActionID`,`QuestID`),

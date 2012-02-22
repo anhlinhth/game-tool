@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 22, 2012 at 02:25 AM
+-- Generation Time: Feb 22, 2012 at 02:39 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -34,10 +34,10 @@ CREATE TABLE IF NOT EXISTS `q_quest` (
   `QuestString` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `QuestDesc` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `QuestDescString` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `AwardGold` int(11) DEFAULT NULL,
-  `AwardExp` int(11) DEFAULT NULL,
+  `AwardGold` int(11) NOT NULL,
+  `AwardExp` int(11) NOT NULL,
   `NextQuest` int(11) DEFAULT NULL,
-  `QuestLineID` int(11) DEFAULT NULL,
+  `QuestLineID` int(11) NOT NULL,
   PRIMARY KEY (`QuestID`),
   KEY `QuestLineID` (`QuestLineID`),
   KEY `NextQuest` (`NextQuest`,`QuestLineID`)
@@ -58,8 +58,8 @@ INSERT INTO `q_quest` (`QuestID`, `QuestName`, `QuestGroupString`, `QuestGroup`,
 -- Constraints for table `q_quest`
 --
 ALTER TABLE `q_quest`
-  ADD CONSTRAINT `q_quest_ibfk_2` FOREIGN KEY (`NextQuest`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `q_quest_ibfk_1` FOREIGN KEY (`QuestLineID`) REFERENCES `q_questline` (`QuestLineID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `q_quest_ibfk_1` FOREIGN KEY (`QuestLineID`) REFERENCES `q_questline` (`QuestLineID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `q_quest_ibfk_2` FOREIGN KEY (`NextQuest`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
