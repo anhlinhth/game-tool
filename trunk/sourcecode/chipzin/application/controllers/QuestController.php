@@ -93,7 +93,7 @@ class QuestController extends BaseController
 			$md = new Models_Quest_Detail();
 			
 			if($this->_request->isPost())// da post du lieu len
-			{
+			{				
 				$form = new Forms_Quest_Detail();
 				$form->_requestToForm($this);
 				$form->validate(UPDATE);		
