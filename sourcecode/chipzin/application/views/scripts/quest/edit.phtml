@@ -5,7 +5,7 @@
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
 
-<?php print_r($this->obj)?>
+<?php //print_r($this->obj)?>
 <div id="box">
 	<h3 id="adduser">Chỉnh sửa Quest</h3>
 	<form id="form" action="" method="post" enctype="multipart/form-data">
@@ -35,8 +35,7 @@
 			
 			<tr>
 				<td>
-					<label for="name" >Quest Line : </label> 
-					<<?php print_r($this->arrValue)?>		
+					<label for="name" >Quest Line : </label>							
 					<?php $this->selectQuestLine2($this->obj->QuestLineID,$this->arrValue) ;?>
 				</td>
 				<td>
@@ -68,7 +67,8 @@
 
 		</table>
 
-		<input type="submit" name="search" id="button1" value="Save All" />
+		<input id="button1" type="submit" value="Save" /> &nbsp;&nbsp; 	  
+	 	<input id="button1" type="button" value="Cancel	" onclick="window.location='<?php echo $this->baseUrl ?>/quest/index'" />
 	
 		<br />
 		
