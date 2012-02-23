@@ -4,11 +4,11 @@
 <?php if($this->msg) :?>		
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
-
+<div>
 <table>
 	<tr>
 		<td>Task ID</td>
-		<td><input type="text" id="TaskID" name="TaskID[]" value="<?php echo $this->obj->TaskID?>"/></td>
+		<td><input type="text" id="TaskID" name="TaskID[]" class="taskid" value="<?php echo $this->obj->TaskID?>"/></td>
 		<td>Task Name</td>
 		<td><input type="text" id="TaskName" name="TaskName[]" value="<?php echo $this->obj->TaskName?>"/></td>
 		
@@ -49,3 +49,8 @@
 	</tr>
 </table>
 </div>
+<script>
+//$(document).ready(function(){
+//		$('.taskid').attr(''
+//		});
+</script>

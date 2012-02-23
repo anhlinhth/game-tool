@@ -210,22 +210,83 @@ class QuestController extends BaseController
 	public function updateAction()
 	{
 		try
-		{
-			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';			
-			
-			$md = new Models_Quest_Detail();
-			
+		{			
+			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
+			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Needquest.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Needquest.php';
+			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Awarditem.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
+		
 			if($this->_request->isPost())// da post du lieu len
-			{				
-				$form = new Forms_Quest_Detail();
-				$form->_requestToForm($this);
+			{	
+				$this->QuestID= $this->_request->getParam("QuestID");
 				
-				$this->view->mess =  $form->obj;
-				$md->update($form->obj);
-				/* if(($form->obj->QuestID)==($form->obj->NextQuest))
+				//update quest need quest
+				$this->arrNeedQuest = $this->_request->getParam("need-quest");
+				$mdNeedQuest = new Models_Quest_Needquest();
+				$mdNeedQuest->_delete($this->QuestID);
+				foreach($this->arrNeedQuest as $i=>$key)
 				{
-					echo "Nhap next quest khac voi quest";
-				}*/
+					$objneedquest = new Obj_Quest_Needquest();
+					$objneedquest->QuestID = $this->QuestID;
+					$objneedquest->NeedQuest = $this->arrNeedQuest[$i];
+					
+					if($objneedquest->NeedQuest != "")
+					{
+						$mdNeedQuest->_insert($objneedquest);
+					}
+				}
+				Models_Log::insert($this->view->user->username, "act_update_needquest");
+				
+				//update quest awarditem
+				$this->AwardItem = $this->_request->getParam("awarditem");
+				$mdAwardItem = new Models_Quest_Awarditem();
+				$mdAwardItem->_delete($this->QuestID);
+				foreach($this->AwardItem as $i=>$key)
+				{
+					$objAwardItem = new Obj_Quest_Awarditem();
+					$objAwardItem->QuestID = $this->QuestID;
+					$objAwardItem->AwardItem = $this->AwardItem[$i];
+					
+					if($objAwardItem->AwardItem != "")
+					{
+						$mdAwardItem->_insert($objAwardItem);
+					}
+				}
+				Models_Log::insert($this->view->user->username, "act_update_AwardItem");
+				
+				//update task
+				$this->arrTaskID= $this->_request->getParam("TaskID");			
+				$this->arrTaskName= $this->_request->getParam("TaskName");		
+				$this->arrTaskString= $this->_request->getParam("TaskString"); 
+				$this->arrDescID= $this->_request->getParam("DescID");
+				$this->arrQTC_ID= $this->_request->getParam("QTC_ID");
+				$this->arrUnlockCoin= $this->_request->getParam("UnlockCoin");
+				$this->arrIconClassName= $this->_request->getParam("IconClassName");
+				$this->arrQuantity= $this->_request->getParam("Quantity");
+				$this->arrActionID= $this->_request->getParam("Action");
+				$this->arrTargetID= $this->_request->getParam("TargetID");
+				foreach($this->arrTaskID as $i=>$key)
+				{
+					$task = new Obj_Task();
+					$task->TaskID = $this->arrTaskID[$i];
+					$task->TaskName = $this->arrTaskName[$i];
+					$task->TaskString = $this->arrTaskString[$i];
+					$task->DescID = $this->arrDescID[$i];
+					$task->QTC_ID = $this->arrQTC_ID[$i];
+					$task->UnlockCoin = $this->arrUnlockCoin[$i];
+					$task->IconClassName = $this->arrIconClassName[$i];
+					$task->Quantity = $this->arrQuantity[$i];
+					$task->ActionID = $this->arrActionID[$i];
+					$task->QuestID = $this->QuestID;
+					$task->TargetID = $this->arrTargetID[$i];
+					
+					$mdtask = new Models_Task();
+					$mdtask->_update($task);
+					Models_Log::insert($this->view->user->username, "act_update_quest");				
+				}
+				$this->_redirect("/quest/index");
 			}
 		}
 		catch(Exception $ex)
