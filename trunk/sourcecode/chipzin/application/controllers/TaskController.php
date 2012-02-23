@@ -65,24 +65,20 @@ class TaskController extends BaseController
 	
 	public function editAction()
 	{		
+		$this->_helper->layout()->disableLayout();
 		try
 		{
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Task.php';			
 			//require_once ROOT_APPLICATION_FORMS.DS.'Forms_Action.php';
 			
 			$md = new Models_Task();
-			$mdAction = new Models_Action();
-			
-			if($this->_request->isPost())// da post du lieu len
-			{
-				
-			}
-			else{		// chua post du lieu-->load du lieu vao Form		
+			$mdAction = new Models_Action();	
 				$id = $this->_request->getParam("id");
+				$this->view->mss = $id;
 				$this->view->obj = $md->_getByKey($id);
 				$this->view->arrAction = $mdAction->_getAction($this->view->obj->ActionID);
-				$this->view->objactionname = $mdAction->_getByKey($this->view->obj->ActionID);
-			}
+				$this->view->objactionname = $mdAction->_getByKey($this->view->obj->ActionID);			
+				
 			
 		}
 		catch(Exception $ex)
