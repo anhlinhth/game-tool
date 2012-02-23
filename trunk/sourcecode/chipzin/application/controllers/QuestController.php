@@ -204,6 +204,10 @@ class QuestController extends BaseController
         }
 	}
 	
+	public function updateAction()
+	{		
+		
+	}
 	
 }
 ?>
