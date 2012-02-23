@@ -8,7 +8,7 @@
 <?php //print_r($this->arrAwardItems)?>
 <div id="box">
 	<h3 id="adduser">Chỉnh sửa Quest</h3>
-	<form id="form" action="<?php echo $this->baseUrl.'/Quest/update/'?>" method="post" enctype="multipart/form-data">
+	<form id="form" action="<?php echo $this->baseUrl.'/Quest/update/' ?>" method="post" enctype="multipart/form-data">
 	  <fieldset id="personal">
 		<legend>Thông tin Quest</legend>
 		<table>
@@ -39,7 +39,7 @@
 				</td>
 				<td>
 					<label for="QuestGroupString">Q_Group String: </label> 
-					<input name="QuestQroupString" value="<?php echo $this->obj->QuestGroupString?>" id="questgroupstring" type="text" tabindex="1" />
+					<input name="QuestGroupString" value="<?php echo $this->obj->QuestGroupString?>" id="questgroupstring" type="text" tabindex="1" />
 				</td>
 			</tr>
 			
@@ -60,19 +60,19 @@
 		<p>Award: </p>
 		<label>Gold: </label><input name="AwardGold" value="<?php echo $this->obj->AwardGold?>" id="awardgold" type="text" tabindex="1" /><br/>
 		<label>EXP: </label><input name="AwardExp" value="<?php echo $this->obj->AwardExp?>" id="awardexp" type="text" tabindex="1" /><br/>
-		<label for="2">ITems: </label><a class='btn-add' id='addItem0' title='Add Item' href='javascript:addAwardItem(addItem0)'>add</a>
+		<label for="2">ITems: </label><a id='addItem0' title='Add Item' href='javascript:addAwardItem(addItem0)'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png'></a>
 		        <?php $this->ListQuestAwardItems($this->arrAwardItems) ;?>
 		 
 				</td>
 				<td>
 					<label for="name">Next Quest : </label> 		
-					<?php $this->selectNextQuest($this->ojb->NextQuest,$this->arrQuest) ;?>
+					<?php $this->SelectNextQuest($this->obj->NextQuest,$this->arrnextQuest) ;?>
 				</td>
 			</tr>
 			
 			<tr>				
 				<td>
-					<label for="name">Need Quest : </label> <a class='btn-add' title="Thêm Need Quest" href="javascript:addNeedQuest()">add</a><br/>
+					<label for="name">Need Quest : </label> <a title="Thêm Need Quest" href="javascript:addNeedQuest()"><img style="vertical-align: middle" src="/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png"></a><br/>
 					<?php $this->listNeedQuest($this->arrNeedQuest,$this->arrQuest)?>															
 					
 				</td>
@@ -83,59 +83,48 @@
 		<fieldset id="personal">
 		<legend>Task: </legend>
 			<div id='list-task'>
-			      
-				<h3>Task 1 
-					<a href="javascript:addTask(0)"><img src=" <?php echo $this->baseUrl.'/media/images/icons/add.png' ?>" /> </a>
-					<a href="javascript:deleteTask(0)"><img src=" <?php echo $this->baseUrl.'/media/images/icons/delete.gif' ?>" /> </a>
-				</h3>
+				<h3>Task 1</h3>
 				<div id='task-0'>
 				</div>
-				<h3>Task 2 
-					<a href="javascript:addTask(1)"><img src=" <?php echo $this->baseUrl.'/media/images/icons/add.png' ?>" /> </a>
-					<a href="javascript:deleteTask(1)"><img src=" <?php echo $this->baseUrl.'/media/images/icons/delete.gif' ?>" /> </a>
-					
-				</h3>
+				<h3>Task 2</h3>
 				<div id='task-1'>
 				</div>
-				<h3>Task 3 
-					<a href="javascript:addTask(2)"><img src=" <?php echo $this->baseUrl.'/media/images/icons/add.png' ?>" /> </a>
-					<a href="javascript:deleteTask(2)"><img src=" <?php echo $this->baseUrl.'/media/images/icons/delete.gif' ?>" /> </a>
-				</h3>
-					
+				<h3>Task 3</h3>
 				<div id='task-2'>
 				</div>
 			</div>	
 	  	</fieldset>
-  		<input id="button1" type="submit" value="save" /> &nbsp;&nbsp; 	  
- 		<input id="button1" type="button" value="cancel" onclick="window.location='<?php echo $this->baseUrl ?>/quest/index'" />		
+  		<input id="button1" type="submit" value="Save All" /> &nbsp;&nbsp; 	  
+ 		<input id="button1" type="button" value="Cancel	" onclick="window.location='<?php echo $this->baseUrl ?>/quest/index'" />		
 		<br />	
 		
 	</form>
 </div>
 <script>
 function  addAwardItem(key){	
+
 	var count = $(".awarditem").size();
-	count = count;
-	var str = " <a class='btn-add' title='Add Item' href='javascript:addAwardItem("+count+")'>add</a>"
-	 + " <a class='btn-delete' title='Delete Item' href='javascript:deleteAwardItem("+count+")'>delete</a>" ;
-	if(key==-1)
-		$("#addItem1").after("<div class='awarditem' id='award1-"+count+"'><label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/>"+str+"</div>");
-	else
-		$('#award_'+key).after("<div class='awarditem' id='award_"+count+"'><label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/> "+str+"</div>");
-	alert(str);
+	count = count + 1;
+	var str = " <a title='Add Item' href='javascript:addAwardItem(award_"+count+")'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png'></a>"
+    + " <a title='Delete Item' href='javascript:deleteAwardItem(award_"+count+")'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/delete.gif'></a>" ;
+//	if(key==-1)
+//		$("#addItem1").after("<div class='awarditem' id='award1-"+count+"'><label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/>"+str+"</div>");
+//	else
+		$(key).after("<div class='awarditem' id='award_"+count+"'><label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/> "+str+"</div>");
 }
 
-function  addNeedQuest(item){	
+function  addNeedQuest(key){
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/listquest/'?> ",		
 		success: function(data){
 			if(data != "")
 			{	
-				var count = $(".awarditem").size();				
-				var html = "<div class='need_quest' id='need_quest_"+count+"'><label></label>" + data + "</div>";	
-				//alert(html);		
-				$(item).after(data);
+				var count = $(".awarditem").size();
+				count = count + 1;	
+				var html = "<div class='need-quest' id='need-quest-"+count+"'><label></label>" + data + "</div>";	
+				alert(html);		
+				//$("#task-" + postion).html(data);
 			}
 			else
 			{
@@ -149,16 +138,7 @@ function  addNeedQuest(item){
 }
 
 function  deleteAwardItem(key){
-	s = $('award_'+key).remove();	
-}
-
-
-function  addTask(key){
-	alert(key);	
-}
-
-function  deleteTask(key){
-	alert('delete'+key);	
+	s = $(key).remove();	
 }
 
 function  deleteNeedQuest(key){
