@@ -221,7 +221,7 @@ class QuestController extends BaseController
 			if($this->_request->isPost())// da post du lieu len
 			{	
 				$this->QuestID= $this->_request->getParam("QuestID");
-				
+				$form->validate(UPDATE);
 				//update quest need quest
 				$this->arrNeedQuest = $this->_request->getParam("need-quest");
 				$mdNeedQuest = new Models_Quest_Needquest();
