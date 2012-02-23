@@ -211,9 +211,19 @@ class QuestController extends BaseController
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Task.php';			
 			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
+			//require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Detail.php';
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
+			//require_once ROOT_APPLICATION_OBJ.DS.'Forms_Quest_Detail.php';	
 		
 			if($this->_request->isPost())// da post du lieu len
 			{	
+				$md_quest = new Models_Quest_Detail();
+				$form_quest = new Forms_Quest_Detail();
+				$form_quest->_requestToForm($this);
+				print_r($form_quest->obj);
+				$md_quest->_update($form_quest->obj);
+				
+				
 				$this->arrTaskID= $this->_request->getParam("TaskID");			
 				$this->arrTaskName= $this->_request->getParam("TaskName");		
 				$this->arrTaskString= $this->_request->getParam("TaskString"); 
@@ -242,7 +252,7 @@ class QuestController extends BaseController
 					$mdtask = new Models_Task();
 					$mdtask->_update($task);
 					Models_Log::insert($this->view->user->username, "act_update_quest");				
-					$this->_redirect("/quest/index");
+					//$this->_redirect("/quest/edit/id/$this->QuestID");
 				}
 			}
 			
