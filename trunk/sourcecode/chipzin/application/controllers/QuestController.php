@@ -110,6 +110,7 @@ class QuestController extends BaseController
 				$this->view->arrAwardItems = $md->getAwardItems($id);
 				$this->view->arrTask = $md->getTask($id);
 				$this->view->arrQuest = $md->getQuest();
+				$this->view->arrnextQuest = $md->getnextQuest($id);
 			}
 			
 		}
@@ -176,6 +177,7 @@ class QuestController extends BaseController
 				$this->view->obj = $md->_getByKey($id);				
 				$this->view->arrNeedQuest = $md->getNeedQuest($id);					
 				$this->view->arrQuest = $md->getQuest();
+				
 			}
 			
 		}
@@ -204,58 +206,27 @@ class QuestController extends BaseController
         }
 	}
 	
+
 	public function updateAction()
-	{		
+	{
 		try
 		{
-			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Task.php';			
-			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task.php';
-			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
-			//require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Detail.php';
-			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
-			//require_once ROOT_APPLICATION_OBJ.DS.'Forms_Quest_Detail.php';	
-		
-			if($this->_request->isPost())// da post du lieu len
-			{	
-				$md_quest = new Models_Quest_Detail();
-				$form_quest = new Forms_Quest_Detail();
-				$form_quest->_requestToForm($this);
-				print_r($form_quest->obj);
-				$md_quest->_update($form_quest->obj);
-				
-				
-				$this->arrTaskID= $this->_request->getParam("TaskID");			
-				$this->arrTaskName= $this->_request->getParam("TaskName");		
-				$this->arrTaskString= $this->_request->getParam("TaskString"); 
-				$this->arrDescID= $this->_request->getParam("DescID");
-				$this->arrQTC_ID= $this->_request->getParam("QTC_ID");
-				$this->arrUnlockCoin= $this->_request->getParam("UnlockCoin");
-				$this->arrIconClassName= $this->_request->getParam("IconClassName");
-				$this->arrQuantity= $this->_request->getParam("Quantity");
-				$this->arrActionID= $this->_request->getParam("Action");
-				$this->QuestID= $this->_request->getParam("QuestID");
-				$this->arrTargetID= $this->_request->getParam("TargetID");
-				foreach($this->arrTaskID as $i=>$key)
-				{
-					$task = new Obj_Task();
-					$task->TaskID = $this->arrTaskID[$i];
-					$task->TaskName = $this->arrTaskName[$i];
-					$task->TaskString = $this->arrTaskString[$i];
-					$task->DescID = $this->arrDescID[$i];
-					$task->QTC_ID = $this->arrQTC_ID[$i];
-					$task->UnlockCoin = $this->arrUnlockCoin[$i];
-					$task->IconClassName = $this->arrIconClassName[$i];
-					$task->Quantity = $this->arrQuantity[$i];
-					$task->ActionID = $this->arrActionID[$i];
-					$task->QuestID = $this->QuestID;
-					$task->TargetID = $this->arrTargetID[$i];
-					$mdtask = new Models_Task();
-					$mdtask->_update($task);
-					Models_Log::insert($this->view->user->username, "act_update_quest");				
-					//$this->_redirect("/quest/edit/id/$this->QuestID");
-				}
-			}
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';			
 			
+			$md = new Models_Quest_Detail();
+			
+			if($this->_request->isPost())// da post du lieu len
+			{				
+				$form = new Forms_Quest_Detail();
+				$form->_requestToForm($this);
+				
+				$this->view->mess =  $form->obj;
+				$md->update($form->obj);
+				/* if(($form->obj->QuestID)==($form->obj->NextQuest))
+				{
+					echo "Nhap next quest khac voi quest";
+				}*/
+			}
 		}
 		catch(Exception $ex)
         {
@@ -265,6 +236,5 @@ class QuestController extends BaseController
         }
 		
 	}
-	
 }
 ?>
