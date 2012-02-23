@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 23, 2012 at 03:50 AM
+-- Generation Time: Feb 23, 2012 at 10:48 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -10909,18 +10909,7 @@ CREATE TABLE IF NOT EXISTS `q_action` (
   `ActionID` int(11) NOT NULL AUTO_INCREMENT,
   `ActionName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ActionID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4004 ;
-
---
--- Dumping data for table `q_action`
---
-
-INSERT INTO `q_action` (`ActionID`, `ActionName`) VALUES
-(1, NULL),
-(2, NULL),
-(1001, NULL),
-(1002, NULL),
-(4003, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -10956,15 +10945,7 @@ CREATE TABLE IF NOT EXISTS `q_questline` (
   `QuestLineName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`QuestLineID`),
   UNIQUE KEY `QuestLineName` (`QuestLineName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `q_questline`
---
-
-INSERT INTO `q_questline` (`QuestLineID`, `QuestLineName`) VALUES
-(1, '1'),
-(2, '2');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -11021,9 +11002,9 @@ CREATE TABLE IF NOT EXISTS `q_task` (
   `UnlockCoin` int(11) NOT NULL,
   `IconClassName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Quantity` int(11) NOT NULL,
-  `ActionID` int(11) NOT NULL,
+  `ActionID` int(11) DEFAULT NULL,
   `QuestID` int(11) DEFAULT NULL,
-  `TargetID` int(11) NOT NULL,
+  `TargetID` int(11) DEFAULT NULL,
   PRIMARY KEY (`TaskID`),
   KEY `QuestID` (`QuestID`),
   KEY `QTC_ID` (`QTC_ID`,`ActionID`,`QuestID`),
@@ -11143,7 +11124,7 @@ INSERT INTO `user` (`id`, `username`, `fullname`, `password`, `active`, `created
 --
 ALTER TABLE `q_quest`
   ADD CONSTRAINT `q_quest_ibfk_1` FOREIGN KEY (`QuestLineID`) REFERENCES `q_questline` (`QuestLineID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `q_quest_ibfk_2` FOREIGN KEY (`NextQuest`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `q_quest_ibfk_2` FOREIGN KEY (`NextQuest`) REFERENCES `q_quest` (`QuestID`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `q_quest_awarditem`
