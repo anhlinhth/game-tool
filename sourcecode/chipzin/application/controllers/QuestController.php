@@ -15,7 +15,7 @@ class QuestController extends BaseController
 {
 	public function _setUserPrivileges()
 	{
-		return array('index','add','edit','delete','active','item','additem','pigshop','itemshop');
+		return array('index','add','edit','delete','active','item','additem','pigshop','itemshop','update');
 	}
 	
 	public function preDispatch()
@@ -206,6 +206,53 @@ class QuestController extends BaseController
 	
 	public function updateAction()
 	{		
+		try
+		{
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Task.php';			
+			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
+		
+			if($this->_request->isPost())// da post du lieu len
+			{	
+				$this->arrTaskID= $this->_request->getParam("TaskID");			
+				$this->arrTaskName= $this->_request->getParam("TaskName");		
+				$this->arrTaskString= $this->_request->getParam("TaskString"); 
+				$this->arrDescID= $this->_request->getParam("DescID");
+				$this->arrQTC_ID= $this->_request->getParam("QTC_ID");
+				$this->arrUnlockCoin= $this->_request->getParam("UnlockCoin");
+				$this->arrIconClassName= $this->_request->getParam("IconClassName");
+				$this->arrQuantity= $this->_request->getParam("Quantity");
+				$this->arrActionID= $this->_request->getParam("Action");
+				$this->QuestID= $this->_request->getParam("QuestID");
+				$this->arrTargetID= $this->_request->getParam("TargetID");
+				foreach($this->arrTaskID as $i=>$key)
+				{
+					$task = new Obj_Task();
+					$task->TaskID = $this->arrTaskID[$i];
+					$task->TaskName = $this->arrTaskName[$i];
+					$task->TaskString = $this->arrTaskString[$i];
+					$task->DescID = $this->arrDescID[$i];
+					$task->QTC_ID = $this->arrQTC_ID[$i];
+					$task->UnlockCoin = $this->arrUnlockCoin[$i];
+					$task->IconClassName = $this->arrIconClassName[$i];
+					$task->Quantity = $this->arrQuantity[$i];
+					$task->ActionID = $this->arrActionID[$i];
+					$task->QuestID = $this->QuestID;
+					$task->TargetID = $this->arrTargetID[$i];
+					$mdtask = new Models_Task();
+					$mdtask->_update($task);
+					Models_Log::insert($this->view->user->username, "act_update_quest");				
+					$this->_redirect("/quest/index");
+				}
+			}
+			
+		}
+		catch(Exception $ex)
+        {
+            $this->view->form = $form->obj;
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
 		
 	}
 	
