@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 22, 2012 at 02:39 AM
+-- Generation Time: Feb 23, 2012 at 04:18 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -35,21 +35,14 @@ CREATE TABLE IF NOT EXISTS `q_task` (
   `UnlockCoin` int(11) NOT NULL,
   `IconClassName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Quantity` int(11) NOT NULL,
-  `ActionID` int(11) NOT NULL,
+  `ActionID` int(11) DEFAULT NULL,
   `QuestID` int(11) DEFAULT NULL,
-  `TargetID` int(11) NOT NULL,
+  `TargetID` int(11) DEFAULT NULL,
   PRIMARY KEY (`TaskID`),
   KEY `QuestID` (`QuestID`),
   KEY `QTC_ID` (`QTC_ID`,`ActionID`,`QuestID`),
   KEY `ActionID` (`ActionID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `q_task`
---
-
-INSERT INTO `q_task` (`TaskID`, `TaskName`, `TaskString`, `DescID`, `QTC_ID`, `UnlockCoin`, `IconClassName`, `Quantity`, `ActionID`, `QuestID`, `TargetID`) VALUES
-(2, 'Xây thêm 1 Nhà Cỏ tranh ', '@quest#3 ', '@quest#3 ', 1, 3, 'sample', 1, 1, 2, 2004);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Constraints for dumped tables
