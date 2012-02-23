@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 23, 2012 at 10:48 AM
+-- Generation Time: Feb 23, 2012 at 10:49 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -5691,7 +5691,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `action` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5097 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5098 ;
 
 --
 -- Dumping data for table `log`
@@ -10800,7 +10800,8 @@ INSERT INTO `log` (`id`, `action_date`, `user`, `action`, `note`) VALUES
 (5093, '2012-02-22 16:20:19', 'admin', 'act_login', NULL),
 (5094, '2012-02-22 22:59:37', 'admin', 'act_login', NULL),
 (5095, '2012-02-23 08:58:41', 'admin', 'act_login', NULL),
-(5096, '2012-02-23 09:37:44', 'admin', 'act_login', NULL);
+(5096, '2012-02-23 09:37:44', 'admin', 'act_login', NULL),
+(5097, '2012-02-23 16:49:29', 'admin', 'act_changepass', NULL);
 
 -- --------------------------------------------------------
 
@@ -11101,7 +11102,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `fullname`, `password`, `active`, `created_date`, `group_id`) VALUES
-(1, 'admin', 'admin', '51934be6f2f7b6066d48afd1b635bc1c', 1, '0000-00-00 00:00:00', 1),
+(1, 'admin', 'admin', '202cb962ac59075b964b07152d234b70', 1, '0000-00-00 00:00:00', 1),
 (13, 'kietma', 'Mai Anh Kiệt', 'e10adc3949ba59abbe56e057f20f883e', 1, '0000-00-00 00:00:00', 4),
 (14, 'chilh', 'La Hồng Chi', '202cb962ac59075b964b07152d234b70', 1, '0000-00-00 00:00:00', 2),
 (15, 'tutn', 'Trần Ngọc Tú', 'ac3ee64b7a3f3e1a740cb04ce72fe3df', 0, '0000-00-00 00:00:00', 2),
