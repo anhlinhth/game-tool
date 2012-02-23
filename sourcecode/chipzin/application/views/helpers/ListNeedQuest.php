@@ -19,9 +19,9 @@ class Zend_View_Helper_ListNeedQuest
 				$strSelectQuest .= "<option $slt value='". $q_value->QuestID ."'>$q_value->QuestName</option>";
 			}
 			$strSelectQuest .= "</select>";
-			$strList.="<div id='need-quest-$key'><label></label>".$strSelectQuest."
-			<a title='Add Item' href='javascript:addNeedQuest($key)'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png'></a>
-			<a title='Delete Item' href='javascript:deleteNeedQuest($key)'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/delete.gif'></a>
+			$strList.="<div id='need_quest_$key'><label></label>".$strSelectQuest."
+			<a title='Add Item' href='javascript:addNeedQuest(need_quest_$key)'>Add</a>
+			<a title='Delete Item' href='javascript:deleteNeedQuest(need_quest_$key)'>Delete</a>
 			</div>";
 		}		
 			

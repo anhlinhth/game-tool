@@ -8,7 +8,7 @@
 <?php //print_r($this->arrAwardItems)?>
 <div id="box">
 	<h3 id="adduser">Chỉnh sửa Quest</h3>
-	<form id="form" action="" method="post" enctype="multipart/form-data">
+	<form id="form" action="<?php echo $this->baseUrl.'/Quest/update/'?>" method="post" enctype="multipart/form-data">
 	  <fieldset id="personal">
 		<legend>Thông tin Quest</legend>
 		<table>
@@ -60,7 +60,7 @@
 		<p>Award: </p>
 		<label>Gold: </label><input name="AwardGold" value="<?php echo $this->obj->AwardGold?>" id="awardgold" type="text" tabindex="1" /><br/>
 		<label>EXP: </label><input name="AwardExp" value="<?php echo $this->obj->AwardExp?>" id="awardexp" type="text" tabindex="1" /><br/>
-		<label for="2">ITems: </label><a id='addItem0' title='Add Item' href='javascript:addAwardItem(addItem0)'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png'></a>
+		<label for="2">ITems: </label><a class='btn-add' id='addItem0' title='Add Item' href='javascript:addAwardItem(addItem0)'>add</a>
 		        <?php $this->ListQuestAwardItems($this->arrAwardItems) ;?>
 		 
 				</td>
@@ -72,7 +72,7 @@
 			
 			<tr>				
 				<td>
-					<label for="name">Need Quest : </label> <a title="Thêm Need Quest" href="javascript:addNeedQuest()"><img style="vertical-align: middle" src="/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png"></a><br/>
+					<label for="name">Need Quest : </label> <a class='btn-add' title="Thêm Need Quest" href="javascript:addNeedQuest()">add</a><br/>
 					<?php $this->listNeedQuest($this->arrNeedQuest,$this->arrQuest)?>															
 					
 				</td>
@@ -94,8 +94,8 @@
 				</div>
 			</div>	
 	  	</fieldset>
-  		<input id="button1" type="submit" value="Save All" /> &nbsp;&nbsp; 	  
- 		<input id="button1" type="button" value="Cancel	" onclick="window.location='<?php echo $this->baseUrl ?>/quest/index'" />		
+  		<input id="button1" type="submit" value="save" /> &nbsp;&nbsp; 	  
+ 		<input id="button1" type="button" value="cancel" onclick="window.location='<?php echo $this->baseUrl ?>/quest/index'" />		
 		<br />	
 		
 	</form>
@@ -105,26 +105,25 @@ function  addAwardItem(key){
 
 	var count = $(".awarditem").size();
 	count = count + 1;
-	var str = " <a title='Add Item' href='javascript:addAwardItem(award_"+count+")'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png'></a>"
-    + " <a title='Delete Item' href='javascript:deleteAwardItem(award_"+count+")'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/delete.gif'></a>" ;
+	var str = " <a class='btn-add' title='Add Item' href='javascript:addAwardItem(award_"+count+")'>add</a>"
+    + " <a class='btn-delete' title='Delete Item' href='javascript:deleteAwardItem(award_"+count+")'>delete</a>" ;
 //	if(key==-1)
 //		$("#addItem1").after("<div class='awarditem' id='award1-"+count+"'><label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/>"+str+"</div>");
 //	else
 		$(key).after("<div class='awarditem' id='award_"+count+"'><label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/> "+str+"</div>");
 }
 
-function  addNeedQuest(key){
+function  addNeedQuest(item){	
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/listquest/'?> ",		
 		success: function(data){
 			if(data != "")
 			{	
-				var count = $(".awarditem").size();
-				count = count + 1;	
-				var html = "<div class='need-quest' id='need-quest-"+count+"'><label></label>" + data + "</div>";	
-				alert(html);		
-				//$("#task-" + postion).html(data);
+				var count = $(".awarditem").size();				
+				var html = "<div class='need_quest' id='need_quest_"+count+"'><label></label>" + data + "</div>";	
+				//alert(html);		
+				$(item).after(data);
 			}
 			else
 			{
