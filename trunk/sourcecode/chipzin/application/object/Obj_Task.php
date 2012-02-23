@@ -8,7 +8,7 @@ class Obj_Task
 	public $QTC_ID;
 	public $UnlockCoin;
 	public $IconClassName;
-	public $Quaantity;
+	public $Quantity;
 	public $ActionID;
 	public $QuestID;
 	public $TargetID;
