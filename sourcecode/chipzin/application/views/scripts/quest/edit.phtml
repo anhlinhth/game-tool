@@ -5,7 +5,7 @@
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
 
-<?php print_r($this->arrAwardItems)?>
+<?php //print_r($this->arrAwardItems)?>
 <div id="box">
 	<h3 id="adduser">Chỉnh sửa Quest</h3>
 	<form id="form" action="" method="post" enctype="multipart/form-data">
@@ -60,7 +60,7 @@
 		<p>Award: </p>
 		<label>Gold: </label><input name="AwardGold" value="<?php echo $this->obj->AwardGold?>" id="awardgold" type="text" tabindex="1" /><br/>
 		<label>EXP: </label><input name="AwardExp" value="<?php echo $this->obj->AwardExp?>" id="awardexp" type="text" tabindex="1" /><br/>
-		<label for="2">ITems: </label><a title='Add Item' href='javascript:addAwardItem()'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png'></a><br/>
+		<label for="2">ITems: </label><a id='addItem0' title='Add Item' href='javascript:addAwardItem(addItem0)'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png'></a>
 		        <?php $this->ListQuestAwardItems($this->arrAwardItems) ;?>
 		 
 				</td>
@@ -70,38 +70,105 @@
 				</td>
 			</tr>
 			
-			<tr>
-
-				
+			<tr>				
 				<td>
-					<label for="name">Need Quest : </label> <br/>
-					<input name="QuestDesc" value="<?php echo $this->obj->QuestDesc?>" id="questdesc" type="text" tabindex="1" />															
-					<a title="Thêm Need Quest" href="javascript:addNeedQuest()"><img style="vertical-align: middle" src="/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png"></a><br/>
+					<label for="name">Need Quest : </label> <a title="Thêm Need Quest" href="javascript:addNeedQuest()"><img style="vertical-align: middle" src="/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png"></a><br/>
+					<?php $this->listNeedQuest($this->arrNeedQuest,$this->arrQuest)?>															
+					
 				</td>
 			</tr>
 		</table>
+		</fieldset>
 		
-		<input id="button1" type="submit" value="Save" /> &nbsp;&nbsp; 	  
-	 	<input id="button1" type="button" value="Cancel	" onclick="window.location='<?php echo $this->baseUrl ?>/quest/index'" />
+		<fieldset id="personal">
+		<legend>Task: </legend>
+			<div id='list-task'>
+				<h3>Task 1</h3>
+				<div id='task-0'>
+				</div>
+				<h3>Task 2</h3>
+				<div id='task-1'>
+				</div>
+				<h3>Task 3</h3>
+				<div id='task-2'>
+				</div>
+			</div>	
+	  	</fieldset>
+  		<input id="button1" type="submit" value="Save All" /> &nbsp;&nbsp; 	  
+ 		<input id="button1" type="button" value="Cancel	" onclick="window.location='<?php echo $this->baseUrl ?>/quest/index'" />		
+		<br />	
 		
-		<br />
-		
-		
-		
-	
-	  </fieldset>
 	</form>
 </div>
 <script>
-function  addAwardItem(){
-	alert("add Item");
+function  addAwardItem(key){	
+
+	var count = $(".awarditem").size();
+	count = count + 1;
+	var str = " <a title='Add Item' href='javascript:addAwardItem(award_"+count+")'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png'></a>"
+    + " <a title='Delete Item' href='javascript:deleteAwardItem(award_"+count+")'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/delete.gif'></a>" ;
+//	if(key==-1)
+//		$("#addItem1").after("<div class='awarditem' id='award1-"+count+"'><label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/>"+str+"</div>");
+//	else
+		$(key).after("<div class='awarditem' id='award_"+count+"'><label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/> "+str+"</div>");
 }
 
-function  addNeedQuest(){
-	alert("add Need Quest");
+function  addNeedQuest(key){
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/listquest/'?> ",		
+		success: function(data){
+			if(data != "")
+			{	
+				var count = $(".awarditem").size();
+				count = count + 1;	
+				var html = "<div class='need-quest' id='need-quest-"+count+"'><label></label>" + data + "</div>";	
+				alert(html);		
+				//$("#task-" + postion).html(data);
+			}
+			else
+			{
+				alert("Thêm  không thành công");
+				
+			}
+			
+		}
+	});
+	
 }
 
-function  deleteAwardItem(item){
-	//$("div#item_" + item).remove();
+function  deleteAwardItem(key){
+	s = $(key).remove();	
 }
+
+function  deleteNeedQuest(key){
+	//alert("asd");
+	$("div#need-quest-" + key).remove();
+}
+//////////////
+function loadtask(postion,task_id){
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/task/edit/'?> ",
+		data: "id=" + task_id,
+		success: function(data){
+			if(data != "")
+			{					
+				$("#task-" + postion).html(data);
+			}
+			else
+			{
+				alert("Thêm  không thành công");
+				
+			}
+			
+		}
+	});
+}
+$(function(){
+	<?php foreach ($this->arrTask as $key=>$value) {?>
+		loadtask(<?php echo$key?>,<?php echo $value->TaskID?>);
+	<?php }?>
+	
+});
 </script>

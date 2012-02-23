@@ -104,11 +104,11 @@ class QuestController extends BaseController
 			}
 			else{		// chua post du lieu-->load du lieu vao Form		
 				$id = $this->_request->getParam("id");
-				$this->view->mess = $id;
 				$this->view->obj = $md->_getByKey($id);
 				$this->view->arrValue = $md->getQuestLine();
-				$this->view->arrNeedQuest = $md->getNeedQuest();
+				$this->view->arrNeedQuest = $md->getNeedQuest($id);
 				$this->view->arrAwardItems = $md->getAwardItems($id);
+				$this->view->arrTask = $md->getTask($id);
 				$this->view->arrQuest = $md->getQuest();
 			}
 			
@@ -141,6 +141,7 @@ class QuestController extends BaseController
 	}
 	
 	
+	
 	private function _getArrQuest()
 	{
 		$md = new Models_Quest();
@@ -160,6 +161,48 @@ class QuestController extends BaseController
 			$this->view->arrQuest = $data;
 		}
 	}	
+	
+	public function listneedquestAction()
+	{		
+		try
+		{
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';			
+			
+			$md = new Models_Quest_Detail();
+			
+			if($this->_request->isPost())// da post du lieu len
+			{					
+				$id = $this->_request->getParam("id");
+				$this->view->obj = $md->_getByKey($id);				
+				$this->view->arrNeedQuest = $md->getNeedQuest($id);					
+				$this->view->arrQuest = $md->getQuest();
+			}
+			
+		}
+		catch(Exception $ex)
+        {
+            $this->view->form = $form->obj;
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
+	}
+	
+
+	public function listquestAction()
+	{		
+		try
+		{	$this->_helper->layout()->disableLayout();
+			$md = new Models_Quest_Detail();						
+			$this->view->arrQuest = $md->getQuest();
+		
+		}
+		catch(Exception $ex)
+        {
+            $this->view->form = $form->obj;
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
+	}
 	
 	
 }
