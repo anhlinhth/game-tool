@@ -225,25 +225,32 @@ class QuestController extends BaseController
 		try		
 		{	
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
-			
-			
-			if($this->_request->isPost()){
-				$form = new Forms_Quest_Detail();
-				$form->_requestToForm($this);				
-				$md = new Models_Quest_Detail();
-				print_r($form->obj);
-				$md->insert($form->obj);				
-			}
+			//Lay maxid
+			$md_getmax= new Models_Quest();
+			$idmax =$md_getmax->getMaxQuestID();
+			$id=$idmax+1;
+			//			
 			$md = new Models_Quest_Detail();
 			$this->view->arrValue = $md->getQuestLine();
 			$this->view->arrQuest = $md->getQuest();
 			$this->view->arrNeedQuest = $md->getNeedQuest($id);
-			$this->view->arrnextQuest = $md->getQuest();			
+			$this->view->arrnextQuest = $md->getQuest();
+			$this->view->QuestID = $id;
+			if($this->_request->isPost()){
+				$form = new Forms_Quest_Detail();
+				$form->_requestToForm($this);	
+				$form->validate(INSERT);			
+				$md = new Models_Quest_Detail();
+				print_r($form->obj);
+				
+				$md->_insert($form->obj);				
+			}
+						
 			
 		}
 		catch(Exception $ex)
         {
-           
+           var_dump($ex->getMessage());
         }
 	}
 	public function updateAction()

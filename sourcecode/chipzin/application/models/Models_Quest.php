@@ -119,5 +119,15 @@ class Models_Quest extends Models_Base
 			throw new Internal_Error_Exception($ex);
     	}
     }
+	public  function  getMaxQuestID()
+	{
+		$sql="SELECT
+			 MAX(QuestID) 
+			 FROM 
+			 q_quest
+			 ";
+		$maxId=$this->_db->fetchOne($sql);
+		return $maxId;
+	}
 }
 ?>
