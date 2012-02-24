@@ -273,7 +273,7 @@ class QuestController extends BaseController
 				$form->_requestToForm($this);				
 				$form->validate(UPDATE);
 				$md = new Models_Quest_Detail();
-				print_r($form->obj);
+			//	print_r($form->obj);
 				$md->_update($form->obj);
 				
 				//update quest need quest
@@ -321,6 +321,7 @@ class QuestController extends BaseController
 				$this->arrQuantity= $this->_request->getParam("Quantity");
 				$this->arrActionID= $this->_request->getParam("Action");
 				$this->arrTargetID= $this->_request->getParam("TargetID");
+
 				foreach($this->arrTaskID as $i=>$key)
 				{
 					$task = new Obj_Task();
@@ -336,11 +337,23 @@ class QuestController extends BaseController
 					$task->QuestID = $this->QuestID;
 					$task->TargetID = $this->arrTargetID[$i];
 					
+				//	print_r($task);
+				//	echo"<br>";
+					
 					$mdtask = new Models_Task();
-					$mdtask->_update($task);
-					Models_Log::insert($this->view->user->username, "act_update_quest");				
+					if($task->TaskID == "")
+					{
+						$task->TaskID = $mdtask->findid();
+						$mdtask->_insert($task);
+						Models_Log::insert($this->view->user->username, "act_insert_task");
+					}
+					else
+					{
+						$mdtask->_update($task);
+						Models_Log::insert($this->view->user->username, "act_update_task");
+					}				
 				}
-				//$this->_redirect("/quest/index");
+				$this->_redirect("/quest/index");
 			}
 		}
 		catch(Exception $ex)

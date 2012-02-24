@@ -10,6 +10,17 @@ class Models_Task extends Models_Base
 		$this->_key = "TaskID";
 		$this->_table = "q_task";		
 	}
-
+	
+	public function findid()
+	{
+		$sql = "SELECT
+					(max(QuestID) + 1)
+				FROM
+					q_quest";
+		
+		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}
 }
 ?>
