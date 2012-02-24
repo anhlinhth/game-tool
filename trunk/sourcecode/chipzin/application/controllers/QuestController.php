@@ -129,9 +129,23 @@ class QuestController extends BaseController
 		{
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNoRender();
-			$id = $this->_request->getParam("id"); //luu y cho nay nen dat id trung csd			
+			$id = $this->_request->getParam("id"); //luu y cho nay nen dat id trung csd		
+
+//			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
+//			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Needquest.php';
+//			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
+//			$mdtask = new Models_Task();
+//			$mdtask->_delete($id);
+//			
+//			$mdquestneedquest= new Models_Quest_Needquest();
+//			$mdquestneedquest->_delete($id);
+//			
+//			$mdquestawarditem = new Models_Quest_Awarditem();
+//			$mdquestawarditem->_delete($id);
+			
 			$mdquest = new Models_Quest();
-			$mdquest->_delete($id);	
+			$mdquest->delete($id);
+						
 			Models_Log::insert($this->view->user->username, "act_delete_quest");
 		}
 		catch(Exception $ex)
@@ -140,8 +154,6 @@ class QuestController extends BaseController
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 	}
-	
-	
 	
 	private function _getArrQuest()
 	{

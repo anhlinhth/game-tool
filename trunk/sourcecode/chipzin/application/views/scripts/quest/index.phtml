@@ -3,8 +3,13 @@
 <?php endif; ?>
 <?php if($this->msg) :?>		
 	<?php $this->showMessage($this->msg)?>	
-<?php endif;?>
-
+<?php 
+endif;
+?>
+<?php 
+if($this->temp)
+	$this->showMessage($this->temp)
+?>	
 <form id="quest" name="quest" action="" method="post">
 	<h3>Quest</h3>
 	<table class="filter">
