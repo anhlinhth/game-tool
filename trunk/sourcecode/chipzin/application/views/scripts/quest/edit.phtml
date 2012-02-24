@@ -72,7 +72,8 @@
 			
 			<tr>				
 				<td>
-					<label for="name">Need Quest : </label> <a title="Thêm Need Quest" href="javascript:addNeedQuest()"><img style="vertical-align: middle" src="/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png"></a><br/>
+					<label for="name">Need Quest : </label> <a title="Thêm Need Quest" href="javascript:addNeedQuest(0)"><img style="vertical-align: middle" src="/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png"></a><br/>
+					<div class="need_quest" id="need_quest_0"></div>
 					<?php $this->listNeedQuest($this->arrNeedQuest,$this->arrQuest)?>															
 					
 				</td>
@@ -81,16 +82,18 @@
 		</fieldset>
 		
 		<fieldset id="personal">
-		<legend>Task: </legend>
-			<div id='list-task'>
-				<h3>Task 1</h3>
-				<div id='task-0'>
+		<legend>Task:  <a id='addItem0' title='Add Item' href='javascript:addTask()'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a>	</legend>
+			<div id='list-task'>				
+				<div class='task' id='task-0'>						
+					<div class="content"></div>			
 				</div>
-				<h3>Task 2</h3>
-				<div id='task-1'>
+				
+				<div class='task' id='task-1'>					
+					<div class="content"></div>
 				</div>
-				<h3>Task 3</h3>
-				<div id='task-2'>
+				
+				<div class='task' id='task-2'>					
+					<div class="content"></div>
 				</div>
 			</div>	
 	  	</fieldset>
@@ -105,10 +108,9 @@ function  addAwardItem(key){
 
 	var count = $(".awarditem").size();
 	count = count + 1;
-	var str = " <a title='Add Item' href='javascript:addAwardItem(award_"+count+")'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png'></a>"
-    + " <a title='Delete Item' href='javascript:deleteAwardItem(award_"+count+")'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/delete.gif'></a>" ;
-//	if(key==-1)
-//		$("#addItem1").after("<div class='awarditem' id='award1-"+count+"'><label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/>"+str+"</div>");
+	var str = "<a class='btn-delete' title='Delete Item' href='javascript:deleteAwardItem("+count+")'>Delete</a>" ;
+	if(key==-1)
+		$("#addItem1").after("<div class='awarditem' id='award1-"+count+"'><label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/>"+str+"</div>");
 //	else
 		$(key).after("<div class='awarditem' id='award_"+count+"'><label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/> "+str+"</div>");
 }
@@ -120,11 +122,13 @@ function  addNeedQuest(key){
 		success: function(data){
 			if(data != "")
 			{	
-				var count = $(".awarditem").size();
-				count = count + 1;	
-				var html = "<div class='need-quest' id='need-quest-"+count+"'><label></label>" + data + "</div>";	
-				alert(html);		
-				//$("#task-" + postion).html(data);
+				var count = $(".need_quest").size();
+				var cur = count - 1;
+				count = count;	
+				var html = "<div class='need_quest' id='need_quest_"+count+"'><label></label>" + data + " <a title='Delete Item' href='javascript:deleteNeedQuest("+count+")'>Delete</a></div>";	
+				//alert(count);	
+				//alert(html);	
+				$("#need_quest_0").after(html);
 			}
 			else
 			{
@@ -138,23 +142,69 @@ function  addNeedQuest(key){
 }
 
 function  deleteAwardItem(key){
-	s = $(key).remove();	
+	$("#award_"+key).remove();	
 }
+/////////////////////////
+function  deleteTask(key){
+	$("#task-"+key+" h3").remove();
+	$("#task-"+key+" .content").html("");	
+}
+
+function  addTask(){
+	//$("#award_"+key).remove();
+	var count = $(".task h3").size();
+	
+	var cur = count +1;
+	var btnDelete = "<a title='Delete Task' href='javascript:deleteTask("+count+")'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/delete.gif'?>'></a>"
+	var btnAdd = " ";
+	if(count<2){
+		btnAdd = "<a title='Add Task' href='javascript:addTask()'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a>"
+	}
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/task/edit/'?> ",			
+		success: function(data){			
+			if(data != "")
+			{	
+				 		
+				$("#task-" + count+ " .content").html(data);				
+				$("#task-" + count+ " .content").before("<h3>Task "+cur+ btnAdd + btnDelete +"</h3> ");		
+			}
+			else
+			{
+				alert("Thêm  không thành công");
+				
+			}
+			
+		}
+	});
+	//alert(count);	
+}
+
 
 function  deleteNeedQuest(key){
 	//alert("asd");
-	$("div#need-quest-" + key).remove();
+	$("div#need_quest_" + key).remove();
 }
 //////////////
-function loadtask(postion,task_id){
+function loadtask(pos,task_id){
+	var btnDelete = "<a title='Delete Task' href='javascript:deleteTask("+pos+")'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/delete.gif'?>'></a>"
+	var btnAdd = " ";
+	if(pos < 2){
+		btnAdd = "<a title='Add Task' href='javascript:addTask()'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a>"
+	}
+		
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/task/edit/'?> ",
-		data: "id=" + task_id,
-		success: function(data){
+		data: "id=" + task_id,	
+		success: function(data){			
 			if(data != "")
-			{					
-				$("#task-" + postion).html(data);
+			{	
+				 		
+				$("#task-" + pos+ " .content").html(data);
+				num = pos +1;
+				$("#task-" + pos+ " .content").before("<h3>Task "+num+ btnAdd + btnDelete+"</h3>");	
 			}
 			else
 			{
