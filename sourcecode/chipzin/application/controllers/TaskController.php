@@ -29,11 +29,13 @@ class TaskController extends BaseController
 		try
 		{
 			$this->_helper->layout->disableLayout();
-			$this->_helper->viewRenderer->setNoRender();
+			$this->_helper->viewRenderer->setNorender();
 			$id = $this->_request->getParam("id"); //luu y cho nay nen dat id trung csd			
-			$mdquest = new Models_Quest();
-			$mdquest->_delete($id);	
+			$md = new Models_Task();
+			$md->_delete($id);	
+			echo "da xoa TaskID " .$id;
 			Models_Log::insert($this->view->user->username, "act_delete_task");
+			
 		}
 		catch(Exception $ex)
         {            
