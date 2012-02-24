@@ -106,6 +106,10 @@ class Models_Quest extends Models_Base
 	        			q_quest_needquest
 	        		WHERE
 	        			QuestID ='$value' or NeedQuest='$value';
+        			DELETE FROM 
+	        			q_task
+	        		WHERE
+	        			QuestID = '$value';
 	        		DELETE FROM
         				q_quest
 	        		WHERE
