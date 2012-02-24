@@ -30,7 +30,7 @@ class Zend_View_Helper_ListQuest
 			$addContent = "<a href='$view->baseUrl/gift/item/id/$row->id'><img src='$src' title='Chỉnh sửa nội dung gói phần thưởng' width='16' height='16' /></a>";
 						
 			$strList .= "<tr>
-							<td align='center'>$items</td>
+							<td align='center'><input type='checkbox' name='chkid' onclick='checkOneItem(document.formPaging)' value='$row->QuestID' /></td>
 							<td>$row->QuestID</td>
 							<td>$row->QuestName</td>
 							<td>$row->QuestLineID</td>
