@@ -192,8 +192,10 @@ class QuestController extends BaseController
 
 	public function listquestAction()
 	{		
-		try
-		{	$this->_helper->layout()->disableLayout();
+		try		
+		{	
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Detail.php';
+			$this->_helper->layout()->disableLayout();
 			$md = new Models_Quest_Detail();						
 			$this->view->arrQuest = $md->getQuest();
 		
@@ -211,17 +213,25 @@ class QuestController extends BaseController
 	{
 		try
 		{			
-			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task.php';
+			
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
-			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Needquest.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Needquest.php';
 			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Awarditem.php';
-			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
+			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Needquest.php';
+			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task.php';
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
 		
 			if($this->_request->isPost())// da post du lieu len
 			{	
 				$this->QuestID= $this->_request->getParam("QuestID");
+				$form = new Forms_Quest_Detail();
+				$form->_requestToForm($this);				
 				$form->validate(UPDATE);
+				$md = new Models_Quest_Detail();
+				print_r($form->obj);
+				$md->_update($form->obj);
+				
 				//update quest need quest
 				$this->arrNeedQuest = $this->_request->getParam("need-quest");
 				$mdNeedQuest = new Models_Quest_Needquest();
@@ -286,7 +296,7 @@ class QuestController extends BaseController
 					$mdtask->_update($task);
 					Models_Log::insert($this->view->user->username, "act_update_quest");				
 				}
-				$this->_redirect("/quest/index");
+				//$this->_redirect("/quest/index");
 			}
 		}
 		catch(Exception $ex)

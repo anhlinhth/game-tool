@@ -11,7 +11,9 @@ class Forms_Quest_Detail extends Forms_Base
 	
 	public function validate($action)
 	{
-		
+		if(empty($this->obj->NextQuest)){
+			$this->obj->NextQuest = NULL;
+		}
 	}
 }
 ?>

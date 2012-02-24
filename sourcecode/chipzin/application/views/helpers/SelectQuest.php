@@ -1,7 +1,7 @@
 <?php
-class Zend_View_Helper_SelectNextQuest
+class Zend_View_Helper_SelectQuest
 {
-	public function selectNextQuest($selected, $arrQuest)
+	public function selectQuest($selected, $arrQuest)
 	{
 		$strList .= "<select id='type' name='NextQuest' style='margin-bottom:5px;margin-top:5px;min-width:50px'>";	
 		//$strList .= "<option $slt value='". $value->QuestLineID ."'>$value->QuestLineID</option>";

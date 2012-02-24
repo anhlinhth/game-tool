@@ -17,6 +17,7 @@ class Models_Quest_Detail extends Models_Base
 	
 	public function update($obj)
 	{
+		//var_dump($obj);die();
 		parent::_update($obj);
 	}
 	
