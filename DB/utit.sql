@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 23, 2012 at 10:49 AM
+-- Generation Time: Feb 24, 2012 at 03:38 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -5691,7 +5691,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `action` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5098 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5099 ;
 
 --
 -- Dumping data for table `log`
@@ -10801,7 +10801,8 @@ INSERT INTO `log` (`id`, `action_date`, `user`, `action`, `note`) VALUES
 (5094, '2012-02-22 22:59:37', 'admin', 'act_login', NULL),
 (5095, '2012-02-23 08:58:41', 'admin', 'act_login', NULL),
 (5096, '2012-02-23 09:37:44', 'admin', 'act_login', NULL),
-(5097, '2012-02-23 16:49:29', 'admin', 'act_changepass', NULL);
+(5097, '2012-02-23 16:49:29', 'admin', 'act_changepass', NULL),
+(5098, '2012-02-23 22:41:06', 'admin', 'act_login', NULL);
 
 -- --------------------------------------------------------
 
@@ -11005,12 +11006,24 @@ CREATE TABLE IF NOT EXISTS `q_task` (
   `Quantity` int(11) NOT NULL,
   `ActionID` int(11) DEFAULT NULL,
   `QuestID` int(11) DEFAULT NULL,
-  `TargetID` int(11) DEFAULT NULL,
+  `TargetType` int(11) DEFAULT NULL,
   PRIMARY KEY (`TaskID`),
   KEY `QuestID` (`QuestID`),
   KEY `QTC_ID` (`QTC_ID`,`ActionID`,`QuestID`),
   KEY `ActionID` (`ActionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `q_task_target`
+--
+
+CREATE TABLE IF NOT EXISTS `q_task_target` (
+  `TaskID` int(11) NOT NULL,
+  `TargetID` int(11) NOT NULL,
+  PRIMARY KEY (`TaskID`,`TargetID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -11147,6 +11160,12 @@ ALTER TABLE `q_task`
   ADD CONSTRAINT `q_task_ibfk_1` FOREIGN KEY (`QuestID`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `q_task_ibfk_2` FOREIGN KEY (`QTC_ID`) REFERENCES `q_questtaskclient` (`QTC_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `q_task_ibfk_3` FOREIGN KEY (`ActionID`) REFERENCES `q_action` (`ActionID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `q_task_target`
+--
+ALTER TABLE `q_task_target`
+  ADD CONSTRAINT `q_task_target_ibfk_1` FOREIGN KEY (`TaskID`) REFERENCES `q_task` (`TaskID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
