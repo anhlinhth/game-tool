@@ -60,7 +60,7 @@
 		<p>Award: </p>
 		<label>Gold: </label><input name="AwardGold" value="<?php echo $this->obj->AwardGold?>" id="awardgold" type="text" tabindex="1" /><br/>
 		<label>EXP: </label><input name="AwardExp" value="<?php echo $this->obj->AwardExp?>" id="awardexp" type="text" tabindex="1" /><br/>
-		<label for="2">ITems: </label><a id='add-award_0' title='Add Item' href='javascript:addAwardItem()'><img style='vertical-align: middle' src='/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png'></a>
+		<label for="2">ITems: </label><a id='add-award_0' title='Add Item' href='javascript:addAwardItem()'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a>
 		        <?php $this->ListQuestAwardItems($this->arrAwardItems) ;?>
 		 
 				</td>
@@ -72,7 +72,7 @@
 			
 			<tr>				
 				<td>
-					<label for="name">Need Quest : </label> <a title="Thêm Need Quest" href="javascript:addNeedQuest(0)"><img style="vertical-align: middle" src="/vng/game-tool/sourcecode/chipzin/media/images/icons/add.png"></a><br/>
+					<label for="name">Need Quest : </label> <a title="Thêm Need Quest" href="javascript:addNeedQuest(0)"><img style="vertical-align: middle" src="<?php echo $this->baseUrl .'/media/images/icons/add.png'?>"></a><br/>
 					<div class="need_quest" id="need_quest_0"></div>
 					<?php $this->listNeedQuest($this->arrNeedQuest,$this->arrQuest)?>															
 					
