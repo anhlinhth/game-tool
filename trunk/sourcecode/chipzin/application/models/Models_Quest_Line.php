@@ -20,8 +20,30 @@ class Models_Quest_Line extends Models_Base
 		parent::_update($obj);
 	}
 	
-	private function isExist($alias)
+	private function _deleteQuestLine($id)
 	{
+		try 
+		{
+			$sql="SELECT
+					*
+					FROM
+					q_quest
+					WHERE
+					QuestLineID ='$id' 
+					";
+			
+			$count=$this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+			print_r($count);
+//			if($count < 1)
+//				$this->_db->delete($this->_table, "$this->_key = '$id'");
+//			else
+//				echo ("Xoa khong thanh cong");
+//				 
+		}
+		catch (Zend_Db_Exception $ex)
+		{
+			throw new Internal_Error_Exception($ex);	
+		}
 		
 	}
 	
@@ -75,7 +97,19 @@ class Models_Quest_Line extends Models_Base
 		
 		return $count;
 	}
-	
+	public  function isExistQuestLine($objSearch)
+	{
+		$sql = "SELECT
+					COUNT(QuestLineID)
+				FROM
+					q_quest
+				WHERE
+					QuestLineID='$objSearch'";
+				
+		$count = $this->_db->fetchOne($sql);
+		
+		return $count;
+	}
 	public function getQuestLine()
 	{		
 				

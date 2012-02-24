@@ -27,7 +27,7 @@ function deleteItem(link, id)
 			success: function(msg){
 				if(msg != "")
 				{					
-					alert("Bạn không có quyền thực hiện thao tác xóa");
+					alert(msg);
 				}
 				else
 				{

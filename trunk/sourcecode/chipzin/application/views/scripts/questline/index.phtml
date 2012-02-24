@@ -11,8 +11,8 @@
 	<table class="filter">
 		<tr>
 			<td>Quest Line ID</td>
-			<td><input style="width:110px;" type="text" name="QuestLineID" id="QuestLineID" /></td>
-			<td><input type="submit" name="search" id="button1" value="search" /></td>
+			<td><input style="width:110px;" type="text" name="QuestLineID" id="QuestLineID" class="searchbox" /></td>
+			<td><input type="submit" name="search" id="button1" class="search" value="search" /></td>
 		</tr>
 		
 		<tr>
@@ -49,8 +49,17 @@
 	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
 </div>
 </form>
-<script>
-
+<script type="text/javascript">
+$(function(){
+	$(".search").click(function(){
+		searchbox=document.getElementById('QuestLineID').value;
+		if(searchbox=='')
+		{
+		
+				return false;
+		}
+		});
+});
 $(function(){
 	/// su mot Quest Line
 	
@@ -108,8 +117,6 @@ $(function(){
 		return false;	
 	});
 
-	////huy//////////////
-	////////////////////
 });
 
 
