@@ -8,7 +8,7 @@ class Models_Quest extends Models_Base
 	{
 		parent::__construct();		
 		$this->_key = "QuestID";
-		$this->_table = "q_quest";		
+		$this->_table = "q_quest";	
 	}
 	
 	public function getQuest()
@@ -86,5 +86,38 @@ class Models_Quest extends Models_Base
 		
 		return $count;
 	}
+	
+	public function delete($value)
+	{
+		try
+		{
+	        $sql = "
+	        		UPDATE
+	        			q_quest
+	        		SET
+	        			NextQuest = NULL
+	        		WHERE
+	        			NextQuest = '$value';
+	        		DELETE FROM 
+	        			q_quest_awarditem
+	        		WHERE
+	        			QuestID = '$value';
+	        		DELETE FROM
+	        			q_quest_needquest
+	        		WHERE
+	        			QuestID ='$value' or NeedQuest='$value';
+	        		DELETE FROM
+        				q_quest
+	        		WHERE
+	        			QuestID='$value';";
+	      	
+	        $temp = $this->_db->query($sql);
+	        $result = $temp->rowCount();
+    	}
+    	catch(Zend_Db_Exception $ex)
+		{
+			throw new Internal_Error_Exception($ex);
+    	}
+    }
 }
 ?>
