@@ -208,7 +208,7 @@ class QuestController extends BaseController
         }
 	}
 	
-	public function newAction()
+	public function addAction()
 	{		
 		try		
 		{	
