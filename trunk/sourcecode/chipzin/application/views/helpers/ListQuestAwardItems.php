@@ -4,7 +4,12 @@ class Zend_View_Helper_ListQuestAwardItems
 	public function listQuestAwardItems($data)
 	{
 		
-		$strList .= "";		
+		$strList = "";
+		if(empty($data)){
+			echo $strList;
+			return;
+		}
+				
 		foreach($data as $key =>$row)
 		{
 			//$key = $key+1;

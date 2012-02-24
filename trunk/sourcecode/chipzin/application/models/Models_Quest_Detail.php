@@ -10,9 +10,9 @@ class Models_Quest_Detail extends Models_Base
 		$this->_table = "q_quest";		
 	}
 	
-	public function insert($obj)
+	public function insert($obj)	
 	{
-		
+		parent::_insert($obj);		
 	}
 	
 	public function update($obj)
@@ -79,6 +79,9 @@ class Models_Quest_Detail extends Models_Base
 	}
 public function getnextQuest($id)
 	{
+		if(!isset($id)){
+			$id = -1;
+		}
 		$sql = "SELECT
 					*
 				FROM

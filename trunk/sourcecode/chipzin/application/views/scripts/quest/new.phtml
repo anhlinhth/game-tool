@@ -8,7 +8,7 @@
 <?php //print_r($this->arrAwardItems)?>
 <div id="box">
 	<h3 id="adduser">Chỉnh sửa Quest</h3>
-	<form id="form" action="<?php echo $this->baseUrl.'/Quest/update/' ?>" method="post" enctype="multipart/form-data">
+	<form id="form" action="" method="post" enctype="multipart/form-data">
 	  <fieldset id="personal">
 		<legend>Thông tin Quest</legend>
 		<table>
@@ -66,7 +66,7 @@
 				</td>
 				<td>
 					<label for="name">Next Quest : </label> 		
-					<?php $this->SelectNextQuest($this->obj->NextQuest,$this->arrnextQuest) ;?>
+					<?php $this->SelectNextQuest($this->obj->NextQuest,$this->arrQuest) ;?>
 				</td>
 			</tr>
 			
@@ -104,7 +104,7 @@
 	</form>
 </div>
 <script>
-function  addAwardItem(key){	
+function  addAwardItem(){	
 
 	var count = $(".awarditem").size();
 	count = count + 1;
@@ -112,13 +112,6 @@ function  addAwardItem(key){
 	var input = "<label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/>";
 	$("#add-award_0").after("<div class='awarditem' id='award_"+count+"'>"+input + btnDelete+"</div>");
 }
-
-
-function  deleteAwardItem(key){
-	$("#award_"+key).remove();	
-}
-
-////////////////////////////////
 
 function  addNeedQuest(key){
 	$.ajax({
@@ -142,18 +135,20 @@ function  addNeedQuest(key){
 			}
 			
 		}
-	});	
+	});
+	
 }
 
-function  deleteNeedQuest(key){
-	//alert("asd");
-	$("div#need_quest_" + key).remove();
+function  deleteAwardItem(key){
+	$("#award_"+key).remove();	
 }
-
 /////////////////////////
 function  deleteTask(key){
 	$("#task-"+key+" h3").remove();
-	$("#task-"+key+" .content").html("");	
+	$("#task-"+key+" .content").html("");
+	arr = $(".task h3");
+	
+	
 }
 
 function  addTask(){
@@ -188,7 +183,10 @@ function  addTask(){
 }
 
 
-
+function  deleteNeedQuest(key){
+	//alert("asd");
+	$("div#need_quest_" + key).remove();
+}
 //////////////
 function loadtask(pos,task_id){
 	var btnDelete = "<a title='Delete Task' href='javascript:deleteTask("+pos+")'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/delete.gif'?>'></a>"
@@ -219,9 +217,12 @@ function loadtask(pos,task_id){
 	});
 }
 $(function(){
-	<?php foreach ($this->arrTask as $key=>$value) {?>
-		loadtask(<?php echo$key?>,<?php echo $value->TaskID?>);
-	<?php }?>
+	<?php
+		if(!empty($this->arrTask)){  
+			foreach ($this->arrTask as $key=>$value) {?>
+				loadtask(<?php echo$key?>,<?php echo $value->TaskID?>);
+			<?php }?>
+		<?php }?>	
 	
 });
 </script>
