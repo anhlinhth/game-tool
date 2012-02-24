@@ -8,7 +8,7 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Event.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_SaleOff_Shop.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Item_Increment.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Item.php';
-
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Base.php';
 
 require_once ROOT_APPLICATION_OBJECT_MANAGER.DS.'PigManager.php';
 require_once ROOT_APPLICATION_OBJECT_MANAGER.DS.'ItemManager.php';
@@ -74,7 +74,15 @@ class QuestLineController extends BaseController
 			{				
 				$id = $this->_request->getParam("id");								
 				$mdQuestLine = new Models_Quest_Line();
-				$mdQuestLine->_delete($id);								
+				$count=$mdQuestLine->isExistQuestLine($id);
+				if($count!=0)
+				{
+					echo "Bạn không thể xóa QuestLine này vì trong QuestLine có  Quest";
+				}
+				else
+				{
+					$mdQuestLine->_delete($id);
+				}									
 				Models_Log::insert($this->view->user->username, "act_delete_questline", $obj->name);
 			}
 		}
