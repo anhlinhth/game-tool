@@ -17,15 +17,20 @@
 	<tr>
 		<td>Task String</td>
 		<td><input type="text" id="TaskString" name="TaskString[]" value="<?php echo $this->obj->TaskString?>"/></td>
-		<td>Action</td>
+		<td>Action (*) </td>
 		<td>
 		<select id="Action" name="Action[]">
-			<option value="<?php echo $this->obj->ActionID?>"><?php echo $this->objactionname->ActionName?></option>
+			
 			<?php 
 				foreach($this->arrAction as $row)
 				{
+					$str="";
+					if($this->obj->ActionID == $row->ActionID )
+					{
+						$str= "selected";
+					}
 			?>
-					<option value="<?php echo $row->ActionID ?>"><?php echo $row->ActionName ?></option>
+					<option selected='<?php echo $str;?>' value="<?php echo $row->ActionID ?>"><?php echo $row->ActionName ?></option>
 			<?php
 				}
 			?>
@@ -33,13 +38,18 @@
 		</td>
 	</tr>
 	<tr>
-		<td>Target</td>
+		<td>Target(*) </td>
 		<td><input type="text" id="TargetID" name="TargetID[]" value="<?php echo $this->obj->TargetID?>"/></td>
-		<td>UnlockCoin</td>
+		<!-- 
+		<td>
+		<INPUT TYPE=RADIO NAME="TargetType" VALUE="" CHECKED> Target Type<BR>
+		<INPUT TYPE=RADIO NAME="TargetType" VALUE="null"> Target List<BR>
+		</td>
+		--><td>UnlockCoin (*) </td>
 		<td><input type="text" id="UnlockCoin" name="UnlockCoin[]" value="<?php echo $this->obj->UnlockCoin?>"/></td>
 	</tr>
 	<tr>
-		<td>Quantity</td>
+		<td>Quantity (*) </td>
 		<td><input type="text" id="Quantity" name="Quantity[]" value="<?php echo $this->obj->Quantity?>"/></td>
 		<td>Quest Task Client</td>
 		<td><input type="text" id="QTC_ID" name="QTC_ID[]" value="<?php echo $this->obj->QTC_ID?>"/></td>
