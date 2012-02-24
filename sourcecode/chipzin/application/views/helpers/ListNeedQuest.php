@@ -4,7 +4,12 @@ class Zend_View_Helper_ListNeedQuest
 	public function listNeedQuest($arrNeedQuest,$arrQuest)
 	{
 
-		$strList .= "";		
+		$strList = "";	
+		if(empty($arrNeedQuest)){		
+			echo $strList;
+			return;
+		}
+			
 		foreach($arrNeedQuest as $key =>$row)
 		{			
 			$slt="";

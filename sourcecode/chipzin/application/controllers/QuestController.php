@@ -208,7 +208,32 @@ class QuestController extends BaseController
         }
 	}
 	
-
+	public function newAction()
+	{		
+		try		
+		{	
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
+			
+			
+			if($this->_request->isPost()){
+				$form = new Forms_Quest_Detail();
+				$form->_requestToForm($this);				
+				$md = new Models_Quest_Detail();
+				print_r($form->obj);
+				$md->insert($form->obj);				
+			}
+			$md = new Models_Quest_Detail();
+			$this->view->arrValue = $md->getQuestLine();
+			$this->view->arrQuest = $md->getQuest();
+			$this->view->arrNeedQuest = $md->getNeedQuest($id);
+			$this->view->arrnextQuest = $md->getQuest();			
+			
+		}
+		catch(Exception $ex)
+        {
+           
+        }
+	}
 	public function updateAction()
 	{
 		try
