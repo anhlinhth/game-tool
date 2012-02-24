@@ -17,9 +17,7 @@ class Models_Action extends Models_Base
 					*
 				FROM
 					`q_action`
-				WHERE
-					ActionID <> '".$ActionID."'
-								";
+				";
 		
 		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
 		
