@@ -12,24 +12,26 @@ class Zend_View_Helper_PagingControl
 			$previousLink = "javascript:goTo(". ($curPage - 1) .")";
 		else
 			$previousLink = "javascript:;";
+			$prepage=max($curPage - 1,1);
 		
 		if($curPage < $totalPage)
 			$nextLink = "javascript:goTo(". ($curPage + 1) .")";
 		else
 			$nextLink = "javascript:;";
+			$nextpage=min($totalPage,$curPage+1);
 		
-		$strList .=	"<div id='pager'>
-						Trang <a href='$previousLink'><img style='vertical-align: middle' src='$view->baseUrl/media/images/icons/arrow_left.gif' width='16' height='16' /></a>
-						<input size='1' value='$curPage' onkeypress='doPaging(event)' type='text' name='page' id='page' /> 
-						<a href='$nextLink'><img style='vertical-align: middle' src='$view->baseUrl/media/images/icons/arrow_right.gif' width='16' height='16' /></a>/ $totalPage trang | 
-						Hiển thị ";
-		
-		$strList .= "<select name='items' onchange='changeItems()'>";
+		echo "Trang <a href='".htmlspecialchars($_SERVER['_SELF'])."?do=search&start=".$curPage."&page=".$prepage."'> Previous </a>";
+				echo "<input size='1' value='$curPage' onkeypress='doPaging(event)' type='text' name='page' id='page' /> ";echo "/".$totalPage;
+						 echo "<a href='".htmlspecialchars($_SERVER['_SELF'])."?do=search&start=".$curPage."&page=".$nextpage."'> Next </a>";
+					echo "trang | Hiển thị ";
+		//echo "<li><a href='".htmlspecialchars($_SERVER['_SELF'])."?do=search&start=".$curPage."&page=".$prepage."'>Previous</a></li>";
+		//echo "<li><a href='".htmlspecialchars($_SERVER['_SELF'])."?do=search&start=".$curPage."&page=".$nextpage."'>Next</a></li>";
+		$strList .= "<select name='items' onchange='changeItems()' >";
 		$itemInList = 5;
 		$start		= 10;
 		$step		= 10;
 		
-		for($i = 0, $j = $start; $i < $itemInList; $i++, $j+=$step)
+		for($i = 0, $j = $start; $i < $totalPage; $i++, $j+=$step)
 		{
 			$selected = $itemPerpage == $j ? ' selected ' : ' ';
 			$strList .= "<option $selected value='$j'>$j</option>";
@@ -37,7 +39,6 @@ class Zend_View_Helper_PagingControl
 		
 		$strList .= "</select> mẫu tin | Tổng cộng <strong>$totalRecord</strong> mẫu tin
 		</div>";
-		
 		echo $strList;
 	}
 }
