@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2012 at 04:05 AM
+-- Generation Time: Feb 27, 2012 at 09:47 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -5691,7 +5691,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `action` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5099 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5100 ;
 
 --
 -- Dumping data for table `log`
@@ -10802,7 +10802,8 @@ INSERT INTO `log` (`id`, `action_date`, `user`, `action`, `note`) VALUES
 (5095, '2012-02-23 08:58:41', 'admin', 'act_login', NULL),
 (5096, '2012-02-23 09:37:44', 'admin', 'act_login', NULL),
 (5097, '2012-02-23 16:49:29', 'admin', 'act_changepass', NULL),
-(5098, '2012-02-23 22:41:06', 'admin', 'act_login', NULL);
+(5098, '2012-02-23 22:41:06', 'admin', 'act_login', NULL),
+(5099, '2012-02-27 14:55:03', 'admin', 'act_login', NULL);
 
 -- --------------------------------------------------------
 
@@ -11015,7 +11016,7 @@ CREATE TABLE IF NOT EXISTS `q_questline` (
 --
 
 INSERT INTO `q_questline` (`QuestLineID`, `QuestLineName`) VALUES
-(2, '2');
+(2, '4');
 
 -- --------------------------------------------------------
 
@@ -11027,7 +11028,8 @@ CREATE TABLE IF NOT EXISTS `q_questtaskclient` (
   `QTC_ID` int(11) NOT NULL AUTO_INCREMENT,
   `QTC_Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `QTC_Desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`QTC_ID`)
+  PRIMARY KEY (`QTC_ID`),
+  UNIQUE KEY `QTC_Name` (`QTC_Name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
