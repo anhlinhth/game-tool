@@ -117,7 +117,8 @@ class Models_Quest_Detail extends Models_Base
 						*
 					FROM
 						q_task
-						WHERE QuestID= $questid";
+					WHERE 
+						QuestID= $questid";
 			
 			$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
 			
