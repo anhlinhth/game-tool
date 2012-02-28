@@ -171,7 +171,7 @@ function addTask(key){
 	}	
 	count_form = count_form + 1;
 	$.ajax({
-		type: "POST",
+		type: "Get",
 		url:"<?php echo $this->baseUrl.'/task/add/'?> ",
 		
 		success: function(data){			
@@ -181,8 +181,8 @@ function addTask(key){
 				var str = "<div class='task-div' id='task-div-"+count_div+"'>"+title + data+"</div";
 				//alert(str);
 				$("#task-0").before(str);
-				$("#add-list").click(function(){
-					alert("");
+				$(".add-target").click(function(){
+					addTarget(this);
 					return false;
 				});
 			}else{
@@ -216,38 +216,38 @@ function addTarget(key){
 
 	parent.append(input);
 }
+
+function saveTask(){
+	quest_id = $("#QuestID").val();
+	$(".task_form").each(function(key,value){
+		
+		var data = $(this).serialize();		
+		$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/task/add/'?> ",
+		data: data + "&QuestID="+ quest_id,		
+		success: function(msg){			
+			alert(msg);
+			
+		}
+	});
+	});	
+}
 function saveAll(){		
 	data = $(".quest-info").serialize();
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/new/'?> ",
 		data: data,		
-		success: function(msg){			
-			if(msg != ""){				
-				alert(data);
-			}else{
-				alert("Error");				
-			}
-			
+		success: function(msg){	
+			saveTask();			
 		}
 	});
 		
-	$(".task_form").each(function(key,value){
-		var data = $(this).serialize();
-			$.ajax({
-			type: "POST",
-			url:"<?php echo $this->baseUrl.'/task/add/'?> ",
-			data: data,		
-			success: function(data){			
-					if(msg != ""){				
-						alert(msg);
-					}else{
-						alert("Error");				
-					}				
-				}
-			});
-	});		
+		
 }
+
+
 $(document).ready(function(){	
 		
 });
