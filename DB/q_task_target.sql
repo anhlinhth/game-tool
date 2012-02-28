@@ -23,16 +23,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `q_quest_needquest`
+-- Table structure for table `q_task_target`
 --
 
-CREATE TABLE IF NOT EXISTS `q_quest_needquest` (
+CREATE TABLE IF NOT EXISTS `q_task_target` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `QuestID` int(11) NOT NULL,
-  `NeedQuest` int(11) NOT NULL,
+  `TaskID` int(11) NOT NULL,
+  `TargetID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
-  KEY `QuestID` (`QuestID`),
-  KEY `NeedQuest` (`NeedQuest`)
+  KEY `TaskID` (`TaskID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -40,11 +39,10 @@ CREATE TABLE IF NOT EXISTS `q_quest_needquest` (
 --
 
 --
--- Constraints for table `q_quest_needquest`
+-- Constraints for table `q_task_target`
 --
-ALTER TABLE `q_quest_needquest`
-  ADD CONSTRAINT `q_quest_needquest_ibfk_1` FOREIGN KEY (`QuestID`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `q_quest_needquest_ibfk_2` FOREIGN KEY (`NeedQuest`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `q_task_target`
+  ADD CONSTRAINT `q_task_target_ibfk_1` FOREIGN KEY (`TaskID`) REFERENCES `q_task` (`TaskID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
