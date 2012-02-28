@@ -226,19 +226,24 @@ class QuestController extends BaseController
 		try
 		{
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Action.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task_Target.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Task_Client.php';
+									
 			$this->_helper->layout->disableLayout();			
 			$questid = $this->_request->getParam("id");
 			$md = new Models_Quest_Detail();
 			$mdAction = new Models_Action();				
 			$mdQuestTC = new Models_Quest_Task_Client();
-			
+			$mdTT = new Models_Task_Target();
+			$mdQuestTC = new Models_Quest_Task_Client();
+	
 			//Hiện List q_action
 			$this->view->arrTask = $md->getTask($questid);			
 			$this->view->arrAction = $mdAction->_getAction();
+			$this->view->arrTaskTarget = $mdTT->select($questid);
 				
 			//Hiện ListQuesstTaskClient 
-			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();		
+			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();
 		
 		}catch(Exception $ex){
 			
