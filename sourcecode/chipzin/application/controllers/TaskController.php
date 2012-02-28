@@ -3,10 +3,13 @@ require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Action.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Task_Target.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
 
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task.php';
+require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task_Target.php';
 
 
 class TaskController extends BaseController
@@ -126,7 +129,7 @@ class TaskController extends BaseController
 		
 	}
 	
-public function addAction()
+	public function addAction()
 	{		
 		$this->_helper->layout()->disableLayout();		
 		try
@@ -141,7 +144,40 @@ public function addAction()
 			if($this->_request->isPost()){
 				$this->_helper->layout->disableLayout();
 				$this->_helper->viewRenderer->setNorender();
-				print_r($_POST);
+				//print_r($_POST);
+				$mdTask = new Models_Task();
+				$obj = new Obj_Task();
+				$data = $mdTask->findidTask();
+			 	$obj->TaskID=$data[0]->ID;
+			    $obj->TaskName = $_POST[TaskName];
+			    $obj->TaskString = $_POST[TaskString];
+			    $obj->ActionID = $_POST[Action];
+			    $obj->Quantity = $_POST[Quantity];
+			    $obj->UnlockCoin = $_POST[UnlockCoin];
+			    $obj->QTC_ID = $_POST[QuestTC];
+			    $obj->QuestID = $_POST[QuestID];
+				if($_POST[Target]=="TargetType")
+			    {
+			    	$obj->TargetType = $_POST[TargetType];
+			    }
+			    else
+			    {
+			    	$obj->TargetType = "NULL";
+			    }
+			    $mdTask->_insert($obj);
+				if($_POST[Target]!="TargetType")
+			    {
+					foreach ($_POST[TargetList] as $row)
+			    	{
+			    		$objTT = new Obj_Task_Target();
+			    		$objTT->TargetID = $row;
+			    		$objTT->TaskID = $obj->TaskID;
+			    		print_r($objTT);
+			    		$mdtt = new Models_Task_Target();
+			    		$mdtt->insert($objTT);
+			    	}
+			    }
+				
 			}
 		}
 		catch(Exception $ex)
@@ -197,14 +233,17 @@ public function addAction()
 					$mdTT = new Models_Task_Target();
 					$Targetlist = $_POST[TargetList];
 					$mdTT->delete($_POST[TaskID]);
-					foreach ( $Targetlist as $row)
-					{
-						$objTT= new Obj_Task_Target();
-						$objTT->ID = 'NULL';
-						$objTT->TargetID = $row;
-						$objTT->TaskID = $_POST[TaskID];
-						$mdTT->_insert($objTT);
+					if(!empty($Targetlist)){
+						foreach ( $Targetlist as $row)
+						{
+							$objTT= new Obj_Task_Target();
+							$objTT->ID = 'NULL';
+							$objTT->TargetID = $row;
+							$objTT->TaskID = $_POST[TaskID];
+							$mdTT->_insert($objTT);
+						}
 					}
+					
 				}
 			}
 			echo "Success";

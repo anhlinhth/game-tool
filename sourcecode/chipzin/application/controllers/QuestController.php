@@ -307,7 +307,7 @@ class QuestController extends BaseController
 			$form->validate(UPDATE);			
 			$md = new Models_Quest_Detail();		
 			$md->update($form->obj);							
-			//$this->_redirect("/quest/index");
+			
 			
 
 			//////////////////Update Award Item////////////////////////////
@@ -328,7 +328,7 @@ class QuestController extends BaseController
 			$arrTarget = $_POST["Target"];
 			$arrTargetType = $_POST["TargetType"];
 			print_r($arrTargetType);	
-			
+			$this->_redirect('/quest/edit/id/'.$form->obj->QuestID);
 		}	
 	} 
 	
