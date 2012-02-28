@@ -67,8 +67,29 @@ foreach($this->arrTask as $key =>$val){  ?>
 			</div>
 		</td>
 		<td>Quest Task Client</td>
-		<td><input type="text" id="QTC_ID" name="QTC_ID" value="<?php echo $val->QTC_ID?>"/></td>
+		<!-- ////////////////Hien Quest Task Client vao commbobox/////////////////// -->
 		
+		<td>
+		<select id="QuestTC" name="QuestTC">
+			
+			<?php 
+				foreach($this->arrQuestTC as $row)
+				{
+					$str="";
+					if($val->QTC_ID == $row->QTC_ID )
+					{
+						$str= "selected";
+					}
+			?>
+					<option <?php echo $str;?> value="<?php echo $row->QTC_ID ?>"><?php echo $row->QTC_Name ?></option>
+			<?php
+				}
+			?>
+		</select>
+		</td>
+		
+		<!--   <td><input type="text" id="QTC_ID" name="QTC_ID" value="<?php echo $val->QTC_ID?>"/></td>-->
+		<!-- /////////////////////////////////// -->
 	</tr>
 	<tr>
 		
