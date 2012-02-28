@@ -13,12 +13,13 @@ class Zend_View_Helper_ListQuestAwardItems
 		foreach($data as $key =>$row)
 		{
 			//$key = $key+1;
-			$strList.= "<div class='awarditem' id='award_$key'><label></label><input name='awarditem[]' value='$row->AwardItem' id='' type='text' tabindex='1' />
-			
-			<a title='Delete Item' href='javascript:deleteAwardItem($key)'>Delete</a>
-			</div>";
+			$strList.= "
+				<div class='award_item' id='award_item_$key'>
+				<label></label><input name='awarditem[$row->ID]' value='$row->AwardItem' id='' type='text' tabindex='1' />			
+				<a class='tool-16 delete' title='Delete Item' href='javascript:deleteAwardItem($key)'></a>
+				</div>";
 		}		
-		$strList .= "<br/>";	
+		$strList .= "";	
 		echo $strList;
 	}
 }

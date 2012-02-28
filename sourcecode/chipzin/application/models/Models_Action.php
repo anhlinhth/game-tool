@@ -11,7 +11,7 @@ class Models_Action extends Models_Base
 		$this->_table = "q_action";		
 	}
 	
-	public function _getAction($ActionID)
+	public function _getAction()
 	{
 		$sql = "SELECT DISTINCT
 					*

@@ -4,12 +4,15 @@ require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Detail.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Needquest.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Detail.php';
 
+require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';	
 
 class QuestController extends BaseController
 {
@@ -47,8 +50,7 @@ class QuestController extends BaseController
 			$md= new Models_Quest();
 			$md_questLine = new Models_Quest_Line();
 			$this->view->item = $form->obj;
-			$this->view->filterQuestLine = $md_questLine->_getByKey($form->obj->QuestLineID);
-			
+			$this->view->filterQuestLine = $md_questLine->_getByKey($form->obj->QuestLineID);			
 			$data = $md->filter($form->obj, "QuestID ASC", ($pageNo - 1)*$items, $items);
 			$dataquestlineID = $md->getQuestlineID();
 			$count = $md->count($form->obj);
@@ -88,31 +90,16 @@ class QuestController extends BaseController
 	{		
 		try
 		{
-			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';			
-			
+					
 			$md = new Models_Quest_Detail();
-			
-			if($this->_request->isPost())// da post du lieu len
-			{				
-				$form = new Forms_Quest_Detail();
-				$form->_requestToForm($this);
-				$form->validate(UPDATE);		
-				//$this->view->obj = $form->obj;		
-				$md->update($form->obj);				
-				Models_Log::insert($this->view->user->username, "act_edit_gift", $form->obj->name);
-				$this->_redirect("/quest/index");
-			}
-			else{		// chua post du lieu-->load du lieu vao Form		
-				$id = $this->_request->getParam("id");
-				$this->view->obj = $md->_getByKey($id);
-				$this->view->arrValue = $md->getQuestLine();
+			$id = $this->_request->getParam("id");
+				$this->view->obj = $md->_getByKey($id);				
+				$this->view->arrQuestLine = $md->_getQuestLine();
 				$this->view->arrNeedQuest = $md->getNeedQuest($id);
 				$this->view->arrAwardItems = $md->getAwardItems($id);
 				$this->view->arrTask = $md->getTask($id);
-				$this->view->arrQuest = $md->getQuest();
-				$this->view->arrnextQuest = $md->getnextQuest($id);
-			}
-			
+				$this->view->arrQuest = $md->getQuest($id);	
+				
 		}
 		catch(Exception $ex)
         {
@@ -175,21 +162,20 @@ class QuestController extends BaseController
 		}
 	}	
 	
-	public function listneedquestAction()
+	public function listquestAction()
 	{		
 		try
 		{
-			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';			
 			
-			$md = new Models_Quest_Detail();
 			
 			if($this->_request->isPost())// da post du lieu len
-			{					
-				$id = $this->_request->getParam("id");
-				$this->view->obj = $md->_getByKey($id);				
-				$this->view->arrNeedQuest = $md->getNeedQuest($id);					
-				$this->view->arrQuest = $md->getQuest();
+			{				
 				
+				//$this->_helper->viewRenderer->setNoRender();
+				$this->_helper->layout->disableLayout();			
+				require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';		
+				$md = new Models_Quest_Detail();									
+				$this->view->arrQuest = $md->filterQuest($_POST);				
 			}
 			
 		}
@@ -201,24 +187,59 @@ class QuestController extends BaseController
         }
 	}
 	
-
-	public function listquestAction()
-	{		
-		try		
-		{	
-			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Detail.php';
-			$this->_helper->layout()->disableLayout();
-			$md = new Models_Quest_Detail();						
-			$this->view->arrQuest = $md->getQuest();
+	public function listtaskAction(){
+		try
+		{
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Action.php';
+			
+			$this->_helper->layout->disableLayout();			
+			$questid = $this->_request->getParam("id");
+			$md = new Models_Quest_Detail();
+			$mdAction = new Models_Action();	
+			
+			$this->view->arrTask = $md->getTask($questid);
+			
+			$this->view->arrAction = $mdAction->_getAction();	
+						
 		
-		}
-		catch(Exception $ex)
-        {
-            $this->view->form = $form->obj;
-			$this->view->errMsg = $ex->getMessage();
-			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-        }
+		}catch(Exception $ex){
+	           var_dump($ex->getMessage());
+	    }		
 	}
+	public function saveAction(){
+		/////////////Udate Award ID///////////////
+		if($this->_request->isPost())// da post du lieu len
+		{	
+					
+			$form = new Forms_Quest_Detail();
+			$form->_requestToForm($this);					
+			$form->validate(UPDATE);			
+			$md = new Models_Quest_Detail();		
+			$md->update($form->obj);							
+			//$this->_redirect("/quest/index");
+			
+
+			//////////////////Update Award Item////////////////////////////
+			
+			
+			$arrItem = $_POST["awarditem"];
+			$arrAddItem = $_POST["additem"];				
+			///Update
+			updateAwardItem($arrItem, $arrAddItem,$form->obj->QuestID);
+			//////////////////////////////////////////
+			///////////////////Update need quest////////////////////////
+			
+			$arrNeedQuest = $_POST['need-quest'];
+			$arrAddNeedQuest = $_POST['need-quest-add'];			
+			updateNeedQuest($arrNeedQuest, $arrAddNeedQuest,$form->obj->QuestID);
+			
+			$arrTaskID = $_POST["TaskID"];
+			$arrTarget = $_POST["Target"];
+			$arrTargetType = $_POST["TargetType"];
+			print_r($arrTargetType);	
+			
+		}	
+	} 
 	
 	public function addAction()
 	{		
@@ -334,6 +355,7 @@ class QuestController extends BaseController
            var_dump($ex->getMessage());
         }
 	}
+	
 	public function updateAction()
 	{
 		try
@@ -441,5 +463,66 @@ class QuestController extends BaseController
         }
 		
 	}
-}
+	}
+	///////////////////////////////////////////
+	function updateAwardItem($arrItem,$arrAddItem,$questID){
+		$item_md = new Models_Quest_Awarditem();
+		if(!empty($arrItem)){
+				foreach ($arrItem as $key => $value) {/// $key la ID cua Bang q_quest_awarditem					
+					if($value == ""){                /// $value la gia tri awarditem						
+						$item_md->_delete($key);
+					}else{
+						$item_obj = new Obj_Quest_Awarditem();
+						$item_obj->ID = $key;
+						$item_obj->QuestID = $questID;
+						$item_obj->AwardItem = $value;						
+						$item_md->_update($item_obj);
+					}
+				}	
+			}
+			//Add
+			if(!empty($arrAddItem)){
+				foreach ($arrAddItem as $value) {/// $key la ID cua Bang q_quest_awarditem
+					if($value != ""){                    /// $value la gia tri awarditem				
+						$item_obj = new Obj_Quest_Awarditem();
+						$item_obj->QuestID = $questID;
+						$item_obj->AwardItem = $value;								
+						$item_md->_insert($item_obj);
+					}
+				}	
+			}	
+	}
+	
+	function updateNeedQuest($arrNeedQuest,$arrAddNeedQuest, $questID){
+		$nq_md = new Models_Quest_Needquest();
+			///Update
+			if(!empty($arrNeedQuest)){
+				foreach ($arrNeedQuest as $key => $value) {/// $key la ID cua Bang q_quest_awarditem					
+					if($value == ""){              /// $value la gia tri awarditem								
+						$nq_md->_delete($key);
+					}else{
+						$nq_obj = new Obj_Quest_Needquest();
+						$nq_obj->ID = $key;
+						$nq_obj->QuestID = $questID;
+						$nq_obj->NeedQuest = $value;
+						
+						$nq_md->_update($nq_obj);
+					}
+				}	
+			}
+			//Add
+			if(!empty($arrAddNeedQuest)){
+				foreach ($arrAddNeedQuest as $value) {/// $key la ID cua Bang q_quest_awarditem
+					if($value != ""){                    /// $value la gia tri awarditem				
+						$nq_obj = new Obj_Quest_Needquest();
+						$nq_obj->QuestID = $questID;
+						$nq_obj->NeedQuest = $value;								
+						$nq_md->_insert($nq_obj);
+					}
+				}	
+			}	
+	}
+
 ?>
+
+

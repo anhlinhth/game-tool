@@ -58,7 +58,7 @@ class Models_Quest_Detail extends Models_Base
 		
 	}
 	
-	public function getQuestLine()
+	public function _getQuestLine()
 	{
 		$sql = "SELECT * FROM q_questline";
 		$data = $this->_db->fetchAll($sql,"", Zend_Db::FETCH_OBJ);
@@ -66,31 +66,36 @@ class Models_Quest_Detail extends Models_Base
 				
 	}
 	
-	public function getQuest()
+	public function getQuest($id = "")
 	{
 		$sql = "SELECT
 					*
 				FROM
 					q_quest";
+		if(!empty($id)){
+			$sql."WHERE QuestID !=$id";
+		}
 		
 		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
 		
 		return $data;
 	}
-public function getnextQuest($id)
+
+	public function filterQuest($arrID = Array())
 	{
-		if(!isset($id)){
-			$id = -1;
-		}
+		//print_r($arrID);
 		$sql = "SELECT
-					*
+					QuestID,QuestName
 				FROM
-					q_quest 
-					where
-						QuestID !=$id";
-		
-		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
-		
+					q_quest
+						WHERE 1 ";
+		if (!empty($arrID)){
+			foreach ($arrID as $value){
+				$sql .= "AND QuestID != $value";
+			}
+		}	
+	
+		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);		
 		return $data;
 	}
 	
@@ -100,10 +105,9 @@ public function getnextQuest($id)
 						*
 					FROM
 						q_quest_needquest
-						WHERE QuestID= $questid";
+							WHERE QuestID = $questid";
 			
-			$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
-			
+			$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);			
 			return $data;
 		}
 	
@@ -126,10 +130,9 @@ public function getnextQuest($id)
 						*
 					FROM
 						q_quest_awarditem
-						WHERE QuestID= $questid";
+							WHERE QuestID = $questid";
 			
-			$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
-			
+			$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);			
 			return $data;
 		}
 }

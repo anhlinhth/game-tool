@@ -7,16 +7,17 @@ class Zend_View_Helper_SelectNeedQuest
 		//$strList .= "<option $slt value='". $value->QuestLineID ."'>$value->QuestLineID</option>";
 		$strList .= "<option value='' selected ></option>";
 		$slt="";
-		foreach ($arrQuest as $value) {
-			if($value->QuestID == $selected){
-				$slt = "selected";
-			}else{
-				$slt = "";	
-			}			
-			$strList .= "<option $slt value='". $value->QuestID ."'>$value->QuestName</option>";
+		if(!empty($arrQuest)){
+			foreach ($arrQuest as $row) {
+				$slt = "";
+				if($row->QuestID == $selected){
+					$slt = "selected";
+				}		
+				$strList .= "<option $slt value='". $row->QuestID ."'>(ID:$row->QuestID $row->QuestName )</option>";
+			}		
+			$strList .= "</select>";			
 		}
 		
-		$strList .= "</select>";
 		
 		echo $strList;
 	}
