@@ -8,10 +8,5 @@ class Forms_Task extends Forms_Base
 	{
 		$this->obj = new Obj_Task();
 	}
-	
-	public function validate($action)
-	{
-		
-	}
 }
 ?>

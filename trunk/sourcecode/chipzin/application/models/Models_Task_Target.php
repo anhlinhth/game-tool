@@ -57,5 +57,11 @@ class Models_Task_Target extends Models_Base
 			throw new Internal_Error_Exception($ex);
     	}
     }
+    
+	public function insert($obj)
+	{
+		parent::_insert($obj);
+    }
+    
 }
 ?>

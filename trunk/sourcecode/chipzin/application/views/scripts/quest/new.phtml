@@ -233,14 +233,17 @@ function saveTask(){
 	});
 	});	
 }
-function saveAll(){		
+
+function saveAll(){	
+	quest_id = $("#QuestID").val();
 	data = $(".quest-info").serialize();
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/new/'?> ",
 		data: data,		
 		success: function(msg){	
-			saveTask();			
+			saveTask();	
+					
 		}
 	});
 		
