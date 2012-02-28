@@ -127,16 +127,57 @@ class QuestController extends BaseController
 			$this->view->arrAwardItems = $md->getAwardItems($id);
 			$this->view->arrTask = $md->getTask($id);
 			$this->view->arrQuest = $md->getQuest($id);	
-			if($this->_request->isPost()){
+			if($this->_request->isPost())
+			{
+				//update quest
+		//		print_r($_POST);
+		//		exit();
 				//print_r($_POST);
 				$this->_helper->layout()->disableLayout();
 				$this->_helper->viewRenderer->setNoRender();	
 				$form = new Forms_Quest_Detail();
 				$form->_requestToForm($this);					
 				$form->validate(UPDATE);
-				$form->obj->QuestID = NULL;			
-				$md = new Models_Quest_Detail();		
-				$md->_insert($form->obj);	
+				$form->obj->QuestID;			
+				$md = new Models_Quest_Detail();			
+				$md->_insert($form->obj);
+				$this->QuestID= $form->obj->QuestID;	
+
+				//update quest need quest
+				$this->arrNeedQuest = $this->_request->getParam("need-quest-add");
+				$mdNeedQuest = new Models_Quest_Needquest();
+				$mdNeedQuest->_delete($this->QuestID);
+				foreach($this->arrNeedQuest as $i=>$key)
+				{
+					
+					$objneedquest = new Obj_Quest_Needquest();
+					$objneedquest->ID = "NULL";
+					$objneedquest->QuestID = $this->QuestID;
+					$objneedquest->NeedQuest = $this->arrNeedQuest[$i];
+					if($objneedquest->NeedQuest != "")
+					{
+						$mdNeedQuest->_insert($objneedquest);
+					}
+				}
+				Models_Log::insert($this->view->user->username, "act_update_needquest");
+				
+				//update quest awarditem
+				$this->AwardItem = $this->_request->getParam("additem");
+				$mdAwardItem = new Models_Quest_Awarditem();
+				$mdAwardItem->_delete($this->QuestID);
+				foreach($this->AwardItem as $i=>$key)
+				{
+					$objAwardItem = new Obj_Quest_Awarditem();
+					$objAwardItem->ID="NULL";
+					$objAwardItem->QuestID = $this->QuestID;
+					$objAwardItem->AwardItem = $this->AwardItem[$i];
+					
+					if($objAwardItem->AwardItem != "")
+					{
+						$mdAwardItem->_insert($objAwardItem);
+					}
+				}
+				Models_Log::insert($this->view->user->username, "act_update_AwardItem");
 				//$this->view->msg = "them thanh cong";
 				print_r("thanh cong");
 			}	

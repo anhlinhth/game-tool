@@ -60,9 +60,9 @@ foreach($this->arrTask as $key =>$val){  ?>
 	<tr>		
 		<td rowspan=1">Target(*)</td>
 		<td rowspan="1" id="target">
-			<input checked type="radio" name="Target"  value="TargetType"> Type<input style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value="<?php echo $val->TargetType;?>"> <br>
+			<input type="radio" name="Target"  value="TargetType"> Type<input style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value="<?php echo $val->TargetType;?>"> <br>
 			<div>
-			<input type="radio" name="Target" value="TargetList"> List <a class="ico-16 add add-target" href="#"></a><br>
+			<input checked="checked" type="radio" name="Target" value="TargetList"> List <a class="ico-16 add add-target" href="#"></a><br>
 			
 			<?php
 			$count = 0;
