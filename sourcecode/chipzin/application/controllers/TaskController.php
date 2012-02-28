@@ -125,6 +125,31 @@ class TaskController extends BaseController
         }
 		
 	}
+	
+public function addAction()
+	{		
+		$this->_helper->layout()->disableLayout();		
+		try
+		{
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Action.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Task_Client.php';	
+			$mdAction = new Models_Action();				
+			$mdQuestTC = new Models_Quest_Task_Client();		
+			$this->view->arrAction = $mdAction->_getAction();
+				
+			//Hiện ListQuesstTaskClient 
+			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();				
+			
+		}
+		catch(Exception $ex)
+        {
+            $this->view->ojb = $form->obj;
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
+		
+	}
+	
 	public function saveAction()
 	{
 			$this->_helper->layout->disableLayout();
@@ -179,6 +204,7 @@ class TaskController extends BaseController
 					}
 				}
 			}
+			echo "Success";
 					
 	}
 	

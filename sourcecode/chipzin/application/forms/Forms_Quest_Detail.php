@@ -14,6 +14,9 @@ public function validate($action)
 		$arrCode = array();
 		$arrNote = array();
 		
+		if(empty($this->obj->NextQuest)){
+			$this->obj->NextQuest = NULL;
+		}
 		if($action == UPDATE)
 		{
 			if(empty ($this->obj->QuestID))

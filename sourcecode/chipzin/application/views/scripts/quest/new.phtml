@@ -8,7 +8,7 @@
 <?php //print_r($this->arrAwardItems)?>
 <div  class="mybox" id="quest">
 	<h3>Chỉnh sửa Quest</h3>
-	<form class="quest" id="form" action="<?php echo $this->baseUrl.'/Quest/save/' ?>" method="post" enctype="multipart/form-data">
+	<form class="quest-info" id="form" action="" method="post" enctype="multipart/form-data">
 	  <fieldset id="info">
 		<legend>Thông tin Quest </legend>
 		<table id="quest">
@@ -80,29 +80,21 @@
 					<div id="add-need-quest"></div>
 				</td>
 			</tr>
-			
-			<tr>				
-				
-
-			</tr>
-		</table>
-		<div style="margin: auto; text-align: center">
-			<input id="button1" type="submit" value="Save" /> &nbsp;&nbsp; 	  
- 			<input id="button1" type="button" value="Cancel	" onclick="window.location='<?php echo $this->baseUrl ?>/quest/index'" />
-		
-		</div>		
+		</table>				
 		</fieldset>		
 		</form>
-		<fieldset id="tasks">
-		<legend>Task:  <a id='addItem' class='ico-16 add' title='Add Task' href='javascript:addTask(0)'></a></legend>
-			<div id='list-task' style="margin-top: 10px;">	
-				
-			</div>
-			<div style="margin: auto; text-align: center; margin-top: 10px">				  
+		<div id="mybox">
+			<fieldset>
+				<legend>Task:  <a id='addItem' class='ico-16 add' title='Add Task' href='javascript:addTask(0)'></a></legend>
+				<div id='list-task' style="margin-top: 10px;">
+					<div id='task-0'></div>									
+				</div>
+					
+		  	</fieldset>
+	  	</div>
+	  	<div style="margin: auto; text-align: center; margin-top: 10px;margin-bottom: 10px">				  
  				<a id="save-all"  class="btn save" href="javascript:saveAll()"> Save All</a>		
-			</div>		
-	  	</fieldset>	
-	  	
+		</div>			  	
 </div>
 <script>
 function  addAwardItem(key){	
@@ -169,21 +161,26 @@ function  deleteNeedQuest(key){
 }
 /////////////////////////Task/////////////////////////////////
 function addTask(key){
-	alert($(".form-task-51").serialize());
-	count = $(".task").size();
-	if(count >= 3){
+	
+	count_div = $(".task-div").size();
+	count_form = $("#list-task form").size();
+	
+	if(count_form >= 3){
 		alert("Fail!!!! Limited 3 Task in a Quest");
 		return false;
-	}
-	
-	quest_id = $("#QuestID").val();
+	}	
+	count_form = count_form + 1;
 	$.ajax({
 		type: "POST",
-		url:"<?php echo $this->baseUrl.'/task/new/'?> ",
-		data: "id=" + quest_id,	
+		url:"<?php echo $this->baseUrl.'/task/add/'?> ",
+		
 		success: function(data){			
-			if(data != ""){					
-				loadTask(quest_id);
+			if(data != ""){				
+				var title = "<h4> Task "+count_form+"&nbsp<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask("+count_div+")'></a></h4>"
+				//var btnDelete = "<a class='tool-16 delete' title='Delete Task' href='javascript:deleteTask("+count_div+")'></a>" ;";
+				var str = "<div class='task-div' id='task-div-"+count_div+"'>"+title + data+"</div";
+				//alert(str);
+				$("#task-0").before(str);
 			}else{
 				alert("Error");				
 			}
@@ -192,28 +189,11 @@ function addTask(key){
 	});
 }
 
-function deleteTask(key){		
-	task_id = $("#task-"+key+" input#TaskID").val();	
-	task_name = $("#task-"+key+" input#TaskName").val();
-	quest_id = $("#QuestID").val();
-	div = 	$("#task-"+key);
-	if(!confirm("Do you want to delelte Task: " + task_name)){
-		return false;
-	}		
-	$.ajax({
-		type: "POST",
-		url:"<?php echo $this->baseUrl.'/task/delete/'?> ",
-		data: "id=" + task_id,	
-		success: function(data){			
-			if(data != ""){					
-				loadTask(quest_id);
-			}else{
-				alert("Error");				
-			}
-			
-		}
-	});
-
+function deleteTask(key){
+	alert(key);
+	task_div = $("#task-div-"+key);	
+	task_div.children('h4').remove();
+	task_div.children('form').remove();
 }
 function loadTask(key){	
 	$.ajax({
@@ -255,28 +235,25 @@ function addTarget(key){
 
 	parent.append(input);
 }
-function saveAll(){	
-	quest_id = $("#QuestID").val();
-	$(".task").each(function (index){		
-		data = $(".form-task-"+ index).serialize();
-		$.ajax({
-			type: "POST",
-			url:"<?php echo $this->baseUrl.'/task/save/'?> ",
-			data: data + "&QuestID=" + quest_id,	
-			success: function(msg){		
-				if(msg != ""){ 				
-					alert(msg);
-				}else{
-					alert("Error");				
-				}
-				
+function saveAll(){		
+	data = $(".quest-info").serialize();
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/new/'?> ",
+		data: "id=" + key,	
+		success: function(data){		
+			if(data != ""){ 				
+				alert(data);
+			}else{
+				alert("Error");				
 			}
-		});
-	
+			
+		}
 	});
+
 }
 $(document).ready(function(){	
-	loadTask(<?php echo $this->obj->QuestID?>);	
+		
 });
 
 </script>

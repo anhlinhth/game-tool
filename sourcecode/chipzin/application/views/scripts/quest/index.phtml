@@ -10,7 +10,7 @@ endif;
 if($this->temp)
 	$this->showMessage($this->temp)
 ?>	
-<form  class="myform" id="list-quest" name="quest" action="" method="post">
+<form  class="myform" id="formPaging" name="formPaging" action="" method="post">
 
 <div class="mybox">
 	<h3>Quest</h3>
@@ -43,13 +43,17 @@ if($this->temp)
 	</table>
 	<table class="list" id="list_ql" width="100%">
 		<thead>
-			<th width="10"><input type='checkbox' name='chkid' value='0'/></th>
-			<th width="30"><a href="#">ID</a></th>
-			<th><a href="#">Name</a></th>
-			<th><a href="#">Quest line</a></th>
-			<th><a href="#">Tool</a></th>
+		<tr>
+			<td width="10"><input type='checkbox' name='chkid' value='0'/></td>
+			<td width="30"><a href="#">ID</a></td>
+			<td><a href="#">Name</a></td>
+			<td><a href="#">Quest line</a></td>
+			<td><a href="#">Tool</a></td>
+		</tr>
 		</thead>
 		<?php $this->listQuest($this->data, $this->page, $this->items, $this) ?>
 	</table>
 	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
+
+</div>
 </form>
