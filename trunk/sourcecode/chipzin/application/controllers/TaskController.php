@@ -84,7 +84,7 @@ class TaskController extends BaseController
 				$this->view->mss = $id;
 				$this->view->obj = $md->_getByKey($id);
 				$this->view->arrAction = $mdAction->_getAction($this->view->obj->ActionID);
-				$this->view->objactionname = $mdAction->_getByKey($this->view->obj->ActionID);			
+				$this->view->objactionname = $mdAction->_getByKey($this->view->obj->ActionID);	
 				
 			
 		}
