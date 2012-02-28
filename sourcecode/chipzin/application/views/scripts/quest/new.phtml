@@ -181,6 +181,10 @@ function addTask(key){
 				var str = "<div class='task-div' id='task-div-"+count_div+"'>"+title + data+"</div";
 				//alert(str);
 				$("#task-0").before(str);
+				$("#add-list").click(function(){
+					alert("");
+					return false;
+				});
 			}else{
 				alert("Error");				
 			}
@@ -214,13 +218,35 @@ function addTarget(key){
 }
 function saveAll(){		
 	data = $(".quest-info").serialize();
-	alert(data);
-
-	$(".task_form").each(function(key,value){
-		a = $(this).serialize();
-		alert(a);
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/new/'?> ",
+		data: data,		
+		success: function(msg){			
+			if(msg != ""){				
+				alert(data);
+			}else{
+				alert("Error");				
+			}
+			
+		}
 	});
-
+		
+	$(".task_form").each(function(key,value){
+		var data = $(this).serialize();
+			$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/task/add/'?> ",
+			data: data,		
+			success: function(data){			
+					if(msg != ""){				
+						alert(msg);
+					}else{
+						alert("Error");				
+					}				
+				}
+			});
+	});		
 }
 $(document).ready(function(){	
 		

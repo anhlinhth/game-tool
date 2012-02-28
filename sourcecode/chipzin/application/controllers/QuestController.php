@@ -111,7 +111,8 @@ class QuestController extends BaseController
 	}
 	
 	public function newAction()
-	{		
+	{	
+		
 		try
 		{
 			//Lay maxid
@@ -127,13 +128,17 @@ class QuestController extends BaseController
 			$this->view->arrTask = $md->getTask($id);
 			$this->view->arrQuest = $md->getQuest($id);	
 			if($this->_request->isPost()){
+				//print_r($_POST);
+				$this->_helper->layout()->disableLayout();
+				$this->_helper->viewRenderer->setNoRender();	
 				$form = new Forms_Quest_Detail();
 				$form->_requestToForm($this);					
 				$form->validate(UPDATE);
 				$form->obj->QuestID = NULL;			
 				$md = new Models_Quest_Detail();		
 				$md->_insert($form->obj);	
-				$this->view->msg = "them thanh cong";
+				//$this->view->msg = "them thanh cong";
+				print_r("thanh cong");
 			}	
 		}
 		catch(Exception $ex)
