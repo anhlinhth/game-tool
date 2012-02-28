@@ -9,9 +9,6 @@ class Forms_Quest extends Forms_Base
 		$this->obj = new Obj_Quest();
 	}
 	
-	public function validate($action)
-	{
-		
-	}
+	
 }
 ?>

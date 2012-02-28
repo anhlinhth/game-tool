@@ -1,12 +1,13 @@
-<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery-ui.css" />
-<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery-ui.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery.ui.datetimepicker.js"></script>
+
 <?php if($this->errMsg) :?>
 	<?php $this->showError($this->errMsg)?>
 <?php endif; ?>
 <?php if($this->msg) :?>		
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery-ui.css" />
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery.ui.datetimepicker.js"></script>
 <div id="box">
 	<h3 id="adduser">Gói phần thưởng</h3>
 	<form id="form" action="" method="post" enctype="multipart/form-data">

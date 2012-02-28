@@ -72,9 +72,6 @@ class Models_Quest extends Models_Base
 				WHERE
 					1";
 		
-		if($objSearch->ID)
-			$sql .= " AND QuestID LIKE '%$objSearch->QuestID%'";
-		
 		if($objSearch->QuestName)
 			$sql .= " AND QuestName = '$objSearch->QuestName'";
 		
