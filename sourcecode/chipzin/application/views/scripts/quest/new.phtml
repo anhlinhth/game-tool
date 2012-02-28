@@ -166,7 +166,7 @@ function addTask(key){
 	count_form = $("#list-task form").size();
 	
 	if(count_form >= 3){
-		alert("Fail!!!! Limited 3 Task in a Quest");
+		alert("Failed!!!! Limited 3 Task in a Quest");
 		return false;
 	}	
 	count_form = count_form + 1;
@@ -195,29 +195,6 @@ function deleteTask(key){
 	task_div.children('h4').remove();
 	task_div.children('form').remove();
 }
-function loadTask(key){	
-	$.ajax({
-		type: "POST",
-		url:"<?php echo $this->baseUrl.'/quest/listtask/'?> ",
-		data: "id=" + key,	
-		success: function(data){		
-			if(data != ""){ 				
-				$("#list-task").html(data);
-				$(".add-target").click(function(){
-					addTarget(this);
-					return false;
-				});
-				$("input[name=target]").change(function(){
-					targetChange(this);
-				});
-			}else{
-				alert("Error");				
-			}
-			
-		}
-	});
-	
-}
 ///////////////////////////////////////
 function targetChange(key){
 	
@@ -237,18 +214,11 @@ function addTarget(key){
 }
 function saveAll(){		
 	data = $(".quest-info").serialize();
-	$.ajax({
-		type: "POST",
-		url:"<?php echo $this->baseUrl.'/quest/new/'?> ",
-		data: "id=" + key,	
-		success: function(data){		
-			if(data != ""){ 				
-				alert(data);
-			}else{
-				alert("Error");				
-			}
-			
-		}
+	alert(data);
+
+	$(".task_form").each(function(key,value){
+		a = $(this).serialize();
+		alert(a);
 	});
 
 }

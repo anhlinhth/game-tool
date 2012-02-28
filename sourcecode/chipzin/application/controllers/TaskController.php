@@ -135,8 +135,7 @@ public function addAction()
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Task_Client.php';	
 			$mdAction = new Models_Action();				
 			$mdQuestTC = new Models_Quest_Task_Client();		
-			$this->view->arrAction = $mdAction->_getAction();
-				
+			$this->view->arrAction = $mdAction->_getAction();				
 			//Hiện ListQuesstTaskClient 
 			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();				
 			
