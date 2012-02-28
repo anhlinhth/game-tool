@@ -170,7 +170,7 @@ function  deleteNeedQuest(key){
 }
 /////////////////////////Task/////////////////////////////////
 function addTask(key){
-	alert($(".form-task-51").serialize());
+	
 	count = $(".task").size();
 	if(count >= 3){
 		alert("Fail!!!! Limited 3 Task in a Quest");
@@ -252,7 +252,7 @@ function targetChange(key){
 function addTarget(key){
 	parent = $(key).parent();	
 	count = parent.children('.target-list').size();	
-	input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>'
+	input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>';
 
 	parent.append(input);
 }

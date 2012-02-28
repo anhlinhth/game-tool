@@ -138,7 +138,11 @@ public function addAction()
 			$this->view->arrAction = $mdAction->_getAction();				
 			//Hiện ListQuesstTaskClient 
 			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();				
-			
+			if($this->_request->isPost()){
+				$this->_helper->layout->disableLayout();
+				$this->_helper->viewRenderer->setNorender();
+				print_r($_POST);
+			}
 		}
 		catch(Exception $ex)
         {
