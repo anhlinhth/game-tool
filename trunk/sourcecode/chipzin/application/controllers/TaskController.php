@@ -130,8 +130,54 @@ class TaskController extends BaseController
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();
 			if($this->_request->isPost()){// da post du lieu len				
-			
-				print_r($_POST);
+				if($_POST[Target]=='TargetType')
+				{
+					$md = new Models_Task();
+					$obj = new Obj_Task();
+					
+					$obj->TaskID = $_POST[TaskID];
+				    $obj->ActionID = $_POST[TaskID];
+				    $obj->TaskName = $_POST[TaskName];
+				    $obj->TaskString = $_POST[TaskString];
+				    $obj->ActionID = $_POST[Action];
+				    $obj->Quantity = $_POST[Quantity];
+				    $obj->UnlockCoin = $_POST[UnlockCoin];
+				    $obj->TargetType = $_POST[TargetType];
+				    $obj->QTC_ID = $_POST[QTC_ID];
+				    $obj->QuestID = $_POST[QuestID];
+				    
+					$md->_update($obj);
+				}
+				else 
+				{
+					$md = new Models_Task();
+					$obj = new Obj_Task();
+					$obj->TaskID = $_POST[TaskID];
+					$obj->ActionID = $_POST[TaskID];
+				    $obj->TaskName = $_POST[TaskName];
+				    $obj->TaskString = $_POST[TaskString];
+				    $obj->ActionID = $_POST[Action];
+				    $obj->Quantity = $_POST[Quantity];
+				    $obj->UnlockCoin = $_POST[UnlockCoin];
+				    $obj->QTC_ID = $_POST[QTC_ID];
+				    $obj->QuestID = $_POST[QuestID];
+				    
+					$md->_update($obj);
+					
+					require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task_Target.php';
+					require_once ROOT_APPLICATION_MODELS.DS.'Models_Task_Target.php';
+					$mdTT = new Models_Task_Target();
+					$Targetlist = $_POST[TargetList];
+					$mdTT->delete($_POST[TaskID]);
+					foreach ( $Targetlist as $row)
+					{
+						$objTT= new Obj_Task_Target();
+						$objTT->ID = 'NULL';
+						$objTT->TargetID = $row;
+						$objTT->TaskID = $_POST[TaskID];
+						$mdTT->_insert($objTT);
+					}
+				}
 			}
 					
 	}
