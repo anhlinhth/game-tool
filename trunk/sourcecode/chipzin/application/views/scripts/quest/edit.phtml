@@ -92,18 +92,19 @@
 		
 		</div>		
 		</fieldset>		
-		</form>
+		
 		<fieldset id="tasks">
 		<legend>Task:  <a id='addItem' class='ico-16 add' title='Add Task' href='javascript:addTask(0)'></a></legend>
 			<div id='list-task' style="margin-top: 10px;">	
 				
 			</div>
-			<div style="margin: auto; text-align: center; margin-top: 10px">				  
- 				<a id="save-all"  class="btn save" href="javascript:saveAll()"> Save All</a>		
+			<div style="margin: auto; text-align: center; margin-top: 10px">	
+			<input id="button1" name="button1" value="Save All" onclick="saveAll();"  />		  
+ 						
 			</div>		
-	  	</fieldset>	
-	  	
-</div>
+	  	</fieldset>		  	
+	</div>
+</form>
 <script>
 function  addAwardItem(key){	
 	var count = $(".award_item").size();
