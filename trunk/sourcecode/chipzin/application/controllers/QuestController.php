@@ -110,6 +110,41 @@ class QuestController extends BaseController
 		
 	}
 	
+	public function newAction()
+	{		
+		try
+		{
+			//Lay maxid
+			$md_getmax= new Models_Quest();
+			$idmax =$md_getmax->getMaxQuestID();
+			$id=$idmax+1;
+			$md = new Models_Quest_Detail();			
+			$this->view->obj = new Obj_Quest_Detail();
+			$this->view->obj->QuestID = $id;			
+			$this->view->arrQuestLine = $md->_getQuestLine();
+			$this->view->arrNeedQuest = $md->getNeedQuest($id);
+			$this->view->arrAwardItems = $md->getAwardItems($id);
+			$this->view->arrTask = $md->getTask($id);
+			$this->view->arrQuest = $md->getQuest($id);	
+			if($this->_request->isPost()){
+				$form = new Forms_Quest_Detail();
+				$form->_requestToForm($this);					
+				$form->validate(UPDATE);
+				$form->obj->QuestID = NULL;			
+				$md = new Models_Quest_Detail();		
+				$md->_insert($form->obj);	
+				$this->view->msg = "them thanh cong";
+			}	
+		}
+		catch(Exception $ex)
+        {
+            $this->view->form = $form->obj;
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
+		
+	}
+	
 	public function deleteAction()
 	{
 		try
@@ -249,7 +284,8 @@ class QuestController extends BaseController
 	public function addAction()
 	{		
 		try		
-		{	require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
+		{	
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';			
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Needquest.php';
 			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Awarditem.php';
@@ -262,7 +298,7 @@ class QuestController extends BaseController
 			$id=$idmax+1;
 			//			
 			$md = new Models_Quest_Detail();
-			$this->view->arrValue = $md->getQuestLine();
+			$this->view->arrValue = $md->_getQuestLine();
 			$this->view->arrQuest = $md->getQuest();
 			$this->view->arrNeedQuest = $md->getNeedQuest($id);
 			$this->view->arrnextQuest = $md->getQuest();
