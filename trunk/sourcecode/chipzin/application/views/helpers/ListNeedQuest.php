@@ -14,19 +14,18 @@ class Zend_View_Helper_ListNeedQuest
 		{			
 			$slt="";
 			$strSelectQuest="";
-			$strSelectQuest .= "<select  id='type' name='need-quest[]' style='margin-bottom:5px;margin-top:5px;min-width:50px'>";			
-			$strSelectQuest.="<option value='0'></option>";
+			$strSelectQuest .= "<select class='need-quest' name='need-quest[$row->ID]' style='margin-bottom:5px;margin-top:5px;min-width:50px'>";			
+			$strSelectQuest.="<option value=''></option>";
 			$num = $key + 1;	
 			foreach ($arrQuest as $q_value) {
 				$slt="";	
-				if($q_value->QuestID == $row->NeedQuest){
+				if($q_value->QuestID == $row->NeedQuest){///need quest da chon
 					$slt="selected";		
 				}
-				$strSelectQuest .= "<option $slt value='". $q_value->QuestID ."'>$q_value->QuestName</option>";
+				$strSelectQuest .= "<option class='data' $slt value='". $q_value->QuestID ."'>(ID:$q_value->QuestID) $q_value->QuestName</option>";
 			}
 			$strSelectQuest .= "</select>";
-			$strList.="<div class='need_quest' id='need_quest_$num'><label></label>".$strSelectQuest."			
-			<a title='Delete Item' href='javascript:deleteNeedQuest($num)'>Delete</a>
+			$strList.="<div class='need_quest' id='need_quest_$num'><label></label>".$strSelectQuest."<a class='tool-16 delete' title='Delete Item' href='javascript:deleteNeedQuest($num)'></a>
 			</div>";
 		}		
 			

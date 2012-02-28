@@ -91,10 +91,44 @@ class TaskController extends BaseController
         }
 		
 	}
-	
-	public function listquestAction()
+
+	public function newAction()
+	{		
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender();
+		try
+		{
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Task.php';			
+			//require_once ROOT_APPLICATION_FORMS.DS.'Forms_Action.php';
+			
+			$md = new Models_Task();
+			$mdAction = new Models_Action();	
+			$obj = new Obj_Task();
+			$id = $this->_request->getParam("id");
+			$obj->QuestID = $id;
+			$obj->UnlockCoin = 1;//default value
+			$obj->Quantity = 1; //default value
+			$obj->Quantity = 1;
+			$md->_insert($obj);				
+			echo "success";
+		}
+		catch(Exception $ex)
+        {
+            $this->view->ojb = $form->obj;
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
+		
+	}
+	public function saveAction()
 	{
-				
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();
+			if($this->_request->isPost()){// da post du lieu len				
+			
+				print_r($_POST);
+			}
+					
 	}
 	
 	

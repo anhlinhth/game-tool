@@ -3,21 +3,19 @@ class Zend_View_Helper_SelectQuestLine2
 {
 	public function selectQuestLine2($selected, $arrValue)
 	{
-		$strList .= "<select id='type' name='QuestLineID' style='margin-bottom:5px;margin-top:5px;min-width:50px'>";	
-		//$strList .= "<option $slt value='". $value->QuestLineID ."'>$value->QuestLineID</option>";
-		//$strList .= "<option value='".$selected."' selected >".$selected."</option>";
+		$strList .= "<select id='QuestLineID' name='QuestLineID' style='margin-bottom:5px;margin-top:5px;min-width:50px' tabindex='1'>";		
 		$slt="";
-		foreach ($arrValue as $value) {
-			if($value->QuestLineID == $selected){
+		if(!empty($arrValue)){
+			foreach ($arrValue as $row) {
+			if($row->QuestLineID == $selected){
 				$slt = "selected";
 			}else{
 				$slt = "";	
 			}			
-			$strList .= "<option $slt value='". $value->QuestLineID ."'>$value->QuestLineName</option>";
-		}
-		
-		$strList .= "</select>";
-		
+			$strList .= "<option $slt value='". $row->QuestLineID ."'>$row->QuestLineName</option>";
+			}		
+		}		
+		$strList .= "</select>";		
 		echo $strList;
 	}
 }

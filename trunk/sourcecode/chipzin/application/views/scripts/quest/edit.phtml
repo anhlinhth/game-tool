@@ -6,30 +6,30 @@
 <?php endif;?>
 
 <?php //print_r($this->arrAwardItems)?>
-<div id="box">
-	<h3 id="adduser">Chỉnh sửa Quest</h3>
-	<form id="form" action="<?php echo $this->baseUrl.'/Quest/update/' ?>" method="post" enctype="multipart/form-data">
-	  <fieldset id="personal">
-		<legend>Thông tin Quest</legend>
-		<table>
+<div  class="mybox" id="quest">
+	<h3>Chỉnh sửa Quest</h3>
+	<form class="quest" id="form" action="<?php echo $this->baseUrl.'/Quest/save/' ?>" method="post" enctype="multipart/form-data">
+	  <fieldset id="info">
+		<legend>Thông tin Quest </legend>
+		<table id="quest">
 			<tr>
 				<td>
-					<label for="QuestID">Quest Id : </label> 
-					<input name="QuestID" value="<?php echo $this->obj->QuestID ?>" id="alias" type="text" tabindex="1" /></td>
+					<label for="QuestID">Quest ID : </label> 
+					<input class="disabled" readonly name="QuestID" value="<?php echo $this->obj->QuestID ?>" id="QuestID" type="text" tabindex="1" \/></td>
 				<td>
 					<label for="name" >Quest Line : </label>							
-					<?php $this->selectQuestLine2($this->obj->QuestLineID,$this->arrValue) ;?>
+					<?php $this->selectQuestLine2($this->obj->QuestLineID,$this->arrQuestLine) ;?>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<label for="questname">Quest Name : </label> 
-					<input name="QuestName" value="<?php echo $this->obj->QuestName?>" id="questnamestring" type="text" tabindex="1" /></td>
+					<input name="QuestName" class="width" value="<?php echo $this->obj->QuestName?>" id="questnamestring" type="text" tabindex="1" /></td>
 				<td>
 					<label for="queststring">Quest String: </label> 
-					<input name="QuestString" value="<?php echo $this->obj->QuestString?>" id="queststring" type="text" tabindex="1" />
-					
+					<input name="QuestString" value="<?php echo $this->obj->QuestString?>" id="queststring" type="text" tabindex="1" />					
 				</td>
+
 			</tr>
 			
 			<tr>
@@ -40,7 +40,8 @@
 				<td>
 					<label for="QuestGroupString">Q_Group String: </label> 
 					<input name="QuestGroupString" value="<?php echo $this->obj->QuestGroupString?>" id="questgroupstring" type="text" tabindex="1" />
-				</td>
+				</td>		
+		
 			</tr>
 			
 			<tr>
@@ -51,88 +52,98 @@
 				<td>
 					<label for="questdescString">Q_Desc String: </label> 
 					<input name="QuestDescString" value="<?php echo $this->obj->QuestDescString?>" id="questdescstring" type="text" tabindex="1" />
-				</td>
+				</td>			
 			</tr>
 				
 			
 			<tr>
-				<td rowspan=2">
-		<p>Award: </p>
-		<label>Gold: </label><input name="AwardGold" value="<?php echo $this->obj->AwardGold?>" id="awardgold" type="text" tabindex="1" /><br/>
-		<label>EXP: </label><input name="AwardExp" value="<?php echo $this->obj->AwardExp?>" id="awardexp" type="text" tabindex="1" /><br/>
-		<label for="2">ITems: </label><a id='add-award_0' title='Add Item' href='javascript:addAwardItem()'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a>
-		        <?php $this->ListQuestAwardItems($this->arrAwardItems) ;?>
-		 
+				<td>
+					<label>Gold: </label><input name="AwardGold" value="<?php echo $this->obj->AwardGold?>" id="awardgold" type="text" tabindex="1" /><br/>
+					<label>EXP: </label><input name="AwardExp" value="<?php echo $this->obj->AwardExp?>" id="awardexp" type="text" tabindex="1" /><br/>
 				</td>
 				<td>
 					<label for="name">Next Quest : </label> 		
-					<?php $this->SelectNextQuest($this->obj->NextQuest,$this->arrnextQuest) ;?>
+					<?php $this->SelectNextQuest($this->obj->NextQuest,$this->arrQuest) ;?>
+				</td>
+			</tr>
+			<tr>		
+					<td>
+					<label for="2">ITems: </label>
+					<a class='ico-16 add' title='Add Item' href='javascript:addAwardItem(0)'></a>
+		        	<?php $this->ListQuestAwardItems($this->arrAwardItems) ;?>
+		        	<div id="addItem"></div>
+					</td>
+				
+					<td id="list-need-quest">
+					<label>Need Quest : </label><a class='ico-16 add' title="Thêm Need Quest" href="javascript:addNeedQuest(0)"></a><br/>					
+					<?php $this->listNeedQuest($this->arrNeedQuest,$this->arrQuest)?>
+					<div id="add-need-quest"></div>
 				</td>
 			</tr>
 			
 			<tr>				
-				<td>
-					<label for="name">Need Quest : </label> <a title="Thêm Need Quest" href="javascript:addNeedQuest(0)"><img style="vertical-align: middle" src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a><br/>
-					<div class="need_quest" id="need_quest_0"></div>
-					<?php $this->listNeedQuest($this->arrNeedQuest,$this->arrQuest)?>															
-					
-				</td>
+				
+
 			</tr>
 		</table>
-		</fieldset>
+		<div style="margin: auto; text-align: center">
+			<input id="button1" type="submit" value="Save" /> &nbsp;&nbsp; 	  
+ 			<input id="button1" type="button" value="Cancel	" onclick="window.location='<?php echo $this->baseUrl ?>/quest/index'" />
 		
-		<fieldset id="personal">
-		<legend>Task:  <a id='addItem0' title='Add Item' href='javascript:addTask()'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a>	</legend>
-			<div id='list-task'>				
-				<div class='task' id='task-0'>						
-					<div class="content"></div>			
-				</div>
+		</div>		
+		</fieldset>		
+		</form>
+		<fieldset id="tasks">
+		<legend>Task:  <a id='addItem' class='ico-16 add' title='Add Task' href='javascript:addTask(0)'></a></legend>
+			<div id='list-task' style="margin-top: 10px;">	
 				
-				<div class='task' id='task-1'>					
-					<div class="content"></div>
-				</div>
-				
-				<div class='task' id='task-2'>					
-					<div class="content"></div>
-				</div>
-			</div>	
-	  	</fieldset>
-  		<input id="button1" type="submit" value="Save All" /> &nbsp;&nbsp; 	  
- 		<input id="button1" type="button" value="Cancel	" onclick="window.location='<?php echo $this->baseUrl ?>/quest/index'" />		
-		<br />	
-		
-	</form>
+			</div>
+			<div style="margin: auto; text-align: center; margin-top: 10px">				  
+ 				<a id="save-all"  class="btn save" href="javascript:saveAll()"> Save All</a>		
+			</div>		
+	  	</fieldset>	
+	  	
 </div>
 <script>
 function  addAwardItem(key){	
-	var count = $(".awarditem").size();
-	count = count + 1;
-	var btnDelete = " <a class='btn-delete' title='Delete Item' href='javascript:deleteAwardItem("+count+")'>Delete</a>" ;
-	var input = "<label></label><input name='awarditem[]' value='' id='' type='text' tabindex='1'/>";
-	$("#add-award_0").after("<div class='awarditem' id='award_"+count+"'>"+input + btnDelete+"</div>");
+	var count = $(".award_item").size();
+	count = count;
+	//alert(count);
+	
+	var btnDelete = "&nbsp<a class='tool-16 delete' title='Delete Item' href='javascript:deleteAwardItem("+count+")'></a>" ;
+	var input = "<label></label><input name='additem[]' value='' id='' type='text' tabindex='1'/>";
+	
+
+	$("#addItem").before("<div class='award_item add_item' id='award_item_"+count+"'>" +input + btnDelete+ "</div>");
 }
 
+function  deleteAwardItem(key){		
+	if($("#award_item_"+key).hasClass("add_item")){
+		$("#award_item_"+key).html(""); 
+		return false;
+	}
+	$("#award_item_"+key+" a").remove();
+	$("#award_item_"+key+" label").remove();
+	$("#award_item_"+key+" input").val("");
+	$("#award_item_"+key).hide();
 
-function  deleteAwardItem(key){
-	$("#award_"+key).remove();	
 }
 
 ////////////////////////////////
-
-function  addNeedQuest(key){
+function  addNeedQuest(key){	
+	var id = $("#QuestID").serialize();
+	var count = $(".need_quest").size() + 1;
+	var btnDelete = "<a class='tool-16 delete' title='Delete Item' href='javascript:deleteNeedQuest("+count+")'></a>";
+	var select = "<select id='type' name='need-quest-add[]' style='margin-bottom:5px;margin-top:5px;min-width:50px'>";
 	$.ajax({
 		type: "POST",
-		url:"<?php echo $this->baseUrl.'/quest/listquest/'?> ",		
+		url:"<?php echo $this->baseUrl.'/quest/listquest/'?> ",	
+		data:id,		
 		success: function(data){
-			if(data != "")
-			{	
-				var count = $(".need_quest").size();
-				var cur = count - 1;
-				count = count;	
-				var html = "<div class='need_quest' id='need_quest_"+count+"'><label></label>" + data + " <a title='Delete Item' href='javascript:deleteNeedQuest("+count+")'>Delete</a></div>";	
-				//alert(count);	
-				//alert(html);	
-				$("#need_quest_0").after(html);
+			if(data != ""){
+			
+				var div = "<div class='need_quest new' id='need_quest_"+count+"'><label></label>"+ select+data+"</select>"+btnDelete+"</div>";
+				$("#add-need-quest").before(div);
 			}
 			else
 			{
@@ -141,106 +152,130 @@ function  addNeedQuest(key){
 			}
 			
 		}
-	});	
+	});
+	
 }
-
 function  deleteNeedQuest(key){
 	//alert("asd");
-	$("div#need_quest_" + key).remove();
-}
-
-/////////////////////////
-function  deleteTask(key){	
-	var id = $("#task-"+ key +" #TaskID").val();	
-	//return;
-	if(id !=""){
-		if(confirm("Bạn có muốn xóa mẩu tin này không?") == false)
-			return false;
-		$.ajax({
-			type: "POST",		
-			url:"<?php echo $this->baseUrl.'/task/delete/'?> ",
-			data: "id=" + id,			
-			success: function(data){			
-				if(data != ""){	
-					alert(data);	
-				}
-					else{
-				}
-			}
-		});	
-	}else{
-		// ko co trong task trong co so du lieu
+	var div =  $("div#need_quest_" + key);
+	if(div.hasClass("new"))
+		div.html("");
+	else{	
+		div.hide();
+		div.children("a").remove();
+		div.children("select").children(".data").remove();
+		
 	}	
-	$("#task-"+key+" h3").remove();	
-	$("#task-"+key+" .content").html("");
 }
-
-function  addTask(){
-	//$("#award_"+key).remove();
-	var count = $(".task h3").size();
-	
-	var cur = count +1;
-	var btnDelete = "<a title='Delete Task' href='javascript:deleteTask("+count+")'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/delete.gif'?>'></a>"
-	var btnAdd = " ";
-	if(count<2){
-		btnAdd = "<a title='Add Task' href='javascript:addTask()'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a>"
+/////////////////////////Task/////////////////////////////////
+function addTask(key){
+	alert($(".form-task-51").serialize());
+	count = $(".task").size();
+	if(count >= 3){
+		alert("Fail!!!! Limited 3 Task in a Quest");
+		return false;
 	}
+	
+	quest_id = $("#QuestID").val();
 	$.ajax({
 		type: "POST",
-		url:"<?php echo $this->baseUrl.'/task/edit/'?> ",			
+		url:"<?php echo $this->baseUrl.'/task/new/'?> ",
+		data: "id=" + quest_id,	
 		success: function(data){			
-			if(data != "")
-			{	
-				 		
-				$("#task-" + count+ " .content").html(data);				
-				$("#task-" + count+ " .content").before("<h3>Task "+cur+ btnAdd + btnDelete +"</h3> ");		
-			}
-			else
-			{
-				alert("Thêm  không thành công");
-				
+			if(data != ""){					
+				loadTask(quest_id);
+			}else{
+				alert("Error");				
 			}
 			
 		}
 	});
-	//alert(count);	
 }
 
-
-
-//////////////
-function loadtask(pos,task_id){
-	var btnDelete = "<a title='Delete Task' href='javascript:deleteTask("+pos+")'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/delete.gif'?>'></a>"
-	var btnAdd = " ";
-	if(pos < 2){
-		btnAdd = "<a title='Add Task' href='javascript:addTask()'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a>"
-	}
-		
+function deleteTask(key){		
+	task_id = $("#task-"+key+" input#TaskID").val();	
+	task_name = $("#task-"+key+" input#TaskName").val();
+	quest_id = $("#QuestID").val();
+	div = 	$("#task-"+key);
+	if(!confirm("Do you want to delelte Task: " + task_name)){
+		return false;
+	}		
 	$.ajax({
 		type: "POST",
-		url:"<?php echo $this->baseUrl.'/task/edit/'?> ",
+		url:"<?php echo $this->baseUrl.'/task/delete/'?> ",
 		data: "id=" + task_id,	
 		success: function(data){			
-			if(data != "")
-			{	
-				 		
-				$("#task-" + pos+ " .content").html(data);
-				num = pos +1;
-				$("#task-" + pos+ " .content").before("<h3>Task "+num+ btnAdd + btnDelete+"</h3>");	
-			}
-			else
-			{
-				alert("Thêm  không thành công");
-				
+			if(data != ""){					
+				loadTask(quest_id);
+			}else{
+				alert("Error");				
 			}
 			
 		}
 	});
+
 }
-$(function(){
-	<?php foreach ($this->arrTask as $key=>$value) {?>
-		loadtask(<?php echo$key?>,<?php echo $value->TaskID?>);
-	<?php }?>
+function loadTask(key){	
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/listtask/'?> ",
+		data: "id=" + key,	
+		success: function(data){		
+			if(data != ""){ 				
+				$("#list-task").html(data);
+				$(".add-target").click(function(){
+					addTarget(this);
+					return false;
+				});
+				$("input[name=target]").change(function(){
+					targetChange(this);
+				});
+			}else{
+				alert("Error");				
+			}
+			
+		}
+	});
 	
+}
+///////////////////////////////////////
+function targetChange(key){
+	
+	selected = ($(key).val());
+	if(selected == "TargetType"){
+		
+	}else{
+		
+	}
+}
+function addTarget(key){
+	parent = $(key).parent();	
+	count = parent.children('.target-list').size();	
+	input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>'
+
+	parent.append(input);
+}
+function saveAll(){	
+	$(".task").each(function (index){		
+		data = $(".form-task-"+ index).serialize();
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/task/save/'?> ",
+			data: data,	
+			success: function(msg){		
+				if(msg != ""){ 				
+					alert(msg);
+				}else{
+					alert("Error");				
+				}
+				
+			}
+		});
+	
+	});
+}
+$(document).ready(function(){	
+	loadTask(<?php echo $this->obj->QuestID?>);	
 });
+
 </script>

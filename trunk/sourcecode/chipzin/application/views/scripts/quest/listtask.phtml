@@ -4,51 +4,81 @@
 <?php if($this->msg) :?>		
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
-<div id="box">
-<?php $i=array(1,2,3);
-foreach($i as $val)
-{ echo "<h3> Task $val </h3>";?>
+
+<?php 
+
+foreach($this->arrTask as $key =>$val){  ?>
+<div class='task' id="task-<?php echo $key;?>">
+<h4><a href="#">+</a>Task <?php echo $key+1?>&nbsp&nbsp<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask(<?php echo $key?>)'></a>
+	
+</h4>
+<form  id="form" class="form-task-<?php echo $key?>" action="" method="post" enctype="multipart/form-data">
 <table>
 	<tr>
-	
-		<td>Name</td>
-		<td><input type="text" id="TaskName" name="TaskName" value="<?php echo $this->obj->TaskName?>"/></td>
-		<td>Task String</td>
-		<td><input type="text" id="TaskString" name="TaskString" value="<?php echo $this->obj->TaskString?>"/></td>
+		<td>Task ID</td>
+		<td><input type="text" id="TaskID" name="TaskID" class="disabled" readonly="readonly" class="taskid" value="<?php echo $val->TaskID?>"/></td>
+		<td>Task Name</td>
+		<td><input type="text" id="TaskName" name="TaskName" value="<?php echo $val->TaskName?>"/></td>
+		
 	</tr>
 	<tr>
-		<td>Action</td>
+		<td>Task String</td>
+		<td><input type="text" id="TaskString" name="TaskString" value="<?php echo $val->TaskString?>"/></td>
+		<td>Action (*) </td>
 		<td>
 		<select id="Action" name="Action">
-			<option value="<?php echo $this->obj->ActionID?>"><?php echo $this->objactionname->ActionName?></option>
+			
 			<?php 
 				foreach($this->arrAction as $row)
 				{
+					$str="";
+					if($val->ActionID == $row->ActionID )
+					{
+						$str= "selected";
+					}
 			?>
-					<option value="<?php echo $row->ActionID ?>"><?php echo $row->ActionName ?></option>
+					<option <?php echo $str;?> value="<?php echo $row->ActionID ?>"><?php echo $row->ActionName ?></option>
 			<?php
 				}
 			?>
 		</select>
 		</td>
-		<td>Target</td>
-		<td><input type="text" id="TargetID" name="TargetID" value="<?php echo $this->obj->TargetID?>"/></td>
+	</tr>
+	<tr> 
+
+		<td>Quantity (*) </td>
+		<td><input type="text" id="Quantity" name="Quantity" value="<?php echo $val->Quantity?>"/></td>	
+		
+		<!-- 
+		<td>
+		<INPUT TYPE=RADIO NAME="TargetType" VALUE="" CHECKED> Target Type<BR>
+		<INPUT TYPE=RADIO NAME="TargetType" VALUE="null"> Target List<BR>
+		</td>
+		--><td>UnlockCoin (*) </td>
+		<td><input type="text" id="UnlockCoin" name="UnlockCoin" value="<?php echo $val->UnlockCoin?>"/></td>
+	</tr>
+	<tr>		
+		<td rowspan=1">Target(*)</td>
+		<td rowspan="1" id="target">
+			<input checked type="radio" name="Target"  value="TargetType"> Type<input style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value=""> <br>
+			<div>
+			<input type="radio" name="Target" value="TargetList"> List <a class="ico-16 add add-target" href="#"></a><br>
+			
+			</div>
+		</td>
+		<td>Quest Task Client</td>
+		<td><input type="text" id="QTC_ID" name="QTC_ID" value="<?php echo $val->QTC_ID?>"/></td>
+		
 	</tr>
 	<tr>
-		<td>UnlockCoin</td>
-		<td><input type="text" id="UnlockCoin" name="UnlockCoin" value="<?php echo $this->obj->UnlockCoin?>"/></td>
-		<td>Quantity</td>
-		<td><input type="text" id="Quantity" name="Quantity" value="<?php echo $this->obj->Quantity?>"/></td>
-	</tr>
-	<tr>
-		<td colspan="2">Quest Task Client</td>
-		<td colspan="2"><input type="text" id="QTC_ID" name="QTC_ID" value="<?php echo $this->obj->QTC_ID?>"/></td>
-	</tr>
-	<tr>
-		<td>Icon</td>
-		<td colspan="3"></td>
+		
 	</tr>
 </table>
+</form>
+</div>
 <?php }?>
 
-</div>
+
+
+
+

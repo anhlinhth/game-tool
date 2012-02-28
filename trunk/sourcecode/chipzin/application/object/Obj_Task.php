@@ -11,5 +11,5 @@ class Obj_Task
 	public $Quantity;
 	public $ActionID;
 	public $QuestID;
-	public $TargetID;
+	public $TargetType;
 }

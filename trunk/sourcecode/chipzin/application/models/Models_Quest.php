@@ -38,27 +38,26 @@ class Models_Quest extends Models_Base
 	public function filter($objSearch,$order,$offset,$count)
 	{
 		$sql = "SELECT
-					*
+					Q.*,QL.*
 				FROM
-					q_quest
+					q_quest as Q, q_questline as QL
 				WHERE
-					1";
+					1 AND Q.QuestLineID = QL.QuestLineID";
 		
 		if($objSearch->QuestID)
-			$sql .= " AND QuestID LIKE '%$objSearch->QuestID%'";
+			$sql .= " AND Q.QuestID LIKE '%$objSearch->QuestID%'";
 		
 		if($objSearch->QuestName)
-			$sql .= " AND QuestName = '$objSearch->QuestName'";
+			$sql .= " AND Q.QuestName = '$objSearch->QuestName'";
 		
 		if($objSearch->QuestLineID)
-			$sql .= " AND QuestLineID = '$objSearch->QuestLineID'";
+			$sql .= " AND Q.QuestLineID = '$objSearch->QuestLineID'";
 		
 		if($order)
 			$sql .= " ORDER BY $order";
 		
 		if($count > 0)
 			$sql .= " LIMIT $offset,$count";
-		
 		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
 		
 		return $data;		

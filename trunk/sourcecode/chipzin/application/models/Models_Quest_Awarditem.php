@@ -7,7 +7,7 @@ class Models_Quest_Awarditem extends Models_Base
 	public function __construct()
 	{
 		parent::__construct();		
-		$this->_key = "QuestID";
+		$this->_key = "ID";
 		$this->_table = "q_quest_awarditem";		
 	}
 
