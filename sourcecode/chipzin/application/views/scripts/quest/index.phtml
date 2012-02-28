@@ -11,6 +11,8 @@ if($this->temp)
 	$this->showMessage($this->temp)
 ?>	
 <form  class="myform" id="list-quest" name="quest" action="" method="post">
+
+<div class="mybox">
 	<h3>Quest</h3>
 	<table class="filter">	
 		<tr style="border: 0px;">
@@ -40,13 +42,13 @@ if($this->temp)
 		</tr>
 	</table>
 	<table class="list" id="list_ql" width="100%">
-		<tr>
+		<thead>
 			<th width="10"><input type='checkbox' name='chkid' value='0'/></th>
 			<th width="30"><a href="#">ID</a></th>
 			<th><a href="#">Name</a></th>
 			<th><a href="#">Quest line</a></th>
 			<th><a href="#">Tool</a></th>
-		</tr>
+		</thead>
 		<?php $this->listQuest($this->data, $this->page, $this->items, $this) ?>
 	</table>
 	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>

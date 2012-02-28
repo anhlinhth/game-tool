@@ -15,9 +15,9 @@
 			<tr>
 				<td>
 					<label for="QuestID">Quest Id : </label> 
-					<input name="QuestID" value="<?php echo $this->QuestID;?>" id="alias" type="text"  tabindex="1" /></td>
+					<input name="QuestID" value="<?php echo $this->QuestID;?>" id="alias" type="text" readonly="readonly"  tabindex="1" /></td>
 				<td>
-					<label for="name" >Quest Line : </label>							
+					<label for="name" class="important" >Quest Line : </label>							
 					<?php $this->selectQuestLine2($this->obj->QuestLineID,$this->arrValue) ;?>
 				</td>
 			</tr>
@@ -58,8 +58,8 @@
 			<tr>
 				<td rowspan=2">
 		<p>Award: </p>
-		<label>Gold: </label><input name="AwardGold" value="<?php echo $this->obj->AwardGold?>" id="awardgold" type="text" tabindex="1" /><br/>
-		<label>EXP: </label><input name="AwardExp" value="<?php echo $this->obj->AwardExp?>" id="awardexp" type="text" tabindex="1" /><br/>
+		<label>Gold: </label><input  class="important" name="AwardGold" value="<?php echo $this->obj->AwardGold?>" id="awardgold" type="text" tabindex="1" /><br/>
+		<label>EXP: </label><input class="important" name="AwardExp" value="<?php echo $this->obj->AwardExp?>" id="awardexp" type="text" tabindex="1" /><br/>
 		<label for="2">ITems: </label><a id='add-award_0' title='Add Item' href='javascript:addAwardItem()'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a>
 		        <?php $this->ListQuestAwardItems($this->arrAwardItems) ;?>
 		 
@@ -192,7 +192,7 @@ function loadtask(pos,task_id){
 	var btnDelete = "<a title='Delete Task' href='javascript:deleteTask("+pos+")'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/delete.gif'?>'></a>"
 	var btnAdd = " ";
 	if(pos < 2){
-		btnAdd = "<a title='Add Task' href='javascript:addTask()'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a>"
+		btnAdd = "<a title='Add Task' href='javascript:addTask()' class='addTask'><img style='vertical-align: middle' src='<?php echo $this->baseUrl .'/media/images/icons/add.png'?>'></a>"
 	}
 		
 	$.ajax({
@@ -223,6 +223,7 @@ $(function(){
 				loadtask(<?php echo$key?>,<?php echo $value->TaskID?>);
 			<?php }?>
 		<?php }?>	
-	
+	$(".important").after("<i style='color:#F00;font-size::30px;'>(*)</i>");	
+
 });
 </script>

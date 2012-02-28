@@ -38,14 +38,14 @@ class QuestController extends BaseController
 			
 			$pageNo = $this->_request->getParam("page");
 			$items = $this->_request->getParam("items");
-			
-			$form = new Forms_Quest();
-			$form->_requestToForm($this);
-			
 			if($pageNo == 0)
 				$pageNo = 1;
 			if($items == 0)
 				$items = DEFAULT_ITEM_PER_PAGE;
+			$form = new Forms_Quest();
+			$form->_requestToForm($this);
+			
+			
 
 			$md= new Models_Quest();
 			$md_questLine = new Models_Quest_Line();
@@ -191,21 +191,26 @@ class QuestController extends BaseController
 		try
 		{
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Action.php';
-			
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Task_Client.php';
 			$this->_helper->layout->disableLayout();			
 			$questid = $this->_request->getParam("id");
 			$md = new Models_Quest_Detail();
-			$mdAction = new Models_Action();	
+			$mdAction = new Models_Action();				
+			$mdQuestTC = new Models_Quest_Task_Client();
 			
-			$this->view->arrTask = $md->getTask($questid);
-			
-			$this->view->arrAction = $mdAction->_getAction();	
-						
+			//Hiện List q_action
+			$this->view->arrTask = $md->getTask($questid);			
+			$this->view->arrAction = $mdAction->_getAction();
+				
+			//Hiện ListQuesstTaskClient 
+			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();		
 		
 		}catch(Exception $ex){
-	           var_dump($ex->getMessage());
+			
+	           Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 	    }		
 	}
+			
 	public function saveAction(){
 		/////////////Udate Award ID///////////////
 		if($this->_request->isPost())// da post du lieu len
@@ -251,7 +256,6 @@ class QuestController extends BaseController
 			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Needquest.php';
 			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task.php';
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
-			
 			//Lay maxid
 			$md_getmax= new Models_Quest();
 			$idmax =$md_getmax->getMaxQuestID();
@@ -264,10 +268,14 @@ class QuestController extends BaseController
 			$this->view->arrnextQuest = $md->getQuest();
 			$this->view->QuestID = $id;
 			
+			$form = new Forms_Quest_Detail();
+			$form->_requestToForm($this);	
+			$form->validate(INSERT);
+				
 			if($this->_request->isPost()){
-				$form = new Forms_Quest_Detail();
-				$form->_requestToForm($this);	
-				$form->validate(INSERT);			
+				//$form = new Forms_Quest_Detail();
+				//$form->_requestToForm($this);	
+				//$form->validate(INSERT);			
 				$md = new Models_Quest_Detail();
 
 				$md->_insert($form->obj);
@@ -352,7 +360,8 @@ class QuestController extends BaseController
 		}
 		catch(Exception $ex)
         {
-           var_dump($ex->getMessage());
+           $this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 	}
 	

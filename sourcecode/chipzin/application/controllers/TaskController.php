@@ -64,7 +64,12 @@ class TaskController extends BaseController
 			$this->view->arrTask = $data;
 		}
 	}	
-	
+	public function _getQuestTastClient()
+	{
+		$md = new Models_Task();
+		$Tasks = $md->_filter();
+			
+	}
 	public function editAction()
 	{		
 		$this->_helper->layout()->disableLayout();
