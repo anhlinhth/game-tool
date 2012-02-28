@@ -23,6 +23,22 @@ class Models_Task_Target extends Models_Base
 		return $data;
 	}
 	
+	public function select($value)
+	{
+		$sql = "SELECT
+					qtt.ID,qtt.TargetID,qtt.TaskID
+				FROM
+					q_task_target qtt, q_task qt
+				WHERE 
+					qt.QuestID= '$value'
+				AND
+					qt.TaskID = qtt.TaskID;";
+		
+		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}
+	
 	public function delete($value)
 	{
 		try
