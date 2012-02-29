@@ -143,7 +143,8 @@ class TaskController extends BaseController
 			$this->view->arrAction = $mdAction->_getAction();				
 			//Hiện ListQuesstTaskClient 
 			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();				
-			if($this->_request->isPost()){
+			if($this->_request->isPost())
+			{
 				$this->_helper->layout->disableLayout();
 				$this->_helper->viewRenderer->setNorender();
 				//print_r($_POST);
@@ -158,6 +159,11 @@ class TaskController extends BaseController
 			    $obj->UnlockCoin = $_POST[UnlockCoin];
 			    $obj->QTC_ID = $_POST[QuestTC];
 			    $obj->QuestID = $_POST[QuestID];
+			    
+			    $form = new Forms_Task();
+			    $form->obj = $obj;
+			    $form->validate(INSERT);
+
 				if($_POST[Target]=="TargetType")
 			    {
 			    	$obj->TargetType = $_POST[TargetType];
