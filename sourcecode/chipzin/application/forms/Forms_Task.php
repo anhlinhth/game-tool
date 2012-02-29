@@ -29,17 +29,29 @@ class Forms_Task extends Forms_Base
 		if(empty ($this->obj->UnlockCoin))
 		{
 			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
-			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_INVALID);
 			array_push($arrNote, "UnlockCoin phải là số và không được để trống<br>");
 		}
 		
+		if(!ctype_digit($this->obj->UnlockCoin))
+		{
+	
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_INVALID);
+			array_push($arrNote, "UnlockCoin phải là số<br>");
+		}
+				
 		if(empty ($this->obj->Quantity))
 		{
 			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
-			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_INVALID);
 			array_push($arrNote, "TaskString phải là số và không được để trống<br>");
 		}
-				
+
+		if(!ctype_digit($this->obj->Quantity))
+		{
+	
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_INVALID);
+			array_push($arrNote, "Quantity phải là số<br>");
+		}
+		
 		if(!empty ($arrCode))
 		throw new Invalid_Argument_Exception($arrCode, $arrNote);
 	}
