@@ -309,7 +309,10 @@ class QuestController extends BaseController
 		/////////////Udate Award ID///////////////
 		if($this->_request->isPost())// da post du lieu len
 		{	
-			print_r($_POST);	
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNoRender();
+			
+				
 			$form = new Forms_Quest_Detail();
 			$form->_requestToForm($this);					
 			$form->validate(UPDATE);			
@@ -331,12 +334,9 @@ class QuestController extends BaseController
 			$arrNeedQuest = $_POST['need-quest'];
 			$arrAddNeedQuest = $_POST['need-quest-add'];			
 			updateNeedQuest($arrNeedQuest, $arrAddNeedQuest,$form->obj->QuestID);
+			 
+			echo "1";
 			
-			$arrTaskID = $_POST["TaskID"];
-			$arrTarget = $_POST["Target"];
-			$arrTargetType = $_POST["TargetType"];
-			print_r($arrTargetType);	
-			$this->_redirect('/quest/edit/id/'.$form->obj->QuestID);
 		}	
 	} 
 	

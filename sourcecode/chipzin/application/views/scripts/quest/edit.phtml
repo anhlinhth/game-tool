@@ -255,6 +255,23 @@ function addTarget(key){
 }
 function saveAll(){	
 	quest_id = $("#QuestID").val();
+	s = $("form#form").serialize();
+	$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/save/'?> ",
+			data: s,	
+			success: function(msg){		
+				if(parseInt(msg)==1){					 				
+					saveTask();
+				}else{
+					alert("Error");				
+				}
+				
+			}
+	});	
+}
+function saveTask(){
+alert("savetask");
 	$(".task").each(function (index){		
 		data = $(".form-task-"+ index).serialize();		
 		$.ajax({
