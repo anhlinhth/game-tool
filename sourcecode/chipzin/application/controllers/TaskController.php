@@ -77,7 +77,7 @@ class TaskController extends BaseController
 	}
 	public function editAction()
 	{		
-		$this->_helper->layout()->disableLayout();
+		//$this->_helper->layout()->disableLayout();
 		try
 		{
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Task.php';			
