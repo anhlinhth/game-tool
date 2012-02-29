@@ -160,6 +160,7 @@ class TaskController extends BaseController
 			    $obj->QTC_ID = $_POST[QuestTC];
 			    $obj->QuestID = $_POST[QuestID];
 			    
+				
 			    $form = new Forms_Task();
 			    $form->obj = $obj;
 			    $form->validate(INSERT);
