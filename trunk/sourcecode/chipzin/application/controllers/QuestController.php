@@ -137,55 +137,62 @@ class QuestController extends BaseController
 				$this->_helper->viewRenderer->setNoRender();	
 				$form = new Forms_Quest_Detail();
 				$form->_requestToForm($this);					
-				$form->validate(UPDATE);
+				$form->validate(INSERT);
 				$form->obj->QuestID;			
 				$md = new Models_Quest_Detail();			
 				$md->_insert($form->obj);
-				$this->QuestID= $form->obj->QuestID;	
-
+				$this->QuestID= $form->obj->QuestID;
 				//update quest need quest
 				$this->arrNeedQuest = $this->_request->getParam("need-quest-add");
 				$mdNeedQuest = new Models_Quest_Needquest();
 				$mdNeedQuest->_delete($this->QuestID);
-				foreach($this->arrNeedQuest as $i=>$key)
-				{
-					
-					$objneedquest = new Obj_Quest_Needquest();
-					$objneedquest->ID = "NULL";
-					$objneedquest->QuestID = $this->QuestID;
-					$objneedquest->NeedQuest = $this->arrNeedQuest[$i];
-					if($objneedquest->NeedQuest != "")
+				if(!empty($this->arrNeedQuest)){
+					foreach($this->arrNeedQuest as $i=>$key)
 					{
-						$mdNeedQuest->_insert($objneedquest);
+						
+						$objneedquest = new Obj_Quest_Needquest();
+						$objneedquest->ID = "NULL";
+						$objneedquest->QuestID = $this->QuestID;
+						$objneedquest->NeedQuest = $this->arrNeedQuest[$i];
+						if($objneedquest->NeedQuest != "")
+						{
+							$mdNeedQuest->_insert($objneedquest);
+						}
 					}
-				}
+				}				
+				
 				Models_Log::insert($this->view->user->username, "act_update_needquest");
 				
 				//update quest awarditem
 				$this->AwardItem = $this->_request->getParam("additem");
 				$mdAwardItem = new Models_Quest_Awarditem();
 				$mdAwardItem->_delete($this->QuestID);
-				foreach($this->AwardItem as $i=>$key)
-				{
-					$objAwardItem = new Obj_Quest_Awarditem();
-					$objAwardItem->ID="NULL";
-					$objAwardItem->QuestID = $this->QuestID;
-					$objAwardItem->AwardItem = $this->AwardItem[$i];
-					
-					if($objAwardItem->AwardItem != "")
-					{
-						$mdAwardItem->_insert($objAwardItem);
-					}
+				if(!empty($this->AwardItem)){
+					foreach($this->AwardItem as $i=>$key)
+						{
+							$objAwardItem = new Obj_Quest_Awarditem();
+							$objAwardItem->ID="NULL";
+							$objAwardItem->QuestID = $this->QuestID;
+							$objAwardItem->AwardItem = $this->AwardItem[$i];
+							
+							if($objAwardItem->AwardItem != "")
+							{
+								$mdAwardItem->_insert($objAwardItem);
+							}
+						}
 				}
+				
+				echo '1';
 				Models_Log::insert($this->view->user->username, "act_update_AwardItem");
 				//$this->view->msg = "them thanh cong";
-				print_r("thanh cong");
+				
 			}	
 		}
 		catch(Exception $ex)
         {
             $this->view->form = $form->obj;
 			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 		
@@ -301,7 +308,7 @@ class QuestController extends BaseController
 		/////////////Udate Award ID///////////////
 		if($this->_request->isPost())// da post du lieu len
 		{	
-					
+			print_r($_POST);	
 			$form = new Forms_Quest_Detail();
 			$form->_requestToForm($this);					
 			$form->validate(UPDATE);			

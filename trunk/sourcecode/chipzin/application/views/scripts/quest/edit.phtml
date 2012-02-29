@@ -86,25 +86,20 @@
 
 			</tr>
 		</table>
-		<div style="margin: auto; text-align: center">
-			<input id="button1" type="submit" value="Save" /> &nbsp;&nbsp; 	  
- 			<input id="button1" type="button" value="Cancel	" onclick="window.location='<?php echo $this->baseUrl ?>/quest/index'" />
 		
-		</div>		
 		</fieldset>		
-		
+		</form>
 		<fieldset id="tasks">
 		<legend>Task:  <a id='addItem' class='ico-16 add' title='Add Task' href='javascript:addTask(0)'></a></legend>
 			<div id='list-task' style="margin-top: 10px;">	
 				
 			</div>
 			<div style="margin: auto; text-align: center; margin-top: 10px">	
-			<input id="button1" name="button1" value="Save All" onclick="saveAll();"  />		  
- 						
+			<a id="saveall" class="btn save" href="javascript:saveAll()">Save All</a>
 			</div>		
 	  	</fieldset>		  	
 	</div>
-</form>
+
 <script>
 function  addAwardItem(key){	
 	var count = $(".award_item").size();
@@ -259,14 +254,13 @@ function addTarget(key){
 function saveAll(){	
 	quest_id = $("#QuestID").val();
 	$(".task").each(function (index){		
-		data = $(".form-task-"+ index).serialize();
+		data = $(".form-task-"+ index).serialize();		
 		$.ajax({
 			type: "POST",
 			url:"<?php echo $this->baseUrl.'/task/save/'?> ",
 			data: data + "&QuestID=" + quest_id,	
 			success: function(msg){		
-				if(msg != ""){
-					 				
+				if(msg != ""){					 				
 					alert(msg);
 				}else{
 					alert("Error");				
@@ -274,7 +268,7 @@ function saveAll(){
 				
 			}
 		});
-	
+	$("#form").submit();
 	});
 }
 $(document).ready(function(){	
