@@ -143,6 +143,7 @@ class QuestController extends BaseController
 				$md->_insert($form->obj);
 				$this->QuestID= $form->obj->QuestID;
 				//update quest need quest
+				
 				$this->arrNeedQuest = $this->_request->getParam("need-quest-add");
 				$mdNeedQuest = new Models_Quest_Needquest();
 				$mdNeedQuest->_delete($this->QuestID);
