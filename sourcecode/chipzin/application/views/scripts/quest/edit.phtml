@@ -89,6 +89,7 @@
 		
 		</fieldset>		
 		</form>
+		<div id="mybox">
 		<fieldset id="tasks">
 		<legend>Task:  <a id='addItem' class='ico-16 add' title='Add Task' href='javascript:addTask(0)'></a></legend>
 			<div id='list-task' style="margin-top: 10px;">	
@@ -97,7 +98,8 @@
 			<div style="margin: auto; text-align: center; margin-top: 10px">	
 			<a id="saveall" class="btn save" href="javascript:saveAll()">Save All</a>
 			</div>		
-	  	</fieldset>		  	
+	  	</fieldset>	
+	  	</div>	  	
 	</div>
 
 <script>
@@ -248,7 +250,7 @@ function addTarget(key){
 	parent = $(key).parent();	
 	count = parent.children('.target-list').size();	
 	input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>';
-
+	//btn_delete();
 	parent.append(input);
 }
 function saveAll(){	

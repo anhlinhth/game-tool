@@ -293,6 +293,7 @@ class QuestController extends BaseController
 			//Hiện List q_action
 			$this->view->arrTask = $md->getTask($questid);			
 			$this->view->arrAction = $mdAction->_getAction();
+			
 			$this->view->arrTaskTarget = $mdTT->select($questid);
 				
 			//Hiện ListQuesstTaskClient 

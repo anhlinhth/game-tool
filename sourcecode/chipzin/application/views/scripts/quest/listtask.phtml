@@ -60,23 +60,34 @@ foreach($this->arrTask as $key =>$val){  ?>
 	<tr>		
 		<td rowspan=1">Target(*)</td>
 		<td rowspan="1" id="target">
-			<input type="radio" name="Target"  value="TargetType"> Type<input style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value="<?php echo $val->TargetType;?>"> <br>
+		<?php if($val->TargetType != NULL){
+					$chkType = "checked";
+					$chkList = "";
+			}else{
+				$chkType = "";
+				$chkList = "checked";
+			}
+		
+		?>
+			<input type="radio" name="Target" <?php echo $chkType?> value="TargetType"> Type<input style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value="<?php echo $val->TargetType;?>"> <br>
 			<div>
-			<input checked="checked" type="radio" name="Target" value="TargetList"> List <a class="ico-16 add add-target" href="#"></a><br>
+			<input type="radio" name="Target" <?php echo $chkList?>  value="TargetList"> List <a class="ico-16 add add-target" href="#"></a><br>
 			
 			<?php
 			$count = 0;
-			foreach ($this->arrTaskTarget as $row)
-			{
-				
-				if ($val->TaskID == $row->TaskID)
+			if($chkList == "checked"){
+				foreach ($this->arrTaskTarget as $row)
 				{
-			?>
+				
+					if ($val->TaskID == $row->TaskID)
+				{
+				?>
 					<input id="target-"<?php echo $count?>" class="target-list" type="text" value="<?php echo $row->TargetID?>" name="TargetList[]" style="margin-left: 50px; width: 153px;"><br>
 					
-			<?php 
+				<?php 
 					$count++;
 				}
+			}
 			}
 			?>
 			</div>
