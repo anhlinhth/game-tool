@@ -235,9 +235,12 @@ function saveTask(){
 			data: data + "&QuestID="+ quest_id,		
 			success: function(msg){				
 				if(parseInt(msg)==1){
+					
+					$("#dialog-success").dialog("open");
 				}else{
 					message = 0;
 					$("#dialog-error").append(msg);
+					$("#dialog-error").dialog("open");
 				}		
 			}
 		});
@@ -273,9 +276,7 @@ function saveAll(){
 						
 								
 		}
-	});
-		
-		
+	});			
 }
 /////////////////////////////
 
