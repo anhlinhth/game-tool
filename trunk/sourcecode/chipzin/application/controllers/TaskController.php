@@ -222,7 +222,7 @@ class TaskController extends BaseController
 				    $obj->QuestID = $_POST[QuestID];
 				    $form = new Forms_Task();
 				    $form->obj = $obj;
-				    $form->validate($UPDATE);
+				    $form->validate(UPDATE);
 					$md->_update($obj);
 					require_once ROOT_APPLICATION_MODELS.DS.'Models_Task_Target.php';
 					$mdTT = new Models_Task_Target();
@@ -241,7 +241,9 @@ class TaskController extends BaseController
 				    $obj->UnlockCoin = $_POST[UnlockCoin];
 				    $obj->QTC_ID = $_POST[QTC_ID];
 				    $obj->QuestID = $_POST[QuestID];
-				    
+				    $form = new Forms_Task();
+				    $form->obj = $obj;
+				    $form->validate(UPDATE);
 					$md->_update($obj);
 					
 					require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task_Target.php';
