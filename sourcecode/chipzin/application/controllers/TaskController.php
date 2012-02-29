@@ -173,8 +173,11 @@ class TaskController extends BaseController
 			    		$objTT->TargetID = $row;
 			    		$objTT->TaskID = $obj->TaskID;
 			    		print_r($objTT);
-			    		$mdtt = new Models_Task_Target();
-			    		$mdtt->insert($objTT);
+			    		if($objTT->TargetID != "")
+			    		{
+				    		$mdtt = new Models_Task_Target();
+				    		$mdtt->insert($objTT);
+			    		}
 			    	}
 			    }
 				
@@ -244,7 +247,10 @@ class TaskController extends BaseController
 							$objTT->ID = 'NULL';
 							$objTT->TargetID = $row;
 							$objTT->TaskID = $_POST[TaskID];
-							$mdTT->_insert($objTT);
+							if($objTT->TargetID != "")
+							{
+								$mdTT->_insert($objTT);
+							}
 						}
 					}
 					
