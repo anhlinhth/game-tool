@@ -39,13 +39,11 @@
 				<?php $this->listQuestLine($this->data, $this->page, $this->items, $this) ?>
 			</tr>
 		</tbody>						
-	</table>		
+	</table>	
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>	
 	<div align="center" style="margin: 20px;">		
 		<input class="btn big sync"  type="submit" value="Sync">
 	</div>
-	
-	
-	
 </div>
 </form>
 <script type="text/javascript">
