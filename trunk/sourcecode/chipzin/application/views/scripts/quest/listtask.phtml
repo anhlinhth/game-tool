@@ -6,7 +6,9 @@
 <?php endif;?>
 
 <?php 
-
+if(empty($this->arrTask)){
+	exit();
+}
 foreach($this->arrTask as $key =>$val){  ?>
 <div class='task' id="task-<?php echo $key;?>">
 <h4><a href="#">+</a>Task <?php echo $key+1?>&nbsp&nbsp<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask(<?php echo $key?>)'></a>
