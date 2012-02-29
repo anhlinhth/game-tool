@@ -8,8 +8,8 @@ class Forms_Quest_Detail extends Forms_Base
 	{
 		$this->obj = new Obj_Quest_Detail();
 	}
-	
-public function validate($action)
+		
+	public function validate($action)
 	{
 		$arrCode = array();
 		$arrNote = array();
@@ -29,30 +29,36 @@ public function validate($action)
 		if(empty ($this->obj->QuestName))
 		{
 			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
-			array_push($arrNote, "QuestName không được để trống");
+			array_push($arrNote, "QuestName không được để trống<br>");
 		}
 		
 		if(empty ($this->obj->AwardGold))
 		{
 			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
-			array_push($arrNote, "Phần thưởng Gold không được để trống");
+			array_push($arrNote, "Phần thưởng Gold không được để trống<br>");
 		}
-		if(is_integer($this->obj->AwardGold))
+		if(!ctype_digit($this->obj->AwardGold))
 		{
 	
-			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
-			array_push($arrNote, "Phần thưởng Gold phai là số");
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_INVALID);
+			array_push($arrNote, "Phần thưởng Gold phai là số<br>");
 		}
+		
 		if(empty ($this->obj->AwardExp))
 		{
 			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
-			array_push($arrNote, "Vui lòng nhập phần thưởng kinh nghiệm");
+			array_push($arrNote, "Phần thưởng kinh nghiệm không được để trống<br>");
 		}
-		
+		if(!ctype_digit($this->obj->AwardExp))
+		{
+	
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_INVALID);
+			array_push($arrNote, "Phần thưởng EXP phai là số<br>");
+		}
 		if(empty ($this->obj->QuestLineID))
 		{
 			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
-			array_push($arrNote, "Vui lòng chọn QuestLine");
+			array_push($arrNote, "Vui lòng chọn QuestLine<br>");
 		}
 		if(!empty ($arrCode))
 		throw new Invalid_Argument_Exception($arrCode, $arrNote);

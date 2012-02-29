@@ -179,11 +179,13 @@ class TaskController extends BaseController
 			    }
 				
 			}
+			echo "true";
 		}
 		catch(Exception $ex)
         {
             $this->view->ojb = $form->obj;
 			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 		
@@ -193,7 +195,8 @@ class TaskController extends BaseController
 	{
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();
-			if($this->_request->isPost()){// da post du lieu len				
+			if($this->_request->isPost()){// da post du lieu len
+				print_r($_POST);						
 				if($_POST[Target]=='TargetType')
 				{
 					$md = new Models_Task();
@@ -204,6 +207,7 @@ class TaskController extends BaseController
 				    $obj->TaskName = $_POST[TaskName];
 				    $obj->TaskString = $_POST[TaskString];
 				    $obj->ActionID = $_POST[Action];
+				    
 				    $obj->Quantity = $_POST[Quantity];
 				    $obj->UnlockCoin = $_POST[UnlockCoin];
 				    $obj->TargetType = $_POST[TargetType];
