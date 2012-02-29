@@ -101,10 +101,7 @@
 	  	</fieldset>	
 	  	</div>	  	
 	</div>
-<div id='dialog-error' style="color: red">
-
-</div>
-<div id='dialog-success'>
+<div id='dialog'>
 
 </div>
 <script>
@@ -261,8 +258,8 @@ function addTarget(key){
 
 var test = 1;
 function saveAll(){	
-	$("#dialog-success").html("");				
-	$("#dialog-error").html("");				
+	$("#dialog").html("");				
+	
 	quest_id = $("#QuestID").val();
 	s = $("form#form").serialize();
 	$.ajax({
@@ -270,35 +267,35 @@ function saveAll(){
 			url:"<?php echo $this->baseUrl.'/quest/save/'?> ",
 			data: s,	
 			success: function(msg){		
-				if(parseInt(msg)==1){					 				
+				if(parseInt(msg)==1){
+					$("#dialog").append("<p class='msg'>Update Quest Success<p>");
 					saveTask();
-					if(test == 1){
-						$("#dialog-success").html("<b><center>Succsess</center></b>");
-						$("#dialog-success").dialog("open");
-					}else{
-						$("#dialog-error").dialog("open");
-					}
+					$("#dialog").dialog("open");
 				}else{
-					$("#dialog-error").append(msg);				
-					$("#dialog-error").dialog("open");			
+					$("#dialog").append("<p class='error'>Failed:<br>"+msg+"<p>");				
+					$("#dialog").dialog("open");			
 				}
 				
 			}
 	});	
 }
 function saveTask(){
-
+	var key = 0;
 	$(".task").each(function (index){		
+		
 		data = $(".form-task-"+ index).serialize();		
 		$.ajax({
 			type: "POST",
 			url:"<?php echo $this->baseUrl.'/task/save/'?> ",
 			data: data + "&QuestID=" + quest_id,	
-			success: function(msg){		
+			success: function(msg){	
+				//alert(data);
+				//alert(msg);
+				key = key+ 1;
 				if(parseInt(msg)==1){
-				}else{
-					test = 0;
-					$("#dialog-error").append(msg);
+					$("#dialog").append("<p class='success'>Task "+ key +":Success<p>");
+				}else{					
+					$("#dialog").append("<p class='error'>Task " + key + ":	<br>"+ msg + "</p>");					
 				}	
 				
 			}
@@ -309,7 +306,7 @@ function saveTask(){
 $(document).ready(function(){	
 	loadTask(<?php echo $this->obj->QuestID?>);	
 		
-	$("#dialog-error").dialog({
+	$("#dialog").dialog({
 		autoOpen: false,
 		height: 300,
 		width: 350,
@@ -327,26 +324,7 @@ $(document).ready(function(){
 			}
 		}
 	});	
-	$("#dialog-success").dialog({
-		autoOpen: false,
-		height: 300,
-		width: 400,
-		modal: true,
-		buttons: {
-			"Refresh": function() {								
-				$(this).dialog("close");
-				location.reload();
-			},
-			"New Quest": function() {								
-				$(this).dialog("close");
-				location.window.location.replace("<?php echo $this->baseUrl.'/quest/new/'?>");				
-			},
-			"Back": function() {
-				$( this ).dialog( "close" );
-				location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
-			}
-		}
-	});	
+	
 });
 
 </script>

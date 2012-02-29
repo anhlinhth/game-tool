@@ -189,9 +189,9 @@ class TaskController extends BaseController
 			    		}
 			    	}
 			    }
-				
+				echo "1";				
 			}
-			echo "1";
+			
 		}
 		catch(Exception $ex)
         {
@@ -273,8 +273,9 @@ class TaskController extends BaseController
 					}
 					
 				}
+				echo "1";
 			}
-			echo "1";
+			
 		}
 		catch(Exception $ex)
         {
@@ -284,9 +285,6 @@ class TaskController extends BaseController
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 					
-	}
-	
-	
-	
+	}	
 }
 ?>

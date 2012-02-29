@@ -96,10 +96,8 @@
  				<a id="save-all"  class="btn save" href="javascript:saveAll()"> Save All</a>		
 		</div>			  	
 </div>
-<div id='dialog-error' style="color: red">
 
-</div>
-<div id='dialog-success'>
+<div id='dialog'>
 
 </div>
 <script>
@@ -228,18 +226,18 @@ function saveTask(){
 	quest_id = $("#QuestID").val();
 
 	$(".task_form").each(function(key,value){		
-		var data = $(this).serialize();		
+		var data = $(this).serialize();	
+		key = key + 1;
+		taskname = $(this).find("#TaskName").val();	
 		$.ajax({
 			type: "POST",
 			url:"<?php echo $this->baseUrl.'/task/add/'?> ",
 			data: data + "&QuestID="+ quest_id,		
 			success: function(msg){				
 				if(parseInt(msg)==1){					
-					$("#dialog-success").dialog("open");
-				}else{
-					message = 0;
-					$("#dialog-error").append(msg);
-					//$("#dialog-error").dialog("open");
+					$("#dialog").append("<p class='success'>Task "+ key +":Success<p>");
+				}else{					
+					$("#dialog").append("<p class='error'>Task " + key + ":	<br>"+ msg + "</p>");					
 				}		
 			}
 		});
@@ -253,25 +251,20 @@ function saveAll(){
 	data = $(".quest-info").serialize();
 	$("#dialog-success").html("");				
 	$("#dialog-error").html("");	
+	$("#dialog").html("");	
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/new/'?>",
 		data: data,		
 		success: function(msg){				
-			if(parseInt(msg)==1){
-				$("#dialog-success").html("");				
-							
+			if(parseInt(msg)==1){	
+				$("#dialog").append("<p class='msg'>Add Quest Success<p>");
 				saveTask();	
-				if(message == 1){
-					$("#dialog-success").html("<b><center>Succsess</center></b>");
-					$("#dialog-success").dialog("open");
-				}else{
-					$("#dialog-error").dialog("open");
-				}
+				$("#dialog").dialog("open");
 			}else{
 				//alert("false");
-				$("#dialog-error").append(msg);				
-				$("#dialog-error").dialog("open");
+				$("#dialog").append("<p class='error'>Failed:<br>"+msg+"<p>");				
+				$("#dialog").dialog("open");
 			}
 						
 								
@@ -282,28 +275,11 @@ function saveAll(){
 
 
 $(document).ready(function(){	
-	$("#dialog-error").dialog({
+	
+	$("#dialog").dialog({
 		autoOpen: false,
-		height: 300,
-		width: 350,
-		modal: true,
-		buttons: {
-			"New Quest": function() {								
-				$(this).dialog("close");
-				location.reload();				
-			},
-			"Continue": function() {								
-				$(this).dialog("close");						
-			},
-			"Back": function() {
-				$( this ).dialog( "close" );
-			}
-		}
-	});	
-	$("#dialog-success").dialog({
-		autoOpen: false,
-		height: 300,
-		width: 350,
+		height: 400,
+		width: 400,
 		modal: true,
 		buttons: {
 			"Edit This Quest": function() {	
