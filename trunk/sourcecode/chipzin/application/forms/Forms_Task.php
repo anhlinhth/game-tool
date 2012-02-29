@@ -1,5 +1,5 @@
 <?php
-require ROOT_APPLICATION_FORMS.DS.'Forms_Base.php';
+require_once ROOT_APPLICATION_FORMS.DS.'Forms_Base.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task.php';
 
 class Forms_Task extends Forms_Base
@@ -25,10 +25,21 @@ class Forms_Task extends Forms_Base
 				array_push($arrNote, "Không cập nhật được");
 			}			
 		}
-		
+		if($action == INSERT)
+		{
+			if(empty ($this->obj->TaskID))
+			{
+				array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
+				array_push($arrNote, "Không thêm mới được");
+			}			
+		}
 		if(empty ($this->obj->UnlockCoin))
 		{
-			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);			
+			array_push($arrNote, "UnlockCoin  không được để trống<br>");
+		}
+		if(!ctype_digit($this->obj->UnlockCoin))
+		{
 			array_push($arrNote, "UnlockCoin không được để trống<br>");
 		}
 		
@@ -41,7 +52,6 @@ class Forms_Task extends Forms_Base
 				
 		if(empty ($this->obj->Quantity))
 		{
-			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
 			array_push($arrNote, "Quantity không được để trống<br>");
 		}
 
