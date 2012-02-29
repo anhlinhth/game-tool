@@ -101,7 +101,12 @@
 	  	</fieldset>	
 	  	</div>	  	
 	</div>
+<div id='dialog-error' style="color: red">
 
+</div>
+<div id='dialog-success'>
+
+</div>
 <script>
 function  addAwardItem(key){	
 	var count = $(".award_item").size();
@@ -253,7 +258,11 @@ function addTarget(key){
 	//btn_delete();
 	parent.append(input);
 }
+
+var test = 1;
 function saveAll(){	
+	$("#dialog-success").html("");				
+	$("#dialog-error").html("");				
 	quest_id = $("#QuestID").val();
 	s = $("form#form").serialize();
 	$.ajax({
@@ -263,15 +272,22 @@ function saveAll(){
 			success: function(msg){		
 				if(parseInt(msg)==1){					 				
 					saveTask();
+					if(test == 1){
+						$("#dialog-success").html("<b><center>Succsess</center></b>");
+						$("#dialog-success").dialog("open");
+					}else{
+						$("#dialog-error").dialog("open");
+					}
 				}else{
-					alert("Error");				
+					$("#dialog-error").append(msg);				
+					$("#dialog-error").dialog("open");			
 				}
 				
 			}
 	});	
 }
 function saveTask(){
-alert("savetask");
+
 	$(".task").each(function (index){		
 		data = $(".form-task-"+ index).serialize();		
 		$.ajax({
@@ -279,11 +295,11 @@ alert("savetask");
 			url:"<?php echo $this->baseUrl.'/task/save/'?> ",
 			data: data + "&QuestID=" + quest_id,	
 			success: function(msg){		
-				if(msg != ""){					 				
-					alert(msg);
+				if(parseInt(msg)==1){
 				}else{
-					alert("Error");				
-				}
+					test = 0;
+					$("#dialog-error").append(msg);
+				}	
 				
 			}
 		});
@@ -292,6 +308,45 @@ alert("savetask");
 }
 $(document).ready(function(){	
 	loadTask(<?php echo $this->obj->QuestID?>);	
+		
+	$("#dialog-error").dialog({
+		autoOpen: false,
+		height: 300,
+		width: 350,
+		modal: true,
+		buttons: {
+			"Continue": function() {								
+				$(this).dialog("close");						
+			},
+			"Refresh": function() {								
+				$(this).dialog("close");
+				location.reload();				
+			},			
+			"Back": function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});	
+	$("#dialog-success").dialog({
+		autoOpen: false,
+		height: 300,
+		width: 400,
+		modal: true,
+		buttons: {
+			"Refresh": function() {								
+				$(this).dialog("close");
+				location.reload();
+			},
+			"New Quest": function() {								
+				$(this).dialog("close");
+				location.window.location.replace("<?php echo $this->baseUrl.'/quest/new/'?>");				
+			},
+			"Back": function() {
+				$( this ).dialog( "close" );
+				location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
+			}
+		}
+	});	
 });
 
 </script>
