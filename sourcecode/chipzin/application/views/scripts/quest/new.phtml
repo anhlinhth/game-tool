@@ -103,7 +103,7 @@
 
 </div>
 <script>
-var  message = 0;
+
 function  addAwardItem(key){	
 	var count = $(".award_item").size();
 	count = count;
@@ -223,10 +223,10 @@ function addTarget(key){
 
 	parent.append(input);
 }
-
+var  message = 1;
 function saveTask(){
 	quest_id = $("#QuestID").val();
-	alert(quest_id);
+
 	$(".task_form").each(function(key,value){		
 		var data = $(this).serialize();		
 		$.ajax({
@@ -234,13 +234,12 @@ function saveTask(){
 			url:"<?php echo $this->baseUrl.'/task/add/'?> ",
 			data: data + "&QuestID="+ quest_id,		
 			success: function(msg){				
-				if(parseInt(msg)==1){
-					
+				if(parseInt(msg)==1){					
 					$("#dialog-success").dialog("open");
 				}else{
 					message = 0;
 					$("#dialog-error").append(msg);
-					$("#dialog-error").dialog("open");
+					//$("#dialog-error").dialog("open");
 				}		
 			}
 		});
@@ -252,7 +251,8 @@ function saveTask(){
 function saveAll(){	
 	quest_id = $("#QuestID").val();
 	data = $(".quest-info").serialize();
-	$("#dialog-error").html("");
+	$("#dialog-success").html("");				
+	$("#dialog-error").html("");	
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/new/'?>",
@@ -260,7 +260,7 @@ function saveAll(){
 		success: function(msg){				
 			if(parseInt(msg)==1){
 				$("#dialog-success").html("");				
-				message = 1;			
+							
 				saveTask();	
 				if(message == 1){
 					$("#dialog-success").html("<b><center>Succsess</center></b>");
@@ -317,6 +317,7 @@ $(document).ready(function(){
 			},
 			"Back": function() {
 				$( this ).dialog( "close" );
+				location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
 			}
 		}
 	});	

@@ -308,37 +308,43 @@ class QuestController extends BaseController
 			
 	public function saveAction(){
 		/////////////Udate Award ID///////////////
-		if($this->_request->isPost())// da post du lieu len
-		{	
-			$this->_helper->layout->disableLayout();
-			$this->_helper->viewRenderer->setNoRender();
-			
+		try{
+			if($this->_request->isPost())// da post du lieu len
+			{	
+				$this->_helper->layout->disableLayout();
+				$this->_helper->viewRenderer->setNoRender();
 				
-			$form = new Forms_Quest_Detail();
-			$form->_requestToForm($this);					
-			$form->validate(UPDATE);			
-			$md = new Models_Quest_Detail();		
-			$md->update($form->obj);							
-			
-			
-
-			//////////////////Update Award Item////////////////////////////
-			
-			
-			$arrItem = $_POST["awarditem"];
-			$arrAddItem = $_POST["additem"];				
-			///Update
-			updateAwardItem($arrItem, $arrAddItem,$form->obj->QuestID);
-			//////////////////////////////////////////
-			///////////////////Update need quest////////////////////////
-			
-			$arrNeedQuest = $_POST['need-quest'];
-			$arrAddNeedQuest = $_POST['need-quest-add'];			
-			updateNeedQuest($arrNeedQuest, $arrAddNeedQuest,$form->obj->QuestID);
-			 
-			echo "1";
-			
-		}	
+					
+				$form = new Forms_Quest_Detail();
+				$form->_requestToForm($this);					
+				$form->validate(UPDATE);			
+				$md = new Models_Quest_Detail();		
+				$md->update($form->obj);							
+				
+				
+	
+				//////////////////Update Award Item////////////////////////////
+				
+				
+				$arrItem = $_POST["awarditem"];
+				$arrAddItem = $_POST["additem"];				
+				///Update
+				updateAwardItem($arrItem, $arrAddItem,$form->obj->QuestID);
+				//////////////////////////////////////////
+				///////////////////Update need quest////////////////////////
+				
+				$arrNeedQuest = $_POST['need-quest'];
+				$arrAddNeedQuest = $_POST['need-quest-add'];			
+				updateNeedQuest($arrNeedQuest, $arrAddNeedQuest,$form->obj->QuestID);
+				 
+				echo "1";
+			}
+				
+		}catch(Exception $ex) {
+	           $this->view->errMsg = $ex->getMessage();
+	           echo $this->view->errMsg;
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+	    }	
 	} 
 	
 	public function addAction()

@@ -190,7 +190,7 @@ class TaskController extends BaseController
 			    }
 				
 			}
-			echo "true";
+			echo "1";
 		}
 		catch(Exception $ex)
         {
@@ -273,7 +273,7 @@ class TaskController extends BaseController
 					
 				}
 			}
-			echo "Thành công";
+			echo "1";
 		}
 		catch(Exception $ex)
         {
