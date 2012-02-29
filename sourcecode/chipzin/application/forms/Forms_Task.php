@@ -8,5 +8,40 @@ class Forms_Task extends Forms_Base
 	{
 		$this->obj = new Obj_Task();
 	}
+	
+	public function validate($action)
+	{
+		$arrCode = array();
+		$arrNote = array();
+		
+		if(empty($this->obj->TaskID)){
+			$this->obj->TaskID = NULL;
+		}
+		if($action == UPDATE)
+		{
+			if(empty ($this->obj->TaskID))
+			{
+				array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
+				array_push($arrNote, "Không cập nhật được");
+			}			
+		}
+		
+		if(empty ($this->obj->UnlockCoin))
+		{
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_INVALID);
+			array_push($arrNote, "UnlockCoin phải là số và không được để trống<br>");
+		}
+		
+		if(empty ($this->obj->Quantity))
+		{
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_INVALID);
+			array_push($arrNote, "TaskString phải là số và không được để trống<br>");
+		}
+				
+		if(!empty ($arrCode))
+		throw new Invalid_Argument_Exception($arrCode, $arrNote);
+	}
 }
 ?>

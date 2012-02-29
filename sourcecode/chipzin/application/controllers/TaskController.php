@@ -11,6 +11,8 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task_Target.php';
 
+require_once ROOT_APPLICATION_FORMS.DS.'Forms_Task.php';
+
 
 class TaskController extends BaseController
 {
@@ -196,10 +198,12 @@ class TaskController extends BaseController
 	
 	public function saveAction()
 	{
-			$this->_helper->layout->disableLayout();
-			$this->_helper->viewRenderer->setNorender();
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNorender();
+		try
+		{
 			if($this->_request->isPost()){// da post du lieu len
-				print_r($_POST);						
+										
 				if($_POST[Target]=='TargetType')
 				{
 					$md = new Models_Task();
@@ -216,7 +220,9 @@ class TaskController extends BaseController
 				    $obj->TargetType = $_POST[TargetType];
 				    $obj->QTC_ID = $_POST[QTC_ID];
 				    $obj->QuestID = $_POST[QuestID];
-				    
+				    $form = new Forms_Task();
+				    $form->obj = $obj;
+				    $form->validate($UPDATE);
 					$md->_update($obj);
 					require_once ROOT_APPLICATION_MODELS.DS.'Models_Task_Target.php';
 					$mdTT = new Models_Task_Target();
@@ -259,7 +265,15 @@ class TaskController extends BaseController
 					
 				}
 			}
-			echo "Success";
+			echo "Thành công";
+		}
+		catch(Exception $ex)
+        {
+            $this->view->ojb = $form->obj;
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
 					
 	}
 	
