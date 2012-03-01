@@ -1,7 +1,7 @@
 <?php
 class Zend_View_Helper_ListQuest
 {
-	public function listQuest($data, $curPage, $itemPerPage ,$view)
+	public function listQuest($data,$data2, $curPage, $itemPerPage ,$view)
 	{
 		if(!$data)
 			return;
@@ -10,6 +10,7 @@ class Zend_View_Helper_ListQuest
 		$strList .= "<tbody>";		
 		foreach($data as $row)
 		{
+			
 			if($row->enabled)
 				$strActive = "<span style='color:green; font-weight:bold'>Kích hoạt</span>";
 			else
@@ -34,6 +35,34 @@ class Zend_View_Helper_ListQuest
 							<td class='center'>$row->QuestID</td>
 							<td>$row->QuestName</td>							
 							<td>$row->QuestLineName</td>
+							<td>
+								<select width='30' name='needquest' id='needquest-$row->QuestID' class='needquest' onChange='updateNeedquest($row->QuestID);' > 
+							";
+				foreach ($data2 as $row2)
+				{
+					$str="";
+						if($row->QuestLineID == $row2->QuestLineID)
+						{
+							$str="selected";
+						}
+						$strList .= "<option $str  value='$row2->NeedQuest'>$row2->QuestName</option>";
+				}
+				$strList.="</select>
+							</td>
+							<td>
+							<select id='nextquest' name='nextquest'>";
+				foreach ($data2 as $row3)
+					{
+						$str="";
+						if($row->QuestLineID == $row3->QuestLineID){
+						$str="selected";
+						}
+						$strList .= "<option $str  value='$row3->NextQuest'>$row3->QuestName</option>";
+					}
+					
+				$strList.="</select>
+							</td>
+							<td>Trạng thái</td>
 							<td align='center'>	
 								$edit
 								&nbsp;$delete
@@ -46,6 +75,7 @@ class Zend_View_Helper_ListQuest
 		
 		echo $strList;
 	}
-
+<<<<<<< .mine	}
+=======
 }
-?>
+>>>>>>> .theirs?>
