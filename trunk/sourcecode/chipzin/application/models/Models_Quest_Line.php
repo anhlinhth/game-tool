@@ -77,8 +77,17 @@ class Models_Quest_Line extends Models_Base
 					q_questline
 				WHERE
 					1";
+		if($objSearch->QuestLineName)
+			$sql .= " AND QuestLineName LIKE '%$objSearch->QuestLineName%'";
 		
-		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+		if($objSearch->QuestLineID)
+			$sql .= " AND QuestLineID= '$objSearch->QuestLineID'";						
+		if($order)
+			$sql .= " ORDER BY $order";
+		
+		if($count > 0)
+			$sql .= " LIMIT $offset,$count";
+		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);		
 		
 		return $data;
 	
