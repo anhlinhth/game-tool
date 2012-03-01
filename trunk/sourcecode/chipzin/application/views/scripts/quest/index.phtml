@@ -21,7 +21,7 @@ if($this->temp)
 			<td></td>
 			<td>Quest Line
 				<select name="QuestLineID" id = "QuestLineID">
-				<option value=""> </option>
+				<option value="">Chọn QuestLine </option>
 				<?php 
 				foreach($this->dataquestlineid as $row)
 				{
@@ -34,9 +34,11 @@ if($this->temp)
 					
 				<?php
 				}
+				
 				?>
 				
 				</select>
+				
 			</td>
 			<td>
 				<input type="submit" name="button1" id = "button1" value="search"/>
@@ -51,12 +53,37 @@ if($this->temp)
 			<td width="30"><a href="#">ID</a></td>
 			<td><a href="#">Name</a></td>
 			<td><a href="#">Quest line</a></td>
-			<td><a href="#">Tool</a></td>
+			<td><a href="#">NeedQuest</a></td>
+			<td><a href="#">NextQuest</a></td>
+			<td width="70"><a href="#">Status</a></td>
+			<td width="50"><a href="#" >Tool</a></td>
 		</tr>
 		</thead>
-		<?php $this->listQuest($this->data, $this->page, $this->items, $this) ?>
+		<?php $this->listQuest($this->data,$this->data2, $this->page, $this->items, $this) ?>
 	</table>
 	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
 
 </div>
 </form>
+<script>
+
+function updateNeedquest(id)
+{
+	var needquest = document.getElementById('needquest-'+id).value;
+	alert(needquest);
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/updateq/'?> ",
+		data: "id=" + id +"&needquest="+ needquest,	
+		success: function(data){			
+			if(data != ""){					
+				alert(data);
+			}else{
+				alert("Error");				
+			}
+			
+		}
+	});
+}
+
+</script>
