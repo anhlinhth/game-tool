@@ -194,11 +194,11 @@ public function importAction() {
 				$this->_helper->viewRenderer->setNoRender();	
 				$form = new Forms_Quest_Detail();
 				$form->_requestToForm($this);					
-			
+				$form->validate(INSERT);
 				$md = new Models_Quest_Detail();			
 				$md->_insert($form->obj);
 				$this->QuestID= $form->obj->QuestID;
-				$form->validate(INSERT);
+				
 				Models_Log::insert($this->view->user->username, "act_update_needquest");
 				
 				//update quest awarditem
@@ -243,23 +243,12 @@ public function importAction() {
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNoRender();
 			$id = $this->_request->getParam("id"); //luu y cho nay nen dat id trung csd		
-
-//			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
-//			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Needquest.php';
-//			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
-//			$mdtask = new Models_Task();
-//			$mdtask->_delete($id);
-//			
-//			$mdquestneedquest= new Models_Quest_Needquest();
-//			$mdquestneedquest->_delete($id);
-//			
-//			$mdquestawarditem = new Models_Quest_Awarditem();
-//			$mdquestawarditem->_delete($id);
 			
 			$mdquest = new Models_Quest();
 			$mdquest->delete($id);
 						
 			Models_Log::insert($this->view->user->username, "act_delete_quest");
+			echo "1";
 		}
 		catch(Exception $ex)
         {            
