@@ -102,7 +102,8 @@
 	  	</div>	  	
 	</div>
 <div id='dialog'>
-
+	<div id='ct'></div>
+	<div id='ft'> </div>
 </div>
 <script>
 function  addAwardItem(key){	
@@ -256,9 +257,8 @@ function addTarget(key){
 	parent.append(input);
 }
 
-var test = 1;
 function saveAll(){	
-	$("#dialog").html("");				
+	$("#dialog #ct").html("");				
 	
 	quest_id = $("#QuestID").val();
 	s = $("form#form").serialize();
@@ -268,11 +268,13 @@ function saveAll(){
 			data: s,	
 			success: function(msg){		
 				if(parseInt(msg)==1){
-					$("#dialog").append("<p class='msg'>Update Quest Success<p>");
+				
+					$("#dialog #ct").append("<p class='msg'>Update Quest Success<p>");
 					saveTask();
 					$("#dialog").dialog("open");
+					
 				}else{
-					$("#dialog").append("<p class='error'>Failed:<br>"+msg+"<p>");				
+					$("#dialog #ct").append("<p class='error'>Failed:<br>"+msg+"<p>");				
 					$("#dialog").dialog("open");			
 				}
 				
@@ -293,9 +295,9 @@ function saveTask(){
 				//alert(msg);
 				key = key+ 1;
 				if(parseInt(msg)==1){
-					$("#dialog").append("<p class='success'>Task "+ key +":Success<p>");
+					$("#dialog #ft").before("<p class='success'>Task "+ key +":Success<p>");
 				}else{					
-					$("#dialog").append("<p class='error'>Task " + key + ":	<br>"+ msg + "</p>");					
+					$("#dialog #ft").before("<p class='error'>Task " + key + ":	<br>"+ msg + "</p>");					
 				}	
 				
 			}

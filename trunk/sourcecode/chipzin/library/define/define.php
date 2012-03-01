@@ -48,6 +48,7 @@ define('ROOT_UPLOAD',								ROOT.DS.'upload');
 define('ROOT_LANGUAGE',								ROOT.DS.'language');
 define('ROOT_FILE',									ROOT.DS.'file');
 define('ROOT_IMPORT_FILE',							ROOT.DS.'import_file_config');
+define('ROOT_EXPORT_FILE',							ROOT.DS.'export_file_config');
 define('ROOT_BAT',									ROOT.DS.'bat');
 define('ROOT_XML',									ROOT.DS.'xml');
 define('ROOT_UPLOADCONFIG',                         ROOT.DS.'uploadconfig');
@@ -73,6 +74,9 @@ define('TYPE_GOLD', 1);
 define('TYPE_EXP', 2);
 
 //Name of config files
+define('QUEST_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'Quest.conf.php');
+define('TASK_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'Task.conf.php');
+define('QUEST_PACKAGE_XFJ_FILE',ROOT_EXPORT_FILE.DS.'quest.xfj');
 define('EVENT_GOLD_EXP_PHP_FILE',ROOT_FILE.DS.'ExpEvent.php');
 define('EVENT_NAMTHIEN_PHP_FILE',ROOT_FILE.DS.'EventKimInLenh.php');
 define('GIFT_PACKAGE_PHP_FILE',ROOT_FILE.DS.'GiftPackageTool.php');

@@ -7,6 +7,9 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Needquest.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
+require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Q_Action.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Action.php';
+
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 
@@ -27,6 +30,60 @@ class QuestController extends BaseController
 		
 		if(!$this->hasPrivilege())
 			$this->_redirect ("/error/permission");
+	}
+	
+	
+public function importAction() {
+		if ($this->_request->isPost ()) 
+		{
+			
+			/*
+			//import file json to object
+			$file2= ROOT_IMPORT_FILE.'/system.xfj';
+			$fileContent = file_get_contents ($file2);
+			$arr=json_decode($fileContent);
+			var_dump($arr);
+			die();
+			*/
+			//--------------------------------------------------------------------			
+			
+			if(file_exists (ROOT_IMPORT_FILE.'/import2.php')==false ||file_exists (ROOT_IMPORT_FILE.'/Define.def.php')==false ) 
+			echo ("<SCRIPT LANGUAGE='JavaScript'>
+			 window.alert('Please check files exists in folder import_file_config : Define.def.php and import2.php')
+			 </SCRIPT>");
+			else {
+			system ( '"D:/003/xampp/php/php.exe" '. ROOT_IMPORT_FILE.'"/import2.php"' );
+			$file = ROOT_IMPORT_FILE . '/define.php';
+			if (! empty ( $file )) {
+				
+				$arrDefine = require_once ($file);
+				$md_Action=new Models_Q_Action();
+				$obj_action= new Obj_Q_Action();
+				foreach ( $arrDefine as $key => $value ) 
+				{
+					if (strpos ( $key, 'QUEST_TASK_' ) !== false) 
+					{
+						$obj_action->ActionID=(int)$value;
+						$obj_action->ActionName=$key;
+						if ($md_Action->isExist($obj_action->ActionID))
+						{
+							$md_Action->Update($obj_action);
+						}
+						else 
+						{
+							
+							$md_Action->Insert($obj_action);
+						}
+					
+						
+					} 
+					
+				}
+				Models_Log::insert($this->view->user->username , "Import action");
+			
+			}		}
+		}
+	
 	}
 	
 	public function indexAction()
