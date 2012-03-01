@@ -5,12 +5,12 @@
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
 <?php
-
-$linkdown1=$_SERVER['HTTP_HOST'].substr(ROOT_EXPORT_FILE . "/Quest.conf.php.txt", 15,strlen(ROOT_EXPORT_FILE . "/Quest.conf.php.txt"));
+$url=$this->baseUrl."/export_file_config";
+$linkdown1=$_SERVER['HTTP_HOST'].$url."/Quest.conf.php.txt";
 $linkdown1="http://".str_replace("\\","/",$linkdown1);
-$linkdown2=$_SERVER['HTTP_HOST'].substr(ROOT_EXPORT_FILE . "/quest.xfj.txt", 15,strlen(ROOT_EXPORT_FILE . "/quest.xfj.txt"));
+$linkdown2=$_SERVER['HTTP_HOST'].$url."/quest.xfj.txt";
 $linkdown2="http://".str_replace("\\","/",$linkdown2);
-$linkdown3=$_SERVER['HTTP_HOST'].substr(ROOT_EXPORT_FILE . "/Task.conf.php.txt", 15,strlen(ROOT_EXPORT_FILE . "/Task.conf.php.txt"));
+$linkdown3=$_SERVER['HTTP_HOST'].$url."/Task.conf.php.txt";
 $linkdown3="http://".str_replace("\\","/",$linkdown3);
 ?>
  <FORM>
