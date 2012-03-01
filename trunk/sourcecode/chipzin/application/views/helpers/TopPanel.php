@@ -72,7 +72,9 @@ class Zend_View_Helper_TopPanel
                     $strList .= "<li><a href='$view->baseUrl/ibshop/arrange' class='report'>Sắp xếp shop</a></li>";
                 break;
             case 'quest':
-                if (Utility::checkPrivilege($view, 'quest', 'index'))
+            	if (Utility::checkPrivilege($view, 'quest', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/quest/index' class='report'>Quest</a></li>";               
+                if (Utility::checkPrivilege($view, 'questline', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/questline/index' class='report'>Quest Line</a></li>";
                 if (Utility::checkPrivilege($view, 'QTC', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/QTC/index' class='report'>Quest Task Client</a></li>";
@@ -86,18 +88,20 @@ class Zend_View_Helper_TopPanel
                    
                 break;
             case 'questline':
-               if (Utility::checkPrivilege($view, 'quest', 'listquest'))
+               if (Utility::checkPrivilege($view, 'quest', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/quest/index' class='report'>Quest</a></li>";
-                if (Utility::checkPrivilege($view, 'QTC', 'index'))
+               if (Utility::checkPrivilege($view, 'questline', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/questline/index' class='report'>Quest Line</a></li>";
+                     
+               if (Utility::checkPrivilege($view, 'QTC', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/QTC/index' class='report'>Quest Task Client</a></li>";
-                  if (Utility::checkPrivilege($view, 'quest', 'import'))
+               if (Utility::checkPrivilege($view, 'quest', 'import'))
                     $strList .= "<li><a href='$view->baseUrl/quest/import' class='report'>Import Define</a></li>";
-                   if (Utility::checkPrivilege($view, 'quest', 'import'))
+               if (Utility::checkPrivilege($view, 'quest', 'import'))
                     $strList .= "<li><a href='$view->baseUrl/export/export' class='report'>Export Define</a></li>";
-                     if (Utility::checkPrivilege($view, 'action', 'index'))
+               if (Utility::checkPrivilege($view, 'action', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/action/index' class='report'>Action</a></li>";
-                    
-                break;
+               break;
             case 'QTC':
                 if (Utility::checkPrivilege($view, 'questline', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/questline/index' class='report'>Quest Line</a></li>";
