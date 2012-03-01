@@ -194,12 +194,11 @@ public function importAction() {
 				$this->_helper->viewRenderer->setNoRender();	
 				$form = new Forms_Quest_Detail();
 				$form->_requestToForm($this);					
-				$form->validate(INSERT);
-				$form->obj->QuestID;			
+			
 				$md = new Models_Quest_Detail();			
 				$md->_insert($form->obj);
 				$this->QuestID= $form->obj->QuestID;
-				
+				$form->validate(INSERT);
 				Models_Log::insert($this->view->user->username, "act_update_needquest");
 				
 				//update quest awarditem
@@ -519,6 +518,12 @@ public function importAction() {
 		{
 			$this->QuestID=$this->_request->getParam('questid');
 			$this->NextQuest=$this->_request->getParam('nextquest');
+			print_r($this->NextQuest);
+			
+			if(empty($this->NextQuest))
+			{
+				$this->NextQuest = NULL;
+			}
 			$form=new Models_Quest();
 			$form->updateNextquest($this->QuestID,$this->NextQuest);
 			

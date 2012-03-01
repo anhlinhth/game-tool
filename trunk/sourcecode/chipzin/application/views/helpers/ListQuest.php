@@ -38,7 +38,7 @@ class Zend_View_Helper_ListQuest
 							<td>
 								<select width='30' name='needquest-$row->QuestID' id='needquest-$row->QuestID' class='needquest' onChange='updateNeedquest($row->QuestID);' > 
 							";
-			    
+			    $strList .= "<option selected  value=''>NULL</option>";
 				foreach ($data2 as $row2)
 				{
 						
@@ -61,11 +61,12 @@ class Zend_View_Helper_ListQuest
 							</td>
 							<td>
 							<select id='nextquest-$row->QuestID' name='nextquest-$row->QuestID' onChange='updateNextquest($row->QuestID);' >";
+				$strList .= "<option selected  value=''>NULL</option>";
 				foreach ($data2 as $row3)
 					{
-						$str="";
+						 $str="";
 						if($row->NextQuest == $row3->QuestID){
-						$str="selected";
+							$str="selected";
 						}
 					$strList .= "<option $str  value='$row3->QuestID'>$row3->QuestName</option>";
 					}
