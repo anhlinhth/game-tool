@@ -22,7 +22,17 @@ class Models_Quest_xfj extends Models_Base
 		
 		return $data;
 	}
-	
+	public function lastId()
+	{
+		$sql = "SELECT COUNT(QuestID)
+				FROM
+					q_quest
+					";
+				
+		$count = $this->_db->fetchOne($sql);
+		
+		return $count;
+	}
 	public function generate($data)
 	{
 		$str .= "{";
@@ -41,11 +51,11 @@ class Models_Quest_xfj extends Models_Base
 				$str .= "\n\t\t\"".(int)$row['QuestID']."\":";
 				$temp=(int)$row['QuestLineID'];
 				$str .= "\n\t\t{";
-				$str .= "\n\t\t\t \"group\" : ".(int)$row['QuestLineID'];
+				$str .= "\n\t\t\t \"group\" : ".(int)$row['QuestLineID'].",";
 				if($row['NextQuest']!=NULL)
-					$str .= "\n\t\t\t \"nextQuest\" : [\"".(int)$row['NextQuest']."\"]";
+					$str .= "\n\t\t\t \"nextQuest\" : [\"".(int)$row['NextQuest']."\"],";
 				else
-					$str .= "\n\t\t\t \"nextQuest\" : NULL";
+					$str .= "\n\t\t\t \"nextQuest\" : NULL,";
 					
 				$str .= "\n\t\t\t \"tasks\" : [";
 				$objSearch->task_package_id = $row->id;
@@ -77,15 +87,21 @@ class Models_Quest_xfj extends Models_Base
 				$str .= "\n\t\t\t\t \"gold\" : ".$row['AwardGold'].",";
 				$str .= "\n\t\t\t\t \"exp\" : ".$row['AwardExp'];
 				$str .= "\n\t\t\t } ";
+				
+				$c = $this->lastId();
+				if((int)$c!=(int)$i)
+					$str .= "\n\t }, \n";
+				else
+					$str .= "\n\t } \n";
 				$i++;
-				$str .= "\n\t }, \n";
-			}
+			}		
 		}
 		$md = new Models_Task_Target_Package_Detail();
 		$am = new Models_QTC();
 		if($gifts)
 		{	
 			$i=0;
+			$str .= "}\n" ;
 			$str .= "\n" ;
 				$str .= " \t\"quest_tasks\"  :";				
 				$str .= "\n\t{";
@@ -111,7 +127,13 @@ class Models_Quest_xfj extends Models_Base
 					$objSearch->task_package_id = $gifts->id;
 					$sf=$md->_filter($objSearch);
 					
+					//if(file_exists (ROOT_IMPORT_FILE.'/system.xfj)==false)
+						
+					
 					$file2= ROOT_IMPORT_FILE.'/system.xfj';
+					//if(file2==NULL)
+				//	echo("<SCRIPT LANGUAGE='JavaScript'>window.alert('check file exits')</SCRIPT>");
+				//	else echo("<SCRIPT LANGUAGE='JavaScript'>window.alert('Ok')</SCRIPT>");
 					$fileContent = file_get_contents ($file2);
 					$arr=json_decode($fileContent);
 					
