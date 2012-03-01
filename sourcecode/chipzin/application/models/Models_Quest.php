@@ -47,6 +47,31 @@ class Models_Quest extends Models_Base
 		$data=$this->_db->fetchAll($sql,null,Zend_Db::FETCH_OBJ);
 		return $data;
 	}
+	public function updateNeedquest($id,$needquest)
+	{
+		$sql="
+				UPDATE q_quest
+					SET
+						NeedQuest ='".$needquest."'
+					WHERE QuestID='".$id."'
+			";
+		//print_r($sql);
+		$data=$this->_db->query($sql);
+		return $data;
+	}
+	
+	public function updateNextquest($id,$nextquest)
+	{
+		$sql="
+				UPDATE q_quest
+					SET
+						NextQuest ='".$nextquest."'
+					WHERE QuestID='".$id."'
+			";
+		//print_r($sql);
+		$data=$this->_db->query($sql);
+		return $data;
+	}
 	public function filter($objSearch,$order,$offset,$count)
 	{
 		$sql = "SELECT
