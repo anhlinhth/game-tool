@@ -131,12 +131,16 @@ class Models_Quest extends Models_Base
 	        			NextQuest = NULL
 	        		WHERE
 	        			NextQuest = '$value';
+	        		UPDATE
+	        			q_quest
+	        		SET
+	        			NeedQuest = NULL
+	        		WHERE
+	        			NextQuest = '$value';
 	        		DELETE FROM 
 	        			q_quest_awarditem
 	        		WHERE
 	        			QuestID = '$value';
-	        		DELETE FROM
-	        			q_quest_needquest
 	        		WHERE
 	        			QuestID ='$value' or NeedQuest='$value';
         			DELETE FROM 
