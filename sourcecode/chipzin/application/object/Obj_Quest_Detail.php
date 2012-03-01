@@ -12,5 +12,6 @@ class Obj_Quest_Detail
 	public $AwardExp;
 	public $NextQuest;
 	public $QuestLineID;
+	public $NeedQuest;
 }
 ?>
