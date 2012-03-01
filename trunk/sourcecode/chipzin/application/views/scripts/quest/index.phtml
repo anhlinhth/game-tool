@@ -70,14 +70,32 @@ if($this->temp)
 function updateNeedquest(id)
 {
 	var needquest = document.getElementById('needquest-'+id).value;
-	alert(needquest);
+	
 	$.ajax({
 		type: "POST",
-		url:"<?php echo $this->baseUrl.'/quest/updateq/'?> ",
-		data: "id=" + id +"&needquest="+ needquest,	
+		url:"<?php echo $this->baseUrl.'/quest/updateneedquest/'?> ",
+		data: "questid=" + id +"&needquest="+ needquest,	
 		success: function(data){			
 			if(data != ""){					
-				alert(data);
+				location.reload();
+			}else{
+				alert("Error");				
+			}
+			
+		}
+	});
+}
+function updateNextquest(id)
+{
+	var nextquest = document.getElementById('nextquest-'+id).value;
+	
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/updatenextquest/'?> ",
+		data: "questid=" + id +"&nextquest="+ nextquest,	
+		success: function(data){			
+			if(data != ""){					
+				location.reload();
 			}else{
 				alert("Error");				
 			}
