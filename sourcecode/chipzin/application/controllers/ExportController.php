@@ -55,7 +55,7 @@ class ExportController extends BaseController
 		$data2 = $tuo2->getGiftType();
 		$model2->generate($data2);
 		
-		$this->_redirect ("/quest/index");
+		$this->_redirect ("/export/download");
 		//	echo GIFT_PACKAGE_PHP_FILE;
 		// $f=ROOT.'/config/Gift.php'; //Khai bÃ¡o Ä‘Æ°á»�ng dáº«n cá»§a file cáº§n ghi dá»¯ liá»‡u @ 
 		// $ft=fopen($f,"w"); //Má»Ÿ file cáº§n ghi 
@@ -67,38 +67,7 @@ class ExportController extends BaseController
 		// else{ echo "CÃ³ lá»—i phÃ¡t sinh"; } 
 		//$this->_redirect ("gift/index");
 	}
-	public function exporttaskAction()
-	{
-		$model = new Models_Task_Package();
-		$tuo = new Models_Task_Package();
-		$data = $tuo->getGiftType();
-		$model->generate($data);
-		// $f=ROOT.'/config/Gift.php'; //Khai bÃ¡o Ä‘Æ°á»�ng dáº«n cá»§a file cáº§n ghi dá»¯ liá»‡u @ 
-		// $ft=fopen($f,"w"); //Má»Ÿ file cáº§n ghi 
-		// $f="Ä�Ã¢y lÃ  pháº§n hÆ°á»›ng dáº«n PHP"; //Khai bÃ¡o ná»™i dung cá»§a file 
-		// fwrite($ft,$f); //Thá»±c hiá»‡n ghi ná»™i dung vÃ o file 
-		// if(fwrite){ //Náº¿u ghi Ä‘Æ°á»£c thÃ¬... 
-		// echo "ThÃ nh cÃ´ng"; 
-		// }	
-		// else{ echo "CÃ³ lá»—i phÃ¡t sinh"; } 
-		//$this->_redirect ("gift/index");
-	}
-	public function exportxfjAction()
-	{
-		$model = new Models_Quest_xfj();
-		$tuo = new Models_Quest_xfj();
-		$data = $tuo->getGiftType();
-		$model->generate($data);
-		// $f=ROOT.'/config/Gift.php'; //Khai bÃ¡o Ä‘Æ°á»�ng dáº«n cá»§a file cáº§n ghi dá»¯ liá»‡u @ 
-		// $ft=fopen($f,"w"); //Má»Ÿ file cáº§n ghi 
-		// $f="Ä�Ã¢y lÃ  pháº§n hÆ°á»›ng dáº«n PHP"; //Khai bÃ¡o ná»™i dung cá»§a file 
-		// fwrite($ft,$f); //Thá»±c hiá»‡n ghi ná»™i dung vÃ o file 
-		// if(fwrite){ //Náº¿u ghi Ä‘Æ°á»£c thÃ¬... 
-		// echo "ThÃ nh cÃ´ng"; 
-		// }	
-		// else{ echo "CÃ³ lá»—i phÃ¡t sinh"; } 
-		//$this->_redirect ("gift/index");
-	}
+
 	public function indexAction()
 	{
 		try
