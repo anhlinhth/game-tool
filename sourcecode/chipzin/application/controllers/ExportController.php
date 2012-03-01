@@ -67,7 +67,9 @@ class ExportController extends BaseController
 		// else{ echo "CÃ³ lá»—i phÃ¡t sinh"; } 
 		//$this->_redirect ("gift/index");
 	}
-
+	public function downloadAction()
+	{
+	}
 	public function indexAction()
 	{
 		try
