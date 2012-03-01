@@ -5,7 +5,6 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Gift_Package.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Package.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Package_Detail.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Gift_Package_Detail.php';
-require_once ROOT_APPLICATION_MODELS.DS.'Models_Qneeds_Package_Detail.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_xfj.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_QTC.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Task_Package.php';
