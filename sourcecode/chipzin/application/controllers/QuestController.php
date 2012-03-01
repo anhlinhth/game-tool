@@ -152,7 +152,7 @@ public function importAction() {
 			$id = $this->_request->getParam("id");
 				$this->view->obj = $md->_getByKey($id);				
 				$this->view->arrQuestLine = $md->_getQuestLine();
-				$this->view->arrNeedQuest = $md->getNeedQuest($id);
+				$this->view->arrNeedQuest = $md->getQuest();
 				$this->view->arrAwardItems = $md->getAwardItems($id);
 				$this->view->arrTask = $md->getTask($id);
 				$this->view->arrQuest = $md->getQuest($id);	
@@ -180,7 +180,7 @@ public function importAction() {
 			$this->view->obj = new Obj_Quest_Detail();
 			$this->view->obj->QuestID = $id;			
 			$this->view->arrQuestLine = $md->_getQuestLine();
-			$this->view->arrNeedQuest = $md->getNeedQuest($id);
+			$this->view->arrNeedQuest = $md->getQuest();
 			$this->view->arrAwardItems = $md->getAwardItems($id);
 			$this->view->arrTask = $md->getTask($id);
 			$this->view->arrQuest = $md->getQuest($id);	
