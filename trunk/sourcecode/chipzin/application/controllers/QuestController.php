@@ -190,10 +190,6 @@ public function importAction() {
 			$this->view->arrQuest = $md->getQuest($id);	
 			if($this->_request->isPost())
 			{
-				//update quest
-		//		print_r($_POST);
-		//		exit();
-				//print_r($_POST);
 				$this->_helper->layout()->disableLayout();
 				$this->_helper->viewRenderer->setNoRender();	
 				$form = new Forms_Quest_Detail();
@@ -203,25 +199,6 @@ public function importAction() {
 				$md = new Models_Quest_Detail();			
 				$md->_insert($form->obj);
 				$this->QuestID= $form->obj->QuestID;
-				//update quest need quest
-				
-				$this->arrNeedQuest = $this->_request->getParam("need-quest-add");
-				$mdNeedQuest = new Models_Quest_Needquest();
-				$mdNeedQuest->_delete($this->QuestID);
-				if(!empty($this->arrNeedQuest)){
-					foreach($this->arrNeedQuest as $i=>$key)
-					{
-						
-						$objneedquest = new Obj_Quest_Needquest();
-						$objneedquest->ID = "NULL";
-						$objneedquest->QuestID = $this->QuestID;
-						$objneedquest->NeedQuest = $this->arrNeedQuest[$i];
-						if($objneedquest->NeedQuest != "")
-						{
-							$mdNeedQuest->_insert($objneedquest);
-						}
-					}
-				}				
 				
 				Models_Log::insert($this->view->user->username, "act_update_needquest");
 				
@@ -444,21 +421,7 @@ public function importAction() {
 				$md->_insert($form->obj);
 				$this->QuestID= $form->obj->QuestID;	
 
-				//update quest need quest
-				$this->arrNeedQuest = $this->_request->getParam("need-quest");
-				$mdNeedQuest = new Models_Quest_Needquest();
-				$mdNeedQuest->_delete($this->QuestID);
-				foreach($this->arrNeedQuest as $i=>$key)
-				{
-					$objneedquest = new Obj_Quest_Needquest();
-					$objneedquest->QuestID = $this->QuestID;
-					$objneedquest->NeedQuest = $this->arrNeedQuest[$i];
-					
-					if($objneedquest->NeedQuest != "")
-					{
-						$mdNeedQuest->_insert($objneedquest);
-					}
-				}
+				
 				Models_Log::insert($this->view->user->username, "act_update_needquest");
 				
 				//update quest awarditem

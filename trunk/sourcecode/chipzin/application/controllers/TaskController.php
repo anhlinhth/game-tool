@@ -120,7 +120,10 @@ class TaskController extends BaseController
 			$obj->QuestID = $id;
 			$obj->UnlockCoin = 1;//default value
 			$obj->Quantity = 1; //default value
-			$obj->Quantity = 1;
+			$obj->DescID = 1; //default value
+			$obj->TaskString = 1;
+			$obj->QTC_ID = 1;
+			$obj->ActionID = 1;
 			$md->_insert($obj);				
 			echo "success";
 		}
@@ -161,8 +164,9 @@ class TaskController extends BaseController
 			    $obj->UnlockCoin = $_POST[UnlockCoin];
 			    $obj->QTC_ID = $_POST[QuestTC];
 			    $obj->QuestID = $_POST[QuestID];
+			    $obj->DescID = $_POST[DescID];
+			    $obj->DescString = $_POST[DescString];
 			    
-				
 			    $form = new Forms_Task();
 			    $form->obj = $obj;
 			    $form->validate(INSERT);
@@ -209,6 +213,7 @@ class TaskController extends BaseController
 	{
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNorender();
+		
 		try
 		{
 			if($this->_request->isPost()){// da post du lieu len
@@ -226,9 +231,18 @@ class TaskController extends BaseController
 				    
 				    $obj->Quantity = $_POST[Quantity];
 				    $obj->UnlockCoin = $_POST[UnlockCoin];
-				    $obj->TargetType = $_POST[TargetType];
-				    $obj->QTC_ID = $_POST[QTC_ID];
+				    if ($_POST[TargetType] == "")
+				    {
+				    	$obj->TargetType = "NULL";
+				    }
+				    else 
+				    {
+				    	$obj->TargetType = $_POST[TargetType];
+				    }
+				    $obj->QTC_ID = $_POST[QuestTC];
 				    $obj->QuestID = $_POST[QuestID];
+				    $obj->DescID = $_POST[DescID];
+				    $obj->DescString = $_POST[DescString];
 				    $form = new Forms_Task();
 				    $form->obj = $obj;
 				    $form->validate(UPDATE);
@@ -248,8 +262,10 @@ class TaskController extends BaseController
 				    $obj->ActionID = $_POST[Action];
 				    $obj->Quantity = $_POST[Quantity];
 				    $obj->UnlockCoin = $_POST[UnlockCoin];
-				    $obj->QTC_ID = $_POST[QTC_ID];
+				    $obj->QTC_ID = $_POST[QuestTC];
 				    $obj->QuestID = $_POST[QuestID];
+				    $obj->DescID = $_POST[DescID];
+				    $obj->DescString = $_POST[DescString];
 				    $form = new Forms_Task();
 				    $form->obj = $obj;
 				    $form->validate(UPDATE);

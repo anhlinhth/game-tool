@@ -5,6 +5,7 @@ class Obj_Task
 	public $TaskName;
 	public $TaskString;	
 	public $DescID;
+	public $DescString;
 	public $QTC_ID;
 	public $UnlockCoin;
 	public $IconClassName;
