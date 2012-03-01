@@ -22,17 +22,5 @@ class Models_Task extends Models_Base
 		
 		return $data;
 	}
-	
-	public function findidTask()
-	{
-		$sql = "SELECT
-					(max(TaskID) + 1) as ID
-				FROM
-					q_task";
-		
-		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
-		
-		return $data;
-	}
 }
 ?>

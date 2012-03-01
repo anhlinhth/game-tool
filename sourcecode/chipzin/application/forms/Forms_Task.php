@@ -57,12 +57,7 @@ class Forms_Task extends Forms_Base
 			array_push($arrNote, "Quantity phải là số<br>");
 		}
 		
-		if(!ctype_digit($this->obj->TargetType))
-		{
-	
-			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_INVALID);
-			array_push($arrNote, "TargetType phải là số<br>");
-		}
+
 		
 		if(!empty ($arrCode))
 		throw new Invalid_Argument_Exception($arrCode, $arrNote);

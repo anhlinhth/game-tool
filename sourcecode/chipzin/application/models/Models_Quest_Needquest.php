@@ -7,7 +7,7 @@ class Models_Quest_Needquest extends Models_Base
 	public function __construct()
 	{
 		parent::__construct();		
-		$this->_key = "ID";
+		$this->_key = "QuestID";
 		$this->_table = "q_quest_needquest";		
 	}
 	/*
