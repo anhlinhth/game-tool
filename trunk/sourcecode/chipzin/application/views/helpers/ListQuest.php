@@ -47,15 +47,8 @@ class Zend_View_Helper_ListQuest
 						{
 							$str="selected";
 						}
-						if(empty($row2->NeedQuest))
-						{
-							$str="selected";
-							$strList .= "<option $str  value=''>NULL</option>";
-						}
-						else 
-						{	
 							$strList .= "<option $str  value='$row2->QuestID'>$row2->QuestName</option>";
-						}
+						
 				}
 				$strList.="</select>
 							</td>
