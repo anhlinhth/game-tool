@@ -46,5 +46,6 @@ class Zend_View_Helper_ListQuest
 		
 		echo $strList;
 	}
+
 }
 ?>
