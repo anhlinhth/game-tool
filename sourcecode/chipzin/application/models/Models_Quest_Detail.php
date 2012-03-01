@@ -21,6 +21,7 @@ class Models_Quest_Detail extends Models_Base
 		parent::_update($obj);
 	}
 	
+	
 	private function isExist($alias)
 	{
 		
