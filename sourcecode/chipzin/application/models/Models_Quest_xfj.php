@@ -175,7 +175,7 @@ class Models_Quest_xfj extends Models_Base
 							$str .= "\n\t\t\t \"gameType\" : "."NULL".",";
 					}
 					$str .= "\n\t\t\t \"txtContent\" : \"".trim($gifts->TaskString)."\",";
-					$str .= "\n\t\t\t \"txtHelp\" : \"".trim($gifts->HelpString)."\",";
+					$str .= "\n\t\t\t \"txtHelp\" : \"".trim($gifts->DescID)."\",";
 					$str .= "\n\t\t\t \"iconClassName\" : \"".trim($gifts->IconClassName)."\",";
 					$str .= "\n\t\t},\n";
 					$i++;
