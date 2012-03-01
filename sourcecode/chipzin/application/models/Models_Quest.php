@@ -136,13 +136,11 @@ class Models_Quest extends Models_Base
 	        		SET
 	        			NeedQuest = NULL
 	        		WHERE
-	        			NextQuest = '$value';
+	        			NeedQuest = '$value';
 	        		DELETE FROM 
 	        			q_quest_awarditem
 	        		WHERE
 	        			QuestID = '$value';
-	        		WHERE
-	        			QuestID ='$value' or NeedQuest='$value';
         			DELETE FROM 
 	        			q_task
 	        		WHERE
