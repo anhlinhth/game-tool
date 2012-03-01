@@ -36,33 +36,36 @@ class Zend_View_Helper_ListQuest
 							<td>$row->QuestName</td>							
 							<td>$row->QuestLineName</td>
 							<td>
-								<select width='30' name='needquest' id='needquest-$row->QuestID' class='needquest' onChange='updateNeedquest($row->QuestID);' > 
+								<select width='30' name='needquest-$row->QuestID' id='needquest-$row->QuestID' class='needquest' onChange='updateNeedquest($row->QuestID);' > 
 							";
+			    
 				foreach ($data2 as $row2)
 				{
-					$str="";
-						if($row->QuestLineID == $row2->QuestLineID)
+						
+						$str="";
+						if($row->NeedQuest== $row2->QuestID)
 						{
 							$str="selected";
 						}
-						$strList .= "<option $str  value='$row2->NeedQuest'>$row2->QuestName</option>";
+						
+						$strList .= "<option $str  value='$row2->QuestID'>$row2->QuestName</option>";
 				}
 				$strList.="</select>
 							</td>
 							<td>
-							<select id='nextquest' name='nextquest'>";
+							<select id='nextquest-$row->QuestID' name='nextquest-$row->QuestID' onChange='updateNextquest($row->QuestID);' >";
 				foreach ($data2 as $row3)
 					{
 						$str="";
-						if($row->QuestLineID == $row3->QuestLineID){
+						if($row->NextQuest == $row3->QuestID){
 						$str="selected";
 						}
-						$strList .= "<option $str  value='$row3->NextQuest'>$row3->QuestName</option>";
+					$strList .= "<option $str  value='$row3->QuestID'>$row3->QuestName</option>";
 					}
 					
 				$strList.="</select>
 							</td>
-							<td>Trạng thái</td>
+							<td></td>
 							<td align='center'>	
 								$edit
 								&nbsp;$delete
@@ -75,7 +78,5 @@ class Zend_View_Helper_ListQuest
 		
 		echo $strList;
 	}
-<<<<<<< .mine	}
-=======
 }
->>>>>>> .theirs?>
+?>
