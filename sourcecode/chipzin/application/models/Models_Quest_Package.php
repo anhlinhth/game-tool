@@ -27,7 +27,6 @@ class Models_Quest_Package extends Models_Base
 	{
 		$str .= "<?php\nreturn array\n(";
 		$mdGiftPackageDetail = new Models_Quest_Package_Detail();
-		$mdQneedPackageDetail = new Models_Qneeds_Package_Detail();
 		if($data)
 		{
 			$i = 1;
@@ -38,12 +37,15 @@ class Models_Quest_Package extends Models_Base
 				$str .= " => array(";				
 				$str .= "\n\t'group'=> ";
 				$str .= (int)$row['QuestID'].",";
-				$str .= "\n\t'needQuest' =>";
+				if($row['NeedQuest']!=NULL)
+					$str .= "\n\t'needQuest' =>".$row['NeedQuest'].",";
+				else 
+					$str .= "\n\t'needQuest' => NULL,";
 				$temp= (int)$row['QuestID'];
 				$objSearch->quest_package_id = $row->id;
 		
-				$qneeds=$mdQneedPackageDetail->_filter($objSearch);
-				
+		
+				/*
 				if($qneeds)
 				{
 					foreach($qneeds as $qneeds)
@@ -58,7 +60,7 @@ class Models_Quest_Package extends Models_Base
 				}
 				else 
 					$str .= " NULL,";
-				
+				*/
 				$str .= "\n\t'tasks' => ";
 				
 				$objSearch->quest_package_id = $row->id;
@@ -67,16 +69,24 @@ class Models_Quest_Package extends Models_Base
 				if($gifts)
 				{
 					$j=0;
+					$true1=0;
 					$str .= "\n\tarray(";
 					foreach($gifts as $gift)
 					{
 							if($temp==$gift->QuestID)
 							{
+								$true1=1;
 								$str .= "\n\t $j => ".$gift->TaskID." ,";
 								$j++;
 							}
 					}
-					$str .= "\n\t),";
+					if($true1==1)
+						$str .= "\n\t),";
+					else 
+					{
+						echo("<SCRIPT LANGUAGE='JavaScript'>window.alert('Quest Id = $temp chưa có task')</SCRIPT>");
+						return ;
+					}
 				}
 				$str .= "\n\t'award' => ";
 				$str .= "\n  array(";	
