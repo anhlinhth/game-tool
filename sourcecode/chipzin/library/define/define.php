@@ -74,8 +74,8 @@ define('TYPE_GOLD', 1);
 define('TYPE_EXP', 2);
 
 //Name of config files
-define('QUEST_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'Quest.conf.php');
-define('TASK_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'Task.conf.php');
+define('QUEST_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'Quest.conf.php.txt');
+define('TASK_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'Task.conf.php.txt');
 define('QUEST_PACKAGE_XFJ_FILE',ROOT_EXPORT_FILE.DS.'quest.xfj');
 define('EVENT_GOLD_EXP_PHP_FILE',ROOT_FILE.DS.'ExpEvent.php');
 define('EVENT_NAMTHIEN_PHP_FILE',ROOT_FILE.DS.'EventKimInLenh.php');
