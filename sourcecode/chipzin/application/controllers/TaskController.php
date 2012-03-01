@@ -37,9 +37,11 @@ class TaskController extends BaseController
 			$this->_helper->viewRenderer->setNorender();
 			$id = $this->_request->getParam("id"); //luu y cho nay nen dat id trung csd			
 			$md = new Models_Task();
-			$md->_delete($id);	
-			echo "da xoa TaskID " .$id;
+			$md_target = new Models_Task_Target();
+			$md_target->_delete($id);
+			$md->_delete($id);				
 			Models_Log::insert($this->view->user->username, "act_delete_task");
+			echo "1";
 			
 		}
 		catch(Exception $ex)
