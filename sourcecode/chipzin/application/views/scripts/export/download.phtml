@@ -1,0 +1,22 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<?php
+
+$linkdown1=$_SERVER['HTTP_HOST'].substr(ROOT_EXPORT_FILE . "/Quest.conf.php.txt", 15,strlen(ROOT_EXPORT_FILE . "/Quest.conf.php.txt"));
+$linkdown1="http://".str_replace("\\","/",$linkdown1);
+$linkdown2=$_SERVER['HTTP_HOST'].substr(ROOT_EXPORT_FILE . "/quest.xfj.txt", 15,strlen(ROOT_EXPORT_FILE . "/quest.xfj.txt"));
+$linkdown2="http://".str_replace("\\","/",$linkdown2);
+$linkdown3=$_SERVER['HTTP_HOST'].substr(ROOT_EXPORT_FILE . "/Task.conf.php.txt", 15,strlen(ROOT_EXPORT_FILE . "/Task.conf.php.txt"));
+$linkdown3="http://".str_replace("\\","/",$linkdown3);
+?>
+ <FORM>
+<INPUT TYPE="BUTTON" VALUE="Download Quest.conf.php.txt" ONCLICK="window.location.href='<?php echo $linkdown1;?>'"></br>
+</br>
+<INPUT TYPE="BUTTON" VALUE="Download quest.xfj.txt" ONCLICK="window.location.href='<?php echo $linkdown2;?>'"></br>
+</br>
+<INPUT TYPE="BUTTON" VALUE="Download Task.conf.php.txt" ONCLICK="window.location.href='<?php echo $linkdown3;?>'"> 
+</FORM>
