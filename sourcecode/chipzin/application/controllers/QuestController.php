@@ -100,20 +100,24 @@ public function importAction() {
 			if($items == 0)
 				$items = DEFAULT_ITEM_PER_PAGE;
 			$form = new Forms_Quest();
-			$form->_requestToForm($this);
-			
-			
+			$form->_requestToForm($this);						
 
 			$md= new Models_Quest();
 			$md_questLine = new Models_Quest_Line();
+			
 			$this->view->item = $form->obj;
 			$this->view->filterQuestLine = $md_questLine->_getByKey($form->obj->QuestLineID);			
 			$data = $md->filter($form->obj, "QuestID ASC", ($pageNo - 1)*$items, $items);
 			$dataquestlineID = $md->getQuestlineID();
+			$dataquestneed=$md->getNeedQuest();
+			//print_r($dataquestneed);
 			$count = $md->count($form->obj);
 			
 			$this->view->data = $data;
+			$this->view->data2=$data;
 			$this->view->dataquestlineid = $dataquestlineID;
+			
+			
 			$this->view->items = $items;
 			$this->view->page = $pageNo;
 			$this->view->totalRecord = $count;
@@ -524,6 +528,42 @@ public function importAction() {
         }
 	}
 	
+	public function updateneedquestAction()
+	{
+		require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
+		require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender();
+		if($this->_request->isPost())
+		{
+			$this->QuestID=$this->_request->getParam('questid');
+			$this->NeedQuest=$this->_request->getParam('needquest');
+			$form=new Models_Quest();
+			$form->updateNeedquest($this->QuestID,$this->NeedQuest);
+			
+			
+		}
+		echo "Cập nhật thành công";
+		
+	}
+	public function updatenextquestAction()
+	{
+		require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
+		require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNoRender();
+		if($this->_request->isPost())
+		{
+			$this->QuestID=$this->_request->getParam('questid');
+			$this->NextQuest=$this->_request->getParam('nextquest');
+			$form=new Models_Quest();
+			$form->updateNextquest($this->QuestID,$this->NextQuest);
+			
+			
+		}
+		echo "Cập nhật thành công";
+		
+	}
 	public function updateAction()
 	{
 		try
@@ -661,35 +701,8 @@ public function importAction() {
 			}	
 	}
 	
-	function updateNeedQuest($arrNeedQuest,$arrAddNeedQuest, $questID){
-		$nq_md = new Models_Quest_Needquest();
-			///Update
-			if(!empty($arrNeedQuest)){
-				foreach ($arrNeedQuest as $key => $value) {/// $key la ID cua Bang q_quest_awarditem					
-					if($value == ""){              /// $value la gia tri awarditem								
-						$nq_md->_delete($key);
-					}else{
-						$nq_obj = new Obj_Quest_Needquest();
-						$nq_obj->ID = $key;
-						$nq_obj->QuestID = $questID;
-						$nq_obj->NeedQuest = $value;
-						
-						$nq_md->_update($nq_obj);
-					}
-				}	
-			}
-			//Add
-			if(!empty($arrAddNeedQuest)){
-				foreach ($arrAddNeedQuest as $value) {/// $key la ID cua Bang q_quest_awarditem
-					if($value != ""){                    /// $value la gia tri awarditem				
-						$nq_obj = new Obj_Quest_Needquest();
-						$nq_obj->QuestID = $questID;
-						$nq_obj->NeedQuest = $value;								
-						$nq_md->_insert($nq_obj);
-					}
-				}	
-			}	
-	}
+	
+	
 
 ?>
 
