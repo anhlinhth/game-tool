@@ -75,9 +75,23 @@
 					</td>
 				
 					<td id="list-need-quest">
-					<label>Need Quest : </label><a class='ico-16 add' title="Thêm Need Quest" href="javascript:addNeedQuest(0)"></a><br/>					
-					<?php $this->listNeedQuest($this->arrNeedQuest,$this->arrQuest)?>
-					<div id="add-need-quest"></div>
+					<label>Need Quest : </label>				
+					<select name='NeedQuest' style='margin-bottom:5px;margin-top:5px;min-width:50px'>
+						<option value=''></option>
+						<?php 
+						$strSelectQuest = "";
+						foreach ($this->arrNeedQuest as $row)
+						{
+							$select = "";
+							if($row->QuestID == $this->obj->NeedQuest)
+							{
+								$select = "selected";
+							}
+							$strSelectQuest .= "<option $select value='". $row->QuestID ."'>(ID:$row->QuestID) $row->QuestName</option>";
+						}
+						echo $strSelectQuest;
+						?>
+					</select>
 				</td>
 			</tr>
 			
@@ -131,31 +145,7 @@ function  deleteAwardItem(key){
 }
 
 ////////////////////////////////
-function  addNeedQuest(key){	
-	var id = $("#QuestID").serialize();
-	var count = $(".need_quest").size() + 1;
-	var btnDelete = "<a class='tool-16 delete' title='Delete Item' href='javascript:deleteNeedQuest("+count+")'></a>";
-	var select = "<select id='type' name='need-quest-add[]' style='margin-bottom:5px;margin-top:5px;min-width:50px'>";
-	$.ajax({
-		type: "POST",
-		url:"<?php echo $this->baseUrl.'/quest/listquest/'?> ",	
-		data:id,		
-		success: function(data){
-			if(data != ""){
-			
-				var div = "<div class='need_quest new' id='need_quest_"+count+"'><label></label>"+ select+data+"</select>"+btnDelete+"</div>";
-				$("#add-need-quest").before(div);
-			}
-			else
-			{
-				alert("Thêm  không thành công");
-				
-			}
-			
-		}
-	});
-	
-}
+
 function  deleteNeedQuest(key){
 	//alert("asd");
 	var div =  $("div#need_quest_" + key);

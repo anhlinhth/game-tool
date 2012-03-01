@@ -7,7 +7,7 @@
 
 <?php //print_r($this->arrAwardItems)?>
 <div  class="mybox" id="quest">
-	<h3>Chỉnh sửa Quest</h3>
+	<h3>Ch?nh s?a Quest</h3>
 	<form class="quest-info" id="form" action="" method="post" enctype="multipart/form-data">
 	  <fieldset id="info">
 		<legend>Thông tin Quest </legend>
@@ -75,9 +75,23 @@
 					</td>
 				
 					<td id="list-need-quest">
-					<label>Need Quest : </label><a class='ico-16 add' title="Thêm Need Quest" href="javascript:addNeedQuest(0)"></a><br/>					
-					<?php $this->listNeedQuest($this->arrNeedQuest,$this->arrQuest)?>
-					<div id="add-need-quest"></div>
+					<label>Need Quest : </label>				
+					<select name='NeedQuest' style='margin-bottom:5px;margin-top:5px;min-width:50px'>
+						<option value=''></option>
+						<?php 
+						$strSelectQuest = "";
+						foreach ($this->arrNeedQuest as $row)
+						{
+							$select = "";
+							if($row->QuestID == $this->obj->NeedQuest)
+							{
+								$select = "selected";
+							}
+							$strSelectQuest .= "<option $select value='". $row->QuestID ."'>(ID:$row->QuestID) $row->QuestName</option>";
+						}
+						echo $strSelectQuest;
+						?>
+					</select>
 				</td>
 			</tr>
 		</table>				

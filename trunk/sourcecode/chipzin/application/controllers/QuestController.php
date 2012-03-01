@@ -375,7 +375,7 @@ public function importAction() {
 				$form = new Forms_Quest_Detail();
 				$form->_requestToForm($this);					
 				$form->validate(UPDATE);			
-				$md = new Models_Quest_Detail();		
+				$md = new Models_Quest_Detail();	
 				$md->update($form->obj);							
 				
 				
@@ -390,9 +390,9 @@ public function importAction() {
 				//////////////////////////////////////////
 				///////////////////Update need quest////////////////////////
 				
-				$arrNeedQuest = $_POST['need-quest'];
-				$arrAddNeedQuest = $_POST['need-quest-add'];			
-				updateNeedQuest($arrNeedQuest, $arrAddNeedQuest,$form->obj->QuestID);
+			//	$arrNeedQuest = $_POST['need-quest'];
+			//	$arrAddNeedQuest = $_POST['need-quest-add'];			
+			//	updateNeedQuest($arrNeedQuest, $arrAddNeedQuest,$form->obj->QuestID);
 				 
 				echo "1";
 			}
