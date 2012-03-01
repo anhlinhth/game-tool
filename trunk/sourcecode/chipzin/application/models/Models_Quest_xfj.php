@@ -79,8 +79,8 @@ class Models_Quest_xfj extends Models_Base
 					}
 				}
 				$str .= "]";
-				$str .= ",\n\t\t\t \"txtName\" : \"".trim($row['QuestGroupString'])."\",";
-				$str .= "\n\t\t\t \"txtAlias\" : \"".trim($row['QuestString'])."\",";
+				$str .= ",\n\t\t\t \"txtName\" : \"".trim($row['QuestString'])."\",";
+				$str .= "\n\t\t\t \"txtAlias\" : \"".trim($row['QuestGroupString'])."\",";
 				$str .= "\n\t\t\t \"txtDesc\" : \"".trim($row['QuestDescString'])."\",";
 				$str .= "\n\t\t\t \"award\" :";
 				$str .= "\n\t\t\t { ";
