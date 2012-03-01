@@ -205,9 +205,9 @@ function deleteTask(key){
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/task/delete/'?> ",
 		data: "id=" + task_id,	
-		success: function(data){			
-			if(data != ""){					
-				loadTask(quest_id);
+		success: function(msg){				
+			if(parseInt(msg)==1){					
+				loadTask(quest_id);				
 			}else{
 				alert("Error");				
 			}
