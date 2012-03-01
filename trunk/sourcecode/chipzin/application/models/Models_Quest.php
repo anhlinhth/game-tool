@@ -34,7 +34,19 @@ class Models_Quest extends Models_Base
 		
 		return $data;
 	}
-	
+	public function getNeedQuest()
+	{
+		$sql="
+			SELECT DISTINCT
+				NextQuest,NeedQuest,QuestLineID,QuestName
+			FROM
+				q_quest
+			
+				
+			 ";
+		$data=$this->_db->fetchAll($sql,null,Zend_Db::FETCH_OBJ);
+		return $data;
+	}
 	public function filter($objSearch,$order,$offset,$count)
 	{
 		$sql = "SELECT
