@@ -108,6 +108,7 @@ class TaskController extends BaseController
 	{		
 		$this->_helper->layout()->disableLayout();
 		$this->_helper->viewRenderer->setNoRender();
+		print_r($_POST);
 		try
 		{
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Task.php';			
@@ -125,12 +126,13 @@ class TaskController extends BaseController
 			$obj->QTC_ID = 1;
 			$obj->ActionID = 1;
 			$md->_insert($obj);				
-			echo "success";
+			echo "1";
 		}
 		catch(Exception $ex)
         {
-            $this->view->ojb = $form->obj;
+            //$this->view->ojb = $form->obj;
 			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 		

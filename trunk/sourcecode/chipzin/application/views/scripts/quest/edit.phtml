@@ -173,7 +173,8 @@ function addTask(key){
 		url:"<?php echo $this->baseUrl.'/task/new/'?> ",
 		data: "id=" + quest_id,	
 		success: function(data){			
-			if(data != ""){					
+			if(data != ""){	
+				alert(data);
 				loadTask(quest_id);
 			}else{
 				alert("Error");				
