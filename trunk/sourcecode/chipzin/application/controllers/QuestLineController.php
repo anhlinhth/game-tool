@@ -10,7 +10,7 @@ class QuestLineController extends BaseController
 {
 	public function _setUserPrivileges()
 	{
-		return array('index','add','edit','delete');
+		return array('index','add','edit','update','delete');
 	}
 	
 	public function preDispatch()
