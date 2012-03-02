@@ -28,11 +28,13 @@ function deleteItem(link, id)
 				if(msg != "")
 				{					
 					alert(msg);
+					window.location.reload();
 				}
 				else
 				{
-					alert("Xóa thành công");
-					window.location = location.href;
+					//alert("Xóa thành công");
+				//	window.location.reload();
+					
 				}
 			}
 		});
