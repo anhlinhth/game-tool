@@ -1,7 +1,7 @@
 <?php
 class Zend_View_Helper_ListQuest
 {
-	public function listQuest($data,$data2, $curPage, $itemPerPage ,$view)
+	public function listQuest($data,$data2,$Task, $curPage, $itemPerPage ,$view)
 	{
 		if(!$data)
 			return;
@@ -72,13 +72,29 @@ class Zend_View_Helper_ListQuest
 					
 				$strList.="</select>
 							</td>";
-				if($flag1 == 0 || $flag2 == 0)
-				{	
-					$strList.="<td align='center'><a title='Warning' class='ico-16 warning' id='warning'></a></td>";
-				}
-				else
+				$flagtask = 0;
+				foreach ($Task as $taskrow)
 				{
-					$strList.="<td align='center'><a title='Ok' class='ico-16 ok' id='warning'></a></td>";
+					if($row->QuestID == $taskrow->QuestID)
+					{
+						$flagtask = 1;
+						break;
+					}
+				}
+				if($flagtask == 0)
+				{
+					$strList.="<td align='center'><a title='error' class='ico-16 errors' id='error'></a></td>";
+				}
+				else 
+				{
+					if($flag1 == 0 || $flag2 == 0)
+					{	
+						$strList.="<td align='center'><a title='Warning' class='ico-16 warning' id='warning'></a></td>";
+					}
+					else
+					{
+						$strList.="<td align='center'><a title='Ok' class='ico-16 ok' id='warning'></a></td>";
+					}
 				}
 				$strList.="<td align='center'>	
 								$edit

@@ -34,5 +34,17 @@ class Models_Task extends Models_Base
 		
 		return $data;
 	}
+	
+	public  function listQuestInTask()
+	{
+		$sql = "SELECT DISTINCT
+					QuestID
+				FROM
+					q_task";
+				
+		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}
 }
 ?>
