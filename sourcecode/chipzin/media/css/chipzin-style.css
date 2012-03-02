@@ -167,6 +167,21 @@ button.btn:hover {
 	background-image:url("../images/p2/icons/16/save.png"); 
 }
 
+.ico-16.warning{
+	background-image:url("../images/p2/icons/16/warning.png"); 
+}
+.ico-16.warning:hover{
+		
+		border:none;
+}
+.ico-16.ok{
+	background-image:url("../images/p2/icons/16/ok.png"); 
+}
+.ico-16.ok:hover{
+		
+		border:none;
+}
+
 .ico-24{
 	padding: 5px 17px 5px 11px !important;
 	cursor: pointer !important;
