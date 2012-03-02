@@ -32,22 +32,11 @@ class ExportController extends BaseController
 	public function preDispatch()
 	{
 		parent::preDispatch();
-		$this->checkNullAction();
+		
 		if(!$this->hasPrivilege())
 			$this->_redirect ("/error/permission");
 	}
 	
-	public function checkNullAction(){
-		  $check=new Models_Quest();
-		  $flag=$check->checkIsNull();
-		  if($flag!=0)
-		  {
-		  	  
-			//exit();
-			
-		  }
-		  
-	}
 	
 	public function exportAction()
 	{
