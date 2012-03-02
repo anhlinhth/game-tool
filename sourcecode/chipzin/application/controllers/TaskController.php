@@ -41,8 +41,7 @@ class TaskController extends BaseController
 			$md_target->delete($id);
 			$md->_delete($id);				
 			Models_Log::insert($this->view->user->username, "act_delete_task");
-			echo "1";
-			
+			echo "1";			
 		}
 		catch(Exception $ex)
         {            
