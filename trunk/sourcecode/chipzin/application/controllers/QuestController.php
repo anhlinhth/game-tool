@@ -523,7 +523,6 @@ public function importAction() {
 				$form=new Models_Quest();
 				$form->updateNextquest($this->QuestID,$this->NextQuest);
 				Models_Log::insert($this->view->user->username, "act_update_next_quest");
-				
 			}
 			echo "Cập nhật thành công";
 		}
