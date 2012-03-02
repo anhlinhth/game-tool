@@ -18,7 +18,7 @@ class TaskController extends BaseController
 {
 	public function _setUserPrivileges()
 	{
-		return array('index','add','edit','delete','active','item','additem','pigshop','itemshop');
+		return array('index','add','edit','new','save','delete','active','item','additem','pigshop','itemshop');
 	}
 	
 	public function preDispatch()
