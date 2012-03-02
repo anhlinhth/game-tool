@@ -125,7 +125,8 @@ class TaskController extends BaseController
 			$obj->TaskString = 1;
 			$obj->QTC_ID = 1;
 			$obj->ActionID = 1;
-			$md->_insert($obj);				
+			$md->_insert($obj);
+			 Models_Log::insert($this->view->user->username, "act_add_new_task", $obj->name);				
 			echo "1";
 		}
 		catch(Exception $ex)
@@ -197,6 +198,7 @@ class TaskController extends BaseController
 			    		}
 			    	}
 			    }
+			    Models_Log::insert($this->view->user->username, "act_add_task", $obj->name);
 				echo "1";				
 			}
 			
@@ -293,6 +295,7 @@ class TaskController extends BaseController
 					}
 					
 				}
+				 Models_Log::insert($this->view->user->username, "act_save_task", $obj->name);
 				echo "1";
 			}
 			
