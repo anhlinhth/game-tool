@@ -7,13 +7,11 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Needquest.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
-require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Q_Action.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Action.php';
-
-
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Detail.php';
+require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Q_Action.php';
 
 require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';	
 
@@ -21,7 +19,7 @@ class QuestController extends BaseController
 {
 	public function _setUserPrivileges()
 	{
-		return array('index','add','edit','delete','active','item','additem','pigshop','itemshop','update');
+		return array('index','add','edit','delete','active','updatenextquest','updateneedquest','new','update','import','item','additem','pigshop','itemshop');
 	}
 	
 	public function preDispatch()
