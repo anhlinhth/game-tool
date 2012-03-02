@@ -11,7 +11,7 @@ class QTCController extends BaseController
 {
 	public function _setUserPrivileges()
 	{
-		return array('index','add','edit','delete');
+		return array('index','add','edit','delete','update');
 	}
 	
 	public function preDispatch()
