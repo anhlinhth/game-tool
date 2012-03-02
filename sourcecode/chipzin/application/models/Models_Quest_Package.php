@@ -25,6 +25,7 @@ class Models_Quest_Package extends Models_Base
 	
 	public function generate($data)
 	{
+		$error = array();
 		$str .= "<?php\nreturn array\n(";
 		$mdGiftPackageDetail = new Models_Quest_Package_Detail();
 		if($data)
@@ -42,8 +43,7 @@ class Models_Quest_Package extends Models_Base
 				else 
 					$str .= "\n\t'needQuest' => NULL,";
 				$temp= (int)$row['QuestID'];
-				$objSearch->quest_package_id = $row->id;
-		
+				$objSearch->quest_package_id = $row->id;		
 		
 				/*
 				if($qneeds)
@@ -64,8 +64,7 @@ class Models_Quest_Package extends Models_Base
 				$str .= "\n\t'tasks' => ";
 				
 				$objSearch->quest_package_id = $row->id;
-				$gifts = $mdGiftPackageDetail->_filter($objSearch);
-				
+				$gifts = $mdGiftPackageDetail->_filter($objSearch);				
 				if($gifts)
 				{
 					$j=0;
@@ -83,9 +82,8 @@ class Models_Quest_Package extends Models_Base
 					if($true1==1)
 						$str .= "\n\t),";
 					else 
-					{
-						echo("<SCRIPT LANGUAGE='JavaScript'>window.alert('Quest Id = $temp chưa có task')</SCRIPT>");
-						return ;
+					{				
+						$error[] = $temp ;						
 					}
 				}
 				$str .= "\n\t'award' => ";
@@ -94,22 +92,24 @@ class Models_Quest_Package extends Models_Base
 				$str .= (int)$row['AwardExp'];
 				$str .= "\n\t'Gold'=> ";
 				$str .= (int)$row['AwardGold'];
-				$str .= "\n\t\t\t),";
-				
+				$str .= "\n\t\t\t),";				
 				$str .= "\n),";
 				$i++;
 			}
 		}
 		
-		$str .= "\n\n);\n?>";		
+		$str .= "\n\n);\n?>";
+		if(empty($error)){
+			$fp = fopen(QUEST_PACKAGE_PHP_FILE, 'w');
+			if(fwrite($fp, $str) === false)
+			{
+				fclose($fp);				
+			}
+		}else{
+			return $error;
+		}		
 		
-		$fp = fopen(QUEST_PACKAGE_PHP_FILE, 'w');
-		if(fwrite($fp, $str) === false)
-		{
-			return false;
-		}
-		fclose($fp);
-		return true;
+		
 	}
 }
 ?>
