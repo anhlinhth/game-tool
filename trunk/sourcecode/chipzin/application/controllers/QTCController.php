@@ -26,6 +26,7 @@ class QTCController extends BaseController
 	{
 	try
 		{
+			
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Q_QTC.php';
 			$pageNo = $this->_request->getParam("page");
 			$items = $this->_request->getParam("items");
