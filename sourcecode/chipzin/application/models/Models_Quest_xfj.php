@@ -127,12 +127,13 @@ class Models_Quest_xfj extends Models_Base
 					$objSearch->task_package_id = $gifts->id;
 					$sf=$md->_filter($objSearch);
 					
-					//if(file_exists (ROOT_IMPORT_FILE.'/system.xfj)==false)
+					if(file_exists (ROOT_IMPORT_FILE.'/system.xfj')==false)
+						echo("<SCRIPT LANGUAGE='JavaScript'>window.alert('check file exits')</SCRIPT>");
 						
 					
 					$file2= ROOT_IMPORT_FILE.'/system.xfj';
 					//if(file2==NULL)
-				//	echo("<SCRIPT LANGUAGE='JavaScript'>window.alert('check file exits')</SCRIPT>");
+			
 				//	else echo("<SCRIPT LANGUAGE='JavaScript'>window.alert('Ok')</SCRIPT>");
 					$fileContent = file_get_contents ($file2);
 					$arr=json_decode($fileContent);

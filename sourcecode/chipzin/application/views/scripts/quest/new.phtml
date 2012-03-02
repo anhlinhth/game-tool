@@ -267,7 +267,7 @@ function saveAll(){
 	$("#dialog #ct").html("");	
 	$.ajax({
 		type: "POST",
-		url:"<?php echo $this->baseUrl.'/quest/new/'?>",
+		url:"<?php echo $this->baseUrl.'/quest/new'?>",
 		data: data,		
 		success: function(msg){				
 			if(parseInt(msg)==1){	

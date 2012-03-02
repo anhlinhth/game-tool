@@ -27,13 +27,20 @@ class QuestLineController extends BaseController
 		{
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Line.php';
 			$pageNo = $this->_request->getParam("page");
-						
+			$pageNo = $this->_request->getParam("page");
+			$items = $this->_request->getParam("items");			
 			$md = new Models_Quest_Line();
-			
+			if($pageNo == 0)
+				$pageNo = 1;
+			if($items == 0)
+				$items = DEFAULT_ITEM_PER_PAGE;
+				
 			$data = $md->_filter(NULL, "QuestLineID ASC");
 			$count = $md->_count(null);			
 			$this->view->data = $data;
-			
+			$this->view->items = $items;
+			$this->view->page = $pageNo;
+			$this->view->totalRecord = $count;
 		}
 		catch(Exception $ex)
 		{
