@@ -1,1 +1,20 @@
-﻿<a href="#">export</a>
+﻿<h2 align="center"">
+
+ Export thất bại do trong Quest không có Task.
+ </h2>
+<?php
+
+	foreach ($this->questIdError as $questid) 
+	{
+		echo "<a style='text-decoration:underline;color=#CCC;font-size:17px;' href='$this->baseUrl/quest/edit/id/$questid'/>Edit Quest $questid</a><br>";
+		
+	}
+?>
+
+<form action="" name="formPaging" name="formPaging" method="post">
+	<table>
+		<thead>
+			
+		</thead>
+	</table>
+</form> 
