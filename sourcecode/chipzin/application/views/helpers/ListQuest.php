@@ -39,12 +39,15 @@ class Zend_View_Helper_ListQuest
 								<select width='30' name='needquest-$row->QuestID' id='needquest-$row->QuestID' class='needquest' onChange='updateNeedquest($row->QuestID);' > 
 							";
 			    $strList .= "<option selected  value=''>NULL</option>";
+			    $flag1 = 0;
+			    $flag2 = 0;
 				foreach ($data2 as $row2)
 				{
 						
 						$str="";
 						if($row->NeedQuest== $row2->QuestID)
 						{
+							$flag1 = 1;
 							$str="selected";
 						}
 							$strList .= "<option $str  value='$row2->QuestID'>$row2->QuestName</option>";
@@ -59,22 +62,29 @@ class Zend_View_Helper_ListQuest
 					{
 						 $str="";
 						if($row->NextQuest == $row3->QuestID){
+							$flag2 = 1;
 							$str="selected";
 						}
 					$strList .= "<option $str  value='$row3->QuestID'>$row3->QuestName</option>";
 					}
 					
 				$strList.="</select>
-							</td>
-							<td></td>
-							<td align='center'>	
+							</td>";
+				if($flag1 == 0 || $flag2 == 0)
+				{	
+					$strList.="<td align='center'><a title='Warning' class='ico-16 warning' id='warning'></a></td>";
+				}
+				else
+				{
+					$strList.="<td align='center'><a title='Ok' class='ico-16 ok' id='warning'></a></td>";
+				}
+				$strList.="<td align='center'>	
 								$edit
 								&nbsp;$delete
 							</td>
 						</tr>";
 			$items++;
 		}
-		
 		$strList .= "</tbody>";		
 		
 		echo $strList;
