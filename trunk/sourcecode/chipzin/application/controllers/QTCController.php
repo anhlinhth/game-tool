@@ -73,12 +73,10 @@ class QTCController extends BaseController
 					echo "Bạn không thể xóa Quest Task Client này vì trong Task có  Quest Task Client";
 				}
 				else
-				{
-					
+				{					
 					$mdQTC->delete((int)$id);
 					Models_Log::insert($this->view->user->username, "act_delete_QTC", $obj->name);
-				}									
-				
+				}													
 			}
 		}
 		catch(Exception $ex)
@@ -101,6 +99,7 @@ class QTCController extends BaseController
 		$md = new Models_Q_QTC();
 		$md->update($obj);
 		Models_Log::insert($this->view->user->username, "act_update_QTC", $obj->name);
+>>>>>>> .r159
 		echo "Update thanh cong";	
 		}
 		catch(Exception $ex)
@@ -122,6 +121,7 @@ class QTCController extends BaseController
 		$md = new Models_Q_QTC();
 		$md->insert($obj);
 		Models_Log::insert($this->view->user->username, "act_insert_QTC", $obj->name);
+>>>>>>> .r159
 		echo " Thêm thành công";
 	}
 	catch(Exception $ex)
