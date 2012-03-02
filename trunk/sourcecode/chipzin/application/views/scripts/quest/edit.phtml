@@ -164,7 +164,7 @@ function addTask(key){
 	count = $(".task").size();
 	if(count >= 3){
 		alert("Fail!!!! Limited 3 Task in a Quest");
-		return false;
+		
 	}
 	
 	quest_id = $("#QuestID").val();
@@ -174,7 +174,7 @@ function addTask(key){
 		data: "id=" + quest_id,	
 		success: function(data){			
 			if(data != ""){	
-				alert(data);
+				//alert(data);
 				loadTask(quest_id);
 			}else{
 				alert("Error");				
