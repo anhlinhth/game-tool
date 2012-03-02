@@ -33,8 +33,7 @@ class QuestController extends BaseController
 	
 public function importAction() {
 		if ($this->_request->isPost ()) 
-		{
-			
+		{			
 			/*
 			//import file json to object
 			$file2= ROOT_IMPORT_FILE.'/system.xfj';
