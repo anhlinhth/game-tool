@@ -32,7 +32,7 @@ function deleteItem(link, id)
 				}
 				else
 				{
-					//alert("Xóa thành công");
+					alert("Xóa không thành công");
 				//	window.location.reload();
 					
 				}
