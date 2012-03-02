@@ -34,8 +34,7 @@ class QuestLineController extends BaseController
 				$pageNo = 1;
 			if($items == 0)
 				$items = DEFAULT_ITEM_PER_PAGE;						
-			$md = new Models_Quest_Line();			
-				
+			$md = new Models_Quest_Line();							
 			$data = $md->_filter($form->obj, "QuestLineID ASC",($pageNo - 1)*$items, $items);
 			$count = $md->_count($form->obj);						
 			$this->view->data = $data;
@@ -95,6 +94,7 @@ class QuestLineController extends BaseController
 						$md->_insert($form->obj);
 						echo "them thanh cong";
 					}
+					Models_Log::insert($this->view->user->username, "act_update_questline", $obj->name);
 				}
 		}
 		catch(Exception $ex)
