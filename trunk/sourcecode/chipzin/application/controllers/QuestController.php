@@ -101,18 +101,20 @@ public function importAction() {
 			$form->_requestToForm($this);						
 
 			$md= new Models_Quest();
+			$mdqd = new Models_Quest_Detail();
 			$md_questLine = new Models_Quest_Line();
 			
 			$this->view->item = $form->obj;
 			$this->view->filterQuestLine = $md_questLine->_getByKey($form->obj->QuestLineID);			
 			$data = $md->filter($form->obj, "QuestID ASC", ($pageNo - 1)*$items, $items);
+			$data1 = $mdqd->getQuest();
 			$dataquestlineID = $md->getQuestlineID();
 			$dataquestneed=$md->getNeedQuest();
 			//print_r($dataquestneed);
 			$count = $md->count($form->obj);
 			
 			$this->view->data = $data;
-			$this->view->data2=$data;
+			$this->view->data2= $data1;
 			$this->view->dataquestlineid = $dataquestlineID;
 			
 			
