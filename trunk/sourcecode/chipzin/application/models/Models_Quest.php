@@ -50,10 +50,12 @@ class Models_Quest extends Models_Base
 	public function updateNeedquest($id,$needquest)
 	{
 		$sql="
-				UPDATE q_quest
-					SET
-						NeedQuest ='".$needquest."'
-					WHERE QuestID='".$id."'
+				UPDATE 
+					q_quest
+				SET
+					NeedQuest ='".$needquest."'
+				WHERE 
+					QuestID='".$id."'
 			";
 		//print_r($sql);
 		$data=$this->_db->query($sql);
@@ -63,12 +65,13 @@ class Models_Quest extends Models_Base
 	public function updateNextquest($id,$nextquest)
 	{
 		$sql="
-				UPDATE q_quest
-					SET
-						NextQuest ='".$nextquest."'
-					WHERE QuestID='".$id."'
+				UPDATE 
+					q_quest
+				SET
+					NextQuest = $nextquest
+				WHERE 
+					QuestID='".$id."'
 			";
-		//print_r($sql);
 		$data=$this->_db->query($sql);
 		return $data;
 	}
