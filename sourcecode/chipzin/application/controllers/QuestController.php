@@ -103,11 +103,13 @@ public function importAction() {
 			$md= new Models_Quest();
 			$mdqd = new Models_Quest_Detail();
 			$md_questLine = new Models_Quest_Line();
-			
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
 			$this->view->item = $form->obj;
 			$this->view->filterQuestLine = $md_questLine->_getByKey($form->obj->QuestLineID);			
 			$data = $md->filter($form->obj, "QuestID ASC", ($pageNo - 1)*$items, $items);
 			$data1 = $mdqd->getQuest();
+			$mdQT = new Models_Task();
+			$dataTask = $mdQT->listQuestInTask();
 			$dataquestlineID = $md->getQuestlineID();
 			$dataquestneed=$md->getNeedQuest();
 			//print_r($dataquestneed);
@@ -115,6 +117,7 @@ public function importAction() {
 			
 			$this->view->data = $data;
 			$this->view->data2= $data1;
+			$this->view->Task = $dataTask;
 			$this->view->dataquestlineid = $dataquestlineID;
 			
 			
