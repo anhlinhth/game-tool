@@ -248,7 +248,7 @@ public function importAction() {
 			$mdquest->delete($id);
 						
 			Models_Log::insert($this->view->user->username, "act_delete_quest");
-			echo "1";
+			echo "Xóa thành công";
 		}
 		catch(Exception $ex)
         {            
