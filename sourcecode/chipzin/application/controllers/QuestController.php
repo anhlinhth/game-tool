@@ -520,7 +520,7 @@ public function importAction() {
 				
 				if(empty($this->NextQuest))
 				{
-					$this->NextQuest = NULL;
+					$this->NextQuest = "NULL";
 				}
 				$form=new Models_Quest();
 				$form->updateNextquest($this->QuestID,$this->NextQuest);
