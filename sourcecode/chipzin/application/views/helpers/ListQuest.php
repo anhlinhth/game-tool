@@ -43,7 +43,8 @@ class Zend_View_Helper_ListQuest
 			    $flag2 = 0;
 				foreach ($data2 as $row2)
 				{
-						
+					if($row->QuestID != $row2->QuestID)
+					{
 						$str="";
 						if($row->NeedQuest== $row2->QuestID)
 						{
@@ -51,7 +52,7 @@ class Zend_View_Helper_ListQuest
 							$str="selected";
 						}
 							$strList .= "<option $str  value='$row2->QuestID'>$row2->QuestName</option>";
-						
+					}
 				}
 				$strList.="</select>
 							</td>
@@ -59,14 +60,15 @@ class Zend_View_Helper_ListQuest
 							<select id='nextquest-$row->QuestID' name='nextquest-$row->QuestID' onChange='updateNextquest($row->QuestID);' >";
 				$strList .= "<option selected  value=''>NULL</option>";
 				foreach ($data2 as $row3)
+				{
+					$str="";
+					if($row->NextQuest == $row3->QuestID)
 					{
-						 $str="";
-						if($row->NextQuest == $row3->QuestID){
-							$flag2 = 1;
-							$str="selected";
-						}
-					$strList .= "<option $str  value='$row3->QuestID'>$row3->QuestName</option>";
+						$flag2 = 1;
+						$str="selected";
 					}
+					$strList .= "<option $str  value='$row3->QuestID'>$row3->QuestName</option>";
+				}
 					
 				$strList.="</select>
 							</td>";
