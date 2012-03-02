@@ -15,6 +15,7 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Event.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_SaleOff_Shop.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Item_Increment.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Item.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
 
 require_once ROOT_APPLICATION_OBJECT_MANAGER.DS.'PigManager.php';
 require_once ROOT_APPLICATION_OBJECT_MANAGER.DS.'ItemManager.php';
@@ -25,24 +26,42 @@ class ExportController extends BaseController
 {
 	public function _setUserPrivileges()
 	{
-		return array('index','add','edit','delete','active','item','additem','pigshop','itemshop');
+		return array('index','add','edit','delete','active','item','additem','pigshop','itemshop','export');
 	}
 	
 	public function preDispatch()
 	{
 		parent::preDispatch();
-		
+		$this->checkNullAction();
 		if(!$this->hasPrivilege())
 			$this->_redirect ("/error/permission");
 	}
+	
+	public function checkNullAction(){
+		  $check=new Models_Quest();
+		  $flag=$check->checkIsNull();
+		  if($flag!=0)
+		  {
+		  	  
+			//exit();
+			
+		  }
+		  
+	}
+	
 	public function exportAction()
 	{
 		$model = new Models_Quest_Package();
 		$tuo = new Models_Quest_Package();
 		$data = $tuo->getGiftType();
-		$model->generate($data);
-////////////////////////////////////////////////		
+		$questIdError = $model->generate($data);
 		
+		if(!empty($questIdError)){
+			//$this->view->val = 1;
+			$this->view->questIdError = $questIdError;	
+		}else{
+					
+////////////////////////////////////////////////				
 		
 		$model1 = new Models_Task_Package();
 		$tuo1 = new Models_Task_Package();
@@ -66,6 +85,8 @@ class ExportController extends BaseController
 		// }	
 		// else{ echo "CÃ³ lá»—i phÃ¡t sinh"; } 
 		//$this->_redirect ("gift/index");
+		}
+
 	}
 	public function downloadAction()
 	{
