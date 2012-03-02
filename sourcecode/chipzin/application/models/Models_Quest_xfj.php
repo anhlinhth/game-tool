@@ -147,8 +147,7 @@ class Models_Quest_xfj extends Models_Base
 								
 								$str .= "\n\t\t\t \"gameType\" : [\"".$value->gameType."\"],";
 							}
-						}
-						
+						}					
 					}
 						else 
 					{
