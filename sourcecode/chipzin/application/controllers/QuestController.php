@@ -199,7 +199,7 @@ public function importAction() {
 				$md->_insert($form->obj);
 				$this->QuestID= $form->obj->QuestID;
 				
-				Models_Log::insert($this->view->user->username, "act_update_needquest");
+				Models_Log::insert($this->view->user->username, "act_add_new_quest");
 				
 				//update quest awarditem
 				$this->AwardItem = $this->_request->getParam("additem");
@@ -356,6 +356,8 @@ public function importAction() {
 				$arrAddItem = $_POST["additem"];				
 				///Update
 				updateAwardItem($arrItem, $arrAddItem,$form->obj->QuestID);
+				Models_Log::insert($this->view->user->username, "act_update_award_item");
+				
 				//////////////////////////////////////////
 				///////////////////Update need quest////////////////////////
 				
@@ -369,7 +371,7 @@ public function importAction() {
 		}catch(Exception $ex) {
 	           $this->view->errMsg = $ex->getMessage();
 	           echo $this->view->errMsg;
-			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+			   Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 	    }	
 	} 
 	
@@ -481,45 +483,57 @@ public function importAction() {
 	
 	public function updateneedquestAction()
 	{
-		require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
-		require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
-		$this->_helper->layout->disableLayout();
-		$this->_helper->viewRenderer->setNoRender();
-		if($this->_request->isPost())
-		{
-			$this->QuestID=$this->_request->getParam('questid');
-			$this->NeedQuest=$this->_request->getParam('needquest');
-			$form=new Models_Quest();
-			$form->updateNeedquest($this->QuestID,$this->NeedQuest);
-			
-			
+		try{
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNoRender();
+			if($this->_request->isPost())
+			{
+				$this->QuestID=$this->_request->getParam('questid');
+				$this->NeedQuest=$this->_request->getParam('needquest');
+				$form=new Models_Quest();
+				$form->updateNeedquest($this->QuestID,$this->NeedQuest);
+				Models_Log::insert($this->view->user->username, "act_update_need_quest");			
+			}
+			echo "Cập nhật thành công";
 		}
-		echo "Cập nhật thành công";
-		
+		catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}		
 	}
+	
 	public function updatenextquestAction()
 	{
-		require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
-		require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
-		$this->_helper->layout->disableLayout();
-		$this->_helper->viewRenderer->setNoRender();
-		if($this->_request->isPost())
-		{
-			$this->QuestID=$this->_request->getParam('questid');
-			$this->NextQuest=$this->_request->getParam('nextquest');
-			print_r($this->NextQuest);
-			
-			if(empty($this->NextQuest))
+		try{
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNoRender();
+			if($this->_request->isPost())
 			{
-				$this->NextQuest = NULL;
+				$this->QuestID=$this->_request->getParam('questid');
+				$this->NextQuest=$this->_request->getParam('nextquest');
+				print_r($this->NextQuest);
+				
+				if(empty($this->NextQuest))
+				{
+					$this->NextQuest = NULL;
+				}
+				$form=new Models_Quest();
+				$form->updateNextquest($this->QuestID,$this->NextQuest);
+				Models_Log::insert($this->view->user->username, "act_update_next_quest");
+				
 			}
-			$form=new Models_Quest();
-			$form->updateNextquest($this->QuestID,$this->NextQuest);
-			
-			
+			echo "Cập nhật thành công";
 		}
-		echo "Cập nhật thành công";
-		
+		catch(Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}		
 	}
 	public function updateAction()
 	{
