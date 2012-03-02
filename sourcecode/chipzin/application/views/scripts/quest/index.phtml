@@ -67,24 +67,7 @@ if($this->temp)
 </form>
 <script>
 
-function updateNeedquest(id)
-{
-	var needquest = document.getElementById('needquest-'+id).value;
-	
-	$.ajax({
-		type: "POST",
-		url:"<?php echo $this->baseUrl.'/quest/updateneedquest/'?> ",
-		data: "questid=" + id +"&needquest="+ needquest,	
-		success: function(data){			
-			if(data != ""){					
-				location.reload();
-			}else{
-				alert("Error");				
-			}
-			
-		}
-	});
-}
+
 function updateNextquest(id)
 {
 	var nextquest = document.getElementById('nextquest-'+id).value;
@@ -94,7 +77,28 @@ function updateNextquest(id)
 		url:"<?php echo $this->baseUrl.'/quest/updatenextquest/'?> ",
 		data: "questid=" + id +"&nextquest="+ nextquest,	
 		success: function(data){			
-			if(data != ""){					
+			if(data != ""){	
+					alert('Cập nhật NextQuest thành công');		
+				location.reload();
+			}else{
+				alert("Error");				
+			}
+			
+		}
+	});
+}
+
+function updateNeedquest(id)
+{
+	var needquest = document.getElementById('needquest-'+id).value;
+
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/updateneedquest/'?> ",
+		data: "questid=" + id +"&needquest="+ needquest,	
+		success: function(data){			
+			if(data != ""){	
+			alert('Cập nhật NeeQuest thành công');				
 				location.reload();
 			}else{
 				alert("Error");				
