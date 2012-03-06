@@ -77,11 +77,11 @@ class Models_Quest_Line extends Models_Base
 					q_questline
 				WHERE
 					1";
-		if($objSearch->QuestLineName)
-			$sql .= " AND QuestLineName LIKE '%$objSearch->QuestLineName%'";
+		if($objSearch)
+			$sql .= " AND QuestLineName LIKE '%$objSearch%'";
 		
-		if($objSearch->QuestLineID)
-			$sql .= " AND QuestLineID= '$objSearch->QuestLineID'";						
+		if($objSearch)
+			$sql .= " AND QuestLineID = '$objSearch'";						
 		if($order)
 			$sql .= " ORDER BY $order";
 		
