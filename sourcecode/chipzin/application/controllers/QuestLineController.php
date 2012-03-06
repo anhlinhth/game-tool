@@ -34,8 +34,11 @@ class QuestLineController extends BaseController
 				$pageNo = 1;
 			if($items == 0)
 				$items = DEFAULT_ITEM_PER_PAGE;						
-			$md = new Models_Quest_Line();							
-			$data = $md->_filter($form->obj, "QuestLineID ASC",($pageNo - 1)*$items, $items);
+			$md = new Models_Quest_Line();	
+			$searchID=$this->_request->getParam('searchID');
+			
+			$data = $md->filter($searchID, "QuestLineID ASC",($pageNo - 1)*$items, $items);
+			
 			$count = $md->_count($form->obj);						
 			$this->view->data = $data;
 			$this->view->items = $items;
