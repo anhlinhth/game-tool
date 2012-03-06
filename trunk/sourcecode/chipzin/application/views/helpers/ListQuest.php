@@ -83,17 +83,17 @@ class Zend_View_Helper_ListQuest
 				}
 				if($flagtask == 0)
 				{
-					$strList.="<td align='center'><a title='error' class='ico-16 errors' id='error'></a></td>";
+					$strList.="<td align='center'><a title='Quest chưa có Task nào' class='ico-16 errors' id='error'></a></td>";
 				}
 				else 
 				{
 					if($flag1 == 0 || $flag2 == 0)
 					{	
-						$strList.="<td align='center'><a title='Warning' class='ico-16 warning' id='warning'></a></td>";
+						$strList.="<td align='center'><a title='NeedQuest hoặc NextQuest đang để trống' class='ico-16 warning' id='warning'></a></td>";
 					}
 					else
 					{
-						$strList.="<td align='center'><a title='Ok' class='ico-16 ok' id='warning'></a></td>";
+						$strList.="<td align='center'><a title='Ok' class='ico-16 ok' id='ok'></a></td>";
 					}
 				}
 				$strList.="<td align='center'>	
