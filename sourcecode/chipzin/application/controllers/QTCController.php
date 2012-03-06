@@ -76,6 +76,7 @@ class QTCController extends BaseController
 				else
 				{					
 					$mdQTC->delete((int)$id);
+					echo "Xóa QuestTask thành công";
 					Models_Log::insert($this->view->user->username, "act_delete_QTC", $obj->name);
 				}													
 			}
