@@ -297,6 +297,10 @@ $(document).ready(function(){
 		close: function(event, ui) {
 		},
 		buttons: {
+			"Continue": function() {								
+				$(this).dialog("close");
+										
+			},
 			"Edit This Quest": function() {	
 				quest_id = $("#QuestID").val();							
 				$(this).dialog("close");
@@ -305,10 +309,6 @@ $(document).ready(function(){
 			"Add New Quest": function() {								
 				$(this).dialog("close");
 				location.reload();							
-			},
-			"Back": function() {
-				$( this ).dialog( "close" );
-				location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
 			}
 		}
 	});	
