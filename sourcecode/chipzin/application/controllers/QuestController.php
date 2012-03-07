@@ -43,6 +43,31 @@ public function importAction() {
 			die();
 			*/
 			//--------------------------------------------------------------------			
+			$file11 = $_FILES ['file1'] ;
+			$file12 = $_FILES ['file2'] ;
+			if($file11!=null )
+			{
+			
+				if($file11['name']=='Define.def.php')	
+				{		$dest1File = ROOT_IMPORT_FILE.DS.$file11['name'];
+		 move_uploaded_file($file11['tmp_name'], $dest1File);
+		 
+				}
+				
+				
+			
+			}
+			if($file12!=null )
+			{
+				if($file12['name']=='system.xfj')
+				{
+				
+		$dest2File = ROOT_IMPORT_FILE.DS.$file12['name'];
+		 move_uploaded_file($file12['tmp_name'], $dest2File);
+		 
+			}}
+		
+			
 			
 			if(file_exists (ROOT_IMPORT_FILE.'/import2.php')==false ||file_exists (ROOT_IMPORT_FILE.'/Define.def.php')==false ) 
 			echo ("<SCRIPT LANGUAGE='JavaScript'>
