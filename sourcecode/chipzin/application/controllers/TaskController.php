@@ -177,12 +177,45 @@ class TaskController extends BaseController
 			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Template.php';	
 			$mdtemp = new Models_template();
-			$this->view->arrTemplate = $mdtemp->_filter();				
+			$this->view->arrTemplate = $mdtemp->_filter();
+			$this->view->key1 = $_POST[flag];
+			
+		}
+		catch(Exception $ex)
+        {
+            $this->view->ojb = $form->obj;
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
+		
+	}
+		
+	public function savetaskAction()
+	{		
+		$this->_helper->layout()->disableLayout();		
+		try
+		{
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Action.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Task_Client.php';	
+			$mdAction = new Models_Action();				
+			$mdQuestTC = new Models_Quest_Task_Client();		
+			$this->view->arrAction = $mdAction->_getAction();				
+			//Hiện ListQuesstTaskClient 
+			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Template.php';	
+			$mdtemp = new Models_template();
+			$this->view->arrTemplate = $mdtemp->_filter();
 			if($this->_request->isPost())
 			{
+//				if($_POST[save]!=1)
+//				{
+//					$this->view->key1=$_POST[key];
+//				}
+//				else
+//				{
 				$this->_helper->layout->disableLayout();
 				$this->_helper->viewRenderer->setNorender();
-				//print_r($_POST);
 				$mdTask = new Models_Task();
 				$obj = new Obj_Task();
 				$data = $mdTask->findidTask();
@@ -226,7 +259,8 @@ class TaskController extends BaseController
 			    	}
 			    }
 			    Models_Log::insert($this->view->user->username, "act_add_task", $obj->name);
-				echo "1";				
+				echo "1";	
+//				}			
 			}
 			
 		}

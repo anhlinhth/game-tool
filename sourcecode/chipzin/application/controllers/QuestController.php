@@ -74,7 +74,7 @@ public function importAction() {
 			 window.alert('Please check files exists in folder import_file_config : Define.def.php and import2.php')
 			 </SCRIPT>");
 			else {
-			system ( '"D:/003/xampp/php/php.exe" '. ROOT_IMPORT_FILE.'"/import2.php"' );
+			system ( '"C:/xampp/php/php.exe" '. ROOT_IMPORT_FILE.'"/import2.php"' );
 			$file = ROOT_IMPORT_FILE . '/define.php';
 			if (! empty ( $file )) {
 				
