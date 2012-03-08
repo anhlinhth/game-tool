@@ -1,4 +1,20 @@
 <form  id="form" class="task_form">
+<select id="Action" name="Action">
+			
+			<?php 
+				foreach($this->arrAction as $row)
+				{
+					$str="";
+					if($val->ActionID == $row->ActionID )
+					{
+						$str= "selected";
+					}
+			?>
+					<option <?php echo $str;?> value="<?php echo $row->ActionID ?>"><?php echo $row->ActionName ?></option>
+			<?php
+				}
+			?>
+		</select>
 <table>
 	<tr>
 		<td>Task ID</td>

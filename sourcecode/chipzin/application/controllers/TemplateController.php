@@ -45,6 +45,7 @@ class TemplateController extends BaseController
 		$temp->QuestID = 0;
 		$md = new Models_template();
 		$md->insert($temp);
+		echo "1";
 	}
 }
 ?>
