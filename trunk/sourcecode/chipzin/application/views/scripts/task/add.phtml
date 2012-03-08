@@ -1,20 +1,14 @@
 <form  id="form" class="task_form">
-<select id="Action" name="Action">
-			
-			<?php 
-				foreach($this->arrAction as $row)
-				{
-					$str="";
-					if($val->ActionID == $row->ActionID )
-					{
-						$str= "selected";
-					}
-			?>
-					<option <?php echo $str;?> value="<?php echo $row->ActionID ?>"><?php echo $row->ActionName ?></option>
-			<?php
-				}
-			?>
-		</select>
+Template : <select id ="Template<?php echo $this->key1;?>" name ="Template<?php echo $this->key1;?>" onchange ="loadTemplate(<?php echo $this->key1;?>)">
+<?php 
+foreach ($this->arrTemplate as $row)
+{
+?>
+	<option value ="<?php echo $row->TaskID;?>"><?php echo $row->TaskName;?></option>
+<?php 
+}
+?>
+</select>
 <table>
 	<tr>
 		<td>Task ID</td>
@@ -100,4 +94,4 @@
 	<tr>		
 </tr>
 </table>
-</form>
+
