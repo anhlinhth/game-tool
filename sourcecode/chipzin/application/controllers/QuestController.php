@@ -329,12 +329,14 @@ public function importAction() {
         }
 	}
 	
+	
 	public function listtaskAction(){
 		try
 		{
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Action.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task_Target.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Task_Client.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Template.php';
 									
 			$this->_helper->layout->disableLayout();			
 			$questid = $this->_request->getParam("id");
@@ -343,11 +345,12 @@ public function importAction() {
 			$mdQuestTC = new Models_Quest_Task_Client();
 			$mdTT = new Models_Task_Target();
 			$mdQuestTC = new Models_Quest_Task_Client();
+			$mdtemp = new Models_template();
 	
 			//Hiện List q_action
 			$this->view->arrTask = $md->getTask($questid);			
 			$this->view->arrAction = $mdAction->_getAction();
-			
+			$this->view->arrTemp = $mdtemp->_filter();
 			$this->view->arrTaskTarget = $mdTT->select($questid);
 				
 			//Hiện ListQuesstTaskClient 

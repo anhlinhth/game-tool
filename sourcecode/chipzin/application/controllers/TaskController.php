@@ -103,6 +103,31 @@ class TaskController extends BaseController
 		
 	}
 
+	public function loadtemplateAction()
+	{		
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNorender();
+		try
+		{			
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Template.php';
+			$mdtemp = new Models_template();
+			$return = $mdtemp->_getByKey($_POST[id]);
+			if($this->_request->isPost())// da post du lieu len
+			{				
+				
+				//$data = array("id"=>$return->TaskID,"id1"=>$return->TaskN);
+				
+				echo json_encode( (array)$return);
+			}
+			
+		}
+		catch(Exception $ex)
+        {
+            $this->view->form = $form->obj;
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
+	}
 	public function newAction()
 	{		
 		$this->_helper->layout()->disableLayout();
@@ -149,7 +174,10 @@ class TaskController extends BaseController
 			$mdQuestTC = new Models_Quest_Task_Client();		
 			$this->view->arrAction = $mdAction->_getAction();				
 			//Hiện ListQuesstTaskClient 
-			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();				
+			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Template.php';	
+			$mdtemp = new Models_template();
+			$this->view->arrTemplate = $mdtemp->_filter();				
 			if($this->_request->isPost())
 			{
 				$this->_helper->layout->disableLayout();

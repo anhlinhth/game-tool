@@ -307,6 +307,29 @@ function saveTask(){
 	
 	});
 }
+
+function loadTemplate(key){
+	var id = $("#template"+key).val();
+
+	
+	$.ajax({
+		type: "POST",		
+		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
+		data: "id=" + id,	
+		dataType: "json",
+		success: function(msg){					
+			$(".form-task-" + key +" #TaskString").val(msg.TaskString);
+			$(".form-task-" + key +" #TaskName").val(msg.TaskName);
+			$(".form-task-" + key +" #DescID").val(msg.DescID);
+			$(".form-task-" + key +" #DescString").val(msg.DescString);
+			$(".form-task-" + key +" #QTC_ID").val(msg.QTC_ID);
+			$(".form-task-" + key +" #UnlockCoin").val(msg.UnlockCoin);
+			$(".form-task-" + key +" #Quantity").val(msg.Quantity);
+			$(".form-task-" + key +" #ActionID").val(msg.ActionID);
+		}
+	});
+	
+}
 $(document).ready(function(){	
 	loadTask(<?php echo $this->obj->QuestID?>);	
 		
