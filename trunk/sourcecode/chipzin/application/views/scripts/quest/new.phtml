@@ -184,7 +184,7 @@ function addTemplate(key){
 	data = $("#task-div-"+key + " .task_form").serialize();
 	$.ajax({
 			type: "POST",
-			url:"<?php echo $this->baseUrl.'/test/testpost/'?> ",
+			url:"<?php echo $this->baseUrl.'/template/save/'?> ",
 			data: data,		
 			success: function(msg){				
 				alert(msg);

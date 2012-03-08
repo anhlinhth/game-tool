@@ -159,12 +159,23 @@ function  deleteNeedQuest(key){
 	}	
 }
 /////////////////////////Task/////////////////////////////////
+function addTemplate(key){
+	data = $("#task-" + key + " .form-task-0").serialize();
+	$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/template/save/'?> ",
+			data: data,		
+			success: function(msg){				
+				alert(msg);
+			}
+		});
+}
 function addTask(key){
 	
 	count = $(".task").size();
 	if(count >= 3){
 		alert("Fail!!!! Limited 3 Task in a Quest");
-		
+		return;
 	}
 	
 	quest_id = $("#QuestID").val();

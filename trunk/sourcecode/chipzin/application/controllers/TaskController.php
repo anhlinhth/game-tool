@@ -166,8 +166,8 @@ class TaskController extends BaseController
 			    $obj->UnlockCoin = $_POST[UnlockCoin];
 			    $obj->QTC_ID = $_POST[QuestTC];
 			    $obj->QuestID = $_POST[QuestID];
-			    $obj->DescID = $_POST[DescID];
-			    $obj->DescString = $_POST[DescString];
+			    $obj->DescID = $_POST[DescString];
+			    $obj->DescString = $_POST[DescID];
 			    
 			    $form = new Forms_Task();
 			    $form->obj = $obj;

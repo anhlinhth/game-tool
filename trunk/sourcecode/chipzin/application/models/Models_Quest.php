@@ -144,8 +144,14 @@ class Models_Quest extends Models_Base
 	        			q_quest_awarditem
 	        		WHERE
 	        			QuestID = '$value';
-        			DELETE FROM 
-	        			q_task
+	        			
+	        		DELETE FROM
+						q_task_target
+					WHERE
+						TaskID IN(SELECT TaskID FROM q_task WHERE QuestID = $value);
+						
+        			DELETE FROM         			
+	        			q_task 
 	        		WHERE
 	        			QuestID = '$value';
 	        		DELETE FROM
