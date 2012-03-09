@@ -275,29 +275,62 @@ function saveTask(){
 			
 }
 function validate(){
+	flag=true;
+	
 	$(".task_form").each(function(key,value){
+		num = key+1;
 		value = $("#task-div-" + key +" .task_form #TaskString").val();		
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString khong de trong</p>");					
+			flag=false;
+		}		
 		value = $("#task-div-" + key +" .task_form #TaskName").val();
+		
 		value = $("#task-div-" + key +" .task_form #DescID").val();
 		value = $("#task-div-" + key +" .task_form #DescString").val();
 		value = $("#task-div-" + key +" .task_form #QuestTC").val();
 		value = $("#task-div-" + key +" .task_form #UnlockCoin").val();
+		if(isNaN(value))
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin phải là số</p>");					
+			flag=false;
+		}
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlickCoin không được để trống</p>");					
+			flag=false;
+		}
 		value = $("#task-div-" + key +" .task_form #Quantity").val();
+		if(isNaN(value))
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity phải là số</p>");					
+			flag=false;
+		}
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity không được để trống</p>");					
+			flag=false;
+		}
 		value = $("#task-div-" + key +" .task_form #Action").val();	
-		
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Hãy chọn Action</p>");					
+			flag=false;
+		}
 	});
-	return true;	
+	return flag;	
 }
 function saveAll(){	
 	quest_id = $("#QuestID").val();
 	data = $(".quest-info").serialize();		
 	$("#dialog #ct").html("");	
-	//test = validate();
-	//if(!test)
-	//	alert("false");
-	//else{
+	test = validate();
+	if(test==false)
+		$("#dialog").dialog("open");
+	else{
 	//	alert("true");
-	//}
+	
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/new/'?>",
@@ -315,7 +348,8 @@ function saveAll(){
 						
 								
 		}
-	});			
+	});	
+	}	
 }
 /////////////////////////////
 
