@@ -55,7 +55,7 @@ class Models_Quest_xfj extends Models_Base
 				if($row['NextQuest']!=NULL)
 					$str .= "\n\t\t\t \"nextQuest\" : [\"".(int)$row['NextQuest']."\"],";
 				else
-					$str .= "\n\t\t\t \"nextQuest\" : NULL,";
+					$str .= "\n\t\t\t \"nextQuest\" : [],";
 					
 				$str .= "\n\t\t\t \"tasks\" : [";
 				$objSearch->task_package_id = $row->id;
@@ -90,24 +90,26 @@ class Models_Quest_xfj extends Models_Base
 				
 				$c = $this->lastId();
 				if((int)$c!=(int)$i)
-					$str .= "\n\t }, \n";
+					$str .= "\n\t\t}, \n";
 				else
-					$str .= "\n\t } \n";
+					$str .= "\n\t\t } \n";
 				$i++;
 			}		
 		}
 		$md = new Models_Task_Target_Package_Detail();
 		$am = new Models_QTC();
+		$i=0;
 		if($gifts)
 		{	
-			$i=0;
-			$str .= "}\n" ;
+			
+			$str .= "},\n" ;
 			$str .= "\n" ;
 				$str .= " \t\"quest_tasks\"  :";				
 				$str .= "\n\t{";
 				foreach($gifts as $gifts)
 				{
 					$str .= "\n\t\t\"".(int)$gifts->TaskID."\" :";
+					$i++;
 					$str .= "\n\t\t{";
 					$str .= "\n\t\t\t \"questId\" : ".(int)$gifts->QuestID.",";
 					$str .= "\n\t\t\t \"payFinish\" : ".(int)$gifts->UnlockCoin.",";
@@ -123,7 +125,7 @@ class Models_Quest_xfj extends Models_Base
 						}
 					}
 					else 
-						$str .= "\n\t\t\t \"taskType\" : NULL,";
+						$str .= "\n\t\t\t \"taskType\" : [],";
 					$objSearch->task_package_id = $gifts->id;
 					$sf=$md->_filter($objSearch);
 					
@@ -140,6 +142,7 @@ class Models_Quest_xfj extends Models_Base
 					
 					if($gifts->TargetType!=NULL)
 					{
+						
 						foreach ($arr->entity as $key => $value)
 						{
 							if($key== $gifts->TargetType)
@@ -172,15 +175,19 @@ class Models_Quest_xfj extends Models_Base
 							$str .= "],";
 						}
 						if($a==0)
-							$str .= "\n\t\t\t \"gameType\" : "."NULL".",";
+							$str .= "\n\t\t\t \"gameType\" : "."[]".",";
 					}
 					$str .= "\n\t\t\t \"txtContent\" : \""."@quest#".trim($gifts->TaskString)."\",";
 					$str .= "\n\t\t\t \"txtHelp\" : \""."@quest#".trim($gifts->DescID)."\",";
 					$str .= "\n\t\t\t \"iconClassName\" : \"".trim($gifts->IconClassName)."\",";
-					$str .= "\n\t\t},\n";
-					$i++;
+					$c = $this->lastId();
+					if((int)$c!=(int)$i)
+						$str .= "\n\t\t },\n";
+					else
+						$str .= "\n\t\t } \n";
+					
 				}
-				$str .= "\n\t}";
+				$str .= "\n\t }";
 		}
 		$str .= "\n}";		
 		
