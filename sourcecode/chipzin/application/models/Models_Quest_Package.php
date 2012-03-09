@@ -37,7 +37,7 @@ class Models_Quest_Package extends Models_Base
 				$str .= (int)$i ;
 				$str .= " => array(";				
 				$str .= "\n\t'group'=> ";
-				$str .= (int)$row['QuestID'].",";
+				$str .= (int)$row['QuestLineID'].",";
 				if($row['NeedQuest']!=NULL)
 					$str .= "\n\t'needQuest' =>".$row['NeedQuest'].",";
 				else 
