@@ -60,7 +60,7 @@ class Models_Quest_xfj extends Models_Base
 			{
 				
 				$str .= "\n\t\t\"".(int)$row['QuestID']."\":";
-				$temp=(int)$row['QuestLineID'];
+				$temp=(int)$row['QuestID'];
 				$str .= "\n\t\t{";
 				$str .= "\n\t\t\t \"group\" : ".(int)$row['QuestLineID'].",";
 				if($row['NextQuest']!=NULL)
@@ -85,6 +85,7 @@ class Models_Quest_xfj extends Models_Base
 									$j=1;
 								}
 								$str .="\"".(int)$gift->TaskID."\"";	
+								
 							}
 														
 					}
@@ -171,7 +172,7 @@ class Models_Quest_xfj extends Models_Base
 							foreach ($sf as $sf)
 							{
 						
-								if((int)$sf->TaskID==(int)$gifts->TaskID&&$a==0)
+								if((int)$sf->TaskID==(int)$this->TaskID&&$a==0)
 								{
 									$str .="\n\t\t\t \"entityType\" : ["."\"".(int)$sf->TargetID."\"";
 									$a++;
