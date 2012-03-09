@@ -35,7 +35,7 @@ class Forms_Quest_Detail extends Forms_Base
 			array_push($arrNote, "QuestName không được để trống<br>");
 		}
 		
-		if(empty ($this->obj->AwardGold))
+		if(empty ($this->obj->AwardGold)&&$this->obj->AwardGold!=0)
 		{
 			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
 			array_push($arrNote, "Phần thưởng Gold không được để trống<br>");
@@ -47,7 +47,7 @@ class Forms_Quest_Detail extends Forms_Base
 			array_push($arrNote, "Phần thưởng Gold phai là số<br>");
 		}
 		
-		if(empty ($this->obj->AwardExp))
+		if(empty ($this->obj->AwardExp)&&$this->obj->AwardExp!=0)
 		{
 			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
 			array_push($arrNote, "Phần thưởng kinh nghiệm không được để trống<br>");
