@@ -178,15 +178,34 @@ public function importAction() {
 	{		
 		try
 		{
+			if($this->_request->isPost())// da post du lieu len
+			{	
+				$this->_helper->layout->disableLayout();
+				$this->_helper->viewRenderer->setNoRender();
 					
-			$md = new Models_Quest_Detail();
-			$id = $this->_request->getParam("id");
+				$form = new Forms_Quest_Detail();
+				$form->_requestToForm($this);					
+				$form->validate(UPDATE);			
+				$md = new Models_Quest_Detail();	
+				$md->update($form->obj);
+				//////////////////Update Award Item////////////////////////////								
+				$arrItem = $_POST["awarditem"];
+				$arrAddItem = $_POST["additem"];				
+				///Update
+				updateAwardItem($arrItem, $arrAddItem,$form->obj->QuestID);
+				Models_Log::insert($this->view->user->username, "act_update_award_item");				
+				 
+				echo "1";
+			}else{		
+				$md = new Models_Quest_Detail();
+				$id = $this->_request->getParam("id");
 				$this->view->obj = $md->_getByKey($id);				
 				$this->view->arrQuestLine = $md->_getQuestLine();
 				$this->view->arrNeedQuest = $md->getQuest();
 				$this->view->arrAwardItems = $md->getAwardItems($id);
 				$this->view->arrTask = $md->getTask($id);
-				$this->view->arrQuest = $md->getQuest($id);	
+				$this->view->arrQuest = $md->getQuest($id);
+			}	
 				
 		}
 		catch(Exception $ex)
@@ -245,12 +264,10 @@ public function importAction() {
 								$mdAwardItem->_insert($objAwardItem);
 							}
 						}
-				}
-				
+				}				
 				echo '1';
 				Models_Log::insert($this->view->user->username, "act_update_AwardItem");
-				//$this->view->msg = "them thanh cong";
-				
+		
 			}	
 		}
 		catch(Exception $ex)
@@ -362,48 +379,6 @@ public function importAction() {
 	    }		
 	}
 			
-	public function saveAction(){
-		/////////////Udate Award ID///////////////
-		try{
-			if($this->_request->isPost())// da post du lieu len
-			{	
-				$this->_helper->layout->disableLayout();
-				$this->_helper->viewRenderer->setNoRender();
-				
-					
-				$form = new Forms_Quest_Detail();
-				$form->_requestToForm($this);					
-				$form->validate(UPDATE);			
-				$md = new Models_Quest_Detail();	
-				$md->update($form->obj);							
-				
-				
-	
-				//////////////////Update Award Item////////////////////////////
-				
-				
-				$arrItem = $_POST["awarditem"];
-				$arrAddItem = $_POST["additem"];				
-				///Update
-				updateAwardItem($arrItem, $arrAddItem,$form->obj->QuestID);
-				Models_Log::insert($this->view->user->username, "act_update_award_item");
-				
-				//////////////////////////////////////////
-				///////////////////Update need quest////////////////////////
-				
-			//	$arrNeedQuest = $_POST['need-quest'];
-			//	$arrAddNeedQuest = $_POST['need-quest-add'];			
-			//	updateNeedQuest($arrNeedQuest, $arrAddNeedQuest,$form->obj->QuestID);
-				 
-				echo "1";
-			}
-				
-		}catch(Exception $ex) {
-	           $this->view->errMsg = $ex->getMessage();
-	           echo $this->view->errMsg;
-			   Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-	    }	
-	} 
 	
 	public function addAction()
 	{		

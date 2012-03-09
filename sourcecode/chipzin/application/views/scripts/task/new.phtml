@@ -1,34 +1,41 @@
-<?php if($this->errMsg) :?>
-	<?php $this->showError($this->errMsg)?>
-<?php endif; ?>
-<?php if($this->msg) :?>		
-	<?php $this->showMessage($this->msg)?>	
-<?php endif;?>
+<form  id="form" class="task_form">
+Template : <select id ="Template<?php echo $this->key1;?>" name ="Template<?php echo $this->key1;?>" onchange ="loadTemplate(<?php echo $this->key1;?>)">
+<option value =""></option>
+<?php 
+foreach ($this->arrTemplate as $row)
+{
+?>
+	<option value ="<?php echo $row->TaskID;?>"><?php echo $row->TaskName;?></option>
+<?php 
+}
+?>
+</select>
 <table>
 	<tr>
 		<td>Task ID</td>
-		<td><input type="text" id="TaskID" name="TaskID[]" class="disabled" readonly="readonly" class="taskid" value="<?php echo $this->obj->TaskID?>"/></td>
+		<td><input type="text" id="TaskID" name="TaskID" class="disabled" readonly="readonly" class="taskid" value=""/></td>
 		<td>Task Name</td>
-		<td><input type="text" id="TaskName" name="TaskName[]" value=""/></td>
+		<td><input type="text" id="TaskName" name="TaskName" value=""/></td>
 		
 	</tr>
+	
 	<tr>
 		<td>Task String</td>
-		<td><input type="text" id="TaskString" name="TaskString[]" value=""/></td>
+		<td><input type="text" id="TaskString" name="TaskString" value=""/></td>
 		<td>Action (*) </td>
 		<td>
-		<select id="Action" name="Action[]">
+		<select id="Action" name="Action">
 			
 			<?php 
 				foreach($this->arrAction as $row)
 				{
 					$str="";
-					if($this->obj->ActionID == $row->ActionID )
+					if($val->ActionID == $row->ActionID )
 					{
 						$str= "selected";
 					}
 			?>
-					<option selected='<?php echo $str;?>' value="<?php echo $row->ActionID ?>"><?php echo $row->ActionName ?></option>
+					<option <?php echo $str;?> value="<?php echo $row->ActionID ?>"><?php echo $row->ActionName ?></option>
 			<?php
 				}
 			?>
@@ -41,25 +48,52 @@
 		<td>DescString</td>
 		<td><input type="text" id="DescString" name="DescString" value=""/></td>
 	</tr>
-	<tr>
-		<td>Target(*) </td>
-		<td><input type="text" id="TargetID" name="TargetID[]" value=""/></td>
+	<tr> 
+
+		<td>Quantity (*) </td>
+		<td><input type="text" id="Quantity" name="Quantity" value=""/></td>	
+		
 		<!-- 
 		<td>
 		<INPUT TYPE=RADIO NAME="TargetType" VALUE="" CHECKED> Target Type<BR>
 		<INPUT TYPE=RADIO NAME="TargetType" VALUE="null"> Target List<BR>
 		</td>
 		--><td>UnlockCoin (*) </td>
-		<td><input type="text" id="UnlockCoin" name="UnlockCoin[]" value="5"/></td>
+		<td><input type="text" id="UnlockCoin" name="UnlockCoin" value=""/></td>
 	</tr>
-	<tr>
-		<td>Quantity (*) </td>
-		<td><input type="text" id="Quantity" name="Quantity[]" value="5"/></td>
+	<tr>		
+		<td rowspan=1">Target(*)</td>
+		<td rowspan="1" id="target">
+			<input checked type="radio" name="Target"  value="TargetType"> Type<input style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value=""> <br>
+			<div id='target-list-<?php echo $this->key1;?>'>
+				<input type="radio" name="Target" value="TargetList"> List <a  class="ico-16 add add-target" href="javascript:addTarget(<?php echo $this->key1?>)"></a><br>
+			
+			</div>
+		</td>
 		<td>Quest Task Client</td>
-		<td><input type="text" id="QTC_ID" name="QTC_ID[]" value=""/></td>
+		<!-- ////////////////Hien Quest Task Client vao commbobox/////////////////// -->
+		
+		<td>
+		<select id="QuestTC" name="QuestTC">
+			
+			<?php 
+				foreach($this->arrQuestTC as $row)
+				{
+					$str="";
+					if($val->QTC_ID == $row->QTC_ID )
+					{
+						$str= "selected";
+					}
+			?>
+					<option <?php echo $str;?> value="<?php echo $row->QTC_ID ?>"><?php echo $row->QTC_Name ?></option>
+			<?php
+				}
+			?>
+		</select>
+		</td>	
 	</tr>
-	<tr>
-		<td>Icon</td>
-		<td colspan="3"></td>
-	</tr>
+	<tr>		
+</tr>
 </table>
+</form>
+
