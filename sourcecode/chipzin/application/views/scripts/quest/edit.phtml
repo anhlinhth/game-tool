@@ -258,30 +258,83 @@ function addTarget(key){
 	//btn_delete();
 	parent.append(input);
 }
-
+function validate(){
+	flag=true;
+	
+	$(".task").each(function(key,value){
+		num = key+1;
+		value = $("#task-" + key +" .form-task-"+key+" #TaskString").val();		
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString khong de trong</p>");					
+			flag=false;
+		}		
+		value = $("#task-" + key +" .form-task-"+key+" #TaskName").val();
+		
+		value = $("#task-" + key +" .form-task-"+key+" #DescID").val();
+		value = $("#task-" + key +" .form-task-"+key+" #DescString").val();
+		value = $("#task-" + key +" .form-task-"+key+" #QuestTC").val();
+		value = $("#task-" + key +" .form-task-"+key+" #UnlockCoin").val();
+		if(isNaN(value))
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin phải là số</p>");					
+			flag=false;			
+		}
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlickCoin không được để trống</p>");					
+			flag=false;
+		}
+		value = $("#task-" + key +" .form-task-"+key+" #Quantity").val();
+		if(isNaN(value))
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity phải là số</p>");					
+			flag=false;
+		}
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity không được để trống</p>");					
+			flag=false;
+		}
+		value = $("#task-" + key +" .form-task-"+key+" #Action").val();	
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Hãy chọn Action</p>");					
+			flag=false;
+		}
+	});
+	return flag;	
+}
 function saveAll(){	
 	$("#dialog #ct").html("");				
 	
 	quest_id = $("#QuestID").val();
 	s = $("form#form").serialize();
-	$.ajax({
-			type: "POST",
-			url:"<?php echo $this->baseUrl.'/quest/save/'?> ",
-			data: s,	
-			success: function(msg){		
-				if(parseInt(msg)==1){
-				
-					$("#dialog #ct").append("<p class='msg'>Update Quest Success<p>");
-					saveTask();
-					$("#dialog").dialog("open");
+	
+	test = validate();
+	if(test==false)
+	{
+		$("#dialog").dialog("open");		
+	}else{
+		$.ajax({
+				type: "POST",
+				url:"<?php echo $this->baseUrl.'/quest/save/'?> ",
+				data: s,	
+				success: function(msg){		
+					if(parseInt(msg)==1){
 					
-				}else{
-					$("#dialog #ct").append("<p class='error'>Failed:<br>"+msg+"<p>");				
-					$("#dialog").dialog("open");			
+						$("#dialog #ct").append("<p class='msg'>Update Quest Success<p>");
+						saveTask();
+						$("#dialog").dialog("open");
+						
+					}else{
+						$("#dialog #ct").append("<p class='error'>Failed:<br>"+msg+"<p>");				
+						$("#dialog").dialog("open");			
+					}
+					
 				}
-				
-			}
-	});	
+		});
+	}	
 }
 function saveTask(){
 	var key = 0;
