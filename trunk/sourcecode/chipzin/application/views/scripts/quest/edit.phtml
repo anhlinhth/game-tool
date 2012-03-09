@@ -8,7 +8,7 @@
 <?php //print_r($this->arrAwardItems)?>
 <div  class="mybox" id="quest">
 	<h3>Chỉnh sửa Quest</h3>
-	<form class="quest" id="form" action="<?php echo $this->baseUrl.'/Quest/save/' ?>" method="post">
+	<form class="quest" id="form" action="" method="post">
 	  <fieldset id="info">
 		<legend>Thông tin Quest </legend>
 		<table id="quest">
@@ -181,7 +181,7 @@ function addTask(key){
 	quest_id = $("#QuestID").val();
 	$.ajax({
 		type: "POST",
-		url:"<?php echo $this->baseUrl.'/task/new/'?> ",
+		url:"<?php echo $this->baseUrl.'/task/add/'?> ",
 		data: "id=" + quest_id,	
 		success: function(data){			
 			if(data != ""){	
@@ -306,8 +306,7 @@ function validate(){
 	return flag;	
 }
 function saveAll(){	
-	$("#dialog #ct").html("");				
-	
+	$("#dialog #ct").html("");
 	quest_id = $("#QuestID").val();
 	s = $("form#form").serialize();
 	
@@ -318,7 +317,7 @@ function saveAll(){
 	}else{
 		$.ajax({
 				type: "POST",
-				url:"<?php echo $this->baseUrl.'/quest/save/'?> ",
+				url:"<?php echo $this->baseUrl.'/quest/edit/'?> ",
 				data: s,	
 				success: function(msg){		
 					if(parseInt(msg)==1){
@@ -346,8 +345,6 @@ function saveTask(){
 			url:"<?php echo $this->baseUrl.'/task/save/'?> ",
 			data: data + "&QuestID=" + quest_id,	
 			success: function(msg){	
-				//alert(data);
-				//alert(msg);
 				key = key+ 1;
 				if(parseInt(msg)==1){
 					$("#dialog #ft").before("<p class='success'>Task "+ key +":Success<p>");
@@ -362,9 +359,7 @@ function saveTask(){
 }
 
 function loadTemplate(key){
-	var id = $("#template"+key).val();
-
-	
+	var id = $("#template"+key).val();	
 	$.ajax({
 		type: "POST",		
 		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
