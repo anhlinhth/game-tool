@@ -214,8 +214,7 @@ class TaskController extends BaseController
 			    
 			    $form = new Forms_Task();
 			    $form->obj = $obj;
-			    $form->validate(INSERT);
-				print_r($_POST);
+			    $form->validate(INSERT);				
 				if($_POST[Target]=="TargetType")
 			    {
 			    	$obj->TargetType = $_POST[TargetType];

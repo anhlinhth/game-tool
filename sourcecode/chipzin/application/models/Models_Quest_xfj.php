@@ -79,9 +79,9 @@ class Models_Quest_xfj extends Models_Base
 					}
 				}
 				$str .= "]";
-				$str .= ",\n\t\t\t \"txtName\" : \""."@quest#".trim($row['QuestString'])."\",";
-				$str .= "\n\t\t\t \"txtAlias\" : \""."@quest#".trim($row['QuestGroupString'])."\",";
-				$str .= "\n\t\t\t \"txtDesc\" : \""."@quest#".trim($row['QuestDescString'])."\",";
+				$str .= ",\n\t\t\t \"txtName\" : \"".trim($row['QuestString'])."\",";
+				$str .= "\n\t\t\t \"txtAlias\" : \"".trim($row['QuestGroupString'])."\",";
+				$str .= "\n\t\t\t \"txtDesc\" : \"".trim($row['QuestDescString'])."\",";
 				$str .= "\n\t\t\t \"award\" :";
 				$str .= "\n\t\t\t { ";
 				$str .= "\n\t\t\t\t \"gold\" : ".$row['AwardGold'].",";
@@ -177,8 +177,8 @@ class Models_Quest_xfj extends Models_Base
 						if($a==0)
 							$str .= "\n\t\t\t \"gameType\" : "."[]".",";
 					}
-					$str .= "\n\t\t\t \"txtContent\" : \""."@quest#".trim($gifts->TaskString)."\",";
-					$str .= "\n\t\t\t \"txtHelp\" : \""."@quest#".trim($gifts->DescID)."\",";
+					$str .= "\n\t\t\t \"txtContent\" : \"".trim($gifts->TaskString)."\",";
+					$str .= "\n\t\t\t \"txtHelp\" : \"".trim($gifts->DescID)."\",";
 					$str .= "\n\t\t\t \"iconClassName\" : \"".trim($gifts->IconClassName)."\"";
 					$c = $this->lastId();
 					if((int)$c!=(int)$i)
