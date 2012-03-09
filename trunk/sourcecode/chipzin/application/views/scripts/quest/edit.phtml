@@ -353,9 +353,9 @@ function saveTask(){
 			success: function(msg){	
 				key = key+ 1;
 				if(parseInt(msg)==1){
-					$("#dialog #ft").before("<p class='success'>Task "+ key +":Success<p>");
+					$("#dialog #ct").append("<p class='success'>Task "+ key +":Success<p>");
 				}else{					
-					$("#dialog #ft").before("<p class='error'>Task " + key + ":	<br>"+ msg + "</p>");					
+					$("#dialog #ct").append("<p class='error'>Task " + key + ":	<br>"+ msg + "</p>");					
 				}	
 				
 			}
