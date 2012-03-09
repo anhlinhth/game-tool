@@ -47,5 +47,69 @@ class TemplateController extends BaseController
 		$md->insert($temp);
 		echo "1";
 	}
+	
+	public function indexAction()
+	{
+		try
+		{
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Template.php';
+			$pageNo = $this->_request->getParam("page");
+			$items = $this->_request->getParam("items");
+			
+			if($pageNo == 0)
+				$pageNo = 1;
+			if($items == 0)
+				$items = DEFAULT_ITEM_PER_PAGE;
+			
+			$md = new Models_template();
+			$form= new Forms_Template();
+			$form->_requestToForm($this);
+			$data = $md->filter($form->obj, "TaskID ASC", ($pageNo - 1)*$items, $items);
+			$count = $md->_count(null);
+			
+			
+			$this->view->data = $data;
+			$this->view->items = $items;
+			$this->view->page = $pageNo;
+			$this->view->totalRecord = $count;
+		}
+		catch(Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}
+	public function editAction()
+	{
+		if($this->_request->isPost())
+		{
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Template.php';
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNoRender();
+			
+			$form = new Forms_Template();
+			$form->_requestToForm($this);								
+			$md = new Models_template();	
+			$form->obj->QuestID = 0;
+			
+			$md->_update($form->obj);
+			$this->_redirect ("/template/edit/id/".$form->obj->TaskID);
+			
+		}
+		else
+		{
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Template.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_QTC.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Action.php';
+			$id = $this->_request->getParam("id");		
+			$md = new Models_template();
+			$this->view->obj = $md->_getByKey($id);
+			$mdQTC = new Models_Q_QTC();
+			$this->view->arrQuestTC = $mdQTC->_filter();
+			$mdAction = new Models_Action();
+			$this->view->arrAction = $mdAction->_filter();
+		}
+	}
+	
 }
 ?>
