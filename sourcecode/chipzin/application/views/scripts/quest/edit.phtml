@@ -266,7 +266,7 @@ function validate(){
 		value = $("#task-" + key +" .form-task-"+key+" #TaskString").val();		
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString khong de trong</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString không được để trống</p>");					
 			flag=false;
 		}		
 		value = $("#task-" + key +" .form-task-"+key+" #TaskName").val();
@@ -282,7 +282,7 @@ function validate(){
 		}
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlickCoin không được để trống</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin không được để trống</p>");					
 			flag=false;
 		}
 		value = $("#task-" + key +" .form-task-"+key+" #Quantity").val();
