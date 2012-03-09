@@ -179,7 +179,7 @@ class Models_Quest_xfj extends Models_Base
 					}
 					$str .= "\n\t\t\t \"txtContent\" : \""."@quest#".trim($gifts->TaskString)."\",";
 					$str .= "\n\t\t\t \"txtHelp\" : \""."@quest#".trim($gifts->DescID)."\",";
-					$str .= "\n\t\t\t \"iconClassName\" : \"".trim($gifts->IconClassName)."\",";
+					$str .= "\n\t\t\t \"iconClassName\" : \"".trim($gifts->IconClassName)."\"";
 					$c = $this->lastId();
 					if((int)$c!=(int)$i)
 						$str .= "\n\t\t },\n";
