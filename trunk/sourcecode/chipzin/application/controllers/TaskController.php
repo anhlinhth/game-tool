@@ -191,6 +191,11 @@ class TaskController extends BaseController
 		
 	}
 		
+public function validateAction()
+	{		
+		$this->_helper->layout()->disableLayout();	
+	}
+	
 	public function savetaskAction()
 	{		
 		$this->_helper->layout()->disableLayout();		

@@ -7,7 +7,7 @@
 
 <?php //print_r($this->arrAwardItems)?>
 <div  class="mybox" id="quest">
-	<h3>Ch?nh s?a Quest</h3>
+	<h3>Thêm Quest</h3>
 	<form class="quest-info" id="form" action="" method="post" enctype="multipart/form-data">
 	  <fieldset id="info">
 		<legend>Thông tin Quest </legend>
@@ -180,6 +180,18 @@ function  deleteNeedQuest(key){
 	}	
 }
 /////////////////////////Task/////////////////////////////////
+function addTemplate(key){
+	data = $("#task-div-"+key + " .task_form").serialize();
+	$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/Template/save/'?> ",
+			data: data,		
+			success: function(msg){
+				if(parseInt(msg)==1)
+					alert("Successfull");
+			}
+		});
+}
 function addTask(key){
 	
 	count_div = $(".task-div").size();
@@ -188,16 +200,18 @@ function addTask(key){
 	if(count_form >= 3){
 		alert("Failed!!!! Limited 3 Task in a Quest");
 		return false;
-	}	
+	}
+	var dem = count_div;	
 	count_form = count_form + 1;
 	$.ajax({
-		type: "Get",
+		type: "POST",
 		url:"<?php echo $this->baseUrl.'/task/add/'?> ",
-		
+		data :"flag="+dem,
 		success: function(data){			
-			if(data != ""){				
-				var title = "<h4> Task "+count_form+"&nbsp<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask("+count_div+")'></a></h4>"
-				//var btnDelete = "<a class='tool-16 delete' title='Delete Task' href='javascript:deleteTask("+count_div+")'></a>" ;";
+			if(data != ""){
+				var btnDel = "<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask("+count_div+")'></a>";
+				var btnAddTo = "<a class='ico-16 template' title='Add To Template' href='javascript:addTemplate("+count_div+")'>Add To Template</a>";
+				var title = "<h4> Task "+count_form+"&nbsp"+btnDel+"&nbsp&nbsp&nbsp&nbsp"+btnAddTo+"</h4>";
 				var str = "<div class='task-div' id='task-div-"+count_div+"'>"+title + data+"</div";
 				//alert(str);
 				$("#task-0").before(str);
@@ -260,11 +274,30 @@ function saveTask(){
 	
 			
 }
-
+function validate(){
+	$(".task_form").each(function(key,value){
+		value = $("#task-div-" + key +" .task_form #TaskString").val();		
+		value = $("#task-div-" + key +" .task_form #TaskName").val();
+		value = $("#task-div-" + key +" .task_form #DescID").val();
+		value = $("#task-div-" + key +" .task_form #DescString").val();
+		value = $("#task-div-" + key +" .task_form #QuestTC").val();
+		value = $("#task-div-" + key +" .task_form #UnlockCoin").val();
+		value = $("#task-div-" + key +" .task_form #Quantity").val();
+		value = $("#task-div-" + key +" .task_form #Action").val();	
+		
+	});
+	return true;	
+}
 function saveAll(){	
 	quest_id = $("#QuestID").val();
 	data = $(".quest-info").serialize();		
 	$("#dialog #ct").html("");	
+	//test = validate();
+	//if(!test)
+	//	alert("false");
+	//else{
+	//	alert("true");
+	//}
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/new/'?>",
@@ -295,9 +328,13 @@ $(document).ready(function(){
 		width: 400,
 		modal: true,
 		close: function(event, ui) {
-			location.reload();	
+			
 		},
 		buttons: {
+			"Continue": function() {								
+				$(this).dialog("close");
+										
+			},
 			"Edit This Quest": function() {	
 				quest_id = $("#QuestID").val();							
 				$(this).dialog("close");
@@ -306,13 +343,28 @@ $(document).ready(function(){
 			"Add New Quest": function() {								
 				$(this).dialog("close");
 				location.reload();							
-			},
-			"Back": function() {
-				$( this ).dialog( "close" );
-				location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
 			}
 		}
 	});	
 });
-
+function loadTemplate(key){
+	var id = $("#Template"+key).val();
+	$.ajax({
+		type: "POST",		
+		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
+		data: "id=" + id,	
+		dataType: "json",
+		success: function(msg){					
+			$("#task-div-" + key +" .task_form #TaskString").val(msg.TaskString);
+			$("#task-div-" + key +" .task_form #TaskName").val(msg.TaskName);
+			$("#task-div-" + key +" .task_form #DescID").val(msg.DescID);
+			$("#task-div-" + key +" .task_form #DescString").val(msg.DescString);
+			$("#task-div-" + key +" .task_form #QuestTC").val(msg.QTC_ID);
+			$("#task-div-" + key +" .task_form #UnlockCoin").val(msg.UnlockCoin);
+			$("#task-div-" + key +" .task_form #Quantity").val(msg.Quantity);
+			$("#task-div-" + key +" .task_form #Action").val(msg.ActionID);
+		}
+	});
+	
+}
 </script>
