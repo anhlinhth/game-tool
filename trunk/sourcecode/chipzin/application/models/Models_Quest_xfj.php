@@ -33,6 +33,17 @@ class Models_Quest_xfj extends Models_Base
 		
 		return $count;
 	}
+	public function taskId()
+	{
+		$sql = "SELECT COUNT(TaskID)
+				FROM
+					q_task
+					";
+				
+		$count = $this->_db->fetchOne($sql);
+		
+		return $count;
+	}
 	public function generate($data)
 	{
 		$str .= "{";
@@ -180,7 +191,7 @@ class Models_Quest_xfj extends Models_Base
 					$str .= "\n\t\t\t \"txtContent\" : \"".trim($gifts->TaskString)."\",";
 					$str .= "\n\t\t\t \"txtHelp\" : \"".trim($gifts->DescID)."\",";
 					$str .= "\n\t\t\t \"iconClassName\" : \"".trim($gifts->IconClassName)."\"";
-					$c = $this->lastId();
+					$c = $this->taskId();
 					if((int)$c!=(int)$i)
 						$str .= "\n\t\t },\n";
 					else
