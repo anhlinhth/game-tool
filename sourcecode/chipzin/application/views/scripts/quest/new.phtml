@@ -276,13 +276,23 @@ function validate(){
 		value = $("#task-div-" + key +" .task_form #TaskString").val();		
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString khong de trong</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString không được để trống</p>");					
 			flag=false;
 		}		
 		value = $("#task-div-" + key +" .task_form #TaskName").val();
 		
 		value = $("#task-div-" + key +" .task_form #DescID").val();
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescID không được để trống</p>");	
+			flag=false;
+		}
 		value = $("#task-div-" + key +" .task_form #DescString").val();
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescString không được để trống</p>");	
+			flag=false;
+		}
 		value = $("#task-div-" + key +" .task_form #QuestTC").val();
 		value = $("#task-div-" + key +" .task_form #UnlockCoin").val();
 		if(isNaN(value))
