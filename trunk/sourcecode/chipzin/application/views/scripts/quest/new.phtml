@@ -271,30 +271,30 @@ function saveTask(){
 function validate(){
 	flag=true;
 	
-	$(".task_form").each(function(key,value){
+	$(".task_form").each(function(key,val){
 		num = key+1;
-		value = $("#task-div-" + key +" .task_form #TaskString").val();		
+		value = $(val).find(" #TaskString").val();		
 		if(value=='')
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString không được để trống</p>");					
 			flag=false;
 		}		
-		value = $("#task-div-" + key +" .task_form #TaskName").val();
+		value = $(val).find(" #TaskName").val();
 		
-		value = $("#task-div-" + key +" .task_form #DescID").val();
+		value = $(val).find(" #DescID").val();
 		if(value=='')
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescID không được để trống</p>");	
 			flag=false;
 		}
-		value = $("#task-div-" + key +" .task_form #DescString").val();
+		value = $(val).find(" #DescString").val();
 		if(value=='')
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescString không được để trống</p>");	
 			flag=false;
 		}
-		value = $("#task-div-" + key +" .task_form #QuestTC").val();
-		value = $("#task-div-" + key +" .task_form #UnlockCoin").val();
+		value = $(val).find(" #QuestTC").val();
+		value = $(val).find(" #UnlockCoin").val();
 		if(isNaN(value))
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin phải là số</p>");					
@@ -305,7 +305,7 @@ function validate(){
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlickCoin không được để trống</p>");					
 			flag=false;
 		}
-		value = $("#task-div-" + key +" .task_form #Quantity").val();
+		value = $(val).find("#Quantity").val();
 		if(isNaN(value))
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity phải là số</p>");					
@@ -316,7 +316,7 @@ function validate(){
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity không được để trống</p>");					
 			flag=false;
 		}
-		value = $("#task-div-" + key +" .task_form #Action").val();	
+		value = $(val).find("#Action").val();	
 		if(value=='')
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Hãy chọn Action</p>");					
