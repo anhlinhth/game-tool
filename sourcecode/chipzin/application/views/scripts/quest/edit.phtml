@@ -261,41 +261,37 @@ function addTarget(key){
 function validate(){
 	flag=true;
 	
-	$(".task").each(function(key,value){
+	$(".task").each(function(key,val){
 		num = key+1;
-		value = $("#task-" + key +" .form-task-"+key+" #TaskString").val();		
+		value = $(val).find(" #TaskString").val();		
 		if(value=='')
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString không được để trống</p>");					
 			flag=false;
 		}		
-		value = $("#task-" + key +" .form-task-"+key+" #TaskName").val();
+		value = $(val).find("#TaskName").val();
 		
-		value = $("#task-" + key +" .form-task-"+key+" #DescID").val();
+		
+		
+		value = $(val).find("#DescID").val();
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescID không được để trống</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescString không được để trống</p>");	
 			flag=false;
 		}
-		value = $("#task-" + key +" .form-task-"+key+" #DescString").val();
-		if(value=='')
-		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescString không được để trống</p>");					
-			flag=false;
-		}
-		value = $("#task-" + key +" .form-task-"+key+" #QuestTC").val();
-		value = $("#task-" + key +" .form-task-"+key+" #UnlockCoin").val();
+		value = $(val).find("#QuestTC").val();
+		value = $(val).find("#UnlockCoin").val();
 		if(isNaN(value))
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin phải là số</p>");					
-			flag=false;			
+			flag=false;
 		}
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin không được để trống</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlickCoin không được để trống</p>");					
 			flag=false;
 		}
-		value = $("#task-" + key +" .form-task-"+key+" #Quantity").val();
+		value = $(val).find("#Quantity").val();
 		if(isNaN(value))
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity phải là số</p>");					
@@ -306,7 +302,7 @@ function validate(){
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity không được để trống</p>");					
 			flag=false;
 		}
-		value = $("#task-" + key +" .form-task-"+key+" #Action").val();	
+		value = $(val).find("#Action").val();	
 		if(value=='')
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Hãy chọn Action</p>");					
