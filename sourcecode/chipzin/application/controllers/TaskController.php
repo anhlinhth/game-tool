@@ -287,6 +287,7 @@ class TaskController extends BaseController
 				    $obj->IconPackageName = $_POST[IconPackageName];
 				    $obj->Quantity = $_POST[Quantity];
 				    $obj->UnlockCoin = $_POST[UnlockCoin];
+			
 				    if ($_POST[TargetType] == "")
 				    {
 				    	$obj->TargetType = "NULL";
@@ -321,6 +322,8 @@ class TaskController extends BaseController
 				    $obj->QTC_ID = $_POST[QuestTC];
 				    $obj->QuestID = $_POST[QuestID];
 				    $obj->DescID = $_POST[DescID];
+				    $obj->IconClassName = $_POST[IconClassName];
+				    $obj->IconPackageName = $_POST[IconPackageName];
 				    $obj->DescString = $_POST[DescString];
 				    $form = new Forms_Task();
 				    $form->obj = $obj;

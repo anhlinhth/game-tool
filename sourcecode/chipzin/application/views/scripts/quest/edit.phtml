@@ -427,7 +427,7 @@ function saveTask(){
 			type: "POST",
 			url:"<?php echo $this->baseUrl.'/task/save/'?> ",
 			data: data + "&QuestID=" + quest_id,	
-			success: function(msg){	
+			success: function(msg){					
 				key = key+ 1;
 				if(parseInt(msg)==1){
 					$("#dialog #ct").append("<p class='success'>Task "+ key +":Success<p>");
