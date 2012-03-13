@@ -163,7 +163,11 @@ function addTemplate(key){
 		url:"<?php echo $this->baseUrl.'/Template/save/'?> ",
 		data: data,		
 		success: function(msg){				
-			alert(msg);
+			if(parseInt(msg)==1){					
+				alert("Successfull");			
+			}else{
+				alert("Error");				
+			}
 		}
 	});
 }
