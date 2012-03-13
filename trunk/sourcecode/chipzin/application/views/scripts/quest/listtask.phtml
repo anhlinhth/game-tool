@@ -16,6 +16,7 @@ foreach($this->arrTask as $key =>$val){  ?>
 <select id="template<?php echo $key;?>" onChange='javascript:loadTemplate(<?php echo $key;?>)'>
 <option value = ""></option>
 <?php 
+
 foreach ($this->arrTemp as $row)
 {
 ?>
@@ -63,6 +64,12 @@ foreach ($this->arrTemp as $row)
 		<td>DescString</td>
 		<td><input type="text" id="DescID" name="DescID" value="<?php echo $val->DescID?>"/></td>
 	</tr>
+	<tr>
+		<td>Icon Class Name</td>
+		<td><input type="text" id="IconClassName" name="IconClassName" value="<?php echo $val->IconClassName?>"/></td>
+		<td>Icon Package Name</td>
+		<td><input type="text" id="IconPackageName" name="IconPackageName" value="<?php echo $val->IconPackageName?>"/></td>		
+	</tr>
 	<tr> 
 
 		<td>Quantity (*) </td>
@@ -88,27 +95,28 @@ foreach ($this->arrTemp as $row)
 			}
 		
 		?>
-			<input type="radio" name="Target" <?php echo $chkType?> value="TargetType"> Type<input style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value="<?php echo $val->TargetType;?>"> <br>
+			<input type="radio" id="Type" name="Target" <?php echo $chkType?> value="TargetType"> Type<input  id="TargetType"  style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value="<?php echo $val->TargetType;?>"> <br>
 			<div>
-			<input type="radio" name="Target" <?php echo $chkList?>  value="TargetList"> List <a class="ico-16 add add-target" href="#"></a><br>
-			
-			<?php
-			$count = 0;
-			if($chkList == "checked"){
-				foreach ($this->arrTaskTarget as $row)
-				{
-				
-					if ($val->TaskID == $row->TaskID)
-				{
-				?>
-					<input id="target-"<?php echo $count?>" class="target-list" type="text" value="<?php echo $row->TargetID?>" name="TargetList[]" style="margin-left: 50px; width: 153px;"><br>
-					
-				<?php 
-					$count++;
-				}
-			}
-			}
-			?>
+			<input type="radio" id="List" name="Target" <?php echo $chkList?>  value="TargetList"> List <a class="ico-16 add add-target" href="#"></a><br>
+				<div class='list'>
+					<?php
+					$count = 0;
+					if($chkList == "checked"){
+						foreach ($this->arrTaskTarget as $row)
+						{
+						
+							if ($val->TaskID == $row->TaskID)
+						{
+						?>
+							
+							
+						<?php 
+							$count++;
+						}
+					}
+					}
+					?>
+				</div>
 			</div>
 		</td>
 		<td>Quest Task Client</td>
