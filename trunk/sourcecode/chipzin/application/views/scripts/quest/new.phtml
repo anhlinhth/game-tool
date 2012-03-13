@@ -395,6 +395,7 @@ function loadTemplate(key){
 		success: function(msg){	
 			
 			if(msg.TargetType==null){
+				$("#task-div-" + key +" .task_form #TargetType").val("");
 				$("#target-list-"+key + " .list").html("");
 				$("#task-div-" + key +" .task_form #List").attr("checked", true);				
 				$.each(msg.TargetList, function(key1,val){				
