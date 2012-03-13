@@ -13,4 +13,5 @@ class Obj_Template
 	public $Quantity;
 	public $ActionID;
 	public $QuestID;
+	public $TargetType;
 }

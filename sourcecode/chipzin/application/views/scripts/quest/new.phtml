@@ -241,7 +241,7 @@ function targetChange(key){
 function addTarget(key){
 	count = $("#target-list-"+key +' .target-list').size();	
 	input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>'
-	$("#target-list-"+key).append(input);
+	$("#target-list-"+key + " .list").append(input);
 }
 
 
@@ -392,7 +392,22 @@ function loadTemplate(key){
 		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
 		data: "id=" + id,	
 		dataType: "json",
-		success: function(msg){				
+		success: function(msg){	
+			
+			if(msg.TargetType==null){
+				$("#target-list-"+key + " .list").html("");
+				$("#task-div-" + key +" .task_form #List").attr("checked", true);				
+				$.each(msg.TargetList, function(key1,val){				
+					count = $("#target-list-"+key +' .target-list').size();	
+					input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value="'+val.TargetID+'"> <br>'
+					$("#target-list-"+key + " .list").append(input);
+				});
+			}else{								
+				$("#task-div-" + key +" .task_form #TargetType").val(msg.TargetType	);
+				$("#target-list-"+key + " .list").html("");
+				$("#task-div-" + key +" .task_form #Type").attr("checked", true);
+			}
+						
 			$("#task-div-" + key +" .task_form #TaskString").val(msg.TaskString);
 			$("#task-div-" + key +" .task_form #TaskName").val(msg.TaskName);
 			$("#task-div-" + key +" .task_form #DescID").val(msg.DescID);

@@ -70,10 +70,11 @@ foreach ($this->arrTemplate as $row)
 	<tr>		
 		<td rowspan=1">Target(*)</td>
 		<td rowspan="1" id="target">
-			<input checked type="radio" name="Target"  value="TargetType"> Type<input style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value=""> <br>
+			<input checked type="radio" id="Type"  name="Target"  value="TargetType"> Type<input  id="TargetType" style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value=""> <br>
 			<div id='target-list-<?php echo $this->key1;?>'>
-				<input type="radio" name="Target" value="TargetList"> List <a  class="ico-16 add add-target" href="javascript:addTarget(<?php echo $this->key1?>)"></a><br>
-			
+				<input type="radio" id="List" name="Target" value="TargetList"> List <a  class="ico-16 add add-target" href="javascript:addTarget(<?php echo $this->key1?>)"></a><br>
+				<div class='list'>
+				</div>
 			</div>
 		</td>
 		<td>Quest Task Client</td>

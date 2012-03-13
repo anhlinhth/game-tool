@@ -3,14 +3,14 @@ require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Action.php';
-require_once ROOT_APPLICATION_MODELS.DS.'Models_Task_Target.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Temp_Target.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_template.php';
 
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Template.php';
-require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task_Target.php';
+require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Temp_Target.php';
 
 
 class TemplateController extends BaseController
@@ -32,8 +32,11 @@ class TemplateController extends BaseController
 	{
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNorender();
+		
+		$md = new Models_template();
 		$temp = new Obj_Template();
-		$temp->TaskID = "NULL";
+		$TempID = $md->getID();
+		$temp->TaskID = $TempID[0][TaskID];
 		$temp->TaskName = $_POST['TaskName'];
 		$temp->TaskString = $_POST['TaskString'];
 		$temp->DescID = $_POST['DescString'];
@@ -45,8 +48,29 @@ class TemplateController extends BaseController
 		$temp->QuestID = 0;
 		$temp->IconClassName = $_POST[IconClassName];
 		$temp->IconPackageName = $_POST[IconPackageName];
-		$md = new Models_template();
-		$md->insert($temp);
+		if ($_POST[Target]=="TargetType")
+		{
+			$temp->TargetType = $_POST[TargetType];
+					$md->insert($temp);
+		}
+		else 
+		{
+			$md->insert($temp);
+			$Targetlist = $_POST[TargetList];
+			$mdTT = new Models_Temp_Target();
+			$mdTT->delete($_POST[TaskID]);
+			foreach ( $Targetlist as $row)
+			{
+				$objTT= new Obj_Temp_Target();
+				$objTT->ID = 'NULL';
+				$objTT->TargetID = $row;
+				$objTT->TaskID = $temp->TaskID;
+				if($objTT->TargetID != "")
+				{
+					$mdTT->_insert($objTT);
+				}
+			}
+		}
 		echo "1";
 	}
 	

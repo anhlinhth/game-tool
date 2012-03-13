@@ -50,5 +50,15 @@ class Models_template extends Models_Base
 		
 		return $data;		
 	}
+	
+	public  function getID()
+	{
+		$sql ="	SELECT 
+					(max(TaskID)+1) as TaskID
+				FROM
+					q_temp";
+		$data = $this->_db->fetchAll($sql);
+		return $data;
+	}
 }
 ?>
