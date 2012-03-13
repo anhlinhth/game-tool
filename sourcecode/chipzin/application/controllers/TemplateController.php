@@ -59,15 +59,18 @@ class TemplateController extends BaseController
 			$Targetlist = $_POST[TargetList];
 			$mdTT = new Models_Temp_Target();
 			$mdTT->delete($_POST[TaskID]);
-			foreach ( $Targetlist as $row)
+			if(count($Targetlist)!= 0)
 			{
-				$objTT= new Obj_Temp_Target();
-				$objTT->ID = 'NULL';
-				$objTT->TargetID = $row;
-				$objTT->TaskID = $temp->TaskID;
-				if($objTT->TargetID != "")
+				foreach ( $Targetlist as $row)
 				{
-					$mdTT->_insert($objTT);
+					$objTT= new Obj_Temp_Target();
+					$objTT->ID = 'NULL';
+					$objTT->TargetID = $row;
+					$objTT->TaskID = $temp->TaskID;
+					if($objTT->TargetID != "")
+					{
+						$mdTT->_insert($objTT);
+					}
 				}
 			}
 		}
