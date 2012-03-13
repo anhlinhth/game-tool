@@ -6,7 +6,7 @@ class Zend_View_Helper_PagingControl
 		$totalPage = ceil($totalRecord/$itemPerpage);
 		
 		if($totalPage <= 1)
-			return;
+			$totalPage = 1;
 		
 		if($curPage > 1)
 			$previousLink = "javascript:goTo(". ($curPage - 1) .")";
@@ -31,7 +31,7 @@ class Zend_View_Helper_PagingControl
 		$start		= 10;
 		$step		= 10;
 		
-		for($i = 0, $j = $start; $i < $totalPage; $i++, $j+=$step)
+		for($i = 0, $j = $start;( $i < $totalPage)||($i == $totalPage && $totalPage==1); $i++, $j+=$step)
 		{
 			$selected = $itemPerpage == $j ? ' selected ' : ' ';
 			$strList .= "<option $selected value='$j'>$j</option>";

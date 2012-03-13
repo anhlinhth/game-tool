@@ -131,7 +131,7 @@ function  addAwardItem(key){
 
 	$("#addItem").before("<div class='award_item add_item' id='award_item_"+count+"'>" +input + btnDelete+ "</div>");
 }
-
+//////////////////
 function  deleteAwardItem(key){		
 	if($("#award_item_"+key).hasClass("add_item")){
 		$("#award_item_"+key).html(""); 
@@ -143,9 +143,7 @@ function  deleteAwardItem(key){
 	$("#award_item_"+key).hide();
 
 }
-
 ////////////////////////////////
-
 function  deleteNeedQuest(key){
 	//alert("asd");
 	var div =  $("div#need_quest_" + key);
@@ -160,16 +158,17 @@ function  deleteNeedQuest(key){
 }
 /////////////////////////Task/////////////////////////////////
 function addTemplate(key){
-	data = $("#task-" + key + " .form-task-0").serialize();
+	data = $("#task-" + key + " *").serialize();	
 	$.ajax({
-			type: "POST",
-			url:"<?php echo $this->baseUrl.'/template/save/'?> ",
-			data: data,		
-			success: function(msg){				
-				alert(msg);
-			}
-		});
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/template/save/'?> ",
+		data: data,		
+		success: function(msg){				
+			alert(msg);
+		}
+	});
 }
+//////////////////////////////////////////
 function addTask(key){
 	
 	count = $(".task").size();
@@ -194,7 +193,7 @@ function addTask(key){
 		}
 	});
 }
-
+/////////////////////////////////////////
 function deleteTask(key){		
 	task_id = $("#task-"+key+" input#TaskID").val();	
 	task_name = $("#task-"+key+" input#TaskName").val();
@@ -218,6 +217,7 @@ function deleteTask(key){
 	});
 
 }
+////////////////////////////////////////
 function loadTask(key){	
 	$.ajax({
 		type: "POST",
@@ -251,6 +251,7 @@ function targetChange(key){
 		
 	}
 }
+/////////////////////////////////////
 function addTarget(key){
 	parent = $(key).parent();	
 	count = parent.children('.target-list').size();	
@@ -258,6 +259,7 @@ function addTarget(key){
 	//btn_delete();
 	parent.append(input);
 }
+////////////////////////////////
 function validate(){
 	flag=true;
 	
@@ -311,6 +313,7 @@ function validate(){
 	});
 	return flag;	
 }
+///////////////////////////////
 function saveAll(){	
 	$("#dialog #ct").html("");
 	quest_id = $("#QuestID").val();
@@ -341,6 +344,7 @@ function saveAll(){
 		});
 	}	
 }
+///////////////////////////////
 function saveTask(){
 	var key = 0;
 	$(".task").each(function (index){		
@@ -363,15 +367,16 @@ function saveTask(){
 	
 	});
 }
-
+////////////////////////////////
 function loadTemplate(key){
 	var id = $("#template"+key).val();	
 	$.ajax({
 		type: "POST",		
 		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
 		data: "id=" + id,	
-		dataType: "json",
-		success: function(msg){					
+		//dataType: "json",
+		success: function(msg){
+			alert(msg);
 			$(".form-task-" + key +" #TaskString").val(msg.TaskString);
 			$(".form-task-" + key +" #TaskName").val(msg.TaskName);
 			$(".form-task-" + key +" #DescID").val(msg.DescID);
@@ -380,13 +385,15 @@ function loadTemplate(key){
 			$(".form-task-" + key +" #UnlockCoin").val(msg.UnlockCoin);
 			$(".form-task-" + key +" #Quantity").val(msg.Quantity);
 			$(".form-task-" + key +" #Action").val(msg.ActionID);
+			$(".form-task-" + key +" #TargetType").val(msg.TargetType);
 		}
-	});
-	
+	});	
 }
-$(document).ready(function(){	
+////////////////////////////////
+$(document).ready(function(){
+	///////////////////////////////
 	loadTask(<?php echo $this->obj->QuestID?>);	
-		
+	/////////////////////////////////	
 	$("#dialog").dialog({
 		autoOpen: false,
 		height: 300,
@@ -406,7 +413,7 @@ $(document).ready(function(){
 			}
 		}
 	});	
-	
+	///////////////////////////////
 });
 
 </script>
