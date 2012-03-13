@@ -157,10 +157,10 @@ function  deleteNeedQuest(key){
 }
 /////////////////////////Task/////////////////////////////////
 function addTemplate(key){
-	data = $("#task-" + key + " *").serialize();	
+	data = $(".form-task-" + key).serialize();	
 	$.ajax({
 		type: "POST",
-		url:"<?php echo $this->baseUrl.'/template/save/'?> ",
+		url:"<?php echo $this->baseUrl.'/Template/save/'?> ",
 		data: data,		
 		success: function(msg){				
 			alert(msg);
@@ -256,7 +256,7 @@ function addTarget(key){
 	count = parent.children('.target-list').size();	
 	input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>';
 	//btn_delete();
-	parent.append(input);
+	parent.children('.list').append(input);
 }
 ////////////////////////////////
 function validate(){
@@ -434,18 +434,31 @@ function loadTemplate(key){
 		type: "POST",		
 		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
 		data: "id=" + id,	
-		//dataType: "json",
-		success: function(msg){
-			alert(msg);
+		dataType: "json",
+		success: function(msg){			
 			$(".form-task-" + key +" #TaskString").val(msg.TaskString);
 			$(".form-task-" + key +" #TaskName").val(msg.TaskName);
 			$(".form-task-" + key +" #DescID").val(msg.DescID);
 			$(".form-task-" + key +" #DescString").val(msg.DescString);
 			$(".form-task-" + key +" #QuestTC").val(msg.QTC_ID);
+			$(".form-task-" + key +" #Action").val(msg.ActionID);
 			$(".form-task-" + key +" #UnlockCoin").val(msg.UnlockCoin);
 			$(".form-task-" + key +" #Quantity").val(msg.Quantity);
-			$(".form-task-" + key +" #Action").val(msg.ActionID);
-			$(".form-task-" + key +" #TargetType").val(msg.TargetType);
+			$(".form-task-" + key +" #IconClassName").val(msg.IconClassName);			
+			$(".form-task-" + key +" #IconPackageName").val(msg.IconPackageName);
+			if(msg.TargetType==null){				
+				$(".form-task-" + key+ " .list").html("");
+				$(".form-task-" + key+ " #List").attr("checked", true);				
+				$.each(msg.TargetList, function(key1,val){				
+					count = $(".form-task-" + key+' .target-list').size();	
+					input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value="'+val.TargetID+'"> <br>'
+					$(".form-task-" + key + " .list").append(input);
+				});
+			}else{								
+				$(".form-task-" + key + " #TargetType").val(msg.TargetType);
+				$(".form-task-" + key + " .list").html("");
+				$(".form-task-" + key + " #Type").attr("checked", true);
+			}
 		}
 	});	
 }

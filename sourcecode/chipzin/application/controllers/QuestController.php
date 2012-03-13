@@ -365,7 +365,8 @@ public function importAction() {
 			$mdtemp = new Models_template();
 	
 			//Hiện List q_action
-			$this->view->arrTask = $md->getTask($questid);			
+			$this->view->arrTask = $md->getTask($questid);
+						
 			$this->view->arrAction = $mdAction->_getAction();
 			$this->view->arrTemp = $mdtemp->_filter();
 			$this->view->arrTaskTarget = $mdTT->select($questid);
