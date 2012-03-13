@@ -128,6 +128,7 @@ class Models_Quest_xfj extends Models_Base
 					$str .= "\n\t\t\t \"quantity\" : ".(int)$gifts->Quantity.",";
 					$objSearch->task_package_id = $gifts->id;
 					$sf=$am->_filter($objSearch);
+					
 					if($sf)
 					{
 						foreach ($sf as $sf)
@@ -171,11 +172,12 @@ class Models_Quest_xfj extends Models_Base
 						{
 							foreach ($sf as $sf)
 							{
-						
-								if((int)$sf->TaskID==(int)$this->TaskID&&$a==0)
+								//var_dump($gift);
+								//exit();
+								if((int)$sf->TaskID==(int)$gifts->TaskID&&$a==0)
 								{
 									$str .="\n\t\t\t \"entityType\" : ["."\"".(int)$sf->TargetID."\"";
-									$a++;
+									$a=1;
 									continue;
 								}
 								if((int)$sf->TaskID==(int)$gifts->TaskID&&$a==1)
