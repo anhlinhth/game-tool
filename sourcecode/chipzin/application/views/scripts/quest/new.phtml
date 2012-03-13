@@ -334,8 +334,6 @@ function saveAll(){
 	if(test==false)
 		$("#dialog").dialog("open");
 	else{
-	//	alert("true");
-	
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/new/'?>",
