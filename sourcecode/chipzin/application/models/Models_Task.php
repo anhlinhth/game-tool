@@ -34,7 +34,18 @@ class Models_Task extends Models_Base
 		
 		return $data;
 	}
-	
+	public function findtemplate()
+	{
+		$sql = "SELECT
+					*
+				FROM
+					q_task
+				WHERE Template = 1";
+		
+		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}
 	public  function listQuestInTask()
 	{
 		$sql = "SELECT DISTINCT
