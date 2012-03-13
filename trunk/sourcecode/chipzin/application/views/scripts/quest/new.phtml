@@ -210,8 +210,9 @@ function addTask(key){
 			if(data != ""){
 				var btnDel = "<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask("+count_div+")'></a>";
 				var btnAddTo = "<a class='ico-16 template' title='Add To Template' href='javascript:addTemplate("+count_div+")'>Add To Template</a>";
-				var title = "<h4> Task "+count_form+"&nbsp"+btnDel+"&nbsp&nbsp&nbsp&nbsp"+btnAddTo+"</h4>";
-				var str = "<div class='task-div' id='task-div-"+count_div+"'>"+title + data+"</div";
+				var edittemp = "<a title='Edit Temp' href='<?php echo $this->baseUrl.'/template'?>'>Edit Template</a>";
+				var title = "<h4> Task "+count_form+"&nbsp"+btnDel+"&nbsp&nbsp&nbsp&nbsp"+btnAddTo+edittemp+"</h4>";
+				var str = "<div class='task-div' id='task-div-"+count_div+"'>"+title + data+"</div>";
 				$("#task-0").before(str);
 				
 			}else{
