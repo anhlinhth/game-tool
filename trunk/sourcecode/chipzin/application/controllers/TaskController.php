@@ -283,7 +283,8 @@ class TaskController extends BaseController
 				    $obj->TaskName = $_POST[TaskName];
 				    $obj->TaskString = $_POST[TaskString];
 				    $obj->ActionID = $_POST[Action];
-				    
+				    $obj->IconClassName = $_POST[IconClassName];
+				    $obj->IconPackageName = $_POST[IconPackageName];
 				    $obj->Quantity = $_POST[Quantity];
 				    $obj->UnlockCoin = $_POST[UnlockCoin];
 				    if ($_POST[TargetType] == "")
