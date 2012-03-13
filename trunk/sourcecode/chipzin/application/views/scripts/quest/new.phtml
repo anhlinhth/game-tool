@@ -332,6 +332,11 @@ function validate(){
 				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType không được bỏ trống</p>");					
 				flag=false;
 			}
+			else if(isNaN(targetType))
+			{
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType phải là số</p>");					
+				flag=false;
+			}
 		}
 		else
 		{			
@@ -346,6 +351,11 @@ function validate(){
 			{
 				
 				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList không được bỏ trống</p>");					
+				flag=false;
+			}
+			else if(isNaN(targetList) &&count!=0)
+			{
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList phải là số</p>");					
 				flag=false;
 			}
 		}		
