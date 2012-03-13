@@ -13,6 +13,7 @@ foreach($this->arrTask as $key =>$val){  ?>
 <div class='task' id="task-<?php echo $key;?>">
 <h4><a href="#">+</a>Task <?php echo $key+1?>&nbsp;&nbsp;<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask(<?php echo $key?>)'></a>
 <a class='ico-16 ' title='Delete Task' href='javascript:addTemplate(<?php echo $key?>)'>Add to Template</a>
+<a class=icon-16 ' title='Edit Template' href='<?php echo $this->baseUrl.'/template'?>'>Edit Template</a>
 <select id="template<?php echo $key;?>" onChange='javascript:loadTemplate(<?php echo $key;?>)'>
 <option value = ""></option>
 <?php 
