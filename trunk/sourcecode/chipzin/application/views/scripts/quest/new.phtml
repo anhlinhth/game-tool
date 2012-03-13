@@ -184,10 +184,9 @@ function addTemplate(key){
 	data = $("#task-div-"+key + " .task_form").serialize();
 	$.ajax({
 			type: "POST",
-			url:"<?php echo $this->baseUrl.'/test/testpost/'?> ",
+			url:"<?php echo $this->baseUrl.'/Template/save/'?> ",
 			data: data,		
 			success: function(msg){
-				alert(msg);
 				if(parseInt(msg)==1)
 					alert("Successfull");
 			}
@@ -241,8 +240,8 @@ function targetChange(key){
 }
 function addTarget(key){
 	count = $("#target-list-"+key +' .target-list').size();	
-	input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>'
-	$("#target-list-"+key + " .list").append(input);
+	input ='<input id = "target-'+count+'"  class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>'
+	$("#target-list-"+key).append(input);
 }
 
 
@@ -323,8 +322,35 @@ function validate(){
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Hãy chọn Action</p>");					
 			flag=false;
 		}
+		
+		target = $(val).find("#target :radio:checked").val();		
+		if(target == "TargetType")
+		{
+			targetType=$(val).find("#TargetType").val();
+			if(targetType=='')
+			{
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType không được bỏ trống</p>");					
+				flag=false;
+			}
+		}
+		else
+		{			
+			targetList=$(val).find(".target-list").val();
+			count = $(val).find(".target-list").size();			
+			if(count==0)
+			{								
+					$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList chưa được tạo</p>");					
+					flag=false;				
+			}
+			else if(targetList=='' && count!=0)
+			{
+				
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList không được bỏ trống</p>");					
+				flag=false;
+			}
+		}		
 	});
-	return flag;	
+		return flag;	
 }
 function saveAll(){	
 	quest_id = $("#QuestID").val();
@@ -332,7 +358,18 @@ function saveAll(){
 	$("#dialog #ct").html("");	
 	test = validate();
 	if(test==false)
-		$("#dialog").dialog("open");
+	{
+		$("#dialog").dialog({			
+			height: 400,
+			width: 350,
+			modal: true,
+			buttons: {
+				"Continue": function() {								
+					$(this).dialog("close");						
+				}										
+			}
+		});
+	}	
 	else{
 	$.ajax({
 		type: "POST",
@@ -342,11 +379,40 @@ function saveAll(){
 			if(parseInt(msg)==1){	
 				$("#dialog #ct").append("<p class='msg'>Add Quest Success<p>");
 				saveTask();	
-				$("#dialog").dialog("open");
-			}else{
-				//alert("false");
+				//$("#dialog").dialog("open");
+				$("#dialog").dialog({
+					height: 300,
+					width: 350,
+					modal: true,
+					buttons: {
+						"Success": function() {								
+							$(this).dialog("close");
+							location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
+						},
+						"Edit": function() {								
+							$(this).dialog("close");
+							location.replace("<?php echo $this->baseUrl.'/quest/edit/id/'?>"+quest_id);
+							//alert(quest_id);
+						},
+						"New": function() {								
+							$(this).dialog("close");
+							location.replace("<?php echo $this->baseUrl.'/quest/new/'?>");							
+						}										
+					}
+					});
+			}else{				
 				$("#dialog #ct").append("<p class='error'>Failed:<br>"+msg+"<p>");				
-				$("#dialog").dialog("open");
+				$("#dialog").dialog({
+					height: 300,
+					width: 350,
+					modal: true,
+					buttons: {
+						"Error": function() {								
+							$(this).dialog("close");
+							//location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
+						}
+					}
+					});
 			}
 						
 								
@@ -357,7 +423,33 @@ function saveAll(){
 /////////////////////////////
 
 
-////////////////////////////////////Load template//////////////////////
+//$(document).ready(function(){	
+//	
+//	$("#dialog").dialog({
+//		autoOpen: false,
+//		height: 400,
+//		width: 400,
+//		modal: true,
+//		close: function(event, ui) {
+//			
+//		},
+//		buttons: {
+//			"Continue": function() {								
+//				$(this).dialog("close");
+//										
+//			},
+//			"Edit This Quest": function() {	
+//				quest_id = $("#QuestID").val();							
+//				$(this).dialog("close");
+//				window.location.replace("<?php echo $this->baseUrl.'/quest/edit/id/'?>"+quest_id);				
+//			},
+//			"Add New Quest": function() {								
+//				$(this).dialog("close");
+//				location.reload();							
+//			}
+//		}
+//	});	
+//});
 function loadTemplate(key){
 	var id = $("#Template"+key).val();
 	$.ajax({
@@ -365,23 +457,7 @@ function loadTemplate(key){
 		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
 		data: "id=" + id,	
 		dataType: "json",
-		success: function(msg){	
-			
-			if(msg.TargetType==null){
-				$("#task-div-" + key +" .task_form #TargetType").val("");
-				$("#target-list-"+key + " .list").html("");
-				$("#task-div-" + key +" .task_form #List").attr("checked", true);				
-				$.each(msg.TargetList, function(key1,val){				
-					count = $("#target-list-"+key +' .target-list').size();	
-					input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value="'+val.TargetID+'"> <br>';
-					$("#target-list-"+key + " .list").append(input);
-				});
-			}else{								
-				$("#task-div-" + key +" .task_form #TargetType").val(msg.TargetType	);
-				$("#target-list-"+key + " .list").html("");
-				$("#task-div-" + key +" .task_form #Type").attr("checked", true);
-			}
-						
+		success: function(msg){					
 			$("#task-div-" + key +" .task_form #TaskString").val(msg.TaskString);
 			$("#task-div-" + key +" .task_form #TaskName").val(msg.TaskName);
 			$("#task-div-" + key +" .task_form #DescID").val(msg.DescID);
@@ -390,8 +466,6 @@ function loadTemplate(key){
 			$("#task-div-" + key +" .task_form #UnlockCoin").val(msg.UnlockCoin);
 			$("#task-div-" + key +" .task_form #Quantity").val(msg.Quantity);
 			$("#task-div-" + key +" .task_form #Action").val(msg.ActionID);
-			$("#task-div-" + key +" .task_form #IconClassName").val(msg.IconClassName);
-			$("#task-div-" + key +" .task_form #IconPackageName").val(msg.IconPackageName);
 		}
 	});
 	
