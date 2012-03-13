@@ -7,7 +7,7 @@
 
 <?php //print_r($this->arrAwardItems)?>
 <div  class="mybox" id="quest">
-	<h3>Chỉnh sửa Quest</h3>
+	<h3>Ch?nh s?a Quest</h3>
 	<form class="quest" id="form" action="" method="post">
 	  <fieldset id="info">
 		<legend>Thông tin Quest </legend>
@@ -123,8 +123,7 @@
 function  addAwardItem(key){	
 	var count = $(".award_item").size();
 	count = count;
-	//alert(count);
-	
+	//alert(count);	
 	var btnDelete = "&nbsp<a class='tool-16 delete' title='Delete Item' href='javascript:deleteAwardItem("+count+")'></a>" ;
 	var input = "<label></label><input name='additem[]' value='' id='' type='text' tabindex='1'/>";
 	
@@ -273,12 +272,10 @@ function validate(){
 		}		
 		value = $(val).find("#TaskName").val();
 		
-		
-		
 		value = $(val).find("#DescID").val();
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescString không được để trống</p>");	
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescString không được bỏ trống</p>");	
 			flag=false;
 		}
 		value = $(val).find("#QuestTC").val();
@@ -310,6 +307,30 @@ function validate(){
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Hãy chọn Action</p>");					
 			flag=false;
 		}
+		//////////////
+		target = $(val).find("#target :radio:checked").val();
+		if(target == "TargetType"){
+			targetType=$(val).find("#TargetType").val();
+			if(targetType=='')
+			{
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType không được bỏ trống</p>");					
+				flag=false;
+			}
+		}else{			
+			targetList=$(val).find(".target-list").val();
+			count = $(val).find(".target-list").size();			
+			if(count==0)
+			{								
+					$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList chưa được tạo</p>");					
+					flag=false;				
+			}
+			else if(targetList=='' &&count!=0 )
+			{
+				
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList không được bỏ trống</p>");					
+				flag=false;
+			}
+		}
 	});
 	return flag;	
 }
@@ -317,31 +338,69 @@ function validate(){
 function saveAll(){	
 	$("#dialog #ct").html("");
 	quest_id = $("#QuestID").val();
-	s = $("form#form").serialize();
-	
+	s = $("form#form").serialize();	
 	test = validate();
 	if(test==false)
 	{
-		$("#dialog").dialog("open");		
-	}else{
+		$("#dialog").dialog({			
+			height: 300,
+			width: 350,
+			modal: true,
+			buttons: {
+				"Continue": function() {								
+					$(this).dialog("close");						
+				}										
+			}
+			});		
+	}
+	else
+	{
 		$.ajax({
-				type: "POST",
-				url:"<?php echo $this->baseUrl.'/quest/edit/'?> ",
-				data: s,	
-				success: function(msg){		
-					if(parseInt(msg)==1){
-					
-						$("#dialog #ct").append("<p class='msg'>Update Quest Success<p>");
-						saveTask();
-						$("#dialog").dialog("open");
-						
-					}else{
-						$("#dialog #ct").append("<p class='error'>Failed:<br>"+msg+"<p>");				
-						$("#dialog").dialog("open");			
-					}
-					
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/new/'?>",
+			data: s,		
+			success: function(msg){				
+				if(parseInt(msg)==1){	
+					$("#dialog #ct").append("<p class='msg'>Add Quest Success<p>");
+					saveTask();	
+					//$("#dialog").dialog("open");
+					$("#dialog").dialog({
+						height: 300,
+						width: 350,
+						modal: true,
+						buttons: {
+							"Success": function() {								
+								$(this).dialog("close");
+								location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
+							},
+							"Edit": function() {								
+								$(this).dialog("close");
+								location.replace("<?php echo $this->baseUrl.'/quest/edit/id/'?>"+quest_id);
+								//alert(quest_id);
+							},
+							"New": function() {								
+								$(this).dialog("close");
+								location.replace("<?php echo $this->baseUrl.'/quest/new/'?>");							
+							}										
+						}
+						});
+				}else{				
+					$("#dialog #ct").append("<p class='error'>Failed:<br>"+msg+"<p>");				
+					$("#dialog").dialog({
+						height: 300,
+						width: 350,
+						modal: true,
+						buttons: {
+							"Error": function() {								
+								$(this).dialog("close");														
+							}
+						}
+						});
 				}
-		});
+							
+									
+			}
+		});	
 	}	
 }
 ///////////////////////////////
@@ -359,7 +418,8 @@ function saveTask(){
 				if(parseInt(msg)==1){
 					$("#dialog #ct").append("<p class='success'>Task "+ key +":Success<p>");
 				}else{					
-					$("#dialog #ct").append("<p class='error'>Task " + key + ":	<br>"+ msg + "</p>");					
+					$("#dialog #ct").append("<p class='error'>Task " + key + ":	<br>"+ msg + "</p>");
+										
 				}	
 				
 			}
@@ -393,27 +453,8 @@ function loadTemplate(key){
 $(document).ready(function(){
 	///////////////////////////////
 	loadTask(<?php echo $this->obj->QuestID?>);	
-	/////////////////////////////////	
-	$("#dialog").dialog({
-		autoOpen: false,
-		height: 300,
-		width: 350,
-		modal: true,
-		buttons: {
-			"Continue": function() {								
-				$(this).dialog("close");						
-			},
-			"Refresh": function() {								
-				$(this).dialog("close");
-				location.reload();				
-			},			
-			"Back": function() {
-				$( this ).dialog( "close" );
-				location.replace("<?php echo $this->baseUrl.'/quest/'?>");	
-			}
-		}
-	});	
 	///////////////////////////////
+	
 });
 
 </script>
