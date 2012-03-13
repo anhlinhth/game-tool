@@ -357,33 +357,6 @@ function saveAll(){
 /////////////////////////////
 
 
-$(document).ready(function(){	
-	
-	$("#dialog").dialog({
-		autoOpen: false,
-		height: 400,
-		width: 400,
-		modal: true,
-		close: function(event, ui) {
-			
-		},
-		buttons: {
-			"Continue": function() {								
-				$(this).dialog("close");
-										
-			},
-			"Edit This Quest": function() {	
-				quest_id = $("#QuestID").val();							
-				$(this).dialog("close");
-				window.location.replace("<?php echo $this->baseUrl.'/quest/edit/id/'?>"+quest_id);				
-			},
-			"Add New Quest": function() {								
-				$(this).dialog("close");
-				location.reload();							
-			}
-		}
-	});	
-});
 ////////////////////////////////////Load template//////////////////////
 function loadTemplate(key){
 	var id = $("#Template"+key).val();
