@@ -461,6 +461,7 @@ function saveAll(){
 //		}
 //	});	
 //});
+////////////////////////////////////Load template//////////////////////
 function loadTemplate(key){
 	var id = $("#Template"+key).val();
 	$.ajax({
@@ -468,7 +469,23 @@ function loadTemplate(key){
 		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
 		data: "id=" + id,	
 		dataType: "json",
-		success: function(msg){					
+		success: function(msg){	
+			
+			if(msg.TargetType==null){
+				$("#task-div-" + key +" .task_form #TargetType").val("");
+				$("#target-list-"+key + " .list").html("");
+				$("#task-div-" + key +" .task_form #List").attr("checked", true);				
+				$.each(msg.TargetList, function(key1,val){				
+					count = $("#target-list-"+key +' .target-list').size();	
+					input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value="'+val.TargetID+'"> <br>';
+					$("#target-list-"+key + " .list").append(input);
+				});
+			}else{								
+				$("#task-div-" + key +" .task_form #TargetType").val(msg.TargetType	);
+				$("#target-list-"+key + " .list").html("");
+				$("#task-div-" + key +" .task_form #Type").attr("checked", true);
+			}
+						
 			$("#task-div-" + key +" .task_form #TaskString").val(msg.TaskString);
 			$("#task-div-" + key +" .task_form #TaskName").val(msg.TaskName);
 			$("#task-div-" + key +" .task_form #DescID").val(msg.DescID);
@@ -477,6 +494,8 @@ function loadTemplate(key){
 			$("#task-div-" + key +" .task_form #UnlockCoin").val(msg.UnlockCoin);
 			$("#task-div-" + key +" .task_form #Quantity").val(msg.Quantity);
 			$("#task-div-" + key +" .task_form #Action").val(msg.ActionID);
+			$("#task-div-" + key +" .task_form #IconClassName").val(msg.IconClassName);
+			$("#task-div-" + key +" .task_form #IconPackageName").val(msg.IconPackageName);
 		}
 	});
 	

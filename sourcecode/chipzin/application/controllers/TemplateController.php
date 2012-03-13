@@ -37,6 +37,10 @@ class TemplateController extends BaseController
 		$temp = new Obj_Template();
 		$TempID = $md->getID();
 		$temp->TaskID = $TempID[0][TaskID];
+		if($temp->TaskID == "")
+		{
+			$temp->TaskID = "1";
+		}
 		$temp->TaskName = $_POST['TaskName'];
 		$temp->TaskString = $_POST['TaskString'];
 		$temp->DescID = $_POST['DescString'];
@@ -58,7 +62,7 @@ class TemplateController extends BaseController
 			$md->insert($temp);
 			$Targetlist = $_POST[TargetList];
 			$mdTT = new Models_Temp_Target();
-			$mdTT->delete($_POST[TaskID]);
+			$mdTT->delete($temp->TaskID);
 			if(count($Targetlist)!= 0)
 			{
 				foreach ( $Targetlist as $row)
@@ -139,6 +143,25 @@ class TemplateController extends BaseController
 			$this->view->arrAction = $mdAction->_filter();
 		}
 	}
-	
+	public function deleteAction()
+	{
+		try
+		{
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();
+			$id = $this->_request->getParam("id"); //luu y cho nay nen dat id trung csd			
+			$md = new Models_template();
+			$md_target = new Models_Temp_Target();
+			$md_target->delete($id);
+			$md->_delete($id);				
+			Models_Log::insert($this->view->user->username, "act_delete_temp");
+			echo "Thành công";			
+		}
+		catch(Exception $ex)
+        {            
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
+	}
 }
 ?>
