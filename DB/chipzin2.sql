@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 13, 2012 at 05:11 AM
+-- Generation Time: Mar 13, 2012 at 08:18 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -11326,20 +11326,22 @@ INSERT INTO `q_task_target` (`ID`, `TaskID`, `TargetID`) VALUES
 
 CREATE TABLE IF NOT EXISTS `q_temp` (
   `TaskID` int(11) NOT NULL AUTO_INCREMENT,
-  `TaskName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `TaskString` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `DescID` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `DescString` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TaskName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TaskString` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `DescID` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `DescString` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `QTC_ID` int(11) DEFAULT NULL,
   `UnlockCoin` int(11) DEFAULT NULL,
-  `IconClassName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `IconPackageName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IconClassName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IconPackageName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Quantity` int(11) DEFAULT NULL,
   `ActionID` int(11) DEFAULT NULL,
   `QuestID` int(11) DEFAULT NULL,
   `	TargetType` int(11) DEFAULT NULL,
-  PRIMARY KEY (`TaskID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`TaskID`),
+  KEY `QTC_ID` (`QTC_ID`,`ActionID`),
+  KEY `ActionID` (`ActionID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -11488,6 +11490,13 @@ ALTER TABLE `q_task`
 --
 ALTER TABLE `q_task_target`
   ADD CONSTRAINT `q_task_target_ibfk_1` FOREIGN KEY (`TaskID`) REFERENCES `q_task` (`TaskID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `q_temp`
+--
+ALTER TABLE `q_temp`
+  ADD CONSTRAINT `q_temp_ibfk_2` FOREIGN KEY (`ActionID`) REFERENCES `q_action` (`ActionID`) ON DELETE SET NULL ON UPDATE NO ACTION,
+  ADD CONSTRAINT `q_temp_ibfk_1` FOREIGN KEY (`QTC_ID`) REFERENCES `q_questtaskclient` (`QTC_ID`) ON DELETE SET NULL ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `q_temp_target`
