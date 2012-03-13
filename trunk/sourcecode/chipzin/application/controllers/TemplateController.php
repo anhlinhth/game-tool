@@ -43,6 +43,8 @@ class TemplateController extends BaseController
 		$temp->Quantity = $_POST['Quantity'];
 		$temp->ActionID = $_POST['Action'];
 		$temp->QuestID = 0;
+		$temp->IconClassName = $_POST[IconClassName];
+		$temp->IconPackageName = $_POST[IconPackageName];
 		$md = new Models_template();
 		$md->insert($temp);
 		echo "1";
