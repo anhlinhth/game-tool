@@ -109,10 +109,17 @@ class TaskController extends BaseController
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Template.php';
 			$mdtemp = new Models_template();
 			$return = $mdtemp->_getByKey($_POST[id]);
-			if($this->_request->isPost())// da post du lieu len
+			$arr =  (array)$return;
+			if($return->TargetType == "")
 			{
-				echo json_encode( (array)$return);
+				require_once ROOT_APPLICATION_MODELS.DS.'Models_Temp_Target.php';
+				$mdtt = new Models_Temp_Target();
+				$arrTarget = (array)$mdtt->selectTarget($_POST[id]);
+				$arr["TargetList"] = $arrTarget;				
+			}else{
+				
 			}
+			echo json_encode($arr);
 			
 		}
 		catch(Exception $ex)
