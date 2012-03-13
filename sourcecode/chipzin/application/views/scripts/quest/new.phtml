@@ -385,6 +385,7 @@ $(document).ready(function(){
 		}
 	});	
 });
+////////////////////////////////////Load template//////////////////////
 function loadTemplate(key){
 	var id = $("#Template"+key).val();
 	$.ajax({
@@ -400,7 +401,7 @@ function loadTemplate(key){
 				$("#task-div-" + key +" .task_form #List").attr("checked", true);				
 				$.each(msg.TargetList, function(key1,val){				
 					count = $("#target-list-"+key +' .target-list').size();	
-					input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value="'+val.TargetID+'"> <br>'
+					input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value="'+val.TargetID+'"> <br>';
 					$("#target-list-"+key + " .list").append(input);
 				});
 			}else{								
