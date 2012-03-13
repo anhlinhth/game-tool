@@ -9,8 +9,10 @@ class Obj_Task
 	public $QTC_ID;
 	public $UnlockCoin;
 	public $IconClassName;
+	public $IconPackageName;
 	public $Quantity;
 	public $ActionID;
 	public $QuestID;
 	public $TargetType;
+	
 }

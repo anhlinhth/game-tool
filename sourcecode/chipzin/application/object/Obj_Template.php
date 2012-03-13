@@ -9,6 +9,7 @@ class Obj_Template
 	public $QTC_ID;
 	public $UnlockCoin;
 	public $IconClassName;
+	public $IconPackageName;
 	public $Quantity;
 	public $ActionID;
 	public $QuestID;

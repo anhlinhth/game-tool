@@ -392,7 +392,7 @@ function loadTemplate(key){
 		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
 		data: "id=" + id,	
 		dataType: "json",
-		success: function(msg){					
+		success: function(msg){				
 			$("#task-div-" + key +" .task_form #TaskString").val(msg.TaskString);
 			$("#task-div-" + key +" .task_form #TaskName").val(msg.TaskName);
 			$("#task-div-" + key +" .task_form #DescID").val(msg.DescID);
@@ -401,6 +401,8 @@ function loadTemplate(key){
 			$("#task-div-" + key +" .task_form #UnlockCoin").val(msg.UnlockCoin);
 			$("#task-div-" + key +" .task_form #Quantity").val(msg.Quantity);
 			$("#task-div-" + key +" .task_form #Action").val(msg.ActionID);
+			$("#task-div-" + key +" .task_form #IconClassName").val(msg.IconClassName);
+			$("#task-div-" + key +" .task_form #IconPackageName").val(msg.IconPackageName);
 		}
 	});
 	
