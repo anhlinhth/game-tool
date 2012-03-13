@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 13, 2012 at 04:05 AM
+-- Generation Time: Mar 13, 2012 at 05:11 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -11150,7 +11150,7 @@ CREATE TABLE IF NOT EXISTS `q_quest` (
   KEY `QuestLineID` (`QuestLineID`),
   KEY `NextQuest` (`NextQuest`,`QuestLineID`),
   KEY `NextQuest_2` (`NextQuest`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `q_quest`
@@ -11256,7 +11256,7 @@ CREATE TABLE IF NOT EXISTS `q_task` (
   `QTC_ID` int(11) DEFAULT NULL,
   `UnlockCoin` int(11) NOT NULL,
   `IconClassName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `	IconPackageName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IconPackageName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Quantity` int(11) NOT NULL,
   `ActionID` int(11) NOT NULL,
   `QuestID` int(11) NOT NULL,
@@ -11265,13 +11265,13 @@ CREATE TABLE IF NOT EXISTS `q_task` (
   KEY `QuestID` (`QuestID`),
   KEY `QTC_ID` (`QTC_ID`,`ActionID`,`QuestID`),
   KEY `ActionID` (`ActionID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `q_task`
 --
 
-INSERT INTO `q_task` (`TaskID`, `TaskName`, `TaskString`, `DescID`, `DescString`, `QTC_ID`, `UnlockCoin`, `IconClassName`, `	IconPackageName`, `Quantity`, `ActionID`, `QuestID`, `TargetType`) VALUES
+INSERT INTO `q_task` (`TaskID`, `TaskName`, `TaskString`, `DescID`, `DescString`, `QTC_ID`, `UnlockCoin`, `IconClassName`, `IconPackageName`, `Quantity`, `ActionID`, `QuestID`, `TargetType`) VALUES
 (7, 'Xây thêm 1 Ô đất', '@quest#49', '@quest#51', '', 4, 1, NULL, NULL, 1, 1, 1, NULL),
 (9, 'Gieo trồng 1 vụ Lúa', '@quest#50', '@quest#52', '', 13, 1, NULL, NULL, 1, 1001, 1, NULL),
 (10, 'Thu hoạch 1 Lúa ', '@quest#56 ', '@quest#57', '', 7, 1, NULL, NULL, 1, 1002, 2, NULL),
@@ -11298,7 +11298,7 @@ CREATE TABLE IF NOT EXISTS `q_task_target` (
   `TargetID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `TaskID` (`TaskID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `q_task_target`
@@ -11333,13 +11333,13 @@ CREATE TABLE IF NOT EXISTS `q_temp` (
   `QTC_ID` int(11) DEFAULT NULL,
   `UnlockCoin` int(11) DEFAULT NULL,
   `IconClassName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `	IconPackageName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `IconPackageName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Quantity` int(11) DEFAULT NULL,
   `ActionID` int(11) DEFAULT NULL,
   `QuestID` int(11) DEFAULT NULL,
   `	TargetType` int(11) DEFAULT NULL,
   PRIMARY KEY (`TaskID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
