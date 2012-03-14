@@ -1,0 +1,140 @@
+<?php
+return array
+(
+1 => array(
+	'group'=> 7,
+	'needQuest' => NULL,
+	'tasks' => 
+	array(
+	 0 => 7 ,
+	 1 => 28 ,
+	),
+	'award' => 
+  array(
+	'Honour'=> 2,
+	'Gold'=> 0
+			),
+),
+2 => array(
+	'group'=> 7,
+	'needQuest' =>1,
+	'tasks' => 
+	array(
+	 0 => 10 ,
+	 1 => 26 ,
+	),
+	'award' => 
+  array(
+	'Honour'=> 1,
+	'Gold'=> 0
+			),
+),
+3 => array(
+	'group'=> 7,
+	'needQuest' =>2,
+	'tasks' => 
+	array(
+	 0 => 11 ,
+	),
+	'award' => 
+  array(
+	'Honour'=> 1,
+	'Gold'=> 0
+			),
+),
+4 => array(
+	'group'=> 7,
+	'needQuest' =>3,
+	'tasks' => 
+	array(
+	 0 => 12 ,
+	),
+	'award' => 
+  array(
+	'Honour'=> 1,
+	'Gold'=> 0
+			),
+),
+5 => array(
+	'group'=> 7,
+	'needQuest' =>4,
+	'tasks' => 
+	array(
+	 0 => 13 ,
+	),
+	'award' => 
+  array(
+	'Honour'=> 2,
+	'Gold'=> 0
+			),
+),
+6 => array(
+	'group'=> 7,
+	'needQuest' =>5,
+	'tasks' => 
+	array(
+	 0 => 14 ,
+	),
+	'award' => 
+  array(
+	'Honour'=> 2,
+	'Gold'=> 0
+			),
+),
+7 => array(
+	'group'=> 7,
+	'needQuest' =>6,
+	'tasks' => 
+	array(
+	 0 => 15 ,
+	 1 => 18 ,
+	),
+	'award' => 
+  array(
+	'Honour'=> 2,
+	'Gold'=> 0
+			),
+),
+8 => array(
+	'group'=> 7,
+	'needQuest' =>10,
+	'tasks' => 
+	array(
+	 0 => 16 ,
+	),
+	'award' => 
+  array(
+	'Honour'=> 2,
+	'Gold'=> 0
+			),
+),
+9 => array(
+	'group'=> 7,
+	'needQuest' =>7,
+	'tasks' => 
+	array(
+	 0 => 19 ,
+	),
+	'award' => 
+  array(
+	'Honour'=> 2,
+	'Gold'=> 0
+			),
+),
+10 => array(
+	'group'=> 7,
+	'needQuest' =>9,
+	'tasks' => 
+	array(
+	 0 => 20 ,
+	 1 => 21 ,
+	),
+	'award' => 
+  array(
+	'Honour'=> 2,
+	'Gold'=> 0
+			),
+),
+
+);
+?>

@@ -21,8 +21,13 @@ Zend_Registry::set('db', $db);
 $frontController = Zend_Controller_Front::getInstance();
 $frontController->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 $frontController->throwExceptions(true);
-$frontController->setControllerDirectory(ROOT_APPLICATION_CONTROLLERS);
+//$frontController->setControllerDirectory(ROOT_APPLICATION_CONTROLLERS);
 
+$frontController->setControllerDirectory(array(
+    'default' => ROOT_APPLICATION_CONTROLLERS,
+    //'campaign'    => ROOT_APPLICATION.'/modules/campaign/controllers',    
+));
+$frontController->addModuleDirectory(ROOT_APPLICATION.'/modules/');
 Zend_Layout::startMvc(array('layoutPath' => ROOT_APPLICATION_VIEWS_LAYOUTS));
 
 $writer = new Zend_Log_Writer_Firebug();
