@@ -89,9 +89,17 @@ class Models_Quest_Package extends Models_Base
 				$str .= "\n\t'award' => ";
 				$str .= "\n  array(";	
 				$str .= "\n\t'Honour'=> ";
-				$str .= (int)$row['AwardExp'].",";
+				if((int)$row['AwardExp']!=0)
+					$str .= (int)$row['AwardExp'].",";
+				else 
+					$str .= "NULL,";
+				
+				
 				$str .= "\n\t'Gold'=> ";
-				$str .= (int)$row['AwardGold'];
+				if((int)$row['AwardGold']!=0)
+					$str .= (int)$row['AwardGold'];
+				else 	
+					$str .= "NULL";
 				$str .= "\n\t\t\t),";				
 				$str .= "\n),";
 				$i++;
