@@ -14,7 +14,8 @@ class BaseController extends Zend_Controller_Action
 		
 		$auth = Zend_Auth::getInstance();
 		$auth->setStorage(new Zend_Auth_Storage_Session("back"));
-		$this->view->user = $auth->getIdentity();		
+		$this->view->user = $auth->getIdentity();
+		$this->view->arrParam = $this->_request->getParams();		
 	}
 	
 	public function preDispatch()
