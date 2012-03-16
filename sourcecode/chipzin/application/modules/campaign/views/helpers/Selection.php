@@ -3,7 +3,7 @@ class Zend_View_Helper_Selection
 {
 	public function selection($data,$selected,$name,$arrParram)
 	{
-		$strList .= "<select id='$name' name='$name' tabindex='2'>";
+		$strList .= "<select  style='width='100%;' id='$name' name='$name' tabindex='2'>";
 		if(isset($arrParram['default'])){
 			$val = $arrParram['default'];
 			$strList .= "<option value='$val'></option>";
@@ -14,6 +14,7 @@ class Zend_View_Helper_Selection
 			
 			foreach($data as $row)
 				{
+					$row = (array)$row; 
 					if($row[$key] == $selected)
 						$strSelect = 'selected';
 					else
