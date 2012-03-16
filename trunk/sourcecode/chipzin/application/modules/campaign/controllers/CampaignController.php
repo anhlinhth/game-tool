@@ -57,7 +57,7 @@ class Campaign_CampaignController extends BaseController
 			$mdawardtype = new Models_Award_Type();
 			$this->view->arrawardtype = $mdawardtype->getAwardtype();
 			////
-			print_r($this->view->arrawardtype);
+		
 			///////Đối với mỗi battle//////
 			$mdB_layout = new Models_Battle_Soldier();
 			
