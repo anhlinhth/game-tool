@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2012 at 07:46 AM
+-- Generation Time: Mar 16, 2012 at 08:56 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -4209,7 +4209,8 @@ CREATE TABLE IF NOT EXISTS `c_battle` (
   `Campaign` int(11) NOT NULL,
   `New` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `Layout` (`Layout`,`Order`)
+  KEY `Layout` (`Layout`,`Order`),
+  KEY `Campaign` (`Campaign`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -4240,7 +4241,8 @@ CREATE TABLE IF NOT EXISTS `c_campaign` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `WorldMap` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`),
+  KEY `WorldMap` (`WorldMap`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -5809,7 +5811,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `action` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5291 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5295 ;
 
 --
 -- Dumping data for table `log`
@@ -11112,7 +11114,11 @@ INSERT INTO `log` (`id`, `action_date`, `user`, `action`, `note`) VALUES
 (5287, '2012-03-13 16:12:16', 'admin', 'act_save_task', NULL),
 (5288, '2012-03-14 08:56:21', 'admin', 'act_login', NULL),
 (5289, '2012-03-14 08:57:58', 'admin', 'act_update_need_quest', NULL),
-(5290, '2012-03-14 14:25:22', 'admin', 'act_login', NULL);
+(5290, '2012-03-14 14:25:22', 'admin', 'act_login', NULL),
+(5291, '2012-03-16 14:24:35', 'admin', 'act_login', NULL),
+(5292, '2012-03-16 14:25:57', 'admin', 'act_delete_quest', NULL),
+(5293, '2012-03-16 14:26:18', 'admin', 'act_delete_QTC', NULL),
+(5294, '2012-03-16 14:26:31', 'admin', 'act_delete_action', NULL);
 
 -- --------------------------------------------------------
 
@@ -11229,7 +11235,6 @@ CREATE TABLE IF NOT EXISTS `q_action` (
 --
 
 INSERT INTO `q_action` (`ActionID`, `ActionName`) VALUES
-(9, 'QUEST_TASK_BOOST_BUIDLING'),
 (10, 'QUEST_TASK_BOOST_BUIDLING_FRIEND'),
 (1004, 'QUEST_TASK_BOOST_ITEM'),
 (1005, 'QUEST_TASK_BOOST_ITEM_FRIEND'),
@@ -11295,10 +11300,9 @@ INSERT INTO `q_quest` (`QuestID`, `QuestName`, `QuestGroupString`, `QuestGroup`,
 (4, 'Nhà Cỏ tranh', '@quest#63', 'Tăng dân số (Nhiệm vụ 1/1)', '@quest#64', 'Dân làng mỗi lúc một đông, xây thêm nhà cho mọi người vui vẻ nào', '@quest#65', 0, 1, 5, 3, 7),
 (5, 'Nhà đào tạo dân công', '@quest#68', 'Nhân lực dồi dào (Nhiệm vụ 1/2)', '@quest#69', 'Zin táy máy đã nghiên cứu thành công máy tự động đào tạo dân công. Vào đó nạp đủ dinh dưỡng siêu bổ, dân làng sẽ trở thành dân công năng suất lao động cực cao', '@quest#70', 0, 2, 6, 4, 7),
 (6, 'Đào tạo dân công', '@quest#73', 'Nhân lực dồi dào (Nhiệm vụ 2/2)', '@quest#74', 'Tăng cường lực lượng cho làng để tăng năng suất lao động', '@quest#75', 0, 2, 7, 5, 7),
-(7, 'Trại Gỗ', '@quest#78', 'Gỗ Mít (Nhiệm vụ 1/2)', '@quest#79', 'Trong rừng hiện có rất nhiều cây khô, lập trại gỗ để khai thác và tích trữ lượng gỗ cho kế hoạch dựng nhà trú đông', '@quest#80', 0, 2, 9, 6, 7),
+(7, 'Trại Gỗ', '@quest#78', 'Gỗ Mít (Nhiệm vụ 1/2)', '@quest#79', 'Trong rừng hiện có rất nhiều cây khô, lập trại gỗ để khai thác và tích trữ lượng gỗ cho kế hoạch dựng nhà trú đông', '@quest#80', 0, 2, NULL, 6, 7),
 (8, 'Gỗ Mít', '@quest#83', 'Gỗ Mít (Nhiệm vụ 2/2)', '@quest#84', 'Mít cho gỗ rất thơm. Hãy thu hoạch để tích luỹ gỗ cho việc xây nhà nào', '@quest#85', 0, 2, NULL, 10, 7),
-(9, 'Cỏ', '@quest#90', 'Khai hoang (Nhiệm vụ 1/1)', '@quest#91', 'Cỏ dại mọc đầy rồi. Hãy dọn dẹp bớt cho vùng đất thoáng mát nha', '@quest#92', 0, 2, 10, 7, 7),
-(10, 'Di chuyển', '@quest#95', 'Quy hoạch (Nhiệm vụ 1/2)', '@quest#96', 'Học thao tác quy hoạch làng một chút nhé', '@quest#97', 0, 2, 8, 9, 7);
+(10, 'Di chuyển', '@quest#95', 'Quy hoạch (Nhiệm vụ 1/2)', '@quest#96', 'Học thao tác quy hoạch làng một chút nhé', '@quest#97', 0, 2, 8, NULL, 7);
 
 -- --------------------------------------------------------
 
@@ -11347,7 +11351,6 @@ INSERT INTO `q_questtaskclient` (`QTC_ID`, `QTC_Name`, `QTC_Desc`) VALUES
 (6, 'QUEST_TASK_FinishConstruction ', NULL),
 (7, 'QUEST_TASK_HarvestFarm ', NULL),
 (8, 'QUEST_TASK_HarvestGold ', NULL),
-(9, 'QUEST_TASK_HarvestRock ', NULL),
 (10, 'QUEST_TASK_HarvestTree ', NULL),
 (11, 'QUEST_TASK_HarvestWood ', NULL),
 (12, 'QUEST_TASK_MoveBuilding ', NULL),
@@ -11414,7 +11417,6 @@ INSERT INTO `q_task` (`TaskID`, `TaskName`, `TaskString`, `DescID`, `DescString`
 (15, 'Xây 1 Trại gỗ ', '@quest#81 ', '@quest#82', '', 4, 1, NULL, NULL, 1, 1, 7, NULL),
 (16, 'Thu hoạch 1 gỗ Mít', '@quest#87', '@quest#89', '', 11, 1, NULL, NULL, 1, 1002, 8, NULL),
 (18, 'Sản xuất 1 gỗ Mít', '@quest#86', '@quest#87', '', 14, 1, NULL, NULL, 1, 1001, 7, NULL),
-(19, 'Nhổ 1 cỏ lá nhỏ', '@quest#93 ', '@quest#94', '', 10, 1, NULL, NULL, 1, 3, 9, NULL),
 (20, 'Di chuyển 1 ô đất', '@quest#98', '@quest#100', '', 12, 1, NULL, NULL, 1, 2, 10, NULL),
 (21, 'Bán 1 ô đất', '@quest#99', '@quest#101', '', 16, 1, NULL, NULL, 1, 8, 10, NULL);
 
@@ -11444,7 +11446,6 @@ INSERT INTO `q_task_target` (`ID`, `TaskID`, `TargetID`) VALUES
 (13, 16, 7001),
 (14, 15, 2001),
 (15, 18, 7001),
-(16, 19, 2044),
 (17, 20, 2002),
 (18, 21, 2002),
 (23, 7, 2002),
@@ -11608,6 +11609,7 @@ ALTER TABLE `c_award`
 -- Constraints for table `c_battle`
 --
 ALTER TABLE `c_battle`
+  ADD CONSTRAINT `c_battle_ibfk_2` FOREIGN KEY (`Campaign`) REFERENCES `c_campaign` (`ID`) ON DELETE NO ACTION,
   ADD CONSTRAINT `c_battle_ibfk_1` FOREIGN KEY (`Layout`) REFERENCES `c_layout` (`ID`) ON DELETE NO ACTION;
 
 --
@@ -11616,6 +11618,12 @@ ALTER TABLE `c_battle`
 ALTER TABLE `c_battle_soldier`
   ADD CONSTRAINT `c_battle_soldier_ibfk_1` FOREIGN KEY (`BattleID`) REFERENCES `c_battle` (`ID`) ON DELETE NO ACTION,
   ADD CONSTRAINT `c_battle_soldier_ibfk_2` FOREIGN KEY (`Soldier`) REFERENCES `c_soldier` (`ID`) ON DELETE NO ACTION;
+
+--
+-- Constraints for table `c_campaign`
+--
+ALTER TABLE `c_campaign`
+  ADD CONSTRAINT `c_campaign_ibfk_1` FOREIGN KEY (`WorldMap`) REFERENCES `c_worldmap` (`ID`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `q_quest`
