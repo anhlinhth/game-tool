@@ -11,8 +11,17 @@ class Models_Battle extends Models_Base
 		$this->_table = "c_battle";	
 	}
 	
-	public function getBattle($id)
+	public function getBattle($id="")
 	{
-
+		$sql="
+				SELECT 
+					*
+				FROM
+					c_battle";
+		if(!empty($id)){
+			$sql."WHERE ID !=$id";
+		}
+		$data = $this->_db->fetchAll($sql,"", Zend_Db::FETCH_OBJ);
+		return $data;
 	}
 }

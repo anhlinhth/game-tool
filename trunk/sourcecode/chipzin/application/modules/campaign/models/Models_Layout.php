@@ -12,6 +12,6 @@ class Models_Layout extends Models_Base
 	
 	public function getLayout()
 	{
-		parent::_filter();
+		return parent::_filter();
 	}
 }

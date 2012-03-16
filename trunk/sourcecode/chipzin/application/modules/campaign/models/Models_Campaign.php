@@ -10,9 +10,34 @@ class Models_Campaign extends Models_Base
 		$this->_key = "ID";
 		$this->_table = "c_campaign";	
 	}
-	
-	public function getcampaig($id)
+	public function getbattles($id)
 	{
-		parent::_getByKey($id);
+		$sql="
+			SELECT 
+				*
+			FROM
+				c_battle
+			WHERE Campaign=$id
+		";
+		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}	
+	public function getAllbattle()
+	{
+		$sql="
+			SELECT 
+				* 
+			FROM
+				c_battle			
+		";
+		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}
+	public function getLayout()
+	{
+		
+	
 	}
 }
