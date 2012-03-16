@@ -1,5 +1,5 @@
 <?php
-
+require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 class IndexController extends Zend_Controller_Action
 {
 
@@ -11,6 +11,8 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
         // action body
+        $this->_redirect("quest/index");
+        
     }
 
 
