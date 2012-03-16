@@ -5,20 +5,4 @@
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
 
-<?php 
-			
-		//$strList .= "<option $slt value='". $value->QuestLineID ."'>$value->QuestLineID</option>";
-		$strList .= "<option value='' selected ></option>";
-		$slt="";
-		if(!empty($this->arrQuest)){
-			foreach ($this->arrQuest as $row) {
-				$slt = "";
-				if($row->QuestID == 0){
-					$slt = "selected";
-				}		
-				$strList .= "<option $slt value='". $row->QuestID ."'>(ID:$row->QuestID) $row->QuestName </option>";
-			}		
-					
-		}
-		echo $strList;
-?>	
+<?php $this->listQuest2($this->data,$this->data2,$this->Task, $this->page, $this->items, $this) ?>

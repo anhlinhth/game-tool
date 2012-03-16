@@ -11,23 +11,15 @@ class Zend_View_Helper_TopMenu
 			case 'group':
 				$selectGroup = 'current';
 				break;
-			case 'tool':
-				$selectTool = 'current';
-				break;
-            case 'shopeditor':
-                $selectShopeditor = 'current';
-                break;    
-			case 'event':
-				$selectEvent = 'current';
-				break;
-			case 'gift':
-				$selectGift = 'current';
-				break;
-			case 'quest':
+			case 'questline':               
+            case 'QTC':
+           	case 'action':
+            case 'export':
+            case 'quest':
 				$selectQuest = 'current';
 				break;
 			case 'campaign':
-			case 'solider':
+           	case 'soldier':
 				$campaign = 'current';
 				break;		
 		}

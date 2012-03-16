@@ -31,7 +31,7 @@ class QuestController extends BaseController
 	}
 	
 	
-public function importAction() {
+	public function importAction() {
 		if ($this->_request->isPost ()) 
 		{			
 			/*
@@ -123,7 +123,8 @@ public function importAction() {
 				$items = DEFAULT_ITEM_PER_PAGE;
 			$form = new Forms_Quest();
 			$form->_requestToForm($this);						
-
+			if(empty($form->obj->QuestLineID))
+				$form->obj->QuestLineID = NULL;
 			$md= new Models_Quest();
 			$mdqd = new Models_Quest_Detail();
 			$md_questLine = new Models_Quest_Line();
@@ -138,32 +139,16 @@ public function importAction() {
 			$dataquestneed=$md->getNeedQuest();
 			//print_r($dataquestneed);
 			$count = $md->count($form->obj);
-			
-			$this->view->data = $data;
-			$this->view->data2= $data1;
-			$this->view->Task = $dataTask;
+		
 			$this->view->dataquestlineid = $dataquestlineID;
+			
 			
 			
 			$this->view->items = $items;
 			$this->view->page = $pageNo;
 			$this->view->totalRecord = $count;
 			
-			/*if($this->_request->getParam("hidSync"))
-			{
-				$location = $this->_request->getParam("hidLocation");
-				
-				$data = $md->_filter(null, "id DESC", 0, 0);
-				
-				$mdSaleOffShop = new Models_SaleOff_Shop();
-				$saleOffData = $mdSaleOffShop->_filter();
-				$mdItem = new Models_Item();
-				$items = $mdItem->_filter();
-				
-				$md->sync($data,$items,$saleOffData,$location);
-				$this->view->msg = "Sync dữ liệu thành công";
-			}
-			*/
+			
 			$this->view->form = $form->obj;
 		}
 		catch (Exception $ex)
@@ -325,25 +310,53 @@ public function importAction() {
 	{		
 		try
 		{
+			$this->_helper->layout->disableLayout();
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest.php';
+			$this->_getArrQuest();
+			
+			$pageNo = $this->_request->getParam("page");
+			$items = $this->_request->getParam("items");
+			if($pageNo == 0)
+				$pageNo = 1;
+			if($items == 0)
+				$items = DEFAULT_ITEM_PER_PAGE;
+			$form = new Forms_Quest();
+			$form->_requestToForm($this);	
+							
+			if(empty($form->obj->QuestLineID))
+				$form->obj->QuestLineID = NULL;
+			$md= new Models_Quest();
+			$mdqd = new Models_Quest_Detail();
+			$md_questLine = new Models_Quest_Line();
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
+			$this->view->item = $form->obj;
+			$this->view->filterQuestLine = $md_questLine->_getByKey($form->obj->QuestLineID);			
+			$data = $md->filter($form->obj, "QuestID ASC", ($pageNo - 1)*$items, $items);
+			$data1 = $mdqd->getQuest();
+			$mdQT = new Models_Task();
+			$dataTask = $mdQT->listQuestInTask();
+			$dataquestlineID = $md->getQuestlineID();
+			$dataquestneed=$md->getNeedQuest();
+			//print_r($dataquestneed);
+			$count = $md->count($form->obj);
+			
+			$this->view->data = $data;
+			$this->view->data2= $data1;
+			$this->view->Task = $dataTask;
+			$this->view->dataquestlineid = $dataquestlineID;
 			
 			
-			if($this->_request->isPost())// da post du lieu len
-			{				
-				
-				//$this->_helper->viewRenderer->setNoRender();
-				$this->_helper->layout->disableLayout();			
-				require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';		
-				$md = new Models_Quest_Detail();									
-				$this->view->arrQuest = $md->filterQuest($_POST);				
-			}
-			
+			$this->view->items = $items;
+			$this->view->page = $pageNo;
+			$this->view->totalRecord = $count;
+			$this->view->form = $form->obj;
 		}
-		catch(Exception $ex)
-        {
-            $this->view->form = $form->obj;
+		catch (Exception $ex)
+		{
 			$this->view->errMsg = $ex->getMessage();
-			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-        }
+			echo $this->view->errMsg;
+            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
 	}
 	
 	

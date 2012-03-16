@@ -1,12 +1,18 @@
 <?php
-require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
-require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 
-class IndexController extends BaseController
+class IndexController extends Zend_Controller_Action
 {
-	public function indexAction()
-	{
-		 $this->_redirect ("/quest");
-	}
+
+    public function init()
+    {
+        /* Initialize action controller here */
+    }
+
+    public function indexAction()
+    {
+        // action body
+    }
+
+
 }
-?>
+
