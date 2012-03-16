@@ -108,21 +108,21 @@ class ActionController extends BaseController
 	//	var_dump($obj);
 		$md = new Models_Action_New();
 		$md->update($obj);
-		echo "Update thanh cong";	
+		echo "Update thành công";	
 		
 	}
 	
 	public function addAction(){
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNorender();
-		//$id = $this->_request->getParam("id");
+		$id = $this->_request->getParam("id");
 		$desc = $this->_request->getParam("desc1");
 		$obj = new Obj_Action();
-		//$obj->QuestLineID = $id;
+		$obj->ActionID = $id;
 		$obj->ActionName = $desc;
 		$md = new Models_Action_New();
 		$md->insert($obj);
-		echo " ThÃªm thÃ nh cÃ´ng";
+		echo " Thêm thành công";
 	}
 	
 }

@@ -17,7 +17,7 @@
 		
 		<tr>
 			<td>ID</td>
-			<td><input type="text" name="questlineid1" disabled="disabled" id="questlineid1" style="width:110px;" /></td>
+			<td><input type="text" name="questlineid1"  id="questlineid1" style="width:110px;" /></td>
 			<td>DESC</td>
 			<td><input type="text" name="desc1" id="desc1" /></td>
 			<td><input type="submit" name="update" id="button1" class="update" value="Update" /></td>
@@ -62,6 +62,39 @@ $(function(){
 $(function(){
 	/// su mot Quest Line
 	
+	$(".add").click(function(){
+		id = document.getElementById('questlineid1').value;	
+		if(id==''){
+			return false;
+		}
+		desc1 = document.getElementById('desc1').value;
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/action/add/'?> ",
+			data: "desc1=" + desc1 +"&id="+id,
+			success: function(msg){
+				if(msg != "")
+				{					
+					alert(msg);
+				}
+				else
+				{
+					alert("Update không thành công");
+					
+				}
+				window.location.reload();
+			}
+		});
+		return false;	
+	});
+
+	////Them 1 quest line
+	
+
+});
+$(function(){
+	/// su mot Quest Line
+	
 	$(".update").click(function(){
 		id = document.getElementById('questlineid1').value;	
 		if(id==''){
@@ -89,31 +122,7 @@ $(function(){
 	});
 
 	////Them 1 quest line
-	$(".add").click(function(){				
-		desc1 = document.getElementById('desc1').value;
-		id = document.getElementById('questlineid1').value;
-		if(desc1=='' ||id!=''){
-			return false;
-		}
-		$.ajax({
-			type: "POST",
-			url:"<?php echo $this->baseUrl.'/action/add/'?> ",
-			data: "desc1=" + desc1,
-			success: function(msg){
-				if(msg != "")
-				{					
-					alert(msg);
-				}
-				else
-				{
-					alert("ThÃªm  khÃ´ng thÃ nh cÃ´ng");
-					
-				}
-				window.location.reload();
-			}
-		});
-		return false;	
-	});
+	
 
 });
 
