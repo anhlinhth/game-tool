@@ -50,7 +50,7 @@ select{
 		</td>
 		<td>
 			<label>World Map:</label>
-			<input type="text" readonly="readonly" value='<?php echo $this->campaign->NextCamp;?>' name='nextCampaign' id='nextCampaign'/>
+			<input type="text" readonly="readonly" value='<?php echo $this->campaign->Wor;?>' name='nextCampaign' id='nextCampaign'/>
 		</td>
 		</tr>
 	</table>
@@ -147,14 +147,10 @@ select{
 			</td>
 		</tr>
 		<?php }?>
-		<tr>
-			
-			<td>
-				<input type="button" name='button1' id='button1' value='Add'>
-				<input type="submit" name='button2' id='button2' value='Save'/>
-			</td>
-		</tr>
+	
 	</table>
+	<a class="btn add" href="">Add</a>
+	<a class="btn save" href="">Save</a>
 </div>
 </form>
 <!-- Dung de them 1 award -->
