@@ -34,7 +34,7 @@ class Models_Quest_Package extends Models_Base
 			foreach($data as $row)
 			{
 				$str .= "\n" ;
-				$str .= (int)$i ;
+				$str .= (int)$row['QuestID'] ;
 				$str .= " => array(";				
 				$str .= "\n\t'group'=> ";
 				$str .= (int)$row['QuestLineID'].",";
