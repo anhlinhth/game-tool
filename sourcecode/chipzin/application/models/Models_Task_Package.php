@@ -33,7 +33,7 @@ class Models_Task_Package extends Models_Base
 			foreach($data as $row)
 			{
 				$str .= "\n" ;
-				$str .= (int)$i ;
+				$str .= (int)$row['TaskID'] ;
 				$str .= " => array(";				
 				$str .= "\n\t'action' => ";
 				$str .= "\n\tarray(";
