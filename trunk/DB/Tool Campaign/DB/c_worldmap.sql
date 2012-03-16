@@ -23,13 +23,12 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `c_campaign`
+-- Table structure for table `c_worldmap`
 --
 
-CREATE TABLE IF NOT EXISTS `c_campaign` (
+CREATE TABLE IF NOT EXISTS `c_worldmap` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `WorldMap` int(11) NOT NULL,
+  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
