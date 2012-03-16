@@ -20,7 +20,7 @@ if($this->temp)
 			<input type="text" name="QuestID" id="QuestID" value="<?php print_r( $this->item->QuestID);?>" style="width: 110px;"/></td>
 			<td></td>
 			<td>Quest Line
-				<select name="QuestLineID" id = "QuestLineID">
+				<select name="QuestLineID" id = "QuestLineID" onChange="changeQuestLine()">
 				<option value="">Chọn QuestLine </option>
 				<?php 
 				foreach($this->dataquestlineid as $row)
@@ -81,9 +81,7 @@ function updateNextquest(id)
 		data: "questid=" + id +"&nextquest="+ nextquest,	
 		success: function(data){			
 			if(data != ""){	
-					alert('Cập nhật NextQuest thành công');		
 					loadQuest();
-					
 					//var url = window.location + "?do=123";
 					//window.location = url;
 			}else{
@@ -104,8 +102,7 @@ function updateNeedquest(id)
 		url:"<?php echo $this->baseUrl.'/quest/updateneedquest/'?> ",
 		data: "questid=" + id +"&needquest="+ needquest,	
 		success: function(data){			
-			if(data != ""){	
-			alert('Cập nhật NeeQuest thành công');				
+			if(data != ""){						
 				loadQuest();
 			}else{
 				alert("Error");				
@@ -127,6 +124,24 @@ function loadQuest(){
 			$("#list-quest").html(data);
 		}
 	});
+}
+function deleteQuest(key){	
+	if(confirm("Delelte Quest: "+key+" ?")){
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/delete/'?> ",
+			data: {
+				id:key
+			},			
+			success: function(data){				
+				loadQuest();
+			}
+		});
+	}
+	
+}
+function changeQuestLine(){
+	$("#formPaging").submit();
 }
 $(document).ready(function(){
 	///////////////////////////////

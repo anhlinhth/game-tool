@@ -17,7 +17,7 @@ class Zend_View_Helper_ListQuest2
 				$strActive = "";
 			
 			$edit = "<a href='$view->baseUrl/quest/edit/id/$row->QuestID'><img src='$view->baseUrl/media/images/icons/edit-icon.gif' title='Chỉnh sửa' width='16' height='16' /></a>";
-			$delete = "<a href='javascript:deleteItem(\"$view->baseUrl/quest/delete\",$row->QuestID)'><img src='$view->baseUrl/media/images/icons/delete.gif' title='Xóa' width='16' height='16' /></a>";
+			$delete = "<a href='javascript:deleteQuest($row->QuestID)'><img src='$view->baseUrl/media/images/icons/delete.gif' title='Xóa' width='16' height='16' /></a>";
 
 		//	luu y
 		//	$objSearch->gift_package_id = $row->id;
