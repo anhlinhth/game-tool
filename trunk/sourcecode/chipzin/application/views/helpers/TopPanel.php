@@ -86,7 +86,10 @@ class Zend_View_Helper_TopPanel
                     $strList .= "<li><a href='$view->baseUrl/action/index' class='report'>Action</a></li>";
                   if (Utility::checkPrivilege($view, 'export', 'download'))
                     $strList .= "<li><a href='$view->baseUrl/export/download' class='report'>Download Export</a></li>";
-                      
+                    if (Utility::checkPrivilege($view, 'template', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/template/' class='report'>Delete Template</a></li>";
+
+   
                    
                 break;
             case 'questline':
@@ -105,7 +108,10 @@ class Zend_View_Helper_TopPanel
                     $strList .= "<li><a href='$view->baseUrl/action/index' class='report'>Action</a></li>";
                 if (Utility::checkPrivilege($view, 'export', 'download'))
                     $strList .= "<li><a href='$view->baseUrl/export/download' class='report'>Download Export</a></li>";
-                   
+                    if (Utility::checkPrivilege($view, 'template', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/template/' class='report'>Delete Template</a></li>";
+
+
                     break;
             case 'QTC':
                 if (Utility::checkPrivilege($view, 'questline', 'index'))
@@ -120,7 +126,10 @@ class Zend_View_Helper_TopPanel
                     $strList .= "<li><a href='$view->baseUrl/action/index' class='report'>Action</a></li>";
                     if (Utility::checkPrivilege($view, 'export', 'download'))
                     $strList .= "<li><a href='$view->baseUrl/export/download' class='report'>Download Export</a></li>";
-                    
+                     if (Utility::checkPrivilege($view, 'template', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/template/' class='report'>Delete Template</a></li>";
+
+
                 break;
               case 'action':
                 if (Utility::checkPrivilege($view, 'questline', 'index'))
@@ -135,7 +144,10 @@ class Zend_View_Helper_TopPanel
                     $strList .= "<li><a href='$view->baseUrl/export/export' class='report'>Export Define</a></li>";
                     if (Utility::checkPrivilege($view, 'export', 'download'))
                     $strList .= "<li><a href='$view->baseUrl/export/download' class='report'>Download Export</a></li>";
-                    
+                     if (Utility::checkPrivilege($view, 'template', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/template/' class='report'>Delete Template</a></li>";
+
+
                 break;
                    case 'export':
                 if (Utility::checkPrivilege($view, 'questline', 'index'))
@@ -150,8 +162,31 @@ class Zend_View_Helper_TopPanel
                     $strList .= "<li><a href='$view->baseUrl/export/export' class='report'>Export Define</a></li>";
                     if (Utility::checkPrivilege($view, 'export', 'download'))
                     $strList .= "<li><a href='$view->baseUrl/export/download' class='report'>Download Export</a></li>";
+			  if (Utility::checkPrivilege($view, 'template', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/template/' class='report'>Delete Template</a></li>";
+
                     
                 break;
+
+ case 'template':
+                if (Utility::checkPrivilege($view, 'questline', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/questline/index' class='report'>Quest Line</a></li>";
+                if (Utility::checkPrivilege($view, 'quest', 'listquest'))
+                    $strList .= "<li><a href='$view->baseUrl/quest/index' class='report'>Quest</a></li>";
+                if (Utility::checkPrivilege($view, 'QTC', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/QTC/index' class='report'>Quest Task Client</a></li>";
+                    if (Utility::checkPrivilege($view, 'quest', 'import'))
+                    $strList .= "<li><a href='$view->baseUrl/quest/import' class='report'>Import Define</a></li>";
+                    if (Utility::checkPrivilege($view, 'quest', 'import'))
+                    $strList .= "<li><a href='$view->baseUrl/export/export' class='report'>Export Define</a></li>";
+                    if (Utility::checkPrivilege($view, 'export', 'download'))
+                    $strList .= "<li><a href='$view->baseUrl/export/download' class='report'>Download Export</a></li>";
+			  if (Utility::checkPrivilege($view, 'template', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/template/' class='report'>Delete Template</a></li>";
+
+                    
+                break;
+
         }
         $strList .= "</ul>
 					</div>

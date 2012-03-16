@@ -186,7 +186,7 @@ function addTemplate(key){
 			type: "POST",
 			url:"<?php echo $this->baseUrl.'/template/save/'?> ",
 			data: data,		
-			success: function(msg){
+			success: function(msg){				
 				if(parseInt(msg)==1)
 					alert("Successfull");
 			}
@@ -210,9 +210,8 @@ function addTask(key){
 			if(data != ""){
 				var btnDel = "<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask("+count_div+")'></a>";
 				var btnAddTo = "<a class='ico-16 template' title='Add To Template' href='javascript:addTemplate("+count_div+")'>Add To Template</a>";
-				var edittemp = "<a title='Edit Temp' href='<?php echo $this->baseUrl.'/template'?>'>Edit Template</a>";
-				var title = "<h4> Task "+count_form+"&nbsp"+btnDel+"&nbsp&nbsp&nbsp&nbsp"+btnAddTo+edittemp+"</h4>";
-				var str = "<div class='task-div' id='task-div-"+count_div+"'>"+title + data+"</div>";
+				var title = "<h4> Task "+count_form+"&nbsp"+btnDel+"&nbsp&nbsp&nbsp&nbsp"+btnAddTo+"</h4>";
+				var str = "<div class='task-div' id='task-div-"+count_div+"'>"+title + data+"</div";
 				$("#task-0").before(str);
 				
 			}else{
@@ -241,8 +240,8 @@ function targetChange(key){
 }
 function addTarget(key){
 	count = $("#target-list-"+key +' .target-list').size();	
-	input ='<input id = "target-'+count+'"  class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>'
-	$("#target-list-"+key).append(input);
+	input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>'
+	$("#target-list-"+key + " .list").append(input);
 }
 
 
@@ -323,45 +322,8 @@ function validate(){
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Hãy chọn Action</p>");					
 			flag=false;
 		}
-		
-		target = $(val).find("#target :radio:checked").val();		
-		if(target == "TargetType")
-		{
-			targetType=$(val).find("#TargetType").val();
-			if(targetType=='')
-			{
-				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType không được bỏ trống</p>");					
-				flag=false;
-			}
-			else if(isNaN(targetType))
-			{
-				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType phải là số</p>");					
-				flag=false;
-			}
-		}
-		else
-		{			
-			targetList=$(val).find(".target-list").val();
-			count = $(val).find(".target-list").size();			
-			if(count==0)
-			{								
-					$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList chưa được tạo</p>");					
-					flag=false;				
-			}
-			else if(targetList=='' && count!=0)
-			{
-				
-				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList không được bỏ trống</p>");					
-				flag=false;
-			}
-			else if(isNaN(targetList) &&count!=0)
-			{
-				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList phải là số</p>");					
-				flag=false;
-			}
-		}		
 	});
-		return flag;	
+	return flag;	
 }
 function saveAll(){	
 	quest_id = $("#QuestID").val();
@@ -369,18 +331,7 @@ function saveAll(){
 	$("#dialog #ct").html("");	
 	test = validate();
 	if(test==false)
-	{
-		$("#dialog").dialog({			
-			height: 400,
-			width: 350,
-			modal: true,
-			buttons: {
-				"Continue": function() {								
-					$(this).dialog("close");						
-				}										
-			}
-		});
-	}	
+		$("#dialog").dialog("open");
 	else{
 	$.ajax({
 		type: "POST",
@@ -390,40 +341,11 @@ function saveAll(){
 			if(parseInt(msg)==1){	
 				$("#dialog #ct").append("<p class='msg'>Add Quest Success<p>");
 				saveTask();	
-				//$("#dialog").dialog("open");
-				$("#dialog").dialog({
-					height: 300,
-					width: 350,
-					modal: true,
-					buttons: {
-						"Success": function() {								
-							$(this).dialog("close");
-							location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
-						},
-						"Edit": function() {								
-							$(this).dialog("close");
-							location.replace("<?php echo $this->baseUrl.'/quest/edit/id/'?>"+quest_id);
-							//alert(quest_id);
-						},
-						"New": function() {								
-							$(this).dialog("close");
-							location.replace("<?php echo $this->baseUrl.'/quest/new/'?>");							
-						}										
-					}
-					});
-			}else{				
+				$("#dialog").dialog("open");
+			}else{
+				//alert("false");
 				$("#dialog #ct").append("<p class='error'>Failed:<br>"+msg+"<p>");				
-				$("#dialog").dialog({
-					height: 300,
-					width: 350,
-					modal: true,
-					buttons: {
-						"Error": function() {								
-							$(this).dialog("close");
-							//location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
-						}
-					}
-					});
+				$("#dialog").dialog("open");
 			}
 						
 								
@@ -434,33 +356,33 @@ function saveAll(){
 /////////////////////////////
 
 
-//$(document).ready(function(){	
-//	
-//	$("#dialog").dialog({
-//		autoOpen: false,
-//		height: 400,
-//		width: 400,
-//		modal: true,
-//		close: function(event, ui) {
-//			
-//		},
-//		buttons: {
-//			"Continue": function() {								
-//				$(this).dialog("close");
-//										
-//			},
-//			"Edit This Quest": function() {	
-//				quest_id = $("#QuestID").val();							
-//				$(this).dialog("close");
-//				window.location.replace("<?php echo $this->baseUrl.'/quest/edit/id/'?>"+quest_id);				
-//			},
-//			"Add New Quest": function() {								
-//				$(this).dialog("close");
-//				location.reload();							
-//			}
-//		}
-//	});	
-//});
+$(document).ready(function(){	
+	
+	$("#dialog").dialog({
+		autoOpen: false,
+		height: 400,
+		width: 400,
+		modal: true,
+		close: function(event, ui) {
+			
+		},
+		buttons: {
+			"Continue": function() {								
+				$(this).dialog("close");
+										
+			},
+			"Edit This Quest": function() {	
+				quest_id = $("#QuestID").val();							
+				$(this).dialog("close");
+				window.location.replace("<?php echo $this->baseUrl.'/quest/edit/id/'?>"+quest_id);				
+			},
+			"Add New Quest": function() {								
+				$(this).dialog("close");
+				location.reload();							
+			}
+		}
+	});	
+});
 ////////////////////////////////////Load template//////////////////////
 function loadTemplate(key){
 	var id = $("#Template"+key).val();
