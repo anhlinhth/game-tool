@@ -73,18 +73,17 @@ if($this->temp)
 
 function updateNextquest(id)
 {
-	var nextquest = document.getElementById('nextquest-'+id).value;
-	
+	var nextquest = document.getElementById('nextquest-'+id).value;	
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/updatenextquest/'?> ",
 		data: "questid=" + id +"&nextquest="+ nextquest,	
 		success: function(data){			
-			if(data != ""){	
-					loadQuest();
-					//var url = window.location + "?do=123";
-					//window.location = url;
+			if(parseInt(data) == 1){	
+				alert("Cập nhật thành công");
+				loadQuest();
 			}else{
+				alert(data);
 				alert("Error");				
 			}
 			
@@ -96,15 +95,16 @@ function updateNextquest(id)
 function updateNeedquest(id)
 {
 	var needquest = document.getElementById('needquest-'+id).value;
-
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/updateneedquest/'?> ",
 		data: "questid=" + id +"&needquest="+ needquest,	
 		success: function(data){			
-			if(data != ""){						
+			if(parseInt(data)==1){	 
+				alert("Cập nhật thành công");
 				loadQuest();
 			}else{
+				alert(data);
 				alert("Error");				
 			}
 		}

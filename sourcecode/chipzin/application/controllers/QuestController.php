@@ -515,7 +515,7 @@ class QuestController extends BaseController
 				$form->updateNeedquest($this->QuestID,$this->NeedQuest);
 				Models_Log::insert($this->view->user->username, "act_update_need_quest");			
 			}
-			echo "Cập nhật thành công";
+			echo 1;
 		}
 		catch (Exception $ex)
 		{
@@ -535,8 +535,6 @@ class QuestController extends BaseController
 			{
 				$this->QuestID=$this->_request->getParam('questid');
 				$this->NextQuest=$this->_request->getParam('nextquest');
-				print_r($this->NextQuest);
-				
 				if(empty($this->NextQuest))
 				{
 					$this->NextQuest = "NULL";
@@ -545,7 +543,7 @@ class QuestController extends BaseController
 				$form->updateNextquest($this->QuestID,$this->NextQuest);
 				Models_Log::insert($this->view->user->username, "act_update_next_quest");
 			}
-			echo "Cập nhật thành công";
+			echo 1;
 		}
 		catch(Exception $ex)
 		{
