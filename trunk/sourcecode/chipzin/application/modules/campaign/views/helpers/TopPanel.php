@@ -62,11 +62,11 @@ class Zend_View_Helper_TopPanel
                     $strList .= "<li><a href='$view->baseUrl/export/download' class='report'>Download Export</a></li>";  
                 break;
             case 'campaign':
-           	case 'solider':
+           	case 'soldier':
             	if (Utility::checkPrivilege($view, 'quest', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/campaign/campaign/index' class='report'>Campagin Manager</a></li>";               
                 if (Utility::checkPrivilege($view, 'questline', 'index'))
-                    $strList .= "<li><a href='$view->baseUrl/campaign/solider/index' class='report'>Solider</a></li>";    
+                    $strList .= "<li><a href='$view->baseUrl/campaign/soldier/index' class='report'>Soldier</a></li>";    
         }
         $strList .= "</ul>
 					</div>

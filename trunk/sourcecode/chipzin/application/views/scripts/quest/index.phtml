@@ -26,11 +26,11 @@ if($this->temp)
 				foreach($this->dataquestlineid as $row)
 				{
 					$str = "";
-					if($this->filterQuestLine->QuestLineID == $row->QuestLineID){
+					if($this->form->QuestLineID == $row->QuestLineID){
 						$str="selected";
 					}
 				?>					
-					<option '<?php echo $str; ?>' value="<?php echo $row->QuestLineID ?>"><?php echo $row->QuestLineName ?></option>
+					<option <?php echo $str; ?> value="<?php echo $row->QuestLineID ?>"><?php echo $row->QuestLineName ?></option>
 					
 				<?php
 				}
@@ -59,7 +59,10 @@ if($this->temp)
 			<td width="50"><a href="#" >Tool</a></td>
 		</tr>
 		</thead>
-		<?php $this->listQuest($this->data,$this->data2,$this->Task, $this->page, $this->items, $this) ?>
+		<tbody id="list-quest">
+			
+		</tbody>
+		
 	</table>
 	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
 
@@ -79,7 +82,10 @@ function updateNextquest(id)
 		success: function(data){			
 			if(data != ""){	
 					alert('Cập nhật NextQuest thành công');		
-				location.reload();
+					loadQuest();
+					
+					//var url = window.location + "?do=123";
+					//window.location = url;
 			}else{
 				alert("Error");				
 			}
@@ -87,6 +93,7 @@ function updateNextquest(id)
 		}
 	});
 }
+
 
 function updateNeedquest(id)
 {
@@ -99,13 +106,33 @@ function updateNeedquest(id)
 		success: function(data){			
 			if(data != ""){	
 			alert('Cập nhật NeeQuest thành công');				
-				location.reload();
+				loadQuest();
 			}else{
 				alert("Error");				
 			}
-			
 		}
 	});
 }
+function loadQuest(){	
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/listquest/'?> ",
+		data: {
+			page:<?php echo $this->page;?>,
+			items:<?php echo $this->items;?>,
+			<?php if($this->form->QuestLineID)
+				echo "QuestLineID:".$this->form->QuestLineID?>
+		},			
+		success: function(data){			
+			$("#list-quest").html(data);
+		}
+	});
+}
+$(document).ready(function(){
+	///////////////////////////////
+	loadQuest();	
+	///////////////////////////////
+	
+});
 
 </script>
