@@ -13,6 +13,6 @@ class Models_Award_Type extends Models_Base
 	
 	public function getAwardtype()
 	{
-		parent::_filter();
+		return parent::_filter();
 	}
 }
