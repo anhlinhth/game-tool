@@ -12,7 +12,7 @@ class Models_Action_New extends Models_Base
 	
 	public function insert($obj)
 	{
-		parent::_insert($obj);		
+		parent::_insert($obj);
 	}
 	
 	public function update($obj)
