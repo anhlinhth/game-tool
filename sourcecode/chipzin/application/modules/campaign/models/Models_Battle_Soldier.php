@@ -22,4 +22,15 @@ class Models_Battle_Soldier extends Models_Base
 		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
 		return $data;
 	}
+	
+	public function getAllSoldier()
+	{
+		$sql ="SELECT 
+					*
+				FROM
+					c_battle_soldier
+				";
+		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+		return $data;
+	}
 }
