@@ -31,7 +31,8 @@ class Campaign_CampaignController extends BaseController
 			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Layout.php';
 			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Battle.php';
 			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Award_type.php';
-			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Battle_Soldier.php';			
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Battle_Soldier.php';		
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Soldier.php';	
 			
 			$id = $this->_request->getParam("id");
 			
@@ -43,9 +44,6 @@ class Campaign_CampaignController extends BaseController
 			
 			///////Lấy danh sách Battle ///////////
 			//$mdbattle = new Models_Battle();
-			$mdBattle=new Models_Campaign();
-			$this->view->arrbattle=$mdBattle->getbattles($id);
-			$this->view->allbattle=$mdBattle->getAllbattle();
 			
 			
 			
