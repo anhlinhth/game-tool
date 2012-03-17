@@ -14,4 +14,5 @@ class Models_Layout extends Models_Base
 	{
 		return parent::_filter();
 	}
+	
 }
