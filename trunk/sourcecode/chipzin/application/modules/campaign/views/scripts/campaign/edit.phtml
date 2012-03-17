@@ -29,8 +29,15 @@ table#battle td{
 }
 select{
 	margin: 0;
-	padding-right: 2px;
-	margin-right: 2px;
+	padding:0;
+	max-width: 110px;
+	min-width: 110px;
+	height: 25px;
+	overflow: hidden;
+}
+.style{
+	margin: auto;text-align: center;padding-top: 2px;padding-bottom: 2px;
+}
 }
 </style>
 <form  class="myform" id="formPaging" name="formPaging" action="" method="post">
@@ -59,8 +66,8 @@ select{
 	<table id='battle' width="100%" >
 		<thead>
 			<tr>
-				<td>ID</td>
-				<td>Order</td>
+				<td width="15px;">ID</td>
+				<td width="20px;">Order</td>
 				<td>Layout</td>
 				<td>Award</td>
 			</tr>
@@ -72,66 +79,58 @@ select{
 				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
 			<td width="auto">
-				<?php echo $this->selection($this->arrlayout,$rowbattle->Layout,"Layout",
-												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?>
+				<?php echo $this->selection($this->arrlayout,$rowbattle->Layout,"Layout",array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?>
 				<br/>
 				<table id='tb_layout'>
 					<tr>
 						<td style="margin: 0;padding: 0;">
-							<em>S:</em><?php echo $this->selection($this->arrLayout,1,"LayoutID",
-												array('key'=>"LayoutID",'name'=>"LayoutName"))?>
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,1,"Solider",
+												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
 							<em>L:</em><input type='text' class='solider' id='#' name='#'/>
 						</td>
 						<td>
-							S:<select name='solider'>
-								<option value=''>Solider aa</option>								
-									</select><br/>
-							L:<input class='solider' type='text' id='#' name='#'/>
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,1,"Solider",
+												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
+							<em>L:</em><input type='text' class='solider' id='#' name='#'/>
 						</td>
-						<td>S:<select name='solider'>
-								<option value=''>Solider aa</option>								
-									</select><br/>
-							L:<input  class='solider' type='text' id='#' name='#'/>
+						<td>
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,1,"Solider",
+												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
+							<em>L:</em><input type='text' class='solider' id='#' name='#'/>
 						</td>						
 					</tr>
 					<tr>
 						<td>
-							S:<select name='solider'>
-								<option value=''>Solider aa</option>								
-									</select><br/>
-							L:<input class='solider' type='text' id='#' name='#'/>
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,2,"Solider",
+												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
+							<em>L:</em><input type='text' class='solider' id='#' name='#'/>
 						</td>
 						<td>
-							S:<select name='solider'>
-								<option value=''>Solider aa</option>								
-									</select><br/>
-							L:<input class='solider' type='text' id='#' name='#'/>
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,2,"Solider",
+												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
+							<em>L:</em><input type='text' class='solider' id='#' name='#'/>
 						</td>
 						<td>
-							S:<select name='solider'>
-								<option value=''>Solider aa</option>								
-									</select><br/>
-							L:<input class='solider' type='text' id='#' name='#'/>
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,2,"Solider",
+												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
+							<em>L:</em><input type='text' class='solider' id='#' name='#'/>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							S:<select name='solider'>
-								<option value=''>Solider aa</option>								
-									</select><br/>
-							L:<input class='solider' type='text' id='#' name='#'/>
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,2,"Solider",
+												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
+							<em>L:</em><input type='text' class='solider' id='#' name='#'/>
 						</td>
 						<td>
-							S:<select name='solider'>
-								<option value=''>Solider aa</option>								
-									</select><br/>
-							L:<input class='solider' type='text' id='#' name='#'/>
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,2,"Solider",
+												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
+							<em>L:</em><input type='text' class='solider' id='#' name='#'/>
 						</td>
 						<td>
-							S:<select name='solider'>
-								<option value=''>Solider aa</option>								
-									</select><br/>
-							L:<input class='solider' type='text' id='#' name='#'/>
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,1,"Solider",
+												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
+							<em>L:</em><input type='text' class='solider' id='#' name='#'/>
 						</td>
 					</tr>
 				</table>
@@ -149,8 +148,10 @@ select{
 		<?php }?>
 	
 	</table>
+	<div class="style">
 	<a class="btn add" href="">Add</a>
 	<a class="btn save" href="">Save</a>
+	</div>
 </div>
 </form>
 <!-- Dung de them 1 award -->
