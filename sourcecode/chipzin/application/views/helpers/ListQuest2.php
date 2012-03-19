@@ -65,7 +65,7 @@ class Zend_View_Helper_ListQuest2
 							<select style='min-width:200px' id='nextquest-$row->QuestID-$key' name='nextquest-$row->QuestID-$key' onChange='updateNextQuest($nextQuestRow->ID,$row->QuestID,$key);'>";
 					$strList .= "<option selected  value=''>NULL</option>";		
 					foreach ($arrAllQuest as $row3){
-						if($row3->QuestID==$row->QuestID){
+						if($row3->QuestID==$row->NeedQuest){
 							continue;
 						}
 						$str="";
