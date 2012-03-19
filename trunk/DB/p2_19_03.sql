@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 19, 2012 at 06:05 PM
+-- Generation Time: Mar 19, 2012 at 10:59 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -438,7 +438,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `action` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5296 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5389 ;
 
 --
 -- Dumping data for table `log`
@@ -5746,7 +5746,100 @@ INSERT INTO `log` (`id`, `action_date`, `user`, `action`, `note`) VALUES
 (5292, '2012-03-16 14:25:57', 'admin', 'act_delete_quest', NULL),
 (5293, '2012-03-16 14:26:18', 'admin', 'act_delete_QTC', NULL),
 (5294, '2012-03-16 14:26:31', 'admin', 'act_delete_action', NULL),
-(5295, '2012-03-19 23:32:59', 'admin', 'act_login', NULL);
+(5295, '2012-03-19 23:32:59', 'admin', 'act_login', NULL),
+(5296, '2012-03-20 03:18:04', 'admin', 'act_login', NULL),
+(5297, '2012-03-20 03:23:12', 'admin', 'act_update_next_quest', NULL),
+(5298, '2012-03-20 03:23:24', 'admin', 'act_update_next_quest', NULL),
+(5299, '2012-03-20 03:30:06', 'admin', 'act_update_next_quest', NULL),
+(5300, '2012-03-20 03:31:18', 'admin', 'act_update_next_quest', NULL),
+(5301, '2012-03-20 03:31:21', 'admin', 'act_update_next_quest', NULL),
+(5302, '2012-03-20 03:31:25', 'admin', 'act_update_next_quest', NULL),
+(5303, '2012-03-20 03:33:02', 'admin', 'act_update_next_quest', NULL),
+(5304, '2012-03-20 03:33:05', 'admin', 'act_update_next_quest', NULL),
+(5305, '2012-03-20 03:33:08', 'admin', 'act_update_next_quest', NULL),
+(5306, '2012-03-20 03:35:53', 'admin', 'act_update_next_quest', NULL),
+(5307, '2012-03-20 03:50:20', 'admin', 'act_update_next_quest', NULL),
+(5308, '2012-03-20 03:50:28', 'admin', 'act_update_next_quest', NULL),
+(5309, '2012-03-20 03:53:34', 'admin', 'act_update_next_quest', NULL),
+(5310, '2012-03-20 03:55:18', 'admin', 'act_update_next_quest', NULL),
+(5311, '2012-03-20 03:55:23', 'admin', 'act_update_next_quest', NULL),
+(5312, '2012-03-20 03:56:03', 'admin', 'act_update_next_quest', NULL),
+(5313, '2012-03-20 03:57:15', 'admin', 'act_update_next_quest', NULL),
+(5314, '2012-03-20 03:57:50', 'admin', 'act_update_next_quest', NULL),
+(5315, '2012-03-20 03:58:09', 'admin', 'act_update_next_quest', NULL),
+(5316, '2012-03-20 03:59:29', 'admin', 'act_update_next_quest', NULL),
+(5317, '2012-03-20 03:59:34', 'admin', 'act_update_next_quest', NULL),
+(5318, '2012-03-20 04:00:44', 'admin', 'act_update_next_quest', NULL),
+(5319, '2012-03-20 04:00:46', 'admin', 'act_update_next_quest', NULL),
+(5320, '2012-03-20 04:00:53', 'admin', 'act_update_next_quest', NULL),
+(5321, '2012-03-20 04:04:47', 'admin', 'act_update_next_quest', NULL),
+(5322, '2012-03-20 04:05:00', 'admin', 'act_update_next_quest', NULL),
+(5323, '2012-03-20 04:05:42', 'admin', 'act_update_next_quest', NULL),
+(5324, '2012-03-20 04:06:02', 'admin', 'act_update_next_quest', NULL),
+(5325, '2012-03-20 04:06:45', 'admin', 'act_update_next_quest', NULL),
+(5326, '2012-03-20 04:06:48', 'admin', 'act_update_next_quest', NULL),
+(5327, '2012-03-20 04:06:53', 'admin', 'act_update_next_quest', NULL),
+(5328, '2012-03-20 04:06:57', 'admin', 'act_update_next_quest', NULL),
+(5329, '2012-03-20 04:07:01', 'admin', 'act_update_next_quest', NULL),
+(5330, '2012-03-20 04:07:04', 'admin', 'act_update_next_quest', NULL),
+(5331, '2012-03-20 04:07:09', 'admin', 'act_update_next_quest', NULL),
+(5332, '2012-03-20 04:07:11', 'admin', 'act_update_next_quest', NULL),
+(5333, '2012-03-20 04:12:38', 'admin', 'act_update_next_quest', NULL),
+(5334, '2012-03-20 04:12:40', 'admin', 'act_update_next_quest', NULL),
+(5335, '2012-03-20 04:12:43', 'admin', 'act_update_next_quest', NULL),
+(5336, '2012-03-20 04:12:45', 'admin', 'act_update_next_quest', NULL),
+(5337, '2012-03-20 04:15:00', 'admin', 'act_update_next_quest', NULL),
+(5338, '2012-03-20 04:15:53', 'admin', 'act_update_next_quest', NULL),
+(5339, '2012-03-20 04:15:56', 'admin', 'act_update_next_quest', NULL),
+(5340, '2012-03-20 04:15:58', 'admin', 'act_update_next_quest', NULL),
+(5341, '2012-03-20 04:16:01', 'admin', 'act_update_next_quest', NULL),
+(5342, '2012-03-20 04:16:16', 'admin', 'act_update_next_quest', NULL),
+(5343, '2012-03-20 04:16:20', 'admin', 'act_update_next_quest', NULL),
+(5344, '2012-03-20 04:16:24', 'admin', 'act_update_next_quest', NULL),
+(5345, '2012-03-20 04:16:26', 'admin', 'act_update_next_quest', NULL),
+(5346, '2012-03-20 04:19:50', 'admin', 'act_update_next_quest', NULL),
+(5347, '2012-03-20 04:20:00', 'admin', 'act_update_next_quest', NULL),
+(5348, '2012-03-20 04:23:41', 'admin', 'act_update_next_quest', NULL),
+(5349, '2012-03-20 04:23:44', 'admin', 'act_update_next_quest', NULL),
+(5350, '2012-03-20 04:23:48', 'admin', 'act_update_next_quest', NULL),
+(5351, '2012-03-20 04:23:51', 'admin', 'act_update_next_quest', NULL),
+(5352, '2012-03-20 04:24:02', 'admin', 'act_update_next_quest', NULL),
+(5353, '2012-03-20 04:24:22', 'admin', 'act_update_next_quest', NULL),
+(5354, '2012-03-20 04:24:24', 'admin', 'act_update_next_quest', NULL),
+(5355, '2012-03-20 04:35:22', 'admin', 'act_update_award_item', NULL),
+(5356, '2012-03-20 04:35:38', 'admin', 'act_update_award_item', NULL),
+(5357, '2012-03-20 04:35:39', 'admin', 'act_save_task', NULL),
+(5358, '2012-03-20 04:35:39', 'admin', 'act_save_task', NULL),
+(5359, '2012-03-20 04:35:49', 'admin', 'act_update_award_item', NULL),
+(5360, '2012-03-20 04:35:49', 'admin', 'act_save_task', NULL),
+(5361, '2012-03-20 04:35:49', 'admin', 'act_save_task', NULL),
+(5362, '2012-03-20 04:44:36', 'admin', 'act_add_new_quest', NULL),
+(5363, '2012-03-20 04:44:36', 'admin', 'act_update_AwardItem', NULL),
+(5364, '2012-03-20 04:45:33', 'admin', 'act_update_next_quest', NULL),
+(5365, '2012-03-20 04:45:37', 'admin', 'act_update_next_quest', NULL),
+(5366, '2012-03-20 04:45:58', 'admin', 'act_update_next_quest', NULL),
+(5367, '2012-03-20 04:50:28', 'admin', 'act_update_next_quest', NULL),
+(5368, '2012-03-20 04:50:30', 'admin', 'act_update_next_quest', NULL),
+(5369, '2012-03-20 04:51:38', 'admin', 'act_update_award_item', NULL),
+(5370, '2012-03-20 04:51:38', 'admin', 'act_save_task', NULL),
+(5371, '2012-03-20 04:51:38', 'admin', 'act_save_task', NULL),
+(5372, '2012-03-20 04:51:50', 'admin', 'act_update_award_item', NULL),
+(5373, '2012-03-20 04:51:50', 'admin', 'act_save_task', NULL),
+(5374, '2012-03-20 04:51:50', 'admin', 'act_save_task', NULL),
+(5375, '2012-03-20 04:55:03', 'admin', 'act_update_next_quest', NULL),
+(5376, '2012-03-20 04:56:27', 'admin', 'act_update_next_quest', NULL),
+(5377, '2012-03-20 04:56:30', 'admin', 'act_update_next_quest', NULL),
+(5378, '2012-03-20 04:56:32', 'admin', 'act_update_next_quest', NULL),
+(5379, '2012-03-20 04:56:35', 'admin', 'act_update_next_quest', NULL),
+(5380, '2012-03-20 04:56:36', 'admin', 'act_update_next_quest', NULL),
+(5381, '2012-03-20 04:56:38', 'admin', 'act_update_next_quest', NULL),
+(5382, '2012-03-20 04:56:40', 'admin', 'act_update_next_quest', NULL),
+(5383, '2012-03-20 04:56:42', 'admin', 'act_update_next_quest', NULL),
+(5384, '2012-03-20 04:56:48', 'admin', 'act_update_next_quest', NULL),
+(5385, '2012-03-20 04:58:02', 'admin', 'act_update_next_quest', NULL),
+(5386, '2012-03-20 04:58:04', 'admin', 'act_update_next_quest', NULL),
+(5387, '2012-03-20 04:58:19', 'admin', 'act_update_next_quest', NULL),
+(5388, '2012-03-20 04:58:26', 'admin', 'act_update_next_quest', NULL);
 
 -- --------------------------------------------------------
 
@@ -5882,11 +5975,29 @@ INSERT INTO `q_action` (`ActionID`, `ActionName`) VALUES
 CREATE TABLE IF NOT EXISTS `q_nextquest` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `QuestID` int(11) NOT NULL,
-  `NextQuest` int(11) NOT NULL,
+  `NextQuest` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `QuestID` (`QuestID`,`NextQuest`),
   KEY `NextQuest` (`NextQuest`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=37 ;
+
+--
+-- Dumping data for table `q_nextquest`
+--
+
+INSERT INTO `q_nextquest` (`ID`, `QuestID`, `NextQuest`) VALUES
+(19, 1, 2),
+(36, 1, 10),
+(20, 2, 3),
+(33, 3, 3),
+(21, 3, 4),
+(22, 4, 5),
+(23, 5, 6),
+(24, 6, 7),
+(16, 7, NULL),
+(17, 8, NULL),
+(25, 10, 8),
+(18, 11, NULL);
 
 -- --------------------------------------------------------
 
@@ -5904,20 +6015,20 @@ CREATE TABLE IF NOT EXISTS `q_quest` (
   `QuestDescString` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `AwardGold` int(11) NOT NULL,
   `AwardExp` int(11) NOT NULL,
-  `NextQuest` int(11) DEFAULT NULL,
+  `NextQuest1` int(11) DEFAULT NULL,
   `NeedQuest` int(11) DEFAULT NULL,
   `QuestLineID` int(11) NOT NULL,
   PRIMARY KEY (`QuestID`),
   KEY `QuestLineID` (`QuestLineID`),
-  KEY `NextQuest` (`NextQuest`,`QuestLineID`),
-  KEY `NextQuest_2` (`NextQuest`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+  KEY `NextQuest` (`NextQuest1`,`QuestLineID`),
+  KEY `NextQuest_2` (`NextQuest1`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `q_quest`
 --
 
-INSERT INTO `q_quest` (`QuestID`, `QuestName`, `QuestGroupString`, `QuestGroup`, `QuestString`, `QuestDesc`, `QuestDescString`, `AwardGold`, `AwardExp`, `NextQuest`, `NeedQuest`, `QuestLineID`) VALUES
+INSERT INTO `q_quest` (`QuestID`, `QuestName`, `QuestGroupString`, `QuestGroup`, `QuestString`, `QuestDesc`, `QuestDescString`, `AwardGold`, `AwardExp`, `NextQuest1`, `NeedQuest`, `QuestLineID`) VALUES
 (1, 'Mùa lúa về', '@quest#46', 'Ấm no (Nhiệm vụ 1/2)', '@quest#47', 'Mùa lúa tới rồi, hãy trồng trọt thật nhiều để tích trữ lương thực', '@quest#48', 0, 2, 2, 2, 7),
 (2, 'Lúa chín đầy bồ', '@quest#53', 'Ấm no (Nhiệm vụ 2/2)', '@quest#54', 'Lúa chín rồi. Nhanh nhanh gặt nào', '@quest#55', 0, 1, 3, 1, 7),
 (3, 'Thu thuế', '@quest#58', 'Thu thuế (Nhiệm vụ 1/1)', '@quest#59', 'Nhân tuần lễ Vàng, hãy đến nhà dân để quyên góp xây dựng làng', '@quest#60', 0, 1, 4, 2, 7),
@@ -5926,7 +6037,8 @@ INSERT INTO `q_quest` (`QuestID`, `QuestName`, `QuestGroupString`, `QuestGroup`,
 (6, 'Đào tạo dân công', '@quest#73', 'Nhân lực dồi dào (Nhiệm vụ 2/2)', '@quest#74', 'Tăng cường lực lượng cho làng để tăng năng suất lao động', '@quest#75', 0, 2, 7, 5, 7),
 (7, 'Trại Gỗ', '@quest#78', 'Gỗ Mít (Nhiệm vụ 1/2)', '@quest#79', 'Trong rừng hiện có rất nhiều cây khô, lập trại gỗ để khai thác và tích trữ lượng gỗ cho kế hoạch dựng nhà trú đông', '@quest#80', 0, 2, NULL, 6, 7),
 (8, 'Gỗ Mít', '@quest#83', 'Gỗ Mít (Nhiệm vụ 2/2)', '@quest#84', 'Mít cho gỗ rất thơm. Hãy thu hoạch để tích luỹ gỗ cho việc xây nhà nào', '@quest#85', 0, 2, NULL, 10, 7),
-(10, 'Di chuyển', '@quest#95', 'Quy hoạch (Nhiệm vụ 1/2)', '@quest#96', 'Học thao tác quy hoạch làng một chút nhé', '@quest#97', 0, 2, 8, NULL, 7);
+(10, 'Di chuyển', '@quest#95', 'Quy hoạch (Nhiệm vụ 1/2)', '@quest#96', 'Học thao tác quy hoạch làng một chút nhé', '@quest#97', 0, 2, 8, NULL, 7),
+(11, '23', '42', '2', '423', '23', '34', 42, 4, NULL, NULL, 7);
 
 -- --------------------------------------------------------
 
@@ -5998,7 +6110,14 @@ CREATE TABLE IF NOT EXISTS `q_quest_awarditem` (
   `AwardItem` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `QuestID` (`QuestID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `q_quest_awarditem`
+--
+
+INSERT INTO `q_quest_awarditem` (`QuestID`, `ID`, `AwardItem`) VALUES
+(1, 1, '209');
 
 -- --------------------------------------------------------
 
@@ -6031,7 +6150,7 @@ CREATE TABLE IF NOT EXISTS `q_task` (
 --
 
 INSERT INTO `q_task` (`TaskID`, `TaskName`, `TaskString`, `DescID`, `DescString`, `QTC_ID`, `UnlockCoin`, `IconClassName`, `IconPackageName`, `Quantity`, `ActionID`, `QuestID`, `TargetType`) VALUES
-(7, 'Xây thêm 1 Ô đất', '@quest#49', '@quest#51', '', 4, 1, 'sample', 'sample', 1, 1, 1, NULL),
+(7, 'Xây thêm 1 Ô đất', '@quest#49', '@quest#51', 'ưeqweqw', 4, 1, 'sample', 'sample', 1, 1, 1, NULL),
 (9, 'Gieo trồng 1 vụ Lúa', '@quest#50', '@quest#52', '', 13, 1, 'sample', 'sample', 1, 1001, 1, NULL),
 (10, 'Thu hoạch 1 Lúa ', '@quest#56 ', '@quest#57', '', 7, 1, NULL, NULL, 1, 1002, 2, NULL),
 (11, 'Thu thuế 1 nhà Dân', '@quest#61', '@quest#62', '', 8, 1, NULL, NULL, 1, 3, 3, NULL),
@@ -6056,7 +6175,7 @@ CREATE TABLE IF NOT EXISTS `q_task_target` (
   `TargetID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `TaskID` (`TaskID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `q_task_target`
@@ -6072,8 +6191,8 @@ INSERT INTO `q_task_target` (`ID`, `TaskID`, `TargetID`) VALUES
 (15, 18, 7001),
 (17, 20, 2002),
 (18, 21, 2002),
-(23, 7, 2002),
-(24, 9, 5001);
+(31, 7, 2002),
+(32, 9, 5001);
 
 -- --------------------------------------------------------
 
@@ -6185,8 +6304,8 @@ ALTER TABLE `c_campaign`
 -- Constraints for table `q_nextquest`
 --
 ALTER TABLE `q_nextquest`
-  ADD CONSTRAINT `q_nextquest_ibfk_2` FOREIGN KEY (`QuestID`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `q_nextquest_ibfk_1` FOREIGN KEY (`NextQuest`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `q_nextquest_ibfk_1` FOREIGN KEY (`NextQuest`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `q_nextquest_ibfk_2` FOREIGN KEY (`QuestID`) REFERENCES `q_quest` (`QuestID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `q_quest`
