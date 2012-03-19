@@ -54,7 +54,15 @@ class Models_Quest extends Models_Base
 				SET
 					NeedQuest ='".$needquest."'
 				WHERE 
-					QuestID='".$id."'
+					QuestID='".$id."';
+				
+				UPDATE 
+					q_NextQuest
+				SET
+					NextQuest = NULL
+				WHERE 
+					QuestID = '$id' AND NextQuest = '$needquest'; 	
+					
 			";
 		//print_r($sql);
 		$data=$this->_db->query($sql);

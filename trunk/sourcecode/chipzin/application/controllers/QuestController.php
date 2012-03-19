@@ -515,6 +515,8 @@ class QuestController extends BaseController
 				$this->NeedQuest=$this->_request->getParam('needquest');
 				$form=new Models_Quest();
 				$form->updateNeedquest($this->QuestID,$this->NeedQuest);
+				$md = new Models_Quest_Detail();
+				
 				Models_Log::insert($this->view->user->username, "act_update_need_quest");			
 			}
 			echo 1;
