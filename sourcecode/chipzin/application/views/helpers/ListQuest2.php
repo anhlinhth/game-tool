@@ -36,7 +36,7 @@ class Zend_View_Helper_ListQuest2
 							<td>$row->QuestName</td>							
 							<td>$row->QuestLineName</td>
 							<td>
-								<select width='30' name='needquest-$row->QuestID' id='needquest-$row->QuestID' class='needquest' onChange='updateNeedquest($row->QuestID);' > 
+								<select style='min-width:200px'  name='needquest-$row->QuestID' id='needquest-$row->QuestID' class='needquest' onChange='updateNeedquest($row->QuestID);' > 
 							";
 			    $strList .= "<option selected  value=''>NULL</option>";
 			    $flag1 = 0;
@@ -62,9 +62,12 @@ class Zend_View_Helper_ListQuest2
 						$flag2 = 0;
 					}
 					$strList.= "<div class='next-quest-$row->QuestID' id='next-quest-div-$row->QuestID-$key'>							
-							<select id='nextquest-$row->QuestID-$key' name='nextquest-$row->QuestID-$key' onChange='updateNextQuest($nextQuestRow->ID,$row->QuestID,$key);'>";
+							<select style='min-width:200px' id='nextquest-$row->QuestID-$key' name='nextquest-$row->QuestID-$key' onChange='updateNextQuest($nextQuestRow->ID,$row->QuestID,$key);'>";
 					$strList .= "<option selected  value=''>NULL</option>";		
 					foreach ($arrAllQuest as $row3){
+						if($row3->QuestID==$row->QuestID){
+							continue;
+						}
 						$str="";
 						if($nextQuestRow->NextQuest == $row3->QuestID)
 						{							

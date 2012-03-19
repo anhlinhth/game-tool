@@ -128,18 +128,25 @@ class Models_Quest extends Models_Base
 		try
 		{
 	        $sql = "
-	        		UPDATE
-	        			q_quest
+	        		DELETE FROM
+						q_nextquest
+					WHERE 
+						questID='$value';
+						
+					UPDATE
+	        			q_nextquest
 	        		SET
 	        			NextQuest = NULL
 	        		WHERE
-	        			NextQuest = '$value';
+	        			NextQuest = '$value';	        			
+	        		
 	        		UPDATE
 	        			q_quest
 	        		SET
 	        			NeedQuest = NULL
 	        		WHERE
 	        			NeedQuest = '$value';
+	        			
 	        		DELETE FROM 
 	        			q_quest_awarditem
 	        		WHERE
@@ -150,10 +157,12 @@ class Models_Quest extends Models_Base
 					WHERE
 						TaskID IN(SELECT TaskID FROM q_task WHERE QuestID = $value);
 						
+						
         			DELETE FROM         			
 	        			q_task 
 	        		WHERE
 	        			QuestID = '$value';
+	        			
 	        		DELETE FROM
         				q_quest
 	        		WHERE

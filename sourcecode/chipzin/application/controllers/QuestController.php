@@ -114,8 +114,7 @@ class QuestController extends BaseController
 	try
 		{
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest.php';
-			$this->_getArrQuest();
-			
+			$this->_getArrQuest();			
 			$pageNo = $this->_request->getParam("page");
 			$items = $this->_request->getParam("items");
 			if($pageNo == 0)
@@ -126,6 +125,7 @@ class QuestController extends BaseController
 			$form->_requestToForm($this);						
 			if(empty($form->obj->QuestLineID))
 				$form->obj->QuestLineID = NULL;
+			
 			$md= new Models_Quest();
 			$mdqd = new Models_Quest_Detail();
 			$md_questLine = new Models_Quest_Line();
