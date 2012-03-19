@@ -39,6 +39,32 @@ class Models_Quest_xfj extends Models_Base {
 		
 		return $count;
 	}
+	public function nextquest($search) {
+		$sql = "SELECT *
+		
+				FROM
+					q_nextquest
+				WHERE
+					QuestID = '$search'
+					";
+		
+		$data = $this->_db->fetchAll ( $sql , "", Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}
+	public function countquest($search) {
+		$sql = "SELECT COUNT(NextQuest)
+		
+				FROM
+					q_nextquest
+				WHERE
+					QuestID = '$search'
+					";
+		
+		$data = $this->_db->fetchOne ( $sql , "", Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}
 	public function generate($data) {
 		$str .= "{";
 		$mdGiftPackageDetail = new Models_Quest_Package_Detail ();
@@ -55,8 +81,25 @@ class Models_Quest_xfj extends Models_Base {
 				$temp = ( int ) $row ['QuestID'];
 				$str .= "\n\t\t{";
 				$str .= "\n\t\t\t \"group\" : " . ( int ) $row ['QuestLineID'] . ",";
-				if ($row ['NextQuest'] != NULL)
-					$str .= "\n\t\t\t \"nextQuest\" : [\"" . ( int ) $row ['NextQuest'] . "\"],";
+				$data1 = $this->nextquest($row['QuestID']);
+				$data2 = $this->countquest($row['QuestID']);
+				if ($data1)
+				{
+					$u=1;
+					$str .= "\n\t\t\t \"nextQuest\" : [";
+					foreach($data1 as $row2)
+						if($data2==1)
+							$str .="\"".( int ) $row2->NextQuest."\"";
+						else
+							if($u!=$data2)
+							{
+								$str .="\"".( int ) $row2->NextQuest."\",";
+								$u++;
+							}
+							else 
+								$str .="\"".( int ) $row2->NextQuest."\"";
+					$str .= "]";	
+				}
 				else
 					$str .= "\n\t\t\t \"nextQuest\" : [],";
 				
