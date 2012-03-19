@@ -88,6 +88,8 @@ class Models_Quest_xfj extends Models_Base {
 					$u=1;
 					$str .= "\n\t\t\t \"nextQuest\" : [";
 					foreach($data1 as $row2)
+					if($row2->NextQuest!=NULL)
+					{
 						if($data2==1)
 							$str .="\"".( int ) $row2->NextQuest."\"";
 						else
@@ -98,7 +100,8 @@ class Models_Quest_xfj extends Models_Base {
 							}
 							else 
 								$str .="\"".( int ) $row2->NextQuest."\"";
-					$str .= "]";	
+					}
+					$str .= "]";
 				}
 				else
 					$str .= "\n\t\t\t \"nextQuest\" : [],";
