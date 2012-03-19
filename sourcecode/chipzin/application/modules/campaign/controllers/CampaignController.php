@@ -157,12 +157,9 @@ class Campaign_CampaignController extends BaseController
 		}
 		catch(Exception $ex)
 		{
-			var_dump($ex);
-			die();
+
 		}
 		Models_Log::insert($this->view->user->username, "act_insert_Campaign", $obj->name);
-
-		echo $obj->WorldMap;
 	}
 	catch(Exception $ex)
         {            
