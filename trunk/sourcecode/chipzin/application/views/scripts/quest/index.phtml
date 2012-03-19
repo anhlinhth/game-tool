@@ -26,7 +26,7 @@ if($this->temp)
 				foreach($this->dataquestlineid as $row)
 				{
 					$str = "";
-					if($this->form->QuestLineID == $row->QuestLineID){
+					if($this->obj->QuestLineID == $row->QuestLineID){
 						$str="selected";
 					}
 				?>					
@@ -169,7 +169,7 @@ function loadQuest(){
 			page:<?php echo $this->page;?>,
 			items:<?php echo $this->items;?>,
 			<?php if($this->obj->QuestLineID)
-				echo "QuestLineID:".$this->form->QuestLineID?>
+				echo "QuestLineID:".$this->obj->QuestLineID?>
 		},			
 		success: function(data){			
 			$("#list-quest").html(data);
@@ -192,7 +192,7 @@ function deleteQuest(key){
 	
 }
 /////////////////////////////////////////
-function changeQuestLine(){
+function changeQuestLine(){	
 	$("#formPaging").submit();
 }
 
