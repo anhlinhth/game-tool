@@ -9,8 +9,7 @@ class Obj_Quest_Detail
 	public $QuestDesc;
 	public $QuestDescString;
 	public $AwardGold;
-	public $AwardExp;
-	public $NextQuest;
+	public $AwardExp;	
 	public $QuestLineID;
 	public $NeedQuest;
 }

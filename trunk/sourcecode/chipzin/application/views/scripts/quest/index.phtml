@@ -69,16 +69,67 @@ if($this->temp)
 </div>
 </form>
 <script>
+/////////////////////////////////
+function addNextQuest(questID,key){		
+	$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/updatenextquest'?> ",
+			data: {
+				questID:questID,
+				Action:'insert'
+			},			
+			success: function(data){
+				if(parseInt(data) == 1){
+					loadQuest();
+				}else{
+					alert(data);
+					alert("Error");				
+				}
+			}
+	});
+}
+///////////////////////
+function deleteNextQuest(questID,id,key){
+	var count = $(".next-quest-"+questID).size();
+	if(count <=1){
+		alert("at least 1 Next-Quest! Only Set Null");
+		return;
+	}
+	if(confirm("Bạn có muốn xóa Next-Quest?")){
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/updatenextquest'?> ",
+			data: {
+				ID:id,
+				Action:'delete'
+			},			
+			success: function(data){
+				if(parseInt(data) == 1){						
+					loadQuest();
+				}else{
+					alert(data);
+					alert("Error");				
+				}
+			}
+		});
+	}
+	
+}
+/////////////////////
 
-
-function updateNextquest(id)
-{
-	var nextquest = document.getElementById('nextquest-'+id).value;	
+function updateNextQuest(id,questid,key)
+{	
+	var value = document.getElementById('nextquest-'+questid+'-'+key).value;
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/updatenextquest/'?> ",
-		data: "questid=" + id +"&nextquest="+ nextquest,	
-		success: function(data){			
+		data: {
+				Action:'update',
+				ID:id,
+				QuestID:questid,				
+				NextQuest:value
+		},	
+		success: function(data){
 			if(parseInt(data) == 1){	
 				alert("Cập nhật thành công");
 				loadQuest();
@@ -117,7 +168,7 @@ function loadQuest(){
 		data: {
 			page:<?php echo $this->page;?>,
 			items:<?php echo $this->items;?>,
-			<?php if($this->form->QuestLineID)
+			<?php if($this->obj->QuestLineID)
 				echo "QuestLineID:".$this->form->QuestLineID?>
 		},			
 		success: function(data){			
@@ -140,9 +191,11 @@ function deleteQuest(key){
 	}
 	
 }
+/////////////////////////////////////////
 function changeQuestLine(){
 	$("#formPaging").submit();
 }
+
 $(document).ready(function(){
 	///////////////////////////////
 	loadQuest();	

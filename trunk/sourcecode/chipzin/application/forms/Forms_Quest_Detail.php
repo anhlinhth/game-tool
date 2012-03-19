@@ -14,9 +14,6 @@ class Forms_Quest_Detail extends Forms_Base
 		$arrCode = array();
 		$arrNote = array();
 		
-		if(empty($this->obj->NextQuest)){
-			$this->obj->NextQuest = NULL;
-		}
 		if(empty($this->obj->NeedQuest)){
 			$this->obj->NeedQuest = NULL;
 		}

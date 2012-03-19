@@ -100,13 +100,14 @@ class Models_Quest_Detail extends Models_Base
 		return $data;
 	}
 	
-	public function getNeedQuest($questid)
+	public function getNextQuest($questid)
 		{
 			$sql = "SELECT
 						*
 					FROM
-						q_quest_needquest
-							WHERE QuestID = $questid";
+						q_NextQuest							 	
+							WHERE QuestID = $questid
+								ORDER BY  ID ASC ";
 			
 			$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);			
 			return $data;
@@ -136,6 +137,32 @@ class Models_Quest_Detail extends Models_Base
 			
 			$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);			
 			return $data;
+		}
+		
+		public function insertNextQuest($obj){
+		    
+		    $data = (array)$obj;
+		    $this->_db->insert('q_NextQuest', $data);
+		    $id = $this->_db->lastInsertId();
+		    return $id;
+		}
+		public function deleteNextQuest($id,$questID=null,$nextquest=null){
+		    $this->_db->delete('q_NextQuest', "ID=$id");
+		}
+		
+		public function updateNextQuest($obj){		
+			try
+			{
+				$data = Utility::transferObjectToArray($obj);
+				$key = $data[ID];
+				unset($data[ID]);			
+				$this->_db->update('q_NextQuest', $data, "ID = $key");	
+	    		return $key;
+			}
+			catch(Zend_Db_Exception $ex)
+			{
+				throw new Internal_Error_Exception($ex);
+	    	}    
 		}
 }
 	

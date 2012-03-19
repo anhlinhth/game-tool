@@ -38,10 +38,9 @@ class Models_Quest extends Models_Base
 	{
 		$sql="
 			SELECT DISTINCT
-				NextQuest,NeedQuest,QuestLineID,QuestName
+				NeedQuest,QuestLineID,QuestName
 			FROM
 				q_quest
-			
 				
 			 ";
 		$data=$this->_db->fetchAll($sql,null,Zend_Db::FETCH_OBJ);
@@ -64,15 +63,16 @@ class Models_Quest extends Models_Base
 	
 	public function updateNextquest($id,$nextquest)
 	{
-		$sql="
-				UPDATE 
-					q_quest
-				SET
-					NextQuest = $nextquest
-				WHERE 
-					QuestID='".$id."'
-			";
-		$data=$this->_db->query($sql);
+// 		$sql="
+// 				UPDATE 
+// 					q_quest
+// 				SET
+// 					NextQuest = $nextquest
+// 				WHERE 
+// 					QuestID='".$id."'
+// 			";
+// 		$data=$this->_db->query($sql);
+		$data = ("Not implement");
 		return $data;
 	}
 	public function filter($objSearch,$order,$offset,$count)

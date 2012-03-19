@@ -4,13 +4,14 @@ require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Detail.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
-require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Needquest.php';
+
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Action.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Detail.php';
+require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_NextQuest.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Q_Action.php';
 
 require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';	
@@ -130,26 +131,16 @@ class QuestController extends BaseController
 			$md_questLine = new Models_Quest_Line();
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
 			$this->view->item = $form->obj;
-			$this->view->filterQuestLine = $md_questLine->_getByKey($form->obj->QuestLineID);			
-			$data = $md->filter($form->obj, "QuestID ASC", ($pageNo - 1)*$items, $items);
-			$data1 = $mdqd->getQuest();
-			$mdQT = new Models_Task();
-			$dataTask = $mdQT->listQuestInTask();
+			
+			
 			$dataquestlineID = $md->getQuestlineID();
-			$dataquestneed=$md->getNeedQuest();
-			//print_r($dataquestneed);
-			$count = $md->count($form->obj);
-		
+			
+			$count = $md->count($form->obj);		
 			$this->view->dataquestlineid = $dataquestlineID;
-			
-			
-			
 			$this->view->items = $items;
 			$this->view->page = $pageNo;
 			$this->view->totalRecord = $count;
-			
-			
-			$this->view->form = $form->obj;
+			$this->view->obj = $form->obj;
 		}
 		catch (Exception $ex)
 		{
@@ -197,6 +188,7 @@ class QuestController extends BaseController
         {
             $this->view->form = $form->obj;
 			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 		
@@ -227,7 +219,10 @@ class QuestController extends BaseController
 				$form->_requestToForm($this);					
 				$form->validate(INSERT);
 				$md = new Models_Quest_Detail();			
-				$md->_insert($form->obj);
+				$questID = $md->_insert($form->obj);
+				$obj_nextquest = new Obj_Quest_NextQuest();
+				$obj_nextquest->QuestID = $questID;
+				$md->insertNextQuest($obj_nextquest);
 				$this->QuestID= $form->obj->QuestID;
 				
 				Models_Log::insert($this->view->user->username, "act_add_new_quest");
@@ -331,17 +326,24 @@ class QuestController extends BaseController
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
 			$this->view->item = $form->obj;
 			$this->view->filterQuestLine = $md_questLine->_getByKey($form->obj->QuestLineID);			
-			$data = $md->filter($form->obj, "QuestID ASC", ($pageNo - 1)*$items, $items);
-			$data1 = $mdqd->getQuest();
+			$arrQuest = $md->filter($form->obj, "QuestID ASC", ($pageNo - 1)*$items, $items);
+			$arrAllQuest = $mdqd->getQuest();
 			$mdQT = new Models_Task();
 			$dataTask = $mdQT->listQuestInTask();
 			$dataquestlineID = $md->getQuestlineID();
 			$dataquestneed=$md->getNeedQuest();
 			//print_r($dataquestneed);
 			$count = $md->count($form->obj);
+			$arrNextQuest = array();
 			
-			$this->view->data = $data;
-			$this->view->data2= $data1;
+			foreach($arrQuest as $quest){
+			    $arrNextQuest[$quest->QuestID] = $mdqd->getNextQuest($quest->QuestID);
+			};
+			
+			
+			$this->view->arrQuest = $arrQuest;
+			$this->view->arrNextQuest = $arrNextQuest;
+			$this->view->arrAllQuest= $arrAllQuest;
 			$this->view->Task = $dataTask;
 			$this->view->dataquestlineid = $dataquestlineID;
 			
@@ -383,10 +385,10 @@ class QuestController extends BaseController
 			$this->view->arrAction = $mdAction->_getAction();
 			$this->view->arrTemp = $mdtemp->_filter();
 			$this->view->arrTaskTarget = $mdTT->select($questid);
-				
+			$arrArrNextQuest = 	
 			//Hiện ListQuesstTaskClient 
 			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();
-		
+			
 		}catch(Exception $ex){
 			
 	           Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
@@ -527,27 +529,66 @@ class QuestController extends BaseController
 	public function updatenextquestAction()
 	{
 		try{
-			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
+ 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Detail.php';
+			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_NextQuest.php';
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNoRender();
 			if($this->_request->isPost())
 			{
-				$this->QuestID=$this->_request->getParam('questid');
-				$this->NextQuest=$this->_request->getParam('nextquest');
-				if(empty($this->NextQuest))
-				{
-					$this->NextQuest = "NULL";
-				}
-				$form=new Models_Quest();
-				$form->updateNextquest($this->QuestID,$this->NextQuest);
+			    
+			    $action = $_POST['Action'];		    
+			    $md = new Models_Quest_Detail();
+			    switch ($action) {
+			    	case "insert":		
+			    	    $questID = $_POST['questID'];
+			        	$obj = new Obj_Quest_NextQuest();
+			        	$obj->QuestID = $questID;
+			        	$obj->NextQuest = null;
+			       	 	$md->insertNextQuest($obj);
+			       	 	echo "1";
+			      	break;
+			    	case "delete":
+			    	    $id = $_POST['ID'];
+			    		$md->deleteNextQuest($id);
+			    		echo "1";
+			    	break;
+			    	case "update":			    	   
+			    		$obj->ID = $_POST['ID'];
+			    		$obj->QuestID = $_POST['QuestID'];
+			    		$obj->NextQuest = $_POST['NextQuest'];	
+			    		if(empty($obj->NextQuest)){
+			    		  $obj->NextQuest = null;  
+			    		}	    		
+			    		$md->updateNextQuest($obj);
+			    		echo "1";
+			    		break;
+			    	default:			    		
+			    	break;
+			    }
+// 			    if($action == 'insert'){
+			        
+			        
+// 			    }else if($ac){
+// 			        $this->QuestID=$this->_request->getParam('questid');
+// 			        $this->NextQuest=$this->_request->getParam('nextquest');
+// 			        if(empty($this->NextQuest))
+// 			        {
+// 			        	$this->NextQuest = "NULL";
+// 			        }
+// 			        $form=new Models_Quest();
+// 			        $form->updateNextquest($this->QuestID,$this->NextQuest);
+// 			    }
+				
 				Models_Log::insert($this->view->user->username, "act_update_next_quest");
 			}
-			echo 1;
+			
 		}
 		catch(Exception $ex)
 		{
 			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}		
 	}
