@@ -65,15 +65,18 @@ class Campaign_CampaignController extends BaseController
 			
 			$arrbattle = $this->view->arrbattle;
 			$this->view->layout[] = array();
-			////////
-			$mdB_award = new Models_Award();
+			
+			///////Lấy Award - ThaoNX////////////
+						
+			$md_award = new Models_Award();
+			$this->view->arrAwardType = $md_award->getAwardType();
 			$this->view->arraward = array();
 			
 			foreach ($this->view->arrbattle as $row)
 			{
 				$idbattle= $row->ID;			
-			///////Lấy Award////////////
-				$this->view->arraward[$idbattle] = $mdB_award->getAward($idbattle);
+			
+				$this->view->arraward[$idbattle] = $md_award->getAward($idbattle);
 				
 			}
 			//print_r($this->view->award);
@@ -203,9 +206,3 @@ class Campaign_CampaignController extends BaseController
         }
 	}
 }
-	
-	
-
-?>
-
-
