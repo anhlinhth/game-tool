@@ -11,14 +11,14 @@ class Models_Award extends Models_Base
 		$this->_table = "c_award";	
 	}
 	
-	public function getAward($idBattel)
+	public function getAward($idBattle)
 	{
 		$sql ="SELECT
 					*
 				FROM
 					c_award
 				WHERE
-					BattleID = $idBattel";
+					BattleID = $idBattle";
 		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
 		return $data;
 	}
