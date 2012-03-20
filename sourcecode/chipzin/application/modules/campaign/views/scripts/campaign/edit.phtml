@@ -53,7 +53,7 @@ select{
 		</td>			
 		<td>
 			<label>Campaign Name:</label>
-			<input type="text" name='Name' id='Name' value='<?php echo $this->campaign->Name;?>' />
+			<input type="text" name='Name' id=Name' value='<?php echo $this->campaign->Name;?>' />
 		</td>
 		<td>
 			<label>World Map:</label>
@@ -63,7 +63,7 @@ select{
 	</table>
 	<h3>Battle</h3>	
 	
-	<table id='battle' >
+	<table id='battle' width="100%" >
 		<thead>
 			<tr>
 				<td width="15px;">ID</td>
@@ -82,56 +82,81 @@ select{
 			<td width="auto">
 				<?php echo $this->selection($this->arrlayout,$rowbattle->Layout,"Layout",array('key'=>"ID",'name'=>"Name"))?>
 				<br/>
+				
 				<table id='tb_layout'>
 					<tr>
-						<td style="margin: 0;padding: 0;">
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0),"solider_$rowbattle->ID_$this->arrBattleSolider[$rowbattle->ID]",
-												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
-							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][0])?"visile":"invisible"?>
+						<td class="<?php echo  $strclass?>" style="margin: 0;padding: 0;">
+							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0);
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._0,
+												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>												
+												
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
-						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1),"solider_$rowbattle->ID_$this->arrBattleSolider[$rowbattle->ID]",
+						
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][1])?"visile":"invisible"?>
+						<td class="<?php echo  $strclass?>" >
+							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); 
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._1,
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
-							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
-						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2),"soldier",
+						
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][2])?"visile":"invisible"?>
+						<td class="<?php echo  $strclass?>" >
+							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); 
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._2,
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
-							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value='<?php echo $arrBS['Level'];?>'/>
 						</td>						
 					</tr>
 					<tr>
-						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3),"soldier",
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][3])?"visile":"invisible"?>
+						<td class="<?php echo  $strclass?>" >
+							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3); 
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._3,
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
-							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
-						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4),"soldier",
+						
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visile":"invisible"?>
+						<td class="<?php echo  $strclass?>" >
+							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); 
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._4,
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
-							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
-						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5),"soldier",
+						
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][5])?"visile":"invisible"?>
+						<td class="<?php echo  $strclass?>" >
+							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5);
+							 echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._5,
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
-							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 					<tr>
-						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6),"soldier",
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][6])?"visile":"invisible"?>
+						<td class="<?php echo  $strclass?>" >
+							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._6,
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
-							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
-						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7),"soldier",
+						
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][70])?"visile":"invisible"?>
+						<td class="<?php echo  $strclass?>" >
+							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7); 
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._7,
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
-							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider_2' name='levelSolider' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
-						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8),"soldier",
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][8])?"visile":"invisible"?>
+						<td class="<?php echo  $strclass?>" >
+							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._8,
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
-							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider_1' name='levelSolider' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 				</table>
@@ -140,13 +165,8 @@ select{
 			<div id='div_award_<?php echo $rowbattle->ID;?>'>				
 				<a href='javascript:addAward(<?php echo $rowbattle->ID; ?>)' class='ico-16 add' ></a><br/>
 				
-				<?php foreach ($this->arraward[$rowbattle->ID] as $key=>$row){?>
-					<select>
-						<option $strSelect value="" style="color:red">NULL</option>
-						<?php echo $this->options($this->arrawardtype,$row->AwardTypeID,array('key'=>'AwardTypeID','name'=>'Name'))?>
-					</select>					
-					<input type='text' class='soldier' id='Value' name='Value' value='<?php echo $row->Value?>'/>
-					<a class='tool-16 delete' href='javascript:removeAward(<?php echo($row->ID)?>)'>&nbsp</a>	
+				<?php foreach ($this->arraward[$rowbattle->ID] as $row){?>
+				<?php echo $this->selection($this->arrawardtype,$row->ID,"AwardID_$rowbattle->ID[]",array('key'=>'ID','name'=>'Name'))?>	
 				<?php }?>
 			</div>
 			</td>
@@ -164,48 +184,29 @@ select{
 <div style="display: none">
 	<div id="selectAwardType">
 		
-		<?php echo $this->options($this->arrawardtype,1,array('key'=>'ID','name'=>'Name'))?>
+		<?php echo $this->selection($this->arrawardtype,1,"AwardID[]",array('key'=>'ID','name'=>'Name'))?>
 		
 	</div>
 </div>
 <!--  -->
 <script>
 	function addAward(key)
-	{		
-		$.ajax({
-			type: "POST",
-			url: "<?php echo $this->baseUrl.'/campaign/campaign/updateaward'?> ",
-			data: {
-				Action:'insert',
-				BattleID: key				
-			},
-			success: function(msg){					
-				if(msg == "1"){					
-					alert("Successfull");
-				}else{
-					alert("Error");					
-				}
-				window.location.reload();
-			}
-		});
+	{
+		var select = $("#selectAward").html();
+		var count = $("#div_award .award-list").size();
+		var btnDel= "<a class='tool-16 delete' href='javascript:removeAward("+count+")'></a>";
+		var input="<input class='soldier' type='text' id='award_input'/>"
+		var html = "<div class='award-list' id='award-list-"+count+"'>"+select+input+btnDel+"</div>";
+		$("#div_award_"+key).append(html);
 	}
 	function removeAward(key)
 	{
-		$.ajax({
-			type: "POST",
-			url: "<?php echo $this->baseUrl.'/campaign/campaign/updateaward'?> ",
-			data: {
-				Action:'delete',
-				ID: key				
-			},
-			success: function(msg){				
-				if(msg == '1'){					
-					alert("Successfull");
-				}else{
-					alert("Error");					
-				}
-				window.location.reload();
-			}
-		});
+		$("#award-list-"+key).remove();
 	}
+	$(document).ready(function(){
+			
+			$("td.invisible").css("");
+			
+		
+	});
 </script>
