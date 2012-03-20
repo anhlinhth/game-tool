@@ -245,6 +245,21 @@ class Campaign_CampaignController extends BaseController
 						$mdAward->deleteAward($ID);
 						echo "1";
 						break;
+					case 'update-type':
+							$ID = $_POST['ID'];
+							$Type = $_POST['Type'];						
+							$mdAward = new Models_Award();
+							$mdAward->updateAwardType($ID,$Type,$Value);
+							echo "1";
+							break;
+					case 'update-all':
+							$battleID = $_POST['BattleID'];
+							$arrType = $_POST['AwardTypeID'];
+							$arrValue = $_POST['Value'];							
+							$mdAward = new Models_Award();
+							$mdAward->updateAward($battleID,$arrType,$arrValue);
+							echo "1";
+							break;
 					default:
 						;
 					break;

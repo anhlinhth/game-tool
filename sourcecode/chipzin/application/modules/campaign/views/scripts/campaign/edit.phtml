@@ -162,11 +162,21 @@ select{
 				</table>
 			</td>
 			<td width="200px">
-			<div id='div_award_<?php echo $rowbattle->ID;?>'>				
-				<a href='javascript:addAward(<?php echo $rowbattle->ID; ?>)' class='ico-16 add' ></a><br/>
-				
-				<?php foreach ($this->arraward[$rowbattle->ID] as $row){?>
-				<?php echo $this->selection($this->arrawardtype,$row->ID,"AwardID_$rowbattle->ID[]",array('key'=>'ID','name'=>'Name'))?>	
+			<div id='div-battle-award-<?php echo $rowbattle->ID;?>'>				
+				<a href='javascript:saveAward(<?php echo $rowbattle->ID; ?>)' class='ico-16 save disabled'></a>&nbsp;&nbsp<a href='javascript:addAward(<?php echo $rowbattle->ID?>)' class='ico-16 add' ></a><br>
+				<?php foreach ($this->arraward[$rowbattle->ID] as $key=>$row){?>
+					<div class="award-<?php echo $rowbattle->ID?>" id="div-list-award-<?php echo $key ?>">
+					<select id='<?php echo $row->ID?>' name='AwardTypeID[]' onChange='updateAward(<?php echo $row->ID?>,this)'>
+						<?php if (empty($row->AwardTypeID)){?>
+							<option $strSelect value="" style="color:red"></option>
+						<?php } ?>	
+						<?php echo $this->options($this->arrawardtype,$row->AwardTypeID,array('key'=>'AwardTypeID','name'=>'Name'))?>
+						<option  value="insert" style="color:red"> Insert A Type</option>
+					</select>					
+					<input type='text' class='soldier' id='Value' name='Value[]' value='<?php echo $row->Value?>'/>
+					
+					<a class='tool-16 delete' href='javascript:removeAward(<?php echo $rowbattle->ID.",".$key?>)'>&nbsp</a>	
+					</div>
 				<?php }?>
 			</div>
 			</td>
@@ -182,26 +192,46 @@ select{
 </form>
 <!-- Dung de them 1 award -->
 <div style="display: none">
-	<div id="selectAwardType">
-		
-		<?php echo $this->selection($this->arrawardtype,1,"AwardID[]",array('key'=>'ID','name'=>'Name'))?>
-		
+	<div id="optionAwardType">
+		<option selected value="" style="color:red"></option>
+		<?php echo $this->options($this->arrawardtype,0,array('key'=>'AwardTypeID','name'=>'Name'))?>		
 	</div>
 </div>
 <!--  -->
 <script>
 	function addAward(key)
-	{
-		var select = $("#selectAward").html();
-		var count = $("#div_award .award-list").size();
-		var btnDel= "<a class='tool-16 delete' href='javascript:removeAward("+count+")'></a>";
-		var input="<input class='soldier' type='text' id='award_input'/>"
-		var html = "<div class='award-list' id='award-list-"+count+"'>"+select+input+btnDel+"</div>";
-		$("#div_award_"+key).append(html);
+	{		
+		var count = $(".award-"+ key).size();
+		var options = $("#optionAwardType").html();
+		var input = " <input type='text' class='soldier' id='Value' name='Value[]' value=''/>";
+		var btnDelete = " <a class='tool-16 delete' href='javascript:removeAward("+key+","+count+")'>&nbsp</a>"	;
+		var select = "<div class='award-"+key+"' id='div-list-award-"+count+"'><select name='AwardTypeID[]'>"+options+"</select>"+input+btnDelete+"</div>";
+		$("#div-battle-award-"+key).append(select);
+		
+		
 	}
-	function removeAward(key)
+	function removeAward(battleID,key)
 	{
-		$("#award-list-"+key).remove();
+		$("#div-battle-award-"+battleID+ " #div-list-award-"+key).html("");
+	}
+	/////////////////////////
+	function saveAward(key)
+	{
+		var data = $("#div-battle-award-"+key+" *").serialize();
+		data += "&Action=update-all&BattleID="+key+"";
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/campaign/campaign/updateaward'?> ",
+			data: data,
+			success: function(msg){
+				if(msg == '1'){					
+					alert("Successfull");
+				}else{
+					alert("Error");					
+				}
+				window.location.reload();
+			}
+		});
 	}
 	$(document).ready(function(){
 			
@@ -209,4 +239,12 @@ select{
 			
 		
 	});
+	////////////////////////////
+	function updateAward(id,element)
+	{
+		var selected = element.value;
+		if(selected == "insert"){
+			alert("Ch?c nang chua th?c hi?n");			
+		}
+	}
 </script>
