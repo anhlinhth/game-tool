@@ -140,9 +140,12 @@ select{
 				<a href='javascript:addAward(<?php echo $rowbattle->ID; ?>)' class='ico-16 add' ></a><br/>
 				
 				<?php foreach ($this->arraward[$rowbattle->ID] as $key=>$row){?>
-					<?php echo $this->selection($this->arrawardtype,$row->AwardTypeID,"AwardID_$rowbattle->ID[]",array('key'=>'AwardTypeID','name'=>'Name'))?>
-					<input type="text"  id="#" name="Value" value="<?php echo($row->Value)?>"/>	
-					<a style="float:right" class='tool-16 delete' href='javascript:removeAward(<?php echo($rowattle->ID.",".$key)?>)'></a>
+					<select>
+						<option $strSelect value="" style="color:red">NULL</option>
+						<?php echo $this->options($this->arrawardtype,$row->AwardTypeID,array('key'=>'AwardTypeID','name'=>'Name'))?>
+					</select>					
+					<input type='text' class='soldier' id='Value' name='Value' value='<?php echo $row->Value?>'/>
+					<a class='tool-16 delete' href='javascript:removeAward(<?php echo($row->ID)?>)'>&nbsp</a>	
 				<?php }?>
 			</div>
 			</td>
@@ -160,23 +163,48 @@ select{
 <div style="display: none">
 	<div id="selectAwardType">
 		
-		<?php echo $this->selection($this->arrawardtype,1,"AwardID[]",array('key'=>'ID','name'=>'Name'))?>
+		<?php echo $this->options($this->arrawardtype,1,array('key'=>'ID','name'=>'Name'))?>
 		
 	</div>
 </div>
 <!--  -->
 <script>
 	function addAward(key)
-	{
-		var select = $("#selectAward").html();
-		var count = $("#div_award .award-list").size();
-		var btnDel= "<a class='tool-16 delete' href='javascript:removeAward("+count+")'></a>";
-		var input="<input class='soldier' type='text' id='award_input' value=''/>";
-		var html = "<div class='award-list' id='award-list-"+count+"'>"+select+input+btnDel+"</div>";
-		$("#div_award_"+key).append(html);
+	{		
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/campaign/campaign/updateaward'?> ",
+			data: {
+				Action:'insert',
+				BattleID: key				
+			},
+			success: function(msg){					
+				if(msg == "1"){					
+					alert("Successfull");
+				}else{
+					alert("Error");					
+				}
+				window.location.reload();
+			}
+		});
 	}
 	function removeAward(key)
 	{
-		$("#award-list-"+key).remove();
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/campaign/campaign/updateaward'?> ",
+			data: {
+				Action:'delete',
+				ID: key				
+			},
+			success: function(msg){				
+				if(msg == '1'){					
+					alert("Successfull");
+				}else{
+					alert("Error");					
+				}
+				window.location.reload();
+			}
+		});
 	}
 </script>
