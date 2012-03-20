@@ -25,5 +25,6 @@ class Zend_View_Helper_SelectionSolider
 		
 		echo $strList;
 	}
+
 }
 ?>
