@@ -16,7 +16,8 @@ class Zend_View_Helper_ListQuestLine
 				$delete = "<a class='tool-16 delete' href='javascript:deleteQuestLine($key)'></a>";;								
 			$strList .= "<tr id='quest-line-$key'>							
 							<td class='id'>$row->QuestLineID</td>	
-							<td class='name'>$row->QuestLineName</td>						
+							<td class='name'>$row->QuestLineName</td>
+							<td class='QLIcon'>$row->QuestLineIcon</td>			
 							<td align='center'>								
 								$edit&nbsp								
 								$delete								
