@@ -95,5 +95,17 @@ public  function isExistSoldier($objSearch)
 		
 		return $count;
 	}
+public function getAllSoldier()
+	{
+		$sql="
+			SELECT 
+				*
+			FROM
+				c_soldier
+		";
+		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);		
+		
+		return $data;
+	}
 }
 ?>

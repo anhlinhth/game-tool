@@ -33,4 +33,5 @@ class Models_Battle_Soldier extends Models_Base
 		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
 		return $data;
 	}
+	
 }
