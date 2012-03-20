@@ -151,7 +151,7 @@ function updateNeedquest(id)
 		url:"<?php echo $this->baseUrl.'/quest/updateneedquest/'?> ",
 		data: "questid=" + id +"&needquest="+ needquest,	
 		success: function(data){			
-			if(parseInt(data)==1){	 
+			if(data=="1"){	 
 				alert("Cập nhật thành công");
 				loadQuest();
 			}else{

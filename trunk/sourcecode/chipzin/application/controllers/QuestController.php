@@ -515,15 +515,15 @@ class QuestController extends BaseController
 				$this->NeedQuest=$this->_request->getParam('needquest');
 				$form=new Models_Quest();
 				$form->updateNeedquest($this->QuestID,$this->NeedQuest);
-				$md = new Models_Quest_Detail();
-				
+				$md = new Models_Quest_Detail();				
 				Models_Log::insert($this->view->user->username, "act_update_need_quest");			
 			}
-			echo 1;
+			echo "1";
 		}
 		catch (Exception $ex)
 		{
 			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}		
 	}
@@ -731,9 +731,3 @@ class QuestController extends BaseController
 			}	
 	}
 	
-	
-	
-
-?>
-
-
