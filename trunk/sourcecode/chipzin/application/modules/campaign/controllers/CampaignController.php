@@ -206,4 +206,43 @@ class Campaign_CampaignController extends BaseController
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 	}
+	///////////////////////////////////////
+	/////////////////Thaonx//////////////
+	public function updateawardAction()
+	{
+		try
+		{
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Award.php';
+			if($this->_request->isPost())
+			{
+				$action = $_POST['Action'];
+				switch ($action) {
+					case 'insert':
+						$battleID = $_POST['BattleID'];
+						$mdAward = new Models_Award();
+						$mdAward->insertAward($battleID);
+						echo "1";					
+						break;
+					case 'delete':
+						$ID = $_POST['ID'];
+						$mdAward = new Models_Award();
+						$mdAward->deleteAward($ID);
+						echo "1";
+						break;
+					default:
+						;
+					break;
+				}
+			}
+		}
+		catch(Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}
+	
 }
