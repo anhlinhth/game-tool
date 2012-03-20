@@ -41,7 +41,7 @@ class Models_Quest_Package extends Models_Base
 				$str .= "\n\t'group'=> ";
 				
 				$lineIcon = $mdQuestLine-> search($row['QuestLineID']);
-				$str .= (int)$lineIcon['QuestLineIcon'].",";
+				$str .= trim($lineIcon).",";
 				
 				//$str .= (int)$row['QuestLineID'].",";
 				if($row['NeedQuest']!=NULL)
