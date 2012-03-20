@@ -3,7 +3,18 @@ class Zend_View_Helper_Selection
 {
 	public function selection($data,$selected,$name,$arrParram)
 	{
-		$strList .= "<select  style='width='100%;' id='$name' name='$name' tabindex='2'>";
+		if($selected == 'default')
+		{
+			
+			$disabled="disabled";
+			
+		}
+		else 
+		{
+			$disabled = "";
+		}
+
+		$strList .= "<select  $disabled style='width='100%;' id='$name' name='$name' tabindex='2'>";
 		if(isset($arrParram['default'])){
 			$val = $arrParram['default'];
 			$strList .= "<option value='$val'></option>";
@@ -22,9 +33,10 @@ class Zend_View_Helper_Selection
 					$strList .= "<option $strSelect value=$row[$key]>$row[$name]</option>";
 				}
 		}				
-		$strList .= "</select>";
+
+		$strList .= "</select>";	
+		echo $strList;	
 		
-		echo $strList;
 	}
 }
 ?>
