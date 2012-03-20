@@ -14,7 +14,7 @@ class Zend_View_Helper_Selection
 			$disabled = "";
 		}
 
-		$strList .= "<select  $disabled style='width='100%;' id='$name' name='$name' tabindex='2'>";
+		$strList .= "<select  $disabled style='width='100%;' onChange='LoadLayout(this.value)' id='$name' name='$name' tabindex='2'>";
 		if(isset($arrParram['default'])){
 			$val = $arrParram['default'];
 			$strList .= "<option value='$val'></option>";

@@ -14,7 +14,7 @@ class Zend_View_Helper_GetPoint
 			}	
 					
 		}
-		return 'default';	
+		return $arrData;	
 	}
 }
 ?>
