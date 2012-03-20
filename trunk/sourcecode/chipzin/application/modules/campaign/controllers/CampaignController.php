@@ -59,10 +59,25 @@ class Campaign_CampaignController extends BaseController
 			////
 		
 			///////Đối với mỗi battle//////
-			$mdB_layout = new Models_Battle_Soldier();
-			$this->view->arrSoldier=$mdB_layout->getAllSoldier();
-			$mdB=new Models_Battle();
-			$this->view->arrbattle=$mdB->getBattle();
+			$mdB_layout = new Models_Soldier();
+			$this->view->arrSoldier=$mdB_layout->getAllSoldier();					
+			$mdB=new Models_Battle();			
+			$this->view->arrbattle=$mdB->getBattle($id);
+			
+			
+			$mdBS=new Models_Battle_Soldier();
+			$this->view->arrBattleSolider=array();
+			$arrPoint = array();
+			foreach ($this->view->arrbattle as $row)
+			{	
+				
+				$strPoint =  $row->Point;
+				$strPoint = substr($strPoint,1,strlen($strPoint)-2);
+				$arr = explode(',',$strPoint )	;		
+				$arrPoint[$row->ID] = $arr;
+				$this->view->arrBattleSolider[$row->ID]=$mdBS->getbattle_soldier($row->ID);
+			}
+			$this->view->arrPoint = $arrPoint;
 			
 			$arrbattle = $this->view->arrbattle;
 			$this->view->layout[] = array();
@@ -89,7 +104,6 @@ class Campaign_CampaignController extends BaseController
 			$this->view->errMsg = $ex->getMessage();
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
-		
 	}
 	
 	public function deleteAction()
