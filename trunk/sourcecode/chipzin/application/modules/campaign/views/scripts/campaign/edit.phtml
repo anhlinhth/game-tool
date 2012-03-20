@@ -73,62 +73,63 @@ select{
 			</tr>
 		</thead>
 	<?php foreach ($this->arrbattle as $rowbattle){?>
+
 		<tr>
 			<td><?php echo $rowbattle->ID;?></td>
 			<td>
 				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
 			<td width="auto">
-				<?php echo $this->selection($this->arrlayout,$rowbattle->Layout,"Layout",array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?>
+				<?php echo $this->selection($this->arrlayout,$rowbattle->Layout,"Layout",array('key'=>"ID",'name'=>"Name"))?>
 				<br/>
 				<table id='tb_layout'>
 					<tr>
 						<td style="margin: 0;padding: 0;">
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,1,"soldier",
-												array('key'=>"ID",'name'=>"Name",'default'=>"1"))?><br/>
-							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
-						</td>
-						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,1,"soldier",
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0),"solider_$rowbattle->ID_$this->arrBattleSolider[$rowbattle->ID]",
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
 							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
 						</td>
 						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,1,"soldier",
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1),"solider_$rowbattle->ID_$this->arrBattleSolider[$rowbattle->ID]",
+												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
+							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
+						</td>
+						<td>
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2),"soldier",
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
 							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
 						</td>						
 					</tr>
 					<tr>
 						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,2,"soldier",
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3),"soldier",
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
 							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
 						</td>
 						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,2,"soldier",
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4),"soldier",
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
 							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
 						</td>
 						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,2,"soldier",
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5),"soldier",
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
 							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,2,"soldier",
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6),"soldier",
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
 							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
 						</td>
 						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,2,"soldier",
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7),"soldier",
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
 							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
 						</td>
 						<td>
-							<em>S:</em><?php echo $this->selection($this->arrSoldier,1,"soldier",
+							<em>S:</em><?php echo $this->selection($this->arrSoldier,$this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8),"soldier",
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
 							<em>L:</em><input type='text' class='soldier' id='#' name='#'/>
 						</td>
