@@ -101,7 +101,7 @@ class Models_Quest_xfj extends Models_Base {
 							else 
 								$str .="\"".( int ) $row2->NextQuest."\"";
 					}
-					$str .= "]";
+					$str .= "],";
 				}
 				else
 					$str .= "\n\t\t\t \"nextQuest\" : [],";
