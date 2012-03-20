@@ -83,8 +83,9 @@ class Models_Quest_xfj extends Models_Base {
 				$temp = ( int ) $row ['QuestID'];
 				$str .= "\n\t\t{";
 				
-				$LineIcon= $mdQL->search($row ['QuestLineID']);
-				$str .= "\n\t\t\t \"group\" : " . ( int ) $LineIcon ['QuestLineIcon'] . ",";
+				$llineIcon= $mdQL->search((int)$row ['QuestLineID']);
+				
+				$str .= "\n\t\t\t \"group\" : " . trim($llineIcon) . ",";
 				
 				//$str .= "\n\t\t\t \"group\" : " . ( int ) $row ['QuestLineID'] . ",";
 				$data1 = $this->nextquest($row['QuestID']);

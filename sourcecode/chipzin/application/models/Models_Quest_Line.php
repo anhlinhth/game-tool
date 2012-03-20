@@ -24,14 +24,15 @@ class Models_Quest_Line extends Models_Base
 	{
 	
 			$sql="SELECT
-					*
+					QuestLineIcon
 					FROM
-					q_quest
+					q_questline
 					WHERE
 					QuestLineID ='$idQL' 
 					";
 			
 			$dt=$this->_db->fetchOne($sql, "", Zend_Db::FETCH_OBJ);
+			
 		return 	 $dt;
 		
 		
