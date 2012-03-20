@@ -102,5 +102,19 @@ class Models_Campaign extends Models_Base
 				
 	}
 	
+public function getAllbattle()
+	{
+		$sql = "SELECT
+					*
+				FROM
+					c_battle_soldier
+				WHERE
+					1";
+		
+		$data = $this->_db->fetchOne($sql, "", Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	
+	}
 }
 ?>
