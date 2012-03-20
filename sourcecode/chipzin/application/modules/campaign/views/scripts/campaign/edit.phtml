@@ -53,7 +53,7 @@ select{
 		</td>			
 		<td>
 			<label>Campaign Name:</label>
-			<input type="text" name='Name' id=Name' value='<?php echo $this->campaign->Name;?>' />
+			<input type="text" name='Name' id='Name' value='<?php echo $this->campaign->Name;?>' />
 		</td>
 		<td>
 			<label>World Map:</label>
@@ -63,7 +63,7 @@ select{
 	</table>
 	<h3>Battle</h3>	
 	
-	<table id='battle' width="100%" >
+	<table id='battle' >
 		<thead>
 			<tr>
 				<td width="15px;">ID</td>
@@ -139,8 +139,10 @@ select{
 			<div id='div_award_<?php echo $rowbattle->ID;?>'>				
 				<a href='javascript:addAward(<?php echo $rowbattle->ID; ?>)' class='ico-16 add' ></a><br/>
 				
-				<?php foreach ($this->arraward[$rowbattle->ID] as $row){?>
-				<?php echo $this->selection($this->arrawardtype,$row->ID,"AwardID_$rowbattle->ID[]",array('key'=>'ID','name'=>'Name'))?>	
+				<?php foreach ($this->arraward[$rowbattle->ID] as $key=>$row){?>
+					<?php echo $this->selection($this->arrawardtype,$row->AwardTypeID,"AwardID_$rowbattle->ID[]",array('key'=>'AwardTypeID','name'=>'Name'))?>
+					<input type="text"  id="#" name="Value" value="<?php echo($row->Value)?>"/>	
+					<a style="float:right" class='tool-16 delete' href='javascript:removeAward(<?php echo($rowattle->ID.",".$key)?>)'></a>
 				<?php }?>
 			</div>
 			</td>
@@ -169,7 +171,7 @@ select{
 		var select = $("#selectAward").html();
 		var count = $("#div_award .award-list").size();
 		var btnDel= "<a class='tool-16 delete' href='javascript:removeAward("+count+")'></a>";
-		var input="<input class='soldier' type='text' id='award_input'/>"
+		var input="<input class='soldier' type='text' id='award_input' value=''/>";
 		var html = "<div class='award-list' id='award-list-"+count+"'>"+select+input+btnDel+"</div>";
 		$("#div_award_"+key).append(html);
 	}
