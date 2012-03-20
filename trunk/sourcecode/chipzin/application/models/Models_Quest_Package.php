@@ -2,6 +2,7 @@
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Base.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Item.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_SaleOff_Shop.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
 
 class Models_Quest_Package extends Models_Base
 {
@@ -28,6 +29,7 @@ class Models_Quest_Package extends Models_Base
 		$error = array();
 		$str .= "<?php\nreturn array\n(";
 		$mdGiftPackageDetail = new Models_Quest_Package_Detail();
+		$mdQuestLine = new Models_Quest_Line();
 		if($data)
 		{
 			$i = 1;
@@ -37,7 +39,11 @@ class Models_Quest_Package extends Models_Base
 				$str .= (int)$row['QuestID'] ;
 				$str .= " => array(";				
 				$str .= "\n\t'group'=> ";
-				$str .= (int)$row['QuestLineID'].",";
+				
+				$lineIcon = $mdQuestLine-> search($row['QuestLineID']);
+				$str .= (int)$lineIcon['QuestLineIcon'].",";
+				
+				//$str .= (int)$row['QuestLineID'].",";
 				if($row['NeedQuest']!=NULL)
 					$str .= "\n\t'needQuest' =>".$row['NeedQuest'].",";
 				else 

@@ -2,6 +2,7 @@
 require_once ROOT_APPLICATION_MODELS . DS . 'Models_Base.php';
 require_once ROOT_APPLICATION_MODELS . DS . 'Models_Item.php';
 require_once ROOT_APPLICATION_MODELS . DS . 'Models_SaleOff_Shop.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
 
 class Models_Quest_xfj extends Models_Base {
 	public function __construct() {
@@ -71,6 +72,7 @@ class Models_Quest_xfj extends Models_Base {
 		if ($data) {
 			$i = 1;
 			$mdGiftPackageDetail = new Models_Quest_Package_Detail ();
+			$mdQL = new Models_Quest_Line();
 			$qtc = new Models_QTC ();
 			$str .= "\n";
 			$str .= " \t\"quests\"  :";
@@ -80,7 +82,11 @@ class Models_Quest_xfj extends Models_Base {
 				$str .= "\n\t\t\"" . ( int ) $row ['QuestID'] . "\":";
 				$temp = ( int ) $row ['QuestID'];
 				$str .= "\n\t\t{";
-				$str .= "\n\t\t\t \"group\" : " . ( int ) $row ['QuestLineID'] . ",";
+				
+				$LineIcon= $mdQL->search($row ['QuestLineID']);
+				$str .= "\n\t\t\t \"group\" : " . ( int ) $LineIcon ['QuestLineIcon'] . ",";
+				
+				//$str .= "\n\t\t\t \"group\" : " . ( int ) $row ['QuestLineID'] . ",";
 				$data1 = $this->nextquest($row['QuestID']);
 				$data2 = $this->countquest($row['QuestID']);
 				if ($data1)

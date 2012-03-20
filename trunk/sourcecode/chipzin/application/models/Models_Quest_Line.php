@@ -20,6 +20,23 @@ class Models_Quest_Line extends Models_Base
 		parent::_update($obj);
 	}
 	
+	public function search($idQL)
+	{
+	
+			$sql="SELECT
+					*
+					FROM
+					q_quest
+					WHERE
+					QuestLineID ='$idQL' 
+					";
+			
+			$dt=$this->_db->fetchOne($sql, "", Zend_Db::FETCH_OBJ);
+		return 	 $dt;
+		
+		
+	}
+	
 	private function _deleteQuestLine($id)
 	{
 		try 
