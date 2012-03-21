@@ -34,4 +34,17 @@ class Models_Battle_Soldier extends Models_Base
 		return $data;
 	}
 	
+	public function deleteB_Soldier($id)
+	{
+		$sql = "DELETE FROM
+					c_battle_soldier
+				WHERE
+					BattleID = $id";
+		$this->_db->query($sql);
+	}
+	
+	public function updateB_Soldier($obj)
+	{
+		parent::_insert($obj);
+	}
 }

@@ -15,11 +15,16 @@ class Models_Battle extends Models_Base
 	{
 		$sql="
 				SELECT 
-					*
+					c_battle.*, c_layout.Point
 				FROM
 					c_battle,c_layout		
 				WHERE Campaign =$id AND c_battle.Layout=c_layout.ID";		
 		$data = $this->_db->fetchAll($sql,"", Zend_Db::FETCH_OBJ);
 		return $data;
+	}
+	
+	public function saveBattle($obj)
+	{
+		parent::_update($obj);
 	}
 }
