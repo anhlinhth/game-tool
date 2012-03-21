@@ -192,8 +192,8 @@ td.visible select,td.invisible select{
 			</div>
 			</td>
 			<td class="center">
-			<a class='tool-24 save disabled' id="" href='javascript:saveBattle(<?php echo $rowbattle->ID ?>)'></a><br><br>
-			<a class='tool-24 reset disabled' href='javascript:resetBattle(<?php echo $rowbattle->ID ?>)'></a><br><br>
+			<a class='tool-24 save' id="" href='javascript:saveBattle(<?php echo $rowbattle->ID ?>)'></a><br><br>
+			<a class='tool-24 reset' href='javascript:resetBattle(<?php echo $rowbattle->ID ?>)'></a><br><br>
 			<a class='tool-24 delete' id="" href='javascript:deleteBattle(<?php echo $rowbattle->ID ?>)'></a>
 			</td>
 		</tr>
@@ -201,7 +201,8 @@ td.visible select,td.invisible select{
 		<?php }?>
 	
 	</table>
-	<div class="style">	
+	<div class="style">
+	<a class="btn add" href="javascript:addBattle()">Add Battle</a>	
 	<a class="btn save" href="javascript:saveAll()">Save</a>
 	</div>
 </div>
@@ -270,6 +271,26 @@ td.visible select,td.invisible select{
 					alert("Error");					
 				}
 				window.location.reload();
+			}
+		});		
+	}
+	
+	function deleteBattle(key)
+	{			
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/campaign/battle/delete'?> ",
+			data: {
+				BattleID:key
+			},
+			success: function(msg){				
+				if(msg == '1'){					
+					alert("Successfull");
+					$("#battle-"+key+" *").remove();
+				}else{
+					alert("Error");					
+				}
+				
 			}
 		});
 	}
