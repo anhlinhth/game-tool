@@ -70,8 +70,8 @@ td.visible select,td.invisible select{
 		</tr>
 	</table>
 	<h3>Battle</h3>	
-	
-	<table id='battle' width="100%" >
+
+	<table id='battle' width="100%">
 		<thead>
 			<tr>
 				<td width="15px;">ID</td>
@@ -81,10 +81,11 @@ td.visible select,td.invisible select{
 				<td>Action</td>
 			</tr>
 		</thead>
+	<tbody id="campaign">	
 	<?php foreach ($this->arrbattle as $rowbattle){?>
 
-		<tr id='battle-<?php echo $rowbattle->ID?>'>
-			<td><?php echo $rowbattle->ID;?></td>
+		<tr class='battle' id='battle-<?php echo $rowbattle->ID?>'>
+			<td><?php echo $rowbattle->ID;?><input style="display:none" type="text" name='BattleID' value='<?php echo $rowbattle->ID;?>'/></td>
 			<td>
 				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
@@ -172,7 +173,7 @@ td.visible select,td.invisible select{
 			</td>
 			<td width="200px">
 			<div id='div-battle-award-<?php echo $rowbattle->ID;?>'>				
-				<a href='javascript:saveAward(<?php echo $rowbattle->ID; ?>)' class='ico-16 save disabled'></a>&nbsp;&nbsp<a href='javascript:addAward(<?php echo $rowbattle->ID?>)' class='ico-16 add' ></a><br>
+				<a href='javascript:addAward(<?php echo $rowbattle->ID?>)' class='ico-16 add' ></a><br>
 				<?php foreach ($this->arraward[$rowbattle->ID] as $key=>$row){?>
 					<div class="award-<?php echo $rowbattle->ID?>" id="div-list-award-<?php echo $key ?>">
 					<select id='<?php echo $row->ID?>' name='AwardTypeID[]' onChange='updateAward(<?php echo $row->ID?>,this)'>
@@ -189,13 +190,17 @@ td.visible select,td.invisible select{
 				<?php }?>
 			</div>
 			</td>
-			<td><a class='' href='javascript:saveBattle(<?php echo $rowbattle->ID ?>)'>Save</a></td>
+			<td>
+			<a class='tool-16 save' href='javascript:saveBattle(<?php echo $rowbattle->ID ?>)'>SAVE</a><br><br>
+			<a class='tool-16 reset' href='javascript:saveBattle(<?php echo $rowbattle->ID ?>)'>RESET</a>
+			</td>
 		</tr>
+		</tbody>	
 		<?php }?>
 	
 	</table>
 	<div class="style">	
-	<a class="btn save" href="">Save</a>
+	<a class="btn save" href="javascript:saveAll()">Save</a>
 	</div>
 </div>
 </form>
@@ -247,9 +252,7 @@ td.visible select,td.invisible select{
 	function saveBattle(key)
 	{
 		var data = $("#battle-"+key+" *").serialize();
-		data += "&BattleID="+key+"";
-		
-		
+		alert(data);
 		$.ajax({
 			type: "POST",
 			url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
@@ -265,6 +268,16 @@ td.visible select,td.invisible select{
 			}
 		});
 	}
+	
+	///Save All////
+	function saveAll(){
+		$(".battle").each(function(index){			
+			alert($(this).find("*").serialize());
+		});
+		
+		
+	}
+	
 ///////////////End-ThaoNX/////////////////////
 ////////////////////////////////////////////////
 
