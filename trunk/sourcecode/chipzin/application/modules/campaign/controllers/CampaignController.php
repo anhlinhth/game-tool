@@ -293,4 +293,37 @@ class Campaign_CampaignController extends BaseController
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 	}
+	
+	public function loadlayoutAction()
+	{
+		try{
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Layout.php';
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();
+			$mdlayout = new Models_Layout();
+			$id=$_POST['id'];
+			$layout=array();
+			$layout =  $mdlayout->getLayoutById($id);
+			//echo json_encode($layout);
+			$strPoint =	$layout[0]->Point;
+					
+			$strPoint = substr($strPoint,1,strlen($strPoint)-2);
+			$arrPoint = explode(',',$strPoint);
+			$arr = array();
+			foreach ($arrPoint as $key =>$value) {
+				$arr["point".$key] = $value;
+			}
+			
+			
+			
+			echo json_encode($arr);
+			
+		}
+		catch(Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		
+		}
+	}
 }
