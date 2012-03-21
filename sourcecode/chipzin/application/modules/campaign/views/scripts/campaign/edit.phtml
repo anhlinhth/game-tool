@@ -34,8 +34,9 @@ td.visible select,td.invisible select{
 	min-width: 170px;
 	height: 25px;
 	overflow: hidden;
-	background-color: #D9EAED;
-	opacity:0.5;
+	
+	opacity:0.8;
+	
 }
 .style{
 	margin: auto;text-align: center;padding-top: 2px;padding-bottom: 2px;
@@ -45,7 +46,7 @@ td.visible select,td.invisible select{
 	opacity:0.1; 
 }
 .hien{
-	
+	background-color:#D9EAED; 
 }
 </style>
 <form  class="myform" id="formPaging" name="formPaging" action="" method="post">
@@ -81,11 +82,10 @@ td.visible select,td.invisible select{
 				<td class="center"width="20px;">Action</td>
 			</tr>
 		</thead>
-	<tbody id="campaign">	
 	<?php foreach ($this->arrbattle as $rowbattle){?>
 
-		<tr class='battle' id='battle-<?php echo $rowbattle->ID?>'>
-			<td><?php echo $rowbattle->ID;?><input style="display:none" type="text" name='BattleID' value='<?php echo $rowbattle->ID;?>'/></td>
+		<tr id='battle-<?php echo $rowbattle->ID?>'>
+			<td><?php echo $rowbattle->ID;?></td>
 			<td class="center">
 				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
@@ -173,7 +173,7 @@ td.visible select,td.invisible select{
 			</td>
 			<td width="200px">
 			<div id='div-battle-award-<?php echo $rowbattle->ID;?>'>				
-				<a href='javascript:addAward(<?php echo $rowbattle->ID?>)' class='ico-16 add' ></a><br>
+				<a href='javascript:saveAward(<?php echo $rowbattle->ID; ?>)' class='ico-16 save disabled'></a>&nbsp;&nbsp<a href='javascript:addAward(<?php echo $rowbattle->ID?>)' class='ico-16 add' ></a><br>
 				<?php foreach ($this->arraward[$rowbattle->ID] as $key=>$row){?>
 					<div class="award-<?php echo $rowbattle->ID?>" id="div-list-award-<?php echo $key ?>">
 					<select id='<?php echo $row->ID?>' name='AwardTypeID[]' onChange='updateAward(<?php echo $row->ID?>,this)'>
@@ -195,12 +195,11 @@ td.visible select,td.invisible select{
 			<a class='tool-24 reset disabled' href='javascript:resetBattle(<?php echo $rowbattle->ID ?>)'></a>
 			</td>
 		</tr>
-		</tbody>	
 		<?php }?>
 	
 	</table>
 	<div class="style">	
-	<a class="btn save" href="javascript:saveAll()">Save</a>
+	<a class="btn save" href="">Save</a>
 	</div>
 </div>
 </form>
@@ -252,7 +251,9 @@ td.visible select,td.invisible select{
 	function saveBattle(key)
 	{
 		var data = $("#battle-"+key+" *").serialize();
-		alert(data);
+		data += "&BattleID="+key+"";
+		
+		
 		$.ajax({
 			type: "POST",
 			url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
@@ -268,16 +269,6 @@ td.visible select,td.invisible select{
 			}
 		});
 	}
-	
-	///Save All////
-	function saveAll(){
-		$(".battle").each(function(index){			
-			alert($(this).find("*").serialize());
-		});
-		
-		
-	}
-	
 ///////////////End-ThaoNX/////////////////////
 
 	////////////////////////////
@@ -293,7 +284,24 @@ td.visible select,td.invisible select{
 			$("td.invisible").addClass('an');
 			$("td.invisible").find("option").remove();
 			$("td.invisible").find("input").attr('disabled',true);
-			//$("td.invisible").find("select").addClass('an');
+			$("td.visible").addClass('hien');
 		
+		});
+	////////////LoatLayout////////
+
+	$('select#Layout').change(function(){
+		var select=$(this).children("option:selected").val();
+		var s=$(this).parent().parent().html();
+		alert(s);
+		return;
+		var id=$(this).val();
+			$.ajax({
+				type: "POST",
+				url: "<?php echo $this->baseUrl.'/campaign/campaign/loadlayout'?> ",
+				data: "id=" + id,
+				success: function(msg){
+					alert(msg);					
+				}
+				});
 		});
 </script>
