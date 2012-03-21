@@ -27,4 +27,33 @@ class Models_Battle extends Models_Base
 	{
 		parent::_update($obj);
 	}
+	///////////////////ThaoNX////////////////////////
+	public function delete($battleID)
+	{
+		try
+		{
+		    $sql="
+		    	DELETE
+		    		FROM c_award
+		    	WHERE
+		   			 BattleID='".$battleID."';
+
+		   		DELETE
+		    		FROM c_battle_soldier
+		    	WHERE
+		   			 BattleID='".$battleID."';
+		   			 
+		   		DELETE
+		    		FROM c_battle
+		    	WHERE
+		   			ID='".$battleID."';	 
+		    	";		    	
+		    $data=$this->_db->query($sql);
+		   
+		}
+		catch(Zend_Db_Exception $ex)
+		{
+			throw new Internal_Error_Exception($ex);
+		}
+	}
 }

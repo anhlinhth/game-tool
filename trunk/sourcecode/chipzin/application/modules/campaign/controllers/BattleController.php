@@ -81,7 +81,27 @@ class Campaign_BattleController extends BaseController
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}
 	}
-	
+	///////////////////ThaoNX/////////////////////////
+	public function deleteAction(){
+	    try
+	    {
+	    	$this->_helper->layout->disableLayout();
+	    	$this->_helper->viewRenderer->setNorender();
+	    	if($this->_request->isPost())
+	    	{
+	    		$battleID = $_POST['BattleID'];	    		   		
+	    		$mdbattle = new Models_Battle();
+	    		$mdbattle->delete($battleID);
+	    		echo "1";	    		
+	    	}
+	    }
+	    catch(Exception $ex)
+	    {
+	    	$this->view->errMsg = $ex->getMessage();
+	    	echo $this->view->errMsg;
+	    	Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+	    }
+	}
 }
 
 
