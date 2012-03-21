@@ -111,6 +111,7 @@ class Campaign_BattleController extends BaseController
 			$objBattle->ID = "NULL";
 			$objBattle->Campaign = $_POST['campaignID'];
 			$objBattle->Layout = 1;
+			$objBattle->Order = 1;
 			$mdbattle->_insert($objBattle);
 			echo "Thành công";
 		}
