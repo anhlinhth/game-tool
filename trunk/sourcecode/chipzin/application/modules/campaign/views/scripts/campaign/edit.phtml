@@ -27,17 +27,25 @@ table#battle td{
 	margin: 0;
 	overflow: hidden;
 }
-select{
+td.visible select,td.invisible select{
 	margin: 0;
 	padding:0;
-	max-width: 110px;
-	min-width: 110px;
+	max-width: 170px;
+	min-width: 170px;
 	height: 25px;
 	overflow: hidden;
+	background-color: #D9EAED;
+	opacity:0.5;
 }
 .style{
 	margin: auto;text-align: center;padding-top: 2px;padding-bottom: 2px;
 }
+.an{
+	background-color:white;
+	opacity:0.1; 
+}
+.hien{
+	
 }
 </style>
 <form  class="myform" id="formPaging" name="formPaging" action="" method="post">
@@ -86,7 +94,7 @@ select{
 				
 				<table id='tb_layout'>
 					<tr>
-						<?php $strclass = ($this->arrPoint[$rowbattle->ID][0])?"visile":"invisible"?>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][0])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" style="margin: 0;padding: 0;">
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0);
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._0,
@@ -95,7 +103,7 @@ select{
 							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
-						<?php $strclass = ($this->arrPoint[$rowbattle->ID][1])?"visile":"invisible"?>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][1])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._1,
@@ -103,7 +111,7 @@ select{
 							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
-						<?php $strclass = ($this->arrPoint[$rowbattle->ID][2])?"visile":"invisible"?>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][2])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._2,
@@ -112,7 +120,7 @@ select{
 						</td>						
 					</tr>
 					<tr>
-						<?php $strclass = ($this->arrPoint[$rowbattle->ID][3])?"visile":"invisible"?>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][3])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._3,
@@ -120,7 +128,7 @@ select{
 							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
-						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visile":"invisible"?>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._4,
@@ -128,7 +136,7 @@ select{
 							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
-						<?php $strclass = ($this->arrPoint[$rowbattle->ID][5])?"visile":"invisible"?>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][5])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5);
 							 echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._5,
@@ -137,7 +145,7 @@ select{
 						</td>
 					</tr>
 					<tr>
-						<?php $strclass = ($this->arrPoint[$rowbattle->ID][6])?"visile":"invisible"?>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][6])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._6,
@@ -145,14 +153,14 @@ select{
 							<yy></yy><input type='text' class='soldier' id='levelSolider' name='levelSolider' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
-						<?php $strclass = ($this->arrPoint[$rowbattle->ID][70])?"visile":"invisible"?>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][70])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._7,
 												array('key'=>"ID",'name'=>"Name",'default'=>"234234234"))?><br/>
 							<yy></yy><input type='text' class='soldier' id='levelSolider_2' name='levelSolider' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
-						<?php $strclass = ($this->arrPoint[$rowbattle->ID][8])?"visile":"invisible"?>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][8])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider_$rowbattle->ID"._8,
@@ -278,4 +286,11 @@ select{
 	function LoadLayout(key){
 			alert(key);
 	}
+	$(document).ready(function(){			
+			$("td.invisible").addClass('an');
+			$("td.invisible").find("option").remove();
+			$("td.invisible").find("input").attr('disabled',true);
+			//$("td.invisible").find("select").addClass('an');
+		
+		});
 </script>
