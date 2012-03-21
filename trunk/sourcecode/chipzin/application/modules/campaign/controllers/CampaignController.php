@@ -268,7 +268,6 @@ class Campaign_CampaignController extends BaseController
 				$this->view->arrBattleSolider[$row->ID]=$mdBS->getbattle_soldier($row->ID);
 			}
 			$this->view->arrPoint = $arrPoint;
-			
 			$arrbattle = $this->view->arrbattle;
 			$this->view->layout[] = array();
 			

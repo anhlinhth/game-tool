@@ -1,5 +1,5 @@
 <?php
-class Obj_Battle_Award
+class Obj_Award
 {
 	public $ID;
 	public $BattleID;
