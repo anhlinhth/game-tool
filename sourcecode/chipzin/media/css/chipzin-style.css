@@ -252,3 +252,14 @@ a.tool-24:hover{
 .tool-16.delete{
 	background-image:url("../images/p2/icons/16/delete.png"); 
 }
+
+#tb_layout  select{
+	
+	
+}
+
+#tb_layout  td{
+	
+	margin:0px;
+	padding:0px;
+}
