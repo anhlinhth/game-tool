@@ -97,75 +97,75 @@ td.visible select,td.invisible select{
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][0])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" style="margin: 0;padding: 0;">
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0);
-							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[]"._0,
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[0]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>												
 												
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[]' value="<?php echo $arrBS['Level'];?>"/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[0]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][1])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); 
-							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[]"._1,
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[3]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[]' value="<?php echo $arrBS['Level'];?>"/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[3]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][2])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); 
-							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[]"._2,
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[6]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[6]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>						
 					</tr>
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][3])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3); 
-							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[]"._3,
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[1]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[1]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); 
-							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[]"._4,
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[4]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[4]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][5])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5);
-							 echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[]"._5,
+							 echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[7]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[7]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][6])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
-							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[]"._6,
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[2]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[2]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][70])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7); 
-							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[]"._7,
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[5]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider_2' name='level[]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider_2' name='level[5]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][8])?"visible":"invisible"?>
 						<td class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
-							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[]"._8,
+							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[8]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider_1' name='level[]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider_1' name='level[8]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 				</table>
@@ -252,7 +252,7 @@ td.visible select,td.invisible select{
 		
 		$.ajax({
 			type: "POST",
-			url: "<?php echo $this->baseUrl.'/test/testpost'?> ",
+			url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
 			data: data,
 			success: function(msg){
 				alert(msg);return;
