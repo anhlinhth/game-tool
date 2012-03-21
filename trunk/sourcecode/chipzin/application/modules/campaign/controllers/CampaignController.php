@@ -3,7 +3,7 @@ require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'Campaign'.DS.'models'.DS.'Models_Campaign.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'Campaign'.DS.'models'.DS.'Models_WorldMap.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
-require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
+
 class Campaign_CampaignController extends BaseController
 {
 	public function _setUserPrivileges()
@@ -18,7 +18,7 @@ class Campaign_CampaignController extends BaseController
 		if(!$this->hasPrivilege())
 			$this->_redirect ("/error/permission");
 	}
-	///////////////////////
+		///////////////////////
 	public function indexAction(){
 	try
 		{
@@ -49,10 +49,7 @@ class Campaign_CampaignController extends BaseController
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}
 	}
-	//////////////////////
-	public function editAction(){
-		
-	}
+
 	public function deleteAction()
 	{
 	try
@@ -78,9 +75,7 @@ class Campaign_CampaignController extends BaseController
 			$this->view->errMsg = $ex->getMessage();
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
-	}
-	
-	
+	}	
 	public function updateworldmapAction(){
 	try{
 		$this->_helper->layout->disableLayout();
@@ -162,6 +157,138 @@ class Campaign_CampaignController extends BaseController
 		Models_Log::insert($this->view->user->username, "act_insert_Campaign", $obj->name);
 	}
 	catch(Exception $ex)
+        {            
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
+	}
+
+	///////////////////////////////////////
+	/////////////////Thaonx//////////////
+	public function updateawardAction()
+	{
+		try
+		{
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Award.php';
+			if($this->_request->isPost())
+			{
+				$action = $_POST['Action'];
+				switch ($action) {
+					case 'insert':
+						$battleID = $_POST['BattleID'];
+						$mdAward = new Models_Award();
+						$mdAward->insertAward($battleID);
+						echo "1";					
+						break;
+					case 'delete':
+						$ID = $_POST['ID'];
+						$mdAward = new Models_Award();
+						$mdAward->deleteAward($ID);
+						echo "1";
+						break;
+					case 'update-type':
+							$ID = $_POST['ID'];
+							$Type = $_POST['Type'];						
+							$mdAward = new Models_Award();
+							$mdAward->updateAwardType($ID,$Type,$Value);
+							echo "1";
+							break;
+					case 'update-all':
+							$battleID = $_POST['BattleID'];
+							$arrType = $_POST['AwardTypeID'];
+							$arrValue = $_POST['Value'];							
+							$mdAward = new Models_Award();
+							$mdAward->updateAward($battleID,$arrType,$arrValue);
+							echo "1";
+							break;
+					default:
+						;
+					break;
+				}
+			}
+		}
+		catch(Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}
+	
+	////////////////////////////////////////////Edit///////////////////////////////////////////
+	public function editAction()
+	{
+		try 
+		{
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Award.php';
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Layout.php';
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Battle.php';
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Award_type.php';
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Battle_Soldier.php';		
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Soldier.php';
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Worldmap.php';	
+			
+			$id = $this->_request->getParam("id");
+			
+			///////Lấy Campaign//////////
+			$mdCamp = new Models_Campaign();			
+			$this->view->campaign = $mdCamp->_getByKey($id);
+			//var_dump($campaign);			
+			
+			///////Lấy danh sách Battle ///////////
+			//$mdbattle = new Models_Battle();			
+			
+			///////Lấy danh sách Layout//////////
+			$mdlayout = new Models_Layout();
+			$this->view->arrlayout =  $mdlayout->getLayout();			
+			//print_r($this->view->arrlayout);
+			///////Lấy danh sách Award//////////
+			$mdawardtype = new Models_Award_Type();
+			$this->view->arrawardtype = $mdawardtype->getAwardtype();
+			////
+		
+			///////Đối với mỗi battle//////
+			$mdB_layout = new Models_Soldier();
+			$this->view->arrSoldier=$mdB_layout->getAllSoldier();					
+			$mdB=new Models_Battle();			
+			$this->view->arrbattle=$mdB->getBattle($id);
+			
+			
+			$mdBS=new Models_Battle_Soldier();
+			$this->view->arrBattleSolider=array();
+			$arrPoint = array();
+			foreach ($this->view->arrbattle as $row)
+			{	
+				
+				$strPoint =  $row->Point;
+				$strPoint = substr($strPoint,1,strlen($strPoint)-2);
+				$arr = explode(',',$strPoint )	;		
+				$arrPoint[$row->ID] = $arr;
+				$this->view->arrBattleSolider[$row->ID]=$mdBS->getbattle_soldier($row->ID);
+			}
+			$this->view->arrPoint = $arrPoint;
+			
+			$arrbattle = $this->view->arrbattle;
+			$this->view->layout[] = array();
+			
+			///////Lấy Award - ThaoNX////////////
+						
+			$md_award = new Models_Award();
+			$this->view->arrAwardType = $md_award->getAwardType();
+			$this->view->arraward = array();
+			
+			foreach ($this->view->arrbattle as $row)
+			{
+				$idbattle= $row->ID;			
+			
+				$this->view->arraward[$idbattle] = $md_award->getAward($idbattle);
+				
+			}
+			
+		}
+		catch(Exception $ex)
         {            
 			$this->view->errMsg = $ex->getMessage();
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
