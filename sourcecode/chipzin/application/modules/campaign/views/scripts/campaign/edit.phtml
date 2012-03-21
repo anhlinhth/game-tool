@@ -70,11 +70,12 @@ select{
 				<td width="20px;">Order</td>
 				<td>Layout</td>
 				<td>Award</td>
+				<td>Action</td>
 			</tr>
 		</thead>
 	<?php foreach ($this->arrbattle as $rowbattle){?>
 
-		<tr>
+		<tr id='battle-<?php echo $rowbattle->ID?>'>
 			<td><?php echo $rowbattle->ID;?></td>
 			<td>
 				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
@@ -180,12 +181,12 @@ select{
 				<?php }?>
 			</div>
 			</td>
+			<td><a class='' href='javascript:saveBatlle(<?php echo $rowbattle->ID ?>)'>Save</a></td>
 		</tr>
 		<?php }?>
 	
 	</table>
-	<div class="style">
-	<a class="btn add" href="">Add</a>
+	<div class="style">	
 	<a class="btn save" href="">Save</a>
 	</div>
 </div>
@@ -199,6 +200,7 @@ select{
 </div>
 <!--  -->
 <script>
+///////////////ThaoNX/////////////////////
 	function addAward(key)
 	{		
 		var count = $(".award-"+ key).size();
@@ -233,7 +235,9 @@ select{
 			}
 		});
 	}
-	///////////
+///////////////End-ThaoNX/////////////////////
+////////////////////////////////////////////////
+
 	$(document).ready(function(){
 			
 			$("td.invisible").css("");
