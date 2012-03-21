@@ -255,7 +255,6 @@ class Campaign_CampaignController extends BaseController
 			$mdB=new Models_Battle();			
 			$this->view->arrbattle=$mdB->getBattle($id);
 			
-			
 			$mdBS=new Models_Battle_Soldier();
 			$this->view->arrBattleSolider=array();
 			$arrPoint = array();
@@ -286,6 +285,7 @@ class Campaign_CampaignController extends BaseController
 				$this->view->arraward[$idbattle] = $md_award->getAward($idbattle);
 				
 			}
+			
 			
 		}
 		catch(Exception $ex)

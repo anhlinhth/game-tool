@@ -251,8 +251,9 @@ td.visible select,td.invisible select{
 	function saveBattle(key)
 	{
 		var data = $("#battle-"+key+" *").serialize();
+		var camID = $("#campaignID").val();
 		data += "&BattleID="+key+"";
-		
+		data += "&campaignID="+camID;
 		
 		$.ajax({
 			type: "POST",
