@@ -301,10 +301,22 @@ td.visible select,td.invisible select{
 	///Save All////
 	function saveAll(){
 		$(".battle").each(function(index){			
-			alert($(this).find("*").serialize());
-		});
-		
-		
+			data = ($(this).find("*").serialize());
+			var camID = $("#campaignID").val();
+			data += "&campaignID="+camID;		
+			$.ajax({
+				type: "POST",
+				url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
+				data: data,
+				success: function(msg){				
+					if(msg == '1'){					
+						alert("Successfull");
+					}else{
+						alert(msg);					
+					}					
+				}
+			});	
+		});		
 	}
 	///Add battle///
 	function addBattle()
