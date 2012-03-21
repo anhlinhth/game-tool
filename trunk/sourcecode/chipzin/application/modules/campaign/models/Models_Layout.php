@@ -14,5 +14,17 @@ class Models_Layout extends Models_Base
 	{
 		return parent::_filter();
 	}
+	public function getLayoutById($id)
+	{
+		$sql="
+			SELECT
+				 *
+			FROM
+				c_layout
+			WHERE ID=$id		
+		";
+		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);	
+		return $data;
+	}
 	
 }
