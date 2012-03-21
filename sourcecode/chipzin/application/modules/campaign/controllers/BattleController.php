@@ -29,7 +29,7 @@ class Campaign_BattleController extends BaseController
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();
 			if($this->_request->isPost())
-			{	
+			{
 				$mdbattle = new Models_Battle();
 				$objBattle = new Obj_Battle();
 				$objBattle->ID = $_POST['BattleID'];
@@ -37,6 +37,7 @@ class Campaign_BattleController extends BaseController
 				$objBattle->Order = $_POST['Order'];
 				$objBattle->Campaign = $_POST['campaignID'];
 				$mdbattle->saveBattle($objBattle);
+				//save Battle Soldier
 				$mdbs = new Models_Battle_Soldier();
 				$arrSolider = $_POST['solider'];
 				$arrLevel = $_POST['level'];
@@ -49,15 +50,34 @@ class Campaign_BattleController extends BaseController
 					$objbs->Point = $key;
 					$objbs->Soldier = $arrSolider[$key];
 					$objbs->ID = "NULL";
-					print_r($objbs);
-					$mdbs->updateB_Soldier($objbs);
+					if($objbs->Soldier != "" && $objbs->Level != "")
+					{
+						$mdbs->updateB_Soldier($objbs);
+					}
 				}
-				
+				$mda = new Models_Award();
+				$mda->delAward($objBattle->ID);
+				$arrAwardID = $_POST['AwardTypeID'];
+				$arrValue = $_POST['Value'];
+				foreach ($arrAwardID as $key => $value )
+				{
+					$obja = new Obj_Award();
+					$obja->ID = "NULL";
+					$obja->BattleID = $objBattle->ID;
+					$obja->AwardTypeID = $arrAwardID[$key];
+					$obja->Value = $arrValue[$key];
+					if($obja->AwardTypeID != "" && $obja->Value != "")
+					{
+						$mda->InsAward($obja);
+					}
+				}
+				echo "1";
 			}
 		}
 		catch(Exception $ex)
 		{
 			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}
 	}
