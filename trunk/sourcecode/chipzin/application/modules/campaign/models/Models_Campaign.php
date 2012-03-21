@@ -26,7 +26,6 @@ class Models_Campaign extends Models_Base
 	public function delete($id)
 	{
 		parent::_delete($id,null);
-		
 	}
 	
 	
