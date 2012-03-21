@@ -208,6 +208,7 @@ td.visible select,td.invisible select{
 	<div class="style">
 	<a class="btn add" href="javascript:addBattle()">Add Battle</a>	
 	<a class="btn save" href="javascript:saveAll()">Save</a>
+	<a class="btn add" href="javascript:addBattle()">Add</a>
 	</div>
 </div>
 </form>
@@ -230,8 +231,6 @@ td.visible select,td.invisible select{
 		var btnDelete = " <a class='tool-16 delete' href='javascript:removeAward("+key+","+count+")'>&nbsp</a>"	;
 		var select = "<div class='award-"+key+"' id='div-list-award-"+count+"'><select name='AwardTypeID[]'>"+options+"</select>"+input+btnDelete+"</div>";
 		$("#div-battle-award-"+key).append(select);
-		
-		
 	}
 	function removeAward(battleID,key)
 	{
@@ -306,6 +305,21 @@ td.visible select,td.invisible select{
 		});
 		
 		
+	}
+	///Add battle///
+	function addBattle()
+	{
+		var camID = $("#campaignID").val();
+		var data = "campaignID="+camID;
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/campaign/battle/add' ?> ",
+			data: data,
+			success: function(msg){	
+				alert ("Thành công");	
+				window.location.reload();
+			}
+		});
 	}
 	
 ///////////////End-ThaoNX/////////////////////

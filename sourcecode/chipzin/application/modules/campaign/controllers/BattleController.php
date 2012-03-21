@@ -55,6 +55,7 @@ class Campaign_BattleController extends BaseController
 						$mdbs->updateB_Soldier($objbs);
 					}
 				}
+				//save award
 				$mda = new Models_Award();
 				$mda->delAward($objBattle->ID);
 				$arrAwardID = $_POST['AwardTypeID'];
@@ -102,6 +103,25 @@ class Campaign_BattleController extends BaseController
 	    	Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 	    }
 	}
+	public function addAction()
+	{
+		try {
+			$mdbattle = new Models_Battle();
+			$objBattle = new Obj_Battle();
+			$objBattle->ID = "NULL";
+			$objBattle->Campaign = $_POST['campaignID'];
+			$objBattle->Layout = 1;
+			$mdbattle->_insert($objBattle);
+			echo "Thành công";
+		}
+		catch(Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}
+	
 }
 
 
