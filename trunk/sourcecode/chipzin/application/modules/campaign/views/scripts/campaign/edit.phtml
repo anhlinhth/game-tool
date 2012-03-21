@@ -85,8 +85,12 @@ td.visible select,td.invisible select{
 	<tbody id="campaign">	
 	<?php foreach ($this->arrbattle as $rowbattle){?>
 
+
+		
+
 		<tr class='battle' id='battle-<?php echo $rowbattle->ID?>'>
-			<td><?php echo $rowbattle->ID;?><input style="display:none" type="text" name='BattleID' value='<?php echo $rowbattle->ID;?>'/></td>
+			<td><?php echo $rowbattle->ID;?><input style="display:none" type="text" id='BattleID' name='BattleID' value='<?php echo $rowbattle->ID;?>'/></td>
+
 			<td class="center">
 				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
@@ -97,7 +101,7 @@ td.visible select,td.invisible select{
 				<table id='tb_layout'>
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][0])?"visible":"invisible"?>
-						<td class="<?php echo  $strclass?>" style="margin: 0;padding: 0;">
+						<td id="point0" class="<?php echo  $strclass?>" style="margin: 0;padding: 0;">
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0);
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[0]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>												
@@ -106,7 +110,7 @@ td.visible select,td.invisible select{
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][1])?"visible":"invisible"?>
-						<td class="<?php echo  $strclass?>" >
+						<td id="point3" class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[3]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
@@ -114,7 +118,7 @@ td.visible select,td.invisible select{
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][2])?"visible":"invisible"?>
-						<td class="<?php echo  $strclass?>" >
+						<td id="point6" class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[6]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
@@ -123,7 +127,7 @@ td.visible select,td.invisible select{
 					</tr>
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][3])?"visible":"invisible"?>
-						<td class="<?php echo  $strclass?>" >
+						<td  id="point2" class="<?php echo  $strclass?>" >
 							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[1]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
@@ -131,7 +135,7 @@ td.visible select,td.invisible select{
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visible":"invisible"?>
-						<td class="<?php echo  $strclass?>" >
+						<td  id="point4"class="<?php echo  $strclass?>" >
 							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[4]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
@@ -139,7 +143,7 @@ td.visible select,td.invisible select{
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][5])?"visible":"invisible"?>
-						<td class="<?php echo  $strclass?>" >
+						<td  id="point7"class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7);
 							 echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[7]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
@@ -148,26 +152,26 @@ td.visible select,td.invisible select{
 					</tr>
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][6])?"visible":"invisible"?>
-						<td class="<?php echo  $strclass?>" >
+						<td id="point3" class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[2]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
 							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[2]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
-						<?php $strclass = ($this->arrPoint[$rowbattle->ID][70])?"visible":"invisible"?>
-						<td class="<?php echo  $strclass?>" >
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][7])?"visible":"invisible"?>
+						<td id="point5" class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[5]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider_2' name='level[5]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[5]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][8])?"visible":"invisible"?>
-						<td class="<?php echo  $strclass?>" >
+						<td id="point8 "class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[8]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider_1' name='level[8]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[8]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 				</table>
@@ -317,7 +321,7 @@ td.visible select,td.invisible select{
 	///////////////////////////
 	$(document).ready(function(){			
 			$("td.invisible").addClass('an');
-			$("td.invisible").find("option").remove();
+			$("td.invisible").find("select").attr('disabled','disabled');
 			$("td.invisible").find("input").attr('disabled',true);
 			$("td.visible").addClass('hien');
 			
@@ -331,17 +335,27 @@ td.visible select,td.invisible select{
 
 	$('select#Layout').change(function(){
 		var select=$(this).children("option:selected").val();
-		var s=$(this).parent().parent().html();
-		alert(s);
-		return;
-		var id=$(this).val();
+		var battleID=$(this).parent().parent().find("#BattleID").val();			
+		var layoutID=$(this).val();
+		
 			$.ajax({
 				type: "POST",
 				url: "<?php echo $this->baseUrl.'/campaign/campaign/loadlayout'?> ",
-				data: "id=" + id,
-				success: function(msg){
-					alert(msg);					
+				data: "id=" + layoutID,
+				dataType: "json",
+				success: function(data){				
+					$.each(data, function(key, val) {
+						if(val==0){								
+							$("#battle-"+battleID +" #"+key).addClass("an");
+							$("td.invisible").find("select").attr('disabled',true);
+						}else{
+							$("#battle-"+battleID +" #"+key).removeClass("an");
+							$("td.invisible").find("select").attr('disabled',false);
+						}
+					 
+					   // $("#battle-"+s+ "#tb_layout td"+key).val(val); 
+					});											
 				}
-				});
+			});
 		});
 </script>
