@@ -181,7 +181,7 @@ select{
 				<?php }?>
 			</div>
 			</td>
-			<td><a class='' href='javascript:saveBatlle(<?php echo $rowbattle->ID ?>)'>Save</a></td>
+			<td><a class='' href='javascript:saveBattle(<?php echo $rowbattle->ID ?>)'>Save</a></td>
 		</tr>
 		<?php }?>
 	
@@ -226,6 +226,28 @@ select{
 			url: "<?php echo $this->baseUrl.'/campaign/campaign/updateaward'?> ",
 			data: data,
 			success: function(msg){
+				if(msg == '1'){					
+					alert("Successfull");
+				}else{
+					alert("Error");					
+				}
+				window.location.reload();
+			}
+		});
+	}
+	////////////////////////////////
+	function saveBattle(key)
+	{
+		var data = $("#battle-"+key+" *").serialize();
+		data += "&BattleID="+key+"";
+		
+		
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/test/testpost'?> ",
+			data: data,
+			success: function(msg){
+				alert(msg);return;
 				if(msg == '1'){					
 					alert("Successfull");
 				}else{
