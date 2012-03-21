@@ -11,14 +11,14 @@ class Models_Battle_Soldier extends Models_Base
 		$this->_table = "c_battle_soldier";	
 	}
 	
-	public function getbattle_soldier($idBattle)
+	public function getbattle_soldier($idBattel)
 	{
 		$sql ="SELECT 
 					*
 				FROM
 					c_battle_soldier
 				WHERE
-					BattleID = $idBattle";
+					BattleID = $idBattel";
 		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
 		return $data;
 	}
@@ -33,5 +33,4 @@ class Models_Battle_Soldier extends Models_Base
 		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
 		return $data;
 	}
-	
 }
