@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 21, 2012 at 08:30 AM
+-- Generation Time: Mar 21, 2012 at 10:33 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -34,7 +34,49 @@ CREATE TABLE IF NOT EXISTS `c_award` (
   PRIMARY KEY (`ID`),
   KEY `BattleID` (`BattleID`,`AwardTypeID`),
   KEY `AwardType` (`AwardTypeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+
+--
+-- Dumping data for table `c_award`
+--
+
+INSERT INTO `c_award` (`ID`, `BattleID`, `AwardTypeID`, `Value`) VALUES
+(1, 1, 1, 100),
+(2, 1, 2, 44),
+(3, 1, 3, 3),
+(4, 1, 4, 55),
+(5, 2, 1, 55),
+(6, 2, 2, 88),
+(12, 4, 3, 141),
+(13, 4, 4, 12),
+(14, 5, 1, 55),
+(15, 5, 2, 66),
+(16, 5, 4, 44),
+(17, 6, 3, 12),
+(18, 6, 4, 22),
+(19, 6, 1, 17),
+(20, 6, 1, 44),
+(21, 7, 2, 14),
+(22, 7, 4, 55),
+(23, 7, 3, 44),
+(24, 8, 1, 145),
+(25, 8, 3, 15),
+(26, 8, 2, 144),
+(27, 9, 4, 67),
+(28, 9, 2, 55),
+(29, 10, 3, 114),
+(30, 10, 3, 121),
+(31, 11, 1, 76),
+(32, 11, 4, 444),
+(33, 12, 3, 15),
+(34, 12, 2, 198),
+(35, 13, 1, 456),
+(36, 13, 2, 64),
+(37, 13, 4, 18),
+(38, 3, 1, 99),
+(39, 3, 2, 145),
+(40, 3, 3, 14),
+(41, 3, 4, 44);
 
 -- --------------------------------------------------------
 
@@ -46,7 +88,17 @@ CREATE TABLE IF NOT EXISTS `c_award_type` (
   `AwardTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`AwardTypeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `c_award_type`
+--
+
+INSERT INTO `c_award_type` (`AwardTypeID`, `Name`) VALUES
+(1, 'Gold'),
+(2, ' Exp'),
+(3, 'Item'),
+(4, 'Silver');
 
 -- --------------------------------------------------------
 
@@ -112,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `c_battle_soldier` (
   PRIMARY KEY (`ID`),
   KEY `BattleID` (`BattleID`,`Soldier`),
   KEY `Soldier` (`Soldier`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
 
 --
 -- Dumping data for table `c_battle_soldier`
@@ -129,13 +181,6 @@ INSERT INTO `c_battle_soldier` (`ID`, `BattleID`, `Point`, `Soldier`, `Level`, `
 (8, 2, 2, 3, 7, NULL),
 (9, 2, 4, 4, 6, NULL),
 (10, 2, 7, 5, 7, NULL),
-(11, 3, 0, 1, 4, NULL),
-(12, 3, 2, 2, 4, NULL),
-(13, 3, 3, 3, 3, NULL),
-(14, 3, 5, 4, 5, NULL),
-(15, 3, 6, 5, 5, NULL),
-(16, 3, 7, 1, 4, NULL),
-(17, 3, 8, 2, 6, NULL),
 (18, 4, 0, 3, 7, NULL),
 (19, 4, 2, 4, 4, NULL),
 (20, 4, 3, 5, 2, NULL),
@@ -176,7 +221,12 @@ INSERT INTO `c_battle_soldier` (`ID`, `BattleID`, `Point`, `Soldier`, `Level`, `
 (55, 10, 1, 4, 6, NULL),
 (56, 10, 2, 3, 6, NULL),
 (57, 10, 4, 5, 4, NULL),
-(58, 10, 7, 3, 5, NULL);
+(58, 10, 7, 3, 5, NULL),
+(59, 3, 0, 1, 4, NULL),
+(60, 3, 6, 5, 5, NULL),
+(61, 3, 7, 1, 4, NULL),
+(62, 3, 2, 2, 4, NULL),
+(63, 3, 8, 2, 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -6397,11 +6447,19 @@ CREATE TABLE IF NOT EXISTS `q_temp` (
   `Quantity` int(11) DEFAULT NULL,
   `ActionID` int(11) DEFAULT NULL,
   `QuestID` int(11) DEFAULT NULL,
-  `	TargetType` int(11) DEFAULT NULL,
+  `TargetType` int(11) DEFAULT NULL,
   PRIMARY KEY (`TaskID`),
   KEY `QTC_ID` (`QTC_ID`,`ActionID`),
   KEY `ActionID` (`ActionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `q_temp`
+--
+
+INSERT INTO `q_temp` (`TaskID`, `TaskName`, `TaskString`, `DescID`, `DescString`, `QTC_ID`, `UnlockCoin`, `IconClassName`, `IconPackageName`, `Quantity`, `ActionID`, `QuestID`, `TargetType`) VALUES
+(1, 'Xây thêm 1 Ô đất', '@quest#49', 'ưeqweqw', '@quest#51', 4, 1, 'sample', 'sample', 1, 1, 0, NULL),
+(2, 'Xây thêm 1 Ô đất', '@quest#49', 'ưeqweqw', '@quest#51', 4, 1, 'sample', 'sample', 1, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -6415,7 +6473,15 @@ CREATE TABLE IF NOT EXISTS `q_temp_target` (
   `TargetID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `TaskID` (`TaskID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `q_temp_target`
+--
+
+INSERT INTO `q_temp_target` (`ID`, `TaskID`, `TargetID`) VALUES
+(1, 1, 2002),
+(2, 2, 2002);
 
 -- --------------------------------------------------------
 
