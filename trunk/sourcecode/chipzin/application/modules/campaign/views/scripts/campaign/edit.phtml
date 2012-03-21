@@ -71,14 +71,14 @@ td.visible select,td.invisible select{
 	</table>
 	<h3>Battle</h3>	
 
-	<table id='battle' width="100%">
+	<table class="list" id='battle' width="100%">
 		<thead>
 			<tr>
 				<td width="15px;">ID</td>
 				<td width="20px;">Order</td>
-				<td>Layout</td>
+				<td class="center">Layout</td>
 				<td>Award</td>
-				<td>Action</td>
+				<td class="center"width="20px;">Action</td>
 			</tr>
 		</thead>
 	<tbody id="campaign">	
@@ -86,10 +86,10 @@ td.visible select,td.invisible select{
 
 		<tr class='battle' id='battle-<?php echo $rowbattle->ID?>'>
 			<td><?php echo $rowbattle->ID;?><input style="display:none" type="text" name='BattleID' value='<?php echo $rowbattle->ID;?>'/></td>
-			<td>
+			<td class="center">
 				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
-			<td width="auto">
+			<td width="200px">
 				<?php echo $this->selection($this->arrlayout,$rowbattle->Layout,"Layout",array('key'=>"ID",'name'=>"Name"))?>
 				<br/>
 				
@@ -190,7 +190,7 @@ td.visible select,td.invisible select{
 				<?php }?>
 			</div>
 			</td>
-			<td>
+			<td class="center">
 			<a class='tool-24 save disabled' id="" href='javascript:saveBattle(<?php echo $rowbattle->ID ?>)'></a><br><br>
 			<a class='tool-24 reset disabled' href='javascript:resetBattle(<?php echo $rowbattle->ID ?>)'></a>
 			</td>
