@@ -8,9 +8,10 @@ class Zend_View_Helper_ListCamp
 			return;
 		$items = (($curPage - 1) * $itemPerPage) + 1;
 		$strList .= "<tbody>";
-		$data1 = $data;
-		$mdWm = new Models_WorldMap();
-		$data2 = $mdWm->fetchall(); 
+		$mdm = new Models_WorldMap();
+		$data2 = $mdm->fetchall();
+		$mdc = new Models_Campaign();
+		$data3 = $mdc->fetchall();
 		foreach($data as $row)
 		{					
 			$edit = "";
@@ -36,6 +37,39 @@ class Zend_View_Helper_ListCamp
 			}
 			$strList.="
 							</select></center></td>
+							<td class='desc3'>
+							<center>
+							<select id='type-$row->ID' name='type-$row->ID' onChange='changeMap1($row->ID)'>
+							";
+						
+								if($row->TypeID==1)
+								{
+									$strList.="<option selected="."selected".">Map</option>";
+									$strList.="<option >BARRAC</option>";
+								}
+								else
+								{
+									$strList.="<option selected="."selected".">Map</option>";
+									$strList.="<option selected="."selected".">BARRAC</option>";
+								}
+			$strList.="
+							</select></center>
+							</td>
+							<td>
+							<center>
+							<select id='nextquest-$row->ID' name='nextquest-$row->ID' onChange='changeMap($row->ID)'>
+							";
+					foreach ($data as $row1)
+					{
+							if($row->ID==$row1->ID)
+								$strList .= "<option selected="."selected".">$row1->NeedCamp</option>";
+							else
+								$strList .= "<option>$row1->ID</option>";
+					}
+							$strList .= "
+							</select>
+							</center>
+							</td>
 							<td align='center'>								
 								$edit&nbsp								
 								$delete								
@@ -58,9 +92,11 @@ class Zend_View_Helper_ListCamp
 			value = $(parent).children(".desc").text();
 			value2= $(parent).children(".descid").text();
 			value3= $(parent).children(".desc2").text();
+			value4= $(parent).children(".desc3").val();
 			document.getElementById('desc1').value = value;
 			document.getElementById('ID1').value = value2;
 			document.getElementById('select1').value = value3;
+			document.getElementById('select2').value = value4;
 			return false;
 		});
 	});
