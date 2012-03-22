@@ -3,7 +3,7 @@ require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'Campaign'.DS.'models'.DS.'Models_Campaign.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'Campaign'.DS.'models'.DS.'Models_WorldMap.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
-
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 class Campaign_CampaignController extends BaseController
 {
 	public function _setUserPrivileges()
@@ -77,6 +77,7 @@ class Campaign_CampaignController extends BaseController
         }
 	}	
 	public function updateworldmapAction(){
+		
 	try{
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNorender();
@@ -89,6 +90,37 @@ class Campaign_CampaignController extends BaseController
 		$obj->ID = $id;
 		$obj->Name = $md->fetchname($id);
 		$obj->WorldMap = $mdw->searchname($desc2);
+		
+		$md->update($obj);
+
+		Models_Log::insert($this->view->user->username, "act_update_Campaign", $obj->name);
+
+		echo "Update thanh cong";	
+		}
+		catch(Exception $ex)
+        {            
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
+	}
+	public function updatetypeAction(){
+	try{
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNorender();
+		$id = $this->_request->getParam("id");
+		$desc3 = $this->_request->getParam("desc3");	
+		$md = new Models_Campaign();	
+		$mdw = new Models_WorldMap();
+		$data = $md->fetchone($id);
+		$obj = new Obj_Campaign();
+
+		$obj->ID = $id;
+		$obj->Name = $data['Name'];
+		$obj->WorldMap = $data['WorldMap'];
+		if($desc3=="Map")
+			$obj->TypeID = 1;
+		else
+			$obj->TypeID = 2;
 		$md->update($obj);
 		Models_Log::insert($this->view->user->username, "act_update_Campaign", $obj->name);
 
@@ -137,6 +169,9 @@ class Campaign_CampaignController extends BaseController
 		$this->_helper->viewRenderer->setNorender();
 		$wm = $_POST[select];
 		$desc = $_POST[decs];
+		$nc = $_POST[select3];
+		$type = $_POST[select2];
+		$desc = $_POST[decs];
 		$obj = new Obj_Campaign();
 		if($wm==NULL)
 		{
@@ -146,7 +181,13 @@ class Campaign_CampaignController extends BaseController
 		else
 		$obj->WorldMap = $mdw->searchname($wm);
 		$obj->Name = $desc;
+		$obj->NeedCamp = $nc;
+		if($type=="Map")
+			$obj->TypeID = 1;
+		else 
+			$obj->TypeID = 2;
 		$md = new Models_Campaign();
+		echo "ok";
 		try{
 			$md->insert($obj);
 		}
@@ -230,14 +271,10 @@ class Campaign_CampaignController extends BaseController
 			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Soldier.php';
 			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Worldmap.php';	
 			
+			$id = $this->_request->getParam("id");
 			
 			///////Lấy Campaign//////////
-			$mdCamp = new Models_Campaign();
-			$id = $this->_request->getParam("id");
-			if(!isset($id)){
-				$campaign = $mdCamp->getTopCampaign();				
-				$this->_redirect("/campaign/campaign/edit/id/$campaign->ID");
-			}			
+			$mdCamp = new Models_Campaign();			
 			$this->view->campaign = $mdCamp->_getByKey($id);
 			//var_dump($campaign);			
 			
@@ -272,6 +309,7 @@ class Campaign_CampaignController extends BaseController
 				$this->view->arrBattleSolider[$row->ID]=$mdBS->getbattle_soldier($row->ID);
 			}
 			$this->view->arrPoint = $arrPoint;
+			
 			$arrbattle = $this->view->arrbattle;
 			$this->view->layout[] = array();
 			
@@ -296,38 +334,5 @@ class Campaign_CampaignController extends BaseController
 			$this->view->errMsg = $ex->getMessage();
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
-	}
-	
-	public function loadlayoutAction()
-	{
-		try{
-			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Layout.php';
-			$this->_helper->layout->disableLayout();
-			$this->_helper->viewRenderer->setNorender();
-			$mdlayout = new Models_Layout();
-			$id=$_POST['id'];
-			$layout=array();
-			$layout =  $mdlayout->getLayoutById($id);
-			//echo json_encode($layout);
-			$strPoint =	$layout[0]->Point;
-					
-			$strPoint = substr($strPoint,1,strlen($strPoint)-2);
-			$arrPoint = explode(',',$strPoint);
-			$arr = array();
-			foreach ($arrPoint as $key =>$value) {
-				$arr["point".$key] = $value;
-			}
-			
-			
-			
-			echo json_encode($arr);
-			
-		}
-		catch(Exception $ex)
-		{
-			$this->view->errMsg = $ex->getMessage();
-			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-		
-		}
 	}
 }
