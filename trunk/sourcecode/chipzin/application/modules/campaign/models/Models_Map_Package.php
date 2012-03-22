@@ -38,40 +38,101 @@ class Models_Map_Package extends Models_Base
 		
 		return $data;
 	}
+	public function getnextmap($id)
+	{
+		$sql = "SELECT
+					*
+				FROM
+					c_nextcamp
+				WHERE
+					CampID='$id'";
+		$data = $this->_db->fetchRow($sql);
+		
+		return $data;
+	}
 	public function generate($data)
 	{
 		$i = 1;
 		$error = array();
+		$data5 = $this->count();
 		$str .= "<?php\nreturn array\n(\n";
 		foreach ($data as $row)
 		{
+			if($row['TypeID']==1)
+			{
+				$str .= "\tMAP_".$row['ID']." => array \n ";
+				$str .= "\t{\n";
+				$str .= "\t\t'type' => MAP,  \n";
+				$str .= "\t\t'name' => '".$row['Name']."',\n";
+				$data1 = $this->fetchone($row['NeedCamp']);
+				$data2 = $this->getnextmap($row['ID']);
+				$data3 = $this->fetchone($data2['CampID']);
+				if($row['NeedCamp']!=NULL)
+				{
+					if($data1['TypeID']==1)
+						$str .= "\t\t'needmap' =>MAP_".$data1['ID'].",  \n";
+					else 
+				 		$str .= "\t\t'needmap' =>BARRACK_".$data1['ID'].",  \n";
+				}
+				else
+					$str .= "\t\t'needmap' => NULL,  \n";
+				if($data2!=NULL)
+				{
+					if($data3['TypeID']==1)
+						$str .= "\t\t'nextmap' =>BARRACK_".$data2['NextCamp'].",  \n";
+					else
+						$str .= "\t\t'nextmap' =>MAP_".$data2['NextCamp'].",  \n";
+				}
+				else 
+					$str .= "\t\t'nextmap' => NULL,\n";
+				$str .= "\t\t'width' => 40, \n";
+				$str .= "\t\t'height' => 40, \n";
+				$str .= "\t\t'blocks' => array(), \n";
+				$str .= "\t\t'freeWorker' => 0 \n";
+				if($i<$data5)
+					$str .= "\t},\n";
+				else 
+					$str .= "\t}\n";
+			}
+			else 
+			{
 			
-			$str .= "\tMAP_".$row['ID']." => array \n ";
-			$str .= "\t{\n";
-			$str .= "\t\t'type' => MAP,  \n";
-			$str .= "\t\t'name' =>  \n";
-			$str .= "\t\t'needmap' =>  \n";
-			$str .= "\t\t'nextmap' =>  \n";
-			$str .= "\t\t'width' => 40, \n";
-			$str .= "\t\t'height' => 40, \n";
-			$str .= "\t\t'blocks' => array(), \n";
-			$str .= "\t\t'freeWorker' => 0 \n";
-			$str .= "\t},\n";
-			$i++;
-		}
-			$str .= "\t/\"*************************************************************\"/";
-		foreach ($data as $row)
-		{
+	
 			
-			$str .= "\tBARRACK_$i=> array \n ";
-			$str .= "\t{\n";
-			$str .= "\t\t'type' => BARRACK, \n";
-			$str .= "\t\t'needmap' =>  \n";
-			$str .= "\t\t'nextmap' =>  \n";
-			$str .= "\t},\n";
+				$str .= "\tBARRACK_$i=> array \n ";
+				$str .= "\t{\n";
+				$str .= "\t\t'type' => BARRACK, \n";
+				$data1 = $this->fetchone($row['NeedCamp']);
+				$data2 = $this->getnextmap($row['ID']);
+				$data3 = $this->fetchone($data2['CampID']);
+				
+				if($row['NeedCamp']!=NULL)
+				{
+					if($data1['TypeID']==1)
+						$str .= "\t\t'needmap' =>MAP_".$data1['ID'].",  \n";
+					else 
+				 		$str .= "\t\t'needmap' =>BARRACK_".$data1['ID'].",  \n";
+				}
+				else
+					$str .= "\t\t'needmap' => NULL,  \n";
+				if($data2!=NULL)
+				{
+					if($data3['TypeID']==1)
+						$str .= "\t\t'nextmap' =>BARRACK_".$data2['NextCamp'].",  \n";
+					else
+						$str .= "\t\t'nextmap' =>MAP_".$data2['NextCamp'].",  \n";
+				}
+				else 
+					$str .= "\t\t'nextmap' => NULL,\n";
+					if($i<$data5)
+					$str .= "\t},\n";
+				else 
+					$str .= "\t}\n";
+				
+			}
 			$i++;
-		}	
-			$str .= "\n\n);\n?>";
+			}
+			$str .= ");\n?>";
 		if(empty($error)){
 			$fp = fopen(MAP_PACKAGE_PHP_FILE, 'w');
 			if(fwrite($fp, $str) === false)
@@ -99,6 +160,19 @@ class Models_Map_Package extends Models_Base
 		return $data;
 	
 	}
+	public function fetchone($id)
+	{
+		$sql = "SELECT
+					*
+				FROM
+					c_campaign
+				WHERE
+					ID='$id'";
+		
+		$data = $this->_db->fetchRow($sql);
+		
+		return $data;
+	}
 	public function fetchname($objSearch)
 	{
 		$sql = "SELECT
@@ -113,10 +187,10 @@ class Models_Map_Package extends Models_Base
 		return $data;
 	
 	}
-	public function count($objSearch)
+	public function count()
 	{
 		$sql = "SELECT
-					COUNT(QTC_ID)
+					COUNT(ID)
 				FROM
 					c_campaign
 				WHERE
