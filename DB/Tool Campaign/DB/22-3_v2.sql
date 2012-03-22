@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 22, 2012 at 08:02 AM
+-- Generation Time: Mar 22, 2012 at 10:22 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -6598,9 +6598,8 @@ ALTER TABLE `c_battle_soldier`
 -- Constraints for table `c_campaign`
 --
 ALTER TABLE `c_campaign`
-  ADD CONSTRAINT `c_campaign_ibfk_3` FOREIGN KEY (`TypeID`) REFERENCES `c_typemap` (`ID`) ON DELETE NO ACTION,
   ADD CONSTRAINT `c_campaign_ibfk_1` FOREIGN KEY (`WorldMap`) REFERENCES `c_worldmap` (`ID`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `c_campaign_ibfk_2` FOREIGN KEY (`NeedCamp`) REFERENCES `c_campaign` (`ID`) ON DELETE NO ACTION;
+  ADD CONSTRAINT `c_campaign_ibfk_3` FOREIGN KEY (`TypeID`) REFERENCES `c_typemap` (`ID`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `c_nextcamp`
