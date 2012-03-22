@@ -7,66 +7,29 @@ return array
 		'name' => 'Làng Bí Ẩn',
 		'needMap' => null,
 		'nextMap' => BARRACK_1,
-		'robBattle' => null,
-		'openBattles' => array(),
 		'width' => 40,
 		'heigh' => 40,
-		'blocks' => array(MAP_BLOCK_0 => null),
-		'freeWorker' => 3
+		'blocks' => array( 0 => null, 1 => null, 5 => null, 6 => null ),
+		'freeWorker' => 0
 	),
-	MAP_2 => array
-	(
-		'type' => MAP,
-		'name' => 'Làng Bí Ẩn 2',
-		'needMap' => BARRACK_2,
-		'nextMap' => BARRACK_3,
-		'robBattle' => 1,
-		'openBattles' => array(1,2,3),
-		'width' => 40,
-		'heigh' => 40,
-		'blocks' => array(MAP_BLOCK_0 => null),
-		'freeWorker' => 1
-	),
-	MAP_3 => array
-	(
-		'type' => MAP,
-		'name' => 'Làng Bí Ẩn 3',
-		'needMap' => MAP_2,
-		'nextMap' => null,
-		'robBattle' => 4,
-		'openBattles' => array(4,5,6),
-		'width' => 40,
-		'heigh' => 40,
-		'blocks' => array(MAP_BLOCK_0 => null),
-		'freeWorker' => 1
-	),
-	
-	/**********************************************************************/
-	
 	BARRACK_1 => array
 	(
 		'type' => BARRACK,
 		'needMap' => MAP_1,
 		'nextMap' => BARRACK_2,
-		'robBattle' => 1,
-		'openBattles' => array(1,2,3),
 	),
 	BARRACK_2 => array
 	(
 		'type' => BARRACK,
 		'needMap' => BARRACK_1,
-		'nextMap' => MAP_2,
-		'robBattle' => 1,
-		'openBattles' => array(4,5,6),
+		'nextMap' => BARRACK_3,
 	)
 	,
 	BARRACK_3 => array
 	(
 		'type' => BARRACK,
-		'needMap' => MAP_2,
+		'needMap' => BARRACK_2,
 		'nextMap' => BARRACK_4,
-		'robBattle' => 2,
-		'openBattles' => array(1,2,3),
 	)
 	,
 	BARRACK_4 => array
@@ -74,41 +37,101 @@ return array
 		'type' => BARRACK,
 		'needMap' => BARRACK_3,
 		'nextMap' => BARRACK_5,
-		'robBattle' => 4,
-		'openBattles' => array(4,5,6),
 	)
 	,
 	BARRACK_5 => array
 	(
 		'type' => BARRACK,
 		'needMap' => BARRACK_4,
-		'nextMap' => MAP_3,
-		'robBattle' => 4,
-		'openBattles' => array(1,2,3),
+		'nextMap' => BARRACK_6,
 	),
 	BARRACK_6 => array
 	(
 		'type' => BARRACK,
 		'needMap' => BARRACK_5,
 		'nextMap' => BARRACK_7,
-		'robBattle' => 5,
-		'openBattles' => array(4,5,6),
 	),
 	BARRACK_7 => array
 	(
 		'type' => BARRACK,
 		'needMap' => BARRACK_6,
 		'nextMap' => BARRACK_8,
-		'robBattle' => 6,
-		'openBattles' => array(1,2,3),
 	),
 	BARRACK_8 => array
 	(
 		'type' => BARRACK,
 		'needMap' => BARRACK_7,
+		'nextMap' => MAP_2,
+	),
+	MAP_2 => array
+	(
+		'type' => MAP,
+		'name' => 'Làng Bí Ẩn 2',
+		'needMap' => BARRACK_8,
+		'nextMap' => BARRACK_9,
+		'width' => 40,
+		'heigh' => 40,
+		'blocks' => array(MAP_BLOCK_0 => null),
+		'freeWorker' => 1
+	),
+	BARRACK_9 => array
+	(
+		'type' => BARRACK,
+		'needMap' => MAP_2,
+		'nextMap' => BARRACK_10,
+	),
+	BARRACK_10 => array
+	(
+		'type' => BARRACK,
+		'needMap' => BARRACK_9,
+		'nextMap' => BARRACK_11,
+	),
+	BARRACK_11 => array
+	(
+		'type' => BARRACK,
+		'needMap' => BARRACK_10,
+		'nextMap' => BARRACK_12,
+	),
+	BARRACK_12 => array
+	(
+		'type' => BARRACK,
+		'needMap' => BARRACK_11,
+		'nextMap' => BARRACK_13,
+	),
+	BARRACK_13 => array
+	(
+		'type' => BARRACK,
+		'needMap' => BARRACK_12,
+		'nextMap' => BARRACK_13,
+	),
+	BARRACK_14 => array
+	(
+		'type' => BARRACK,
+		'needMap' => BARRACK_13,
+		'nextMap' => BARRACK_15,
+	),
+	BARRACK_15 => array
+	(
+		'type' => BARRACK,
+		'needMap' => BARRACK_14,
+		'nextMap' => BARRACK_16,
+	),
+	BARRACK_16 => array
+	(
+		'type' => BARRACK,
+		'needMap' => BARRACK_15,
 		'nextMap' => MAP_3,
-		'robBattle' => 4,
-		'openBattles' => array(4,5,6),
-	)
+	),
+	MAP_3 => array
+	(
+		'type' => MAP,
+		'name' => 'Làng Bí Ẩn 3',
+		'needMap' => BARRACK_16,
+		'nextMap' => null,
+		'width' => 40,
+		'heigh' => 40,
+		'blocks' => array(MAP_BLOCK_0 => null),
+		'freeWorker' => 1
+	),
 );
 ?>
