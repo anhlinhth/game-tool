@@ -18,7 +18,8 @@ class Models_Battle extends Models_Base
 					c_battle.*, c_layout.Point
 				FROM
 					c_battle,c_layout		
-				WHERE Campaign =$id AND c_battle.Layout=c_layout.ID";		
+				WHERE Campaign =$id AND c_battle.Layout=c_layout.ID 
+				ORDER BY c_battle.Order ASC";		
 		$data = $this->_db->fetchAll($sql,"", Zend_Db::FETCH_OBJ);
 		return $data;
 	}
@@ -55,5 +56,17 @@ class Models_Battle extends Models_Base
 		{
 			throw new Internal_Error_Exception($ex);
 		}
+	}
+	public function getBattleInfo($id)
+	{
+		$sql="
+		SELECT
+		c_battle.*, c_layout.Point
+		FROM
+		c_battle,c_layout
+		WHERE c_battle.ID ='$id' AND c_battle.Layout=c_layout.ID
+		ORDER BY c_battle.Order ASC";
+		$data = $this->_db->fetchRow($sql,"", Zend_Db::FETCH_OBJ);
+		return $data;
 	}
 }

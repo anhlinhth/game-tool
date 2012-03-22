@@ -27,7 +27,7 @@ class Zend_View_Helper_TopMenu
 				$selectQuest = 'current';
 				break;
 			case 'campaign':
-			case 'solider':
+			case 'soldier':
 				$campaign = 'current';
 				break;		
 		}
