@@ -10,26 +10,29 @@ endif;
 .soldier{
 	width: 40px;
 }
+table#battle{
+	border:1px solid; 	
+}
 
-table#battle input{
-	max-width: 50px;
+table#battle input{	
 	overflow: hidden;
 	margin-top: 2px;
 	margin-bottom: 2px;
 }
-table#battle{
-	border:solid 1px !important; 
-}
+
 table#battle .hidden{
 	opacity:0.3;
 }
 table#battle td{
 	margin: 0;
 	overflow: hidden;
+	vertical-align: middle;
 }
 /**************eTable Layout********************/
- table#tb_layout td,table#tb_layout tr{
-	border:none;
+ table#tb_layout{
+
+	border-collapse: separate;
+
  }
 
 table#tb_layout td.invisible{
@@ -53,15 +56,21 @@ table#tb_layout td.visible *{
 	color:blue;
 	
 }
-td.visible select,td.invisible select{
-	margin: 0;
-	padding:0;
-	max-width: 170px;
-	min-width: 170px;
-	height: 25px;
+table#tb_layout td select, table#tb_layout td input{
+	border:none;
+	max-width: 200px;
+	min-width: 100%;	
 	overflow: hidden;
 	background-color: #D9EAED;
-	opacity:0.5;
+	padding:0px;
+	margin: 0px;
+	
+}
+table#tb_layout td select{
+	
+}
+table#tb_layout td input{
+	color:black;
 }
 /**************End Table Layout****************/
 .style{
@@ -87,7 +96,7 @@ td.visible select,td.invisible select{
 		</td>
 		<td>
 			<label>World Map:</label>
-			<input type="text" readonly="readonly" value='<?php echo $this->campaign->Wor;?>' name='nextCampaign' id='nextCampaign'/>
+			<input type="text" readonly="readonly" value='<?php echo $this->campaign->WorldMap;?>' name='nextCampaign' id='nextCampaign'/>
 		</td>
 		</tr>
 	</table>
@@ -97,10 +106,10 @@ td.visible select,td.invisible select{
 		<thead>
 			<tr>
 				<td width="15px;">ID</td>
-				<td width="20px;">Order</td>
+				<td  class="center" width="50px;">Order</td>
 				<td class="center">Layout</td>
 				<td>Award</td>
-				<td class="center"width="20px;">Action</td>
+				<td class="center" width="20px;">Action</td>
 			</tr>
 		</thead>
 	<tbody id="campaign">	
@@ -111,7 +120,7 @@ td.visible select,td.invisible select{
 			<td class="center">
 				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
-			<td width="200px">
+			<td width="300px">
 				
 				<select style="width=100%" id="Layout" name="Layout" tabindex="2">
 					<?php echo $this->options($this->arrlayout,$rowbattle->Layout,array('key'=>"ID",'name'=>"Name"))?>
@@ -119,15 +128,15 @@ td.visible select,td.invisible select{
 				</select>
 				<br/>
 				
-				<table id='tb_layout' cellpadding="1">
+				<table id='tb_layout' cellpadding="5" cellspacing="5">
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][0])?"visible":"invisible"?>
-						<td id="point0" class="<?php echo  $strclass?>" style="margin: 0;padding: 0;">
+						<td id="point0" class="<?php echo  $strclass?>">
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0);
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[0]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>												
 												
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[0]' value="<?php echo $arrBS['Level'];?>"/>
+							<input type='text' class='soldier' id='levelSolider' name='level[0]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][3])?"visible":"invisible"?>
