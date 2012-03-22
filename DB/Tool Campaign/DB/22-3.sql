@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 22, 2012 at 05:02 AM
+-- Generation Time: Mar 22, 2012 at 08:02 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `aaa`
+-- Database: `testthao`
 --
 
 -- --------------------------------------------------------
@@ -34,7 +34,49 @@ CREATE TABLE IF NOT EXISTS `c_award` (
   PRIMARY KEY (`ID`),
   KEY `BattleID` (`BattleID`,`AwardTypeID`),
   KEY `AwardType` (`AwardTypeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+
+--
+-- Dumping data for table `c_award`
+--
+
+INSERT INTO `c_award` (`ID`, `BattleID`, `AwardTypeID`, `Value`) VALUES
+(1, 1, 1, 100),
+(2, 1, 2, 44),
+(3, 1, 3, 3),
+(4, 1, 4, 55),
+(5, 2, 1, 55),
+(6, 2, 2, 88),
+(12, 4, 3, 141),
+(13, 4, 4, 12),
+(14, 5, 1, 55),
+(15, 5, 2, 66),
+(16, 5, 4, 44),
+(17, 6, 3, 12),
+(18, 6, 4, 22),
+(19, 6, 1, 17),
+(20, 6, 1, 44),
+(21, 7, 2, 14),
+(22, 7, 4, 55),
+(23, 7, 3, 44),
+(24, 8, 1, 145),
+(25, 8, 3, 15),
+(26, 8, 2, 144),
+(27, 9, 4, 67),
+(28, 9, 2, 55),
+(29, 10, 3, 114),
+(30, 10, 3, 121),
+(31, 11, 1, 76),
+(32, 11, 4, 444),
+(33, 12, 3, 15),
+(34, 12, 2, 198),
+(35, 13, 1, 456),
+(36, 13, 2, 64),
+(37, 13, 4, 18),
+(38, 3, 1, 99),
+(39, 3, 2, 145),
+(40, 3, 3, 14),
+(41, 3, 4, 44);
 
 -- --------------------------------------------------------
 
@@ -46,14 +88,17 @@ CREATE TABLE IF NOT EXISTS `c_award_type` (
   `AwardTypeID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`AwardTypeID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `c_award_type`
 --
 
 INSERT INTO `c_award_type` (`AwardTypeID`, `Name`) VALUES
-(1, 'gold');
+(1, 'Gold'),
+(2, ' Exp'),
+(3, 'Item'),
+(4, 'Silver');
 
 -- --------------------------------------------------------
 
@@ -70,7 +115,38 @@ CREATE TABLE IF NOT EXISTS `c_battle` (
   PRIMARY KEY (`ID`),
   KEY `Layout` (`Layout`,`Order`),
   KEY `Campaign` (`Campaign`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+
+--
+-- Dumping data for table `c_battle`
+--
+
+INSERT INTO `c_battle` (`ID`, `Layout`, `Order`, `Campaign`, `Temp`) VALUES
+(1, 1, 1, 1, NULL),
+(2, 1, 2, 1, NULL),
+(3, 2, 3, 1, NULL),
+(4, 2, 4, 1, NULL),
+(5, 1, 5, 1, NULL),
+(6, 1, 1, 2, NULL),
+(7, 1, 2, 2, NULL),
+(8, 2, 3, 2, NULL),
+(9, 1, 4, 2, NULL),
+(10, 1, 5, 2, NULL),
+(11, 1, 1, 3, NULL),
+(12, 2, 2, 3, NULL),
+(13, 2, 3, 3, NULL),
+(14, 1, 4, 3, NULL),
+(15, 1, 5, 3, NULL),
+(16, 2, 1, 4, NULL),
+(17, 1, 2, 4, NULL),
+(18, 1, 3, 4, NULL),
+(19, 1, 4, 4, NULL),
+(20, 1, 5, 4, NULL),
+(21, 1, 1, 5, NULL),
+(22, 1, 2, 5, NULL),
+(23, 1, 3, 5, NULL),
+(24, 1, 4, 5, NULL),
+(25, 2, 5, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -88,7 +164,69 @@ CREATE TABLE IF NOT EXISTS `c_battle_soldier` (
   PRIMARY KEY (`ID`),
   KEY `BattleID` (`BattleID`,`Soldier`),
   KEY `Soldier` (`Soldier`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
+
+--
+-- Dumping data for table `c_battle_soldier`
+--
+
+INSERT INTO `c_battle_soldier` (`ID`, `BattleID`, `Point`, `Soldier`, `Level`, `Temp`) VALUES
+(1, 1, 0, 1, 5, NULL),
+(2, 1, 1, 2, 4, NULL),
+(3, 1, 2, 3, 6, NULL),
+(4, 1, 4, 4, 5, NULL),
+(5, 1, 7, 5, 4, NULL),
+(6, 2, 0, 1, 5, NULL),
+(7, 2, 1, 2, 6, NULL),
+(8, 2, 2, 3, 7, NULL),
+(9, 2, 4, 4, 6, NULL),
+(10, 2, 7, 5, 7, NULL),
+(18, 4, 0, 3, 7, NULL),
+(19, 4, 2, 4, 4, NULL),
+(20, 4, 3, 5, 2, NULL),
+(21, 4, 5, 1, 5, NULL),
+(22, 4, 6, 2, 4, NULL),
+(23, 4, 7, 3, 6, NULL),
+(24, 4, 8, 4, 3, NULL),
+(25, 5, 0, 5, 7, NULL),
+(26, 5, 2, 3, 6, NULL),
+(27, 5, 3, 3, 7, NULL),
+(28, 5, 5, 5, 8, NULL),
+(29, 5, 6, 4, 5, NULL),
+(30, 5, 7, 5, 3, NULL),
+(31, 5, 8, 3, 7, NULL),
+(32, 6, 0, 2, 5, NULL),
+(33, 6, 1, 4, 7, NULL),
+(34, 6, 2, 4, 8, NULL),
+(35, 6, 4, 4, 5, NULL),
+(36, 6, 7, 3, 8, NULL),
+(37, 7, 0, 2, 3, NULL),
+(38, 7, 1, 3, 5, NULL),
+(39, 7, 2, 4, 7, NULL),
+(40, 7, 4, 3, 5, NULL),
+(41, 7, 7, 4, 3, NULL),
+(42, 8, 0, 3, 4, NULL),
+(43, 8, 2, 4, 6, NULL),
+(44, 8, 3, 3, 5, NULL),
+(45, 8, 5, 3, 4, NULL),
+(46, 8, 6, 4, 9, NULL),
+(47, 8, 7, 2, 9, NULL),
+(48, 8, 8, 3, 7, NULL),
+(49, 9, 0, 4, 5, NULL),
+(50, 9, 1, 3, 6, NULL),
+(51, 9, 2, 3, 7, NULL),
+(52, 9, 4, 4, 6, NULL),
+(53, 9, 7, 3, 9, NULL),
+(54, 10, 0, 3, 6, NULL),
+(55, 10, 1, 4, 6, NULL),
+(56, 10, 2, 3, 6, NULL),
+(57, 10, 4, 5, 4, NULL),
+(58, 10, 7, 3, 5, NULL),
+(59, 3, 0, 1, 4, NULL),
+(60, 3, 6, 5, 5, NULL),
+(61, 3, 7, 1, 4, NULL),
+(62, 3, 2, 2, 4, NULL),
+(63, 3, 8, 2, 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -105,9 +243,21 @@ CREATE TABLE IF NOT EXISTS `c_campaign` (
   `Temp` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `WorldMap` (`WorldMap`),
+  KEY `TypeID` (`TypeID`),
   KEY `NeedCamp` (`NeedCamp`),
-  KEY `TypeID` (`TypeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `TypeID_2` (`TypeID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `c_campaign`
+--
+
+INSERT INTO `c_campaign` (`ID`, `Name`, `WorldMap`, `TypeID`, `NeedCamp`, `Temp`) VALUES
+(1, 'campaign1', 2, 1, NULL, ''),
+(2, 'campaign2', 1, 1, 1, ''),
+(3, 'campaign3', 1, 2, 2, ''),
+(4, 'campaign4', 2, 1, 3, ''),
+(5, 'campaign5', 2, 2, 4, '');
 
 -- --------------------------------------------------------
 
@@ -144,7 +294,17 @@ CREATE TABLE IF NOT EXISTS `c_nextcamp` (
   PRIMARY KEY (`ID`),
   KEY `CampID` (`CampID`,`NextCamp`),
   KEY `NextCamp` (`NextCamp`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `c_nextcamp`
+--
+
+INSERT INTO `c_nextcamp` (`ID`, `CampID`, `NextCamp`) VALUES
+(6, 1, 2),
+(7, 2, 3),
+(8, 2, 4),
+(9, 4, 5);
 
 -- --------------------------------------------------------
 
@@ -154,10 +314,21 @@ CREATE TABLE IF NOT EXISTS `c_nextcamp` (
 
 CREATE TABLE IF NOT EXISTS `c_soldier` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Temp` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `c_soldier`
+--
+
+INSERT INTO `c_soldier` (`ID`, `Name`, `Temp`) VALUES
+(1, 'soldier1', NULL),
+(2, 'soldier2', NULL),
+(3, 'soldier3', NULL),
+(4, 'soldier4', NULL),
+(5, 'soldier5', NULL);
 
 -- --------------------------------------------------------
 
@@ -169,7 +340,15 @@ CREATE TABLE IF NOT EXISTS `c_typemap` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `c_typemap`
+--
+
+INSERT INTO `c_typemap` (`ID`, `Name`) VALUES
+(1, 'Barrack'),
+(2, 'Map');
 
 -- --------------------------------------------------------
 
@@ -181,7 +360,15 @@ CREATE TABLE IF NOT EXISTS `c_worldmap` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `c_worldmap`
+--
+
+INSERT INTO `c_worldmap` (`ID`, `Name`) VALUES
+(1, 'worldmap1'),
+(2, 'worldmap2');
 
 -- --------------------------------------------------------
 
@@ -476,7 +663,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `action` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5408 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5450 ;
 
 --
 -- Dumping data for table `log`
@@ -5893,10 +6080,52 @@ INSERT INTO `log` (`id`, `action_date`, `user`, `action`, `note`) VALUES
 (5401, '2012-03-20 15:19:14', 'admin', 'act_login', NULL),
 (5402, '2012-03-20 15:23:48', 'admin', 'act_add_new_quest', NULL),
 (5403, '2012-03-20 15:23:48', 'admin', 'act_update_AwardItem', NULL),
-(5404, '2012-03-21 15:26:27', 'admin', 'act_login', NULL),
-(5405, '2012-03-22 10:23:52', 'admin', 'act_login', NULL),
-(5406, '2012-03-22 10:23:54', 'admin', 'act_login', NULL),
-(5407, '2012-03-22 10:46:51', 'admin', 'act_login', NULL);
+(5404, '2012-03-20 15:38:15', 'admin', 'act_add_new_quest', NULL),
+(5405, '2012-03-20 15:38:15', 'admin', 'act_update_AwardItem', NULL),
+(5406, '2012-03-20 15:38:29', 'admin', 'act_delete_quest', NULL),
+(5407, '2012-03-20 16:03:14', 'admin', 'act_add_new_quest', NULL),
+(5408, '2012-03-20 16:03:14', 'admin', 'act_update_AwardItem', NULL),
+(5409, '2012-03-20 16:03:14', 'admin', 'act_add_task', NULL),
+(5410, '2012-03-20 16:03:31', 'admin', 'act_update_next_quest', NULL),
+(5411, '2012-03-20 16:03:34', 'admin', 'act_update_need_quest', NULL),
+(5412, '2012-03-20 16:03:39', 'admin', 'act_delete_quest', NULL),
+(5413, '2012-03-20 16:10:28', 'admin', 'act_update_next_quest', NULL),
+(5414, '2012-03-20 16:10:36', 'admin', 'act_add_new_task', NULL),
+(5415, '2012-03-20 16:10:38', 'admin', 'act_add_new_task', NULL),
+(5416, '2012-03-20 16:10:40', 'admin', 'act_add_new_task', NULL),
+(5417, '2012-03-20 16:11:15', 'admin', 'act_delete_task', NULL),
+(5418, '2012-03-20 16:11:19', 'admin', 'act_delete_task', NULL),
+(5419, '2012-03-20 16:11:23', 'admin', 'act_delete_task', NULL),
+(5420, '2012-03-20 16:11:25', 'admin', 'act_add_new_task', NULL),
+(5421, '2012-03-20 16:11:28', 'admin', 'act_delete_task', NULL),
+(5422, '2012-03-20 16:18:09', 'admin', 'act_update_award_item', NULL),
+(5423, '2012-03-20 16:18:22', 'admin', 'act_delete_quest', NULL),
+(5424, '2012-03-20 16:22:30', 'admin', 'act_update_next_quest', NULL),
+(5425, '2012-03-20 16:23:11', 'admin', 'act_add_new_quest', NULL),
+(5426, '2012-03-20 16:23:11', 'admin', 'act_update_AwardItem', NULL),
+(5427, '2012-03-20 16:23:22', 'admin', 'act_delete_quest', NULL),
+(5428, '2012-03-20 16:31:20', 'admin', 'act_update_next_quest', NULL),
+(5429, '2012-03-20 16:31:21', 'admin', 'act_update_next_quest', NULL),
+(5430, '2012-03-20 16:31:21', 'admin', 'act_update_next_quest', NULL),
+(5431, '2012-03-20 16:31:21', 'admin', 'act_update_next_quest', NULL),
+(5432, '2012-03-20 16:31:22', 'admin', 'act_update_next_quest', NULL),
+(5433, '2012-03-20 16:31:24', 'admin', 'act_update_next_quest', NULL),
+(5434, '2012-03-20 16:31:26', 'admin', 'act_update_next_quest', NULL),
+(5435, '2012-03-20 16:31:30', 'admin', 'act_update_next_quest', NULL),
+(5436, '2012-03-20 16:31:32', 'admin', 'act_update_next_quest', NULL),
+(5437, '2012-03-20 16:31:34', 'admin', 'act_update_next_quest', NULL),
+(5438, '2012-03-20 16:41:55', 'admin', 'act_update_next_quest', NULL),
+(5439, '2012-03-21 09:22:29', 'admin', 'act_update_Soldier', NULL),
+(5440, '2012-03-21 10:05:49', 'admin', 'act_update_Soldier', NULL),
+(5441, '2012-03-21 10:05:53', 'admin', 'act_update_Soldier', NULL),
+(5442, '2012-03-21 10:26:50', 'admin', 'act_update_need_quest', NULL),
+(5443, '2012-03-21 10:27:00', 'admin', 'act_update_next_quest', NULL),
+(5444, '2012-03-21 10:27:30', 'admin', 'act_update_Soldier', NULL),
+(5445, '2012-03-21 10:27:52', 'admin', 'act_delete_soldier', NULL),
+(5446, '2012-03-21 10:34:13', 'admin', 'act_update_Soldier', NULL),
+(5447, '2012-03-21 10:34:16', 'admin', 'act_update_Soldier', NULL),
+(5448, '2012-03-21 10:42:13', 'admin', 'act_update_Soldier', NULL),
+(5449, '2012-03-21 10:42:22', 'admin', 'act_update_Soldier', NULL);
 
 -- --------------------------------------------------------
 
@@ -6036,7 +6265,7 @@ CREATE TABLE IF NOT EXISTS `q_nextquest` (
   PRIMARY KEY (`ID`),
   KEY `QuestID` (`QuestID`,`NextQuest`),
   KEY `NextQuest` (`NextQuest`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `q_nextquest`
@@ -6045,16 +6274,14 @@ CREATE TABLE IF NOT EXISTS `q_nextquest` (
 INSERT INTO `q_nextquest` (`ID`, `QuestID`, `NextQuest`) VALUES
 (19, 1, 2),
 (36, 1, 10),
-(20, 2, NULL),
-(33, 3, 3),
+(20, 2, 1),
 (21, 3, 4),
 (22, 4, 5),
 (23, 5, 6),
 (24, 6, 7),
-(16, 7, NULL),
+(16, 7, 1),
 (17, 8, NULL),
-(25, 10, 8),
-(37, 11, NULL);
+(25, 10, 8);
 
 -- --------------------------------------------------------
 
@@ -6079,7 +6306,7 @@ CREATE TABLE IF NOT EXISTS `q_quest` (
   KEY `QuestLineID` (`QuestLineID`),
   KEY `NextQuest` (`NextQuest1`,`QuestLineID`),
   KEY `NextQuest_2` (`NextQuest1`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `q_quest`
@@ -6088,14 +6315,13 @@ CREATE TABLE IF NOT EXISTS `q_quest` (
 INSERT INTO `q_quest` (`QuestID`, `QuestName`, `QuestGroupString`, `QuestGroup`, `QuestString`, `QuestDesc`, `QuestDescString`, `AwardGold`, `AwardExp`, `NextQuest1`, `NeedQuest`, `QuestLineID`) VALUES
 (1, 'Mùa lúa về', '@quest#46', 'Ấm no (Nhiệm vụ 1/2)', '@quest#47', 'Mùa lúa tới rồi, hãy trồng trọt thật nhiều để tích trữ lương thực', '@quest#48', 0, 2, 2, 0, 7),
 (2, 'Lúa chín đầy bồ', '@quest#53', 'Ấm no (Nhiệm vụ 2/2)', '@quest#54', 'Lúa chín rồi. Nhanh nhanh gặt nào', '@quest#55', 0, 1, 3, 3, 7),
-(3, 'Thu thuế', '@quest#58', 'Thu thuế (Nhiệm vụ 1/1)', '@quest#59', 'Nhân tuần lễ Vàng, hãy đến nhà dân để quyên góp xây dựng làng', '@quest#60', 0, 1, 4, 2, 7),
+(3, 'Thu thuế', '@quest#58', 'Thu thuế (Nhiệm vụ 1/1)', '@quest#59', 'Nhân tuần lễ Vàng, hãy đến nhà dân để quyên góp xây dựng làng', '@quest#60', 0, 1, 4, 1, 7),
 (4, 'Nhà Cỏ tranh', '@quest#63', 'Tăng dân số (Nhiệm vụ 1/1)', '@quest#64', 'Dân làng mỗi lúc một đông, xây thêm nhà cho mọi người vui vẻ nào', '@quest#65', 0, 1, 5, 3, 7),
 (5, 'Nhà đào tạo dân công', '@quest#68', 'Nhân lực dồi dào (Nhiệm vụ 1/2)', '@quest#69', 'Zin táy máy đã nghiên cứu thành công máy tự động đào tạo dân công. Vào đó nạp đủ dinh dưỡng siêu bổ, dân làng sẽ trở thành dân công năng suất lao động cực cao', '@quest#70', 0, 2, 6, 4, 7),
 (6, 'Đào tạo dân công', '@quest#73', 'Nhân lực dồi dào (Nhiệm vụ 2/2)', '@quest#74', 'Tăng cường lực lượng cho làng để tăng năng suất lao động', '@quest#75', 0, 2, 7, 5, 7),
 (7, 'Trại Gỗ', '@quest#78', 'Gỗ Mít (Nhiệm vụ 1/2)', '@quest#79', 'Trong rừng hiện có rất nhiều cây khô, lập trại gỗ để khai thác và tích trữ lượng gỗ cho kế hoạch dựng nhà trú đông', '@quest#80', 0, 2, NULL, 6, 7),
 (8, 'Gỗ Mít', '@quest#83', 'Gỗ Mít (Nhiệm vụ 2/2)', '@quest#84', 'Mít cho gỗ rất thơm. Hãy thu hoạch để tích luỹ gỗ cho việc xây nhà nào', '@quest#85', 0, 2, NULL, 10, 7),
-(10, 'Di chuyển', '@quest#95', 'Quy hoạch (Nhiệm vụ 1/2)', '@quest#96', 'Học thao tác quy hoạch làng một chút nhé', '@quest#97', 0, 2, 8, NULL, 7),
-(11, 'df', '', '', 'rtr', '', '', 4, 4, NULL, NULL, 7);
+(10, 'Di chuyển', '@quest#95', 'Quy hoạch (Nhiệm vụ 1/2)', '@quest#96', 'Học thao tác quy hoạch làng một chút nhé', '@quest#97', 0, 2, 8, NULL, 7);
 
 -- --------------------------------------------------------
 
@@ -6201,7 +6427,7 @@ CREATE TABLE IF NOT EXISTS `q_task` (
   KEY `QuestID` (`QuestID`),
   KEY `QTC_ID` (`QTC_ID`,`ActionID`,`QuestID`),
   KEY `ActionID` (`ActionID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `q_task`
@@ -6271,11 +6497,19 @@ CREATE TABLE IF NOT EXISTS `q_temp` (
   `Quantity` int(11) DEFAULT NULL,
   `ActionID` int(11) DEFAULT NULL,
   `QuestID` int(11) DEFAULT NULL,
-  `	TargetType` int(11) DEFAULT NULL,
+  `TargetType` int(11) DEFAULT NULL,
   PRIMARY KEY (`TaskID`),
   KEY `QTC_ID` (`QTC_ID`,`ActionID`),
   KEY `ActionID` (`ActionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `q_temp`
+--
+
+INSERT INTO `q_temp` (`TaskID`, `TaskName`, `TaskString`, `DescID`, `DescString`, `QTC_ID`, `UnlockCoin`, `IconClassName`, `IconPackageName`, `Quantity`, `ActionID`, `QuestID`, `TargetType`) VALUES
+(1, 'Xây thêm 1 Ô đất', '@quest#49', 'ưeqweqw', '@quest#51', 4, 1, 'sample', 'sample', 1, 1, 0, NULL),
+(2, 'Xây thêm 1 Ô đất', '@quest#49', 'ưeqweqw', '@quest#51', 4, 1, 'sample', 'sample', 1, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -6289,7 +6523,15 @@ CREATE TABLE IF NOT EXISTS `q_temp_target` (
   `TargetID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `TaskID` (`TaskID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `q_temp_target`
+--
+
+INSERT INTO `q_temp_target` (`ID`, `TaskID`, `TargetID`) VALUES
+(1, 1, 2002),
+(2, 2, 2002);
 
 -- --------------------------------------------------------
 
