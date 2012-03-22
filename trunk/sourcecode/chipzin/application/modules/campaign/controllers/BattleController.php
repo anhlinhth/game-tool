@@ -30,6 +30,7 @@ class Campaign_BattleController extends BaseController
 			$this->_helper->viewRenderer->setNorender();
 			if($this->_request->isPost())
 			{
+			    
 				$mdbattle = new Models_Battle();
 				$objBattle = new Obj_Battle();
 				$objBattle->ID = $_POST['BattleID'];
@@ -60,18 +61,21 @@ class Campaign_BattleController extends BaseController
 				$mda->delAward($objBattle->ID);
 				$arrAwardID = $_POST['AwardTypeID'];
 				$arrValue = $_POST['Value'];
-				foreach ($arrAwardID as $key => $value )
-				{
-					$obja = new Obj_Award();
-					$obja->ID = "NULL";
-					$obja->BattleID = $objBattle->ID;
-					$obja->AwardTypeID = $arrAwardID[$key];
-					$obja->Value = $arrValue[$key];
-					if($obja->AwardTypeID != "" && $obja->Value != "")
-					{
-						$mda->InsAward($obja);
-					}
+				if(!empty($arrAwardID)){
+				    foreach ($arrAwardID as $key => $value )
+				    {
+				    	$obja = new Obj_Award();
+				    	$obja->ID = "NULL";
+				    	$obja->BattleID = $objBattle->ID;
+				    	$obja->AwardTypeID = $arrAwardID[$key];
+				    	$obja->Value = $arrValue[$key];
+				    	if($obja->AwardTypeID != "" && $obja->Value != "")
+				    	{
+				    		$mda->InsAward($obja);
+				    	}
+				    }
 				}
+				
 				echo "1";
 			}
 		}
@@ -105,23 +109,50 @@ class Campaign_BattleController extends BaseController
 	}
 	public function addAction()
 	{
-		try {
-			$mdbattle = new Models_Battle();
-			$objBattle = new Obj_Battle();
-			$objBattle->ID = "NULL";
-			$objBattle->Campaign = $_POST['campaignID'];
-			$objBattle->Layout = 1;
-			$objBattle->Order = 1;
-			$mdbattle->_insert($objBattle);
-			echo "Thành công";
-		}
-		catch(Exception $ex)
-		{
-			$this->view->errMsg = $ex->getMessage();
-			echo $this->view->errMsg;
-			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-		}
+		try
+	    {
+	    	$this->_helper->layout->disableLayout();
+	    	$this->_helper->viewRenderer->setNorender();
+	    	if($this->_request->isPost())
+	    	{
+	    		$battleID = $_POST['BattleID'];	    		   		
+	    		$mdbattle = new Models_Battle();
+	    		$mdbattle->delete($battleID);
+	    		echo "1";	    		
+	    	}
+	    }
+	    catch(Exception $ex)
+	    {
+	    	$this->view->errMsg = $ex->getMessage();
+	    	echo $this->view->errMsg;
+	    	Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+	    }
 	}
+	
+	public function getinfoAction()
+	{
+		try
+	    {
+	    	$this->_helper->layout->disableLayout();
+	    	$this->_helper->viewRenderer->setNorender();
+	    	if($this->_request->isPost())
+	    	{
+	    		$battleID = $_POST['BattleID'];	    		   		
+	    		$mdbattle = new Models_Battle();
+	    		$obj_battle = $mdbattle->getBattleInfo($battleID);
+	    		echo json_encode((array)$obj_battle);	    		
+	    	}
+	    }
+	    catch(Exception $ex)
+	    {
+	    	$this->view->errMsg = $ex->getMessage();
+	    	echo $this->view->errMsg;
+	    	Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+	    }
+	}
+	
+	
+	
 	
 }
 

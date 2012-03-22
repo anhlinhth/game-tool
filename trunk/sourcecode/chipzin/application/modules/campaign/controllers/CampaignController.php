@@ -230,10 +230,14 @@ class Campaign_CampaignController extends BaseController
 			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Soldier.php';
 			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Worldmap.php';	
 			
-			$id = $this->_request->getParam("id");
 			
 			///////Lấy Campaign//////////
-			$mdCamp = new Models_Campaign();			
+			$mdCamp = new Models_Campaign();
+			$id = $this->_request->getParam("id");
+			if(!isset($id)){
+				$campaign = $mdCamp->getTopCampaign();				
+				$this->_redirect("/campaign/campaign/edit/id/$campaign->ID");
+			}			
 			$this->view->campaign = $mdCamp->_getByKey($id);
 			//var_dump($campaign);			
 			

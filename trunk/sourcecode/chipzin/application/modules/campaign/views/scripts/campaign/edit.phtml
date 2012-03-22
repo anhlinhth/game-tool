@@ -27,6 +27,32 @@ table#battle td{
 	margin: 0;
 	overflow: hidden;
 }
+/**************eTable Layout********************/
+ table#tb_layout td,table#tb_layout tr{
+	border:none;
+ }
+
+table#tb_layout td.invisible{
+	
+	opacity:0.0;
+}
+table#tb_layout td.invisible *{
+	
+	opacity:0.0;
+}
+
+table#tb_layout td.visible{
+	background: #EFEFEF;	
+	opacity:1.0;
+	color:blue;
+	
+}
+table#tb_layout td.visible *{
+	background: #EFEFEF;	
+	opacity:1.0;
+	color:blue;
+	
+}
 td.visible select,td.invisible select{
 	margin: 0;
 	padding:0;
@@ -37,16 +63,11 @@ td.visible select,td.invisible select{
 	background-color: #D9EAED;
 	opacity:0.5;
 }
+/**************End Table Layout****************/
 .style{
 	margin: auto;text-align: center;padding-top: 2px;padding-bottom: 2px;
 }
-.an{
-	background-color:white;
-	opacity:0.1; 
-}
-.hien{
-	
-}
+
 
 </style>
 <form  class="myform" id="formPaging" name="formPaging" action="" method="post">
@@ -62,7 +83,7 @@ td.visible select,td.invisible select{
 		</td>			
 		<td>
 			<label>Campaign Name:</label>
-			<input type="text" name='Name' id=Name' value='<?php echo $this->campaign->Name;?>' />
+			<input type="text" name='Name' id='Name' value='<?php echo $this->campaign->Name;?>' />
 		</td>
 		<td>
 			<label>World Map:</label>
@@ -84,10 +105,6 @@ td.visible select,td.invisible select{
 		</thead>
 	<tbody id="campaign">	
 	<?php foreach ($this->arrbattle as $rowbattle){?>
-
-
-		
-
 		<tr class='battle' id='battle-<?php echo $rowbattle->ID?>'>
 			<td><?php echo $rowbattle->ID;?><input style="display:none" type="text" id='BattleID' name='BattleID' value='<?php echo $rowbattle->ID;?>'/></td>
 
@@ -95,10 +112,14 @@ td.visible select,td.invisible select{
 				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
 			<td width="200px">
-				<?php echo $this->selection($this->arrlayout,$rowbattle->Layout,"Layout",array('key'=>"ID",'name'=>"Name"))?>
+				
+				<select style="width=100%" id="Layout" name="Layout" tabindex="2">
+					<?php echo $this->options($this->arrlayout,$rowbattle->Layout,array('key'=>"ID",'name'=>"Name"))?>
+					<option  value="insert" style="color:red"> New Layout</option>	
+				</select>
 				<br/>
 				
-				<table id='tb_layout'>
+				<table id='tb_layout' cellpadding="1">
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][0])?"visible":"invisible"?>
 						<td id="point0" class="<?php echo  $strclass?>" style="margin: 0;padding: 0;">
@@ -181,12 +202,12 @@ td.visible select,td.invisible select{
 				<a href='javascript:addAward(<?php echo $rowbattle->ID?>)' class='ico-16 add' ></a><br>
 				<?php foreach ($this->arraward[$rowbattle->ID] as $key=>$row){?>
 					<div class="award-<?php echo $rowbattle->ID?>" id="div-list-award-<?php echo $key ?>">
-					<select id='<?php echo $row->ID?>' name='AwardTypeID[]' onChange='updateAward(<?php echo $row->ID?>,this)'>
+					<select id='<?php echo $row->ID?>' name='AwardTypeID[]' onChange='updateAward(this)'>
 						<?php if (empty($row->AwardTypeID)){?>
 							<option $strSelect value="" style="color:red"></option>
 						<?php } ?>	
 						<?php echo $this->options($this->arrawardtype,$row->AwardTypeID,array('key'=>'AwardTypeID','name'=>'Name'))?>
-						<option  value="insert" style="color:red"> Insert A Type</option>
+						<option  value="insert" style="color:red">New Type</option>
 					</select>					
 					<input type='text' class='soldier' id='Value' name='Value[]' value='<?php echo $row->Value?>'/>
 					
@@ -205,10 +226,10 @@ td.visible select,td.invisible select{
 		<?php }?>
 	
 	</table>
-	<div class="style">
-	<a class="btn add" href="javascript:addBattle()">Add Battle</a>	
-	<a class="btn save" href="javascript:saveAll()">Save</a>
-	<a class="btn add" href="javascript:addBattle()">Add</a>
+	<div class="style" style="margin:20px">
+		<a class="btn add" href="javascript:addBattle()">New A Battle</a>	
+		<a class="btn save" href="javascript:saveAll()">Save All</a>
+
 	</div>
 </div>
 </form>
@@ -217,21 +238,58 @@ td.visible select,td.invisible select{
 	<div id="optionAwardType">
 		<option selected value="" style="color:red"></option>
 		<?php echo $this->options($this->arrawardtype,0,array('key'=>'AwardTypeID','name'=>'Name'))?>	
-		<option  value="insert" style="color:red"> Insert A Type</option>		
+		<option  value="insert" style="color:red"> New Type</option>		
 	</div>
+</div>
+<!--  -->
+<!-- Dialog Dung de Show loi~-->
+<div id='dialog'>
+	<div id='ct'></div>
+	<div id='ft'> </div>
+</div>
+<!--  -->
+
+<!-- Dialog Them AwardType~-->
+<div style='display:none' id='insert-awardtype'>	
+	<input class='msg' type="text" id="awardtype" name="awardtype" value="AwardType" />
+	
+</div>
+<!--  -->
+
+<!-- Dialog Them Layout-->
+<div style='display:none'  id='insert-layout'>
+	<table>
+		<tr>
+			<td>1<input type="checkbox" name="point" value="0" /></td>
+			<td>4<input type="checkbox" name="point" value="3" /></td>
+			<td>7<input type="checkbox" name="point" value="6" /></td>
+		</tr>
+		<tr>
+			<td>2<input type="checkbox" name="point" value="1" /></td>
+			<td>5<input type="checkbox" name="point" value="4" /></td>
+			<td>8<input type="checkbox" name="point" value="7" /></td>
+		</tr>
+		<tr>
+			<td>3<input type="checkbox" name="point" value="2" /></td>
+			<td>6<input type="checkbox" name="point" value="5" /></td>
+			<td>9<input type="checkbox" name="point" value="8" /></td>
+		</tr>
+	</table>
 </div>
 <!--  -->
 <script>
 ///////////////ThaoNX/////////////////////
+	////////////////////////////////
 	function addAward(key)
 	{		
 		var count = $(".award-"+ key).size();
 		var options = $("#optionAwardType").html();
 		var input = " <input type='text' class='soldier' id='Value' name='Value[]' value=''/>";
 		var btnDelete = " <a class='tool-16 delete' href='javascript:removeAward("+key+","+count+")'>&nbsp</a>"	;
-		var select = "<div class='award-"+key+"' id='div-list-award-"+count+"'><select name='AwardTypeID[]'>"+options+"</select>"+input+btnDelete+"</div>";
+		var select = "<div class='award-"+key+"' id='div-list-award-"+count+"'><select name='AwardTypeID[]' onChange='updateAward(this)' >"+options+"</select>"+input+btnDelete+"</div>";
 		$("#div-battle-award-"+key).append(select);
 	}
+	/////////////////////////////
 	function removeAward(battleID,key)
 	{
 		$("#div-battle-award-"+battleID+ " #div-list-award-"+key).html("");
@@ -266,20 +324,21 @@ td.visible select,td.invisible select{
 			type: "POST",
 			url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
 			data: data,
-			success: function(msg){
-				alert(msg);return;
+			success: function(msg){				
 				if(msg == '1'){					
 					alert("Successfull");
 				}else{
-					alert("Error");					
-				}
-				window.location.reload();
+					alert(msg);					
+				}				
 			}
 		});		
 	}
-	
+	///////////////////////////////
 	function deleteBattle(key)
-	{			
+	{	
+		if(!confirm("Delete Battle ID: "+key)){
+			return false;
+		}
 		$.ajax({
 			type: "POST",
 			url: "<?php echo $this->baseUrl.'/campaign/battle/delete'?> ",
@@ -297,26 +356,69 @@ td.visible select,td.invisible select{
 			}
 		});
 	}
-	
+	function resetBattle(key){
+		if(!confirm("Reset???")){
+			return false;
+		}
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/campaign/battle/getinfo'?> ",
+			data: {
+				BattleID:key
+			},
+			success: function(msg){				
+				alert(msg);
+			}
+		});
+	}
 	///Save All////
 	function saveAll(){
-		$(".battle").each(function(index){			
-			data = ($(this).find("*").serialize());
-			var camID = $("#campaignID").val();
-			data += "&campaignID="+camID;		
-			$.ajax({
-				type: "POST",
-				url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
-				data: data,
-				success: function(msg){				
-					if(msg == '1'){					
-						alert("Successfull");
-					}else{
-						alert(msg);					
-					}					
+		$("#dialog #ct").html("");
+		var camID = $("#campaignID").val();
+		var name = $("#Name").val();		
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/test/testpost'?> ",
+			data: {
+				ID:camID,
+				Name:name,				
+			},
+			success: function(msg){	
+				$("#dialog #ct").append("<p class='msg'>"+msg+"<p>");
+				$(".battle").each(function(index){			
+						data = ($(this).find("*").serialize());						
+						data += "&campaignID="+camID;		
+						$.ajax({
+							type: "POST",
+							url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
+							data: data,
+							success: function(msg){				
+								if(msg == '1'){					
+									$("#dialog #ct").append("<p class='msg'>Successful<p>");
+								}else{
+									$("#dialog #ct").append("<p class='error'>"+msg+"<p>");					
+								}					
+							}
+						});
+				});		
+			}		
+			
+		});	
+		$("#dialog").dialog({
+				title: "Updating",
+				height: 400,
+				width: 350,
+				modal: true,
+				buttons: {
+					"Continue": function() {								
+						$(this).dialog("close");						
+					},
+					"Refresh": function() {								
+						$(this).dialog("close");
+						window.location.reload();	
+					}	
 				}
-			});	
-		});		
+		});
 	}
 	///Add battle///
 	function addBattle()
@@ -335,21 +437,31 @@ td.visible select,td.invisible select{
 	}
 	
 ///////////////End-ThaoNX/////////////////////
-
 	////////////////////////////
-	function updateAward(id,element)
+	function updateAward(element)
 	{
-		var selected = element.value;
+		var selected = element.value;	
 		if(selected == "insert"){
-			alert("Ch?c nang chua th?c hi?n");			
+			$("#insert-awardtype").dialog({
+				title: "New AwardType",
+				height: 150,
+				width: 200,
+				modal: true,
+				buttons: {
+					"Save": function() {
+						alert("Chức năng chưa thực hiện xong");
+						$(this).dialog("close");						
+					}										
+				}
+			});		
 		}
 	}
 	///////////////////////////
 	$(document).ready(function(){			
-			$("td.invisible").addClass('an');
+			//$("td.invisible").addClass('an');
 			$("td.invisible").find("select").attr('disabled','disabled');
 			$("td.invisible").find("input").attr('disabled',true);
-			$("td.visible").addClass('hien');
+			//$("td.visible").addClass('hien');
 			
 			////////////////ThaoNX/////////////////////
 			$(".tool-24.disabled").click(function(){
@@ -357,13 +469,26 @@ td.visible select,td.invisible select{
 				//return false;
 			});		
 	});
-	////////////LoatLayout////////
-
+	////////////Layout////////
 	$('select#Layout').change(function(){
 		var select=$(this).children("option:selected").val();
 		var battleID=$(this).parent().parent().find("#BattleID").val();			
-		var layoutID=$(this).val();
-		
+		var layoutID=$(this).val();		
+		if(layoutID=="insert"){
+			$("#insert-layout").dialog({
+				title: "New Layout",
+				height: 200,
+				width: 200,
+				modal: true,
+				buttons: {
+					"Save": function() {
+						alert("Chức năng chưa thực hiện xong");
+						$(this).dialog("close");						
+					}										
+				}
+			});
+			return false;
+		}	
 			$.ajax({
 				type: "POST",
 				url: "<?php echo $this->baseUrl.'/campaign/campaign/loadlayout'?> ",
@@ -372,14 +497,13 @@ td.visible select,td.invisible select{
 				success: function(data){				
 					$.each(data, function(key, val) {
 						if(val==0){								
-							$("#battle-"+battleID +" #"+key).addClass("an");
+							$("#battle-"+battleID +" #"+key).removeClass("visible").addClass("invisible");
 							$("#battle-"+battleID +" #"+key).find("select").attr('disabled',true);
 							$("#battle-"+battleID +" #"+key).find("input").attr('disabled',true).val('');
 						}else{
-							$("#battle-"+battleID +" #"+key).removeClass("an");
+							$("#battle-"+battleID +" #"+key).removeClass("invisible").addClass("visible");
 							$("#battle-"+battleID +" #"+key).find("select").attr('disabled',false);
-							$("#battle-"+battleID +" #"+key).find("input").attr('disabled',false);
-							
+							$("#battle-"+battleID +" #"+key).find("input").attr('disabled',false);							
 						}
 					 
 					   // $("#battle-"+s+ "#tb_layout td"+key).val(val); 
