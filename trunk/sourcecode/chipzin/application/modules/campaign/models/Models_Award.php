@@ -97,4 +97,19 @@ class Models_Award extends Models_Base
 			throw new Internal_Error_Exception($ex);
 		}
 	}
+	
+	///////////////Tan/////////////
+	public function  delAward($id)
+	{
+		$sql ="	DELETE FROM
+					c_award
+				WHERE
+					BattleID = $id";
+		$this->_db->query($sql);
+	}
+	
+	public function InsAward($obj)
+	{
+		parent::_insert($obj);
+	}
 }
