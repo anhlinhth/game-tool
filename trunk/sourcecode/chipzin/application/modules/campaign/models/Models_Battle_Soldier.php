@@ -43,6 +43,18 @@ class Models_Battle_Soldier extends Models_Base
 		$this->_db->query($sql);
 	}
 	
+	public function delete($ID)
+	{
+	try
+		{			
+			$this->_db->delete('c_battle_soldier', "ID = '$ID'");			
+		}
+		catch(Zend_Db_Exception $ex)
+		{
+			throw new Internal_Error_Exception($ex);
+		}
+	}
+	
 	public function updateB_Soldier($obj)
 	{
 		parent::_insert($obj);
