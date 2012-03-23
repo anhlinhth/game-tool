@@ -138,7 +138,7 @@ table#tb_layout td input{
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[0]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>												
 												
-							<input type='text' class='soldier' id='levelSolider' name='level[0]' value="<?php echo $arrBS['Level'];?>"/>
+							<input type='text' class='<?php echo $strclass?>_0' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][3])?"visible":"invisible"?>
@@ -146,7 +146,7 @@ table#tb_layout td input{
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[3]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[3]' value="<?php echo $arrBS['Level'];?>"/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_3' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][6])?"visible":"invisible"?>
@@ -154,7 +154,7 @@ table#tb_layout td input{
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[6]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[6]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_6' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
 						</td>						
 					</tr>
 					<tr>
@@ -163,7 +163,7 @@ table#tb_layout td input{
 							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[1]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[1]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_1' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visible":"invisible"?>
@@ -171,7 +171,7 @@ table#tb_layout td input{
 							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[4]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[4]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text'class='<?php echo $strclass?>_4' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][7])?"visible":"invisible"?>
@@ -179,7 +179,7 @@ table#tb_layout td input{
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7);
 							 echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[7]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[7]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_7' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 					<tr>
@@ -188,7 +188,7 @@ table#tb_layout td input{
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[2]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[2]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_2' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][5])?"visible":"invisible"?>
@@ -196,14 +196,14 @@ table#tb_layout td input{
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[5]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[5]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_5' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][8])?"visible":"invisible"?>
 						<td id="point8" class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[8]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='soldier' id='levelSolider' name='level[8]' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_8' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 				</table>
@@ -395,50 +395,67 @@ table#tb_layout td input{
 	function saveAll(){
 		$("#dialog #ct").html("");
 		var camID = $("#campaignID").val();
-		var name = $("#Name").val();		
-		$.ajax({
-			type: "POST",
-			url: "<?php echo $this->baseUrl.'/test/testpost'?> ",
-			data: {
-				ID:camID,
-				Name:name,				
-			},
-			success: function(msg){	
-				$("#dialog #ct").append("<p class='msg'>"+msg+"<p>");
-				$(".battle").each(function(index){			
-						data = ($(this).find("*").serialize());						
-						data += "&campaignID="+camID;		
-						$.ajax({
-							type: "POST",
-							url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
-							data: data,
-							success: function(msg){				
-								if(msg == '1'){					
-									$("#dialog #ct").append("<p class='msg'>Successful<p>");
-								}else{
-									$("#dialog #ct").append("<p class='error'>"+msg+"<p>");					
-								}					
-							}
-						});
-				});		
-			}		
-			
-		});	
-		$("#dialog").dialog({
-				title: "Updating",
-				height: 400,
+		var name = $("#Name").val();
+		test=validate();
+		if(test==false)
+		{
+			$("#dialog").dialog({			
+				height: 300,
 				width: 350,
 				modal: true,
 				buttons: {
 					"Continue": function() {								
 						$(this).dialog("close");						
-					},
-					"Refresh": function() {								
-						$(this).dialog("close");
-						window.location.reload();	
-					}	
+					}										
 				}
-		});
+				});		
+		}
+		else
+		{
+			$.ajax({
+				type: "POST",
+				url: "<?php echo $this->baseUrl.'/test/testpost'?> ",
+				data: {
+					ID:camID,
+					Name:name,				
+				},
+				success: function(msg){	
+					$("#dialog #ct").append("<p class='msg'>"+msg+"<p>");
+					$(".battle").each(function(index){			
+							data = ($(this).find("*").serialize());						
+							data += "&campaignID="+camID;		
+							$.ajax({
+								type: "POST",
+								url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
+								data: data,
+								success: function(msg){				
+									if(msg == '1'){					
+										$("#dialog #ct").append("<p class='msg'>Successful<p>");
+									}else{
+										$("#dialog #ct").append("<p class='error'>"+msg+"<p>");					
+									}					
+								}
+							});
+					});		
+				}		
+				
+			});	
+			$("#dialog").dialog({
+					title: "Updating",
+					height: 400,
+					width: 350,
+					modal: true,
+					buttons: {
+						"Continue": function() {								
+							$(this).dialog("close");						
+						},
+						"Refresh": function() {								
+							$(this).dialog("close");
+							window.location.reload();	
+						}	
+					}
+			});
+		}
 	}
 	///Add battle///
 	function addBattle()
@@ -573,9 +590,50 @@ table#tb_layout td input{
 
 			 	});		 	
 		 });
-	///////Validate cho du lieu////
-		function validate()
-		{
-			var flag=true;
-		}
+	///////Validate cho du lieu////		
+		function validate(){
+			flag=true;			
+			$(".battle").each(function(key,val){
+				num = key+1;
+				flag1=true;
+				//////test cac o khong bo trong
+				for(i=0;i<8;i++)
+				{
+					value=$(val).find('.visible_'+i).val();	
+					
+					if(value=='')
+					{						
+						flag1=false;										
+					}
+				}
+				if(flag1==false)
+				{
+					$("#dialog #ct").append("<p class='error'>Battle" + num + ":	<br>không được bỏ trống các ô</p>");					
+					flag=false;
+				}
+				else {
+					flag1=true;
+				}
+				if(flag1==true)
+					{
+					////////test gia tri 
+					for(i=0;i<8;i++)
+					{
+						value=$(val).find('.visible_'+i).val();	
+						
+						if(isNaN(value))
+						{						
+							flag1=false;										
+						}
+					}
+					if(flag1==false)
+					{
+						$("#dialog #ct").append("<p class='error'>Battle" + num + ":	<br>Phải là số</p>");	
+						flag=false;
+					}
+				}
+				
+			});
+			return flag;	
+			}
 </script>
