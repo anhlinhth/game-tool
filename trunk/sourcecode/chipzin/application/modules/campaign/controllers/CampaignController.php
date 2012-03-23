@@ -62,8 +62,7 @@ class Campaign_CampaignController extends BaseController
 				$id = $this->_request->getParam("id");								
 				$mdCamp = new Models_Campaign();
 
-				$obj= new Obj_Campaign();
-			//	$count=$mdTask->isExist($id);
+				$obj= new Obj_Campaign();;
 				
 				$mdCamp->delete((int)$id);
 				echo "Xóa QuestTask thành công";
