@@ -96,13 +96,13 @@ class Models_Quest_Package extends Models_Base
 				$str .= "\n  array(";	
 				if((int)$row['AwardExp']!=0)
 				{
-					$str .= "\n\t'Honour'=> ";
+					$str .= "\n\tHONOUR=> ";
 				
 					$str .= (int)$row['AwardExp'].",";
 				}
 					if((int)$row['AwardGold']!=0)
 					{
-						$str .= "\n\t'Gold'=> ";
+						$str .= "\n\tGOLD=> ";
 				
 						$str .= (int)$row['AwardGold'];
 					}
