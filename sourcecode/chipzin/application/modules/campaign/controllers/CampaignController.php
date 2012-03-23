@@ -76,7 +76,6 @@ class Campaign_CampaignController extends BaseController
         }
 	}	
 	public function updateworldmapAction(){
-		
 	try{
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNorender();
@@ -89,9 +88,7 @@ class Campaign_CampaignController extends BaseController
 		$obj->ID = $id;
 		$obj->Name = $md->fetchname($id);
 		$obj->WorldMap = $mdw->searchname($desc2);
-		
 		$md->update($obj);
-
 		Models_Log::insert($this->view->user->username, "act_update_Campaign", $obj->name);
 
 		echo "Update thanh cong";	
@@ -273,7 +270,12 @@ class Campaign_CampaignController extends BaseController
 			$id = $this->_request->getParam("id");
 			
 			///////Lấy Campaign//////////
-			$mdCamp = new Models_Campaign();			
+			$mdCamp = new Models_Campaign();
+			$id = $this->_request->getParam("id");
+			if(!isset($id)){
+				$campaign = $mdCamp->getTopCampaign();				
+				$this->_redirect("/campaign/campaign/edit/id/$campaign->ID");
+			}			
 			$this->view->campaign = $mdCamp->_getByKey($id);
 			//var_dump($campaign);			
 			
@@ -308,7 +310,6 @@ class Campaign_CampaignController extends BaseController
 				$this->view->arrBattleSolider[$row->ID]=$mdBS->getbattle_soldier($row->ID);
 			}
 			$this->view->arrPoint = $arrPoint;
-			
 			$arrbattle = $this->view->arrbattle;
 			$this->view->layout[] = array();
 			
@@ -333,5 +334,38 @@ class Campaign_CampaignController extends BaseController
 			$this->view->errMsg = $ex->getMessage();
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
+	}
+	
+	public function loadlayoutAction()
+	{
+		try{
+			require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Layout.php';
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();
+			$mdlayout = new Models_Layout();
+			$id=$_POST['id'];
+			$layout=array();
+			$layout =  $mdlayout->getLayoutById($id);
+			//echo json_encode($layout);
+			$strPoint =	$layout[0]->Point;
+					
+			$strPoint = substr($strPoint,1,strlen($strPoint)-2);
+			$arrPoint = explode(',',$strPoint);
+			$arr = array();
+			foreach ($arrPoint as $key =>$value) {
+				$arr["point".$key] = $value;
+			}
+			
+			
+			
+			echo json_encode($arr);
+			
+		}
+		catch(Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		
+		}
 	}
 }

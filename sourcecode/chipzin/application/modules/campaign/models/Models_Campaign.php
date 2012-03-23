@@ -124,9 +124,18 @@ class Models_Campaign extends Models_Base
 		
 		return $count;
 	}
-	public function getQuestLine()
+	public function getTopCampaign()
 	{		
-				
+		$sql = "SELECT 
+					*
+				FROM
+					c_campaign					
+				WHERE
+					1
+				";
+		
+		$data = $this->_db->fetchRow($sql, "", Zend_Db::FETCH_OBJ);
+		return $data;		
 	}
 	
 public function getAllbattle()
@@ -136,9 +145,10 @@ public function getAllbattle()
 				FROM
 					c_battle_soldier
 				WHERE
-					1";
+					1
+				";
 		
-		$data = $this->_db->fetchOne($sql, "", Zend_Db::FETCH_OBJ);
+		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
 		
 		return $data;
 	
