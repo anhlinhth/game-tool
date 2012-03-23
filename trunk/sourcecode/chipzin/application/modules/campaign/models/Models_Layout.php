@@ -26,5 +26,8 @@ class Models_Layout extends Models_Base
 		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);	
 		return $data;
 	}
-	
+	public function insertLayout($obj)
+	{
+		parent::_insert($obj);
+	}
 }

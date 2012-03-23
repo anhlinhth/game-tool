@@ -279,8 +279,15 @@ table#tb_layout td input{
 <!--  -->
 
 <!-- Dialog Them Layout-->
+
 <div style='display:none'  id='insert-layout'>
+<form  id="layout" name="layout" action="" method="post">
 	<table>
+		<tr>
+			<td colspan="3">
+			Tên layout :<input type="text" name="namelayout">
+			</td>
+		</tr>
 		<tr>
 			<td>1<input type="checkbox" name="point" value="0" /></td>
 			<td>4<input type="checkbox" name="point" value="3" /></td>
@@ -297,7 +304,9 @@ table#tb_layout td input{
 			<td>9<input type="checkbox" name="point" value="8" /></td>
 		</tr>
 	</table>
+</form>	
 </div>
+
 <!--  -->
 <script>
 ///////////////ThaoNX/////////////////////
@@ -509,13 +518,36 @@ table#tb_layout td input{
 		if(layoutID=="insert"){
 			$("#insert-layout").dialog({
 				title: "New Layout",
-				height: 200,
-				width: 200,
+				height: 250,
+				width: 220,
 				modal: true,
 				buttons: {
 					"Save": function() {
-						alert("Chức năng chưa thực hiện xong");
-						$(this).dialog("close");						
+						var arraytemp = new Array();
+						var name = document.layout.namelayout.value;
+						c_value = "[";
+						for (var i=0; i < document.layout.point.length; i++)
+						{
+							if (document.layout.point[i].checked)
+						    {
+								arraytemp[i] = 1;
+						    }
+							else
+							{
+								arraytemp[i] = 0;
+							}
+						}
+						c_value += arraytemp[0]+','+arraytemp[3] +','+ arraytemp[6] + ','+ arraytemp[1] + ','+ arraytemp[4] + ','+ arraytemp[7] + ','+ arraytemp[2] + ','+ arraytemp[5] + ','+ arraytemp[8];
+						c_value += "]&name="+name;
+						$.ajax({
+							type: "POST",
+							url: "<?php echo $this->baseUrl.'/campaign/Layout/insert' ?> ",
+							data: "point=" + c_value,
+							success: function(smg){	
+								alert(Thành công);							
+							}
+						});	
+						$(this).dialog("close");							
 					}										
 				}
 			});
