@@ -61,10 +61,43 @@ class Campaign_CampaignController extends BaseController
 			{				
 				$id = $this->_request->getParam("id");								
 				$mdCamp = new Models_Campaign();
-
-				$obj= new Obj_Campaign();;
-				
+				$mdB = new Models_Battle();
+				$data = $mdB->search($id);
+				foreach ($data as $row)
+				{
+					echo $row['ID'];
+					$mdA = new Models_Award();
+					$data1 = $mdA->getAward($row['ID']);
+					foreach ($data1 as $row1)
+					{
+						echo " award";
+						echo $row1->ID;
+						$mdA->deleteAward($row1->ID);
+					}
+					$mdBs = new Models_Battle_Soldier();
+					$data2 = $mdBs->getbattle_soldier($row['ID']);
+					foreach ($data2 as $row2)
+					{
+						echo " battle soldier";
+						echo $row2->ID;
+						$mdBs->delete($row2->ID);
+					}
+					$mdB->delete($row['ID']);
+				}
+				$mdnc = new Models_Next_Camp();
+				$data3 = $mdnc->getnextmap($id);
+				foreach ($data3 as $row3)
+				{
+					$mdnc->delete($row3->ID);
+				}
+				$obj= new Obj_Campaign();
+				try{
 				$mdCamp->delete((int)$id);
+				}
+				catch (Exception $e)
+				{
+					echo $e;
+				}
 				echo "Xóa QuestTask thành công";
 				Models_Log::insert($this->view->user->username, "act_delete_Campaign", $obj->name);													
 			}
