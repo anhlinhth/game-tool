@@ -10,7 +10,17 @@ class Models_Battle extends Models_Base
 		$this->_key = "ID";
 		$this->_table = "c_battle";	
 	}
-	
+	public function delete($ID)
+	{
+	try
+		{			
+			$this->_db->delete('c_battle', "ID = '$ID'");			
+		}
+		catch(Zend_Db_Exception $ex)
+		{
+			throw new Internal_Error_Exception($ex);
+		}
+	}
 	public function getBattle($id)
 	{
 		$sql="
@@ -18,55 +28,23 @@ class Models_Battle extends Models_Base
 					c_battle.*, c_layout.Point
 				FROM
 					c_battle,c_layout		
-				WHERE Campaign =$id AND c_battle.Layout=c_layout.ID 
-				ORDER BY c_battle.Order ASC";		
+				WHERE Campaign =$id AND c_battle.Layout=c_layout.ID";		
 		$data = $this->_db->fetchAll($sql,"", Zend_Db::FETCH_OBJ);
 		return $data;
 	}
-	
+	public function search($id)
+	{
+		$sql="
+				SELECT 
+					*
+				FROM
+					c_battle		
+				WHERE Campaign ='$id'";		
+		$data = $this->_db->fetchAll($sql);
+		return $data;
+	}
 	public function saveBattle($obj)
 	{
 		parent::_update($obj);
-	}
-	///////////////////ThaoNX////////////////////////
-	public function delete($battleID)
-	{
-		try
-		{
-		    $sql="
-		    	DELETE
-		    		FROM c_award
-		    	WHERE
-		   			 BattleID='".$battleID."';
-
-		   		DELETE
-		    		FROM c_battle_soldier
-		    	WHERE
-		   			 BattleID='".$battleID."';
-		   			 
-		   		DELETE
-		    		FROM c_battle
-		    	WHERE
-		   			ID='".$battleID."';	 
-		    	";		    	
-		    $data=$this->_db->query($sql);
-		   
-		}
-		catch(Zend_Db_Exception $ex)
-		{
-			throw new Internal_Error_Exception($ex);
-		}
-	}
-	public function getBattleInfo($id)
-	{
-		$sql="
-		SELECT
-		c_battle.*, c_layout.Point
-		FROM
-		c_battle,c_layout
-		WHERE c_battle.ID ='$id' AND c_battle.Layout=c_layout.ID
-		ORDER BY c_battle.Order ASC";
-		$data = $this->_db->fetchRow($sql,"", Zend_Db::FETCH_OBJ);
-		return $data;
 	}
 }
