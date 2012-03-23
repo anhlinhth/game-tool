@@ -86,19 +86,17 @@ table#tb_layout td input{
 	<tr>
 		<td>
 			<label>Campaign Id :</label>
-			
-			<select name='campaignID' id='campaignID'>							
-				<?php echo $this->options($this->campaign,$this->campaignId[0]->ID,array('key'=>"ID",'name'=>"Name"))?>
-				
+			<select name='campaignID' id='campaignID'>
+				<option value='<?php echo $this->campaign->ID;?>'><?php echo $this->campaign->ID;?></option>
 			</select>
 		</td>			
 		<td>
 			<label>Campaign Name:</label>
-			<input type="text" name='Name' id='Name' value='<?php echo $this->campaignId[0]->Name;?>' />
+			<input type="text" name='Name' id='Name' value='<?php echo $this->campaign->Name;?>' />
 		</td>
 		<td>
 			<label>World Map:</label>
-			<input type="text" readonly="readonly" value='<?php echo $this->campaignId[0]->WorldMap;?>' name='nextCampaign' id='nextCampaign'/>
+			<input type="text" readonly="readonly" value='<?php echo $this->campaign->WorldMap;?>' name='nextCampaign' id='nextCampaign'/>
 		</td>
 		</tr>
 	</table>
@@ -451,7 +449,7 @@ table#tb_layout td input{
 	////////////////////////////
 	function updateAward(element)
 	{
-		var selected = element.value;
+		var selected = element.value;	
 		if(selected == "insert"){
 			$("#insert-awardtype").dialog({
 				title: "New AwardType",
