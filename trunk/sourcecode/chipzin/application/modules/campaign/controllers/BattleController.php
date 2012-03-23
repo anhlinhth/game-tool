@@ -57,9 +57,32 @@ class Campaign_BattleController extends BaseController
 				}
 				//save award
 				$mda = new Models_Award();
-				$mda->delAward($objBattle->ID);
 				$arrAwardID = $_POST['AwardTypeID'];
 				$arrValue = $_POST['Value'];
+				///////Xoa trung////////
+				$idAward = array();
+				$i = count($arrAwardID)-1;
+				while($i>=0)
+				{
+					$flag = false;
+					foreach($idAward as $item)
+					{
+						if($item == $arrAwardID[$i])
+						{
+							unset($arrAwardID[$i]);
+							unset($arrValue[$i]);
+							$flag = true;
+							break;
+						}
+					}
+					if($flag == false)
+					{
+						$idAward[] = $arrAwardID[$i];
+					}
+					$i--;
+				}
+				//////end xoa trung////
+				$mda->delAward($objBattle->ID);
 				if(!empty($arrAwardID)){
 				    foreach ($arrAwardID as $key => $value )
 				    {
@@ -116,7 +139,7 @@ class Campaign_BattleController extends BaseController
 			$objBattle->Layout = 1;
 			$objBattle->Order = 1;
 			$mdbattle->_insert($objBattle);
-			echo "Thành công";
+			echo "Thï¿½nh cï¿½ng";
 		}
 		catch(Exception $ex)
 		{
@@ -148,9 +171,34 @@ class Campaign_BattleController extends BaseController
 	    }
 	}
 	
-	
-	
-	
+	function deleteTrung($arrID, $arrValue)
+	{	
+		$id = array();
+		$i = count($arrID);
+		$j=0;
+		while($i>=0)
+		{
+			$flag = false;
+			foreach($id as $item)
+			{
+				if($item == $arrID)
+				{
+					unset($arrID[$i]);
+					unset($arrValue[$i]);
+					$flag = true;
+					break;
+				}
+			}
+			if(flag == false)
+			{
+				$id[count($id)+1] = $arrID[$i];
+			}
+			$i++;
+		}
+		$return[id] = $arrID;
+		$return[value] = $arrValue;
+		return $return;
+	}
 }
 
 
