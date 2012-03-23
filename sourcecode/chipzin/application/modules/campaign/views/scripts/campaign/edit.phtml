@@ -138,7 +138,7 @@ table#tb_layout td input{
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[0]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>												
 												
-							<input type='text' class='<?php echo $strclass?>_0' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value="<?php echo $arrBS['Level'];?>"/>
+							<input type='text' class='<?php echo $strclass?>_0' id='levelSolider' name='levelSolider[]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][3])?"visible":"invisible"?>
@@ -146,7 +146,7 @@ table#tb_layout td input{
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[3]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_3' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value="<?php echo $arrBS['Level'];?>"/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_3' id='levelSolider' name='levelSolider[]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][6])?"visible":"invisible"?>
@@ -154,7 +154,7 @@ table#tb_layout td input{
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[6]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_6' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_6' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>						
 					</tr>
 					<tr>
@@ -163,7 +163,7 @@ table#tb_layout td input{
 							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[1]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_1' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_1' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visible":"invisible"?>
@@ -171,7 +171,7 @@ table#tb_layout td input{
 							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[4]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text'class='<?php echo $strclass?>_4' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text'class='<?php echo $strclass?>_4' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][7])?"visible":"invisible"?>
@@ -179,7 +179,7 @@ table#tb_layout td input{
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7);
 							 echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[7]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_7' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_7' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 					<tr>
@@ -188,7 +188,7 @@ table#tb_layout td input{
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[2]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_2' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_2' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][5])?"visible":"invisible"?>
@@ -196,14 +196,14 @@ table#tb_layout td input{
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[5]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_5' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_5' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][8])?"visible":"invisible"?>
 						<td id="point8" class="<?php echo  $strclass?>" >
 							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[8]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_8' id='levelSolider<?php echo $strclass?>' name='levelSolider<?php echo $strclass?>' value='<?php echo $arrBS['Level'];?>'/>
+							<yy></yy><input type='text' class='<?php echo $strclass?>_8' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 				</table>
@@ -344,7 +344,8 @@ table#tb_layout td input{
 			type: "POST",
 			url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
 			data: data,
-			success: function(msg){				
+			success: function(msg){	
+				alert(msg);
 				if(msg == '1'){					
 					alert("Successfull");
 				}else{
@@ -400,7 +401,7 @@ table#tb_layout td input{
 		if(test==false)
 		{
 			$("#dialog").dialog({			
-				height: 300,
+				height: 400,
 				width: 350,
 				modal: true,
 				buttons: {
@@ -600,10 +601,12 @@ table#tb_layout td input{
 				for(i=0;i<8;i++)
 				{
 					value=$(val).find('.visible_'+i).val();	
-					
+					//
 					if(value=='')
-					{						
-						flag1=false;										
+					{	
+
+						flag1=false;		
+						break;	
 					}
 				}
 				if(flag1==false)
@@ -612,25 +615,25 @@ table#tb_layout td input{
 					flag=false;
 				}
 				else {
-					flag1=true;
-				}
-				if(flag1==true)
-					{
+					
+				
+						flag2=true;
 					////////test gia tri 
-					for(i=0;i<8;i++)
-					{
-						value=$(val).find('.visible_'+i).val();	
-						
-						if(isNaN(value))
-						{						
-							flag1=false;										
+						for(i=0;i<8;i++)
+						{
+							value=$(val).find('.visible_'+i).val();							
+							if(isNaN(value) && value=='undefined')
+							{							alert(value + "_"+i);					
+								flag2=false;
+								break;
+							}
 						}
-					}
-					if(flag1==false)
-					{
-						$("#dialog #ct").append("<p class='error'>Battle" + num + ":	<br>Phải là số</p>");	
-						flag=false;
-					}
+						if(flag2==false)
+						{
+							$("#dialog #ct").append("<p class='error'>Battle" + num + ":	<br>Phải là số</p>");	
+							flag=false;
+						}
+						
 				}
 				
 			});

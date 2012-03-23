@@ -30,7 +30,6 @@ class Campaign_BattleController extends BaseController
 			$this->_helper->viewRenderer->setNorender();
 			if($this->_request->isPost())
 			{
-			    
 				$mdbattle = new Models_Battle();
 				$objBattle = new Obj_Battle();
 				$objBattle->ID = $_POST['BattleID'];
@@ -41,7 +40,7 @@ class Campaign_BattleController extends BaseController
 				//save Battle Soldier
 				$mdbs = new Models_Battle_Soldier();
 				$arrSolider = $_POST['solider'];
-				$arrLevel = $_POST['level'];
+				$arrLevel = $_POST['levelSolider'];
 				$mdbs->deleteB_Soldier($objBattle->ID);
 				foreach ( $arrSolider as $key => $value ) 
 				{
@@ -50,7 +49,7 @@ class Campaign_BattleController extends BaseController
 					$objbs->Level = $arrLevel[$key];
 					$objbs->Point = $key;
 					$objbs->Soldier = $arrSolider[$key];
-					$objbs->ID = "NULL";
+					$objbs->ID = "NULL";					
 					if($objbs->Soldier != "" && $objbs->Level != "")
 					{
 						$mdbs->updateB_Soldier($objbs);
