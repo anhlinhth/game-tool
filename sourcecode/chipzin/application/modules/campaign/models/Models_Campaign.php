@@ -25,7 +25,7 @@ class Models_Campaign extends Models_Base
 	
 	public function delete($id)
 	{
-		
+		parent::_delete($id,null);
 	}
 	
 	
@@ -124,18 +124,9 @@ class Models_Campaign extends Models_Base
 		
 		return $count;
 	}
-	public function getTopCampaign()
+	public function getQuestLine()
 	{		
-		$sql = "SELECT 
-					*
-				FROM
-					c_campaign					
-				WHERE
-					1
-				";
-		
-		$data = $this->_db->fetchRow($sql, "", Zend_Db::FETCH_OBJ);
-		return $data;		
+				
 	}
 	
 public function getAllbattle()
@@ -145,40 +136,12 @@ public function getAllbattle()
 				FROM
 					c_battle_soldier
 				WHERE
-					1
-				";
-		
-		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
-		
-		return $data;
-	
-	}
-public function getAllCampaign()
-	{
-		$sql = "SELECT
-					*
-				FROM
-					c_campaign
-				WHERE
 					1";
 		
-		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+		$data = $this->_db->fetchOne($sql, "", Zend_Db::FETCH_OBJ);
 		
 		return $data;
 	
-	}
-	public function getCampaignById($id)
-	{
-		$sql = "SELECT
-					*
-				FROM
-					c_campaign
-				WHERE
-					ID=$id";
-		
-		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
-		
-		return $data;
 	}
 }
 ?>
