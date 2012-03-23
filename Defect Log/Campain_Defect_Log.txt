@@ -1,16 +1,15 @@
-﻿- Xóa Campaign trong form index Campaign (Khóa ngoại) - F..K
-- Form index Campaign: Chưa Enable/Disable button "Add/Cancle/Updates"
-- Form index Campaign: Chưa có filter theo Worldmap (giống form Quest Index: filter theo QuestLine)
+﻿- Xóa Campaign trong form index Campaign (Khóa ngoại) - F..K//Chí
+- Form index Campaign: Chưa Enable/Disable button "Add/Cancle/Updates"//Chí đã làm
+- Form index Campaign: Chưa có filter theo Worldmap (giống form Quest Index: filter theo QuestLine)//Thảo
 - Form index Campaign: bỏ nút "Lưu dưới cùng"
 
 ////////////
 
-- Form Edit Campaign: Selectbox Campaign ID(chưa có dữ liệu, chưa có sự kiện onChange)
-- Form Edit Campaign: Selectbox Worldmap(chưa có dữ liệu, chưa có sự kiện onChange)
-- Form Edit Campaign: Selectbox Worldmap(chưa có dữ liệu, chưa có sự kiện onChange)
-- Form Edit Campaign: Validate du lieu nhập bằng Javascript/Jquery trước khi Ajax
-- Form Edit Campaign: Thêm một Layout
-- Form Edit Campaign:: Thêm một Awardtype
+- Form Edit Campaign: Selectbox Campaign ID(chưa có dữ liệu, chưa có sự kiện onChange)// Thái
+- Form Edit Campaign: Selectbox Worldmap(chưa có dữ liệu, chưa có sự kiện onChange)//Thảo
+- Form Edit Campaign: Validate du lieu nhập bằng Javascript/Jquery trước khi Ajax// Thái
+- Form Edit Campaign: Thêm một Layout//Tân
+- Form Edit Campaign:: Thêm một Awardtype//Tân
 - Form Edit Campaign: Reset dữ liệu khi bấp nút Reset
 
 ////////////
