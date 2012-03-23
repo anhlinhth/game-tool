@@ -153,5 +153,32 @@ public function getAllbattle()
 		return $data;
 	
 	}
+public function getAllCampaign()
+	{
+		$sql = "SELECT
+					*
+				FROM
+					c_campaign
+				WHERE
+					1";
+		
+		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	
+	}
+	public function getCampaignById($id)
+	{
+		$sql = "SELECT
+					*
+				FROM
+					c_campaign
+				WHERE
+					ID=$id";
+		
+		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}
 }
 ?>
