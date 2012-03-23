@@ -16,4 +16,5 @@
 ////////////
 Impoert + Export
 /////////////
-Sample database : DB/Data_Sample_Huy_22_03_2012.sql
+Sample database : 
+- Thay doi DB : \DB\Tool Campaign\DB\22-3_v2.sql
