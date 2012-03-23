@@ -86,17 +86,19 @@ table#tb_layout td input{
 	<tr>
 		<td>
 			<label>Campaign Id :</label>
-			<select name='campaignID' id='campaignID'>
-				<option value='<?php echo $this->campaign->ID;?>'><?php echo $this->campaign->ID;?></option>
+			
+			<select name='campaignID' id='campaignID'>							
+				<?php echo $this->options($this->campaign,$this->campaignId[0]->ID,array('key'=>"ID",'name'=>"Name"))?>
+				
 			</select>
 		</td>			
 		<td>
 			<label>Campaign Name:</label>
-			<input type="text" name='Name' id='Name' value='<?php echo $this->campaign->Name;?>' />
+			<input type="text" name='Name' id='Name' value='<?php echo $this->campaignId[0]->Name;?>' />
 		</td>
 		<td>
 			<label>World Map:</label>
-			<input type="text" readonly="readonly" value='<?php echo $this->campaign->WorldMap;?>' name='nextCampaign' id='nextCampaign'/>
+			<input type="text" readonly="readonly" value='<?php echo $this->campaignId[0]->WorldMap;?>' name='nextCampaign' id='nextCampaign'/>
 		</td>
 		</tr>
 	</table>
@@ -106,7 +108,7 @@ table#tb_layout td input{
 		<thead>
 			<tr>
 				<td width="15px;">ID</td>
-				<td  class="center" width="50px;">Order</td>
+				<td  class="center" width="50px;" ><a onclick="order();" href='#'>Order</a></td>
 				<td class="center">Layout</td>
 				<td>Award</td>
 				<td class="center" width="20px;">Action</td>
@@ -520,4 +522,18 @@ table#tb_layout td input{
 				}
 			});
 		});
+	//////Onchange cho campaignID///////
+	 $(document).ready(function(){
+		 	$('#campaignID').change(function(){
+			 	var campaignID=$(this).val();
+			 	var url = "<?php echo $this->baseUrl.'/campaign/campaign/edit/id/'?>"+campaignID;
+			 	$(location).attr('href',url);			 
+
+			 	});		 	
+		 });
+	///////Validate cho du lieu////
+		function validate()
+		{
+			var flag=true;
+		}
 </script>
