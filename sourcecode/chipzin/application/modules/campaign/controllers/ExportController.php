@@ -5,6 +5,7 @@ require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 
 require_once ROOT_APPLICATION.DS.'modules'.DS.'Campaign'.DS.'models'.DS.'Models_Map_Package.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'Campaign'.DS.'models'.DS.'Models_Battle_Package.php';
 class Campaign_ExportController extends BaseController
 {
 	public function _setUserPrivileges()
@@ -27,6 +28,13 @@ class Campaign_ExportController extends BaseController
 		$tuo = new Models_Map_Package();
 		$data = $tuo->getdata();
 		$questIdError = $model->generate($data);
+		
+		$mdB = new Models_Battle_Package();
+		
+		$data = $mdB->fetchall();
+		$mdB->generate($data);
+		
+		
 		
 		if(!empty($questIdError)){
 			//$this->view->val = 1;
