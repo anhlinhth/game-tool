@@ -149,9 +149,9 @@ class Models_Battle_Package extends Models_Base
 				foreach ($aw as $row2)
 				{
 					if($i<$count)
-						$str .=$this->getawardtype($row2['AwardTypeID'])." => ".$row2['Value'].",";
+						$str .=strtolower($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'].",";
 					else 
-						$str .=$this->getawardtype($row2['AwardTypeID'])." => ".$row2['Value'];
+						$str .=strtolower($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'];
 					$i++;
 				}
 				$str .=")\n";
