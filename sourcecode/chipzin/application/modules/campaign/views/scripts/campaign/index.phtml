@@ -4,230 +4,362 @@
 <?php if($this->msg) :?>		
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
-<form id ="form" action="" name = "form" method="post">
+<style>
+td.c_worldmap select, td.c_type select, td.c_needcampaign select{	
+	width:80%;
+}
+td.c_nextcampaign select{
+	width:80%;
+}
+td.c_needcampaign select{
+	width:100%;
+}
+td.c_name input{
+	width:100px;
+}
+td.status{
+	vertical-align: middle;
+}
+#tbCampaign select{
+	width:100%;
+}
+#tbCampaign tr.alt{
+	background:#EAF2D3;
+}
 
+#tbCampaign td.c_nextcampaign select{
+	width:80%;	
+}
+#tbCampaign td.action{
+	padding: 0px;
+	width: 10%;
+	overflow: hidden;
+}
+</style>
+<form class="myform"  id="formPaging" action="" name="formPaging" method="post">
 <div id="box">
 	<h3>Campaign Manager</h3>
-	<table class="filter">
+	<table class="filter">		
 		<tr>
-			
-			<td>Campaign ID : <input style="width:110px;" type="text" name="ID" id="ID" class="searchbox" /></td>
-			<td>WorldMap : <?php 
-			$mdWm = new Models_WorldMap();
-			$data2 = $mdWm->fetchall(); 
-			$strList1 .= "<select id='select2' class=\"worldmap\" name='select2' onChange='searchworldmap()' >";
-			$strList1.="<option ></option>";
-			foreach ($data2 as $row1)
-			{
-	
-				$strList1.="<option>$row1->Name</option>";
-			}
-			$strList1.="
-			
-			</select>"; echo $strList1;?>
+			<td>
+				Campaign ID : <input style="width:110px;" type="text" name="ID" id="ID" class="searchbox" />
+				<input class="btn search" type="submit" name="search" value="search" />
 			</td>
-			<td><input type="submit" name="search" id="button1" class="search" value="search" /></td>
-			
+			<td>World Map:
+				<select>
+					<?php echo $this->options($this->arrWorldMap,$campRow->WorldMap,array("key"=>"ID","name"=>"Name"));?>
+				</select>
+			</td>
+			<td>				
+
+			</td>
 		</tr>
 		
-		<tr id="chose">
-			
-			<td>ID : <input type="text" name="ID1" disabled="disabled" id="ID1" style="width:110px;" /></td>
-			
-			<td>Name : <input type="text" name="desc1" id="desc1" /></td>
-			
-			<td>WorldMap : <?php 
-			$mdWm = new Models_WorldMap();
-			$data2 = $mdWm->fetchall(); 
-			$strList .= "<select id='select1' name='select1' >";
-			$strList.="<option ></option>";
-			foreach ($data2 as $row1)
-			{
-	
-						$strList.="<option>$row1->Name</option>";
-			}
-			$strList.="
-			
-			</select>"; echo $strList;?>
-			</td>
-			<td>Type: 
-			<select id='select2' name='select2'>
-				<option>Map</option>
-				<option>Barrack</option>
-			</select>
-			</td>
-			<td>NeedCamp : <?php 
-			$mdC = new Models_Campaign();
-			$data2 = $mdC->fetchall(); 
-			$strList2 .= "<select id='select3' name='select3' >";
-			$strList2.="<option></option>";
-			foreach ($data2 as $row1)
-			{
-	
-						$strList2.="<option>$row1->ID</option>";
-			}
-			$strList2.="
-			
-			</select>"; echo $strList2;?>
-			</td>
-			
-		</tr>
-		<tr>
-		<td><input type="submit" name="update" id="button1" class="update" value="Update" style="width:100px;" /></td>
-			<td><input type="submit" name="cancel" id="button2" class="cancel" value="Cancel" style="width:100px;" /></td>
-			<td><input type="submit" name="add" id="button3" class="add" value="Add"  style="width:100px;" /></td>
-		
+	</table>
+	<table class="list" id="tbCampaign">	
+		<thead>
+			<tr>			
+				<td width="20"><a href="#">STT</a></td>
+				<td width="30"><a href="#">ID</a></td>
+				<td width="40">Tên</td>
+				<td>World Map</td>
+				<td>Type</td>		
+				<td>NeedCamp</td>								
+				<td>NextCamp</td>	
+				<td>Thao tác</td>
+				<td width="5"></td>				
 			</tr>
-	</table>
-	<table>	
-		<tr>
-			<table>
-				<thead>
-				<th width="40"><a href="#">STT</a></th>
-				<th width="40"><a href="#">ID</a></th>
-				<th>Tên</th>
-				<th >World Map</th>
-				<th >Type</th>		
-				<th >NeedCamp</th>								
-				<th width="80">Thao tác</th>
-				</thead>
-				<tr>
-					<?php $this->listCamp($this->data, $this->page, $this->items, $this) ?>
-				</tr>				
-			</table>
-		</tr>
-		
-			<div align="center">
-				<input id="button4" type="submit" value="Lưu" style="width:100px;">
-				
-			</div>
+		</thead> 	
+		<tbody>
+			
+				<?php foreach($this->data as $key =>$campRow){ 
+								
+					$btn_save = "<a class='tool-24 save disabled' href=''></a>";
+					$btn_edit = "<a class='tool-24 edit' href='javascript:editCamp($campRow->ID)'></a>";
+					$btn_delete = "<a class='tool-24 delete' href=''></a>";								
+					$alt= ($alt=="alt"?"2":"alt");
+					
+				?>
+				<tr class="tr-camp <?php echo $alt?>" id='tr-camp-<?php echo $campRow->ID ?>'>
+					<td><?php echo ($key+1) ?></td>
+					<td class="c_id">
+                        <span><?php echo $campRow->ID ?></span>
+                        <input style="display:none" type="text" name="ID" value="<?php echo $campRow->ID ?>" />
+                    </td>	
+					<td class="center c_name">
+						<input type="text" name="Name" value="<?php echo $campRow->Name ?>" />
+					</td>
+					<td class="c_worldmap">
+						<select id='WorldMap-<?php echo $campRow->ID?>' name='WorldMap' onChange='changeWorldMap(<?php echo $campRow->ID ?>,this)'>
+							<?php echo $this->options($this->arrWorldMap,$campRow->WorldMap,array("key"=>"ID","name"=>"Name"));?>
+						</select>
+					</td>
+					<td class="c_type">
+						<select id='TypeID' name='TypeID'>
+							<?php echo $this->options($this->arrMapType,$campRow->TypeID,array("key"=>"ID","name"=>"Name"));?>
+						</select>
+					</td>
+					<td class="c_needcampaign">						
+						<select id='NeedCamp-<?php echo $campRow->ID?>' name='NeedCamp' onChange='changeNeedCampaign(<?php echo $campRow->ID ?>,this)'>
+							<option value="">NULL</option>
+							<?php echo $this->options($this->arrCampaign,$campRow->NeedCamp,array("key"=>"ID","name"=>"Name"));?>
+						</select>
+					</td>
+					<td class="c_nextcampaign">					
+					<?php if(!empty($this->arrNextCamp[$campRow->ID])){
+						foreach($this->arrNextCamp[$campRow->ID] as $key=>$nextCamp) {						
+					?>
+						<div class="next-camp">
+							<select id='NextCampaign' name='NextCamp[]'>							
+								<option value="">NULL</option>
+								<?php echo $this->options($this->arrCampaign,$nextCamp->NextCamp,array("key"=>"ID","name"=>"Name"));?>
+							</select>
+							<a class="tool-16 delete"></a><!--JQUERY delegate Click: addNextCampp(e)-->							
+							<a class="tool-16 add"></a><!--JQUERY delegate Click: -->	
+						</div>
+					<?php }?>
+					<?php } else{
+						echo "<div><a class='tool-16 add' href=''></a></div>";
+					}?>
+						
+					</td>
+					<td class="action center">
+						<?php echo $btn_save ?>
+						<?php echo $btn_edit ?>
+						<?php echo $btn_delete ?>						
+					</td>
+					<td class="td-status"><a title="ok" class="status tool-16 ok"></a></td>
+					
+				</tr>			
+				<?php }?>
+			
+		</tbody>
 	
 	</table>
-	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
+	<div style="margin-top:20px;margin-bottom:20px">
+		<a class="btn add" type="submit" href="javascript:addCamp()">Add</a>
+		<a class="btn save" type="submit" href="javascript:saveAll()">Save All</a>
+	</div>
+    
+	<!--Temp Div For add a campp-->	
+	<div id="div-temp-add-camp" style="display:none">
+		<table>
+			<tbody>
+				<tr class="tr-camp" id='tr-camp-new'>
+						<td></td>
+						<td class="c_id">
+							<span>!</span>
+                            <input style="display:none" type="text" id="ID" name="ID" value="" />
+						</td>	
+						<td class="center c_name">
+							<input type="text" name="Name" value="Campaign" />
+						</td>
+						<td class="c_worldmap">
+							<select id='WorldMap-' name='WorldMap'>
+								<?php echo $this->options($this->arrWorldMap,0,array("key"=>"ID","name"=>"Name"));?>
+							</select>
+						</td>
+						<td class="c_type">
+							<select id='TypeID' name='TypeID'>
+								<?php echo $this->options($this->arrMapType,0,array("key"=>"ID","name"=>"Name"));?>
+							</select>
+						</td>
+						<td class="c_needcampaign">						
+							<select id='NeedCamp-' name='NeedCamp'>
+								<option value="">NULL</option>
+								<?php echo $this->options($this->arrCampaign,0,array("key"=>"ID","name"=>"Name"));?>
+							</select>
+						</td>
+						<td class="c_nextcampaign">										
+							<div><a class='tool-16 add' href=''></a></div> 							
+						</td>
+						<td class="action center">
+							<a class='tool-24 save ' href='javascript:saveCampaign(0)'></a>
+							<a class='tool-24 edit disabled' href='javascript:editCamp(0)'></a>
+							<a class='tool-24 delete ' href='javascript:deleteCamp(0)'></a>
+						</td>
+						<td class="td-status">
+							<a title="Not Save" class="status tool-16 warning"></a>
+						</td>					
+				</tr>
+			</tbody>	
+			</table>		
+		</div>
+		<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
 </div>
 </form>
 <script type="text/javascript">
 function changeMap(id){
-	var desc2 = document.getElementById('nextquest-'+id).value;
-	$.ajax({
-		type: "POST",
-		url:"<?php echo $this->baseUrl.'/campaign/campaign/updateworldmap'?> ",
-		data: "id=" + id +"&desc2="+ desc2,	
-		success: function(data){
-			alert(data)			
-			if(data != ""){	
-			alert('Thay đổi  thành công');				
-				location.reload();
-			}else{
-				alert(data);				
-			}
-			
-		}
-	});
-
+	alert("");
 }
 function searchworldmap(){
 	alert("search");
 
 }
 function changeMap1(id){
-	var desc3 = document.getElementById('type-'+id).value;
-	$.ajax({
-		type: "POST",
-		url:"<?php echo $this->baseUrl.'/campaign/campaign/updatetype'?> ",
-		data: "id=" + id +"&desc3="+ desc3,	
-		success: function(data){
-			alert(data)			
-			if(data != ""){	
-			alert('Thay đổi  thành công');				
-				location.reload();
-			}else{
-				alert(data);				
-			}
-			
-		}
-	});
-
+	alert("");
 }
-$(function(){
-	$(".search").click(function(){
-		searchbox=document.getElementById('ID').value;
-		if(searchbox=='')
-		{
-		
-				return false;
-		}
-		});
-});
-$(function(){
-	/// sua mot QTC
+//////////////ThaoNX//////////////
+/**********************************/
+function updateStatus(e,status,title){
+	e.removeClass("ok");	
+	e.removeClass("warning");
+	e.removeClass("loading");
+	e.addClass(status);
+	e.attr("title",title);
+}
+/**********************************/
+function updateSTT(){
+	$("#tbCampaign tbody .tr-camp").each(function(index){
+		$(this).find("td").eq(0).html(index+1);
+	});		
 	
-	$(".update").click(function(){
-		id = document.getElementById('ID1').value;	
-		select1 =  document.getElementById('select1').value;
-		desc1 = document.getElementById('desc1').value;
-		if(id==''){
-			return false;
-		}
-		$.ajax({
-			type: "POST",
-			url: "<?php echo $this->baseUrl.'/campaign/campaign/update/'?> ",
-			data: {
-				id: id,
-				select: select1,
-				desc: desc1
-			},
-			success: function(msg){
-				if(msg != "")
-				{					
-					alert(msg);
-				}
-				else
-				{
-					alert("Thêm  không thành công");
-					
-				}
-				window.location.reload();
-			}
-		});
-		return false;	
+}
+/**********************************/
+function deleteNextCamp(e){
+	var parent_div = $(e).parent();
+	var parent_td = parent_div.parent();
+	var parent_tr = parent_td.parent();
+	parent_div.remove();
+	var count = parent_td.find(".next-camp").size();	
+	if(count==0){
+		
+		var btn = "<div><a class='tool-16 add' href=''></a><div>";		
+		parent_td.html(btn);		
+	}
+	parent_tr.change();
+}
+/**********************************/
+function addNextCamp(e){	
+	var parent_td = $(e).parent().parent();
+	var parent_tr = parent_td.parent();
+	var count = parent_td.find(".next-camp").size();
+	var btn_del_camp = "<a class='tool-16 delete' href=''></a>";
+	var btn_add_camp = "<a class='tool-16 add' href=''></a>";
+	var html="<div class='next-camp'>"+
+		"<select id='NextCamp' name='NextCamp[]'>"+
+		"<option value=''>NULL</option>"+
+		"<?php echo $this->options($this->arrCampaign,0,array('key'=>'ID','name'=>'Name'));?>"+
+		"</select>"+btn_del_camp+btn_add_camp+"</div>";
+	
+	if(count==0){// delete btn-add in td tag
+		parent_td.html("");
+	}
+	
+	parent_td.append(html);		
+	parent_tr.change();
+}
+/**********************************/
+function saveCamp(e){
+	var parent_tr = $(e).parent().parent();
+	var data = parent_tr.find("*").serialize();
+	var a_status = parent_tr.find(".status");
+	var a_save = parent_tr.find(".tool-24.save");
+	updateStatus(a_status,"loading","loading");	
+	$.ajax({	   
+       type: "POST",
+       url: "<?php echo $this->baseUrl.'/campaign/campaign/save'?> ",            
+       data: data,
+       dataType:"json",
+	   success: function(msg){	       
+  		   if(msg.msg=="1"){  		        
+                updateStatus(a_status,"ok","ok");
+  		        a_save.addClass("disabled");
+                if(msg.CampID){                    
+                    parent_tr.find("td.c_id input[name='ID']").attr("value",msg.CampID);
+                    parent_tr.find("td.c_id span").text(msg.CampID);                    
+                }                
+  		   }else{
+    			alert(msg.msg);
+    	   };
+	   }
+	});	
+}
+/**********************************/
+function addCamp(){
+	updateSTT();	
+	var tr = $("#div-temp-add-camp tr");
+	var count = $("#tbCampaign tbody .tr-camp").size();		
+	if(count%2==0){
+		tr.addClass("alt");
+	}else{
+		tr.removeClass("alt");
+	}
+	tr.children("td").eq(0).html(count+1);
+	
+	tr.find(".action a.edit").toggleClass("disabled");
+	tr.find(".action a.edit").toggleClass("disabled");
+	var s = $("#div-temp-add-camp table tbody").html();
+	$("#tbCampaign tbody").append(s);
+	return;
+	
+}
+/**********************************/
+/**********************************/
+function deleteCamp(e){   
+    var parent_tr = $(e).parent().parent();
+   	var a_status = parent_tr.find(".status");
+    var CampID = parent_tr.find("input[name='ID']").val();
+    updateStatus(a_status,"loading","loading");	
+    if(CampID){        
+        $.ajax({	   
+            type: "POST",
+            url: "<?php echo $this->baseUrl.'/campaign/campaign/delete'?>",            
+            data: {
+               CampID:CampID 
+            },        
+            success: function(msg){       
+        	   if(msg=="1"){  		        
+                   parent_tr.remove();           
+        	   }else{
+        			alert(msg);
+        	   };
+            }
+	   });	
+    }else{
+        parent_tr.remove();
+    }
+    updateSTT();	
+}
+/**********************************/
+/**********************************/
+function saveAll(){
+	alert("save all");
+	return false;
+}
+/***************JQuery*******************/
+$(function(){
+	$("body").delegate(".tr-camp", "change", function() {
+		$(this).find("a.save").removeClass("disabled");;		
+		$(this).find(".td-status a").removeClass("ok").addClass("warning").attr("title","Not Save");
+		return false;
 	});
-
-	////Them 1 quest line
-	$(".add").click(function(){				
-		desc1 = document.getElementById('desc1').value;
-		select = document.getElementById('select1').value;
-		select2 = document.getElementById('select2').value;
-		select3 = document.getElementById('select3').value;
-		if(desc1==''){
-			return false;
-		}
-		$.ajax({
-			type: "POST",
-			url:"<?php echo $this->baseUrl.'/campaign/campaign/add/'?> ",
-			data: {
-				select: select,
-				select2: select2,
-				select3: select3,
-				decs: desc1
-			},
-			success: function(msg){
-				if(msg != "")
-				{					
-					alert(msg);
-				}
-				else
-				{
-					alert("Thêm  không thành công");
-					
-				}
-				window.location.reload();
-			}
-		});
-		return false;	
+	
+	///////Delete A Camp///////
+	$("#tbCampaign").delegate("td.action .delete", "click", function() {
+		deleteCamp(this);
+		return false;		
 	});
-
+    
+	///////Save A Camp///////
+	$("#tbCampaign").delegate("td.action .save", "click", function() {
+		if($(this).hasClass("disabled")){
+			alert("disabled");
+		}else{
+			saveCamp(this);
+		}		
+		return false;		
+	});
+	///////Add A Next Camp///////
+	$("#tbCampaign").delegate("td.c_nextcampaign .add", "click", function() {
+		addNextCamp(this);
+		return false;		
+	});
+	///////Delete A Next Camp///////
+	$("#tbCampaign").delegate("td.c_nextcampaign .delete", "click", function() {
+		deleteNextCamp(this);
+		return false;		
+	});
+    
 });
-
-
 </script>

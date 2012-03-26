@@ -26,15 +26,16 @@ class Zend_View_Helper_PagingControl
 					echo "trang | Hiển thị ";
 		//echo "<li><a href='".htmlspecialchars($_SERVER['_SELF'])."?do=search&start=".$curPage."&page=".$prepage."'>Previous</a></li>";
 		//echo "<li><a href='".htmlspecialchars($_SERVER['_SELF'])."?do=search&start=".$curPage."&page=".$nextpage."'>Next</a></li>";
-		$strList .= "<select name='items' onchange='changeItems()' >";
-		$itemInList = 5;
+		$strList .= "<select name='items' onchange='changeItems()'>";
+		$itemInList = 10;
 		$start		= 10;
 		$step		= 10;
 		
-		for($i = 0, $j = $start;( $i < $totalPage)||($i == $totalPage && $totalPage==1); $i++, $j+=$step)
+		for($i = 1; $i<=10;$i++)
 		{
-			$selected = $itemPerpage == $j ? ' selected ' : ' ';
-			$strList .= "<option $selected value='$j'>$j</option>";
+		  $value = $i*10;
+          $selected = $itemPerpage == $value ? 'selected': '';
+          $strList .= "<option $selected value='$value'>$value</option>";
 		}
 		
 		$strList .= "</select> mẫu tin | Tổng cộng <strong>$totalRecord</strong> mẫu tin

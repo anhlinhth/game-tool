@@ -28,50 +28,44 @@ table#battle td{
 	overflow: hidden;
 	vertical-align: middle;
 }
-/**************eTable Layout********************/
+.c_order input{
+	width:30px;
+	text-align:center; 
+}
+/**************Table Layout********************/
  table#tb_layout{
-
 	border-collapse: separate;
-
+	border-spacing: 10px;
  }
-
-table#tb_layout td.invisible{
-	
-	opacity:0.0;
-}
-table#tb_layout td.invisible *{
-	
-	opacity:0.0;
-}
-
-table#tb_layout td.visible{
-	background: #EFEFEF;	
-	opacity:1.0;
-	color:blue;
-	
-}
-table#tb_layout td.visible *{
-	background: #EFEFEF;	
-	opacity:1.0;
-	color:blue;
-	
-}
 table#tb_layout td select, table#tb_layout td input{
 	border:none;
-	max-width: 200px;
-	min-width: 100%;	
+	max-width: 200px;	
 	overflow: hidden;
 	background-color: #D9EAED;
 	padding:0px;
 	margin: 0px;
-	
 }
 table#tb_layout td select{
-	
+	width: 70%;
+	float: left;
 }
 table#tb_layout td input{
-	color:black;
+	width: 22%;	
 }
+table#tb_layout td.invisible,table#tb_layout td.invisible *{	
+	opacity:0.0;
+}
+
+table#tb_layout td.visible,table#tb_layout td.visible *{
+	background: #EFEFEF;	
+	opacity:1.0;
+    color: blue;
+}
+table#tb_layout td.visible{
+	border: 2px solid lightblue;
+}
+
+
 /**************End Table Layout****************/
 .style{
 	margin: auto;text-align: center;padding-top: 2px;padding-bottom: 2px;
@@ -85,33 +79,32 @@ table#tb_layout td input{
 	<table>
 	<tr>
 		<td>
-			<label>Campaign Id :</label>
-			
+			<label>World Map:</label>
+			<input type="text" readonly="readonly" value='<?php echo $this->campaignId[0]->WorldMap;?>' name='nextCampaign' id='nextCampaign'/>
+		</td>
+		<td>
+			<label>Select Campaign:</label>			
 			<select name='campaignID' id='campaignID'>							
-				<?php echo $this->options($this->campaign,$this->campaignId[0]->ID,array('key'=>"ID",'name'=>"Name"))?>
-				
+				<?php echo $this->options($this->arrCampaign,$this->campaign->ID,array('key'=>"ID",'name'=>"Name"))?>				
 			</select>
 		</td>			
 		<td>
 			<label>Campaign Name:</label>
-			<input type="text" name='Name' id='Name' value='<?php echo $this->campaignId[0]->Name;?>' />
+			<input type="text" name='Name' id='Name' value='<?php echo $this->campaign->Name;?>' />
 		</td>
-		<td>
-			<label>World Map:</label>
-			<input type="text" readonly="readonly" value='<?php echo $this->campaignId[0]->WorldMap;?>' name='nextCampaign' id='nextCampaign'/>
-		</td>
+		
 		</tr>
 	</table>
 	<h3>Battle</h3>	
 
-	<table class="list" id='battle' width="100%">
+	<table class="list" id='battle'>
 		<thead>
 			<tr>
-				<td width="15px;">ID</td>
-				<td  class="center" width="50px;" ><a onclick="order();" href='#'>Order</a></td>
-				<td class="center">Layout</td>
+				<td width="15px">ID</td>
+				<td width="15px" class="center"><a onclick="order();" href='#'>Order</a></td>
+				<td width="600px" class="center">Layout</td>
 				<td>Award</td>
-				<td class="center" width="20px;">Action</td>
+				<td class="center" width="20px">Action</td>
 			</tr>
 		</thead>
 	<tbody id="campaign">	
@@ -119,91 +112,91 @@ table#tb_layout td input{
 		<tr class='battle' id='battle-<?php echo $rowbattle->ID?>'>
 			<td><?php echo $rowbattle->ID;?><input style="display:none" type="text" id='BattleID' name='BattleID' value='<?php echo $rowbattle->ID;?>'/></td>
 
-			<td class="center">
+			<td class="center c_order">
 				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
-			<td width="300px">
+			<td width="300px" style="text-align: center;">
 				
-				<select style="width=100%" id="Layout" name="Layout" tabindex="2">
+				<select style="width=100%;border: 2px solid lightblue;" id="Layout" name="Layout" tabindex="2">
 					<?php echo $this->options($this->arrlayout,$rowbattle->Layout,array('key'=>"ID",'name'=>"Name"))?>
 					<option  value="insert" style="color:red"> New Layout</option>	
 				</select>
 				<br/>
 				
-				<table id='tb_layout' cellpadding="5" cellspacing="5">
+				<table id='tb_layout'>
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][0])?"visible":"invisible"?>
 						<td id="point0" class="<?php echo  $strclass?>">
-							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0);
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0);
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[0]",
-												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>												
+												array('key'=>"ID",'name'=>"Name",'default'=>""))?>												
 												
-							<input type='text' class='<?php echo $strclass?>_0' id='levelSolider' name='levelSolider[]' value="<?php echo $arrBS['Level'];?>"/>
+							lv:<input type='text' class='<?php echo $strclass?>_0' id='levelSolider' name='levelSolider[0]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][3])?"visible":"invisible"?>
 						<td id="point3" class="<?php echo  $strclass?>" >
-							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3); 
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[3]",
-												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_3' id='levelSolider' name='levelSolider[]' value="<?php echo $arrBS['Level'];?>"/>
+												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
+							lv:<input type='text' class='<?php echo $strclass?>_3' id='levelSolider' name='levelSolider[3]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][6])?"visible":"invisible"?>
 						<td id="point6" class="<?php echo  $strclass?>" >
-							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[6]",
-												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_6' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
+												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
+							lv:<input type='text' class='<?php echo $strclass?>_6' id='levelSolider' name='levelSolider[6]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>						
 					</tr>
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][1])?"visible":"invisible"?>
 						<td  id="point1" class="<?php echo  $strclass?>" >
-							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); 
+							<?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[1]",
-												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_1' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
+												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
+							lv:<input type='text' class='<?php echo $strclass?>_1' id='levelSolider' name='levelSolider[1]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visible":"invisible"?>
 						<td  id="point4"class="<?php echo  $strclass?>" >
-							<xx></xx><?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); 
+							<?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[4]",
-												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text'class='<?php echo $strclass?>_4' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
+												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
+							lv:<input type='text'class='<?php echo $strclass?>_4' id='levelSolider' name='levelSolider[4]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][7])?"visible":"invisible"?>
 						<td  id="point7"class="<?php echo  $strclass?>" >
-							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7);
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7);
 							 echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[7]",
-												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_7' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
+												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
+							lv:<input type='text' class='<?php echo $strclass?>_7' id='levelSolider' name='levelSolider[7]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][2])?"visible":"invisible"?>
 						<td id="point2" class="<?php echo  $strclass?>" >
-							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); 
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[2]",
-												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_2' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
+												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
+							lv:<input type='text' class='<?php echo $strclass?>_2' id='levelSolider' name='levelSolider[2]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][5])?"visible":"invisible"?>
 						<td id="point5" class="<?php echo  $strclass?>" >
-							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5); 
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[5]",
-												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_5' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
+												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
+							lv:<input type='text' class='<?php echo $strclass?>_5' id='levelSolider' name='levelSolider[5]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][8])?"visible":"invisible"?>
 						<td id="point8" class="<?php echo  $strclass?>" >
-							<xx></xx><?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[8]",
-												array('key'=>"ID",'name'=>"Name",'default'=>""))?><br/>
-							<yy></yy><input type='text' class='<?php echo $strclass?>_8' id='levelSolider' name='levelSolider[]' value='<?php echo $arrBS['Level'];?>'/>
+												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
+							lv:<input type='text' class='<?php echo $strclass?>_8' id='levelSolider' name='levelSolider[8]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 				</table>
@@ -215,14 +208,14 @@ table#tb_layout td input{
 					<div class="award-<?php echo $rowbattle->ID?>" id="div-list-award-<?php echo $key ?>">
 					<select id='<?php echo $row->ID?>' name='AwardTypeID[]' onChange='updateAward(this)'>
 						<?php if (empty($row->AwardTypeID)){?>
-							<option $strSelect value="" style="color:red"></option>
+							<option value="" style="color:red"></option>
 						<?php } ?>	
 						<?php echo $this->options($this->arrawardtype,$row->AwardTypeID,array('key'=>'AwardTypeID','name'=>'Name'))?>
 						<option  value="insert" style="color:red">New Type</option>
 					</select>					
 					<input type='text' class='soldier' id='Value' name='Value[]' value='<?php echo $row->Value?>'/>
 					
-					<a class='tool-16 delete' href='javascript:removeAward(<?php echo $rowbattle->ID.",".$key?>)'>&nbsp</a>	
+					<a class='tool-16 delete' href='javascript:removeAward(<?php echo $rowbattle->ID.",".$key?>)'>&nbsp;</a>	
 					</div>
 				<?php }?>
 			</div>
@@ -246,10 +239,11 @@ table#tb_layout td input{
 </form>
 <!-- Dung de them 1 award -->
 <div style="display: none">
+	
 	<div id="optionAwardType">
-		<option selected value="" style="color:red"></option>
+		<?php echo "<option selected value='' style='color:red'></option>"?>
 		<?php echo $this->options($this->arrawardtype,0,array('key'=>'AwardTypeID','name'=>'Name'))?>	
-		<option  value="insert" style="color:red"> New Type</option>		
+		<?php echo "<option  value='insert' style='color:red'> New Type</option>"?>		
 	</div>
 </div>
 <!--  -->
@@ -261,8 +255,19 @@ table#tb_layout td input{
 <!--  -->
 
 <!-- Dialog Them AwardType~-->
-<div style='display:none' id='insert-awardtype'>	
-	<input class='msg' type="text" id="awardtype" name="awardtype" value="AwardType" />
+<div style='display:none' id='insert-awardtype'>
+	<?php foreach($this->arrawardtype as $value){?>
+		<p id="p-type-<?php echo $value->AwardTypeID?>)">
+		ID:<?php echo $value->AwardTypeID?><input type="text" name="awardtype[]" id="awardtype[]" value="<?php echo $value->Name?>"/>
+		<a class='tool-16 delete' href='javascript:deleteAwardType(<?php echo $value->AwardTypeID?>)'>&nbsp;</a>	
+		</p>			
+	<?php }?>
+	<p id="p-new-type">
+		New<input  type="text" id="awardtype" name="awardtype" value="AwardType" />
+		<a class='tool-16 add' href='javascript:addAwardType(<?php echo $value->AwardTypeID?>)'>&nbsp;</a>
+	</p>
+	
+	
 	
 </div>
 <!--  -->
@@ -338,8 +343,7 @@ table#tb_layout td input{
 	{
 		var data = $("#battle-"+key+" *").serialize();
 		var camID = $("#campaignID").val();
-		data += "&campaignID="+camID;
-		
+		data += "&campaignID="+camID;		
 		$.ajax({
 			type: "POST",
 			url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
@@ -475,18 +479,22 @@ table#tb_layout td input{
 	
 ///////////////End-ThaoNX/////////////////////
 	////////////////////////////
+	function addAwardType(key){
+		alert("chua lam");
+	}
 	function updateAward(element)
 	{
 		var selected = element.value;
 		if(selected == "insert"){
 			$("#insert-awardtype").dialog({
 				title: "New AwardType",
-				height: 160,
-				width: 200,
+				height: 400,
+				width: 250,
 				modal: true,
 				buttons: {
 					"Save": function() {
 						var award = $('#awardtype').val();
+						alert(award);
 						$.ajax({
 							type: "POST",
 							url: "<?php echo $this->baseUrl.'/campaign/AwardType/insert' ?> ",
@@ -518,7 +526,7 @@ table#tb_layout td input{
 	});
 	////////////Layout////////
 	$('select#Layout').change(function(){
-		var select=$(this).children("option:selected").val();
+		
 		var battleID=$(this).parent().parent().find("#BattleID").val();			
 		var layoutID=$(this).val();		
 		if(layoutID=="insert"){
@@ -597,7 +605,7 @@ table#tb_layout td input{
 				num = key+1;
 				flag1=true;
 				//////test cac o khong bo trong
-				for(i=0;i<8;i++)
+				for(var i=0;i<8;i++)
 				{
 					value=$(val).find('.visible_'+i).val();	
 					//
