@@ -24,6 +24,7 @@ class Campaign_BattleController extends BaseController
 	}
 	public function saveAction()
 	{
+		
 		try 
 		{
 			$this->_helper->layout->disableLayout();
@@ -40,7 +41,9 @@ class Campaign_BattleController extends BaseController
 				//save Battle Soldier
 				$mdbs = new Models_Battle_Soldier();
 				$arrSolider = $_POST['solider'];
+				
 				$arrLevel = $_POST['levelSolider'];
+				
 				$mdbs->deleteB_Soldier($objBattle->ID);
 				foreach ( $arrSolider as $key => $value ) 
 				{
@@ -48,8 +51,7 @@ class Campaign_BattleController extends BaseController
 					$objbs->BattleID = $objBattle->ID;
 					$objbs->Level = $arrLevel[$key];
 					$objbs->Point = $key;
-					$objbs->Soldier = $arrSolider[$key];
-					$objbs->ID = "NULL";					
+					$objbs->Soldier = $value;									
 					if($objbs->Soldier != "" && $objbs->Level != "")
 					{
 						$mdbs->updateB_Soldier($objbs);

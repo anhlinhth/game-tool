@@ -10,17 +10,7 @@ class Models_Battle extends Models_Base
 		$this->_key = "ID";
 		$this->_table = "c_battle";	
 	}
-	public function delete($ID)
-	{
-	try
-		{			
-			$this->_db->delete('c_battle', "ID = '$ID'");			
-		}
-		catch(Zend_Db_Exception $ex)
-		{
-			throw new Internal_Error_Exception($ex);
-		}
-	}
+	
 	public function getBattle($id)
 	{
 		$sql="
