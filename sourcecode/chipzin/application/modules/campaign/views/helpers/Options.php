@@ -19,7 +19,7 @@ class Zend_View_Helper_Options
 						$strSelect = 'selected';
 					else
 						$strSelect = '';
-					$strList .= "<option $strSelect value=$row[$key]>$row[$name]</option>";
+					$strList .= "<option $strSelect value=$row[$key]>$row[$name][$row[$key]]</option>";
 				}
 		}	
 		echo $strList;
