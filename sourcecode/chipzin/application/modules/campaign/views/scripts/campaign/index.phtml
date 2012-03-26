@@ -47,9 +47,9 @@ td.status{
 			</td>
 			<td>World Map:
 				<select name="S_WorldMap" onChange="changeMap(this)">
-					<option value=""></option>
+					<option onclick="changeMap1()" value=""></option>
 					<?php echo $this->options($this->arrWorldMap,$this->obj->WorldMap,array("key"=>"ID","name"=>"Name"));?>
-					<option style="color:red" value="-1">New Map</option>
+					<option  style="color:red" value="-1">New Map</option>
 				</select>
 			</td>
 			<td>				
@@ -116,8 +116,8 @@ td.status{
 								<option value="">NULL</option>
 								<?php echo $this->options($this->arrCampaign,$nextCamp->NextCamp,array("key"=>"ID","name"=>"Name"));?>
 							</select>
-							<a class="tool-16 delete"></a><!--JQUERY delegate Click: addNextCampp(e)-->							
-							<a class="tool-16 add"></a><!--JQUERY delegate Click: -->	
+							<a class="tool-16 delete" href="#"></a><!--JQUERY delegate Click: addNextCampp(e)-->							
+							<a class="tool-16 add" href="#"></a><!--JQUERY delegate Click: -->	
 						</div>
 					<?php }?>
 					<?php } else{
@@ -142,8 +142,10 @@ td.status{
 		<a class="btn add" type="submit" href="javascript:addCamp()">Add</a>
 		<a class="btn save" type="submit" href="javascript:saveAll()">Save All</a>
 	</div>
-    
-	<!--Temp Div For add a campp-->	
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
+</div>	
+</form>
+<!--Temp Div For add a campp-->
 	<div id="div-temp" style="display:none">
 		<table id="tbCampaign-temp">
 			<tbody>
@@ -191,30 +193,45 @@ td.status{
 							<option value="">NULL</option>
 							<?php echo $this->options($this->arrCampaign,0,array("key"=>"ID","name"=>"Name"));?>
 						</select>
-			<a class="tool-16 delete"></a><!--JQUERY delegate Click: addNextCampp(e)-->							
-			<a class="tool-16 add"></a><!--JQUERY delegate Click: -->	
-		</div>		
-		</div>
-		<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
-</div>
-</form>
+			<a class="tool-16 delete" href="#" ></a><!--JQUERY delegate Click: addNextCampp(e)-->							
+			<a class="tool-16 add" href="#"></a><!--JQUERY delegate Click: -->	
+		</div><!-- End #next-camp-temp  -->
+		<div id="div-new-world-map">
+		<input style="width:90%" type="text" value="New Map"></input>
+		</div><!-- End #next-camp-temp  -->		
+	</div><!--End temp-->
 <script type="text/javascript">
-function changeMap(id){
-	alert("");
-}
-function searchworldmap(){
-	alert("search");
-
-}
-
 //////////////ThaoNX//////////////
 /**********************************/
 function changeMap(e){
 	var key = e.options[e.selectedIndex].value;
 	if(key == -1){
+		$("#div-new-world-map").dialog({
+				title: "New Map",
+				height: 200,
+				width: 300,
+				modal: true,
+				buttons: {
+					"Save": function() {
+						/*var award = $('#awardtype').val();
+						alert(award);
+						$.ajax({
+							type: "POST",
+							url: "<?php echo $this->baseUrl.'/campaign/AwardType/insert' ?> ",
+							data: "award=" + award,
+							dataType: "json",
+							success: function(smg){	
+								//smg là json có giá trị là awart_type lớn nhất.
+								alert('Thành Công');							
+							}
+						});	*/
+						$(this).dialog("close");				
+					}											
+				}
+			});		
 	}else{
 		$("#formPaging").submit();
-	}
+	};
 }
 function changeMap1(){
 	alert("");
@@ -236,7 +253,7 @@ function updateSelectCamp(campid,name,action){
 			}
 		});
 	}else if(action=="update"){
-	}
+	};
 }
 /**********************************/
 function updateStatus(e,status,title){
@@ -271,15 +288,11 @@ function deleteNextCamp(e){
 function addNextCamp(e){	
 	var parent_td = $(e).parent().parent();
 	var parent_tr = parent_td.parent();
-	var count = parent_td.find(".next-camp").size();
-	var btn_del_camp = "<a class='tool-16 delete' href=''></a>";
-	var btn_add_camp = "<a class='tool-16 add' href=''></a>";
-	var html=$("#next-camp-temp").clone().removeAttr("id").attr("class","next-camp");;
-	
+	var count = parent_td.find(".next-camp").size();	
+	var html=$("#next-camp-temp").clone().removeAttr("id").attr("class","next-camp");;	
 	if(count==0){// delete btn-add in td tag
 		parent_td.html("");
-	}
-	
+	}	
 	parent_td.append(html);		
 	parent_tr.change();
 }
@@ -303,7 +316,7 @@ function saveCamp(e){
                     parent_tr.find("td.c_id input[name='ID']").attr("value",msg.CampID);
                     parent_tr.find("td.c_id span").text(msg.CampID);
 					updateSelectCamp(msg.CampID,msg.Name,"add");
-                }                
+                };                
   		   }else{
     			alert(msg.msg);
     	   };
@@ -341,7 +354,7 @@ function deleteCamp(e){
             type: "POST",
             url: "<?php echo $this->baseUrl.'/campaign/campaign/delete'?>",            
             data: {
-               CampID:CampID 
+               CampID:CampID, 
             },        
             success: function(msg){       
         	   if(msg=="1"){  		        
@@ -360,8 +373,10 @@ function deleteCamp(e){
 /**********************************/
 /**********************************/
 function saveAll(){
-	alert("save all");
-	return false;
+	$("#tbCampaign").find("td.action .save").not(".disabled").each(function (index){
+		$(this).click();
+	});
+	
 }
 /***************JQuery*******************/
 $(function(){
