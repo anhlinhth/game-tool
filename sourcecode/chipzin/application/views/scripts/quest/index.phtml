@@ -21,7 +21,7 @@ if($this->temp)
 			<td></td>
 			<td>Quest Line
 				<select name="QuestLineID" id = "QuestLineID" onChange="changeQuestLine()">
-				<option value="">Chọn QuestLine </option>
+				<option value="">Chá»�n QuestLine </option>
 				<?php 
 				foreach($this->dataquestlineid as $row)
 				{
@@ -65,7 +65,8 @@ if($this->temp)
 		
 	</table>
 	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
-
+	<br>
+		<center><input type="submit" name="button1" id = "button1" style="width:100px" onclick="deletechose(document.formPaging)" value="DELETE"/></center>
 </div>
 </form>
 <script>
@@ -95,7 +96,7 @@ function deleteNextQuest(questID,id,key){
 		alert("at least 1 Next-Quest! Only Set Null");
 		return;
 	}
-	if(confirm("Bạn có muốn xóa Next-Quest?")){
+	if(confirm("Báº¡n cÃ³ muá»‘n xÃ³a Next-Quest?")){
 		$.ajax({
 			type: "POST",
 			url:"<?php echo $this->baseUrl.'/quest/updatenextquest'?> ",
@@ -131,7 +132,7 @@ function updateNextQuest(id,questid,key)
 		},	
 		success: function(data){
 			if(parseInt(data) == 1){	
-				alert("Cập nhật thành công");
+				alert("Cáº­p nháº­t thÃ nh cÃ´ng");
 				loadQuest();
 			}else{
 				alert(data);
@@ -152,7 +153,7 @@ function updateNeedquest(id)
 		data: "questid=" + id +"&needquest="+ needquest,	
 		success: function(data){			
 			if(data=="1"){	 
-				alert("Cập nhật thành công");
+				alert("Cáº­p nháº­t thÃ nh cÃ´ng");
 				loadQuest();
 			}else{
 				alert(data);
@@ -190,6 +191,33 @@ function deleteQuest(key){
 		});
 	}
 	
+}
+function deletechose(theform){	
+	
+	var chkitems = theform.chkid.length;
+	var state = theform.chkall.checked;
+	if(chkitems > 0)
+	{
+		for(var i = 0; i < chkitems; i++)
+		{
+			if(theform.chkid[i].checked == true)
+			{
+				key = theform.chkid[i].value;
+				if(confirm("Delelte Quest: "+key+" ?")){
+					$.ajax({
+						type: "POST",
+						url:"<?php echo $this->baseUrl.'/quest/delete/'?> ",
+						data: {
+							id:key
+						},			
+						success: function(data){				
+							loadQuest();
+						}
+					});
+				}
+			}
+		}
+	}
 }
 /////////////////////////////////////////
 function changeQuestLine(){	
