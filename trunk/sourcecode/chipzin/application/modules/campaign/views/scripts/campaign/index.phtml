@@ -42,12 +42,14 @@ td.status{
 	<table class="filter">		
 		<tr>
 			<td>
-				Campaign ID : <input style="width:110px;" type="text" name="ID" id="ID" class="searchbox" />
+				Campaign ID : <input style="width:110px;" type="text" name="S_ID" id="ID" class="searchbox" value="<?php echo $this->obj->ID?>"/>
 				<input class="btn search" type="submit" name="search" value="search" />
 			</td>
 			<td>World Map:
-				<select>
-					<?php echo $this->options($this->arrWorldMap,$campRow->WorldMap,array("key"=>"ID","name"=>"Name"));?>
+				<select name="S_WorldMap" onChange="changeMap(this)">
+					<option value=""></option>
+					<?php echo $this->options($this->arrWorldMap,$this->obj->WorldMap,array("key"=>"ID","name"=>"Name"));?>
+					<option style="color:red" value="-1">New Map</option>
 				</select>
 			</td>
 			<td>				
@@ -100,7 +102,7 @@ td.status{
 						</select>
 					</td>
 					<td class="c_needcampaign">						
-						<select id='NeedCamp-<?php echo $campRow->ID?>' name='NeedCamp' onChange='changeNeedCampaign(<?php echo $campRow->ID ?>,this)'>
+						<select class='select-need-camp' name='NeedCamp'>
 							<option value="">NULL</option>
 							<?php echo $this->options($this->arrCampaign,$campRow->NeedCamp,array("key"=>"ID","name"=>"Name"));?>
 						</select>
@@ -110,7 +112,7 @@ td.status{
 						foreach($this->arrNextCamp[$campRow->ID] as $key=>$nextCamp) {						
 					?>
 						<div class="next-camp">
-							<select id='NextCampaign' name='NextCamp[]'>							
+							<select class='select-next-camp' name='NextCamp[]'>							
 								<option value="">NULL</option>
 								<?php echo $this->options($this->arrCampaign,$nextCamp->NextCamp,array("key"=>"ID","name"=>"Name"));?>
 							</select>
@@ -142,8 +144,8 @@ td.status{
 	</div>
     
 	<!--Temp Div For add a campp-->	
-	<div id="div-temp-add-camp" style="display:none">
-		<table>
+	<div id="div-temp" style="display:none">
+		<table id="tbCampaign-temp">
 			<tbody>
 				<tr class="tr-camp" id='tr-camp-new'>
 						<td></td>
@@ -183,7 +185,15 @@ td.status{
 						</td>					
 				</tr>
 			</tbody>	
-			</table>		
+			</table>
+		<div id="next-camp-temp">
+			<select class='select-next-camp' name='NextCamp[]'>							
+							<option value="">NULL</option>
+							<?php echo $this->options($this->arrCampaign,0,array("key"=>"ID","name"=>"Name"));?>
+						</select>
+			<a class="tool-16 delete"></a><!--JQUERY delegate Click: addNextCampp(e)-->							
+			<a class="tool-16 add"></a><!--JQUERY delegate Click: -->	
+		</div>		
 		</div>
 		<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
 </div>
@@ -196,10 +206,38 @@ function searchworldmap(){
 	alert("search");
 
 }
-function changeMap1(id){
+
+//////////////ThaoNX//////////////
+/**********************************/
+function changeMap(e){
+	var key = e.options[e.selectedIndex].value;
+	if(key == -1){
+	}else{
+		$("#formPaging").submit();
+	}
+}
+function changeMap1(){
 	alert("");
 }
-//////////////ThaoNX//////////////
+/**********************************/
+function updateSelectCamp(campid,name,action){
+	if(action=="add"){
+		var option_html = "<option value="+campid+">"+name+"["+campid+"]</option>";		
+		$(".select-next-camp").append(option_html);
+		$(".select-need-camp").append(option_html);
+	}else if(action=="del"){
+		$(".select-next-camp option[value='"+campid+"']").remove();
+		$(".select-need-camp option[value='"+campid+"']").remove();
+		//$(".select-next-camp option[value='"+campid+"']").remove();
+		//$(".select-next-camp [value='"+campid+"']").remove();
+		$("select.select-next-camp").each(function(index){			
+			if($(this).val()==""){				
+				//$(this).parent().remove();				
+			}
+		});
+	}else if(action=="update"){
+	}
+}
 /**********************************/
 function updateStatus(e,status,title){
 	e.removeClass("ok");	
@@ -236,11 +274,7 @@ function addNextCamp(e){
 	var count = parent_td.find(".next-camp").size();
 	var btn_del_camp = "<a class='tool-16 delete' href=''></a>";
 	var btn_add_camp = "<a class='tool-16 add' href=''></a>";
-	var html="<div class='next-camp'>"+
-		"<select id='NextCamp' name='NextCamp[]'>"+
-		"<option value=''>NULL</option>"+
-		"<?php echo $this->options($this->arrCampaign,0,array('key'=>'ID','name'=>'Name'));?>"+
-		"</select>"+btn_del_camp+btn_add_camp+"</div>";
+	var html=$("#next-camp-temp").clone().removeAttr("id").attr("class","next-camp");;
 	
 	if(count==0){// delete btn-add in td tag
 		parent_td.html("");
@@ -267,7 +301,8 @@ function saveCamp(e){
   		        a_save.addClass("disabled");
                 if(msg.CampID){                    
                     parent_tr.find("td.c_id input[name='ID']").attr("value",msg.CampID);
-                    parent_tr.find("td.c_id span").text(msg.CampID);                    
+                    parent_tr.find("td.c_id span").text(msg.CampID);
+					updateSelectCamp(msg.CampID,msg.Name,"add");
                 }                
   		   }else{
     			alert(msg.msg);
@@ -278,7 +313,7 @@ function saveCamp(e){
 /**********************************/
 function addCamp(){
 	updateSTT();	
-	var tr = $("#div-temp-add-camp tr");
+	var tr = $("#tbCampaign-temp tr");
 	var count = $("#tbCampaign tbody .tr-camp").size();		
 	if(count%2==0){
 		tr.addClass("alt");
@@ -289,7 +324,7 @@ function addCamp(){
 	
 	tr.find(".action a.edit").toggleClass("disabled");
 	tr.find(".action a.edit").toggleClass("disabled");
-	var s = $("#div-temp-add-camp table tbody").html();
+	var s = $("#tbCampaign-temp tbody").html();
 	$("#tbCampaign tbody").append(s);
 	return;
 	
@@ -310,7 +345,8 @@ function deleteCamp(e){
             },        
             success: function(msg){       
         	   if(msg=="1"){  		        
-                   parent_tr.remove();           
+                    parent_tr.remove();	
+					updateSelectCamp(CampID,"","del");	
         	   }else{
         			alert(msg);
         	   };

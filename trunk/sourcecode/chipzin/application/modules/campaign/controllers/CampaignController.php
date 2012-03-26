@@ -39,13 +39,19 @@ class Campaign_CampaignController extends BaseController
 
             $md = new Models_Campaign();
             $form = new Forms_Campaign();
-            $form->_requestToForm($this);
+            //$form->_requestToForm($this);khong dung duoc vi trung ID va Name
+            if ($this->_request->isPost()) {// search
+                $form->obj->ID = $_POST["S_ID"];
+                $form->obj->WorldMap= $_POST["S_WorldMap"];
+            }
+            print_r($form->obj);
             $data = $md->_filter($form->obj, "ID ASC", ($pageNo - 1) * $items, $items);
             $count = $md->_count(null);
             $this->view->arrNextCamp = array();
             foreach ($data as $value) {
                 $this->view->arrNextCamp[$value->ID] = $md->getNextCamp($value->ID);
             }
+            $this->view->obj = $form->obj;
             $this->view->data = $data;
             $this->view->items = $items;
             $this->view->page = $pageNo;
@@ -241,7 +247,7 @@ class Campaign_CampaignController extends BaseController
                     $mdCamp->insertNextCamp($obj);
                 }
             }
-            $result = array('msg' => '1', 'CampID' => $id); 
+            $result = array('msg' => '1', 'CampID' => $id,'Name'=>$form->obj->Name); 
             echo json_encode($result);           
         }
         catch (exception $ex) {

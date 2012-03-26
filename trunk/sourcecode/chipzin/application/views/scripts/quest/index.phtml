@@ -185,7 +185,8 @@ function deleteQuest(key){
 			data: {
 				id:key
 			},			
-			success: function(data){				
+			success: function(data){
+				alert(data);				
 				loadQuest();
 			}
 		});
