@@ -1,13 +1,13 @@
 <?php
 require_once ROOT_APPLICATION_CONTROLLERS . DS . 'BaseController.php';
-require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'models' .
-    DS . 'Models_Campaign.php';
-require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'models' .
-    DS . 'Models_WorldMap.php';
-require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'form' .
-    DS . 'Forms_Campaign.php';
-require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'object' .
-    DS . 'Obj_Base.php';
+// require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'models' .
+//     DS . 'Models_Campaign.php';
+// require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'models' .
+//     DS . 'Models_WorldMap.php';
+// require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'form' .
+//     DS . 'Forms_Campaign.php';
+// require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'object' .
+//     DS . 'Obj_Base.php';
 require_once ROOT_LIBRARY_UTILITY . DS . 'utility.php';
 require_once ROOT_APPLICATION_MODELS . DS . 'Models_Log.php';
 class Campaign_CampaignController extends BaseController
@@ -29,37 +29,7 @@ class Campaign_CampaignController extends BaseController
     {
         try {
 
-            $pageNo = $this->_request->getParam("page");
-            $items = $this->_request->getParam("items");
-
-            if ($pageNo == 0)
-                $pageNo = 1;
-            if ($items == 0)
-                $items = DEFAULT_ITEM_PER_PAGE;
-
-            $md = new Models_Campaign();
-            $form = new Forms_Campaign();
-            //$form->_requestToForm($this);khong dung duoc vi trung ID va Name
-            if ($this->_request->isPost()) {// search
-                $form->obj->ID = $_POST["S_ID"];
-                $form->obj->WorldMap= $_POST["S_WorldMap"];
-            }
             
-            $data = $md->_filter($form->obj, "ID ASC", ($pageNo - 1) * $items, $items);
-            $count = $md->_count(null);
-            $this->view->arrNextCamp = array();
-            foreach ($data as $value) {
-                $this->view->arrNextCamp[$value->ID] = $md->getNextCamp($value->ID);
-            }
-            $this->view->obj = $form->obj;
-            $this->view->data = $data;
-            $this->view->items = $items;
-            $this->view->page = $pageNo;
-            $this->view->totalRecord = $count;
-            $mdWorldMap = new Models_WorldMap();
-            $this->view->arrWorldMap = $mdWorldMap->fetchall();
-            $this->view->arrCampaign = $md->fetchall();
-            $this->view->arrMapType = $md->getAllMapType();
         }
         catch (exception $ex) {
             $this->view->errMsg = $ex->getMessage();
@@ -70,15 +40,7 @@ class Campaign_CampaignController extends BaseController
     public function deleteAction()
     {       
         try {
-            if ($this->_request->isPost()) {                 
-                $this->_helper->layout->disableLayout();
-                $this->_helper->viewRenderer->setNorender();
-                $campID = $_POST["CampID"];               
-                $md = new Models_Campaign();
-                $md->delete($campID);
-                echo "1";
-            }
-
+            
         }
         catch (exception $ex) {
             $this->view->errMsg = $ex->getMessage();
@@ -89,22 +51,7 @@ class Campaign_CampaignController extends BaseController
     public function updateworldmapAction()
     {
         try {
-            $this->_helper->layout->disableLayout();
-            $this->_helper->viewRenderer->setNorender();
-            $id = $this->_request->getParam("id");
-            $desc2 = $this->_request->getParam("desc2");
-            $md = new Models_Campaign();
-            $mdw = new Models_WorldMap();
-
-            $obj = new Obj_Campaign();
-            $obj->ID = $id;
-            $obj->Name = $md->fetchname($id);
-            $obj->WorldMap = $mdw->searchname($desc2);
-            $md->update($obj);
-            Models_Log::insert($this->view->user->username, "act_update_Campaign", $obj->
-                name);
-
-            echo "Update thanh cong";
+            
         }
         catch (exception $ex) {
             $this->view->errMsg = $ex->getMessage();
@@ -114,56 +61,7 @@ class Campaign_CampaignController extends BaseController
     public function updatetypeAction()
     {
         try {
-            $this->_helper->layout->disableLayout();
-            $this->_helper->viewRenderer->setNorender();
-            $id = $this->_request->getParam("id");
-            $desc3 = $this->_request->getParam("desc3");
-            $md = new Models_Campaign();
-            $mdw = new Models_WorldMap();
-            $data = $md->fetchone($id);
-            $obj = new Obj_Campaign();
-
-            $obj->ID = $id;
-            $obj->Name = $data['Name'];
-            $obj->WorldMap = $data['WorldMap'];
-            if ($desc3 == "Map")
-                $obj->TypeID = 1;
-            else
-                $obj->TypeID = 2;
-            $md->update($obj);
-            Models_Log::insert($this->view->user->username, "act_update_Campaign", $obj->
-                name);
-
-            echo "Update thanh cong";
-        }
-        catch (exception $ex) {
-            $this->view->errMsg = $ex->getMessage();
-            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-        }
-    }
-    public function updateAction()
-    {
-        try {
-            $mdw = new Models_WorldMap();
-            $this->_helper->layout->disableLayout();
-            $this->_helper->viewRenderer->setNorender();
-            $id = $this->_request->getParam("id");
-            $desc = $this->_request->getParam("desc");
-            $wm = $this->_request->getParam("select");
-            $md = new Models_Campaign();
-            $obj = new Obj_Campaign();
-            $obj->ID = $id;
-            $obj->Name = $desc;
-            if ($wm == null) {
-                echo "Chưa nhập dữ liệu listbox";
-                return;
-            } else
-                $obj->WorldMap = $mdw->searchname($wm);
-
-            $md->update($obj);
-            Models_Log::insert($this->view->user->username, "act_update_Campaign", $obj->
-                name);
-            echo "Update thanh cong";
+           
         }
         catch (exception $ex) {
             $this->view->errMsg = $ex->getMessage();
