@@ -28,8 +28,8 @@ class Zend_View_Helper_PagingControl
 		//echo "<li><a href='".htmlspecialchars($_SERVER['_SELF'])."?do=search&start=".$curPage."&page=".$nextpage."'>Next</a></li>";
 		$strList .= "<select name='items' onchange='changeItems()' >";
 		$itemInList = 5;
-		$start		= 10;
-		$step		= 10;
+		$start		= 100;
+		$step		= 100;
 		
 		for($i = 0, $j = $start;( $i < $totalPage)||($i == $totalPage && $totalPage==1); $i++, $j+=$step)
 		{
