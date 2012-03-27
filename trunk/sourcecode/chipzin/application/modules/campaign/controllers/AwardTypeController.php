@@ -40,19 +40,19 @@ public function deleteAction()
 		try
 		{
 			$this->_helper->layout->disableLayout();
-			$this->_helper->viewRenderer->setNorender();			
-			if($this->_request->isPost())
-			{				
-				$id = $this->_request->getParam("AwardTypeID");								
-				$mdAwardType = new Models_AwardType();
-				$mdAwardType->_delete($id);									
-				Models_Log::insert($this->view->user->username, "act_delete_AwardType", $obj->name);
-				echo 1;
-			}
+			$this->_helper->viewRenderer->setNorender();
+			$md = new Models_Award_Type();
+			$obj = new Obj_Base();
+			$obj->Name = $_POST['Name'];						
+			$id = $md->insertAward($obj);
+			$result = array('msg' => '1', 'AwardTypeID' => $id);
+			echo(json_encode($result));
 		}
 		catch(Exception $ex)
         {            
 			$this->view->errMsg = $ex->getMessage();
+			$result = array('msg' => $ex->getMessage(), 'AwardTypeID' => "");
+            echo json_encode($result); 
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 	}
@@ -69,10 +69,10 @@ public function updateAction(){
 					if($md->isExistAwardType($form->obj->AwardTypeID)!=0){
 						echo 1;
 						$md->_update($form->obj);
-						echo "Update thÃ nh cÃ´ng";
+						echo "Update thành công";
 					}else{ 
 						$md->_insert($form->obj);
-						echo "ThÃªm thÃ nh cÃ´ng";
+						echo "Thêm thành công";
 					}
 					Models_Log::insert($this->view->user->username, "act_update_AwardType", $obj->name);
 				}
