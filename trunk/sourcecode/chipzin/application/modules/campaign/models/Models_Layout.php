@@ -30,4 +30,35 @@ class Models_Layout extends Models_Base
 	{
 		parent::_insert($obj);
 	}
+	
+	public function filter($objSearch,$order,$offset,$count)
+	{
+		$sql = "SELECT
+					*
+				FROM
+					c_layout
+				WHERE
+					1";
+		if($objSearch)
+			$sql .= " AND Name LIKE '%$objSearch%'";
+		if($objSearch)
+			$sql .= " AND ID = '$objSearch'";
+		if($order)
+			$sql .= " ORDER BY $order";
+	
+		if($count > 0)
+			$sql .= " LIMIT $offset,$count";
+		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+		return $data;
+	}
+	public function update($id,$point)
+	{
+		$sql ="UPDATE
+					c_layout
+				SET
+					Point = '$point'
+				WHERE
+					ID = $id;";
+		$this->_db->query($sql);
+	}
 }

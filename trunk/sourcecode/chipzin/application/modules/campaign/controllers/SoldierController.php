@@ -42,7 +42,7 @@ public function _setUserPrivileges()
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}	
 	}
-public function deleteAction()
+	public function deleteAction()
 	{
 		try
 		{
@@ -63,7 +63,7 @@ public function deleteAction()
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 	}
-public function updateAction(){
+	public function updateAction(){
 		try{
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();

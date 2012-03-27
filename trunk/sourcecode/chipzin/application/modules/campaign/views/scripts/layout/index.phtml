@@ -1,0 +1,153 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+
+<form id="frmLayout" class="myform" action="" method="post">
+<div class="mybox">
+	<h3>Layout</h3>
+	<table class="filter" style="width: 80%;margin: auto;margin-bottom: 20px;margin-top: 10px";>
+		<tr>
+					
+		</tr>		
+	</table>
+	<table class="list" id="list_layout" style="width: 80%;margin:auto ;border: 1px solid;">	
+		<thead>
+			<tr>									
+				<td width="40"><a href="#">ID</a></td>
+				<td>Layout Name</td>							
+				<td>Point</td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<?php $this->listLayout($this->data, $this->page, $this->items, $this) ?>
+			</tr>
+		</tbody>						
+	</table>
+	<?php 
+	if( $this->items == "")
+	{
+		 $this->items = 10;
+	}
+	?>	
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>	
+	<div align="center" style="margin: 20px;">		
+	</div>
+</div>
+</form>
+
+<div style='display:none'  id='edit-layout'>
+<form  id="layout" name="layout" action="" method="post">
+	<table>
+		<tr>
+			<td>1<input type="checkbox" name="point" id="0" value="0" /></td>
+			<td>4<input type="checkbox" name="point" id="3" value="3" /></td>
+			<td>7<input type="checkbox" name="point" id="6" value="6" /></td>
+		</tr>
+		<tr>
+			<td>2<input type="checkbox" name="point" id="1" value="1" /></td>
+			<td>5<input type="checkbox" name="point" id="4" value="4" /></td>
+			<td>8<input type="checkbox" name="point" id="7" value="7" /></td>
+		</tr>
+		<tr>
+			<td>3<input type="checkbox" name="point" id="2" value="2" /></td>
+			<td>6<input type="checkbox" name="point" id="5" value="5" /></td>
+			<td>9<input type="checkbox" name="point" id="8" value="8" /></td>
+		</tr>
+	</table>
+</form>	
+</div>
+<script type="text/javascript">
+
+function deleteLayout(id)
+{
+	if(!confirm("Bạn có muốn xóa Layout: " + id))
+	{
+		return;
+	};
+	$.ajax
+	({
+		type: "POST",
+		url: "<?php echo $this->baseUrl.'/campaign/Layout/delete/'?> ",
+		data: "ID="+ id,
+		success: function(msg)
+		{
+			if(parseInt(msg)==1)
+			{					
+				window.location.reload();
+			}
+			else
+			{
+				alert ("Đã có battel sử dụng Layout này");
+				window.location.reload();		
+			}			
+		}
+	});		
+}
+
+function editLayout(id,point)
+{	
+	for (var i=0; i <= 8; i++)
+	{
+		if (point[i] == '1')
+	    {
+			$('input[id='+i+']').attr('checked', true);
+	    }
+		else
+		{
+			$('input[id='+i+']').attr('checked', false);
+		}
+	}
+	$("#edit-layout").dialog
+	({
+		title: "Edit Layout",
+		height: 200,
+		width: 220,
+		modal: true,
+		buttons: 
+		{
+			"Save": function() 
+			{
+				var arraytemp = new Array();
+				var c_value = "[";
+				for (var i=0; i < document.layout.point.length; i++)
+				{
+					if (document.layout.point[i].checked)
+				    {
+						arraytemp[i] = 1;
+				    }
+					else
+					{
+						arraytemp[i] = 0;
+					}
+				}
+				c_value += arraytemp[0]+','+arraytemp[3] +','+ arraytemp[6] + ','+ arraytemp[1] + ','+ arraytemp[4] + ','+ arraytemp[7] + ','+ arraytemp[2] + ','+ arraytemp[5] + ','+ arraytemp[8];
+				c_value += "]&ID="+id;
+				$.ajax
+				({
+					type: "POST",
+					url: "<?php echo $this->baseUrl.'/campaign/Layout/update' ?>",
+					data: "point=" + c_value,
+					success: function(msg)
+					{	
+						if(msg == '1')
+						{
+							alert('Thành công');
+							window.location.reload();	
+						}
+						else
+							alert('Lỗi');							
+					}
+				});	
+				$(this).dialog("close");					
+			}									
+		}
+	});
+	return;
+}
+		
+</script>
