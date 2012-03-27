@@ -63,12 +63,18 @@ class Zend_View_Helper_TopPanel
                 break;
             case 'campaign':
            	case 'soldier':
+           	case 'typemap':
+           	case 'awardtype':    
             	if (Utility::checkPrivilege($view, 'campaign', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/campaign/campaign/index' class='report'>Campagin Manager</a></li>";               
 				if (Utility::checkPrivilege($view, 'campaign', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/campaign/campaign/edit' class='report'>Campagin Edit</a></li>";               
                 if (Utility::checkPrivilege($view, 'soldier', 'index'))
-                    $strList .= "<li><a href='$view->baseUrl/campaign/soldier/index' class='report'>Soldier</a></li>";    
+                    $strList .= "<li><a href='$view->baseUrl/campaign/soldier/index' class='report'>Soldier</a></li>";
+                if (Utility::checkPrivilege($view, 'typemap', 'index'))
+                	$strList .= "<li><a href='$view->baseUrl/campaign/typemap/index' class='report'>Typemap</a></li>";
+                if (Utility::checkPrivilege($view, 'awardtype', 'index'))
+                	$strList .= "<li><a href='$view->baseUrl/campaign/awardtype/index' class='report'>Award Type</a></li>";
         }
         $strList .= "</ul>
 					</div>
