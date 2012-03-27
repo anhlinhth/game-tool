@@ -8,7 +8,7 @@
 
 <div class="mybox">
 	<h3>Quest Line</h3>
-	<table class="filter" style="width: 80%;margin: auto;margin-bottom: 20px;margin-top: 10px";>
+	<table class="filter" style="width: 90%;margin: auto;margin-bottom: 20px;margin-top: 10px";>
 		<tr>
 			<td>Quest Line ID</td>
 			<td><input style="width:110px;" type="text" name="searchID" id="searchID" class="searchbox" /></td>
@@ -26,7 +26,7 @@
 			</td>
 		</tr>
 	</table>
-	<table class="list" id="list_ql" style="width: 80%;margin:auto ;border: 1px solid;">	
+	<table class="list" id="list_ql" style="width: 90%;margin:auto ;border: 1px solid;">	
 		<thead>
 			<tr>									
 				<td width="40"><a href="#">ID</a></td>
@@ -40,11 +40,11 @@
 				<?php $this->listQuestLine($this->data, $this->page, $this->items, $this) ?>
 			</tr>
 		</tbody>						
-	</table>	
-	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>	
+	</table>
 	<div align="center" style="margin: 20px;">		
-		<input class="btn big sync"  type="submit" value="Sync">
-	</div>
+		<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
+	</div>	
+	
 </div>
 </form>
 <script type="text/javascript">

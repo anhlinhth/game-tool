@@ -244,29 +244,30 @@ td.b_award input{
 	</div>
 </div>
 </form>
-<!-- Dung de them 1 award -->
-<div id="temp-select-award" style="display: none">
-	<div>
-		<select name='AwardTypeID[]'>
-			<?php echo "<option selected value='' style='color:red'></option>"?>
-			<?php echo $this->options($this->arrawardtype,0,array('key'=>'AwardTypeID','name'=>'Name'))?>	
-			<?php echo "<option  value='-1' style='color:red'> New Type</option>"?>		
-		</select>
-		<input type='text' name='Value[]' value=''/>					
-		<a class='tool-16 delete' href='#'></a>	
-	</div>	
 
-</div>
 <!-- hidden div: dung de de thay doi html -->
 <div style='display:none'>
 
 	<!-- # Show loi~-->
 	<div id='dialog'>
-		<p id='ct'></p>
-		<p id='ft'> </p>
+		<p class='ct'></p>
+		<p class='ft'> </p>
 	</div>
 	<!-- # Show loi~-->
 	
+	<!-- Dung de them 1 award -->
+	<div id="temp-select-award">
+		<div>
+			<select name="AwardTypeID[]" onChange="changeAwardType(this)">
+				<?php echo "<option selected value='' style='color:red'></option>"?>
+				<?php echo $this->options($this->arrawardtype,0,array('key'=>'AwardTypeID','name'=>'Name'))?>	
+				<?php echo "<option  value='-1' style='color:red'> New Type</option>"?>		
+			</select>
+			<input type='text' name='Value[]' value=''/>					
+			<a class='tool-16 delete' href='#'></a>	
+		</div>	
+
+	</div>
 	<!-- # Them AwardType~-->
 	<div  id='insert-awardtype'>		
 		<input  type="text" id="awardtype" name="awardtype" value="AwardType" />		
@@ -406,6 +407,19 @@ td.b_award input{
 <!-- Javascript  -->
 <script>
 /************************ThaoNX********************/	 
+	function showDiaglog(){	
+		$("#dialog").dialog({
+				title: "Diaglog",
+				height: 400,
+				width: 350,
+				modal: true,
+				buttons: {
+					"Save": function() {						
+						$(this).dialog("close");							
+					}										
+				}
+		});
+	}
 	////////////////////////////////
 	function updateStatus(e,status,title){
 		e.removeClass("ok");	
@@ -456,6 +470,11 @@ td.b_award input{
 		var a_reset = parent_tr.find(".tool-24.reset");
 		updateStatus(a_status,"loading","loading");	
 		var data = parent_tr.find("*").serialize();
+		var arr_data = parent_tr.find("*").serializeArray();		
+		if(validate2(arr_data)==false){
+			showDiaglog();
+			return;
+		}
 		data += "&Campaign="+campaignID;		
 		$.ajax({
 			type: "POST",
@@ -480,7 +499,9 @@ td.b_award input{
 	////////////////////////
 	function deleteBattle(e){
 		var parent_tr = $(e).parent().parent();
-		var battle_id = parent_tr.find("#BattleID").val();
+		var a_status = parent_tr.find(".status");
+		var battle_id = parent_tr.find("#BattleID").val();		
+		updateStatus(a_status,"loading","loading");			
 		if(battle_id){
 			$.ajax({
 			type: "POST",
@@ -530,8 +551,8 @@ td.b_award input{
 	}
 
 	/********************AwardType****************************/
-	 	//
-	function changeAwardType(element){
+	 //onchange AwardType
+	function changeAwardType(element){		
 		var selected = element.value;
 		if(selected == -1){
 			addAwardType();
@@ -546,33 +567,39 @@ td.b_award input{
 			modal: true,
 			buttons: {
 				"Save": function() {
-					var award = $('#awardtype').val();
-					alert(award);
+					type_name = $('div#insert-awardtype #awardtype').val();											
 					$.ajax({
 						type: "POST",
 						url: "<?php echo $this->baseUrl.'/campaign/AwardType/insert' ?> ",
-						data: "award=" + award,
+						data: "Name=" + type_name,
 						dataType: "json",
-						success: function(smg){	
-							//smg là json có giá trị là awart_type lớn nhất.
-							alert('Thành Công');							
+						success: function(msg){							
+							if(msg.msg=="1"){								
+								updateAwardTypeSelect(msg.AwardTypeID,type_name);
+							}else{
+								alert(msg.msg);
+							}														
 						}
-					});	
-					$(this).dialog("close");				
+					});
+					$(this).dialog("close");		
 				}											
 			}
 		});		
 	}
-	//////////////////////////
-	
-	/*******************Layout**************************/
-	//update selectbox Layout
-	function updateLayoutSelect(layout_id,layout_name){		
-		var option_html = "<option value='"+layout_id+"'>"+layout_name+"</option>";
-		$("select.b_layout option[value='-1']").before(option_html);
+	//update selectbox award
+	function updateAwardTypeSelect(type_id,type_name){
+		var option_html = "<option value='"+type_id+"'>"+type_name+"</option>"
+		$("select[name='AwardTypeID[]'] option[value='-1']").before(option_html);
+		$("select[name='AwardTypeID[]']").each(function(index){
+			if($(this).val()==-1){
+				$(this).val(type_id);
+			}	
+		});
+		//$("td.b_award select option[value='-1']").before(option_html);
 	}
+	/*******************Layout**************************/
 	//insert layout into database
-	function insertLayout(){
+	function insertLayout(e){
 		var arraytemp = new Array();
 		var name = document.layout.namelayout.value;
 		c_value = "[";
@@ -593,6 +620,8 @@ td.b_award input{
 			success: function(msg){					
 				if(msg.msg == "1"){
 					updateLayoutSelect(msg.LayoutID,name);
+					$(e).val(msg.LayoutID);
+					$(e).change();// delegate to change envent selectbox
 				}else{
 					alert(msg.msg);
 				}
@@ -600,7 +629,7 @@ td.b_award input{
 		});	
 	}	
 	//popup form insert layout
-	function popupInsertLayout(){
+	function popupInsertLayout(e){
 		$("#insert-layout").dialog({
 				title: "New Layout",
 				height: 250,
@@ -608,15 +637,19 @@ td.b_award input{
 				modal: true,
 				buttons: {
 					"Save": function() {
-						insertLayout();
+						insertLayout(e);
 						$(this).dialog("close");							
 					}										
 				}
 		});
 	}
+	//update selectbox Layout
+	function updateLayoutSelect(layout_id,layout_name){		
+		var option_html = "<option value='"+layout_id+"'>"+layout_name+"</option>";
+		$("select.layout option[value='-1']").before(option_html);		
+	}
 	//update layout point when change layout ID
-	function updateLayoutPoint(e,json){//e la the <td>
-		
+	function updateLayoutPoint(e,json){//e la the <td>		
 		var table = e.children("table#tb_layout");
 		$.each(json, function(key, val) {
 			if(val==0){
@@ -632,11 +665,10 @@ td.b_award input{
 	}
 	//change layout
 	function changeLayout(e){		
-		var parent_td=$(e).parent();
-		
+		var parent_td=$(e).parent();		
 		var layoutID=$(e).val();
-		if(layoutID==-1){
-			popupInsertLayout();	
+		if(layoutID==-1){			
+			popupInsertLayout(e);//e la the <td>		
 		}else{	
 			$.ajax({
 				type: "POST",
@@ -649,10 +681,22 @@ td.b_award input{
 			});
 		}
 	}
-/***********************************************/
+	/***********************************************/
 	// validate
+	function validate2(data){
+		$("#dialog .ct").html("");
+		jQuery.each(data, function(i, field){       
+			if(field.value==""){
+				$("#dialog .ct").append("<p class='error'>"+ field.name +"</p>" );
+			}
+		});
+		if($("#dialog .ct").html()!=""){			
+			return false;
+		}
+		return true;
+	}
 	function validate(){
-			flag=true;			
+			/*flag=true;			
 			$(".battle").each(function(key,val){
 				num = key+1;
 				flag1=true;
@@ -696,7 +740,7 @@ td.b_award input{
 				}
 				
 			});
-		return flag;	
+		return flag;	*/
 	}
 
 /***************JQUERY***************************/

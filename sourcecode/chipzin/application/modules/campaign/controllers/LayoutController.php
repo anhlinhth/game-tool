@@ -33,7 +33,7 @@ class Campaign_LayoutController extends BaseController
 		}
 	    catch (exception $ex) {
 	    	$this->view->errMsg = $ex->getMessage();
-	    	$result = array('msg' => $ex->getMessage(), 'CampID' => "");
+	    	$result = array('msg' => $ex->getMessage(), 'LayoutID' => "");
 	    	echo json_encode($result);
 	    	Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 	    }

@@ -383,7 +383,7 @@ class QuestController extends BaseController
 			$this->view->arrTask = $md->getTask($questid);
 						
 			$this->view->arrAction = $mdAction->_getAction();
-			$this->view->arrTemp = $mdtemp->_filter();
+			$this->view->arrTemp = $mdtemp->_filter(null,"TaskName",null,null);
 			$this->view->arrTaskTarget = $mdTT->select($questid);
 			$arrArrNextQuest = 	
 			//Hiện ListQuesstTaskClient 

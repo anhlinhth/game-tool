@@ -176,7 +176,7 @@ class TaskController extends BaseController
 			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Template.php';	
 			$mdtemp = new Models_template();
-			$this->view->arrTemplate = $mdtemp->_filter();
+			$this->view->arrTemplate = $mdtemp->_filter(null,"TaskName",null,null);
 			// $_GET[flag]: thu tu Task trong Form new Quest
 			$this->view->key1 = $_POST[flag];
 			
