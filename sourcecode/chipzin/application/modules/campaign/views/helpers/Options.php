@@ -12,14 +12,16 @@ class Zend_View_Helper_Options
 			$key = $arrParram['key'];
 			$name = $arrParram['name'];
 			
+			
 			foreach($data as $row)
 				{
-					$row = (array)$row; 
+					$row = (array)$row;
+					$name_id = empty($arrParram['flag'])?"":"[". $row[$key]."]";	
 					if($row[$key] == $selected)
 						$strSelect = 'selected';
 					else
 						$strSelect = '';
-					$strList .= "<option $strSelect value=$row[$key]>$row[$name][$row[$key]]</option>";
+					$strList .= "<option $strSelect value=$row[$key]>$row[$name]$name_id</option>";
 				}
 		}	
 		echo $strList;

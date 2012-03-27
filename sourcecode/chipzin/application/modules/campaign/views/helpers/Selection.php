@@ -3,14 +3,9 @@ class Zend_View_Helper_Selection
 {
 	public function selection($data,$selected,$name,$arrParram)
 	{
-		if($selected == 'default')
-		{
-			
+		if($selected == 'default'){		
 			$disabled="disabled";
-			
-			
-		}
-		else 
+		}else 
 		{
 			$disabled = "";
 		}

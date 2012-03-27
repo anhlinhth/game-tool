@@ -8,9 +8,7 @@
 td.c_worldmap select, td.c_type select, td.c_needcampaign select{	
 	width:80%;
 }
-td.c_nextcampaign select{
-	width:80%;
-}
+
 td.c_needcampaign select{
 	width:100%;
 }
@@ -104,7 +102,7 @@ td.status{
 					<td class="c_needcampaign">						
 						<select class='select-need-camp' name='NeedCamp'>
 							<option value="">NULL</option>
-							<?php echo $this->options($this->arrCampaign,$campRow->NeedCamp,array("key"=>"ID","name"=>"Name"));?>
+							<?php echo $this->options($this->arrCampaign,$campRow->NeedCamp,array("key"=>"ID","name"=>"Name","flag"=>1));?>
 						</select>
 					</td>
 					<td class="c_nextcampaign">					
@@ -114,7 +112,7 @@ td.status{
 						<div class="next-camp">
 							<select class='select-next-camp' name='NextCamp[]'>							
 								<option value="">NULL</option>
-								<?php echo $this->options($this->arrCampaign,$nextCamp->NextCamp,array("key"=>"ID","name"=>"Name"));?>
+								<?php echo $this->options($this->arrCampaign,$nextCamp->NextCamp,array("key"=>"ID","name"=>"Name","flag"=>1));?>
 							</select>
 							<a class="tool-16 delete" href="#"></a><!--JQUERY delegate Click: addNextCampp(e)-->							
 							<a class="tool-16 add" href="#"></a><!--JQUERY delegate Click: -->	
@@ -191,7 +189,7 @@ td.status{
 		<div id="next-camp-temp">
 			<select class='select-next-camp' name='NextCamp[]'>							
 							<option value="">NULL</option>
-							<?php echo $this->options($this->arrCampaign,0,array("key"=>"ID","name"=>"Name"));?>
+							<?php echo $this->options($this->arrCampaign,0,array("key"=>"ID","name"=>"Name","flag"=>1));?>
 						</select>
 			<a class="tool-16 delete" href="#" ></a><!--JQUERY delegate Click: addNextCampp(e)-->							
 			<a class="tool-16 add" href="#"></a><!--JQUERY delegate Click: -->	
@@ -232,9 +230,6 @@ function changeMap(e){
 	}else{
 		$("#formPaging").submit();
 	};
-}
-function changeMap1(){
-	alert("");
 }
 /**********************************/
 function updateSelectCamp(campid,name,action){
@@ -380,19 +375,20 @@ function saveAll(){
 }
 /***************JQuery*******************/
 $(function(){
+	//onchange in battle
 	$("body").delegate(".tr-camp", "change", function() {
 		$(this).find("a.save").removeClass("disabled");;		
 		$(this).find(".td-status a").removeClass("ok").addClass("warning").attr("title","Not Save");
 		return false;
 	});
 	
-	///////Delete A Camp///////
+	//Delete a campaign
 	$("#tbCampaign").delegate("td.action .delete", "click", function() {
 		deleteCamp(this);
 		return false;		
 	});
     
-	///////Save A Camp///////
+	// Save a Camppaign
 	$("#tbCampaign").delegate("td.action .save", "click", function() {
 		if($(this).hasClass("disabled")){
 			alert("disabled");
