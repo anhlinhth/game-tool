@@ -1,12 +1,12 @@
 <?php
 require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
-require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_AwardType.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Type.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
-require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'object'.DS.'Obj_AwardType.php';
-require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'form'.DS.'Forms_AwardType.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'object'.DS.'Obj_Type.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'form'.DS.'Forms_Type.php';
 
-class Campaign_AwardTypeController extends BaseController
+class Campaign_TypemapController extends BaseController
 {
 public function _setUserPrivileges()
 	{
@@ -23,8 +23,8 @@ public function _setUserPrivileges()
 	public function indexAction(){
 	try
 	{
-		$md = new Models_AwardType();
-		$data = $md->getAllAwardType();
+		$md = new Models_Type();
+		$data = $md->getAllType();
 		$this->view->data = $data;
 		
 		
@@ -43,10 +43,10 @@ public function deleteAction()
 			$this->_helper->viewRenderer->setNorender();			
 			if($this->_request->isPost())
 			{				
-				$id = $this->_request->getParam("AwardTypeID");								
-				$mdAwardType = new Models_AwardType();
-				$mdAwardType->_delete($id);									
-				Models_Log::insert($this->view->user->username, "act_delete_AwardType", $obj->name);
+				$id = $this->_request->getParam("ID");								
+				$mdType = new Models_Type();
+				$mdType->_delete($id);									
+				Models_Log::insert($this->view->user->username, "act_delete_Type", $obj->name);
 				echo 1;
 			}
 		}
@@ -61,12 +61,12 @@ public function updateAction(){
 		try{
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();
-			$md = new Models_AwardType();
+			$md = new Models_Type();
 			if($this->_request->isPost())// da post du lieu len
 				{
-					$form= new Forms_AwardType();
+					$form= new Forms_Type();
 					$form->_requestToForm($this);
-					if($md->isExistAwardType($form->obj->AwardTypeID)!=0){
+					if($md->isExistType($form->obj->ID)!=0){
 						echo 1;
 						$md->_update($form->obj);
 						echo "Update thành công";
@@ -74,7 +74,7 @@ public function updateAction(){
 						$md->_insert($form->obj);
 						echo "Thêm thành công";
 					}
-					Models_Log::insert($this->view->user->username, "act_update_AwardType", $obj->name);
+					Models_Log::insert($this->view->user->username, "act_update_Type", $obj->name);
 				}
 		}
 		catch(Exception $ex)
