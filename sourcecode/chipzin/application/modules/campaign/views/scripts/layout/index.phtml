@@ -10,7 +10,9 @@
 	<h3>Layout</h3>
 	<table class="filter" style="width: 80%;margin: auto;margin-bottom: 20px;margin-top: 10px";>
 		<tr>
-					
+			<td>
+			<a class="btn add" href="javascript:newlayoutDialog()">Add</a>
+			</td>
 		</tr>		
 	</table>
 	<table class="list" id="list_layout" style="width: 80%;margin:auto ;border: 1px solid;">	
@@ -61,8 +63,34 @@
 	</table>
 </form>	
 </div>
-<script type="text/javascript">
 
+<div style='display:none' id='insert-layout'>
+	<form  id="newlayout" name="newlayout" action="" method="post">
+		<table>
+			<tr>
+				<td colspan="3">
+				Tên layout :<input type="text" name="namelayout">
+				</td>
+			</tr>
+			<tr>
+				<td>1<input type="checkbox" name="point" value="0" /></td>
+				<td>4<input type="checkbox" name="point" value="3" /></td>
+				<td>7<input type="checkbox" name="point" value="6" /></td>
+			</tr>
+			<tr>
+				<td>2<input type="checkbox" name="point" value="1" /></td>
+				<td>5<input type="checkbox" name="point" value="4" /></td>
+				<td>8<input type="checkbox" name="point" value="7" /></td>
+			</tr>
+			<tr>
+				<td>3<input type="checkbox" name="point" value="2" /></td>
+				<td>6<input type="checkbox" name="point" value="5" /></td>
+				<td>9<input type="checkbox" name="point" value="8" /></td>
+			</tr>
+		</table>
+	</form>	
+</div>
+<script type="text/javascript">
 function deleteLayout(id)
 {
 	if(!confirm("Bạn có muốn xóa Layout: " + id))
@@ -149,5 +177,56 @@ function editLayout(id,point)
 	});
 	return;
 }
-		
+function newlayoutDialog()
+{
+	$("#insert-layout").dialog
+	({
+		title: "New Layout",
+		height: 250,
+		width: 220,
+		modal: true,
+		buttons: 
+		{
+			"Save": function() 
+			{
+				insertLayout();
+				$(this).dialog("close");							
+			}										
+		}
+	});
+}
+
+function insertLayout()
+{
+	var arraytemp = new Array();
+	var name = document.newlayout.namelayout.value;
+	c_value = "[";
+	for (var i=0; i < document.newlayout.point.length; i++){
+		if (document.newlayout.point[i].checked) {
+			arraytemp[i] = 1;
+		}else{
+			arraytemp[i] = 0;
+		}
+	}
+	c_value += arraytemp[0]+','+arraytemp[3] +','+ arraytemp[6] + ','+ arraytemp[1] + ','+ arraytemp[4] + ','+ arraytemp[7] + ','+ arraytemp[2] + ','+ arraytemp[5] + ','+ arraytemp[8];
+	c_value += "]&name="+name;
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $this->baseUrl.'/campaign/Layout/insert' ?> ",
+		data: "point=" + c_value,
+		dataType:"json",
+		success: function(msg)
+		{					
+			if(msg.msg == "1")
+			{
+				window.location.reload();
+			}
+			else
+			{
+				alert(msg.msg);
+			}
+		}
+	});	
+}
+
 </script>
