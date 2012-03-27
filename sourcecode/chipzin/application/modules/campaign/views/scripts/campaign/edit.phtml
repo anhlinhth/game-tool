@@ -86,7 +86,7 @@ td.b_award input{
 	<tr>
 		<td>
 			<label>World Map:</label>
-			<input type="text" readonly="readonly" value='<?php echo $this->campaignId[0]->WorldMap;?>' name='nextCampaign' id='nextCampaign'/>
+			<input type="text" readonly="readonly" value='<?php echo $this->campaign->WorldMap;?>' name='nextCampaign' id='nextCampaign'/>
 		</td>
 		<td>
 			<label>Select Campaign:</label>			
@@ -117,7 +117,7 @@ td.b_award input{
 		<tbody id="list-battle">	
 		<?php foreach ($this->arrbattle as $rowbattle){?>
 		<tr class='tr-battle' id='battle-<?php echo $rowbattle->ID?>'>
-			<td>
+			<td class="b_id">
                 <span><?php echo $rowbattle->ID;?></span>
                 <input style="display:none" type="text" id='BattleID' name='BattleID' value='<?php echo $rowbattle->ID;?>'/>
             </td>
@@ -125,8 +125,8 @@ td.b_award input{
 			<td class="center c_order">
 				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
-			<td width="300px" style="text-align: center;">				
-				<select style="width=100%;border: 2px solid lightblue;" id="Layout" class="b_layout" name="Layout" tabindex="2">
+			<td class="b_layout" width="300px" style="text-align: center;">				
+				<select style="width=100%;border: 2px solid lightblue;" class="layout"  name="Layout" tabindex="2">
 					<?php echo $this->options($this->arrlayout,$rowbattle->Layout,array('key'=>"ID",'name'=>"Name"))?>
 					<option  value="-1" style="color:red">New Layout</option>	
 				</select>
@@ -139,7 +139,7 @@ td.b_award input{
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[0]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>												
 												
-							lv:<input type='text' class='<?php echo $strclass?>_0' id='levelSolider' name='levelSolider[0]' value="<?php echo $arrBS['Level'];?>"/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>_0' id='levelSolider' name='levelSolider[0]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][3])?"visible":"invisible"?>
@@ -147,7 +147,7 @@ td.b_award input{
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[3]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' class='<?php echo $strclass?>_3' id='levelSolider' name='levelSolider[3]' value="<?php echo $arrBS['Level'];?>"/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>_3' id='levelSolider' name='levelSolider[3]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][6])?"visible":"invisible"?>
@@ -155,7 +155,7 @@ td.b_award input{
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[6]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' class='<?php echo $strclass?>_6' id='levelSolider' name='levelSolider[6]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>_6' id='levelSolider' name='levelSolider[6]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>						
 					</tr>
 					<tr>
@@ -164,7 +164,7 @@ td.b_award input{
 							<?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[1]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' class='<?php echo $strclass?>_1' id='levelSolider' name='levelSolider[1]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>_1' id='levelSolider' name='levelSolider[1]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visible":"invisible"?>
@@ -172,7 +172,7 @@ td.b_award input{
 							<?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[4]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text'class='<?php echo $strclass?>_4' id='levelSolider' name='levelSolider[4]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text'class='<?php echo $strclass?>_4' id='levelSolider' name='levelSolider[4]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][7])?"visible":"invisible"?>
@@ -180,7 +180,7 @@ td.b_award input{
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7);
 							 echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[7]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' class='<?php echo $strclass?>_7' id='levelSolider' name='levelSolider[7]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>_7' id='levelSolider' name='levelSolider[7]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 					<tr>
@@ -189,7 +189,7 @@ td.b_award input{
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[2]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' class='<?php echo $strclass?>_2' id='levelSolider' name='levelSolider[2]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>_2' id='levelSolider' name='levelSolider[2]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][5])?"visible":"invisible"?>
@@ -197,14 +197,14 @@ td.b_award input{
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[5]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' class='<?php echo $strclass?>_5' id='levelSolider' name='levelSolider[5]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>_5' id='levelSolider' name='levelSolider[5]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][8])?"visible":"invisible"?>
 						<td id="point8" class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
 							echo $this->selection($this->arrSoldier,$arrBS['Solider'],"solider[8]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' class='<?php echo $strclass?>_8' id='levelSolider' name='levelSolider[8]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>_8' id='levelSolider' name='levelSolider[8]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>						
 					</tr>
 				</table>
@@ -213,12 +213,12 @@ td.b_award input{
 				<div><a class='tool-16 add' href=''></a></div>
 				<?php foreach ($this->arraward[$rowbattle->ID] as $key=>$row){?>					
 					<div>
-						<select id='<?php echo $row->ID?>' name='AwardTypeID[]' onChange='updateAward(this)'>
+						<select  name='AwardTypeID[]' onChange='changeAwardType(this)'>
 						<?php if (empty($row->AwardTypeID)){?>
-							<option value="" style="color:red"></option>
+							
 						<?php } ?>	
 						<?php echo $this->options($this->arrawardtype,$row->AwardTypeID,array('key'=>'AwardTypeID','name'=>'Name'))?>
-						<option  value="insert" style="color:red">New Type</option>
+						<option  value="-1" style="color:red">New Type</option>
 						</select>					
 						<input type='text' id='Value' name='Value[]' value='<?php echo $row->Value?>'/>					
 						<a class='tool-16 delete' href='#'></a>	
@@ -227,7 +227,7 @@ td.b_award input{
 			</td>
 			<td class="center action">
 				<a class='tool-24 save disabled' id="" href='#'></a><br><br>
-				<a class='tool-24 reset' href='javascript:resetBattle(<?php echo $rowbattle->ID ?>)'></a><br><br>
+				<a class='tool-24 reset disabled' href='javascript:resetBattle(<?php echo $rowbattle->ID ?>)'></a><br><br>
 				<a class='tool-24 delete' id="" href='javascript:deleteBattle(<?php echo $rowbattle->ID ?>)'></a>
 			</td>
 			<!--Status-->
@@ -238,7 +238,7 @@ td.b_award input{
 	</tbody>
 	</table>
 	<div class="style" style="margin:20px">
-		<a class="btn add" href="javascript:addBattle()">New A Battle</a>	
+		<a class="btn add" href="javascript:addBattle()"> New </a>	
 		<a class="btn save" href="javascript:saveAll()">Save All</a>
 
 	</div>
@@ -258,7 +258,7 @@ td.b_award input{
 
 </div>
 <!-- hidden div: dung de de thay doi html -->
-<div style='display:' >
+<div style='display:none'>
 
 	<!-- # Show loi~-->
 	<div id='dialog'>
@@ -307,7 +307,7 @@ td.b_award input{
 		<table id="battle-temp">
 		<tbody>	
 			<tr class="tr-battle">
-			<td>
+			<td class="b_id">
 				<span>!</span>
 				<input style="display:none" type="text" id="BattleID" name="BattleID" value="">
 			</td>
@@ -316,70 +316,71 @@ td.b_award input{
 				<input type="text" name="Order" id="Order" value="1">
 			</td>
 			<td width="300px" style="text-align: center;">				
-				<select style="width=100%;border: 2px solid lightblue;" id="Layout" class="b_layout" name="Layout" tabindex="2">
-					<?php echo $this->options($this->arrlayout,$rowbattle->Layout,array('key'=>"ID",'name'=>"Name"))?>
+				<select style="width=100%;border: 2px solid lightblue;" class="layout" name="Layout" tabindex="2">
+					<option value=""></option>	
+					<?php echo $this->options($this->arrlayout,-1,array('key'=>"ID",'name'=>"Name"))?>
 					<option  value="-1" style="color:red">New Layout</option>	
 				</select>				
 				<table id='tb_layout'>
 					<tr>						
-						<td id="point0" class="invisible">
+						<td id="point0" class="visible">
 							<?php
 							echo $this->selection($this->arrSoldier,-1,"solider[0]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>												
-							lv:<input type='text' id='levelSolider' name='levelSolider[0]' value=""/>
+							<em>lv:</em><input type='text' id='levelSolider' name='levelSolider[0]' value=""/>
 						</td>						
-						<td id="point3" class="invisible" >
+						<td id="point3" class="visible" > 
 							<?php 
 							echo $this->selection($this->arrSoldier,-1,"solider[3]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' id='levelSolider' name='levelSolider[3]' value=""/>
+							<em>lv:</em><input type='text' id='levelSolider' name='levelSolider[3]' value=""/>
 						</td>						
-						<td id="point6" class="invisible" >
+						<td id="point6" class="visible" >
 							<?php 
 							echo $this->selection($this->arrSoldier,-1,"solider[6]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text'  id='levelSolider' name='levelSolider[6]' value=''/>
+							<em>lv:</em><input type='text'  id='levelSolider' name='levelSolider[6]' value=''/>
 						</td>						
 					</tr>
 					<tr>						
-						<td  id="point1" class="invisible" >
+						<td  id="point1" class="visible" >
 							<?php  
 							echo $this->selection($this->arrSoldier,-1,"solider[1]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text'  id='levelSolider' name='levelSolider[1]' value=''/>
+							<em>lv:</em><input type='text'  id='levelSolider' name='levelSolider[1]' value=''/>
 						</td>					
-						<td  id="point4"class="invisible" >
+						<td  id="point4"class="visible" >
 							<?php 
 							echo $this->selection($this->arrSoldier,-1,"solider[4]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' id='levelSolider' name='levelSolider[4]' value=''/>
+							<em>lv:</em><input type='text' id='levelSolider' name='levelSolider[4]' value=''/>
 						</td>						
-						<td  id="point7"class="invisible" >
+						<td  id="point7"class="visible" >
 							<?php 
 							 echo $this->selection($this->arrSoldier,-1,"solider[7]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text'  id='levelSolider' name='levelSolider[7]' value=''/>
+							<em>lv:</em><input type='text'  id='levelSolider' name='levelSolider[7]' value=''/>
 						</td>
 					</tr>
 					<tr>						
-						<td id="point2" class="invisible" >
+						<td id="point2" class="visible" >
 							<?php 
 							echo $this->selection($this->arrSoldier,-1,"solider[2]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' id='levelSolider' name='levelSolider[2]' value=''/>
+							<em>lv:</em><input type='text' id='levelSolider' name='levelSolider[2]' value=''/>
 						</td>						
-						<td id="point5" class="invisible">
+						<td id="point5" class="visible">
 							<?php 
 							echo $this->selection($this->arrSoldier,-1,"solider[5]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' name='levelSolider[5]' value=''/>
+							<em>lv:</em><input type='text' name='levelSolider[5]' value=''/>
 						</td>
 						
-						<td id="point8" class="invisible">
+						<td id="point8" class="visible">
 							<?php 
 							echo $this->selection($this->arrSoldier,-1,"solider[8]",
 												array('key'=>"ID",'name'=>"Name",'default'=>""))?>
-							lv:<input type='text' id='levelSolider' name='levelSolider[8]' value=''/>
+							<em>lv:</em><input type='text' id='levelSolider' name='levelSolider[8]' value=''/>
 						</td>						
 					</tr>
 				</table>
@@ -390,16 +391,16 @@ td.b_award input{
 			<td class="center action">
 				<a class="tool-24 save disbled" id="" href="#"></a><br><br>
 				<a class="tool-24 reset" href="javascript:resetBattle(26)"></a><br><br>
-				<a class="tool-24 delete" id="" href="javascript:deleteBattle(26)"></a>
+				<a class="tool-24 delete" id="" href="#"></a>
 			</td>
 			<!--Status-->
 			<td class="td-status"><a title="Not Save" class="status tool-16 warning"></a></td>
 		</tr>
-		</tbody>
-	</table>
+			</tbody>
+		</table>
 	
+	</div>
 </div>
-
 
 
 <!-- Javascript  -->
@@ -452,6 +453,7 @@ td.b_award input{
 		var parent_tr = $(e).parent().parent();
 		var a_status = parent_tr.find(".status");
 		var a_save = parent_tr.find(".tool-24.save");
+		var a_reset = parent_tr.find(".tool-24.reset");
 		updateStatus(a_status,"loading","loading");	
 		var data = parent_tr.find("*").serialize();
 		data += "&Campaign="+campaignID;		
@@ -459,37 +461,45 @@ td.b_award input{
 			type: "POST",
 			url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
 			data: data,
+			dataType:"json",
 			success: function(msg){	
-				if(msg == '1'){					
+				if(msg.msg == '1'){					
 					 updateStatus(a_status,"ok","ok");
 					 a_save.addClass("disabled");
+					 a_reset.addClass("disabled");
+					 if(msg.BattleID){ 						
+						parent_tr.find("td.b_id input[name='BattleID']").attr("value",msg.BattleID);
+						parent_tr.find("td.b_id span").text(msg.BattleID);						
+                };   
 				}else{
-					alert(msg);					
+					alert(msg.msg);					
 				}				
 			}
 		});		
 	}
 	////////////////////////
-	function deleteBattle(key){	
-		if(!confirm("Delete Battle ID: "+key)){
-			return false;
-		}
-		$.ajax({
+	function deleteBattle(e){
+		var parent_tr = $(e).parent().parent();
+		var battle_id = parent_tr.find("#BattleID").val();
+		if(battle_id){
+			$.ajax({
 			type: "POST",
 			url: "<?php echo $this->baseUrl.'/campaign/battle/delete'?> ",
 			data: {
-				BattleID:key
+				BattleID:battle_id
 			},
 			success: function(msg){				
-				if(msg == '1'){					
-					alert("Successfull");
-					$("#battle-"+key+" *").remove();
-				}else{
-					alert("Error");					
-				}
+					if(msg == '1'){					
+						parent_tr.remove();						
+					}else{
+						alert(msg);					
+					}
 				
-			}
-		});
+				}
+			});			
+		}else{
+			parent_tr.remove();
+		}
 	}
 	////////////////////////
 	function resetBattle(key){
@@ -514,32 +524,21 @@ td.b_award input{
 		});
 	}
 	///Add battle///
-	function addBattle(){
-		/*var camID = $("#campaignID").val();
-		var data = "campaignID="+camID;
-		$.ajax({
-			type: "POST",
-			url: "<?php echo $this->baseUrl.'/campaign/battle/add' ?> ",
-			data: data,
-			success: function(msg){	
-				alert ("Thành công");	
-				window.location.reload();
-			}
-		});
-		*/
-	 	var html = $("table#battle-temp tbody tr").clone();		
+	function addBattle(){		
+	 	var html = $("table#battle-temp .tr-battle").clone();		
 		$("table#battle tbody#list-battle").append(html);		
 	}
-	//
-	function changeAward(element){
+
+	/********************AwardType****************************/
+	 	//
+	function changeAwardType(element){
 		var selected = element.value;
 		if(selected == -1){
-			alert("chua lam");
+			addAwardType();
 		}
 	}
-	/********************End ThaoNX****************************/
-	////////////////////////////
-	function addAwardType(key){
+	//Show Dialog
+	function addAwardType(){
 		$("#insert-awardtype").dialog({
 			title: "New AwardType",
 			height: 400,
@@ -565,54 +564,7 @@ td.b_award input{
 		});		
 	}
 	//////////////////////////
-	function validate(){
-			flag=true;			
-			$(".battle").each(function(key,val){
-				num = key+1;
-				flag1=true;
-				//////test cac o khong bo trong
-				for(var i=0;i<8;i++)
-				{
-					value=$(val).find('.visible_'+i).val();	
-					//
-					if(value=='')
-					{	
-
-						flag1=false;		
-						break;	
-					}
-				}
-				if(flag1==false)
-				{
-					$("#dialog #ct").append("<p class='error'>Battle" + num + ":	<br>không được bỏ trống các ô</p>");					
-					flag=false;
-				}
-				else {
-					
-				
-						flag2=true;
-					////////test gia tri 
-						for(i=0;i<8;i++)
-						{
-							value=$(val).find('.visible_'+i).val();							
-							if(isNaN(value) && value=='undefined')
-							{							alert(value + "_"+i);					
-								flag2=false;
-								break;
-							}
-						}
-						if(flag2==false)
-						{
-							$("#dialog #ct").append("<p class='error'>Battle" + num + ":	<br>Phải là số</p>");	
-							flag=false;
-						}
-						
-				}
-				
-			});
-		return flag;	
-	}
-
+	
 	/*******************Layout**************************/
 	//update selectbox Layout
 	function updateLayoutSelect(layout_id,layout_name){		
@@ -663,23 +615,26 @@ td.b_award input{
 		});
 	}
 	//update layout point when change layout ID
-	function updateLayoutPoint(battleID,json){
+	function updateLayoutPoint(e,json){//e la the <td>
+		
+		var table = e.children("table#tb_layout");
 		$.each(json, function(key, val) {
-			if(val==0){								
-				$("#battle-"+battleID +" #"+key).removeClass("visible").addClass("invisible");
-				$("#battle-"+battleID +" #"+key).find("select").attr('disabled',true);
-				$("#battle-"+battleID +" #"+key).find("input").attr('disabled',true).val('');
+			if(val==0){
+				table.find("td#"+key).removeClass("visible").addClass("invisible");
+				table.find("td#"+key +" select").attr('disabled',true);
+				table.find("td#"+key +" input").attr('disabled',true).attr("value","");
 			}else{
-				$("#battle-"+battleID +" #"+key).removeClass("invisible").addClass("visible");
-				$("#battle-"+battleID +" #"+key).find("select").attr('disabled',false);
-				$("#battle-"+battleID +" #"+key).find("input").attr('disabled',false);							
+				table.find("td#"+key).removeClass("invisible").addClass("visible");
+				table.find("td#"+key +" select").attr('disabled',false);
+				table.find("td#"+key +" input").attr('disabled',false);						
 			}
 		});											
 	}
 	//change layout
-	$('select#Layout').change(function(){		
-		var battleID=$(this).parent().parent().find("#BattleID").val();			
-		var layoutID=$(this).val();
+	function changeLayout(e){		
+		var parent_td=$(e).parent();
+		
+		var layoutID=$(e).val();
 		if(layoutID==-1){
 			popupInsertLayout();	
 		}else{	
@@ -689,11 +644,60 @@ td.b_award input{
 				data: "id=" + layoutID,
 				dataType: "json",
 				success: function(data){				
-					updateLayoutPoint(battleID,data);
+					updateLayoutPoint(parent_td,data);
 				}			
 			});
 		}
-	});
+	}
+/***********************************************/
+	// validate
+	function validate(){
+			flag=true;			
+			$(".battle").each(function(key,val){
+				num = key+1;
+				flag1=true;
+				//////test cac o khong bo trong
+				for(var i=0;i<8;i++)
+				{
+					value=$(val).find('.visible_'+i).val();	
+					//
+					if(value=='')
+					{	
+
+						flag1=false;		
+						break;	
+					}
+				}
+				if(flag1==false)
+				{
+					$("#dialog #ct").append("<p class='error'>Battle" + num + ":	<br>không được bỏ trống các ô</p>");					
+					flag=false;
+				}
+				else {
+					
+				
+						flag2=true;
+					////////test gia tri 
+						for(i=0;i<8;i++)
+						{
+							value=$(val).find('.visible_'+i).val();							
+							if(isNaN(value) && value=='undefined')
+							{							alert(value + "_"+i);					
+								flag2=false;
+								break;
+							}
+						}
+						if(flag2==false)
+						{
+							$("#dialog #ct").append("<p class='error'>Battle" + num + ":	<br>Phải là số</p>");	
+							flag=false;
+						}
+						
+				}
+				
+			});
+		return flag;	
+	}
 
 /***************JQUERY***************************/
 $(document).ready(function(){
@@ -710,7 +714,8 @@ $(document).ready(function(){
 	
 	//Onchange
 	$("table#battle").delegate(".tr-battle", "change", function() {
-		$(this).find(".action a.save").removeClass("disabled");;		
+		$(this).find(".action a.save").removeClass("disabled");
+		$(this).find(".action a.reset").removeClass("disabled");		
 		$(this).find(".td-status a").removeClass("ok").addClass("warning").attr("title","Not Save");
 		return false;
 	});
@@ -723,6 +728,11 @@ $(document).ready(function(){
 		}		
 		return false;		
 	});
+	//delete a battle
+	$("table#battle").delegate("td.action .delete", "click", function() {
+		deleteBattle(this);
+		return false;		
+	});
 	///////Add A Award///////
 	$("table#battle").delegate("td.b_award .add", "click", function() {
 		addAward(this);		
@@ -733,6 +743,12 @@ $(document).ready(function(){
 		removeAward(this);		
 		return false;		
 	});
+	
+	///////Onchange Layout///////
+	$("table#battle").delegate("select.layout", "change", function(){ 		
+		changeLayout(this);		
+	});
+	
 });
 	
 </script><!-- Javascript  --><!-- Javascript  -->
