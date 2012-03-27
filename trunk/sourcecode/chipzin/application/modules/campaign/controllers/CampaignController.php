@@ -8,6 +8,19 @@ require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'form' .
     DS . 'Forms_Campaign.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'object' .
     DS . 'Obj_Base.php';
+require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
+	DS . 'Models_Award.php';
+require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
+	DS . 'Models_Layout.php';
+require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
+	DS . 'Models_Battle.php';
+require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
+	DS . 'Models_Award_type.php';
+require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
+	DS . 'Models_Battle_Soldier.php';
+require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
+	DS . 'Models_Soldier.php';
+
 require_once ROOT_LIBRARY_UTILITY . DS . 'utility.php';
 require_once ROOT_APPLICATION_MODELS . DS . 'Models_Log.php';
 class Campaign_CampaignController extends BaseController
@@ -24,7 +37,7 @@ class Campaign_CampaignController extends BaseController
         if (!$this->hasPrivilege())
             $this->_redirect("/error/permission");
     }
-    ///////////////////////
+    /////////////////Thaonx//////////////
     public function indexAction()
     {
         try {
@@ -67,6 +80,7 @@ class Campaign_CampaignController extends BaseController
         }
     }
 
+    ///////////////////////////////
     public function deleteAction()
     {       
         try {
@@ -86,134 +100,11 @@ class Campaign_CampaignController extends BaseController
             Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
     }
-    public function updateworldmapAction()
-    {
-        try {
-            $this->_helper->layout->disableLayout();
-            $this->_helper->viewRenderer->setNorender();
-            $id = $this->_request->getParam("id");
-            $desc2 = $this->_request->getParam("desc2");
-            $md = new Models_Campaign();
-            $mdw = new Models_WorldMap();
-
-            $obj = new Obj_Campaign();
-            $obj->ID = $id;
-            $obj->Name = $md->fetchname($id);
-            $obj->WorldMap = $mdw->searchname($desc2);
-            $md->update($obj);
-            Models_Log::insert($this->view->user->username, "act_update_Campaign", $obj->
-                name);
-
-            echo "Update thanh cong";
-        }
-        catch (exception $ex) {
-            $this->view->errMsg = $ex->getMessage();
-            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-        }
-    }
-    public function updatetypeAction()
-    {
-        try {
-            $this->_helper->layout->disableLayout();
-            $this->_helper->viewRenderer->setNorender();
-            $id = $this->_request->getParam("id");
-            $desc3 = $this->_request->getParam("desc3");
-            $md = new Models_Campaign();
-            $mdw = new Models_WorldMap();
-            $data = $md->fetchone($id);
-            $obj = new Obj_Campaign();
-
-            $obj->ID = $id;
-            $obj->Name = $data['Name'];
-            $obj->WorldMap = $data['WorldMap'];
-            if ($desc3 == "Map")
-                $obj->TypeID = 1;
-            else
-                $obj->TypeID = 2;
-            $md->update($obj);
-            Models_Log::insert($this->view->user->username, "act_update_Campaign", $obj->
-                name);
-
-            echo "Update thanh cong";
-        }
-        catch (exception $ex) {
-            $this->view->errMsg = $ex->getMessage();
-            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-        }
-    }
-    public function updateAction()
-    {
-        try {
-            $mdw = new Models_WorldMap();
-            $this->_helper->layout->disableLayout();
-            $this->_helper->viewRenderer->setNorender();
-            $id = $this->_request->getParam("id");
-            $desc = $this->_request->getParam("desc");
-            $wm = $this->_request->getParam("select");
-            $md = new Models_Campaign();
-            $obj = new Obj_Campaign();
-            $obj->ID = $id;
-            $obj->Name = $desc;
-            if ($wm == null) {
-                echo "Chưa nhập dữ liệu listbox";
-                return;
-            } else
-                $obj->WorldMap = $mdw->searchname($wm);
-
-            $md->update($obj);
-            Models_Log::insert($this->view->user->username, "act_update_Campaign", $obj->
-                name);
-            echo "Update thanh cong";
-        }
-        catch (exception $ex) {
-            $this->view->errMsg = $ex->getMessage();
-            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-        }
-    }
-    public function addAction()
-    {
-        try {
-            $mdw = new Models_WorldMap();
-            $this->_helper->layout->disableLayout();
-            $this->_helper->viewRenderer->setNorender();
-            $wm = $_POST[select];
-            $desc = $_POST[decs];
-            $nc = $_POST[select3];
-            $type = $_POST[select2];
-            $desc = $_POST[decs];
-            $obj = new Obj_Campaign();
-            if ($wm == null) {
-                echo "Chưa nhập dữ liệu listbox";
-                return;
-            } else
-                $obj->WorldMap = $mdw->searchname($wm);
-            $obj->Name = $desc;
-            $obj->NeedCamp = $nc;
-            if ($type == "Map")
-                $obj->TypeID = 1;
-            else
-                $obj->TypeID = 2;
-            $md = new Models_Campaign();
-            echo "ok";
-            try {
-                $md->insert($obj);
-            }
-            catch (exception $ex) {
-
-            }
-            Models_Log::insert($this->view->user->username, "act_insert_Campaign", $obj->
-                name);
-        }
-        catch (exception $ex) {
-            $this->view->errMsg = $ex->getMessage();
-            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-        }
-    }
-
-    ///////////////////////////////////////
-    /////////////////Thaonx//////////////
-
-    /**************************************/
+    
+    ///////////////////////////////
+    /*
+     * Neu khong co ID thi Insert
+     * */
     public function saveAction()
     {
         try {
@@ -258,26 +149,11 @@ class Campaign_CampaignController extends BaseController
         }
         
     }
-    /**************************************/
+    
+    ///////////////////////////////
     public function editAction()
     {
         try {
-            require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
-                DS . 'Models_Award.php';
-            require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
-                DS . 'Models_Layout.php';
-            require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
-                DS . 'Models_Battle.php';
-            require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
-                DS . 'Models_Award_type.php';
-            require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
-                DS . 'Models_Battle_Soldier.php';
-            require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
-                DS . 'Models_Soldier.php';
-            require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
-                DS . 'Models_Worldmap.php';
-
-
             ///////Lấy Campaign//////////
             $mdCamp = new Models_Campaign();
             $id = $this->_request->getParam("id");

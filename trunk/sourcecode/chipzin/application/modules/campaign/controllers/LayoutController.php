@@ -19,15 +19,25 @@ class Campaign_LayoutController extends BaseController
 	}
 	public function insertAction()
 	{
-		$this->_helper->layout->disableLayout();
-		$this->_helper->viewRenderer->setNorender();
-		$obj = new Obj_Layout();
-		$obj->ID = "NULL";
-		$obj->Name = $_POST['name'];
-		$obj->Point = $_POST['point'];
-		$md = new Models_Layout();
-		$md->insertLayout($obj);
-		echo 1;	
+		try{
+		    $this->_helper->layout->disableLayout();
+		    $this->_helper->viewRenderer->setNorender();
+		    $obj = new Obj_Layout();		    
+		    $obj->Name = $_POST['name'];
+		    $obj->Point = $_POST['point'];
+		    $md = new Models_Layout();
+		    $id =  $md->_insert($obj);
+		    $result = array('msg' => '1', 'LayoutID' => $id);
+		    echo json_encode($result);
+		}
+	    catch (exception $ex) {
+	    	$this->view->errMsg = $ex->getMessage();
+	    	$result = array('msg' => $ex->getMessage(), 'CampID' => "");
+	    	echo json_encode($result);
+	    	Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+	    }
+		
+			
 	}
 }
 

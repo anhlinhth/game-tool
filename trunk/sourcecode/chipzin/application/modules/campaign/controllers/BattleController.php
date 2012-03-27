@@ -31,20 +31,23 @@ class Campaign_BattleController extends BaseController
 			$this->_helper->viewRenderer->setNorender();
 			if($this->_request->isPost())
 			{
-				$mdbattle = new Models_Battle();
-				$objBattle = new Obj_Battle();
-				$objBattle->ID = $_POST['BattleID'];
-				$objBattle->Layout = $_POST['Layout'];
-				$objBattle->Order = $_POST['Order'];
-				$objBattle->Campaign = $_POST['campaignID'];
-				$mdbattle->saveBattle($objBattle);
+			    $objBattle = new Obj_Battle();
+			    $objBattle->Layout = $_POST['Layout'];
+			    $objBattle->Order = $_POST['Order'];
+			    $objBattle->Campaign = $_POST['Campaign'];
+			    $mdbattle = new Models_Battle();
+			    if(empty($_POST['BattleID'])){			       
+			        $objBattle->ID = $mdbattle->_insert($objBattle);
+			    }else{
+			        $objBattle->ID = $_POST['BattleID'];
+			        $mdbattle->saveBattle($objBattle);
+			    }							
+				
 				//save Battle Soldier
 				$mdbs = new Models_Battle_Soldier();
-				$arrSolider = $_POST['solider'];
-				
-				$arrLevel = $_POST['levelSolider'];
-				
-				$mdbs->deleteB_Soldier($objBattle->ID);
+				$arrSolider = $_POST['solider'];				
+				$arrLevel = $_POST['levelSolider'];				
+				$mdbs->deleteB_Soldier($objBattle->ID);				
 				foreach ( $arrSolider as $key => $value ) 
 				{
 					$objbs = new Obj_Battle_Soldier();
@@ -98,8 +101,7 @@ class Campaign_BattleController extends BaseController
 				    		$mda->InsAward($obja);
 				    	}
 				    }
-				}
-				
+				}				
 				echo "1";
 			}
 		}
