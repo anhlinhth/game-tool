@@ -36,8 +36,10 @@ class Campaign_BattleController extends BaseController
 			    $objBattle->Order = $_POST['Order'];
 			    $objBattle->Campaign = $_POST['Campaign'];
 			    $mdbattle = new Models_Battle();
-			    if(empty($_POST['BattleID'])){			       
-			        $objBattle->ID = $mdbattle->_insert($objBattle);
+			    $battle_id = "";
+			    if(empty($_POST['BattleID'])){ 
+			        $battle_id = $mdbattle->_insert($objBattle);;
+			        $objBattle->ID = $battle_id;
 			    }else{
 			        $objBattle->ID = $_POST['BattleID'];
 			        $mdbattle->saveBattle($objBattle);
@@ -101,14 +103,17 @@ class Campaign_BattleController extends BaseController
 				    		$mda->InsAward($obja);
 				    	}
 				    }
-				}				
-				echo "1";
+				}
+				$result = array('msg' => '1', 'BattleID' => $battle_id);
+				echo json_encode($result);
+				
 			}
 		}
 		catch(Exception $ex)
 		{
 			$this->view->errMsg = $ex->getMessage();
-			echo $this->view->errMsg;
+			$result = array('msg' => $ex->getMessage(), 'BattleID' => "");
+            echo json_encode($result); 
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}
 	}
