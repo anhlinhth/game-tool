@@ -66,6 +66,30 @@ class Models_Quest_xfj extends Models_Base {
 		
 		return $data;
 	}
+public function getAward($id)
+	{
+		$sql = "SELECT
+					*
+				FROM
+					q_award
+				WHERE
+				QuestID='$id'";
+		
+		$data = $this->_db->fetchAll($sql);
+		return $data;
+	}
+	public function getawardtype($id)
+	{
+			$sql = "SELECT
+					Name
+				FROM
+					c_award_type
+				WHERE
+				AwardTypeID='$id'";
+		
+		$data = $this->_db->fetchOne($sql);
+		return $data;
+	}
 	public function generate($data) {
 		$str .= "{";
 		$mdGiftPackageDetail = new Models_Quest_Package_Detail ();
@@ -136,13 +160,18 @@ class Models_Quest_xfj extends Models_Base {
 				$str .= "\n\t\t\t \"txtAlias\" : \"" . trim ( $row ['QuestGroupString'] ) . "\",";
 				$str .= "\n\t\t\t \"txtDesc\" : \"" . trim ( $row ['QuestDescString'] ) . "\",";
 				$str .= "\n\t\t\t \"award\" :";
-				$str .= "\n\t\t\t { ";
-				if ($row ['AwardGold'] != 0)
-					$str .= "\n\t\t\t\t \"gold\" : " . $row ['AwardGold'] . ",";
-				if ($row ['AwardExp'] != 0)
-					$str .= "\n\t\t\t\t \"exp\" : " . $row ['AwardExp'];
-				$str .= "\n\t\t\t } ";
-				
+				$mda = $this->getAward($row['QuestID']);
+				if($mda)
+				{
+					$str .= "\n\t\t\t {\n ";
+					foreach ($mda as $row2)
+					{
+					$str .="\t\t\t\t\"".strtolower(trim($this->getawardtype($row2['AwardTypeID'])))."\" : ".$row2['Value']." \n";
+					}
+					$str .= "\n\t\t\t { ";
+				}
+				else 
+					$str .= "[]";
 				$c = $this->lastId ();
 				if (( int ) $c != ( int ) $i)
 					$str .= "\n\t\t}, \n";
