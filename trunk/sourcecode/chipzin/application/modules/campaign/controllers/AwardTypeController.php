@@ -41,18 +41,17 @@ public function deleteAction()
 		{
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();
-			$md = new Models_Award_Type();
-			$obj = new Obj_Base();
-			$obj->Name = $_POST['Name'];						
-			$id = $md->insertAward($obj);
+			$id = $this->_request->getParam("id");
+			$md = new Models_AwardType();
+			$md->_deleteAwardType($id);
 			$result = array('msg' => '1', 'AwardTypeID' => $id);
-			echo(json_encode($result));
 		}
 		catch(Exception $ex)
         {            
 			$this->view->errMsg = $ex->getMessage();
 			$result = array('msg' => $ex->getMessage(), 'AwardTypeID' => "");
             echo json_encode($result); 
+            echo $ex;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 	}
@@ -85,5 +84,3 @@ public function updateAction(){
 	}
 
 }
-?>
-
