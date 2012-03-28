@@ -1,0 +1,48 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<form id="frmQuestLine" class="myform" action="" method="post">
+
+<div class="mybox">
+	<h3>Export</h3>
+	<table class="list" id="list_ql" style="width: 90%;margin:auto ;border: 1px solid;">
+	<tr>
+	<td><a href="<?php echo $this->baseUrl; ?>/export_file_config/Battle.conf.php.txt">Battle.conf.php.txt</a></td>
+	<td>
+	<a href="<?php echo $this->baseUrl; ?>/export_file_config/MapBattle.conf.php.txt">MapBattle.conf.php.txt</a></td>
+	<td>
+	<a href="<?php echo $this->baseUrl; ?>/export_file_config/Map.conf.php.txt">Map.conf.php.txt</a></td>
+	</tr>
+	</table>
+	<br>
+	<br>
+	<br>
+	<center><input style="width: 100px;" type="submit" value="Export" onclick="exportfile()"></center>
+</div>
+</form>
+<script type="text/javascript">
+function exportfile(){
+	id=1;
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $this->baseUrl.'/campaign/export/export'?> ",
+		data: "ID="+id,
+		success: function(msg){
+			if(msg != "")
+			{					
+				alert(msg);
+			}
+			else
+			{
+				alert("Thêm  không thành công");
+				
+			}
+			window.location.reload();
+				
+		}
+	});	
+}
+</script>
