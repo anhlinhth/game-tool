@@ -211,7 +211,10 @@ class QuestController extends BaseController
 			$this->view->arrawardtype = $mdawartype->getAwardtype();
 			$md = new Models_Quest_Detail();			
 			$this->view->obj = new Obj_Quest_Detail();
-			$this->view->obj->QuestID = $id;			
+			$this->view->obj->QuestID = $id;
+			$this->view->obj->QuestLineID=$_SESSION['QuestLine'];
+
+			
 			$this->view->arrQuestLine = $md->_getQuestLine();
 			$this->view->arrNeedQuest = $md->getQuest();
 			$this->view->arrAwardItems = $md->getAwardItems($id);
@@ -221,8 +224,10 @@ class QuestController extends BaseController
 			{
 				$this->_helper->layout()->disableLayout();
 				$this->_helper->viewRenderer->setNoRender();	
+				
 				$form = new Forms_Quest_Detail();
-				$form->_requestToForm($this);					
+				$form->_requestToForm($this);	
+				$_SESSION['QuestLine']=$form->obj->QuestLineID;				
 				$form->validate(INSERT);
 				$md = new Models_Quest_Detail();			
 				$questID = $md->_insert($form->obj);
@@ -329,7 +334,7 @@ class QuestController extends BaseController
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
 			$this->view->item = $form->obj;
 			$this->view->filterQuestLine = $md_questLine->_getByKey($form->obj->QuestLineID);			
-			$arrQuest = $md->filter($form->obj, "QuestID ASC", ($pageNo - 1)*$items, $items);
+			$arrQuest = $md->filter($form->obj, "QuestName ASC", ($pageNo - 1)*$items, $items);
 			$arrAllQuest = $mdqd->getQuest();
 			$mdQT = new Models_Task();
 			$dataTask = $mdQT->listQuestInTask();
