@@ -139,15 +139,15 @@ function deleteAwardType(key){
 	};
 	$.ajax({
 		type: "POST",
-	//	url: "http://localhost/vng/game-tool/sourcecode/chipzin/questline/update",
 		url: "<?php echo $this->baseUrl.'/campaign/AwardType/delete/'?> ",
-		data: "AwardTypeID="+id,
+		data: {id:id,},
 		success: function(msg){
 			if(parseInt(msg)==1){					
-				window.location.reload();
+				alert(msg);
 			}
 			else{
-				window.location.reload();		
+				alert("xóa thành công");
+				window.location.reload();	
 			}			
 		}
 	});	
