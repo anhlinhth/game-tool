@@ -400,11 +400,13 @@ function saveAll(){
 						"Edit": function() {								
 							$(this).dialog("close");
 							location.replace("<?php echo $this->baseUrl.'/quest/edit/id/'?>"+quest_id);
+							window.location.reload();
 							//alert(quest_id);
 						},
 						"New": function() {								
 							$(this).dialog("close");
-							location.replace("<?php echo $this->baseUrl.'/quest/new/'?>");							
+							location.replace("<?php echo $this->baseUrl.'/quest/new/'?>");
+							window.location.reload();							
 						}										
 					}
 					});
