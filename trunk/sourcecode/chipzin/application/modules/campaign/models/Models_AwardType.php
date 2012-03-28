@@ -45,24 +45,25 @@ public function count($objSearch)
 		
 		return $count;
 	}
-private function _deleteAwardType($id)
+	public function _deleteAwardType($id)
 	{
 		try 
 		{
-			$sql="SELECT
-					*
-					FROM
-					c_award_type
-					WHERE
-					AwardTypeID ='$id' 
-					";
-			
-			$count=$this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
-			print_r($count);
-//			if($count < 1)
-//				$this->_db->delete($this->_table, "$this->_key = '$id'");
-//			else
-//				echo ("Xoa khong thanh cong");
+				$sql = "DELETE 
+					FROM 
+						c_award
+					WHERE 
+						AwardTypeID = '$id';
+						
+					DELETE 
+					
+					FROM 
+						c_award_type
+					WHERE 
+						AwardTypeID = '$id'";
+				 $temp = $this->_db->query($sql);
+				
+		//parent::_delete($id,null);
 //				 
 		}
 		catch (Zend_Db_Exception $ex)
