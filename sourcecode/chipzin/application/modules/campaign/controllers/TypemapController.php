@@ -85,5 +85,4 @@ public function updateAction(){
 	}
 
 }
-?>
 
