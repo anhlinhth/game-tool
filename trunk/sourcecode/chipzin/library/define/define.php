@@ -74,6 +74,9 @@ define('TYPE_GOLD', 1);
 define('TYPE_EXP', 2);
 
 //Name of config files
+define('BATTLE_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'Battle.conf.php.txt');
+define('MAP_BATTLE_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'MapBattle.conf.php.txt');
+define('MAP_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'Map.conf.php.txt');
 define('QUEST_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'Quest.conf.php.txt');
 define('TASK_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'Task.conf.php.txt');
 define('QUEST_PACKAGE_XFJ_FILE',ROOT_EXPORT_FILE.DS.'quest.xfj.txt');
