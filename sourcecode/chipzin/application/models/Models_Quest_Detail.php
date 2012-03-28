@@ -127,12 +127,12 @@ class Models_Quest_Detail extends Models_Base
 			return $data;
 		}
 	
-		public function getAwardItems($questid)
+		public function getAward($questid)
 		{
 			$sql = "SELECT
 						*
 					FROM
-						q_quest_awarditem
+						q_award
 							WHERE QuestID = $questid";
 			
 			$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);			

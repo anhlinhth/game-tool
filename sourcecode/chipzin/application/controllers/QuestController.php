@@ -6,12 +6,13 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Detail.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
-require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
-require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Award.php';
+
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Award.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Action.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
-
+require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
+		DS . 'Models_Award_type.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Detail.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_NextQuest.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Q_Action.php';
@@ -156,33 +157,52 @@ class QuestController extends BaseController
 	{		
 		try
 		{
+		    require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
+		    		DS . 'Models_Award_type.php';
 			if($this->_request->isPost())// da post du lieu len
 			{	
 				$this->_helper->layout->disableLayout();
 				$this->_helper->viewRenderer->setNoRender();
-					
+				
 				$form = new Forms_Quest_Detail();
 				$form->_requestToForm($this);					
 				$form->validate(UPDATE);			
-				$md = new Models_Quest_Detail();	
+				$md = new Models_Quest_Detail();				
 				$md->update($form->obj);
-				//////////////////Update Award Item////////////////////////////								
-				$arrItem = $_POST["awarditem"];
-				$arrAddItem = $_POST["additem"];				
-				///Update
-				updateAwardItem($arrItem, $arrAddItem,$form->obj->QuestID);
-				Models_Log::insert($this->view->user->username, "act_update_award_item");				
-				 
+				//////////////////Update Award Item////////////////////////////
+				$mdAwardItem = new Models_Quest_Award();
+				$mdAwardItem->delete($form->obj->QuestID);
+				$arrAwardValue = $_POST['AwardValue'];
+				$arrAwardType = $_POST['AwardType'];
+				
+				if(!empty($arrAwardType))
+				{
+					foreach($arrAwardType as $key=>$value)
+					{
+						if(!empty($arrAwardValue[$key])){
+							$obj_award = new Obj_Base();
+							$obj_award->QuestID = $form->obj->QuestID;
+							$obj_award->AwardTypeID = $value;
+							$obj_award->Value = $arrAwardValue[$key];													
+							$mdAwardItem->_insert($obj_award);
+						}
+							
+					}
+				}
+				Models_Log::insert($this->view->user->username, "act_update_award_item");
 				echo "1";
 			}else{		
 				$md = new Models_Quest_Detail();
+				$mdawartype = new Models_Award_Type();
 				$id = $this->_request->getParam("id");
 				$this->view->obj = $md->_getByKey($id);				
 				$this->view->arrQuestLine = $md->_getQuestLine();
 				$this->view->arrNeedQuest = $md->getQuest();
-				$this->view->arrAwardItems = $md->getAwardItems($id);
+				$this->view->arrAward = $md->getAward($id);
+				
 				$this->view->arrTask = $md->getTask($id);
-				$this->view->arrQuest = $md->getQuest($id);
+				$this->view->arrQuest = $md->getQuest($id);				
+				$this->view->arrawardtype = $mdawartype->getAwardtype();
 			}	
 				
 		}
@@ -197,16 +217,12 @@ class QuestController extends BaseController
 	}
 	
 	public function newAction()
-	{	
-		
-		try
-		{
+	{			
+		try{
 			//Lay maxid
 			$md_getmax= new Models_Quest();
 			$idmax =$md_getmax->getMaxQuestID();
-			$id=$idmax+1;
-			require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
-					DS . 'Models_Award_type.php';
+			$id=$idmax+1;			
 			$mdawartype = new Models_Award_Type();
 			$this->view->arrawardtype = $mdawartype->getAwardtype();
 			$md = new Models_Quest_Detail();			
@@ -216,8 +232,7 @@ class QuestController extends BaseController
 
 			
 			$this->view->arrQuestLine = $md->_getQuestLine();
-			$this->view->arrNeedQuest = $md->getQuest();
-			$this->view->arrAwardItems = $md->getAwardItems($id);
+			$this->view->arrNeedQuest = $md->getQuest();			
 			$this->view->arrTask = $md->getTask($id);
 			$this->view->arrQuest = $md->getQuest($id);	
 			if($this->_request->isPost())
@@ -229,33 +244,37 @@ class QuestController extends BaseController
 				$form->_requestToForm($this);	
 				$_SESSION['QuestLine']=$form->obj->QuestLineID;				
 				$form->validate(INSERT);
-				$md = new Models_Quest_Detail();			
+				$md = new Models_Quest_Detail();
+							
 				$questID = $md->_insert($form->obj);
-				$obj_nextquest = new Obj_Quest_NextQuest();
-				$obj_nextquest->QuestID = $questID;
-				$md->insertNextQuest($obj_nextquest);
-				$this->QuestID= $form->obj->QuestID;
+				//$form->obj->QuestID = $questID;
+				//$obj_nextquest = new Obj_Quest_NextQuest();
+				//$obj_nextquest->QuestID = $questID;
+				//$md->insertNextQuest($obj_nextquest);
 				
 				Models_Log::insert($this->view->user->username, "act_add_new_quest");
 				
-				//update quest awarditem
-				$AwardItem = $_POST[additem];
-				$AwardType = $_POST[Awardtype];
+				//update quest award
+				$arrAwardValue = $_POST[AwardValue];
+				$arrAwardType = $_POST[AwardType];
 				$mdAwardItem = new Models_Quest_Award();
-				$mdAwardItem->delete($this->QuestID);
-				if(!empty($this->AwardItem))
+				//		
+				if(!empty($arrAwardType))
 				{
-					foreach($AwardItem as $i=>$key)
+					foreach($arrAwardType as $key=>$value)
 						{
-							if($objAwardItem->AwardItem != "")
-							{
-								$mdAwardItem->add($this->QuestID, $AwardType[$key], $AwardItem[$key]);
-							}
+						    if(!empty($arrAwardValue[$key])){
+						        $obj_award = new Obj_Base();
+						        $obj_award->QuestID = $questID;
+						        $obj_award->AwardTypeID = $value;
+						        $obj_award->Value = $arrAwardValue[$key];						        
+						        $mdAwardItem->_insert($obj_award);
+						    }
+							
 						}
 				}				
 				echo '1';
-				Models_Log::insert($this->view->user->username, "act_update_AwardItem");
-		
+				Models_Log::insert($this->view->user->username, "act_update_AwardItem");		
 			}	
 		}
 		catch(Exception $ex)
@@ -393,7 +412,7 @@ class QuestController extends BaseController
 			$this->view->arrAction = $mdAction->_getAction();
 			$this->view->arrTemp = $mdtemp->_filter(null,"TaskName",null,null);
 			$this->view->arrTaskTarget = $mdTT->select($questid);
-			$arrArrNextQuest = 	
+			
 			//Hiện ListQuesstTaskClient 
 			$this->view->arrQuestTC=$mdQuestTC->_getQuestTaskClient();
 			
@@ -403,112 +422,6 @@ class QuestController extends BaseController
 	    }		
 	}
 			
-	
-	public function addAction()
-	{		
-		try		
-		{	
-			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';			
-			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
-			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Needquest.php';
-			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Awarditem.php';
-			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Needquest.php';
-			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Task.php';
-			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
-			//Lay maxid
-			$md_getmax= new Models_Quest();
-			$idmax =$md_getmax->getMaxQuestID();
-			$id=$idmax+1;
-			//			
-			$md = new Models_Quest_Detail();
-			$this->view->arrValue = $md->_getQuestLine();
-			$this->view->arrQuest = $md->getQuest();
-			$this->view->arrNeedQuest = $md->getNeedQuest($id);
-			$this->view->arrnextQuest = $md->getQuest();
-			$this->view->QuestID = $id;
-			
-			$form = new Forms_Quest_Detail();
-			$form->_requestToForm($this);	
-			$form->validate(INSERT);
-				
-			if($this->_request->isPost()){
-				//$form = new Forms_Quest_Detail();
-				//$form->_requestToForm($this);	
-				//$form->validate(INSERT);			
-				$md = new Models_Quest_Detail();
-
-				$md->_insert($form->obj);
-				$this->QuestID= $form->obj->QuestID;	
-
-				
-				Models_Log::insert($this->view->user->username, "act_update_needquest");
-				
-				//update quest awarditem
-				$this->AwardItem = $this->_request->getParam("awarditem");
-				$mdAwardItem = new Models_Quest_Awarditem();
-				$mdAwardItem->_delete($this->QuestID);
-				foreach($this->AwardItem as $i=>$key)
-				{
-					$objAwardItem = new Obj_Quest_Awarditem();
-					$objAwardItem->QuestID = $this->QuestID;
-					$objAwardItem->AwardItem = $this->AwardItem[$i];
-					
-					if($objAwardItem->AwardItem != "")
-					{
-						$mdAwardItem->_insert($objAwardItem);
-					}
-				}
-				Models_Log::insert($this->view->user->username, "act_update_AwardItem");
-				
-				//update task
-				$this->arrTaskID= $this->_request->getParam("TaskID");			
-				$this->arrTaskName= $this->_request->getParam("TaskName");		
-				$this->arrTaskString= $this->_request->getParam("TaskString"); 
-				$this->arrDescID= $this->_request->getParam("DescID");
-				$this->arrQTC_ID= $this->_request->getParam("QTC_ID");
-				$this->arrUnlockCoin= $this->_request->getParam("UnlockCoin");
-				$this->arrIconClassName= $this->_request->getParam("IconClassName");
-				$this->arrQuantity= $this->_request->getParam("Quantity");
-				$this->arrActionID= $this->_request->getParam("Action");
-				$this->arrTargetID= $this->_request->getParam("TargetID");
-				
-				foreach($this->arrTaskID as $i=>$key)
-				{
-					$task = new Obj_Task();
-					$task->TaskID = $this->arrTaskID[$i];
-					$task->TaskName = $this->arrTaskName[$i];
-					$task->TaskString = $this->arrTaskString[$i];
-					$task->DescID = $this->arrDescID[$i];
-					$task->QTC_ID = $this->arrQTC_ID[$i];
-					$task->UnlockCoin = $this->arrUnlockCoin[$i];
-					$task->IconClassName = $this->arrIconClassName[$i];
-					$task->Quantity = $this->arrQuantity[$i];
-					$task->ActionID = $this->arrActionID[$i];
-					$task->QuestID = $this->QuestID;
-					$task->TargetID = $this->arrTargetID[$i];
-					
-					$mdtask = new Models_Task();
-					if($task->TaskID == "")
-					{
-						$task->TaskID = $mdtask->findid();
-						$mdtask->_insert($task);
-						Models_Log::insert($this->view->user->username, "act_insert_task");
-					}
-					else
-					{
-						$mdtask->_update($task);
-						Models_Log::insert($this->view->user->username, "act_update_task");
-					}				
-				}
-				$this->_redirect("/quest/index");
-			}	
-		}
-		catch(Exception $ex)
-        {
-           $this->view->errMsg = $ex->getMessage();
-			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-        }
-	}
 	
 	public function updateneedquestAction()
 	{
@@ -709,33 +622,5 @@ class QuestController extends BaseController
         }
 		
 	}
-	}
-	///////////////////////////////////////////
-	function updateAwardItem($arrItem,$arrAddItem,$questID){
-		$item_md = new Models_Quest_Awarditem();
-		if(!empty($arrItem)){
-				foreach ($arrItem as $key => $value) {/// $key la ID cua Bang q_quest_awarditem					
-					if($value == ""){                /// $value la gia tri awarditem						
-						$item_md->_delete($key);
-					}else{
-						$item_obj = new Obj_Quest_Awarditem();
-						$item_obj->ID = $key;
-						$item_obj->QuestID = $questID;
-						$item_obj->AwardItem = $value;						
-						$item_md->_update($item_obj);
-					}
-				}	
-			}
-			//Add
-			if(!empty($arrAddItem)){
-				foreach ($arrAddItem as $value) {/// $key la ID cua Bang q_quest_awarditem
-					if($value != ""){                    /// $value la gia tri awarditem				
-						$item_obj = new Obj_Quest_Awarditem();
-						$item_obj->QuestID = $questID;
-						$item_obj->AwardItem = $value;								
-						$item_md->_insert($item_obj);
-					}
-				}	
-			}	
 	}
 	

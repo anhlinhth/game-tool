@@ -23,8 +23,7 @@ if($this->temp)
 				<select name="QuestLineID" id = "QuestLineID" onChange="changeQuestLine()">
 				<option value="">Select QuestLine </option>
 				<?php 
-				foreach($this->dataquestlineid as $row)
-				{
+				foreach($this->dataquestlineid as $row){
 					$str = "";
 					if($this->obj->QuestLineID == $row->QuestLineID){
 						$str="selected";
@@ -35,10 +34,8 @@ if($this->temp)
 				<?php
 				}
 				
-				?>
-				
-				</select>
-				
+				?>				
+				</select>				
 			</td>
 			<td>
 				<input type="submit" name="button1" id = "button1" value="search"/>
