@@ -114,7 +114,12 @@ a.btn{
 input.btn{
 	padding: 3px 10px 2px 25px;
 }
-.btn.disabled{
+a.btn.disabled{
+	cursor: default;
+	opacity: 0.5;
+	border:none;
+}
+a.btn.disabled:hover{
 	cursor: default;
 	opacity: 0.5;
 }
@@ -135,6 +140,9 @@ button.btn:hover {
 
 .btn.add{
 	background-image:url("../images/p2/icons/16/add.png") !important; 
+}
+.btn.edit{
+	background-image:url("../images/p2/icons/16/edit.png") !important; 
 }
 .btn.sync{
 	background-image:url("../images/p2/icons/24/sync.png") !important; 
