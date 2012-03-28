@@ -6,6 +6,7 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 
 require_once ROOT_APPLICATION.DS.'modules'.DS.'Campaign'.DS.'models'.DS.'Models_Map_Package.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'Campaign'.DS.'models'.DS.'Models_Battle_Package.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'Campaign'.DS.'models'.DS.'Models_Map_Battle_Package.php';
 class Campaign_ExportController extends BaseController
 {
 	public function _setUserPrivileges()
@@ -24,32 +25,38 @@ class Campaign_ExportController extends BaseController
 	
 	public function exportAction()
 	{
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNorender();
+		try{
 		$model = new Models_Map_Package();
+		
 		$tuo = new Models_Map_Package();
 		$data = $tuo->getdata();
-		$questIdError = $model->generate($data);
 		
+		$model->generate($data);
 		$mdB = new Models_Battle_Package();
-		
 		$data = $mdB->fetchall();
 		$mdB->generate($data);
 		
+		$mdmB = new Models_Map_Battle_Package();
+		$data = $tuo->getdata();
+		$mdmB->generate($data);
 		
 		
-		if(!empty($questIdError)){
-			//$this->view->val = 1;
-			$this->view->questIdError = $questIdError;	
-		}else{
-
+		
+		
+		echo " thành công ";
 		}
-
+		catch (Exception $e)
+		{
+			echo $e;
+		}
 	}
 	public function downloadAction()
 	{
 	}
 	public function indexAction()
 	{
-		echo "Heloo";
 	}
 	
 
