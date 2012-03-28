@@ -467,7 +467,7 @@ function addTemplate(key){
 		url:"<?php echo $this->baseUrl.'/Template/save/'?> ",
 		data: data,
 		dataType:"json",	
-		success: function(msg){				
+		success: function(msg){	
 			if( msg.msg=="1"){
 				var option_html = "<option value='"+msg.TempID+"'>"+msg.Name+"</option>";
 				$("select.task-template").append(option_html);

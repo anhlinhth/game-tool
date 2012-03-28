@@ -1,13 +1,13 @@
-<form  id="form" class="task_form">
-Template : <select class='task-template' id ="Template<?php echo $this->key1;?>" name ="Template<?php echo $this->key1;?>" onchange ="loadTemplate(<?php echo $this->key1;?>)">
+<form  id="form" class="task_form form-task-<?php echo $this->key1?>">
+<em>Template</em><select class='task-template' id="template<?php echo $this->key1;?>" onChange='javascript:loadTemplate(<?php echo $this->key1;?>)'>
 <option value =""></option>
 <?php 
 foreach ($this->arrTemplate as $row) {?>
 	<option value ="<?php echo $row->TaskID;?>"><?php echo $row->TaskName;?></option>
 <?php } ?>
 </select>
-<a class="btn add" title=' Add' href='javascript:addTemplate(<?php echo $this->key1?>)'>Add</a>
-<a class="btn edit" title=' Edit' href='javascript:editTemplate()'>Edit</a>	
+<a class="btn add" title=' Add' href='javascript:addTemplate(<?php echo $this->key1?>)'>Add To Template</a>
+<a class="btn edit" title=' Edit' href='javascript:editTemplate()'>Edit Template</a>	
 <table>
 	<tr>
 		<td>Task ID</td>
@@ -42,9 +42,9 @@ foreach ($this->arrTemplate as $row) {?>
 	</tr>
 	<tr>
 		<td>Desc</td>
-		<td><input type="text" id="DescID" name="DescID" value=""/></td>
-		<td>DescString</td>
 		<td><input type="text" id="DescString" name="DescString" value=""/></td>
+		<td>DescString</td>
+		<td><input type="text" id="DescID" name="DescID" value=""/></td>
 	</tr>
 	<tr>
 		<td>Icon Class Name</td>
