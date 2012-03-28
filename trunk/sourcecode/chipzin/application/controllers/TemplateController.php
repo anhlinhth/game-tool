@@ -30,55 +30,56 @@ class TemplateController extends BaseController
 	
 	public function saveAction()
 	{
-		$this->_helper->layout->disableLayout();
-		$this->_helper->viewRenderer->setNorender();
+	    try{
+	        $this->_helper->layout->disableLayout();
+	        $this->_helper->viewRenderer->setNorender();
+	        
+	        $md = new Models_template();
+	        $temp = new Obj_Template();	        	
+	        $temp->TaskName = $_POST['TaskName'];
+	        $temp->TaskString = $_POST['TaskString'];
+	        $temp->DescID = $_POST['DescString'];
+	        $temp->DescString = $_POST['DescID'];
+	        $temp->QTC_ID = $_POST['QuestTC'];
+	        $temp->UnlockCoin = $_POST['UnlockCoin'];
+	        $temp->Quantity = $_POST['Quantity'];
+	        $temp->ActionID = $_POST['Action'];
+	        $temp->QuestID = 0;
+	        $temp->IconClassName = $_POST[IconClassName];
+	        $temp->IconPackageName = $_POST[IconPackageName];
+	        if ($_POST[Target]=="TargetType"){
+	        	$temp->TargetType = $_POST[TargetType];
+	        	$temp->TaskID = $md->_insert($temp);
+	        }
+	        else {
+	        	$temp->TaskID = $md->_insert($temp);
+	        	$Targetlist = $_POST[TargetList];
+	        	$mdTT = new Models_Temp_Target();
+	        	$mdTT->delete($temp->TaskID);
+	        	if(count($Targetlist)!= 0){
+	        		foreach ( $Targetlist as $row){
+	        			$objTT= new Obj_Temp_Target();
+	        			$objTT->ID = 'NULL';
+	        			$objTT->TargetID = $row;
+	        			$objTT->TaskID = $temp->TaskID;
+	        			if($objTT->TargetID != ""){
+	        				$mdTT->_insert($objTT);
+	        			}
+	        		}
+	        	}
+	        }
+	        $result = array('msg' => '1', 'TempID' => $temp->TaskID,'Name'=>$temp->TaskName);
+	        echo json_encode($result);
+	        
+	    }catch(Exception $ex)
+        {            
+			$this->view->errMsg = $ex->getMessage();
+			$this->view->errMsg = $ex->getMessage();
+			$result = array('msg' => $ex->getMessage(), 'TempID' => "");
+			echo json_encode($result);
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+        }
 		
-		$md = new Models_template();
-		$temp = new Obj_Template();
-		$TempID = $md->getID();
-		$temp->TaskID = $TempID[0][TaskID];
-		if($temp->TaskID == "")
-		{
-			$temp->TaskID = "1";
-		}
-		$temp->TaskName = $_POST['TaskName'];
-		$temp->TaskString = $_POST['TaskString'];
-		$temp->DescID = $_POST['DescString'];
-		$temp->DescString = $_POST['DescID'];
-		$temp->QTC_ID = $_POST['QuestTC'];
-		$temp->UnlockCoin = $_POST['UnlockCoin'];
-		$temp->Quantity = $_POST['Quantity'];
-		$temp->ActionID = $_POST['Action'];
-		$temp->QuestID = 0;
-		$temp->IconClassName = $_POST[IconClassName];
-		$temp->IconPackageName = $_POST[IconPackageName];
-		if ($_POST[Target]=="TargetType")
-		{
-			$temp->TargetType = $_POST[TargetType];
-					$md->insert($temp);
-		}
-		else 
-		{
-			$md->insert($temp);
-			$Targetlist = $_POST[TargetList];
-			$mdTT = new Models_Temp_Target();
-			$mdTT->delete($temp->TaskID);
-			if(count($Targetlist)!= 0)
-			{
-				foreach ( $Targetlist as $row)
-				{
-					$objTT= new Obj_Temp_Target();
-					$objTT->ID = 'NULL';
-					$objTT->TargetID = $row;
-					$objTT->TaskID = $temp->TaskID;
-					if($objTT->TargetID != "")
-					{
-						$mdTT->_insert($objTT);
-					}
-				}
-			}
-		}
-		echo "1";
 	}
 	
 	public function indexAction()
@@ -88,19 +89,19 @@ class TemplateController extends BaseController
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Template.php';
 			$pageNo = $this->_request->getParam("page");
 			$items = $this->_request->getParam("items");
-			
+			$layout = $this->_request->getParam("layout");
 			if($pageNo == 0)
 				$pageNo = 1;
 			if($items == 0)
 				$items = DEFAULT_ITEM_PER_PAGE;
-			
+			if(isset($layout) && $layout=="disabled"){
+			    $this->_helper->layout->disableLayout();
+			}			
 			$md = new Models_template();
 			$form= new Forms_Template();
 			$form->_requestToForm($this);
-			$data = $md->filter($form->obj, "TaskID ASC", ($pageNo - 1)*$items, $items);
-			$count = $md->_count(null);
-			
-			
+			$data = $md->filter($form->obj, "TaskName ASC", ($pageNo - 1)*$items, $items);
+			$count = $md->_count(null);			
 			$this->view->data = $data;
 			$this->view->items = $items;
 			$this->view->page = $pageNo;
@@ -155,11 +156,12 @@ class TemplateController extends BaseController
 			$md_target->delete($id);
 			$md->_delete($id);				
 			Models_Log::insert($this->view->user->username, "act_delete_temp");
-			echo "Thành công";			
+			echo "1";			
 		}
 		catch(Exception $ex)
         {            
 			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 	}

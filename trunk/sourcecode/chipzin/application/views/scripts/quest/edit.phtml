@@ -7,7 +7,7 @@
 
 <?php //print_r($this->arrAwardItems)?>
 <div  class="mybox" id="quest">
-	<h3>Ch?nh s?a Quest</h3>
+	<h3>Edit Quest</h3>
 	<form class="quest" id="form" action="" method="post">
 	  <fieldset id="info">
 		<legend>Thông tin Quest </legend>
@@ -119,6 +119,9 @@
 	<div id='ct'></div>
 	<div id='ft'> </div>
 </div>
+<div id='dialog_edit_template'>
+		
+</div>
 <script>
 function  addAwardItem(key){	
 	var count = $(".award_item").size();
@@ -154,22 +157,6 @@ function  deleteNeedQuest(key){
 		div.children("select").children(".data").remove();
 		
 	}	
-}
-/////////////////////////Task/////////////////////////////////
-function addTemplate(key){
-	data = $(".form-task-" + key).serialize();	
-	$.ajax({
-		type: "POST",
-		url:"<?php echo $this->baseUrl.'/Template/save/'?> ",
-		data: data,		
-		success: function(msg){				
-			if(parseInt(msg)==1){					
-				alert("Successfull");			
-			}else{
-				alert("Error");				
-			}
-		}
-	});
 }
 //////////////////////////////////////////
 function addTask(key){
@@ -442,6 +429,25 @@ function saveTask(){
 	});
 }
 ////////////////////////////////
+/////////////////////////Task/////////////////////////////////
+function addTemplate(key){
+	data = $(".form-task-" + key).serialize();	
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/Template/save/'?> ",
+		data: data,
+		dataType:"json",	
+		success: function(msg){				
+			if( msg.msg=="1"){
+				var option_html = "<option value='"+msg.TempID+"'>"+msg.Name+"</option>";
+				$("select.task-template").append(option_html);
+				alert("Successfull");			
+			}else{
+				alert(msg.msg);				
+			}
+		}
+	});
+}
 function loadTemplate(key){
 	var id = $("#template"+key).val();	
 	$.ajax({
@@ -478,11 +484,32 @@ function loadTemplate(key){
 	});	
 }
 ////////////////////////////////
+function editTemplate(){
+	$.ajax({
+		type: "POST",		
+		url:"<?php echo $this->baseUrl.'/template/index/?layout=disabled'?> ",				
+		success: function(msg){			
+			$("div#dialog_edit_template").html(msg);
+		}
+	});	
+	$("div#dialog_edit_template").dialog("open");
+}
 $(document).ready(function(){
 	///////////////////////////////
-	loadTask(<?php echo $this->obj->QuestID?>);	
-	///////////////////////////////
-	
+	loadTask(<?php echo $this->obj->QuestID?>);
+	///////////////////////////////	
+});
+////////Init Diaglog//////////
+$("#dialog_edit_template").dialog({
+				autoOpen: false,
+				height: $(window).height()-50,
+				width: $(window).width()-100,
+				modal: true,
+				buttons: {
+					"Ok": function() {						
+						$(this).dialog("close");
+					}
+				}
 });
 
 </script>
