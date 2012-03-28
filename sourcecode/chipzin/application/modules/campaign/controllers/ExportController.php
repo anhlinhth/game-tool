@@ -9,20 +9,18 @@ require_once ROOT_APPLICATION.DS.'modules'.DS.'Campaign'.DS.'models'.DS.'Models_
 require_once ROOT_APPLICATION.DS.'modules'.DS.'Campaign'.DS.'models'.DS.'Models_Map_Battle_Package.php';
 class Campaign_ExportController extends BaseController
 {
-	public function _setUserPrivileges()
-	{
-		return array('index','add','edit','delete','active','item','additem','pigshop','itemshop','export');
-	}
-	
-	public function preDispatch()
-	{
-		parent::preDispatch();
-		
-		if(!$this->hasPrivilege())
-			$this->_redirect ("/error/permission");
-	}
-	
-	
+public function _setUserPrivileges()
+    {
+        return array('index');
+    }
+
+    public function preDispatch()
+    {
+        parent::preDispatch();
+
+        if (!$this->hasPrivilege())
+            $this->_redirect("/error/permission");
+    }
 	public function exportAction()
 	{
 		$this->_helper->layout->disableLayout();
@@ -45,12 +43,13 @@ class Campaign_ExportController extends BaseController
 		
 		
 		
-		echo " thành công ";
+		echo " thï¿½nh cï¿½ng ";
 		}
 		catch (Exception $e)
 		{
 			echo $e;
 		}
+		
 	}
 	public function downloadAction()
 	{
