@@ -38,8 +38,8 @@ class TemplateController extends BaseController
 	        $temp = new Obj_Template();	        	
 	        $temp->TaskName = $_POST['TaskName'];
 	        $temp->TaskString = $_POST['TaskString'];
-	        $temp->DescID = $_POST['DescString'];
-	        $temp->DescString = $_POST['DescID'];
+	        $temp->DescID = $_POST['DescID'];
+	        $temp->DescString = $_POST['DescString'];
 	        $temp->QTC_ID = $_POST['QuestTC'];
 	        $temp->UnlockCoin = $_POST['UnlockCoin'];
 	        $temp->Quantity = $_POST['Quantity'];
@@ -47,6 +47,7 @@ class TemplateController extends BaseController
 	        $temp->QuestID = 0;
 	        $temp->IconClassName = $_POST[IconClassName];
 	        $temp->IconPackageName = $_POST[IconPackageName];
+	      
 	        if ($_POST[Target]=="TargetType"){
 	        	$temp->TargetType = $_POST[TargetType];
 	        	$temp->TaskID = $md->_insert($temp);

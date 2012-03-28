@@ -438,7 +438,7 @@ function addTemplate(key){
 		url:"<?php echo $this->baseUrl.'/Template/save/'?> ",
 		data: data,
 		dataType:"json",	
-		success: function(msg){				
+		success: function(msg){			
 			if( msg.msg=="1"){
 				var option_html = "<option value='"+msg.TempID+"'>"+msg.Name+"</option>";
 				$("select.task-template").append(option_html);
@@ -450,41 +450,39 @@ function addTemplate(key){
 	});
 }
 function loadTemplate(key){
-	var id = $("#Template"+key).val();
+	var id = $("#template"+key).val();	
 	$.ajax({
 		type: "POST",		
 		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
 		data: "id=" + id,	
 		dataType: "json",
-		success: function(msg){	
-			
-			if(msg.TargetType==null){
-				$("#task-div-" + key +" .task_form #TargetType").val("");
-				$("#target-list-"+key + " .list").html("");
-				$("#task-div-" + key +" .task_form #List").attr("checked", true);				
+		success: function(msg){ 				
+			$(".form-task-" + key +" #TaskString").val(msg.TaskString);
+			$(".form-task-" + key +" #TaskName").val(msg.TaskName);
+			$(".form-task-" + key +" #DescID").val(msg.DescID);
+			$(".form-task-" + key +" #DescString").val(msg.DescString);
+			$(".form-task-" + key +" #QuestTC").val(msg.QTC_ID);
+			$(".form-task-" + key +" #Action").val(msg.ActionID);
+			$(".form-task-" + key +" #UnlockCoin").val(msg.UnlockCoin);
+			$(".form-task-" + key +" #Quantity").val(msg.Quantity);
+			$(".form-task-" + key +" #IconClassName").val(msg.IconClassName);			
+			$(".form-task-" + key +" #IconPackageName").val(msg.IconPackageName);
+			if(msg.TargetType==null){				
+				$(".form-task-" + key+ " .list").html("");
+				$(".form-task-" + key + " #TargetType").val('');
+				$(".form-task-" + key+ " #List").attr("checked", true);				
 				$.each(msg.TargetList, function(key1,val){				
-					count = $("#target-list-"+key +' .target-list').size();	
-					input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value="'+val.TargetID+'"> <br>';
-					$("#target-list-"+key + " .list").append(input);
+					count = $(".form-task-" + key+' .target-list').size();	
+					input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value="'+val.TargetID+'"> <br>'
+					$(".form-task-" + key + " .list").append(input);
 				});
 			}else{								
-				$("#task-div-" + key +" .task_form #TargetType").val(msg.TargetType	);
-				$("#target-list-"+key + " .list").html("");
-				$("#task-div-" + key +" .task_form #Type").attr("checked", true);
+				$(".form-task-" + key + " #TargetType").val(msg.TargetType);
+				$(".form-task-" + key + " .list").html("");
+				$(".form-task-" + key + " #Type").attr("checked", true);
 			}
-						
-			$("#task-div-" + key +" .task_form #TaskString").val(msg.TaskString);
-			$("#task-div-" + key +" .task_form #TaskName").val(msg.TaskName);
-			$("#task-div-" + key +" .task_form #DescID").val(msg.DescID);
-			$("#task-div-" + key +" .task_form #DescString").val(msg.DescString);
-			$("#task-div-" + key +" .task_form #QuestTC").val(msg.QTC_ID);
-			$("#task-div-" + key +" .task_form #UnlockCoin").val(msg.UnlockCoin);
-			$("#task-div-" + key +" .task_form #Quantity").val(msg.Quantity);
-			$("#task-div-" + key +" .task_form #Action").val(msg.ActionID);
-			$("#task-div-" + key +" .task_form #IconClassName").val(msg.IconClassName);
-			$("#task-div-" + key +" .task_form #IconPackageName").val(msg.IconPackageName);
 		}
-	});
+	});	
 	
 }
 function editTemplate(){
