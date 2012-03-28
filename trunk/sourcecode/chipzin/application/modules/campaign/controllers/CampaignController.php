@@ -15,8 +15,6 @@ require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models'
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
 	DS . 'Models_Battle.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
-	DS . 'Models_Award_type.php';
-require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
 	DS . 'Models_Battle_Soldier.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
 	DS . 'Models_Soldier.php';
@@ -154,7 +152,7 @@ class Campaign_CampaignController extends BaseController
     public function editAction()
     {
         try {
-            ///////Lấy Campaign//////////
+            ///////Láº¥y Campaign//////////
             $mdCamp = new Models_Campaign();
             $id = $this->_request->getParam("id");
             if (!isset($id)) {
@@ -169,19 +167,19 @@ class Campaign_CampaignController extends BaseController
 
             //var_dump($campaign);
 
-            ///////Lấy danh sách Battle ///////////
+            ///////Láº¥y danh sÃ¡ch Battle ///////////
             //$mdbattle = new Models_Battle();
 
-            ///////Lấy danh sách Layout//////////
+            ///////Láº¥y danh sÃ¡ch Layout//////////
             $mdlayout = new Models_Layout();
             $this->view->arrlayout = $mdlayout->getLayout();
             //print_r($this->view->arrlayout);
-            ///////Lấy danh sách Award//////////
+            ///////Láº¥y danh sÃ¡ch Award//////////
             $mdawardtype = new Models_Award_Type();
             $this->view->arrawardtype = $mdawardtype->getAwardtype();
             ////
 
-            ///////Đối với mỗi battle//////
+            ///////Ä�á»‘i vá»›i má»—i battle//////
             $mdB_layout = new Models_Soldier();
             $this->view->arrSoldier = $mdB_layout->getAllSoldier();
             $mdB = new Models_Battle();
@@ -202,7 +200,7 @@ class Campaign_CampaignController extends BaseController
             $arrbattle = $this->view->arrbattle;
 
 
-            ///////Lấy Award - ThaoNX////////////
+            ///////Láº¥y Award - ThaoNX////////////
 
             $md_award = new Models_Award();
             $this->view->arrAwardType = $md_award->getAwardType();
