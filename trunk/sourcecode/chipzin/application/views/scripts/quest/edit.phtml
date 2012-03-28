@@ -13,7 +13,7 @@
 		<legend>Thông tin Quest </legend>
 		<table id="quest">
 			<tr>
-				<td>
+				<td width="55%">
 					<label for="QuestID">Quest ID : </label> 
 					<input class="disabled" readonly name="QuestID" value="<?php echo $this->obj->QuestID ?>" id="QuestID" type="text" tabindex="1" /></td>
 				<td>
@@ -57,9 +57,18 @@
 				
 			
 			<tr>
-				<td>
-					<label>Gold: </label><input name="AwardGold" value="<?php echo $this->obj->AwardGold?>" id="awardgold" type="text" tabindex="1" /><br/>
-					<label>EXP: </label><input name="AwardExp" value="<?php echo $this->obj->AwardExp?>" id="awardexp" type="text" tabindex="1" /><br/>
+				<td class="q_award" rowspan="2">
+					<label>Award:</label>
+					<div><a class='tool-16 add' href=''></a></div>					
+					<?php foreach($this->arrAward as $row){?>					
+						<div>
+							<select name='AwardType[]' style='margin-bottom: 1px;width:31%'>
+							<?php echo $this->options($this->arrawardtype,$row->AwardTypeID,array('key'=>'AwardTypeID','name'=>'Name'));?>
+							</select>							
+							<label></label><input name='AwardValue[]' value='<?php echo $row->Value ?>' id='' type='text' tabindex='1' style='margin-bottom: 1px;width:15%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
+						</div>
+					<?php }?> 
+					
 				</td>
 				<td id="list-need-quest">
 					<label>Need Quest : </label>				
@@ -82,12 +91,7 @@
 				</td>
 			</tr>
 			<tr>		
-					<td>
-					<label for="2">ITems: </label>
-					<a class='ico-16 add' title='Add Item' href='javascript:addAwardItem(0)'></a>
-		        	<?php $this->ListQuestAwardItems($this->arrAwardItems) ;?>
-		        	<div id="addItem"></div>
-					</td>
+					
 					<td>
 					<label for="temp">Temp Field: </label> 		
 					<input name="temp" value="" id="temp" type="text" tabindex="1" />
@@ -122,29 +126,55 @@
 <div id='dialog_edit_template'>
 		
 </div>
+<div style="display:none" id='tempAward'>
+	<div >
+		<select name='AwardType[]' style='margin-bottom: 1px;width:31%'>
+		<?php foreach ($this->arrawardtype as $row)
+		{
+		?>
+		<option value ='<?php echo $row->AwardTypeID;?>'><?php echo $row->Name;?></option>
+		<?php 
+		}
+		?>
+		</select>		
+		<label></label><input name='AwardValue[]' value='' id='' type='text' tabindex='1' style='margin-bottom: 1px;width:15%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
+	</div>
+</div>
 <script>
-function  addAwardItem(key){	
-	var count = $(".award_item").size();
-	count = count;
-	//alert(count);	
-	var btnDelete = "&nbsp<a class='tool-16 delete' title='Delete Item' href='javascript:deleteAwardItem("+count+")'></a>" ;
-	var input = "<label></label><input name='additem[]' value='' id='' type='text' tabindex='1'/>";
+//*****************************Award Item****************//
+
+//*****************************Award Item****************//
+
+//Add Award Item
+function  addAwardItem(e)
+{		
+	var parent_div = $(e).parent();
+	var parent_td = parent_div.parent();
+	var parent_tr = parent_td.parent();
+	var html=$("#tempAward").html();
+	parent_td.append(html);
+	//parent_tr.change();
+}
+//delete A Award
+function deleteAwardItem(e){
 	
-
-	$("#addItem").before("<div class='award_item add_item' id='award_item_"+count+"'>" +input + btnDelete+ "</div>");
+	var parent_div = $(e).parent();
+	//var parent_td = parent_div.parent();
+	//var parent_tr = parent_td.parent();
+	parent_div.remove();
+	//parent_tr.change();
 }
-//////////////////
-function  deleteAwardItem(key){		
-	if($("#award_item_"+key).hasClass("add_item")){
-		$("#award_item_"+key).html(""); 
-		return false;
-	}
-	$("#award_item_"+key+" a").remove();
-	$("#award_item_"+key+" label").remove();
-	$("#award_item_"+key+" input").val("");
-	$("#award_item_"+key).hide();
-
-}
+//Add A Award///////
+$("table#quest").delegate("td.q_award .add", "click", function() {
+	addAwardItem(this);		
+	return false;		
+});
+//Remove A Award///////
+$("table#quest").delegate("td.q_award .delete", "click", function() {	
+	deleteAwardItem(this);		
+	return false;		
+});
+//*****************************Award Item****************//
 ////////////////////////////////
 function  deleteNeedQuest(key){
 	//alert("asd");
@@ -228,9 +258,9 @@ function loadTask(key){
 			}
 			
 		}
-	});
-	
+	});	
 }
+loadTask(<?php echo $this->obj->QuestID?>);
 ///////////////////////////////////////
 function targetChange(key){
 	
@@ -483,7 +513,6 @@ function loadTemplate(key){
 		}
 	});	
 }
-////////////////////////////////
 function editTemplate(){
 	$.ajax({
 		type: "POST",		
@@ -494,11 +523,7 @@ function editTemplate(){
 	});	
 	$("div#dialog_edit_template").dialog("open");
 }
-$(document).ready(function(){
-	///////////////////////////////
-	loadTask(<?php echo $this->obj->QuestID?>);
-	///////////////////////////////	
-});
+
 ////////Init Diaglog//////////
 $("#dialog_edit_template").dialog({
 				autoOpen: false,
@@ -511,5 +536,4 @@ $("#dialog_edit_template").dialog({
 					}
 				}
 });
-
 </script>

@@ -13,7 +13,7 @@
 		<legend>Thông tin Quest </legend>
 		<table id="quest">
 			<tr>
-				<td>
+				<td  style="width: 55%;">
 					<label for="QuestID">Quest ID : </label> 
 					<input class="disabled" readonly name="QuestID" value="<?php echo $this->obj->QuestID ?>" id="QuestID" type="text" tabindex="1" /></td>
 				<td>
@@ -57,8 +57,8 @@
 				
 			
 			<tr>
-				<td class="q_award">
-					<label>Award</label>
+				<td class="q_award" rowspan="2">
+					<label>Award:</label>
 					<div><a class='tool-16 add' href=''></a></div>
 				</td>
 				<td id="list-need-quest">
@@ -81,12 +81,7 @@
 					</select>
 				</td>
 			</tr>
-			<tr>		
-					<td>
-		        	<?php $this->ListQuestAwardItems($this->arrAwardItems) ;?>
-		        	<div id="addItem"></div>
-					</td>
-					
+			<tr>						
 					<td>
 					<label>Temp Field: </label><input name="Temp" value="" id="Temp" type="text" tabindex="1" /><br/>
 					</td>
@@ -113,9 +108,12 @@
 	<div id='ct'></div>
 	<div id='ft'> </div>
 </div>
+<div id='dialog_edit_template'>
+		
+</div>
 <div style="display:none" id='tempAward'>
-	<div>
-		<select name='Awardtype[]' style='margin-bottom:5px;margin-top:5px;min-width:50px'>
+	<div >
+		<select name='AwardType[]' style='margin-bottom: 1px;width:31%'>
 		<?php foreach ($this->arrawardtype as $row)
 		{
 		?>
@@ -123,15 +121,24 @@
 		<?php 
 		}
 		?>
-		</select>
-		<label></label><input name='additem[]' value='' id='' type='text' tabindex='1' style='margin-bottom:5px;margin-top:5px;min-width:50px; max-width:100px;'/>
-		&nbsp;<a class='tool-16 delete' title='Delete Item' href=''></a><br>
+		</select>		
+		<label></label><input name='AwardValue[]' value='' id='' type='text' tabindex='1' style='margin-bottom:1px;width:15%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
 	</div>
 </div>
 <script>
-
-function  addAwardItem(e)
-{		
+//*****************************Award Item****************//
+//Add A Award///////
+$("table#quest").delegate("td.q_award .add", "click", function() {
+	addAwardItem(this);		
+	return false;		
+});
+//Remove A Award///////
+$("table#quest").delegate("td.q_award .delete", "click", function() {
+	deleteAwardItem(this);
+	return false;		
+});
+//Add Award Item
+function  addAwardItem(e){		
 	var parent_div = $(e).parent();
 	var parent_td = parent_div.parent();
 	var parent_tr = parent_td.parent();
@@ -139,26 +146,15 @@ function  addAwardItem(e)
 	parent_td.append(html);
 	parent_tr.change();
 }
-
-function deleteAwardItem(e)
-{
+//delete A Award
+function deleteAwardItem(e){
 	var parent_div = $(e).parent();
 	var parent_td = parent_div.parent();
 	var parent_tr = parent_td.parent();
 	parent_div.remove();
 	parent_tr.change();
 }
-///////Add A Award///////
-$("table#quest").delegate("td.q_award .add", "click", function() {
-	addAwardItem(this);		
-	return false;		
-});
-///////Remove A Award///////
-$("table#quest").delegate("td.q_award .delete", "click", function() {
-	deleteAwardItem(this);
-	return false;		
-});
-
+//*********************************************//
 ////////////////////////////////
 function  addNeedQuest(key){	
 	var id = $("#QuestID").serialize();
@@ -198,18 +194,6 @@ function  deleteNeedQuest(key){
 	}	
 }
 /////////////////////////Task/////////////////////////////////
-function addTemplate(key){
-	data = $("#task-div-"+key + " .task_form").serialize();
-	$.ajax({
-			type: "POST",
-			url:"<?php echo $this->baseUrl.'/template/save/'?> ",
-			data: data,		
-			success: function(msg){
-				if(parseInt(msg)==1)
-					alert("Successfull");
-			}
-		});
-}
 function addTask(key){
 	var count_div = $(".task-div").size();
 	count_form = $("#list-task form").size();	
@@ -227,11 +211,12 @@ function addTask(key){
 		success: function(data){					
 			if(data != ""){
 				var btnDel = "<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask("+count_div+")'></a>";
-				var btnAddTo = "<a class='ico-16 template' title='Add To Template' href='javascript:addTemplate("+count_div+")'>Add To Template</a>";
-				var edittemp = "<a title='Edit Temp' href='<?php echo $this->baseUrl.'/template'?>'>Edit Template</a>";
-				var title = "<h4> Task "+count_form+"&nbsp"+btnDel+"&nbsp&nbsp&nbsp&nbsp"+btnAddTo+edittemp+"</h4>";
+				//var btnAddTo = "<a class='ico-16 template' title='Add To Template' href='javascript:addTemplate("+count_div+")'>Add To Template</a>";
+				//var edittemp = "<a title='Edit Temp' href='<?php echo $this->baseUrl.'/template'?>'>Edit Template</a>";
+				var title = "<h4> Task "+count_form+"&nbsp"+btnDel+"</h4>";
 				var str = "<div class='task-div' id='task-div-"+count_div+"'>"+title + data+"</div>";
 				$("#task-0").before(str);
+				
 				
 			}else{
 				alert("Error");				
@@ -240,7 +225,6 @@ function addTask(key){
 		}
 	});
 }
-
 function deleteTask(key){
 	alert(key);
 	task_div = $("#task-div-"+key);	
@@ -262,8 +246,6 @@ function addTarget(key){
 	input ='<input id = "target-'+count+'"  class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>'
 	$("#target-list-"+key).append(input);
 }
-
-
 function saveTask(){
 	quest_id = $("#QuestID").val();
 
@@ -288,8 +270,7 @@ function saveTask(){
 			
 }
 function validate(){
-	flag=true;
-	
+	flag=true;	
 	$(".task_form").each(function(key,val){
 		num = key+1;
 		value = $(val).find(" #TaskString").val();		
@@ -379,15 +360,14 @@ function validate(){
 			}
 		}		
 	});
-		return flag;	
+	return flag;	
 }
 function saveAll(){	
 	quest_id = $("#QuestID").val();
 	data = $(".quest-info").serialize();		
 	$("#dialog #ct").html("");	
 	test = validate();
-	if(test==true)
-	{
+	if(test==false){
 		$("#dialog").dialog({			
 			height: 400,
 			width: 350,
@@ -398,8 +378,7 @@ function saveAll(){
 				}										
 			}
 		});
-	}	
-	else{
+	}else{
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/new/'?>",
@@ -449,37 +428,25 @@ function saveAll(){
 	});	
 	}	
 }
-/////////////////////////////
-
-
-//$(document).ready(function(){	
-//	
-//	$("#dialog").dialog({
-//		autoOpen: false,
-//		height: 400,
-//		width: 400,
-//		modal: true,
-//		close: function(event, ui) {
-//			
-//		},
-//		buttons: {
-//			"Continue": function() {								
-//				$(this).dialog("close");
-//										
-//			},
-//			"Edit This Quest": function() {	
-//				quest_id = $("#QuestID").val();							
-//				$(this).dialog("close");
-//				window.location.replace("<?php echo $this->baseUrl.'/quest/edit/id/'?>"+quest_id);				
-//			},
-//			"Add New Quest": function() {								
-//				$(this).dialog("close");
-//				location.reload();							
-//			}
-//		}
-//	});	
-//});
-////////////////////////////////////Load template//////////////////////
+////////////////////////////////////Template//////////////////////
+function addTemplate(key){
+	data = $(".form-task-" + key).serialize();	
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/Template/save/'?> ",
+		data: data,
+		dataType:"json",	
+		success: function(msg){				
+			if( msg.msg=="1"){
+				var option_html = "<option value='"+msg.TempID+"'>"+msg.Name+"</option>";
+				$("select.task-template").append(option_html);
+				alert("Successfull");			
+			}else{
+				alert(msg.msg);				
+			}
+		}
+	});
+}
 function loadTemplate(key){
 	var id = $("#Template"+key).val();
 	$.ajax({
@@ -518,16 +485,26 @@ function loadTemplate(key){
 	});
 	
 }
-
-///////Add A Award///////
-$("table#battle").delegate("td.b_award .add", "click", function() {
-	addAward(this);		
-	return false;		
+function editTemplate(){
+	$.ajax({
+		type: "POST",		
+		url:"<?php echo $this->baseUrl.'/template/index/?layout=disabled'?> ",				
+		success: function(msg){			
+			$("div#dialog_edit_template").html(msg);
+		}
+	});	
+	$("div#dialog_edit_template").dialog("open");
+}
+////////Init Diaglog//////////
+$("#dialog_edit_template").dialog({
+				autoOpen: false,
+				height: $(window).height()-50,
+				width: $(window).width()-100,
+				modal: true,
+				buttons: {
+					"Ok": function() {						
+						$(this).dialog("close");
+					}
+				}
 });
-///////Remove A Award///////
-$("table#battle").delegate("td.b_award .delete", "click", function(){ 	
-	removeAward(this);		
-	return false;		
-});
-
 </script>

@@ -101,6 +101,7 @@ class TemplateController extends BaseController
 			$form= new Forms_Template();
 			$form->_requestToForm($this);
 			$data = $md->filter($form->obj, "TaskName ASC", ($pageNo - 1)*$items, $items);
+			
 			$count = $md->_count(null);			
 			$this->view->data = $data;
 			$this->view->items = $items;

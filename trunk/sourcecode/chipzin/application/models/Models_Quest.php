@@ -140,6 +140,11 @@ class Models_Quest extends Models_Base
 						q_nextquest
 					WHERE 
 						questID='$value';
+
+				 	DELETE FROM
+						q_award
+					WHERE 
+						questID='$value';
 						
 					UPDATE
 	        			q_nextquest
