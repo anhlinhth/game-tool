@@ -75,6 +75,8 @@ class Zend_View_Helper_TopPanel
                 	$strList .= "<li><a href='$view->baseUrl/campaign/typemap/index' class='report'>Typemap</a></li>";
                 if (Utility::checkPrivilege($view, 'awardtype', 'index'))
                 	$strList .= "<li><a href='$view->baseUrl/campaign/awardtype/index' class='report'>Award Type</a></li>";
+        		 if (Utility::checkPrivilege($view, 'export', 'index'))
+                	$strList .= "<li><a href='$view->baseUrl/campaign/export/index' class='report'>Export</a></li>";
         }
         $strList .= "</ul>
 					</div>
