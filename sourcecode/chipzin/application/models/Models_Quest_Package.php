@@ -23,7 +23,30 @@ class Models_Quest_Package extends Models_Base
 		
 		return $data;
 	}
-	
+	public function getAward($id)
+	{
+		$sql = "SELECT
+					*
+				FROM
+					q_award
+				WHERE
+				QuestID='$id'";
+		
+		$data = $this->_db->fetchAll($sql);
+		return $data;
+	}
+	public function getawardtype($id)
+	{
+			$sql = "SELECT
+					Name
+				FROM
+					c_award_type
+				WHERE
+				AwardTypeID='$id'";
+		
+		$data = $this->_db->fetchOne($sql);
+		return $data;
+	}
 	public function generate($data)
 	{
 		$error = array();
@@ -93,20 +116,20 @@ class Models_Quest_Package extends Models_Base
 					}
 				}
 				$str .= "\n\t'award' => ";
-				$str .= "\n  array(";	
-				if((int)$row['AwardExp']!=0)
+				$mda = $this->getAward($row['QuestID']);
+				if($mda){
+				$str .= "\n  array(\n";	
+				
+				
+				foreach ($mda as $row2)
 				{
-					$str .= "\n\tHONOUR=> ";
-				
-					$str .= (int)$row['AwardExp'].",";
+					$str .="\t".trim($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value']." \n";
 				}
-					if((int)$row['AwardGold']!=0)
-					{
-						$str .= "\n\tGOLD=> ";
-				
-						$str .= (int)$row['AwardGold'];
-					}
-				$str .= "\n\t\t\t),";				
+				$str .= "\t\t),";		
+				}
+				else 
+					$str .= "NULL,";
+						
 				$str .= "\n),";
 				$i++;
 			}
