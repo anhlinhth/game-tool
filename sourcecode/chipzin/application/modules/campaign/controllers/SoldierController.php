@@ -90,5 +90,4 @@ public function _setUserPrivileges()
 	        }			
 	}
 }
-?>
 
