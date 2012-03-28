@@ -4,11 +4,27 @@
 <?php if($this->msg) :?>		
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
+<script>
+function deleteTemplate(key){
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/Template/delete/'?> ",
+		data: "id="+key,		
+		success: function(msg){				
+			if(msg=="1"){					
+				$("table#list_template tr#temp-"+key).remove();
+				$("select.task-template option[value='"+key+"']").remove();			
+			}else{
+				alert(msg);				
+			}
+		}
+	});
+}
+</script>
 <form id="frmTemplate" class="myform" action="" method="post">
-
 <div class="mybox">
 	<h3>Template</h3>
-	<table class="filter" style="width: 80%;margin: auto;margin-bottom: 20px;margin-top: 10px";>
+	<table class="filter" style="width: 80%;margin: auto;margin-bottom: 20px;margin-top: 10px;">
 		<tr>
 			<td>Template ID</td>
 			<td><input style="width:110px;" type="text" name="TaskID" id="TaskID" class="searchbox" /></td>
@@ -22,7 +38,7 @@
 				<td width="40"><a href="#">ID</a></td>
 				<td>Template Name</td>							
 				<td>Action</td>
-				<td>Quest Task Clien</td>
+				<td>Quest Task Client</td>
 				<td></td>
 			</tr>
 		</thead>
@@ -32,8 +48,9 @@
 			</tr>
 		</tbody>						
 	</table>	
-	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>	
-	<div align="center" style="margin: 20px;">		
+		
+	<div align="center" style="margin: 20px;">
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>		
 	</div>
 </div>
 </form>

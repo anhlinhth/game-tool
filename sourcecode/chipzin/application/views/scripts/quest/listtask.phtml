@@ -12,11 +12,9 @@ if(empty($this->arrTask)){
 foreach($this->arrTask as $key =>$val){  ?>
 <div class='task' id="task-<?php echo $key;?>">
 <h4><a href="#">+</a>Task <?php echo $key+1?>&nbsp;&nbsp;<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask(<?php echo $key?>)'></a>
-<a class='ico-16 ' title='Delete Task' href='javascript:addTemplate(<?php echo $key?>)'>Add to Template</a>
-<select id="template<?php echo $key;?>" onChange='javascript:loadTemplate(<?php echo $key;?>)'>
+<em>Template</em><select class='task-template' id="template<?php echo $key;?>" onChange='javascript:loadTemplate(<?php echo $key;?>)'>
 <option value = ""></option>
 <?php 
-
 foreach ($this->arrTemp as $row)
 {
 ?>
@@ -24,7 +22,9 @@ foreach ($this->arrTemp as $row)
 <?php 
 }
 ?>
-</select>	
+</select>
+<a class="btn add" title=' Add' href='javascript:addTemplate(<?php echo $key?>)'>Add</a>
+<a class="btn edit" title=' Edit' href='javascript:editTemplate()'>Edit</a>	
 </h4>
 <form  id="form" class="form-task-<?php echo $key?>" action="" method="post" enctype="multipart/form-data">
 <table>
