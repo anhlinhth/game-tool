@@ -7,6 +7,8 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Awarditem.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Award.php';
+
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Action.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 
@@ -203,6 +205,10 @@ class QuestController extends BaseController
 			$md_getmax= new Models_Quest();
 			$idmax =$md_getmax->getMaxQuestID();
 			$id=$idmax+1;
+			require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
+					DS . 'Models_Award_type.php';
+			$mdawartype = new Models_Award_Type();
+			$this->view->arrawardtype = $mdawartype->getAwardtype();
 			$md = new Models_Quest_Detail();			
 			$this->view->obj = new Obj_Quest_Detail();
 			$this->view->obj->QuestID = $id;			
@@ -228,20 +234,17 @@ class QuestController extends BaseController
 				Models_Log::insert($this->view->user->username, "act_add_new_quest");
 				
 				//update quest awarditem
-				$this->AwardItem = $this->_request->getParam("additem");
-				$mdAwardItem = new Models_Quest_Awarditem();
-				$mdAwardItem->_delete($this->QuestID);
-				if(!empty($this->AwardItem)){
-					foreach($this->AwardItem as $i=>$key)
+				$AwardItem = $_POST[additem];
+				$AwardType = $_POST[Awardtype];
+				$mdAwardItem = new Models_Quest_Award();
+				$mdAwardItem->delete($this->QuestID);
+				if(!empty($this->AwardItem))
+				{
+					foreach($AwardItem as $i=>$key)
 						{
-							$objAwardItem = new Obj_Quest_Awarditem();
-							$objAwardItem->ID="NULL";
-							$objAwardItem->QuestID = $this->QuestID;
-							$objAwardItem->AwardItem = $this->AwardItem[$i];
-							
 							if($objAwardItem->AwardItem != "")
 							{
-								$mdAwardItem->_insert($objAwardItem);
+								$mdAwardItem->add($this->QuestID, $AwardType[$key], $AwardItem[$key]);
 							}
 						}
 				}				
