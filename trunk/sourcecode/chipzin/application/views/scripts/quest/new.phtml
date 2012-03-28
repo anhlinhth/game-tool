@@ -5,7 +5,7 @@
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
  
-<?php //print_r($this->arrAwardItems)?>
+<?php //print_r($this->arrawardtype);?>
 <div  class="mybox" id="quest">
 	<h3>Thêm Quest</h3>
 	<form class="quest-info" id="form" action="" method="post" enctype="multipart/form-data">
@@ -57,9 +57,9 @@
 				
 			
 			<tr>
-				<td>
-					<label>Gold: </label><input name="AwardGold" value="<?php echo $this->obj->AwardGold?>" id="awardgold" type="text" tabindex="1" /><br/>
-					<label>EXP: </label><input name="AwardExp" value="<?php echo $this->obj->AwardExp?>" id="awardexp" type="text" tabindex="1" /><br/>
+				<td class="q_award">
+					<label>Award</label>
+					<div><a class='tool-16 add' href=''></a></div>
 				</td>
 				<td id="list-need-quest">
 					<label>Need Quest : </label>				
@@ -83,8 +83,6 @@
 			</tr>
 			<tr>		
 					<td>
-					<label for="2">ITems: </label>
-					<a class='ico-16 add' title='Add Item' href='javascript:addAwardItem(0)'></a>
 		        	<?php $this->ListQuestAwardItems($this->arrAwardItems) ;?>
 		        	<div id="addItem"></div>
 					</td>
@@ -115,31 +113,51 @@
 	<div id='ct'></div>
 	<div id='ft'> </div>
 </div>
+<div style="display:none" id='tempAward'>
+	<div>
+		<select name='Awardtype[]' style='margin-bottom:5px;margin-top:5px;min-width:50px'>
+		<?php foreach ($this->arrawardtype as $row)
+		{
+		?>
+		<option value ='<?php echo $row->AwardTypeID;?>'><?php echo $row->Name;?></option>
+		<?php 
+		}
+		?>
+		</select>
+		<label></label><input name='additem[]' value='' id='' type='text' tabindex='1' style='margin-bottom:5px;margin-top:5px;min-width:50px; max-width:100px;'/>
+		&nbsp;<a class='tool-16 delete' title='Delete Item' href=''></a><br>
+	</div>
+</div>
 <script>
 
-function  addAwardItem(key){	
-	var count = $(".award_item").size();
-	count = count;
-	//alert(count);
-	
-	var btnDelete = "&nbsp<a class='tool-16 delete' title='Delete Item' href='javascript:deleteAwardItem("+count+")'></a>" ;
-	var input = "<label></label><input name='additem[]' value='' id='' type='text' tabindex='1'/>";
-	
-
-	$("#addItem").before("<div class='award_item add_item' id='award_item_"+count+"'>" +input + btnDelete+ "</div>");
+function  addAwardItem(e)
+{		
+	var parent_div = $(e).parent();
+	var parent_td = parent_div.parent();
+	var parent_tr = parent_td.parent();
+	var html=$("#tempAward").html();
+	parent_td.append(html);
+	parent_tr.change();
 }
 
-function  deleteAwardItem(key){		
-	if($("#award_item_"+key).hasClass("add_item")){
-		$("#award_item_"+key).html(""); 
-		return false;
-	}
-	$("#award_item_"+key+" a").remove();
-	$("#award_item_"+key+" label").remove();
-	$("#award_item_"+key+" input").val("");
-	$("#award_item_"+key).hide();
-
+function deleteAwardItem(e)
+{
+	var parent_div = $(e).parent();
+	var parent_td = parent_div.parent();
+	var parent_tr = parent_td.parent();
+	parent_div.remove();
+	parent_tr.change();
 }
+///////Add A Award///////
+$("table#quest").delegate("td.q_award .add", "click", function() {
+	addAwardItem(this);		
+	return false;		
+});
+///////Remove A Award///////
+$("table#quest").delegate("td.q_award .delete", "click", function() {
+	deleteAwardItem(this);
+	return false;		
+});
 
 ////////////////////////////////
 function  addNeedQuest(key){	
@@ -368,7 +386,7 @@ function saveAll(){
 	data = $(".quest-info").serialize();		
 	$("#dialog #ct").html("");	
 	test = validate();
-	if(test==false)
+	if(test==true)
 	{
 		$("#dialog").dialog({			
 			height: 400,
@@ -500,4 +518,16 @@ function loadTemplate(key){
 	});
 	
 }
+
+///////Add A Award///////
+$("table#battle").delegate("td.b_award .add", "click", function() {
+	addAward(this);		
+	return false;		
+});
+///////Remove A Award///////
+$("table#battle").delegate("td.b_award .delete", "click", function(){ 	
+	removeAward(this);		
+	return false;		
+});
+
 </script>

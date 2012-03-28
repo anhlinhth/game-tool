@@ -82,5 +82,21 @@ public function updateAction(){
 				Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 	        }			
 	}
-
+	///////get type dùng cho quest
+	public function getAction()
+	{
+		try
+		{
+			$md=new Models_Award_Type();
+			$arraward = $md->getAwardtype();
+			$arr = (array)$arraward;
+			echo(json_encode($arr));
+		}
+		catch(Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}
 }
