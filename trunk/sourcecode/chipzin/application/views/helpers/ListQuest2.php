@@ -10,7 +10,6 @@ class Zend_View_Helper_ListQuest2
 		$strList .= "";		
 		foreach($arrQuest as $row)
 		{
-			
 			if($row->enabled)
 				$strActive = "<span style='color:green; font-weight:bold'>Kích hoạt</span>";
 			else
@@ -57,7 +56,40 @@ class Zend_View_Helper_ListQuest2
 				$strList.="</select></td>
 				<td>";	
 				$flag2 = 1;
+				//$strList.='&amp;';
+				
+				// Dung : Temp fix
+				/*$tt = $arrNextQuest[$row->QuestID];
+				if ($tt==null)
+				{
+					$key_ = $row->QuestID;
+					$flag2 = 0;
+					$strList.= "<div class='next-quest-$row->QuestID' id='next-quest-div-$row->QuestID-$key_'>							
+							<select style='min-width:200px' id='nextquest-$row->QuestID-$key_' name='nextquest-$row->QuestID-$key_' 
+							onChange='updateNextQuest($nextQuestRow->ID,$row->QuestID,$key_);'>";
+					$strList .= "<option selected  value=''>NULL</option>";		
+					foreach ($arrAllQuest as $row3){
+						if($row3->QuestID==$row->NeedQuest){
+							continue;
+						}
+						$str="";
+						if($nextQuestRow->NextQuest == $row3->QuestID)
+						{							
+							$str="selected";
+						}						
+						$strList .= "<option $str  value='$row3->QuestID'>$row3->QuestName</option>";	
+					}
+					$strList.= "</select>					
+					<a class='tool-16 delete' href='javascript:deleteNextQuest($row->QuestID,$nextQuestRow->ID,$key_)'></a>
+					<a class='tool-16 add' href='javascript:addNextQuest($row->QuestID,$key_)'></a>
+					</div>";				
+				}*/
+				///////////////
+				
 				foreach($arrNextQuest[$row->QuestID] as $key => $nextQuestRow){
+					
+					//$strList.='&gt;';
+					
 					if($nextQuestRow->NextQuest==NULL){
 						$flag2 = 0;
 					}

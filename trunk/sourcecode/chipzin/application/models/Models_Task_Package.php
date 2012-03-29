@@ -29,34 +29,31 @@ class Models_Task_Package extends Models_Base
 		$str .= "<?php\nreturn array\n(";
 		if($data)
 		{
-			$i = 1;
 			foreach($data as $row)
 			{
-				$str .= "\n" ;
-				$str .= (int)$row['TaskID'] ;
-				$str .= " => array(";				
-				$str .= "\n\t'action' => ";
-				$str .= "\n\tarray(";
-				$str .="\n\t".(int)$row['ActionID']." => "."NULL".",\n\t),";
-				$str .="\n\t"."'target' => ";
-				$str .= "\n\tarray(";
+				$targetId = 'null';
 				$objSearch->task_package_id = $row->id;
-		
 				$qneeds=$mdGiftPackageDetail->_filter($objSearch);
-				if((int)$row['TargetType']!=NULL)
+				if($qneeds)
 				{
-					$str .="\n\t".(int)$row['TargetType']." => "." NULL,";
+					foreach($qneeds as $qneeds)
+					{
+						if((int)$qneeds->TaskID==$row['TaskID'])
+						{
+							$targetId = $qneeds->TargetID;
+							break;
+						}
+					}
 				}
-				else
-					if($qneeds)
-						foreach($qneeds as $qneeds)
-							if((int)$qneeds->TaskID==$row['TaskID'])
-								$str .="\n\t".(int)$qneeds->TargetID." => "." NULL ,";
-				$str .="\n\t"."),";
-				$str .="\n\t 'quantity' => ".(int)$row['Quantity'].",";
-				$str .="\n\t 'unlockCoin' => ".(int)$row['UnlockCoin'].",";
-				$str .="\n"."),";
-				$i++;
+				
+				$str .= "\n\t" ;
+				$str .= $row['TaskID'];
+				$str .= " => array\r\t(";				
+				$str .= "\n\t\t'action' => ".$row['ActionID'] . ",";
+				$str .= "\n\t\t'target' => ".$targetId.",";
+				$str .= "\n\t\t'quantity' => ".$row['Quantity'].",";
+				$str .= "\n\t\t'unlockCoin' => ".$row['UnlockCoin'];
+				$str .= "\n\t),";
 			}
 		}
 		

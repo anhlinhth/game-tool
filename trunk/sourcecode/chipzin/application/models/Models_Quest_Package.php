@@ -58,19 +58,19 @@ class Models_Quest_Package extends Models_Base
 			$i = 1;
 			foreach($data as $row)
 			{
-				$str .= "\n" ;
+				$str .= "\n\t" ;
 				$str .= (int)$row['QuestID'] ;
-				$str .= " => array(";				
-				$str .= "\n\t'group'=> ";
+				$str .= " => array\n\t(";				
+				$str .= "\n\t\t'group' => ";
 				
 				$lineIcon = $mdQuestLine-> search($row['QuestLineID']);
 				$str .= trim($lineIcon).",";
 				
 				//$str .= (int)$row['QuestLineID'].",";
 				if($row['NeedQuest']!=NULL)
-					$str .= "\n\t'needQuest' =>".$row['NeedQuest'].",";
+					$str .= "\n\t\t'needQuest' => ".$row['NeedQuest'].",";
 				else 
-					$str .= "\n\t'needQuest' => NULL,";
+					$str .= "\n\t\t'needQuest' => null,";
 				$temp= (int)$row['QuestID'];
 				$objSearch->quest_package_id = $row->id;		
 		
@@ -90,7 +90,7 @@ class Models_Quest_Package extends Models_Base
 				else 
 					$str .= " NULL,";
 				*/
-				$str .= "\n\t'tasks' => ";
+				$str .= "\n\t\t'tasks' => array";
 				
 				$objSearch->quest_package_id = $row->id;
 				$gifts = $mdGiftPackageDetail->_filter($objSearch);				
@@ -98,39 +98,39 @@ class Models_Quest_Package extends Models_Base
 				{
 					$j=0;
 					$true1=0;
-					$str .= "\n\tarray(";
+					$str .= "\n\t\t(";
 					foreach($gifts as $gift)
 					{
 							if($temp==$gift->QuestID)
 							{
 								$true1=1;
-								$str .= "\n\t $j => ".$gift->TaskID." ,";
+								$str .= "\n\t\t\t $j => ".$gift->TaskID.",";
 								$j++;
 							}
 					}
 					if($true1==1)
-						$str .= "\n\t),";
+						$str .= "\n\t\t),";
 					else 
 					{				
 						$error[] = $temp ;						
 					}
 				}
-				$str .= "\n\t'award' => ";
+				$str .= "\n\t\t'award' => array";
 				$mda = $this->getAward($row['QuestID']);
 				if($mda){
-				$str .= "\n  array(\n";	
+				$str .= "\n\t\t(\n";	
 				
 				
 				foreach ($mda as $row2)
 				{
-					$str .="\t".trim($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value']." \n";
+					$str .="\t\t\t".trim($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'].", \n";
 				}
 				$str .= "\t\t),";		
 				}
 				else 
 					$str .= "NULL,";
 						
-				$str .= "\n),";
+				$str .= "\n\t),";
 				$i++;
 			}
 		}
