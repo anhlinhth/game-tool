@@ -96,9 +96,10 @@ class Campaign_LayoutController extends BaseController
 			{
 				$id = $_POST['ID'];
 				$Point = $_POST['point'];
+				$Name = $_POST['Name'];
 				$mdLayout = new Models_Layout();
 				$obj = new Obj_Layout();
-				$mdLayout->update($id,$Point);
+				$mdLayout->update($id,$Point,$Name);
 				echo 1;
 			}
 		}
