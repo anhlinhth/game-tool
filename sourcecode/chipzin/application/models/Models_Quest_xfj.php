@@ -166,9 +166,12 @@ public function getAward($id)
 					$str .= "\n\t\t\t {\n ";
 					foreach ($mda as $row2)
 					{
-					$str .="\t\t\t\t\"".strtolower(trim($this->getawardtype($row2['AwardTypeID'])))."\" : ".$row2['Value']." \n";
+					$str .="\t\t\t\t\"".strtolower(trim($this->getawardtype($row2['AwardTypeID'])))."\" : ".$row2['Value'].",\n";
 					}
-					$str .= "\n\t\t\t { ";
+					
+					// Cut out 2 last character "," and "/n"
+					$str = substr( $str, 0, -2 );
+					$str .= "\n\t\t\t }";
 				}
 				else 
 					$str .= "[]";
