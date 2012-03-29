@@ -125,10 +125,12 @@ class QuestController extends BaseController
 			if($items == 0)
 				$items = DEFAULT_ITEM_PER_PAGE;
 			$form = new Forms_Quest();
-			$form->_requestToForm($this);						
+			$form->_requestToForm($this);
+			
 			if(empty($form->obj->QuestLineID))
 				$form->obj->QuestLineID = NULL;
-			
+			if(empty($form->obj->QuestID))
+				$form->obj->QuestID = NULL;				
 			$md= new Models_Quest();
 			$mdqd = new Models_Quest_Detail();
 			$md_questLine = new Models_Quest_Line();
