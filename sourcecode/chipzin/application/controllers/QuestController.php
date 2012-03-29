@@ -222,6 +222,7 @@ class QuestController extends BaseController
 	{			
 		try{
 			//Lay maxid
+			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_NextQuest.php';
 			$md_getmax= new Models_Quest();
 			$idmax =$md_getmax->getMaxQuestID();
 			$id=$idmax+1;			
@@ -237,8 +238,9 @@ class QuestController extends BaseController
 			$this->view->arrNeedQuest = $md->getQuest();			
 			$this->view->arrTask = $md->getTask($id);
 			$this->view->arrQuest = $md->getQuest($id);	
+				
 			if($this->_request->isPost())
-			{
+			{	
 				$this->_helper->layout()->disableLayout();
 				$this->_helper->viewRenderer->setNoRender();	
 				
@@ -247,13 +249,18 @@ class QuestController extends BaseController
 				$_SESSION['QuestLine']=$form->obj->QuestLineID;				
 				$form->validate(INSERT);
 				$md = new Models_Quest_Detail();
-							
 				$questID = $md->_insert($form->obj);
+				/////Insert trong bang nextquest
+				$mdNextquest=new Models_Quest_Detail();
+				$objNextquest=new Obj_Quest_NextQuest();
+				$objNextquest->ID="NULL";
+				$objNextquest->QuestID=$id;
+				$mdNextquest->insertNextQuest($objNextquest);				
+				//////////
 				//$form->obj->QuestID = $questID;
 				//$obj_nextquest = new Obj_Quest_NextQuest();
 				//$obj_nextquest->QuestID = $questID;
-				//$md->insertNextQuest($obj_nextquest);
-				
+				//$md->insertNextQuest($obj_nextquest);								
 				Models_Log::insert($this->view->user->username, "act_add_new_quest");
 				
 				//update quest award
