@@ -485,7 +485,8 @@ function loadTemplate(key){
 		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
 		data: "id=" + id,	
 		dataType: "json",
-		success: function(msg){			
+		success: function(msg){
+			alert(msg);			
 			$(".form-task-" + key +" #TaskString").val(msg.TaskString);
 			$(".form-task-" + key +" #TaskName").val(msg.TaskName);
 			$(".form-task-" + key +" #DescID").val(msg.DescID);
