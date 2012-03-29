@@ -166,8 +166,14 @@ function loadQuest(){
 		data: {
 			page:<?php echo $this->page;?>,
 			items:<?php echo $this->items;?>,
-			<?php if($this->obj->QuestLineID)
-				echo "QuestLineID:".$this->obj->QuestLineID?>
+			<?php 
+				if($this->obj->QuestLineID){
+					echo "QuestLineID:".$this->obj->QuestLineID.",";
+				}
+				if($this->obj->QuestID){
+					echo "QuestID:".$this->obj->QuestID.",";
+				}
+			?>
 		},			
 		success: function(data){			
 			$("#list-quest").html(data);
