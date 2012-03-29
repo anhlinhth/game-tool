@@ -1,4 +1,4 @@
-<?php if($this->errMsg) :?>
+<?php if($this->errMsg) : session_start();?>
 	<?php $this->showError($this->errMsg)?>
 <?php endif; ?>
 <?php if($this->msg) :?>		
@@ -25,7 +25,7 @@ if($this->temp)
 				<?php 
 				foreach($this->dataquestlineid as $row){
 					$str = "";
-					if($this->obj->QuestLineID == $row->QuestLineID){
+					if($this->QuestLineID == $row->QuestLineID){
 						$str="selected";
 					}
 				?>					
@@ -227,7 +227,6 @@ function deletechose(theform){
 function changeQuestLine(){	
 	$("#formPaging").submit();
 }
-
 $(document).ready(function(){
 	///////////////////////////////
 	loadQuest();	
