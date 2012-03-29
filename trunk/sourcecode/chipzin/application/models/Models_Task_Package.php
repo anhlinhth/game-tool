@@ -36,23 +36,20 @@ class Models_Task_Package extends Models_Base
 				$str .= (int)$row['TaskID'] ;
 				$str .= " => array(";				
 				$str .= "\n\t'action' => ";
-				$str .= "\n\tarray(";
-				$str .="\n\t".(int)$row['ActionID']." => "."NULL".",\n\t),";
+				$str .=(int)$row['ActionID'];
 				$str .="\n\t"."'target' => ";
-				$str .= "\n\tarray(";
 				$objSearch->task_package_id = $row->id;
 		
 				$qneeds=$mdGiftPackageDetail->_filter($objSearch);
 				if((int)$row['TargetType']!=NULL)
 				{
-					$str .="\n\t".(int)$row['TargetType']." => "." NULL,";
+					$str .=(int)$row['TargetType'].",";
 				}
 				else
 					if($qneeds)
 						foreach($qneeds as $qneeds)
 							if((int)$qneeds->TaskID==$row['TaskID'])
-								$str .="\n\t".(int)$qneeds->TargetID." => "." NULL ,";
-				$str .="\n\t"."),";
+								$str .=(int)$qneeds->TargetID.",";
 				$str .="\n\t 'quantity' => ".(int)$row['Quantity'].",";
 				if($row['UnlockCoin']!=0)
 				$str .="\n\t 'unlockCoin' => ".(int)$row['UnlockCoin'].",";
