@@ -696,19 +696,16 @@ td.b_award input{
 	function validate2(data){
 		$("#dialog .ct").html("");		
 		jQuery.each(data, function(i, field){  
-			flag=true;		
 			if(field.value==""){
 				$("#dialog .ct").append("<p class='error'>"+ field.name +"không được bỏ trống</p>" );				
 			}			
 			else if(isNaN(field.value))
 			{
-				$("#dialog .ct").append("<p class='error'>"+ field.name +"phải là số</p>" );
-				//flag=false;				
+				$("#dialog .ct").append("<p class='error'>"+ field.name +"phải là số</p>" );				
 			}
 			
 			else if( (Number(field.value)>100 || Number(field.value)<0) && field.name!='Value[]')
-				{
-					
+				{					
 					$("#dialog .ct").append("<p class='error'>"+ field.name +"Level phải nằm trong khoảng 0 ->100</p>" );
 				}
 			
