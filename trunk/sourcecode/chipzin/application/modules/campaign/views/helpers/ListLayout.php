@@ -29,7 +29,7 @@ class Zend_View_Helper_ListLayout
 			$edit = "";
 			$delete = "";
 			$privilege = "";					
-				$edit = "<a class='tool-16 edit' href='javascript:editLayout($row->ID,$row->Point)'></a>";	
+				$edit = "<a class='tool-16 edit' href='javascript:editLayout($row->ID,$row->Point,\"$row->Name\")'></a>";	
 				$delete = "<a class='tool-16 delete' href='javascript:deleteLayout($row->ID)'></a>";;								
 			$strList .= "<tr id='$row->TaskID'>
 							<td class='descid'>$row->ID</td>	

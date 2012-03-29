@@ -46,6 +46,11 @@
 <form  id="layout" name="layout" action="" method="post">
 	<table>
 		<tr>
+			<td colspan="3">
+			Tên layout :<input type="text" name="namelayout" id='namelayout'>
+			</td>
+		</tr>
+		<tr>
 			<td>1<input type="checkbox" name="point" id="0" value="0" /></td>
 			<td>4<input type="checkbox" name="point" id="3" value="3" /></td>
 			<td>7<input type="checkbox" name="point" id="6" value="6" /></td>
@@ -117,8 +122,9 @@ function deleteLayout(id)
 	});		
 }
 
-function editLayout(id,point)
+function editLayout(id,point,name)
 {	
+	$('input[name="namelayout"]').val(name);
 	for (var i=0; i <= 8; i++)
 	{
 		if (point[i] == '1')
@@ -133,13 +139,14 @@ function editLayout(id,point)
 	$("#edit-layout").dialog
 	({
 		title: "Edit Layout",
-		height: 200,
+		height: 250,
 		width: 220,
 		modal: true,
 		buttons: 
 		{
 			"Save": function() 
 			{
+				var Name = $("#namelayout").val();
 				var arraytemp = new Array();
 				var c_value = "[";
 				for (var i=0; i < document.layout.point.length; i++)
@@ -154,7 +161,7 @@ function editLayout(id,point)
 					}
 				}
 				c_value += arraytemp[0]+','+arraytemp[3] +','+ arraytemp[6] + ','+ arraytemp[1] + ','+ arraytemp[4] + ','+ arraytemp[7] + ','+ arraytemp[2] + ','+ arraytemp[5] + ','+ arraytemp[8];
-				c_value += "]&ID="+id;
+				c_value += "]&ID="+id+"&Name=" + Name;
 				$.ajax
 				({
 					type: "POST",

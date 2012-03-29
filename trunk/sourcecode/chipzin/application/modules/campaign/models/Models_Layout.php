@@ -51,12 +51,12 @@ class Models_Layout extends Models_Base
 		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
 		return $data;
 	}
-	public function update($id,$point)
+	public function update($id,$point,$Name)
 	{
 		$sql ="UPDATE
 					c_layout
 				SET
-					Point = '$point'
+					Point = '$point', Name = '$Name'
 				WHERE
 					ID = $id;";
 		$this->_db->query($sql);
