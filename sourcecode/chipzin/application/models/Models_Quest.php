@@ -93,7 +93,7 @@ class Models_Quest extends Models_Base
 					1 AND Q.QuestLineID = QL.QuestLineID";
 		
 		if($objSearch->QuestID)
-			$sql .= " AND Q.QuestID LIKE '%$objSearch->QuestID%'";
+			$sql .= " AND Q.QuestID = '$objSearch->QuestID'";
 		
 		if($objSearch->QuestName)
 			$sql .= " AND Q.QuestName = '$objSearch->QuestName'";
