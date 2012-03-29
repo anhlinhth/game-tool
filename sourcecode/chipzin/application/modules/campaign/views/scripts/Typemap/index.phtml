@@ -139,7 +139,6 @@ function deleteType(key){
 	};
 	$.ajax({
 		type: "POST",
-	//	url: "http://localhost/vng/game-tool/sourcecode/chipzin/questline/update",
 		url: "<?php echo $this->baseUrl.'/campaign/Typemap/delete/'?> ",
 		data: "ID="+id,
 		success: function(msg){
@@ -147,6 +146,7 @@ function deleteType(key){
 				window.location.reload();
 			}
 			else{
+				alert('Không xóa được do type map đã được sử dụng');
 				window.location.reload();		
 			}			
 		}
