@@ -214,6 +214,7 @@ function addTask(key){
 				//var btnAddTo = "<a class='ico-16 template' title='Add To Template' href='javascript:addTemplate("+count_div+")'>Add To Template</a>";
 				//var edittemp = "<a title='Edit Temp' href='<?php echo $this->baseUrl.'/template'?>'>Edit Template</a>";
 				var title = "<h4> Task "+count_form+"&nbsp"+btnDel+"</h4>";
+				var check = "";
 				var str = "<div class='task-div' id='task-div-"+count_div+"'>"+title + data+"</div>";
 				$("#task-0").before(str);
 				
@@ -257,7 +258,7 @@ function saveTask(){
 			type: "POST",
 			url:"<?php echo $this->baseUrl.'/task/insert/'?> ",
 			data: data + "&QuestID="+ quest_id,		
-			success: function(msg){				
+			success: function(msg){	
 				if(parseInt(msg)==1){
 					$("#dialog #ft").before("<p class='success'>Task "+ key +":Success<p>");
 				}else{					

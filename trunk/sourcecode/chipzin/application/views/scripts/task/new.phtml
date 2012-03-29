@@ -7,7 +7,8 @@ foreach ($this->arrTemplate as $row) {?>
 <?php } ?>
 </select>
 <a class="btn add" title=' Add' href='javascript:addTemplate(<?php echo $this->key1?>)'>Add To Template</a>
-<a class="btn edit" title=' Edit' href='javascript:editTemplate()'>Edit Template</a>	
+<a class="btn edit" title=' Edit' href='javascript:editTemplate()'>Edit Template</a><br/>
+<input type="checkbox" id="Counter" name ="Counter" value="check">&nbsp;Counter
 <table>
 	<tr>
 		<td>Task ID</td>
@@ -16,14 +17,12 @@ foreach ($this->arrTemplate as $row) {?>
 		<td><input type="text" id="TaskName" name="TaskName" value=""/></td>
 		
 	</tr>
-	
 	<tr>
 		<td>Task String</td>
 		<td><input type="text" id="TaskString" name="TaskString" value=""/></td>
 		<td>Action (*) </td>
 		<td>
 		<select id="Action" name="Action">
-			
 			<?php 
 				foreach($this->arrAction as $row)
 				{
@@ -42,9 +41,9 @@ foreach ($this->arrTemplate as $row) {?>
 	</tr>
 	<tr>
 		<td>Desc</td>
-		<td><input type="text" id="DescString" name="DescString" value=""/></td>
-		<td>DescString</td>
 		<td><input type="text" id="DescID" name="DescID" value=""/></td>
+		<td>DescString</td>
+		<td><input type="text" id="DescString" name="DescString" value=""/></td>
 	</tr>
 	<tr>
 		<td>Icon Class Name</td>

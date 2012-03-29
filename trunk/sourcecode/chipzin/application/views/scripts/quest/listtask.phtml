@@ -27,6 +27,17 @@ foreach ($this->arrTemp as $row)
 <a class="btn edit" title=' Edit' href='javascript:editTemplate()'>Edit Template</a>	
 </h4>
 <form  id="form" class="form-task-<?php echo $key?>" action="" method="post" enctype="multipart/form-data">
+<?php
+if($val->Counter == 1)
+{
+	$flag = 'checked';
+}
+else 
+{
+	$flag = "";
+}
+?>
+<input type="checkbox" id="Counter" <?php echo $flag?> name ="Counter" value="check">&nbsp;Counter
 <table>
 	<tr>
 		<td>Task ID</td>
