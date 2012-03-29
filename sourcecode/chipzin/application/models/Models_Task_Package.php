@@ -45,6 +45,25 @@ class Models_Task_Package extends Models_Base
 						}
 					}
 				}
+<<<<<<< .mine
+				else
+					if($qneeds)
+						foreach($qneeds as $qneeds)
+							if((int)$qneeds->TaskID==$row['TaskID'])
+								$str .="\n\t".(int)$qneeds->TargetID." => "." NULL ,";
+				$str .="\n\t"."),";
+				$str .="\n\t 'quantity' => ".(int)$row['Quantity'].",";
+				if($row['UnlockCoin']!=0)
+				$str .="\n\t 'unlockCoin' => ".(int)$row['UnlockCoin'].",";
+				else 
+				$str .="\n\t 'unlockCoin' => NULL,";
+				if($row['Counter']==0)
+					$str .="\n\t 'counter' => false,";
+				else 
+					$str .="\n\t 'counter' => true,";
+				$str .="\n"."),";
+				$i++;
+=======
 				
 				$str .= "\n\t" ;
 				$str .= $row['TaskID'];
@@ -54,6 +73,7 @@ class Models_Task_Package extends Models_Base
 				$str .= "\n\t\t'quantity' => ".$row['Quantity'].",";
 				$str .= "\n\t\t'unlockCoin' => ".$row['UnlockCoin'];
 				$str .= "\n\t),";
+>>>>>>> .r484
 			}
 		}
 		
