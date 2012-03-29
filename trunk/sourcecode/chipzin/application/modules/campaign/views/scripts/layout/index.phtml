@@ -74,7 +74,7 @@
 		<table>
 			<tr>
 				<td colspan="3">
-				Tên layout :<input type="text" name="namelayout">
+				Tên layout :<input type="text" name="namelayoutnew">
 				</td>
 			</tr>
 			<tr>
@@ -206,7 +206,7 @@ function newlayoutDialog()
 function insertLayout()
 {
 	var arraytemp = new Array();
-	var name = document.newlayout.namelayout.value;
+	var name = document.newlayout.namelayoutnew.value;
 	c_value = "[";
 	for (var i=0; i < document.newlayout.point.length; i++){
 		if (document.newlayout.point[i].checked) {
