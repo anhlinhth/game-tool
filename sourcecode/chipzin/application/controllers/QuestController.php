@@ -23,6 +23,7 @@ class QuestController extends BaseController
 {
 	public function _setUserPrivileges()
 	{
+		
 		return array('index','add','edit','delete','active','updatenextquest','updateneedquest','new','update','import','item','additem','pigshop','itemshop');
 	}
 	
@@ -127,8 +128,15 @@ class QuestController extends BaseController
 			$form = new Forms_Quest();
 			$form->_requestToForm($this);
 			
-			if(empty($form->obj->QuestLineID))
-				$form->obj->QuestLineID = NULL;
+			$this->view->QuestLineID =$_SESSION['QuestLine'];
+			if($this->_request->isPost())
+			{
+				unset($_SESSION['QuestLine']);
+				$_SESSION['QuestLine']=$this->_request->getParam('QuestLineID');
+				$this->view->QuestLineID =$_SESSION['QuestLine'];
+				//var_dump($_SESSION['QuestLine']);
+				//die();
+			}
 			if(empty($form->obj->QuestID))
 				$form->obj->QuestID = NULL;				
 			$md= new Models_Quest();
