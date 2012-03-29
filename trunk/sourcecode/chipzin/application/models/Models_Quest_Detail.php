@@ -20,7 +20,7 @@ class Models_Quest_Detail extends Models_Base
 		//var_dump($obj);die();
 		parent::_update($obj);
 	}
-	
+	 
 	
 	private function isExist($alias)
 	{
