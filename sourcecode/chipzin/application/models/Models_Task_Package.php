@@ -36,7 +36,7 @@ class Models_Task_Package extends Models_Base
 				$str .= (int)$row['TaskID'] ;
 				$str .= " => array(";				
 				$str .= "\n\t'action' => ";
-				$str .=(int)$row['ActionID'];
+				$str .=(int)$row['ActionID'].",";
 				$str .="\n\t"."'target' => ";
 				$objSearch->task_package_id = $row->id;
 		
