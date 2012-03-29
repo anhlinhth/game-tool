@@ -123,7 +123,7 @@ td.b_award input{
             </td>
 
 			<td class="center c_order">
-				<input type="text" name='Order' id='Order' value='<?php echo $rowbattle->Order;?>'/>
+				<input type="text" name='Order' readonly="readonly" id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
 			<td class="b_layout" width="300px" style="text-align: center;">				
 				<select style="width=100%;border: 2px solid lightblue;" class="layout"  name="Layout" tabindex="2">
@@ -472,7 +472,17 @@ td.b_award input{
 		var data = parent_tr.find("*").serialize();
 		var arr_data = parent_tr.find("*").serializeArray();		
 		if(validate2(arr_data)==false){
-			showDiaglog();
+			$("#dialog").dialog({
+				title: "Diaglog",
+				height: 400,
+				width: 350,
+				modal: true,
+				buttons: {
+					"Continue": function() {						
+						$(this).dialog("close");							
+					}										
+				}
+		});
 			return;
 		}
 		data += "&Campaign="+campaignID;		
@@ -684,11 +694,24 @@ td.b_award input{
 	/***********************************************/
 	// validate
 	function validate2(data){
-		$("#dialog .ct").html("");
-		jQuery.each(data, function(i, field){       
+		$("#dialog .ct").html("");		
+		jQuery.each(data, function(i, field){  
+			flag=true;		
 			if(field.value==""){
-				$("#dialog .ct").append("<p class='error'>"+ field.name +"</p>" );
+				$("#dialog .ct").append("<p class='error'>"+ field.name +"không được bỏ trống</p>" );				
+			}			
+			else if(isNaN(field.value))
+			{
+				$("#dialog .ct").append("<p class='error'>"+ field.name +"phải là số</p>" );
+				//flag=false;				
 			}
+			
+			else if( (Number(field.value)>100 || Number(field.value)<0) && field.name!='Value[]')
+				{
+					
+					$("#dialog .ct").append("<p class='error'>"+ field.name +"Level phải nằm trong khoảng 0 ->100</p>" );
+				}
+			
 		});
 		if($("#dialog .ct").html()!=""){			
 			return false;
