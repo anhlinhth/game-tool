@@ -33,9 +33,17 @@ class QTCController extends BaseController
 			
 			if($pageNo == 0)
 				$pageNo = 1;
-			if($items == 0)
+			if(!$items =$_SESSION['items'])
 				$items = DEFAULT_ITEM_PER_PAGE;
-
+			else
+				$items = $_SESSION['items'];
+			if($this->_request->isPost())
+			{
+				$_SESSION['items']=$this->_request->getParam('items');
+				$items = $_SESSION['items'];
+				//var_dump($_SESSION['QuestLine']);
+				//die();
+			}	
 			$md = new Models_Q_QTC();
 			$form= new Forms_Q_QTC();
 			$form->_requestToForm($this);
