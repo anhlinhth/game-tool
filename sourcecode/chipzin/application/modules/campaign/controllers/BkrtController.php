@@ -29,7 +29,10 @@ class Campaign_BkrtController extends BaseController {
             if($btbk)
             {
             $mdbk= new Models_C_Backup();
-            $mdbk->create();
+           $kq= $mdbk->create();
+           if ($kq==1)
+           $this->view->msg="Thành công";
+           Models_Log::insert ( $this->view->user->username, "Backup data" );
             }
             
             if($btrt)
@@ -37,8 +40,12 @@ class Campaign_BkrtController extends BaseController {
             	$mdrt= new Models_C_Restore();
             	$file11 = $_FILES ['file2'] ;
             
-            	$mdrt->restore($file11['tmp_name']);
-            
+            	$kq2=$mdrt->restore($file11['tmp_name']);
+            if($kq2==1)
+            {
+             $this->view->msg="Thành công";
+           Models_Log::insert ( $this->view->user->username, "Restore data" );
+            }
             }
             }
 		

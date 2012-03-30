@@ -69,16 +69,27 @@ class Campaign_ImportController extends BaseController {
 			if($arrS!= null)
 				{
 					
-					$mdLogic->logicSoldier($arrS);
+					
+				$kq1=$mdLogic->logicSoldier($arrS);
+					if($kq1==1)
+					{
+					$this->view->msg="Thành công";
 					Models_Log::insert ( $this->view->user->username, "Import Soldiers" );
+					}
+					
 				}
 				
 				if($arrM !=null)
 				{
 					var_dump($arrM);
 					die();
-					$mdLogic->logicCamp($arrM);
+					
+					$kq2=$mdLogic->logicCamp($arrM);
+					if($kq2==1)
+					{
+					$this->view->msg="Thành công";
 					Models_Log::insert ( $this->view->user->username, "Import Maps" );
+					}
 				}
 				
 			
