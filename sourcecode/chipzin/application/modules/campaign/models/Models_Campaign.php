@@ -261,6 +261,24 @@ public function getType($id)
         $data = $this->_db->fetchRow($sql, "", Zend_Db::FETCH_OBJ);
         return $data;
     }
+    ////////////////////////tan////////////////////
+    public function getCampaignByLayout($id)
+    {
+    	$sql = "SELECT 
+    				c.ID, c.Name 
+    			FROM 
+    				c_campaign c 
+    			WHERE 
+    				c.ID IN(	SELECT 
+    								Campaign 
+    							FROM 
+    								c_battle 
+    							WHERE 
+    								Layout = $id)";
+    
+    	$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+    	return $data;
+    }
     //////////////////////////////////////////////////
     public function resetNextCamp($id)
     {
@@ -284,5 +302,6 @@ public function getType($id)
             throw new Internal_Error_Exception($ex);
         }
     }
+    
 }
 ?>
