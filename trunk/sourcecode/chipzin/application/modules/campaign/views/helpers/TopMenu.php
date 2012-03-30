@@ -32,6 +32,8 @@ class Zend_View_Helper_TopMenu
            	case 'awardtype':
 			case 'layout':
            	case 'exportcamp': 
+           	case 'restore':
+           	case 'backup': 
 				$campaign = 'current';
 				break;		
 		}
