@@ -123,7 +123,7 @@ td.b_award input{
             </td>
 
 			<td class="center c_order">
-				<input type="text" name='Order' readonly="readonly" id='Order' value='<?php echo $rowbattle->Order;?>'/>
+				<input type="text" name='Order'  id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
 			<td class="b_layout" width="300px" style="text-align: center;">				
 				<select style="width=100%;border: 2px solid lightblue;" class="layout"  name="Layout" tabindex="2">
@@ -696,7 +696,7 @@ td.b_award input{
 	function validate2(data){
 		$("#dialog .ct").html("");		
 		jQuery.each(data, function(i, field){  
-			if(field.value==""){
+			if(field.value=="" && field.name!='BattleID'){
 				$("#dialog .ct").append("<p class='error'>"+ field.name +"không được bỏ trống</p>" );				
 			}			
 			else if(isNaN(field.value))
@@ -704,7 +704,7 @@ td.b_award input{
 				$("#dialog .ct").append("<p class='error'>"+ field.name +"phải là số</p>" );				
 			}
 			
-			else if( (Number(field.value)>100 || Number(field.value)<0) && field.name!='Value[]')
+			else if( (Number(field.value)>100 || Number(field.value)<0) && field.name!='Value[]' && field.name!='BattleID')
 				{					
 					$("#dialog .ct").append("<p class='error'>"+ field.name +"Level phải nằm trong khoảng 0 ->100</p>" );
 				}
