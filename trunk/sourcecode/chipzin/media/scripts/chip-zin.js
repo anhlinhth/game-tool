@@ -27,7 +27,9 @@ function validateForm(e){
 			else if( (Number($(this).val()>100) || Number($(this).val()<0)) && $(this).attr('id')!='Value' && $(this).attr('id')!='BattleID' )
 				{
 					$(this).css({ border: "1px solid red" }).focus();
-				}						
+				}	
+			else 
+				$(this).css({ border: "none" });
 		}
 			
 	});
