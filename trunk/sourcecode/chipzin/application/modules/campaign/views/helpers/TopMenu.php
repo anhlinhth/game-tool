@@ -30,6 +30,7 @@ class Zend_View_Helper_TopMenu
            	case 'soldier':
            	case 'typemap':
            	case 'awardtype': 
+           	case 'exportcamp': 
 				$campaign = 'current';
 				break;		
 		}
