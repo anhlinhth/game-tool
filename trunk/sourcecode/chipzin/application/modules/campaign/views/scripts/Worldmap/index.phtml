@@ -7,19 +7,19 @@
 endif;
 ?>
 
-<form id="frmWorldmapEditor" class="myform" action="" method="post">
+<form id="formPaging" name='formPaging' class="myform" action="" method="post">
 <div class="mybox">
 	<h1>WORLD MAP EDITOR</h1>
 	<table class="filter" style="width: 80%;margin: auto;margin-bottom: 20px;margin-top: 10px";>
 		<tr>
 			<td>World map ID</td>
-			<td><input style="width:110px;" type="text" name="searchID" id="searchID" class="searchbox" /></td>
+			<td><input style="width:110px;" type="text" name="SearchID" id="SearchID" class="searchbox" /></td>
 			<td><input type="submit" name="search_Worldmap" class="btn search" id="search_Worldmap" value="search" /></td>
 		
 		</tr>		
 		<tr>
 			<td>ID</td>
-			<td><input id="WorldmapID" name="WorldmapID" type="text" style="width:110px;" /></td>
+			<td><input id="WorldmapID" name="WorldmapID" readonly="readonly" type="text" style="width:110px;" /></td>
 			<td>Name
 			<input id="WorldmapName" type="text" name="WorldmapName"/>
 				<a class="btn save disabled " href="">Save</a>
@@ -80,7 +80,7 @@ $(function(){
 		}else{	
 			enable($(".btn.cancel"));					
 			if(id != ''){
-				enable($(".btn.add"));
+				//enable($(".btn.add"));
 				enable($(".btn.save"));				
 			}else{
 				enable($(".btn.add"));
@@ -128,7 +128,6 @@ function deleteWorldmap(key){
 	};
 	$.ajax({
 		type: "POST",
-	//	url: "http://localhost/vng/game-tool/sourcecode/chipzin/questline/update",
 		url: "<?php echo $this->baseUrl.'/campaign/Worldmap/delete/'?> ",
 		data: "ID="+id,
 		success: function(msg){				
@@ -137,27 +136,22 @@ function deleteWorldmap(key){
 				window.location.reload();
 			}
 			else{
-				alert(msg);		
+				alert(msg);	
+				return fasle;	
 			}			
 		}
-	});	
-	
+	});		
 }
 function updateWorldmap(){
 	var id = $("#WorldmapID").val();
-	var name = $("#WorldmapName").val();
+	var name = $("#WorldmapName").val();	
 	$.ajax({
 		type: "POST",
 		url: "<?php echo $this->baseUrl.'/campaign/Worldmap/update/'?> ",
 		data: "Name=" +name +"&ID="+id,
-		success: function(msg){
-			if(msg != ""){
-				if(parseInt(msg)==1)
-				{
-					if(!confirm("Bạn có muốn edit Worldmap: " + name)){
-						return false;
-					}
-				}
+		success: function(msg){					
+			if(msg != ""){	
+				alert(msg);			
 				window.location.reload();
 			}
 			else{
