@@ -7,7 +7,7 @@ class Models_C_Restore
   $file2 = fopen($file,"r+");
  
   $line_count = $this->load_backup_sql($file2);
-  fclose($file);
+  fclose($file2);
   if($line_count!= null)
   return 1;
   else {
