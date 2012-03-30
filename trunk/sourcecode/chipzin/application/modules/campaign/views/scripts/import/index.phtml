@@ -1,0 +1,60 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+
+ <div> 
+  <label>Browse file for battle :
+  <input type="file" name="file1" id="file1" value="Browse "/>
+   </label>
+&nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
+   <label>Từ dòng :
+    <input type="text" name="start" id="start" style="width: 50px;"/>
+  </label> 
+  &nbsp;
+  &nbsp;
+  &nbsp;
+	<label> Đến dòng :
+	  <input type="text" name="end" id="end" style="width: 50px;"/>
+  </label>
+  </div>
+  <div> ..</div>
+  <div>
+   <label>Browse file for soldier :    
+    <input type="file" name="file2" id="file2" value="Browse "/>
+   </label>
+  </div>
+  <div> ..</div>
+   <div>
+   <center>
+   <label>
+    <input type="submit" name="btn" id="btn" value="Import file" />
+  </label>
+ </center>
+ </div>
+</form>
+<fieldset>
+</fieldset>
+</body>
+</html>
