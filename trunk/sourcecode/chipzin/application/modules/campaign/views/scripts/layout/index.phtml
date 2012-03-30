@@ -100,6 +100,16 @@
 		</table>
 	</form>	
 </div>
+
+<div style='display:none' id='warming'>
+<form  id="warming" name="warming" action="" method="post">
+	<table>
+		<tbody id = 'campaignlist'>
+		</tbody>
+	</table>
+</form>
+</div>
+
 <script type="text/javascript">
 function deleteLayout(id)
 {
@@ -120,8 +130,36 @@ function deleteLayout(id)
 			}
 			else
 			{
-				alert ("Đã có battel sử dụng Layout này");
-				window.location.reload();		
+				$.ajax
+				({
+					type: "POST",
+					url: "<?php echo $this->baseUrl.'/campaign/campaign/getcampaognlayout' ?>",
+					data: "id=" + id,
+					dataType:"json",
+					success: function(data)
+					{	
+						$('#campaignlist').html('');
+						$.each(data, function(key, val) 
+						{
+							$('#campaignlist').append('<tr><td><p>'+data[key]['Name']+'</p></td><td><p><a class="tool-16 edit" href="campaign/edit/id/'+data[key]['ID']+'"></a></p></td></tr>');
+						});
+
+						$("#warming").dialog
+						({
+							title: "Các Campain sử dụng Layout này",
+							height: 280,
+							width: 250,
+							modal: true,
+							buttons: 
+							{
+								"close": function() 
+								{
+									$(this).dialog("close");							
+								}										
+							}
+						});	
+					}
+				});	
 			}			
 		}
 	});		
