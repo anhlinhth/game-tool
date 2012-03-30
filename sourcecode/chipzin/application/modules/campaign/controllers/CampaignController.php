@@ -47,8 +47,10 @@ class Campaign_CampaignController extends BaseController
 
             if ($pageNo == 0)
                 $pageNo = 1;
-            if ($items == 0)
-                $items = DEFAULT_ITEM_PER_PAGE;
+            if(!$items =$_SESSION['items'])
+				$items = DEFAULT_ITEM_PER_PAGE;
+			else
+				$items = $_SESSION['items'];
 
             $md = new Models_Campaign();
             $form = new Forms_Campaign();
@@ -56,6 +58,8 @@ class Campaign_CampaignController extends BaseController
             if ($this->_request->isPost()) {// search
                 $form->obj->ID = $_POST["S_ID"];
                 $form->obj->WorldMap= $_POST["S_WorldMap"];
+                $_SESSION['items']=$this->_request->getParam('items');
+				$items = $_SESSION['items'];
             }
             
             $data = $md->_filter($form->obj, "ID ASC", ($pageNo - 1) * $items, $items);
