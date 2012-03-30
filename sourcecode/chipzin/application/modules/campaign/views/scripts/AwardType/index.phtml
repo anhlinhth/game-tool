@@ -154,12 +154,12 @@ function deleteAwardType(key){
 				$('#ed').html('');
 				$.each(msg, function(key, val) 
 				{
-					$('#ed').append('<tr><td><p>'+ val.ID+"."+ val.BattleID+'</p></td></tr>');
+					$('#ed').append('<tr><td><p>'+ val.ID+"."+ val.BattleID+'<td><p><a class="tool-16 edit" href="<?php echo $this->baseUrl;?>/campaign/campaign/edit/id/'+val.Campaign+'"></a></p></td></p></td></tr>');
 				});
 
 				$("#ed").dialog
 				({
-					title: "Các Award có award type này",
+					title: "Các Battle có award type này",
 					height: 280,
 					width: 250,
 					modal: true,
