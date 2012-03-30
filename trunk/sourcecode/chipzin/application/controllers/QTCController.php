@@ -35,14 +35,13 @@ class QTCController extends BaseController
 				$pageNo = 1;
 			if($items == 0)
 				$items = DEFAULT_ITEM_PER_PAGE;
-			
+
 			$md = new Models_Q_QTC();
 			$form= new Forms_Q_QTC();
 			$form->_requestToForm($this);
 			$data = $md->_filter($form->obj, "QTC_ID ASC", ($pageNo - 1)*$items, $items);
 			$count = $md->_count(null);
-			
-			
+
 			$this->view->data = $data;
 			$this->view->items = $items;
 			$this->view->page = $pageNo;
