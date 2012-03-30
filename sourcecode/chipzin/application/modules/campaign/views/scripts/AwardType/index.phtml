@@ -13,7 +13,7 @@ endif;
 	<table class="filter" style="width: 80%;margin: auto;margin-bottom: 20px;margin-top: 10px";>	
 		<tr>
 			<td>ID</td>
-			<td><input id="AwardTypeID"  name="AwardTypeID" type="text" style="width:110px;" /></td>
+			<td><input id="AwardTypeID"  readonly class="disabled" name="AwardTypeID" type="text" style="width:110px;" /></td>
 			<td>Name
 			<input id="AwardTypeName" type="text" name="AwardTypeName"/>
 				<a class="btn save disabled " href="">Save</a>
@@ -58,7 +58,10 @@ endif;
 		<input class="btn big sync"  type="submit" value="Sync">
 	</div>
 </div>
+
 </form>
+<div id="ed">
+</div>
 <script type="text/javascript">
 $("a.btn.disabled").click(function(){
 	//alert("disabled");
@@ -91,7 +94,7 @@ $(function(){
 		}else{	
 			enable($(".btn.cancel"));					
 			if(id != ''){
-				enable($(".btn.add"));
+				disable($(".btn.add"));
 				enable($(".btn.save"));				
 			}else{
 				enable($(".btn.add"));
@@ -140,15 +143,35 @@ function deleteAwardType(key){
 	$.ajax({
 		type: "POST",
 		url: "<?php echo $this->baseUrl.'/campaign/AwardType/delete/'?> ",
-		data: {id:id,},
+		data: "ID="+id,
+		dataType:"json",
 		success: function(msg){
-			if(parseInt(msg)==1){					
-				alert(msg);
+			if(parseInt(msg.length)==0)
+			{			
+				window.location.reload();
 			}
 			else{
-				alert("xóa thành công");
-				window.location.reload();	
-			}			
+				$('#ed').html('');
+				$.each(msg, function(key, val) 
+				{
+					$('#ed').append('<tr><td><p>'+ val.ID+"."+ val.BattleID+'</p></td></tr>');
+				});
+
+				$("#ed").dialog
+				({
+					title: "CÃ¡c Award cÃ³ award type nÃ y",
+					height: 280,
+					width: 250,
+					modal: true,
+					buttons: 
+					{
+						"close": function() 
+						{
+							$(this).dialog("close");							
+						}										
+					}
+				});
+			}		
 		}
 	});	
 	

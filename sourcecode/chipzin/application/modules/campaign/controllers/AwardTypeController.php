@@ -1,6 +1,7 @@
 <?php
 require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_AwardType.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Award.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'object'.DS.'Obj_AwardType.php';
@@ -37,21 +38,31 @@ public function _setUserPrivileges()
 	}
 public function deleteAction()
 	{
-		try
+	try
 		{
 			$this->_helper->layout->disableLayout();
-			$this->_helper->viewRenderer->setNorender();
-			$id = $this->_request->getParam("id");
-			$md = new Models_AwardType();
-			$md->_deleteAwardType($id);
-			$result = array('msg' => '1', 'AwardTypeID' => $id);
+			$this->_helper->viewRenderer->setNorender();			
+			if($this->_request->isPost())
+			{				
+				$id = $this->_request->getParam("ID");
+				$md = new Models_Award();
+				$data=$md->getType($id);
+				echo json_encode($data);
+				if(($md->getnoType($id))==0)
+				{					
+				$mdType = new Models_AwardType();
+				$mdType->_delete($id);									
+				Models_Log::insert($this->view->user->username, "act_delete_AwardType", $obj->name);
+				}
+				else 
+				{
+				exit();
+				}
+			}
 		}
 		catch(Exception $ex)
         {            
 			$this->view->errMsg = $ex->getMessage();
-			$result = array('msg' => $ex->getMessage(), 'AwardTypeID' => "");
-            echo json_encode($result); 
-            echo $ex;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 	}
@@ -68,10 +79,10 @@ public function updateAction(){
 					if($md->isExistAwardType($form->obj->AwardTypeID)!=0){
 						echo 1;
 						$md->_update($form->obj);
-						echo "Update thành công";
+						echo "Update thï¿½nh cï¿½ng";
 					}else{ 
 						$md->_insert($form->obj);
-						echo "Thêm thành công";
+						echo "Thï¿½m thï¿½nh cï¿½ng";
 					}
 					Models_Log::insert($this->view->user->username, "act_update_AwardType", $obj->name);
 				}
@@ -82,7 +93,7 @@ public function updateAction(){
 				Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 	        }			
 	}
-	///////get type dùng cho quest
+	///////get type dï¿½ng cho quest
 	public function getAction()
 	{
 		try

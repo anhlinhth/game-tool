@@ -97,7 +97,28 @@ class Models_Award extends Models_Base
 			throw new Internal_Error_Exception($ex);
 		}
 	}
-	
+public function getnoType($id)
+    {
+        $sql = "SELECT
+			COUNT(AwardTypeID)
+			FROM
+			c_award
+			WHERE AwardTypeID='" . $id . "'
+			";
+        $data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+        return $count;
+    }
+public function getType($id)
+    {
+        $sql = "SELECT
+			ID,AwardTypeID,BattleID
+			FROM
+			c_award
+			WHERE AwardTypeID='" . $id . "'
+			";
+        $data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+        return $data;
+    }
 	///////////////Tan/////////////
 	public function  delAward($id)
 	{
