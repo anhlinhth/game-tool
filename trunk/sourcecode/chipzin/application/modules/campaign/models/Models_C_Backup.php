@@ -1,4 +1,5 @@
 <?php
+require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' . DS . 'Models_C_BK_Data.php';
 
 
 class Models_C_Backup{
@@ -18,10 +19,17 @@ class Models_C_Backup{
 function create()
 {
     $ccyymmdd = date("Y-m-d_H-i");
-  $file = fopen(ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS .'backup_data'.DS."backup_".$ccyymmdd.".sql","w");
-  $line_count =$this->create_backup_sql($file);
+    $file="backup_".$ccyymmdd.".sql";
+  $file2 = fopen(ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS .'backup_data'.DS.$file,"w");
+  $line_count =$this->create_backup_sql($file2);
+  if($line_count==1)
+  {
+  	$mdbk= new Models_C_BK_Data();
+  	$mdbk->insert($file);
+  	
+  }
   fclose($file);
-  echo "KQ: ".$line_count;
+ return $line_count;
 
 
 }
