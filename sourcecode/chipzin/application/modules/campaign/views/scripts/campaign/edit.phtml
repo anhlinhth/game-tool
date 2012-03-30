@@ -529,7 +529,9 @@ td.b_award input{
 		var a_reset = parent_tr.find(".tool-24.reset");
 		updateStatus(a_status,"loading","loading");	
 		var data = parent_tr.find("*").serialize();
-		var arr_data = parent_tr.find("*").serializeArray();		
+		var arr_data = parent_tr.find("*").serializeArray();	
+		var form = $("#formPaging");
+		validateForm(form);	
 		if(validate2(arr_data)==false){
 			$("#dialog").dialog({
 				title: "Diaglog",
@@ -777,54 +779,7 @@ td.b_award input{
 			return false;
 		}
 		return true;
-	}
-	function validate(){
-			/*flag=true;			
-			$(".battle").each(function(key,val){
-				num = key+1;
-				flag1=true;
-				//////test cac o khong bo trong
-				for(var i=0;i<8;i++)
-				{
-					value=$(val).find('.visible_'+i).val();	
-					//
-					if(value=='')
-					{	
-
-						flag1=false;		
-						break;	
-					}
-				}
-				if(flag1==false)
-				{
-					$("#dialog #ct").append("<p class='error'>Battle" + num + ":	<br>không được bỏ trống các ô</p>");					
-					flag=false;
-				}
-				else {
-					
-				
-						flag2=true;
-					////////test gia tri 
-						for(i=0;i<8;i++)
-						{
-							value=$(val).find('.visible_'+i).val();							
-							if(isNaN(value) && value=='undefined')
-							{							alert(value + "_"+i);					
-								flag2=false;
-								break;
-							}
-						}
-						if(flag2==false)
-						{
-							$("#dialog #ct").append("<p class='error'>Battle" + num + ":	<br>Phải là số</p>");	
-							flag=false;
-						}
-						
-				}
-				
-			});
-		return flag;	*/
-	}
+	}	
 
 /***************JQUERY***************************/
 
