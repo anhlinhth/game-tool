@@ -61,4 +61,8 @@ class Models_Layout extends Models_Base
 					ID = $id;";
 		$this->_db->query($sql);
 	}
+	public function delete($id)
+	{
+		parent::_delete($id);
+	}
 }

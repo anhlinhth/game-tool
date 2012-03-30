@@ -122,42 +122,33 @@ function deleteLayout(id)
 		type: "POST",
 		url: "<?php echo $this->baseUrl.'/campaign/Layout/delete/'?> ",
 		data: "ID="+ id,
-		success: function(msg)
+		dataType: 'json',
+		success: function(data)
 		{
-			if(parseInt(msg)==1)
+			if(data.length == 0)
 			{					
 				window.location.reload();
 			}
 			else
 			{
-				$.ajax
-				({
-					type: "POST",
-					url: "<?php echo $this->baseUrl.'/campaign/campaign/getcampaognlayout' ?>",
-					data: "id=" + id,
-					dataType:"json",
-					success: function(data)
-					{	
-						$('#campaignlist').html('');
-						$.each(data, function(key, val) 
-						{
-							$('#campaignlist').append('<tr><td><p>'+data[key]['Name']+'</p></td><td><p><a class="tool-16 edit" href="campaign/edit/id/'+data[key]['ID']+'"></a></p></td></tr>');
-						});
+				$('#campaignlist').html('');
+				$.each(data, function(key, val) 
+				{
+					$('#campaignlist').append('<tr><td><p>'+data[key]['Name']+'</p></td><td><p><a class="tool-16 edit" href="campaign/edit/id/'+data[key]['ID']+'"></a></p></td></tr>');
+				});
 
-						$("#warming").dialog
-						({
-							title: "Các Campain sử dụng Layout này",
-							height: 280,
-							width: 250,
-							modal: true,
-							buttons: 
-							{
-								"close": function() 
-								{
-									$(this).dialog("close");							
-								}										
-							}
-						});	
+				$("#warming").dialog
+				({
+					title: "Các Campain sử dụng Layout này",
+					height: 280,
+					width: 250,
+					modal: true,
+					buttons: 
+					{
+						"close": function() 
+						{
+							$(this).dialog("close");							
+						}										
 					}
 				});	
 			}			

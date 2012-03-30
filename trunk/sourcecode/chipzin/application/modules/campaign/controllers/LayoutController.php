@@ -75,13 +75,29 @@ class Campaign_LayoutController extends BaseController
 			{
 				$id = $this->_request->getParam("ID");
 				$mdLayout = new Models_Layout();
-				$mdLayout->_delete($id);
+				$return = $mdLayout->delete($id);
 			//	Models_Log::insert($this->view->user->username, "act_delete_Layout", $obj->name);
-				echo 1;
 			}
 		}
 		catch(Exception $ex)
 		{
+			try
+			{
+				require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'models' .
+						DS . 'Models_Campaign.php';
+				$this->_helper->layout->disableLayout();
+				$this->_helper->viewRenderer->setNorender();
+				$md = new Models_Campaign();
+				$id = $_POST['ID'];
+				$arrcampaign = $md->getCampaignByLayout($id);
+				echo(json_encode($arrcampaign));
+			}
+			catch (exception $ex)
+			{
+				$this->view->errMsg = $ex->getMessage();
+				Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+			
+			}
 			$this->view->errMsg = $ex->getMessage();
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}
