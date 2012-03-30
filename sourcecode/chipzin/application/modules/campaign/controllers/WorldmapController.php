@@ -42,19 +42,28 @@ public function _setUserPrivileges()
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}	
 	}
-public function deleteAction()
+	public function deleteAction()
 	{
 		try
 		{
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();			
 			if($this->_request->isPost())
-			{				
-				$id = $this->_request->getParam("ID");								
+			{			
+				$id = $this->_request->getParam("ID");
+																														
 				$mdWorldmap = new Models_Worldmap();
-				$mdWorldmap->_delete($id);									
-				Models_Log::insert($this->view->user->username, "act_delete_Worldmap", $obj->name);
-				echo 1;
+				$count=$mdWorldmap->isExistWolrdmap($id);
+				if($count!=0)
+				{
+					echo 'WorldMap này không thể xóa.Xóa WolrdMap bên campaign trước';
+				}
+				else
+				{				
+					$mdWorldmap->_delete($id);									
+					Models_Log::insert($this->view->user->username, "act_delete_Worldmap", $obj->name);					
+					echo 1;
+				}
 			}
 		}
 		catch(Exception $ex)
@@ -63,7 +72,7 @@ public function deleteAction()
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 	}
-public function updateAction(){
+	public function updateAction(){
 		try{
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();
@@ -90,5 +99,4 @@ public function updateAction(){
 	        }			
 	}
 }
-?>
 
