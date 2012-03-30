@@ -21,7 +21,7 @@ class Zend_View_Helper_PagingControl
 			$nextpage=min($totalPage,$curPage+1);
 		
 		echo "Trang <a href='".htmlspecialchars($_SERVER['_SELF'])."?do=search&start=".$curPage."&page=".$prepage."'><img style='vertical-align: middle' src='$view->baseUrl/media/images/icons/arrow_left.gif' width='16' height='16'/> </a>";
-				echo "<input size='1' value='$curPage' onkeypress='doPaging(event)' type='text' name='page' id='page' /> ";echo "/".$totalPage;
+				echo "<input size='1' value='$curPage' onkeydown='doPaging(event)' type='text' name='page' id='page' /> ";echo "/".$totalPage;
 						 echo "<a href='".htmlspecialchars($_SERVER['_SELF'])."?do=search&start=".$curPage."&page=".$nextpage."'><img style='vertical-align: middle' src='$view->baseUrl/media/images/icons/arrow_right.gif' width='16' height='16'/> </a>";
 					echo "trang | Hiển thị ";
 		//echo "<li><a href='".htmlspecialchars($_SERVER['_SELF'])."?do=search&start=".$curPage."&page=".$prepage."'>Previous</a></li>";
