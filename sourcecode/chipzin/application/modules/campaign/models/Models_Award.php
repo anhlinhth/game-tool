@@ -111,10 +111,10 @@ public function getnoType($id)
 public function getType($id)
     {
         $sql = "SELECT
-			ID,AwardTypeID,BattleID
+			c_battle.ID,AwardTypeID,BattleID,Campaign
 			FROM
-			c_award
-			WHERE AwardTypeID='" . $id . "'
+			c_award,c_battle
+			WHERE AwardTypeID='" . $id . "' AND c_battle.ID=c_award.BattleID
 			";
         $data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
         return $data;
