@@ -65,7 +65,9 @@ class Zend_View_Helper_TopPanel
            	case 'soldier':
            	case 'typemap':
            	case 'awardtype': 
-           	case 'exportcamp':	   
+           	case 'exportcamp':
+           	case 'restore':	
+           	case 'backup':			   
 			case 'worldmap':
 			case 'layout':
             	if (Utility::checkPrivilege($view, 'campaign', 'index'))
@@ -82,6 +84,10 @@ class Zend_View_Helper_TopPanel
                 	$strList .= "<li><a href='$view->baseUrl/campaign/worldmap/index' class='report'>Worldmap</a></li>";
 				if (Utility::checkPrivilege($view, 'export', 'index'))
                 	$strList .= "<li><a href='$view->baseUrl/campaign/layout/index' class='report'>Layout</a></li>";	
+                if (Utility::checkPrivilege($view, 'restore', 'index'))
+                	$strList .= "<li><a href='$view->baseUrl/campaign/restore/' class='report'>Restore</a></li>";
+                 if (Utility::checkPrivilege($view, 'backup', 'index'))
+                	$strList .= "<li><a href='$view->baseUrl/campaign/bkrt/' class='report'>Backup</a></li>";	
         }
         $strList .= "</ul>
 					</div>
