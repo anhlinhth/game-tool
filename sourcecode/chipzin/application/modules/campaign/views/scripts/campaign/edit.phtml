@@ -604,8 +604,60 @@ td.b_award input{
 			data: {
 				BattleID:key
 			},
-			success: function(msg){				
-				alert(msg);
+			dataType: 'json',
+			success: function(data)
+			{	
+				var awardtype = data['awardtype'][0];
+				var award = data['award'][0];
+				var soldier = data['soldier'][0];
+				
+				$('#battle-'+key +' #Order').val(data['battle'][0]['ID']);
+				$('#battle-'+key +' .layout').val(data['battle'][0]['Layout']);
+				var listaward = '<div><a class="tool-16 add" href=""></a></div>';
+				$.each(award, function(keyaward, valaward) 
+				{
+					listaward += "<div><select onchange='changeAwardType(this)' name='AwardTypeID[]'>";
+					$.each(awardtype, function(keyawardtype, valawardtype) 
+					{
+						if(award[keyaward]['AwardTypeID'] == awardtype[keyawardtype]['AwardTypeID'])
+						{
+							listaward += "<option value="+awardtype[keyawardtype]['AwardTypeID']+" selected='selected'>"+awardtype[keyawardtype]['Name']+"</option>";
+						}
+						else
+						{
+							listaward += "<option value="+awardtype[keyawardtype]['AwardTypeID']+">"+awardtype[keyawardtype]['Name']+"</option>";
+						}
+					});
+					listaward += '<option style="color:red" value="-1">New Type</option></select> <input id="Value" type="text" value="'+award[keyaward]['Value']+'" name="Value[]"> <a class="tool-16 delete" href="#"></a></div>';
+				});
+				$('#battle-'+key +' .b_award').html(listaward);
+				var Point = data['battle'][0]['Point'];
+				var flagpoint = 0;
+				for(var i = 1; i< 18; i+=2)
+				{
+					if(Point[i] == 1)
+					{
+						$.each(soldier, function(keysoldier, valsoldier) 
+						{
+							if(soldier[keysoldier]['Point'] == flagpoint)
+							{
+								$('#battle-'+key +' select[name$="solider['+flagpoint+']"]').val(soldier[keysoldier]['Soldier']);
+								$('#battle-'+key +' input[name$="levelSolider['+flagpoint+']"]').val(soldier[keysoldier]['Level']);
+								return;
+							}
+						});
+						$('#battle-'+key +' #point'+flagpoint).removeClass('invisible').addClass('visible');
+						$('#battle-'+key +' select[name$="solider['+flagpoint+']"]').attr('disabled',false);
+						$('#battle-'+key +' input[name$="levelSolider['+flagpoint+']"]').attr('disabled',false);
+					}
+					else
+					{
+						$('#battle-'+key +' #point'+flagpoint).removeClass('visible').addClass('invisible');
+						$('#battle-'+key +' select[name$="solider['+flagpoint+']"]').attr('disabled',true);
+						$('#battle-'+key +' input[name$="levelSolider['+flagpoint+']"]').attr('disabled',true);
+					}
+					flagpoint++;
+				}
 			}
 		});
 	}
