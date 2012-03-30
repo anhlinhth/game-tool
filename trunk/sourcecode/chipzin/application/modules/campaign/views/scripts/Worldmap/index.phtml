@@ -120,7 +120,7 @@ function editWorldmap(key){
 	}
 }
 /*******click delete button***********/
-function deleteWorldmap(key){
+function deleteWorldmap(key){	
 	id = $("#Worldmap-"+key+" .id").text();
 	name = $("#Worldmap-"+key+" .name").text();
 	if(!confirm("Bạn có muốn xóa Worldmap: " + name)){
@@ -131,12 +131,13 @@ function deleteWorldmap(key){
 	//	url: "http://localhost/vng/game-tool/sourcecode/chipzin/questline/update",
 		url: "<?php echo $this->baseUrl.'/campaign/Worldmap/delete/'?> ",
 		data: "ID="+id,
-		success: function(msg){
-			if(parseInt(msg)==1){					
+		success: function(msg){				
+			if(parseInt(msg)==1){	
+				alert('Xóa WolrdMap thành công');										
 				window.location.reload();
 			}
 			else{
-				window.location.reload();		
+				alert(msg);		
 			}			
 		}
 	});	
