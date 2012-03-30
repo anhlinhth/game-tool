@@ -61,7 +61,7 @@ if($this->temp)
 		</tbody>
 		
 	</table>
-	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this); echo $_SESSION['items']; ?>
 	<br>
 		<center><input type="submit" name="button1" id = "button1" style="width:100px" onclick="deletechose(document.formPaging)" value="DELETE"/></center>
 </div>
