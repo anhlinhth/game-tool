@@ -39,19 +39,19 @@ class Zend_View_Helper_ListLayout
 							<td class='desc'>
 								<table>
 									<tr>
-										<td $arrclass[0]>1<input type='checkbox' disabled $arrCheck[0] name='point$row->ID' id='0_$row->ID' value='0' /></td>
-										<td $arrclass[3]>4<input type='checkbox' disabled $arrCheck[3] name='point$row->ID' id='3_$row->ID' value='3' /></td>
-										<td $arrclass[6]>7<input type='checkbox' disabled $arrCheck[6] name='point$row->ID' id='6_$row->ID' value='6' /></td>
+										<td align='center' $arrclass[0]>1<input type='checkbox' disabled $arrCheck[0] name='point$row->ID' id='0_$row->ID' value='0' /></td>
+										<td align='center' $arrclass[3]>4<input type='checkbox' disabled $arrCheck[3] name='point$row->ID' id='3_$row->ID' value='3' /></td>
+										<td align='center' $arrclass[6]>7<input type='checkbox' disabled $arrCheck[6] name='point$row->ID' id='6_$row->ID' value='6' /></td>
 									</tr>
 									<tr>
-										<td $arrclass[1]>2<input type='checkbox' disabled $arrCheck[1] name='point$row->ID' id='1_$row->ID' value='1' /></td>
-										<td $arrclass[4]>5<input type='checkbox' disabled $arrCheck[4] name='point$row->ID' id='4_$row->ID' value='4' /></td>
-										<td $arrclass[7]>8<input type='checkbox' disabled $arrCheck[7] name='point$row->ID' id='7_$row->ID' value='7' /></td>
+										<td align='center' $arrclass[1]>2<input type='checkbox' disabled $arrCheck[1] name='point$row->ID' id='1_$row->ID' value='1' /></td>
+										<td align='center' $arrclass[4]>5<input type='checkbox' disabled $arrCheck[4] name='point$row->ID' id='4_$row->ID' value='4' /></td>
+										<td align='center' $arrclass[7]>8<input type='checkbox' disabled $arrCheck[7] name='point$row->ID' id='7_$row->ID' value='7' /></td>
 									</tr>
 									<tr>
-										<td $arrclass[2]>3<input type='checkbox' disabled $arrCheck[2] name='point$row->ID' id='2_$row->ID' value='2' /></td>
-										<td $arrclass[5]>6<input type='checkbox' disabled $arrCheck[5] name='point$row->ID' id='5_$row->ID' value='5' /></td>
-										<td $arrclass[8]>9<input type='checkbox' disabled $arrCheck[8] name='point$row->ID' id='8_$row->ID' value='8' /></td>
+										<td align='center' $arrclass[2]>3<input type='checkbox' disabled $arrCheck[2] name='point$row->ID' id='2_$row->ID' value='2' /></td>
+										<td align='center' $arrclass[5]>6<input type='checkbox' disabled $arrCheck[5] name='point$row->ID' id='5_$row->ID' value='5' /></td>
+										<td align='center' $arrclass[8]>9<input type='checkbox' disabled $arrCheck[8] name='point$row->ID' id='8_$row->ID' value='8' /></td>
 									</tr>
 								</table>		
 							</td>
