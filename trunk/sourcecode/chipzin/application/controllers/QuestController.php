@@ -123,17 +123,22 @@ class QuestController extends BaseController
 			$items = $this->_request->getParam("items");
 			if($pageNo == 0)
 				$pageNo = 1;
-			if($items == 0)
+			if(!$items =$_SESSION['items'])
 				$items = DEFAULT_ITEM_PER_PAGE;
+			else
+				$items = $_SESSION['items'];
+		//	if($_SESSION['items'])
+		//		$items =$_SESSION['items'];
 			$form = new Forms_Quest();
-			$form->_requestToForm($this);
-			
+			$form->_requestToForm($this);			
 			$this->view->QuestLineID =$_SESSION['QuestLine'];
 			if($this->_request->isPost())
 			{
 				unset($_SESSION['QuestLine']);
 				$_SESSION['QuestLine']=$this->_request->getParam('QuestLineID');
+				$_SESSION['items']=$this->_request->getParam('items');
 				$this->view->QuestLineID =$_SESSION['QuestLine'];
+				$items = $_SESSION['items'];
 				//var_dump($_SESSION['QuestLine']);
 				//die();
 			}
