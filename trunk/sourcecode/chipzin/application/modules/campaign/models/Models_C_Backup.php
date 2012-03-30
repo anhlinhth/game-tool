@@ -1,5 +1,6 @@
 <?php
 
+
 class Models_C_Backup{
 	
 	function loadConfig()
@@ -17,7 +18,7 @@ class Models_C_Backup{
 function create()
 {
     $ccyymmdd = date("Y-m-d_H-i");
-  $file = fopen('C:\xampp\htdocs\chipzin\backup_data'.DS."backup_".$ccyymmdd.".sql","w");
+  $file = fopen(ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS .'backup_data'.DS."backup_".$ccyymmdd.".sql","w");
   $line_count =$this->create_backup_sql($file);
   fclose($file);
   echo "KQ: ".$line_count;
