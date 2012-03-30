@@ -25,11 +25,16 @@ public function _setUserPrivileges()
 	{
 		$pageNo = $this->_request->getParam("page");
 		$items = $this->_request->getParam("items");
+		if($pageNo == 0)
+				$pageNo = 1;
+			if($items == 0)
+				$items = DEFAULT_ITEM_PER_PAGE;	
 		$form = new Forms_Worldmap();
 		$form->_requestToForm($this);
-		$md = new Models_Worldmap();
-		$SearchID=$this->_request->getParam('SearchID');		
-		$data = $md->filter($searchID, "ID ASC",($pageNo - 1)*$items, $items);		
+		$md = new Models_Worldmap();		
+		$SearchID=$this->_request->getParam('SearchID');	
+		print_r($SearchID);					
+		$data = $md->filter($SearchID,"ID ASC",($pageNo - 1)*$items, $items);		
 		$count = $md->_count($form->obj);
 		$this->view->data = $data;
 		$this->view->items = $items;
