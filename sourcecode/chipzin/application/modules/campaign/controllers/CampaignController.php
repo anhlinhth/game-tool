@@ -254,22 +254,4 @@ class Campaign_CampaignController extends BaseController
 
         }
     }
-    /*******************Tan*******************/
-    public function getcampaognlayoutAction()
-    {
-    	try 
-    	{
-    		$this->_helper->layout->disableLayout();
-    		$this->_helper->viewRenderer->setNorender();
-    		$md = new Models_Campaign();
-    		$id = $_POST['id'];
-    		$arrcampaign = $md->getCampaignByLayout($id);
-    		echo(json_encode($arrcampaign));
-    	}
-    	catch (exception $ex) {
-    		$this->view->errMsg = $ex->getMessage();
-    		Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-    	
-    	}
-    }
 }
