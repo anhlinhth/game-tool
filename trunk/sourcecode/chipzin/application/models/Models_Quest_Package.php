@@ -115,20 +115,24 @@ class Models_Quest_Package extends Models_Base
 						$error[] = $temp ;						
 					}
 				}
-				$str .= "\n\t\t'award' => array";
+				
 				$mda = $this->getAward($row['QuestID']);
-				if($mda){
+				if(!empty($mda)){
+				$str .= "\n\t\t'award' => array";	
 				$str .= "\n\t\t(\n";	
 				
 				
 				foreach ($mda as $row2)
 				{
-					$str .="\t\t\t".trim($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'].", \n";
+					if(trim($this->getawardtype($row2['AwardTypeID'])=="EXP"))
+						$str .="\t\t\t"."HONOUR"." => ".$row2['Value'].", \n";
+					else
+						$str .="\t\t\t".strtoupper(trim($this->getawardtype($row2['AwardTypeID'])))." => ".$row2['Value'].", \n";
 				}
 				$str .= "\t\t),";		
 				}
 				else 
-					$str .= "NULL,";
+					$str .= "\n\t\t'award' => NULL";
 						
 				$str .= "\n\t),";
 				$i++;
