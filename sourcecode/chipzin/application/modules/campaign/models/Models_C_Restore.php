@@ -1,15 +1,18 @@
 <?php
 class Models_C_Restore
 {
-	function restore($file){
-		
-		
+	function restore($file){		
+	
   //this is the file you are loading your tables from
   $file2 = fopen($file,"r+");
  
   $line_count = $this->load_backup_sql($file2);
   fclose($file);
-  echo "lines read: ".$line_count;
+  if($line_count!= null)
+  return 1;
+  else {
+  	return 0;
+  }
 	}
 
   function load_backup_sql($file) {
