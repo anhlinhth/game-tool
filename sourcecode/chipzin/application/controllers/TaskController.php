@@ -148,6 +148,7 @@ class TaskController extends BaseController
 			$obj->TaskString = 1;
 			$obj->QTC_ID = 1;
 			$obj->ActionID = 1;
+			$obj->Counter = 0;
 			$md->_insert($obj);
 			Models_Log::insert($this->view->user->username, "act_add_new_task", $obj->name);				
 			echo "1";
