@@ -96,9 +96,6 @@ class Models_Map_Package extends Models_Base
 			}
 			else 
 			{
-			
-	
-			
 				$str .= "\tBARRACK_$i=> array \n ";
 				$str .= "\t{\n";
 				$str .= "\t\t'type' => BARRACK, \n";
