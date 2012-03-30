@@ -168,8 +168,22 @@ class Campaign_BattleController extends BaseController
 	    	{
 	    		$battleID = $_POST['BattleID'];	    		   		
 	    		$mdbattle = new Models_Battle();
+	    		$mdbsoldier = new Models_Battle_Soldier();
+	    		$mdbaward = new Models_Award();
+	    		
+	    		$arrbsoldier = $mdbsoldier->getbattle_soldier($battleID);
+	    		$arrbaward = $mdbaward->getAward($battleID);
 	    		$obj_battle = $mdbattle->getBattleInfo($battleID);
-	    		echo json_encode((array)$obj_battle);	    		
+	    		require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_AwardType.php';
+	    		$mdAtype = new Models_AwardType();
+	    		$arratype = $mdAtype->getAllAwardType();
+	    		
+	    		$objb = array();
+	    		$objb['battle'][]=$obj_battle;
+	    		$objb['award'][]=$arrbaward;
+	    		$objb['soldier'][]=$arrbsoldier;
+	    		$objb['awardtype'][]=$arratype;
+	    		echo json_encode($objb);	    		
 	    	}
 	    }
 	    catch(Exception $ex)
