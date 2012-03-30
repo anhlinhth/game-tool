@@ -237,7 +237,7 @@ class Models_Campaign extends Models_Base
         $data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
         return $data;
     }
-public function getType($id)
+public function getnoType($id)
     {
         $sql = "SELECT
 			COUNT(ID)
@@ -247,6 +247,17 @@ public function getType($id)
 			";
         $data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
         return $count;
+    }
+public function getType($id)
+    {
+        $sql = "SELECT
+			ID,Name
+			FROM
+			c_campaign
+			WHERE TypeID='" . $id . "'
+			";
+        $data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+        return $data;
     }
     /////////////////////////////////////////////////
     public function getCampaignById($id)

@@ -46,14 +46,18 @@ public function deleteAction()
 			{				
 				$id = $this->_request->getParam("ID");
 				$md = new Models_Campaign();
-				if(($md->getType($id))==0)
+				$data=$md->getType($id);
+				echo json_encode($data);
+				if(($md->getnoType($id))==0)
 				{					
 				$mdType = new Models_Type();
 				$mdType->_delete($id);									
 				Models_Log::insert($this->view->user->username, "act_delete_Type", $obj->name);
-				echo 1;	
 				}
-				else echo 2;
+				else 
+				{
+				exit();
+				}
 			}
 		}
 		catch(Exception $ex)
