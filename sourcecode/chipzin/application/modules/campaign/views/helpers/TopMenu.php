@@ -29,7 +29,8 @@ class Zend_View_Helper_TopMenu
 			case 'campaign':
            	case 'soldier':
            	case 'typemap':
-           	case 'awardtype': 
+           	case 'awardtype':
+			case 'layout':
            	case 'exportcamp': 
 				$campaign = 'current';
 				break;		
