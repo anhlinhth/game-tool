@@ -9,7 +9,7 @@ endif;
 
 <form id="formPaging" name='formPaging' class="myform" action="" method="post">
 <div class="mybox">
-	<h3>WORLD MAP EDITOR</h3>
+	<h3>WorlMap Edit</h3>
 	<table class="filter" style="width: 80%;margin: auto;margin-bottom: 20px;margin-top: 10px";>
 		<tr>
 			<td>World map ID</td>
@@ -42,7 +42,7 @@ endif;
 			</tr>
 		</tbody>						
 	</table>	
-	
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
 	<div align="center" style="margin: 20px;">		
 		<input class="btn big sync"  type="submit" value="Sync">
 	</div>
