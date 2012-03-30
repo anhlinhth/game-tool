@@ -91,23 +91,17 @@ class Models_WorldMap extends Models_Base
 		
 		return $count;
 	}
-	public  function isExist($objSearch)
+	public  function isExistWolrdmap($objSearch)
 	{
 		$sql = "SELECT
-					COUNT(ID)
+					COUNT(WorldMap)
 				FROM
 					c_campaign
 				WHERE
-					ID='$objSearch'";
+					WorldMap='$objSearch'";
 				
 		$count = $this->_db->fetchOne($sql);
 		
 		return $count;
 	}
-	public function getQuestLine()
-	{		
-				
-	}
-	
 }
-?>
