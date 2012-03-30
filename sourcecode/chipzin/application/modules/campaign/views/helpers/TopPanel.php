@@ -67,15 +67,15 @@ class Zend_View_Helper_TopPanel
            	case 'awardtype': 
            	case 'exportcamp':	   
             	if (Utility::checkPrivilege($view, 'campaign', 'index'))
-                    $strList .= "<li><a href='$view->baseUrl/campaign/campaign/index' class='report'>Campagin Manager</a></li>";               
+                    $strList .= "<li><a href='$view->baseUrl/campaign/campaign/index' class='report'>Campaign Manager</a></li>";               
 				if (Utility::checkPrivilege($view, 'campaign', 'index'))
-                    $strList .= "<li><a href='$view->baseUrl/campaign/campaign/edit' class='report'>Campagin Edit</a></li>";               
+                    $strList .= "<li><a href='$view->baseUrl/campaign/campaign/edit' class='report'>Campaign Edit</a></li>";               
                 if (Utility::checkPrivilege($view, 'soldier', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/campaign/soldier/index' class='report'>Soldier</a></li>";
                 if (Utility::checkPrivilege($view, 'typemap', 'index'))
-                	$strList .= "<li><a href='$view->baseUrl/campaign/typemap/index' class='report'>Typemap</a></li>";
+                	$strList .= "<li><a href='$view->baseUrl/campaign/typemap/index' class='report'>Type map</a></li>";
                 if (Utility::checkPrivilege($view, 'awardtype', 'index'))
-                	$strList .= "<li><a href='$view->baseUrl/campaign/awardtype/index' class='report'>Award Type</a></li>";
+                	$strList .= "<li><a href='$view->baseUrl/campaign/awardtype/index' class='report'>Award type</a></li>";
         		 if (Utility::checkPrivilege($view, 'export', 'index'))
                 	$strList .= "<li><a href='$view->baseUrl/campaign/exportcamp/export' class='report'>Export</a></li>";
         }
