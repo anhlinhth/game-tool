@@ -60,4 +60,4 @@ public function _setUserPrivileges()
 	
 
 }
-?>
+
