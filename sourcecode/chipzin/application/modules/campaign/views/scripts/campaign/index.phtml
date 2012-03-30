@@ -75,7 +75,7 @@ td.status{
 				<?php foreach($this->data as $key =>$campRow){ 
 								
 					$btn_save = "<a class='tool-24 save disabled' href=''></a>";
-					$btn_edit = "<a class='tool-24 edit' href='javascript:editCamp($campRow->ID)'></a>";
+					$btn_edit = "<a class='tool-24 edit' href='$this->baseUrl/campaign/campaign/edit/id/$campRow->ID'></a>";
 					$btn_delete = "<a class='tool-24 delete' href=''></a>";								
 					$alt= ($alt=="alt"?"2":"alt");
 					
