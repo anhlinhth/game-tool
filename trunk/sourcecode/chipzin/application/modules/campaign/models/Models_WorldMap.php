@@ -58,8 +58,17 @@ class Models_WorldMap extends Models_Base
 					c_worldmap
 				WHERE
 					1";
+		if($objSearch)
+			$sql .= " AND ID =$objSearch";
 		
-		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+		if($objSearch)
+			$sql .= " AND Name LIKE '$objSearch'";						
+		if($order)
+			$sql .= " ORDER BY $order";
+		
+		if($count > 0)
+			$sql .= " LIMIT $offset,$count";
+		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);		
 		
 		return $data;
 	
