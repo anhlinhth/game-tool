@@ -28,8 +28,8 @@ public function _setUserPrivileges()
 		$form = new Forms_Worldmap();
 		$form->_requestToForm($this);
 		$md = new Models_Worldmap();
-		$searchID=$this->_request->getParam('searchID');
-		$data = $md->filter($searchID, "ID ASC",($pageNo - 1)*$items, $items);
+		$SearchID=$this->_request->getParam('SearchID');		
+		$data = $md->filter($searchID, "ID ASC",($pageNo - 1)*$items, $items);		
 		$count = $md->_count($form->obj);
 		$this->view->data = $data;
 		$this->view->items = $items;
@@ -76,18 +76,21 @@ public function _setUserPrivileges()
 		try{
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();
-			$md = new Models_Worldmap();
+			$md = new Models_Worldmap();			
 			if($this->_request->isPost())// da post du lieu len
 				{
+					
 					$form= new Forms_Worldmap();
-					$form->_requestToForm($this);
-					if($md->isExistWorldmap($form->obj->ID)!=0){
-						echo 1;
+					$form->_requestToForm($this);					
+					if($form->obj->ID!="")
+					{						
 						$md->_update($form->obj);
-						echo "Update thành công";
-					}else{ 
+						echo "Update thành công";						
+					}
+					else
+					{ 
 						$md->_insert($form->obj);
-						echo "Thêm thành công";
+						echo "Thêm WorldMap thành công";
 					}
 					Models_Log::insert($this->view->user->username, "act_update_Worldmap", $obj->name);
 				}
