@@ -3,7 +3,7 @@ require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Layout.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'object'.DS.'Obj_Layout.php';
-
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 class Campaign_LayoutController extends BaseController
 {
 	public function _setUserPrivileges()
@@ -69,36 +69,28 @@ class Campaign_LayoutController extends BaseController
 	{
 		try
 		{
+			require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'models' .
+						DS . 'Models_Campaign.php';
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();
 			if($this->_request->isPost())
 			{
 				$id = $this->_request->getParam("ID");
 				$mdLayout = new Models_Layout();
-				$return = $mdLayout->delete($id);
-			//	Models_Log::insert($this->view->user->username, "act_delete_Layout", $obj->name);
+				$md = new Models_Campaign();
+				$arrcampaign = $md->getCampaignByLayout($id);				
+				if(empty($arrcampaign)){
+					$return = $mdLayout->delete($id);
+				}
+				echo(json_encode($arrcampaign));				
+				Models_Log::insert($this->view->user->username, "act_delete_Layout");
+				
 			}
 		}
 		catch(Exception $ex)
-		{
-			try
-			{
-				require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'models' .
-						DS . 'Models_Campaign.php';
-				$this->_helper->layout->disableLayout();
-				$this->_helper->viewRenderer->setNorender();
-				$md = new Models_Campaign();
-				$id = $_POST['ID'];
-				$arrcampaign = $md->getCampaignByLayout($id);
-				echo(json_encode($arrcampaign));
-			}
-			catch (exception $ex)
-			{
-				$this->view->errMsg = $ex->getMessage();
-				Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-			
-			}
+		{			
 			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}
 	}
