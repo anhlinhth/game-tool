@@ -132,12 +132,14 @@ class QuestController extends BaseController
 			$form = new Forms_Quest();
 			$form->_requestToForm($this);			
 			$this->view->QuestLineID =$_SESSION['QuestLine'];
+			$form->obj->QuestLineID = $this->view->QuestLineID;
 			if($this->_request->isPost())
 			{
 				unset($_SESSION['QuestLine']);
 				$_SESSION['QuestLine']=$this->_request->getParam('QuestLineID');
 				$_SESSION['items']=$this->_request->getParam('items');
 				$this->view->QuestLineID =$_SESSION['QuestLine'];
+				$form->obj->QuestLineID = $this->view->QuestLineID;
 				$items = $_SESSION['items'];
 				//var_dump($_SESSION['QuestLine']);
 				//die();
