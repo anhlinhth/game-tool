@@ -140,6 +140,7 @@ function deleteSoldier(key){
 			}
 			else{
 				$('#ed').html('');
+				$('#ed').append('<p>Các Campaign có Soldier này</p>');
 				$.each(msg, function(key, val) 
 				{
 					$('#ed').append('<tr><td><p>'+ "Battle "+val.BattleID+" trong campaign "+ val.Campaign+'</p></td><td><p><a class="tool-16 edit" href="<?php echo $this->baseUrl;?>/campaign/campaign/edit/id/'+val.Campaign+'"></a></p></td></tr>');
@@ -147,7 +148,8 @@ function deleteSoldier(key){
 
 				$("#ed").dialog
 				({
-					title: "Các Campaign có Soldier này",
+					title: "Không xóa được",
+					show : "slide",
 					height: 280,
 					width: 250,
 					modal: true,
