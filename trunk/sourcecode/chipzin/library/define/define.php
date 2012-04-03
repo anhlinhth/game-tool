@@ -61,7 +61,7 @@ define('ROLE_ADMIN', 1);
 define('ROLE_REPORT', 2);
 define('ROLE_POWER_USER', 3);
 
-define("DEFAULT_ITEM_PER_PAGE", 100);
+define("DEFAULT_ITEM_PER_PAGE", 50);
 define("UPDATE", 1);
 define("INSERT", 2);
 

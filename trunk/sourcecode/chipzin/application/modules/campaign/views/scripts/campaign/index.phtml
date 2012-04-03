@@ -375,14 +375,9 @@ function deleteCamp(e){
 /**********************************/
 /**********************************/
 function saveAll(){
-	var form = $("#formPaging");
-	flag=validateInput2(form);	
-	if(flag==true)
-	{	
-		$("#tbCampaign").find("td.action .save").not(".disabled").each(function (index){		
+	$("#tbCampaign").find("td.action .save").not(".disabled").each(function (index){		
 			$(this).click();
-		});
-	}
+	});
 	
 }
 /***************JQuery*******************/
