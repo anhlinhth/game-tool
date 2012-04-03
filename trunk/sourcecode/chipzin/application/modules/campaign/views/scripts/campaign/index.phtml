@@ -292,34 +292,37 @@ function addNextCamp(e){
 	parent_tr.change();
 }
 /**********************************/
-function saveCamp(e){
-	var parent_tr = $(e).parent().parent();
-	if(parent_tr.hasClass('ok'))
-	{		
-		var data = parent_tr.find("*").serialize();		
-		var flag=validateInput2(parent_tr);	
-		var a_status = parent_tr.find(".status");
-		var a_save = parent_tr.find(".tool-24.save");
-		updateStatus(a_status,"loading","loading");	
-		$.ajax({	   
-	       type: "POST",
-	       url: "<?php echo $this->baseUrl.'/campaign/campaign/save'?> ",            
-	       data: data,
-	       dataType:"json",
-		   success: function(msg){	       
-	  		   if(msg.msg=="1"){  		        
-	                updateStatus(a_status,"ok","ok");
-	  		        a_save.addClass("disabled");
-	                if(msg.CampID){                    
-	                    parent_tr.find("td.c_id input[name='ID']").attr("value",msg.CampID);
-	                    parent_tr.find("td.c_id span").text(msg.CampID);
-						updateSelectCamp(msg.CampID,msg.Name,"add");
-	                };                
-	  		   }else{
-	    			alert(msg.msg);
-	    	   };
-		   }
-		});	
+function saveCamp(e){	
+	var parent_tr = $(e).parent().parent();	
+	flag=validateInput2(parent_tr);
+	if(flag==true)
+	{
+		if(parent_tr.hasClass('ok'))
+		{		
+			var data = parent_tr.find("*").serialize();							
+			var a_status = parent_tr.find(".status");
+			var a_save = parent_tr.find(".tool-24.save");
+			updateStatus(a_status,"loading","loading");	
+			$.ajax({	   
+		       type: "POST",
+		       url: "<?php echo $this->baseUrl.'/campaign/campaign/save'?> ",            
+		       data: data,
+		       dataType:"json",
+				   success: function(msg){	       
+		  		   if(msg.msg=="1"){  		        
+		                updateStatus(a_status,"ok","ok");
+		  		        a_save.addClass("disabled");
+		                if(msg.CampID){                    
+		                    parent_tr.find("td.c_id input[name='ID']").attr("value",msg.CampID);
+		                    parent_tr.find("td.c_id span").text(msg.CampID);
+							updateSelectCamp(msg.CampID,msg.Name,"add");
+		                };                
+		  		   }else{
+		    			alert(msg.msg);
+		    	   };
+		   	}
+			});	
+		}
 	}
 }
 /**********************************/
@@ -373,7 +376,7 @@ function deleteCamp(e){
 /**********************************/
 function saveAll(){
 	var form = $("#formPaging");
-	flag=validateInput(form);	
+	flag=validateInput2(form);	
 	if(flag==true)
 	{	
 		$("#tbCampaign").find("td.action .save").not(".disabled").each(function (index){		
