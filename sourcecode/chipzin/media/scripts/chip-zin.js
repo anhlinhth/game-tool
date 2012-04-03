@@ -15,7 +15,7 @@ function validateForm(e){
 	var select=e.find("select");
 	input.each(function(index){
 		if($(this).hasClass('require')){
-			if($(this).val()=="" )
+			if($(this).val()=="")
 				{					
 				//alert($(this).attr('id'));
 					$(this).css({ border: "1px solid red" }).focus();
@@ -29,7 +29,9 @@ function validateForm(e){
 					$(this).css({ border: "1px solid red" }).focus();
 				}	
 			else 
-				$(this).css({ border: "none" });
+				{
+					$(this).css({ border: "1px solid #EFEFEF" });				
+				}
 		}
 			
 	});
@@ -37,9 +39,37 @@ function validateForm(e){
 		if($(this).hasClass('require')){
 			if($(this).val()=="")
 			$(this).css({ border: "1px solid red" }).focus();
+			else
+				{
+					$(this).css({ border: "none" });
+					
+				}
 		}
 		
+	});		
+}
+
+function validateInput(e)
+{
+	
+	var input=e.find('input');
+	input.each(function(index)
+	{
+		
+		if($(this).hasClass('require'))
+			{
+				if($(this).val()=='')
+					{
+						$(this).css({ border: "1px solid red" }).focus();
+						flag=false;
+					}
+				else if($(this).val()!='')
+					{
+						$(this).css({ border: "none" });
+						flag=true;
+					}
+			}
+		return flag;
 	});
-	
-	
+	//alert(flag);
 }
