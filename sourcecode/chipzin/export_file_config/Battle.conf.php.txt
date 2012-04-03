@@ -1,0 +1,53 @@
+<?php
+return array
+(
+	'max_turn' => 100,
+	'random_min' => 1,
+	'random_max' => 2,
+	7 => array 
+	{
+		'soldiers' => NULL,
+		'awards' => NULL
+	},
+	8 => array 
+	{
+		'soldiers' => NULL,
+		'awards' => NULL
+	},
+	9 => array 
+	{
+		'soldiers' => NULL,
+		'awards' => NULL
+	},
+	10 => array 
+	{
+		'soldiers' => NULL,
+		'awards' => NULL
+	},
+	16 => array 
+	{
+		'soldiers' => NULL,
+		'awards' => NULL
+	},
+	17 => array 
+	{
+		'soldiers' => NULL,
+		'awards' => NULL
+	},
+	18 => array 
+	{
+		'soldiers' => NULL,
+		'awards' => NULL
+	},
+	19 => array 
+	{
+		'soldiers' => NULL,
+		'awards' => NULL
+	},
+	20 => array 
+	{
+		'soldiers' => NULL,
+		'awards' => NULL
+	}
+);
+?>

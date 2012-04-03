@@ -1,0 +1,53 @@
+<?php
+return array
+(
+	MAP_1 => array 
+ 	(
+		'openBattles' => array()
+	),
+	MAP_2 => array 
+ 	(
+		'openBattles' => array(7,8,9,10)
+	),
+	BARRACK_5 => array 
+ 	(
+		'openBattles' => array(16,17,18,19,20)
+	),
+	MAP_5 => array 
+ 	(
+		'openBattles' => array()
+	),
+	MAP_6 => array 
+ 	(
+		'openBattles' => array()
+	),
+	MAP_7 => array 
+ 	(
+		'openBattles' => array()
+	),
+	MAP_8 => array 
+ 	(
+		'openBattles' => array()
+	),
+	MAP_9 => array 
+ 	(
+		'openBattles' => array()
+	),
+	MAP_10 => array 
+ 	(
+		'openBattles' => array()
+	),
+	MAP_11 => array 
+ 	(
+		'openBattles' => array()
+	),
+	MAP_12 => array 
+ 	(
+		'openBattles' => array()
+	),
+	MAP_13 => array 
+ 	(
+		'openBattles' => array()
+	)
+);
+?>
