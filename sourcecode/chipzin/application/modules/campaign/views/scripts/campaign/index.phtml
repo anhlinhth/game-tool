@@ -8,7 +8,12 @@
 td.c_worldmap select, td.c_type select, td.c_needcampaign select{	
 	width:80%;
 }
-
+#tbCampaign td.c_needcampaign{
+	width:16%;	
+}
+#tbCampaign td.c_nextcampaign{
+	width:20%;	
+}
 td.c_needcampaign select{
 	width:100%;
 }
@@ -28,6 +33,7 @@ td.status{
 #tbCampaign td.c_nextcampaign select{
 	width:80%;	
 }
+
 #tbCampaign td.action{
 	padding: 0px;
 	width: 10%;
@@ -102,7 +108,7 @@ td.status{
 					<td class="c_needcampaign">						
 						<select class='select-need-camp' name='NeedCamp'>
 							<option value="">NULL</option>
-							<?php echo $this->options($this->arrCampaign,$campRow->NeedCamp,array("key"=>"ID","name"=>"Name","flag"=>1));?>
+							<?php echo $this->options($this->arrCampaign,$campRow->NeedCamp,array("key"=>"ID","name"=>"Name","name2"=>"WorldMap"));?>
 						</select>
 					</td>
 					<td class="c_nextcampaign">					
@@ -112,7 +118,7 @@ td.status{
 						<div class="next-camp">
 							<select class='select-next-camp' name='NextCamp[]'>							
 								<option value="">NULL</option>
-								<?php echo $this->options($this->arrCampaign,$nextCamp->NextCamp,array("key"=>"ID","name"=>"Name","flag"=>1));?>
+								<?php echo $this->options($this->arrCampaign,$nextCamp->NextCamp,array("key"=>"ID","name"=>"Name","name2"=>"WorldMap"));?>
 							</select>
 							<a class="tool-16 delete" href="#"></a><!--JQUERY delegate Click: addNextCampp(e)-->							
 							<a class="tool-16 add" href="#"></a><!--JQUERY delegate Click: -->	
@@ -189,7 +195,7 @@ td.status{
 		<div id="next-camp-temp">
 			<select class='select-next-camp' name='NextCamp[]'>							
 							<option value="">NULL</option>
-							<?php echo $this->options($this->arrCampaign,0,array("key"=>"ID","name"=>"Name","flag"=>1));?>
+							<?php echo $this->options($this->arrCampaign,0,array("key"=>"ID","name"=>"Name","name2"=>"WorldMap"));?>
 						</select>
 			<a class="tool-16 delete" href="#" ></a><!--JQUERY delegate Click: addNextCampp(e)-->							
 			<a class="tool-16 add" href="#"></a><!--JQUERY delegate Click: -->	
