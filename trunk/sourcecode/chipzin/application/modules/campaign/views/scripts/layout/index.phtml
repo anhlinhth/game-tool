@@ -132,6 +132,7 @@ function deleteLayout(id)
 			else
 			{
 				$('#campaignlist').html('');
+				$('#campaignlist').append('<p>Các Campain sử dụng Layout này</p>');
 				$.each(data, function(key, val) 
 				{
 					$('#campaignlist').append('<tr><td><p>'+data[key]['Name']+'</p></td><td><p><a class="tool-16 edit" href="campaign/edit/id/'+data[key]['ID']+'"></a></p></td></tr>');
@@ -139,7 +140,7 @@ function deleteLayout(id)
 
 				$("#warming").dialog
 				({
-					title: "Các Campain sử dụng Layout này",
+					title: "Không xóa được",
 					height: 280,
 					width: 250,
 					modal: true,
