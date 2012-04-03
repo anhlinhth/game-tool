@@ -81,8 +81,8 @@ class Campaign_ImportController extends BaseController {
 				
 				if($arrM !=null)
 				{
-					var_dump($arrM);
-					die();
+					//var_dump($arrM);
+					//die();
 					
 					$kq2=$mdLogic->logicCamp($arrM);
 					if($kq2==1)
