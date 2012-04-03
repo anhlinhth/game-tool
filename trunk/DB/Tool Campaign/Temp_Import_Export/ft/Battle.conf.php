@@ -9,7 +9,7 @@ return array
 	(
 		'soldiers' => array
 		(
-			1 => array(SOLDIER_ENEMY_NORMAL_22, 1),
+			(vt)(point battle solider)1 => array(SOLDIER_ENEMY_NORMAL_22(name), 1(lv)),
 		),
 		'awards' => array(GOLD => 100, WOOD => 10, IRON => 10)
 	),
