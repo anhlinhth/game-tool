@@ -100,10 +100,7 @@ class Models_Map_Battle_Package extends Models_Base
 			}
 			else 
 			{
-			
-	
-			
-				$str .= "\tBARRACK_$i => array \n ";
+				$str .= "\tBARRACK_".$row['ID']." => array \n ";
 				$str .= "\t(\n";
 				$str .= "\t\t'openBattles' => array(";
 				$bat=$this->getBattle($row['ID']);
