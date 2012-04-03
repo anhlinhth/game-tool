@@ -30,7 +30,7 @@ function validateForm(e){
 				}	
 			else 
 				{
-					$(this).css({ border: "1px solid #EFEFEF" });				
+					$(this).css({ border: "none" });				
 				}
 		}
 			
