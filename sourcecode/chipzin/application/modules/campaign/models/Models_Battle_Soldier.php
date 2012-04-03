@@ -42,7 +42,28 @@ class Models_Battle_Soldier extends Models_Base
 					BattleID = $id";
 		$this->_db->query($sql);
 	}
-	
+public function getnoBattleSoldier($id)
+    {
+        $sql = "SELECT
+			COUNT(ID)
+			FROM
+			c_battle_soldier
+			WHERE Soldier='" . $id . "'
+			";
+        $data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+        return $count;
+    }
+public function getBattleSoldier($id)
+    {
+        $sql = "SELECT
+			c_battle.ID,Soldier,BattleID,Campaign
+			FROM
+			c_battle_soldier,c_battle
+			WHERE Soldier='" . $id . "'AND c_battle.ID=c_battle_soldier.BattleID
+			";
+        $data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+        return $data;
+    }
 	public function delete($ID)
 	{
 	try

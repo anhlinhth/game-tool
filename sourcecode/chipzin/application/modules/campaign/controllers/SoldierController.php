@@ -1,6 +1,7 @@
 <?php
 require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Soldier.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_Battle_Soldier.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'object'.DS.'Obj_Soldier.php';
@@ -51,10 +52,19 @@ public function _setUserPrivileges()
 			if($this->_request->isPost())
 			{				
 				$id = $this->_request->getParam("ID");								
+				$md = new Models_Battle_Soldier();
+				$data=$md->getBattleSoldier($id);
+				echo json_encode($data);
+				if(($md->getnoBattleSoldier($id))==0)
+				{					
 				$mdSoldier = new Models_Soldier();
 				$mdSoldier->_delete($id);									
-				Models_Log::insert($this->view->user->username, "act_delete_soldier", $obj->name);
-				echo 1;
+				Models_Log::insert($this->view->user->username, "act_delete_Soldier", $obj->name);
+				}
+				else 
+				{
+				exit();
+				}
 			}
 		}
 		catch(Exception $ex)
