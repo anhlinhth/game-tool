@@ -219,8 +219,8 @@ class TaskController extends BaseController
 			    $obj->IconPackageName = $_POST[IconPackageName];
 			    $obj->QTC_ID = $_POST[QuestTC];
 			    $obj->QuestID = $_POST[QuestID];
-			    $obj->DescID = $_POST[DescString];
-			    $obj->DescString = $_POST[DescID];
+			    $obj->DescID = $_POST[DescID];
+			    $obj->DescString = $_POST[DescString];
 			    if(isset($_POST[Counter]))
 			    {
 			    	$obj->Counter = '1';
@@ -341,6 +341,14 @@ class TaskController extends BaseController
 				    $obj->IconClassName = $_POST[IconClassName];
 				    $obj->IconPackageName = $_POST[IconPackageName];
 				    $obj->DescString = $_POST[DescString];
+				    if(isset($_POST[Counter]))
+				    {
+				    	$obj->Counter = '1';
+				    }
+				    else
+				    {
+				    	$obj->Counter = '0';
+				    }
 				    $form = new Forms_Task();
 				    $form->obj = $obj;
 				    $form->validate(UPDATE);
