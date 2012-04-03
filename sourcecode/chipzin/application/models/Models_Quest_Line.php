@@ -137,9 +137,14 @@ class Models_Quest_Line extends Models_Base
 		
 		return $count;
 	}
-	public function getQuestLine()
+	public function getQuestIne()
 	{		
-				
+	    $sql = "SELECT
+	    	* 
+	    	FROM
+	    		q_quest
+	    	WHERE
+	    		QuestLineID='$'";
 	}
 	
 }
