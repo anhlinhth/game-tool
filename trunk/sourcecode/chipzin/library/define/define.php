@@ -43,7 +43,7 @@ define('ROOT_MEDIA_IMAGE_UPLOAD',                   ROOT_MEDIA_IMAGE.DS.'upload'
 define('ROOT_MEDIA_IMAGE_PIG',                      ROOT_MEDIA_IMAGE.DS.'pig');
 define('ROOT_MEDIA_IMAGE_ITEM',                     ROOT_MEDIA_IMAGE.DS.'item');
 define('ROOT_MEDIA_IMAGE_ITEM_ITEMGIFT',            ROOT_MEDIA_IMAGE_ITEM.DS.'itemgift');
-
+define('ROOT_BACKUP',            ROOT_MEDIA_IMAGE_ITEM.DS.'itemgift');
 define('ROOT_UPLOAD',								ROOT.DS.'upload');
 define('ROOT_LANGUAGE',								ROOT.DS.'language');
 define('ROOT_FILE',									ROOT.DS.'file');
