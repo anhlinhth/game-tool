@@ -8,7 +8,7 @@ require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_
 require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'object'.DS.'Obj_Battle.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'object'.DS.'Obj_Battle_Soldier.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'object'.DS.'Obj_Award.php';
-
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 class Campaign_BattleController extends BaseController
 {
 	public function _setUserPrivileges()
