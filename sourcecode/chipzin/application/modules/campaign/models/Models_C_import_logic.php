@@ -171,7 +171,7 @@ class Models_C_import_logic {
 			}
 		}
 		
-		
+		return 1;
 	
 	}
 	
@@ -215,9 +215,10 @@ class Models_C_import_logic {
 	$mdSo->update($objSo);
 	}
 	else {
-	$mdSo->insert($objSo);
+	 $mdSo->insert($objSo);
 	}
 	}
+	return 1;
 	}
 	
 }
