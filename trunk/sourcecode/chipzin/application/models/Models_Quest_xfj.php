@@ -83,7 +83,7 @@ public function getAward($id)
 			$sql = "SELECT
 					Name
 				FROM
-					c_award_type
+					q_award_type
 				WHERE
 				AwardTypeID='$id'";
 		
