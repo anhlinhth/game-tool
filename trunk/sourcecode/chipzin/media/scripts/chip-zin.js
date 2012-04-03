@@ -17,7 +17,6 @@ function validateForm(e){
 		if($(this).hasClass('require')){
 			if($(this).val()=="")
 				{					
-				//alert($(this).attr('id'));
 					$(this).css({ border: "1px solid red" }).focus();
 				}
 			else if(isNaN($(this).val()))
@@ -30,7 +29,7 @@ function validateForm(e){
 				}	
 			else 
 				{
-					$(this).css({ border: "none" });				
+					$(this).css({ border: "1px solid #EFEFEF" });				
 				}
 		}
 			
@@ -38,10 +37,10 @@ function validateForm(e){
 	select.each(function(index){
 		if($(this).hasClass('require')){
 			if($(this).val()=="")
-			$(this).css({ border: "1px solid red" }).focus();
+				$(this).css({ border: "1px solid red" }).focus();
 			else
 				{
-					$(this).css({ border: "none" });
+					$(this).css({ border: "1px solid #EFEFEF" });
 					
 				}
 		}
