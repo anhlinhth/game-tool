@@ -152,6 +152,7 @@ function deleteAwardType(key){
 			}
 			else{
 				$('#ed').html('');
+				$('#ed').append('<p>Các Battle có award type này</p>');
 				$.each(msg, function(key, val) 
 				{
 					$('#ed').append('<tr><td><p>'+ val.ID+"."+ val.BattleID+'<td><p><a class="tool-16 edit" href="<?php echo $this->baseUrl;?>/campaign/campaign/edit/id/'+val.Campaign+'"></a></p></td></p></td></tr>');
@@ -159,7 +160,7 @@ function deleteAwardType(key){
 
 				$("#ed").dialog
 				({
-					title: "Các Battle có award type này",
+					title: "Không xóa được",
 					height: 280,
 					width: 250,
 					modal: true,
