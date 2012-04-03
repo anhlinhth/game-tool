@@ -82,6 +82,60 @@ class Campaign_ImportController extends BaseController {
 				}
 				
 				
+				
+				if($arrM!=null)
+				{
+					if ($arrM==1)
+					{
+						$this->view->errMsg="Có lỗi ! Kiểm tra lại thông tin world map, trận đánh không thể không có world map !";
+						return ;
+					}
+					
+				if ($arrM==2)
+					{
+						$this->view->errMsg="Có lỗi ! Kiểm tra lại thông tin làng, thiếu thông tin tên campaign hoặc type map  ! ";
+						return ;
+					}
+				if ($arrM==3)
+					{
+						$this->view->errMsg="Có lỗi ! Kiểm tra lại thông tin tên trận đánh, layout các trận đánh. Tất cả các vị trí không thể trống ! ";
+						return ;
+					}
+				if ($arrM==4)
+					{
+						$this->view->errMsg="Có lỗi ! Kiểm tra lại tên các trận đánh. Không thể không có tên trận đánh !";
+						return ;
+					}
+				if ($arrM==5)
+					{
+						$this->view->errMsg="Có lỗi ! Kiểm tra lại thông tin các trận đánh. Không thể không có layout hoặc tất cả các vị trí trống trong trận đánh !";
+						return ;
+					}
+				
+					
+				}
+				
+				
+				
+				if ($arrS!=null)
+				{
+				if ($arrM==1)
+					{
+						$this->view->errMsg="Có lỗi ! Kiểm tra lại thông tin Soldier, Name không được bỏ trống !";
+						return ;
+					}
+					
+				if ($arrM==2)
+					{
+						$this->view->errMsg="Có lỗi ! Kiểm tra lại thông tin Soldier, ID không được bỏ trống ! ";
+						return ;
+					}
+					
+				}
+				
+				
+				
+				
 			if($arrS!= null)
 				{
 					
