@@ -49,8 +49,7 @@ function validateForm(e){
 }
 
 function validateInput(e)
-{
-	
+{	flag=true;
 	var input=e.find('input');
 	input.each(function(index)
 	{
@@ -64,11 +63,35 @@ function validateInput(e)
 					}
 				else if($(this).val()!='')
 					{
-						$(this).css({ border: "none" });
-						flag=true;
+						$(this).css({ border: "none" });						
 					}
 			}
-		return flag;
 	});
-	//alert(flag);
+	return flag;
+}
+
+function validateInput2(e)
+{	
+	flag=true;
+	var input=e.find('input');
+	input.each(function(index){		
+		if($(this).hasClass('require'))	{
+				if($(this).val()=='')
+					{
+						$(this).css({ border: "1px solid red" }).focus();						
+						flag=false;
+					}
+				else if($(this).val()!='')
+					{
+						$(this).css({ border: "none" });						
+					}
+			}
+	});
+	if(flag){
+		e.addClass("ok");		
+	}
+	else 
+		e.removeClass("ok");
+	
+	return flag;
 }
