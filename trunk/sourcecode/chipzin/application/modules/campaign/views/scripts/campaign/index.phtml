@@ -293,15 +293,14 @@ function addNextCamp(e){
 }
 /**********************************/
 function saveCamp(e){
-	var form = $("#formPaging");
-	flag=validateInput(form);	
-	if(flag==false)
-	{
-		alert(flag);
-	}
-	else
-	{
-		
+	var parent_tr = $(e).parent().parent();
+	if(parent_tr.hasClass('ok'))
+	{		
+		var data = parent_tr.find("*").serialize();		
+		var flag=validateInput2(parent_tr);	
+		var a_status = parent_tr.find(".status");
+		var a_save = parent_tr.find(".tool-24.save");
+		updateStatus(a_status,"loading","loading");	
 		$.ajax({	   
 	       type: "POST",
 	       url: "<?php echo $this->baseUrl.'/campaign/campaign/save'?> ",            
