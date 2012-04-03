@@ -9,7 +9,6 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_SaleOff_Shop.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Item_Increment.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Item.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Base.php';
-require_once ROOT_APPLICATION_MODELS.DS.'Models_Award.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_QAwardType.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Action_New.php';
 require_once ROOT_APPLICATION_OBJECT_MANAGER.DS.'PigManager.php';
