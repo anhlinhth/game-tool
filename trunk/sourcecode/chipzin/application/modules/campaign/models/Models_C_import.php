@@ -1,6 +1,6 @@
 ﻿<?php
 require_once 'excel_reader.php';
-require_once 'DOM_Logic.php';
+//require_once 'DOM_Logic.php';
 
 
 class Models_C_import extends Models_Base {
