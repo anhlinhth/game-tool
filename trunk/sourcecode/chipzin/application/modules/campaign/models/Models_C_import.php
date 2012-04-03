@@ -1,6 +1,6 @@
 ﻿<?php
 require_once 'excel_reader.php';
-//require_once 'DOM_Logic.php';
+
 
 
 class Models_C_import extends Models_Base {
@@ -20,8 +20,8 @@ class Models_C_import extends Models_Base {
 
 		//kiểm tra world map đầu tiên phải có
 		if ($data->val ( $row, 0+1, 0 ) == null) {
-			$message = "Kiểm tra lại thông tin world map, trận đánh không thể không có world map ! ";
-			return $message;
+			//$message = "Kiểm tra lại thông tin world map, trận đánh không thể không có world map ! ";
+			return 1;
 		}
 		
 		//var_dump($data->val ( $row, 1, 0 ));
@@ -29,8 +29,8 @@ class Models_C_import extends Models_Base {
 		
 		//kiểm tra tên làng đầu tiên phải có
 		if ($data->val ( $row, 1+1, 0 ) == null || $data->val ( $row, 2+1, 0 ) == null) {
-			$message = "Kiểm tra lại thông tin làng, thiếu thông tin tên campaign hoặc type map  ! ";
-			return $message;
+			//$message = "Kiểm tra lại thông tin làng, thiếu thông tin tên campaign hoặc type map  ! ";
+			return 2;
 		}
 		
 		while ( $test < 20 ) {
@@ -65,18 +65,18 @@ class Models_C_import extends Models_Base {
 						$test = $test + 1;
 						$row = $row + 1;
 					} else {
-						$message = "Kiểm tra lại thông tin tên trận đánh, layout các trận đánh. Tất cả các vị trí không thể trống ! ";
-						return $message;
+						//$message = "Kiểm tra lại thông tin tên trận đánh, layout các trận đánh. Tất cả các vị trí không thể trống ! ";
+						return 3;
 					}
 				
 				} else {
-					$message = "Kiểm tra lại tên các trận đánh. Không thể không có tên trận đánh ! ";
-					return $message;
+					//$message = "Kiểm tra lại tên các trận đánh. Không thể không có tên trận đánh ! ";
+					return 4;
 				}
 			
 			} else if ($data->val ( $row, 4+1, 0 ) == null || ($data->val ( $row, 5+1, 0 ) == null && $data->val ( $row, 6+1, 0 ) == null && $data->val ( $row, 7+1, 0 ) == null && $data->val ( $row, 8+1, 0 ) == null && $data->val ( $row, 9+1, 0 ) == null)) {
-				$message = "Kiểm tra lại thông tin các trận đánh. Không thể không có layout hoặc tất cả các vị trí trống trong trận đánh ! ";
-				return $message;
+				//$message = "Kiểm tra lại thông tin các trận đánh. Không thể không có layout hoặc tất cả các vị trí trống trong trận đánh ! ";
+				return 5;
 			} else {
 				$arr [$world] [$camp] ['Battle'] [$data->val ( $row, 3+1, 0 )] ['layout'] = $data->val ( $row, 4+1 ,0 );
 				
@@ -106,13 +106,13 @@ class Models_C_import extends Models_Base {
 					$row = $row + 1;
 					$test = $test + 1;
 				} else {
-					$mess = 'Kiểm tra lại thông tin Soldier, Name không được bỏ trống';
-					return $mess;
+					//$mess = 'Kiểm tra lại thông tin Soldier, Name không được bỏ trống';
+					return 1;
 				}
 			} else {
 				if ($data->val ( $row, 2, 0 ) == null) {
-					$mess = 'Kiểm tra lại thông tin Soldier, ID không được bỏ trống';
-					return $mess;
+					//$mess = 'Kiểm tra lại thông tin Soldier, ID không được bỏ trống';
+					return 2;
 				} else {
 					$arr [$data->val ( $row, 2, 0 )] = $data->val ( $row, 1, 0 );
 					$row = $row + 1;
