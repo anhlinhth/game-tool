@@ -1,5 +1,6 @@
 function doPaging(e)
 {
+
 	if(e.keyCode == 13)
 		document.formPaging.submit();
 }
@@ -78,6 +79,8 @@ function checkAll(theform)
 		if(theform.chkid.disabled == false)
 			theform.chkid.checked = state;
 	}	
+	mang=Array("a","b","c");
+	alert(theform.chkid[0].checked);
 }
 
 function checkOneItem(theform)
