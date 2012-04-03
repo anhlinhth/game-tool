@@ -86,6 +86,8 @@ class Zend_View_Helper_TopPanel
                 	$strList .= "<li><a href='$view->baseUrl/campaign/layout/index' class='report'>Layout</a></li>";	
                 if (Utility::checkPrivilege($view, 'restore', 'index'))
                 	$strList .= "<li><a href='$view->baseUrl/campaign/restore/' class='report'>Restore</a></li>";
+                 if (Utility::checkPrivilege($view, 'exportcamp', 'index'))
+                	$strList .= "<li><a href='$view->baseUrl/campaign/exportcamp/export' class='report'>Export Campaign</a></li>";	
                  if (Utility::checkPrivilege($view, 'backup', 'index'))
                 	$strList .= "<li><a href='$view->baseUrl/campaign/bkrt/' class='report'>Backup</a></li>";	
         }
