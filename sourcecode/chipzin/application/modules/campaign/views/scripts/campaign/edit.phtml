@@ -529,9 +529,8 @@ td.b_award input{
 		var a_reset = parent_tr.find(".tool-24.reset");
 		updateStatus(a_status,"loading","loading");	
 		var data = parent_tr.find("*").serialize();
-		var arr_data = parent_tr.find("*").serializeArray();	
-		var form = $("#formPaging");
-		validateForm(form);	
+		var arr_data = parent_tr.find("*").serializeArray();			
+		validateForm(parent_tr);	
 		if(validate2(arr_data)==false){
 			$("#dialog").dialog({
 				title: "Diaglog",
