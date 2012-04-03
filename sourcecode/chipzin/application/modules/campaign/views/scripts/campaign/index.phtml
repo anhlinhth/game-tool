@@ -374,11 +374,8 @@ function deleteCamp(e){
 function saveAll(){
 	var form = $("#formPaging");
 	flag=validateInput(form);	
-	if(flag==false)
-	{
-		alert(flag);
-	}
-	else{
+	if(flag==true)
+	{	
 		$("#tbCampaign").find("td.action .save").not(".disabled").each(function (index){		
 			$(this).click();
 		});
