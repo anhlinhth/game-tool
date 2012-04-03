@@ -58,7 +58,7 @@ class Models_Map_Package extends Models_Base
 		$str .= "<?php\nreturn array\n(\n";
 		foreach ($data as $row)
 		{
-			if($row['TypeID']==1)
+			if($row['TypeID']==2)
 			{
 				$str .= "\tMAP_".$row['ID']." => array \n ";
 				$str .= "\t{\n";
@@ -69,7 +69,7 @@ class Models_Map_Package extends Models_Base
 				$data3 = $this->fetchone($data2['CampID']);
 				if($row['NeedCamp']!=NULL)
 				{
-					if($data1['TypeID']==1)
+					if($data1['TypeID']==2)
 						$str .= "\t\t'needmap' =>MAP_".$data1['ID'].",  \n";
 					else 
 				 		$str .= "\t\t'needmap' =>BARRACK_".$data1['ID'].",  \n";
@@ -105,7 +105,7 @@ class Models_Map_Package extends Models_Base
 				
 				if($row['NeedCamp']!=NULL)
 				{
-					if($data1['TypeID']==1)
+					if($data1['TypeID']==2)
 						$str .= "\t\t'needmap' =>MAP_".$data1['ID'].",  \n";
 					else 
 				 		$str .= "\t\t'needmap' =>BARRACK_".$data1['ID'].",  \n";
