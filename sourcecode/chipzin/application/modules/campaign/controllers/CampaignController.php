@@ -55,13 +55,12 @@ class Campaign_CampaignController extends BaseController
             $md = new Models_Campaign();
             $form = new Forms_Campaign();
             //$form->_requestToForm($this);khong dung duoc vi trung ID va Name
-            if ($this->_request->isPost()) {// search
-                $form->obj->ID = $_POST["S_ID"];
+            if ($this->_request->isPost()) {// search                
                 $form->obj->WorldMap= $_POST["S_WorldMap"];
                 $_SESSION['items']=$this->_request->getParam('items');
 				$items = $_SESSION['items'];
             }
-            
+            $form->obj->ID = $this->_request->getParam("S_ID");
             $data = $md->_filter($form->obj, "ID ASC", ($pageNo - 1) * $items, $items);
             $count = $md->_count(null);
             $this->view->arrNextCamp = array();

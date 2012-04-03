@@ -154,7 +154,7 @@ function deleteType(key){
 				$('#ed').append('<p>Các Campaign có Type map này</p>');
 				$.each(msg, function(key, val) 
 				{
-					$('#ed').append('<tr><td><p>'+ val.ID+"."+ val.Name+'</p></td><td><p><a class="tool-16 edit" href="<?php echo $this->baseUrl;?>/campaign/campaign/edit/id/'+val.ID+'"></a></p></td></tr>');
+					$('#ed').append('<tr><td><p>'+ val.ID+"."+ val.Name+'</p></td><td><p><a class="tool-16 edit" href="<?php echo $this->baseUrl;?>/campaign/campaign/index/S_ID/'+val.ID+'"></a></p></td></tr>');
 				});
 
 				$("#ed").dialog

@@ -11,8 +11,7 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Award.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Action.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
-require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
-		DS . 'Models_Award_type.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Award_type.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Detail.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_NextQuest.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Q_Action.php';
@@ -174,8 +173,7 @@ class QuestController extends BaseController
 	{		
 		try
 		{
-		    require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' .
-		    		DS . 'Models_Award_type.php';
+
 			if($this->_request->isPost())// da post du lieu len
 			{	
 				$this->_helper->layout->disableLayout();
@@ -210,7 +208,7 @@ class QuestController extends BaseController
 				echo "1";
 			}else{		
 				$md = new Models_Quest_Detail();
-				$mdawartype = new Models_Award_Type();
+				$mdawartype = new Models_Q_Award_Type();
 				$id = $this->_request->getParam("id");
 				$this->view->obj = $md->_getByKey($id);				
 				$this->view->arrQuestLine = $md->_getQuestLine();
@@ -241,7 +239,7 @@ class QuestController extends BaseController
 			$md_getmax= new Models_Quest();
 			$idmax =$md_getmax->getMaxQuestID();
 			$id=$idmax+1;			
-			$mdawartype = new Models_Award_Type();
+			$mdawartype = new Models_Q_Award_Type();
 			$this->view->arrawardtype = $mdawartype->getAwardtype();
 			$md = new Models_Quest_Detail();			
 			$this->view->obj = new Obj_Quest_Detail();

@@ -274,28 +274,21 @@ function validate(){
 	flag=true;	
 	$(".task_form").each(function(key,val){
 		num = key+1;
-		value = $(val).find(" #TaskString").val();		
+		value = $(val).find("#TaskString").val();		
 		if(value=='')
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString không được để trống</p>");					
 			flag=false;
 		}		
-		value = $(val).find(" #TaskName").val();
 		
-		value = $(val).find(" #DescID").val();
-		if(value=='')
-		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescID không được để trống</p>");	
-			flag=false;
-		}
-		value = $(val).find(" #DescString").val();
+		value = $(val).find("#DescID").val();
 		if(value=='')
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescString không được để trống</p>");	
 			flag=false;
 		}
-		value = $(val).find(" #QuestTC").val();
-		value = $(val).find(" #UnlockCoin").val();
+		value = $(val).find("#QuestTC").val();
+		value = $(val).find("#UnlockCoin").val();
 		if(isNaN(value))
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin phải là số</p>");					
