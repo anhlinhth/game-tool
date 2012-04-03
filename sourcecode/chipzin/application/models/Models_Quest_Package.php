@@ -40,7 +40,7 @@ class Models_Quest_Package extends Models_Base
 			$sql = "SELECT
 					Name
 				FROM
-					c_award_type
+					q_award_type
 				WHERE
 				AwardTypeID='$id'";
 		
@@ -124,7 +124,7 @@ class Models_Quest_Package extends Models_Base
 				
 				foreach ($mda as $row2)
 				{
-					if(trim($this->getawardtype($row2['AwardTypeID'])=="EXP"))
+					if(trim(strtoupper($this->getawardtype($row2['AwardTypeID']))=="EXP"))
 						$str .="\t\t\t"."HONOUR"." => ".$row2['Value'].", \n";
 					else
 						$str .="\t\t\t".strtoupper(trim($this->getawardtype($row2['AwardTypeID'])))." => ".$row2['Value'].", \n";
