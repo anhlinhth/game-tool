@@ -1,4 +1,5 @@
 <?php
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 require_once ROOT_APPLICATION_CONTROLLERS . DS . 'BaseController.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'Campaign' . DS . 'models' .
     DS . 'Models_Campaign.php';
@@ -93,6 +94,7 @@ class Campaign_CampaignController extends BaseController
                 $campID = $_POST["CampID"];               
                 $md = new Models_Campaign();
                 $md->delete($campID);
+                Models_Log::insert($this->view->user->username, "act_delete_campaign");
                 echo "1";
             }
 
@@ -141,7 +143,8 @@ class Campaign_CampaignController extends BaseController
                     $mdCamp->insertNextCamp($obj);
                 }
             }
-            $result = array('msg' => '1', 'CampID' => $id,'Name'=>$form->obj->Name); 
+            $result = array('msg' => '1', 'CampID' => $id,'Name'=>$form->obj->Name);
+            Models_Log::insert($this->view->user->username, "act_save_campaign");
             echo json_encode($result);           
         }
         catch (exception $ex) {
@@ -217,7 +220,7 @@ class Campaign_CampaignController extends BaseController
                 $this->view->arraward[$idbattle] = $md_award->getAward($idbattle);
 
             }
-
+		
 
         }
         catch (exception $ex) {

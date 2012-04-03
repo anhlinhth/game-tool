@@ -29,6 +29,7 @@ class Campaign_LayoutController extends BaseController
 		    $md = new Models_Layout();
 		    $id =  $md->_insert($obj);
 		    $result = array('msg' => '1', 'LayoutID' => $id);
+		    Models_Log::insert($this->view->user->username, "act_insert_Layout");
 		    echo json_encode($result);
 		}
 	    catch (exception $ex) {
@@ -108,6 +109,7 @@ class Campaign_LayoutController extends BaseController
 				$mdLayout = new Models_Layout();
 				$obj = new Obj_Layout();
 				$mdLayout->update($id,$Point,$Name);
+				Models_Log::insert($this->view->user->username, "act_update_Layout");
 				echo 1;
 			}
 		}
