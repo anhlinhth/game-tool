@@ -37,11 +37,20 @@ class Campaign_ImportController extends BaseController {
 				$file11 = $_FILES ['file1'];
 				$file12 = $_FILES ['file2'];
 				
+			
+				
 				if ($file11 ['name']) {
 					$pos = strpos ( $file11 ['name'], '.xls' );
+					if(strpos ( $file11 ['name'], '.xlsx' )){
+						
+						$this->view->errMsg="Có lỗi ! Định dạng cho phép là : xls";
+					 return;
+					}
 					if($pos == false)
 					{
-						$this->view->errMsg="Định dạng cho phép là : xls";
+						//var_dump($file11['name']);
+			//die();
+						$this->view->errMsg="Có lỗi ! Định dạng cho phép là : xls";
 					 return;
 					}
 					else
@@ -51,15 +60,22 @@ class Campaign_ImportController extends BaseController {
 				}
 				
 				if ($file12 ['name']) {
+					
+				if(strpos ( $file11 ['name'], '.xlsx' )){
+						
+						$this->view->errMsg="Có lỗi ! Định dạng cho phép là : xls";
+					 return;
+					}
+					
 					if (strpos ( $file12 ['name'], '.xlsx' ) !== false) {
-						return "Định dạng cho phép là : xls";
+						return "Có lỗi ! Định dạng cho phép là : xls";
 					} else if (strpos ( $file12 ['name'], '.xls' ) !== FALSE)
 					{
 						$arrS = $mdEx->importSoldier ( $file12 ['tmp_name'] );
 						}
 					else
 					{
-						$this->view->errMsg="Định dạng cho phép là : xls";
+						$this->view->errMsg="Có lỗi ! Định dạng cho phép là : xls";
 						return ;
 					}
 									
