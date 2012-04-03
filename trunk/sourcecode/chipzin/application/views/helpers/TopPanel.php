@@ -77,6 +77,7 @@ class Zend_View_Helper_TopPanel
             case 'action':
             case 'export':
             case 'template':
+            case 'awardtype':
             	if (Utility::checkPrivilege($view, 'quest', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/quest/index' class='report'>Quest</a></li>";               
                 if (Utility::checkPrivilege($view, 'questline', 'index'))
@@ -93,6 +94,8 @@ class Zend_View_Helper_TopPanel
                     $strList .= "<li><a href='$view->baseUrl/export/download' class='report'>Download Export</a></li>";
                 if (Utility::checkPrivilege($view, 'template', 'index'))
                     $strList .= "<li><a href='javascript:editTemplate()' class='report'>Delete Template</a></li>";  
+                if (Utility::checkPrivilege($view, 'awardtype', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/awardtype/' class='report'>Award Type</a></li>";  
                 break; 
         }
         $strList .= "</ul>
