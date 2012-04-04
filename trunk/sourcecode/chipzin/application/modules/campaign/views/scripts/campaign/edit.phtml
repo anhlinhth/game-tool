@@ -139,12 +139,12 @@ td.b_award input{
 						<td id="point0" class="<?php echo  $strclass?>">
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0);
 							?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[0]" tabindex="0">
+							<select style="width=100%;border: 1px solid lightblue;"  name="solider[0]" tabindex="0">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
 							</select>																												
-							<em>lv:</em><input type='text' class='<?php echo  $strclass;?> require' id='levelSolider' name='levelSolider[0]' value="<?php echo $arrBS['Level'];?>"/>
+							<em>lv:</em><input type='text' class='<?php echo  $strclass;?>' id='levelSolider' name='levelSolider[0]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						
@@ -152,12 +152,12 @@ td.b_award input{
 						<td id="point3" class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3);
 							?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[3]" tabindex="3">
+							<select style="width=100%;border: 1px solid lightblue;" name="solider[3]" tabindex="3">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
 							</select> 							
-							<em>lv:</em><input type='text' class='<?php echo $strclass?> require' id='levelSolider' name='levelSolider[3]' value="<?php echo $arrBS['Level'];?>"/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>' id='levelSolider' name='levelSolider[3]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						
@@ -165,60 +165,60 @@ td.b_award input{
 						<td id="point6" class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
 							?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[6]" tabindex="6">
+							<select style="width=100%;border: 1px solid lightblue;" name="solider[6]" tabindex="6">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
 							</select>
-							<em>lv:</em><input type='text' class='<?php echo $strclass?> require' id='levelSolider' name='levelSolider[6]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>' id='levelSolider' name='levelSolider[6]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>						
 					</tr>
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][1])?"visible":"invisible"?>
 						<td  id="point1" class="<?php echo  $strclass?>" >
 							<?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); ?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[1]" tabindex="1">
+							<select style="width=100%;border: 1px solid lightblue;"  name="solider[1]" tabindex="1">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
 							</select>
-							<em>lv:</em><input type='text' class='<?php echo $strclass?> require' id='levelSolider' name='levelSolider[1]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?> ' id='levelSolider' name='levelSolider[1]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visible":"invisible"?>
 						<td  id="point4"class="<?php echo  $strclass?>" >
 							<?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); ?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[4]" tabindex="4">
+							<select style="width=100%;border: 1px solid lightblue;"  name="solider[4]" tabindex="4">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
 							</select>
-							<em>lv:</em><input type='text'class='<?php echo $strclass?> require' id='levelSolider' name='levelSolider[4]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text'class='<?php echo $strclass?>' id='levelSolider' name='levelSolider[4]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][7])?"visible":"invisible"?>
 						<td  id="point7"class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7);?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[7]" tabindex="7">
+							<select style="width=100%;border: 1px solid lightblue;" name="solider[7]" tabindex="7">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
 							</select>
-							<em>lv:</em><input type='text' class='<?php echo $strclass?> require' id='levelSolider' name='levelSolider[7]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>' id='levelSolider' name='levelSolider[7]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 					</tr>
 					<tr>
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][2])?"visible":"invisible"?>
 						<td id="point2" class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); ?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[2]" tabindex="2">
+							<select style="width=100%;border: 1px solid lightblue;"  name="solider[2]" tabindex="2">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
 							</select>
-							<em>lv:</em><input type='text' class='<?php echo $strclass?> require' id='levelSolider' name='levelSolider[2]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?> ' id='levelSolider' name='levelSolider[2]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						
@@ -226,12 +226,12 @@ td.b_award input{
 						<td id="point5" class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5); 
 							?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[5]" tabindex="5">
+							<select style="width=100%;border: 1px solid lightblue;" name="solider[5]" tabindex="5">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
 							</select>
-							<em>lv:</em><input type='text' class='<?php echo $strclass?> require' id='levelSolider' name='levelSolider[5]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>' id='levelSolider' name='levelSolider[5]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>
 						
 						
@@ -239,12 +239,12 @@ td.b_award input{
 						<td id="point8" class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
 							?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[8]" tabindex="8">
+							<select style="width=100%;border: 1px solid lightblue;" name="solider[8]" tabindex="8">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
 							</select>
-							<em>lv:</em><input type='text' class='<?php echo $strclass?> require' id='levelSolider' name='levelSolider[8]' value='<?php echo $arrBS['Level'];?>'/>
+							<em>lv:</em><input type='text' class='<?php echo $strclass?>' id='levelSolider' name='levelSolider[8]' value='<?php echo $arrBS['Level'];?>'/>
 						</td>						
 					</tr>
 				</table>
@@ -253,7 +253,7 @@ td.b_award input{
 				<div><a class='tool-16 add' href=''></a></div>
 				<?php foreach ($this->arraward[$rowbattle->ID] as $key=>$row){?>					
 					<div>
-						<select  name='AwardTypeID[]' onChange='changeAwardType(this)'>
+						<select  name='AwardTypeID[]' onChange='changeAwardType(this)' class='require'>
 						<?php if (empty($row->AwardTypeID)){?>
 							
 						<?php } ?>	
@@ -303,7 +303,7 @@ td.b_award input{
 				<?php echo $this->options($this->arrawardtype,0,array('key'=>'AwardTypeID','name'=>'Name'))?>	
 				<?php echo "<option  value='-1' style='color:red'> New Type</option>"?>		
 			</select>
-			<input type='text' name='Value[]' value='' class='require'/>					
+			<input type='text' name='Value[]' value=''/>					
 			<a class='tool-16 delete' href='#'></a>	
 		</div>	
 
@@ -357,7 +357,7 @@ td.b_award input{
 				<input type="text" name="Order" id="Order" value="1">
 			</td>
 			<td width="300px" style="text-align: center;">				
-				<select style="width=100%;border: 1px solid lightblue;" class="layout" name="Layout" tabindex="2">
+				<select style="width=100%;border: 1px solid lightblue;" class='layout' name="Layout" id='Layout' tabindex="2">
 					<option value=""></option>	
 						<?php echo $this->options($this->arrlayout,-1,array('key'=>"ID",'name'=>"Name"))?>
 					<option  value="-1" style="color:red">New Layout</option>	
@@ -365,81 +365,81 @@ td.b_award input{
 				<table id='tb_layout'>
 					<tr>						
 						<td id="point0" class="visible">
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[0]" tabindex="2">
+							<select style="width=100%;border: 1px solid lightblue;"  name="solider[0]" tabindex="2">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>
 								<option  value="-1" style="color:red">New Layout</option>	
 							</select>																			
-							<em>lv:</em><input type='text' class='require' id='levelSolider' name='levelSolider[0]' value=""/>
+							<em>lv:</em><input type='text' id='levelSolider' name='levelSolider[0]' value=""/>
 						</td>						
 						<td id="point3" class="visible" > 
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[3]" tabindex="3">
+							<select style="width=100%;border: 1px solid lightblue;" name="solider[3]" tabindex="3">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>
 								<option  value="-1" style="color:red">New Layout</option>	
 							</select>							
-							<em>lv:</em><input type='text' class='require' id='levelSolider' name='levelSolider[3]' value=""/>
+							<em>lv:</em><input type='text'  id='levelSolider' name='levelSolider[3]' value=""/>
 						</td>						
 						<td id="point6" class="visible" >
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[6]" tabindex="6">
+							<select style="width=100%;border: 1px solid lightblue;"  name="solider[6]" tabindex="6">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>
 								<option  value="-1" style="color:red">New Layout</option>	
 							</select>	
-							<em>lv:</em><input type='text' class='require' id='levelSolider' name='levelSolider[6]' value=''/>
+							<em>lv:</em><input type='text' id='levelSolider' name='levelSolider[6]' value=''/>
 						</td>						
 					</tr>
 					<tr>						
 						<td  id="point1" class="visible" >
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[1]" tabindex="1">
+							<select style="width=100%;border: 1px solid lightblue;"  name="solider[1]" tabindex="1">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>
 								<option  value="-1" style="color:red">New Layout</option>	
 							</select>	
-							<em>lv:</em><input type='text' class='require' id='levelSolider' name='levelSolider[1]' value=''/>
+							<em>lv:</em><input type='text' id='levelSolider' name='levelSolider[1]' value=''/>
 						</td>					
 						<td  id="point4"class="visible" >
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[4]" tabindex="4">
+							<select style="width=100%;border: 1px solid lightblue;"  name="solider[4]" tabindex="4">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>
 								<option  value="-1" style="color:red">New Layout</option>	
 							</select>	
-							<em>lv:</em><input type='text' class='require' id='levelSolider' name='levelSolider[4]' value=''/>
+							<em>lv:</em><input type='text'  id='levelSolider' name='levelSolider[4]' value=''/>
 						</td>						
 						<td  id="point7"class="visible" >
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[7]" tabindex="7">
+							<select style="width=100%;border: 1px solid lightblue;"  name="solider[7]" tabindex="7">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>
 								<option  value="-1" style="color:red">New Layout</option>	
 							</select>	
-							<em>lv:</em><input type='text' class='require' id='levelSolider' name='levelSolider[7]' value=''/>
+							<em>lv:</em><input type='text' id='levelSolider' name='levelSolider[7]' value=''/>
 						</td>
 					</tr>
 					<tr>						
 						<td id="point2" class="visible" >
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[2]" tabindex="2">
+							<select style="width=100%;border: 1px solid lightblue;" name="solider[2]" tabindex="2">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>
 								<option  value="-1" style="color:red">New Layout</option>	
 							</select>	
-							<em>lv:</em><input type='text'  class='require' id='levelSolider' name='levelSolider[2]' value=''/>
+							<em>lv:</em><input type='text'  id='levelSolider' name='levelSolider[2]' value=''/>
 						</td>						
 						<td id="point5" class="visible">
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[5]" tabindex="5">
+							<select style="width=100%;border: 1px solid lightblue;" name="solider[5]" tabindex="5">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>
 								<option  value="-1" style="color:red">New Layout</option>	
 							</select>	
-							<em>lv:</em><input type='text'  class='require' name='levelSolider[5]' value=''/>
+							<em>lv:</em><input type='text'  name='levelSolider[5]' value=''/>
 						</td>
 						
 						<td id="point8" class="visible">
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[8]" tabindex="8">
+							<select style="width=100%;border: 1px solid lightblue;"  name="solider[8]" tabindex="8">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>
 								<option  value="-1" style="color:red">New Layout</option>	
 							</select>	
-							<em>lv:</em><input type='text'  class='require' id='levelSolider' name='levelSolider[8]' value=''/>
+							<em>lv:</em><input type='text'  id='levelSolider' name='levelSolider[8]' value=''/>
 						</td>						
 					</tr>
 				</table>
@@ -831,10 +831,10 @@ td.b_award input{
 		
 		$("#dialog .ct").html("");		
 		jQuery.each(data, function(i, field){  			
-			if(field.value=="" && field.name!='BattleID'){
-				$("#dialog .ct").append("<p class='error'>"+field.name +"không được bỏ trống</p>" );								
+			if(field.value=="" && field.name=='Layout' ){
+				$("#dialog .ct").append("<p class='error'>"+field.name +"  không được bỏ trống</p>" );								
 			}			
-			else if(isNaN(field.value))
+			/*else if(isNaN(field.value))
 			{
 				$("#dialog .ct").append("<p class='error'>"+ field.name +"phải là số</p>" );				
 			}
@@ -843,7 +843,7 @@ td.b_award input{
 				{					
 					$("#dialog .ct").append("<p class='error'>"+ field.name +"Level phải nằm trong khoảng 0 ->100</p>" );
 				}
-			
+			*/
 		});
 		if($("#dialog .ct").html()!=""){			
 			return false;
