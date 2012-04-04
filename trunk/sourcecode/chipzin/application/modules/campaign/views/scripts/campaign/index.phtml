@@ -43,7 +43,7 @@ td.status{
 <form class="myform"  id="formPaging" action="" name="formPaging" method="post">
 <div id="box">
 	<h3>Campaign Manager</h3>
-	<table class="filter">		
+	<table  class='list' style="margin: auto;width:80%;margin-bottom: 8px;">		
 		<tr>
 			<td>
 				Campaign ID : <input style="width:110px;" type="text" name="S_ID" id="ID" class="searchbox" value="<?php echo $this->obj->ID?>"/>
@@ -62,7 +62,7 @@ td.status{
 		</tr>
 		
 	</table>
-	<table class="list" id="tbCampaign">	
+	<table class="list" id="tbCampaign" style='margin: auto;width: 80%;'>	
 		<thead>
 			<tr>			
 				<td width="20"><a href="#">STT</a></td>
@@ -77,9 +77,9 @@ td.status{
 			
 				<?php foreach($this->data as $key =>$campRow){ 
 								
-					$btn_save = "<a class='tool-24 save disabled' href=''></a>";
+					$btn_save = "<a class='tool-24 save disabled' style='display:none;' href=''></a>";
 					$btn_edit = "<a class='tool-24 edit' href='$this->baseUrl/campaign/campaign/edit/id/$campRow->ID'></a>";
-					$btn_delete = "<a class='tool-24 delete' href=''></a>";								
+					$btn_delete = "<a class='tool-24 delete' style='display:none;' href=''></a>";								
 					$alt= ($alt=="alt"?"2":"alt");
 					
 				?>
@@ -90,12 +90,22 @@ td.status{
                         <input style="display:none" type="text" name="ID" value="<?php echo $campRow->ID ?>" />
                     </td>	
 					<td class="center c_name">
-						<input type="text" name="Name"  class='require' value="<?php echo $campRow->Name ?>" />
+						<input type="text" name="Name" readonly="readonly" class='require' value="<?php echo $campRow->Name ?>" />
 					</td>
 					<td class="c_type">
-						<select id='TypeID' name='TypeID'>
-							<?php echo $this->options($this->arrMapType,$campRow->TypeID,array("key"=>"ID","name"=>"Name"));?>
-						</select>
+					<?php
+						if($campRow->ID <=1000)
+						{						
+					?>
+						Map
+					<?php
+						}
+						else if($campRow->ID >=1001 ) {
+					?>
+						Barack
+					<?php
+						} 
+					?>						
 					</td>					
 					
 					<td class="action center">
@@ -111,8 +121,8 @@ td.status{
 		</tbody>
 	
 	</table>
-	<div style="margin-top:20px;margin-bottom:20px">
-		<a class="btn add" type="submit" href="javascript:addCamp()">Add</a>
+	<div style="margin-top:20px;margin-bottom:20px;display:none;">
+		<a class="btn add" type="submit"  href="javascript:addCamp()">Add</a>
 		<a class="btn save" type="submit" href="javascript:saveAll()">Save All</a>
 	</div>
 	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
@@ -280,23 +290,22 @@ function saveCamp(e){
 	}
 }
 /**********************************/
-function addCamp(){
-	updateSTT();	
-	var tr = $("#tbCampaign-temp tr");
-	var count = $("#tbCampaign tbody .tr-camp").size();		
-	if(count%2==0){
-		tr.addClass("alt");
-	}else{
-		tr.removeClass("alt");
-	}
-	tr.children("td").eq(0).html(count+1);
-	
-	tr.find(".action a.edit").toggleClass("disabled");
-	tr.find(".action a.edit").toggleClass("disabled");
-	var s = $("#tbCampaign-temp tbody").html();
-	$("#tbCampaign tbody").append(s);
-	return;
-	
+function addCamp(){			
+			updateSTT();	
+			var tr = $("#tbCampaign-temp tr");
+			var count = $("#tbCampaign tbody .tr-camp").size();		
+			if(count%2==0){
+				tr.addClass("alt");
+			}else{
+				tr.removeClass("alt");
+			}
+			tr.children("td").eq(0).html(count+1);
+			
+			tr.find(".action a.edit").toggleClass("disabled");
+			tr.find(".action a.edit").toggleClass("disabled");
+			var s = $("#tbCampaign-temp tbody").html();
+			$("#tbCampaign tbody").append(s);
+			return;		
 }
 /**********************************/
 /**********************************/

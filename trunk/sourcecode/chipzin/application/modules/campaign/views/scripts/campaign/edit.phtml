@@ -282,7 +282,7 @@ td.b_award input{
 	<div class="style" style="margin:20px">
 		<a class="btn add" href="javascript:addBattle()"> New </a>	
 		<a class="btn save" href="javascript:saveAll()">Save All</a>
-
+	
 	</div>
 </div>
 </form>
@@ -467,7 +467,7 @@ td.b_award input{
 <!-- Javascript  -->
 <script>
 
-/************************ThaoNX********************/
+/************************ThaoNX********************/$(document).ready(function() {
 	function showDiaglog(){	
 		$("#dialog").dialog({
 				title: "Diaglog",
@@ -799,7 +799,7 @@ td.b_award input{
 			}else{
 				table.find("td#"+key).removeClass("invisible").addClass("visible");
 				table.find("td#"+key +" select").attr('disabled',false).addClass("require");
-				table.find("td#"+key +" input").attr('disabled',false).addClass("require");				
+				table.find("td#"+key +" input").attr('disabled',false);				
 			}
 		});											
 	}
