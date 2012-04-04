@@ -697,8 +697,7 @@ td.b_award input{
 						type: "POST",
 						url: "<?php echo $this->baseUrl.'/campaign/AwardType/insert' ?> ",
 						data: "Name=" + type_name,
-						success: function(msg){	
-							alert(msg);										
+						success: function(msg){																		
 							updateAwardTypeSelect(msg,type_name);													
 						}
 					});
