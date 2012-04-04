@@ -101,6 +101,20 @@ class Models_Campaign extends Models_Base
         return $data;
 
     }
+    public function getCambyWorldmap($id)
+    {
+    	$sql = "SELECT
+    				*
+    			FROM
+    				c_campaign
+    			WHERE
+    				WorldMap = $id";
+    
+    	$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+    
+    	return $data;
+    
+    }
     public function fetchname($objSearch)
     {
         $sql = "SELECT
