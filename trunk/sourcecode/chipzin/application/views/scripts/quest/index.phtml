@@ -52,8 +52,8 @@ if($this->temp)
 			<td><a href="#">Quest line</a></td>
 			<td><a href="#">NeedQuest</a></td>
 			<td><a href="#">NextQuest</a></td>
-			<td width="70"><a href="#">Status</a></td>
-			<td width="50"><a href="#" >Tool</a></td>
+			<td class="center"><a href="#">Status</a></td>
+			<td class="center" width="45"><a href="#" >Tool</a></td>
 		</tr>
 		</thead>
 		<tbody id="list-quest">
@@ -150,16 +150,16 @@ function updateNeedquest(id)
 		data: "questid=" + id +"&needquest="+ needquest,	
 		success: function(data){			
 			if(data=="1"){	 
-				alert("Cáº­p nháº­t thÃ nh cÃ´ng");
+				alert("Successful");
 				loadQuest();
 			}else{
-				alert(data);
-				alert("Error");				
+				alert(data);							
 			}
 		}
 	});
 }
-function loadQuest(){	
+function loadQuest(){
+	$("#list-quest").html("<tr><td colspan='8' class='center'><h1>Loading......</h1></td></tr>");
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/listquest/'?> ",
