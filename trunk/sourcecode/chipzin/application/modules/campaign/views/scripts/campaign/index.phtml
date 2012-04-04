@@ -68,10 +68,7 @@ td.status{
 				<td width="20"><a href="#">STT</a></td>
 				<td width="30"><a href="#">ID</a></td>
 				<td width="40">Tên</td>
-				<td>World Map</td>
-				<td>Type</td>		
-				<td>NeedCamp</td>								
-				<td>NextCamp</td>	
+				<td>Type</td>				
 				<td>Thao tác</td>
 				<td width="5"></td>				
 			</tr>
@@ -95,40 +92,12 @@ td.status{
 					<td class="center c_name">
 						<input type="text" name="Name"  class='require' value="<?php echo $campRow->Name ?>" />
 					</td>
-					<td class="c_worldmap">
-						<select id='WorldMap-<?php echo $campRow->ID?>' name='WorldMap' onChange='changeWorldMap(<?php echo $campRow->ID ?>,this)'>
-							<?php echo $this->options($this->arrWorldMap,$campRow->WorldMap,array("key"=>"ID","name"=>"Name"));?>
-						</select>
-					</td>
 					<td class="c_type">
 						<select id='TypeID' name='TypeID'>
 							<?php echo $this->options($this->arrMapType,$campRow->TypeID,array("key"=>"ID","name"=>"Name"));?>
 						</select>
-					</td>
-					<td class="c_needcampaign">						
-						<select class='select-need-camp' name='NeedCamp'>
-							<option value="">NULL</option>
-							<?php echo $this->options($this->arrCampaign,$campRow->NeedCamp,array("key"=>"ID","name"=>"Name","name2"=>"WorldMap"));?>
-						</select>
-					</td>
-					<td class="c_nextcampaign">					
-					<?php if(!empty($this->arrNextCamp[$campRow->ID])){
-						foreach($this->arrNextCamp[$campRow->ID] as $key=>$nextCamp) {						
-					?>
-						<div class="next-camp">
-							<select class='select-next-camp' name='NextCamp[]'>							
-								<option value="">NULL</option>
-								<?php echo $this->options($this->arrCampaign,$nextCamp->NextCamp,array("key"=>"ID","name"=>"Name","name2"=>"WorldMap"));?>
-							</select>
-							<a class="tool-16 delete" href="#"></a><!--JQUERY delegate Click: addNextCampp(e)-->							
-							<a class="tool-16 add" href="#"></a><!--JQUERY delegate Click: -->	
-						</div>
-					<?php }?>
-					<?php } else{
-						echo "<div><a class='tool-16 add' href=''></a></div>";
-					}?>
-						
-					</td>
+					</td>					
+					
 					<td class="action center">
 						<?php echo $btn_save ?>
 						<?php echo $btn_edit ?>
@@ -162,25 +131,12 @@ td.status{
 						<td class="center c_name">
 							<input type="text" name="Name" value="Campaign" />
 						</td>
-						<td class="c_worldmap">
-							<select id='WorldMap-' name='WorldMap'>
-								<?php echo $this->options($this->arrWorldMap,0,array("key"=>"ID","name"=>"Name"));?>
-							</select>
-						</td>
+						
 						<td class="c_type">
 							<select id='TypeID' name='TypeID'>
 								<?php echo $this->options($this->arrMapType,0,array("key"=>"ID","name"=>"Name"));?>
 							</select>
-						</td>
-						<td class="c_needcampaign">						
-							<select id='NeedCamp-' name='NeedCamp'>
-								<option value="">NULL</option>
-								<?php echo $this->options($this->arrCampaign,0,array("key"=>"ID","name"=>"Name"));?>
-							</select>
-						</td>
-						<td class="c_nextcampaign">										
-							<div><a class='tool-16 add' href=''></a></div> 							
-						</td>
+						</td>				
 						<td class="action center">
 							<a class='tool-24 save ' href='javascript:saveCampaign(0)'></a>
 							<a class='tool-24 edit disabled' href='javascript:editCamp(0)'></a>
@@ -191,15 +147,7 @@ td.status{
 						</td>					
 				</tr>
 			</tbody>	
-			</table>
-		<div id="next-camp-temp">
-			<select class='select-next-camp' name='NextCamp[]'>							
-							<option value="">NULL</option>
-							<?php echo $this->options($this->arrCampaign,0,array("key"=>"ID","name"=>"Name","name2"=>"WorldMap"));?>
-						</select>
-			<a class="tool-16 delete" href="#" ></a><!--JQUERY delegate Click: addNextCampp(e)-->							
-			<a class="tool-16 add" href="#"></a><!--JQUERY delegate Click: -->	
-		</div><!-- End #next-camp-temp  -->
+			</table>		
 		<div id="div-new-world-map">
 		<input style="width:90%" type="text" value="New Map"></input>
 		</div><!-- End #next-camp-temp  -->		
