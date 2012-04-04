@@ -35,7 +35,7 @@ function validateForm(e){
 			
 	});
 	select.each(function(index){
-		if($(this).hasClass('require')){
+		if($(this).attr('id')=='Layout'){
 			if($(this).val()=="")
 				$(this).css({ border: "1px solid red" }).focus();
 			else
@@ -81,17 +81,18 @@ function validateInput2(e)
 						$(this).css({ border: "1px solid red" }).focus();						
 						flag=false;
 					}
-				else if($(this).val()!='')
+				else 
 					{
 						$(this).css({ border: "none" });						
 					}
 			}
 	});
-	if(flag){
+	if(flag==true){
 		e.addClass("ok");		
 	}
-	else 
-		e.removeClass("ok");
+	else {
+			e.removeClass("ok");
+		}
 	
 	return flag;
 }
