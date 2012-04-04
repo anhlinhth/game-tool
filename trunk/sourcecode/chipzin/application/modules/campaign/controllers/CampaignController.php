@@ -167,7 +167,7 @@ class Campaign_CampaignController extends BaseController
                 $campaign = $mdCamp->getTopCampaign();
                 $this->_redirect("/campaign/campaign/edit/id/$campaign->ID");
             }
-
+		
             //$this->view->campaign=$mdCamp->getAllCampaign();
 
             $this->view->arrCampaign = $mdCamp->getAllCampaign();
@@ -186,13 +186,16 @@ class Campaign_CampaignController extends BaseController
             $mdawardtype = new Models_Award_Type();
             $this->view->arrawardtype = $mdawardtype->getAwardtype();
             ////
-
+			
             ///////Ä�á»‘i vá»›i má»—i battle//////
             $mdB_layout = new Models_Soldier();
             $this->view->arrSoldier = $mdB_layout->getAllSoldier();
             $mdB = new Models_Battle();
             $this->view->arrbattle = $mdB->getBattle($id);
-
+			
+            $mdworldmap = new Models_WorldMap();
+            $this->view->arrworldmap = $mdworldmap->fetchall();
+            
             $mdBS = new Models_Battle_Soldier();
             $this->view->arrBattleSolider = array();
             $arrPoint = array();
@@ -259,5 +262,14 @@ class Campaign_CampaignController extends BaseController
             Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 
         }
+    }
+    public function loadcampaignAction()
+    {
+    	$this->_helper->layout->disableLayout();
+    	$this->_helper->viewRenderer->setNorender();
+    	$id = $this->_request->getParam("id");
+    	$md = new Models_Campaign();
+    	$arrcam = $md->getCambyWorldmap($id);
+    	echo(json_encode($arrcam));
     }
 }

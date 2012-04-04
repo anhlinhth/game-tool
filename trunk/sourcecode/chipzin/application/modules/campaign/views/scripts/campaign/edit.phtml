@@ -86,9 +86,11 @@ td.b_award input{
 	<tr>
 		<td>
 			<label>World Map:</label>
-			<input  type="text" readonly="readonly" value='<?php echo $this->campaign->WorldMap;?>' name='nextCampaign' id='nextCampaign'/>
+			<select name='nextCampaign' id='nextCampaign' onchange="javascript:changeworldmap();">
+				<?php echo $this->options($this->arrworldmap,$this->campaign->WorldMap,array('key'=>"ID",'name'=>"Name"))?>
+			</select>
 		</td>
-		<td>
+		<td id='campaign'>
 			<label>Select Campaign:</label>			
 			<select name='campaignID' id='campaignID'>							
 				<?php echo $this->options($this->arrCampaign,$this->campaign->ID,array('key'=>"ID",'name'=>"Name","flag"=>1))?>				
@@ -845,7 +847,33 @@ td.b_award input{
 		}
 		return true;
 	}	
-
+/* -------------- changewordmap ------------------------*/
+function changeworldmap()
+{
+	var id = $("select[name='nextCampaign']").val();
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $this->baseUrl.'/campaign/campaign/loadcampaign'?> ",
+		data: "id=" + id,
+		dataType: "json",
+		success: function(data){
+			var sel = "<label>Select Campaign:</label><select name='CampaignID' id='CampaignID' onchange='javascript:changecan()'><option value=''>&nbsp;</option>";			
+			$.each(data, function(key, value)
+			{
+				sel += "<option value='"+value['ID']+"'>"+value['Name']+"</option>";
+			});
+			sel += "</select>";
+			$('#campaign').html(sel);
+			$('#Name').val("");
+		}			
+	});
+}
+function changecan()
+{
+ 	var campaignID=$("select[name='CampaignID']").val();
+ 	var url = "<?php echo $this->baseUrl.'/campaign/campaign/edit/id/'?>"+campaignID;
+	$(location).attr('href',url);
+}
 /***************JQUERY***************************/
 
 $(document).ready(function(){
