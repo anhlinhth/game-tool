@@ -94,7 +94,7 @@ class TemplateController extends BaseController
 			if($pageNo == 0)
 				$pageNo = 1;
 			if($items == 0)
-				$items = DEFAULT_ITEM_PER_PAGE;
+				$items = 10000;
 			if(isset($layout) && $layout=="disabled"){
 			    $this->_helper->layout->disableLayout();
 			}			
