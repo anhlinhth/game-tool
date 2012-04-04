@@ -13,7 +13,7 @@ function validateForm(e){
 	//alert("");
 	var input = e.find("input");
 	var select=e.find("select");
-	input.each(function(index){
+	/*input.each(function(index){
 		if($(this).hasClass('require')){
 			if($(this).val()=="")
 				{					
@@ -33,7 +33,7 @@ function validateForm(e){
 				}
 		}
 			
-	});
+	});*/
 	select.each(function(index){
 		if($(this).attr('id')=='Layout'){
 			if($(this).val()=="")
