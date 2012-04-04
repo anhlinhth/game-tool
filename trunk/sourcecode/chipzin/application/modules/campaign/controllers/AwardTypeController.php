@@ -36,7 +36,7 @@ public function _setUserPrivileges()
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}	
 	}
-public function deleteAction()
+	public function deleteAction()
 	{
 	try
 		{
@@ -66,7 +66,31 @@ public function deleteAction()
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
 	}
-
+	
+	public function insertAction()
+	{
+		try
+		{
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();
+			if($this->_request->isPost())
+			{
+				$name = $this->_request->getParam("Name");
+				$md = new Models_AwardType();
+				$obj = new Obj_AwardType();
+				$obj->AwardTypeID = "NULL";
+				$obj->Name = $name;
+				$id = $md->insertAward($obj);
+				print_r($id);
+			}
+		}
+		catch(Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}
+	
 public function updateAction(){
 		try{
 			$this->_helper->layout->disableLayout();
@@ -79,10 +103,10 @@ public function updateAction(){
 					if($md->isExistAwardType($form->obj->AwardTypeID)!=0){
 						echo 1;
 						$md->_update($form->obj);
-						echo "Update th�nh c�ng";
+						echo "Update thành công";
 					}else{ 
 						$md->_insert($form->obj);
-						echo "Th�m th�nh c�ng";
+						echo "Thêm thành công";
 					}
 					Models_Log::insert($this->view->user->username, "act_update_AwardType", $obj->name);
 				}

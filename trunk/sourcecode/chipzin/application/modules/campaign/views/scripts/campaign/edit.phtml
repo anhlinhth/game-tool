@@ -697,13 +697,9 @@ td.b_award input{
 						type: "POST",
 						url: "<?php echo $this->baseUrl.'/campaign/AwardType/insert' ?> ",
 						data: "Name=" + type_name,
-						dataType: "json",
-						success: function(msg){							
-							if(msg.msg=="1"){								
-								updateAwardTypeSelect(msg.AwardTypeID,type_name);
-							}else{
-								alert(msg.msg);
-							}														
+						success: function(msg){	
+							alert(msg);										
+							updateAwardTypeSelect(msg,type_name);													
 						}
 					});
 					$(this).dialog("close");		

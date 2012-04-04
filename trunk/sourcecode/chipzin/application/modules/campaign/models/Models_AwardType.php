@@ -1,5 +1,6 @@
 <?php
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Base.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'object'.DS.'Obj_Base.php';
 
 class Models_AwardType extends Models_Base
 {
@@ -106,6 +107,21 @@ public function getAllAwardType()
 		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);		
 		
 		return $data;
+	}
+	
+	public function insertAward($obj)
+	{
+		try
+		{
+			$data = Utility::transferObjectToArray($obj);
+			$this->_db->insert("c_award_type", $data);
+			$id = $this->_db->lastInsertId();
+			return $id;
+		}
+		catch(Zend_Db_Exception $ex)
+		{
+			throw new Internal_Error_Exception($ex);
+		}
 	}
 }
 ?>
