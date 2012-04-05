@@ -16,7 +16,8 @@ class Zend_View_Helper_ListSoldier
 				$delete = "<a class='tool-16 delete' href='javascript:deleteSoldier($key)'></a>";;								
 			$strList .= "<tr id='Soldier-$key'>							
 							<td class='id'>$row->ID</td>	
-							<td class='name'>$row->Name</td>						
+							<td class='name'>$row->Name</td>
+							<td class='nameSV'>$row->NameSV</td>						
 							<td align='center'>								
 								$edit&nbsp								
 								$delete								
