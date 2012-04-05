@@ -795,7 +795,7 @@ td.b_award input{
 			if(val==0){
 				table.find("td#"+key).removeClass("visible").addClass("invisible");				
 				table.find("td#"+key +" select").attr('disabled',true).removeClass("require");				
-				table.find("td#"+key +" input").attr('disabled',true).attr("value","").removeClass("require");										
+				table.find("td#"+key +" input").attr('disabled',true).attr("value","");										
 			}else{
 				table.find("td#"+key).removeClass("invisible").addClass("visible");
 				table.find("td#"+key +" select").attr('disabled',false).addClass("require");
