@@ -16,7 +16,7 @@ public function insert($obj)
 try
 		{
 			
-    		$result=$this->_db->insert('c_award', $data);
+    		$result=$this->_db->insert('c_award', $obj);
     		
     		return $result;
 		}
