@@ -881,7 +881,7 @@ $(document).ready(function(){
 	//update disable status
 	$("td.invisible").find("select").attr('disabled','disabled').removeClass("require");
 	
-	$("td.invisible").find("input").attr('disabled',true).removeClass("require");
+	$("td.invisible").find("input").attr('disabled',true);
 	//change CampaignID selectbox
 	$('#campaignID').change(function(){
 		 	var campaignID=$(this).val();
