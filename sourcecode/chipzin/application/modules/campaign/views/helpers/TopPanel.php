@@ -83,7 +83,7 @@ class Zend_View_Helper_TopPanel
                 if (Utility::checkPrivilege($view, 'awardtype', 'index'))
                 	$strList .= "<li><a href='$view->baseUrl/campaign/awardtype/index' class='report'>Award type</a></li>";
 					if (Utility::checkPrivilege($view, 'campaign', 'index'))
-                    $strList .= "<li><a href='$view->baseUrl/campaign/import/index' class='report'>Import from .xls file</a></li>"; 
+                    $strList .= "<li><a href='$view->baseUrl/campaign/import2/index' class='report'>Import from .xls file</a></li>"; 
         		if (Utility::checkPrivilege($view, 'export', 'index'))
                 	$strList .= "<li><a href='$view->baseUrl/campaign/worldmap/index' class='report'>Worldmap</a></li>";
 				if (Utility::checkPrivilege($view, 'export', 'index'))
