@@ -12,13 +12,9 @@ class Models_C_Camp extends Models_Base
         $this->_table = "c_campaign";
     }
 
-    public function insert($obj,$type)
+    public function insert($obj)
     {
-    	$sql= "SELECT ID 
-		FROM c_typemap
-		Where Name='$type'";
-	$typeID=$this->_db->fetchOne($sql);
-	$obj->TypeID=$typeID;
+    	
 	
     	$id= parent::_insert($obj);
 return $id;

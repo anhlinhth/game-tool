@@ -11,12 +11,24 @@ class Models_C_Battle extends Models_Base
         $this->_table = "c_battle";
     }
 	
-public function insert($obj,$layout)
+public function insert($obj)
 {
-	$sql= "Select ID From c_layout Where Name='$layout'";
+	$sql= "SELECT ID 
+		FROM c_layout
+		ORDER BY RAND( ) 
+		LIMIT 1";
 	$lo=$this->_db->fetchOne($sql);
 	$obj->Layout=$lo;
+	
 $id = parent::_insert($obj);
+return $id;
+}
+
+public function update($obj)
+{
+	
+	
+$id = parent::_update($obj);
 return $id;
 }
     
