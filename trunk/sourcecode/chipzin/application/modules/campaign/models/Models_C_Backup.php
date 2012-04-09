@@ -25,10 +25,12 @@ function create()
   if($line_count==1)
   {
   	$mdbk= new Models_C_BK_Data();
-  	$mdbk->insert($file);
+  	$datei=date("Y-m-d H:i:s");
+  	$mdbk->insert($file,$datei);
+  	
   	
   }
-  //fclose($file);
+//  fclose($file);
  return $line_count;
 
 
