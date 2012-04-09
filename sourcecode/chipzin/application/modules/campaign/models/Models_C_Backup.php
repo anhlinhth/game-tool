@@ -28,7 +28,7 @@ function create()
   	$mdbk->insert($file);
   	
   }
-  fclose($file);
+  //fclose($file);
  return $line_count;
 
 
