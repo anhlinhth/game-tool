@@ -159,7 +159,7 @@ function updateNeedquest(id)
 	});
 }
 function loadQuest(){
-	$("#list-quest").html("<tr><td colspan='8' class='center'><h1>Loading......</h1></td></tr>");
+	$("#list-quest").html("<tr><td colspan='8' class='center'><h1>Loading......<a class='ico-16 loading'></a></h1></td></tr>");
 	$.ajax({
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/listquest/'?> ",
