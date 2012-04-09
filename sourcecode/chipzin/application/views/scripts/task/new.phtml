@@ -13,13 +13,6 @@ foreach ($this->arrTemplate as $row) {?>
 	<tr>
 		<td>Task ID</td>
 		<td><input type="text" id="TaskID" name="TaskID" class="disabled" readonly="readonly" class="taskid" value=""/></td>
-		<td>Task Name</td>
-		<td><input type="text" id="TaskName" name="TaskName" value=""/></td>
-		
-	</tr>
-	<tr>
-		<td>Task String</td>
-		<td><input type="text" id="TaskString" name="TaskString" value=""/></td>
 		<td>Action (*) </td>
 		<td>
 		<select id="Action" name="Action">
@@ -38,12 +31,32 @@ foreach ($this->arrTemplate as $row) {?>
 			?>
 		</select>
 		</td>
+		
+	</tr>
+	<tr>
+		<td>Task Name</td>
+		<td><input type="text" id="TaskName" name="TaskName" value=""/></td>
+		
+		<td>Task String</td>
+		<td>
+			<input type="text" id="TaskString-<?php echo $this->key1?>" name="TaskString" value="" onchange="getvalue('TaskString-<?php echo $this->key1?>')" title="TaskString-string-value-<?php echo $this->key1?>"/>
+			<a title="chon" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('TaskString-<?php echo $this->key1?>','')"></a>
+			<a title="them" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('TaskString-<?php echo $this->key1?>','')"></a>
+			<p class="string-value" id = "TaskString-string-value-<?php echo $this->key1?>" ></p>
+		</td>
+		
 	</tr>
 	<tr>
 		<td>Desc</td>
-		<td><input type="text" id="DescString" name="DescString" value=""/></td>		
+		<td><input type="text" id="DescString" name="DescString" value="" /></td>		
 		<td>DescString</td>
-		<td><input type="text" id="DescID" name="DescID" value=""/></td>
+		<td>
+			<input type="text" id="DescID-<?php echo $this->key1?>" name="DescID" value="" onchange="getvalue('DescID-<?php echo $this->key1?>')" title="DescID-string-value-<?php echo $this->key1?>"/>
+			<a title="chn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('DescID-<?php echo $this->key1?>','')"></a>
+			<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('DescID-<?php echo $this->key1?>','')"></a>
+			<p class="string-value" id = "DescID-string-value-<?php echo $this->key1?>" ></p>
+		</td>
+		
 	</tr>
 	<tr>
 		<td>Icon Class Name</td>

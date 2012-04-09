@@ -443,8 +443,7 @@ class QuestController extends BaseController
 	           Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 	    }		
 	}
-			
-	
+		
 	public function updateneedquestAction()
 	{
 		try{
@@ -537,6 +536,7 @@ class QuestController extends BaseController
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}		
 	}
+	
 	public function updateAction()
 	{
 		try
@@ -644,5 +644,97 @@ class QuestController extends BaseController
         }
 		
 	}
+
+	
+	////////////////////////ThaoNX//////////////////
+	
+	public function index2Action()
+	{
+		try
+		{
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest.php';	
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
+			
+			
+			$pageNo = 1;
+			if(isset($_SESSION['items']))
+			    $items = $_SESSION['items'];				
+			else
+			    $items = DEFAULT_ITEM_PER_PAGE;	
+					
+			$form = new Forms_Quest();
+			$form->_requestToForm($this);
+			
+			if(empty($form->obj->QuestID)||!isset($form->obj->QuestID))
+				$form->obj->QuestID = null;			
+			if(isset($_SESSION['questline']))
+				$form->obj->QuestLineID = $_SESSION['questline'];
+			
+			if(empty($form->obj->QuestLineID))
+				$form->obj->QuestLineID = null;
+			
+			if($this->_request->isPost())
+			{
+			    unset($_SESSION['questline']);
+			    unset($_SESSION['items']);
+			    $_SESSION['questline']=$this->_request->getParam('QuestLineID');
+			    $_SESSION['items']=$this->_request->getParam('items');
+			    
+			    $pageNo = $this->_request->getParam("page");
+			    $items = $this->_request->getParam("items");				
+				$form->obj->QuestLineID =$_SESSION['questline'];				 
+				$items = $_SESSION['items'];
+				//var_dump($_SESSION['QuestLine']);
+				//die();
+			}
+			
+			$md= new Models_Quest();
+			$mdqd = new Models_Quest_Detail();
+			$md_questLine = new Models_Quest_Line();			
+			$count = $md->count($form->obj);			
+			$this->view->arrQuest = $md->filter($form->obj, "QuestName ASC", ($pageNo - 1)*$items, $items);	
+			$this->view->arrQuestLine = $md->getQuestlineID();
+			$this->view->items = $items;
+			$this->view->page = $pageNo;
+			$this->view->totalRecord = $count;
+			$this->view->obj = $form->obj;
+		}
+		catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	
 	}
 	
+	public function getdataAction(){
+		try{
+		    require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest.php';
+		    require_once ROOT_APPLICATION_MODELS.DS.'Models_Task.php';
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();
+			
+			$pageNo = $this->_request->getParam("page");
+			$items = $this->_request->getParam("items");
+			
+			$form = new Forms_Quest();
+			$form->_requestToForm($this);
+			
+			if($form->obj->QuestID ==-1)// no filter
+				$form->obj->QuestID = NULL;
+			
+			if($pageNo == 0)
+				$pageNo = 1;
+			if($items == 0)
+				$items = DEFAULT_ITEM_PER_PAGE;
+			
+			$md= new Models_Quest();
+			$arrQuest = $md->filter($form->obj, "QuestName ASC", ($pageNo - 1)*$items, $items);
+			echo json_encode($arrQuest);
+		}catch(Exception $ex){
+			$this->view->form = $form->obj;
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}
+}

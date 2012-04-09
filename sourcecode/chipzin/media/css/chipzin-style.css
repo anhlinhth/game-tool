@@ -177,6 +177,10 @@ button.btn:hover {
 	background-image:url("../images/p2/icons/16/save.png"); 
 }
 
+.ico-16.explore{
+	background-image:url("../images/p2/icons/16/explore.png"); 
+}
+
 .ico-16.warning{
 	background-image:url("../images/p2/icons/16/warning.png"); 
 }
@@ -256,6 +260,10 @@ a.tool-16:hover{
 	background-image:url("../images/p2/icons/16/delete.png"); 
 }
 
+.tool-16.explore{
+	background-image:url("../images/p2/icons/16/explore.png"); 
+}
+
 .tool-24.edit{
 	background-image:url("../images/p2/icons/24/edit.png"); 
 }
@@ -305,4 +313,11 @@ a.disabled:hover{
 	
 	margin:0px;
 	padding:0px;
+}
+
+.string-value{
+	color: blue;
+	font-weight: bold;
+	font-size: 12px;
+	padding: 0px;
 }
