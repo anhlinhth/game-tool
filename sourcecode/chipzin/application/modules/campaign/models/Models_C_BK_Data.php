@@ -5,11 +5,11 @@ require_once ROOT_APPLICATION_MODELS . DS . 'Models_Base.php';
 class Models_C_BK_Data extends Models_Base
 {
 
-	function  insert($filename)
+	function  insert($filename,$date)
 	{
 	try
 		{
-			$date= date("Y-m-d H:m:s");
+			//$date= date("Y-m-d H:m:s");
 			
 			$data = array(
 				'DateTime'=>$date,
