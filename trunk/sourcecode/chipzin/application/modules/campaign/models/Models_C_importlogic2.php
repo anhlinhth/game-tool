@@ -64,7 +64,8 @@ class Models_C_importlogic2 extends Models_Base {
 					$objBaSo->BattleID=$k;
 					$objBaSo->Level=$val_so[1];
 					$objBaSo->Point=$k_so;
-					$objBaSo->Soldier=$mdSo->getIDSoldier($val_so[0]);
+					$idso=$mdSo->getIDSoldier($val_so[0]);
+					$objBaSo->Soldier=$idso[0]->ID;
 					
 					$mdBaSo->insert($objBaSo);
 					
@@ -77,14 +78,19 @@ class Models_C_importlogic2 extends Models_Base {
 			
 				//-------update layout---------------------------------------
 				$layout_all=$mdLayout->getAllLayout();
+				
+				
 				foreach ($layout_all as $k_lo => $val_lo)
 				{
 					$kq=array_intersect($layout, $val_lo);
 					if($layout==$kq)
 					{
+						
 						$objBattle->ID=$k;
 						$objBattle->Layout=$k_lo;
+							//print_r($objBattle->ID);		
 						$mdBattle->update($objBattle);
+						
 						break;
 					}
 				}

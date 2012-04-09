@@ -28,8 +28,24 @@ public function update($obj)
 {
 	
 	
-$id = parent::_update($obj);
-return $id;
+	$id=$obj->ID;
+	$lay=$obj->Layout;
+	
+	
+	$sql1="select * from c_battle where ID=$id";
+	$data=$this->_db->fetchAll($sql1);
+	
+$obj->Campaign=$data[0]['Campaign'];
+$obj->Order=$data[0]['Order'];
+
+
+	//$sql="Update c_battle
+///	Set Layout=$lay
+	////Where BattleID=$id
+	//";
+	
+$i = parent::_update($obj);
+return $i;
 }
     
 }

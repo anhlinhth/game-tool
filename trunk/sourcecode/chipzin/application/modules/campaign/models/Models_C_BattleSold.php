@@ -14,7 +14,7 @@ class Models_C_BattleSold extends Models_Base
 	
 public function insert($obj)
 {
-	
+/*	
 		
 $sql= "SELECT ID 
 		FROM c_soldier
@@ -22,7 +22,7 @@ $sql= "SELECT ID
 		LIMIT 1";
 	$so=$this->_db->fetchOne($sql);
 	$obj->Soldier=$so;
-	
+*/	
 	parent::_insert($obj);
 }
     
