@@ -15,9 +15,10 @@ public function insert($obj)
 {
 try
 		{
-			
-    		$result=$this->_db->insert('c_award', $obj);
-    		
+			//print_r($obj);
+			//$obj->ID=null;
+    		//$result=$this->_db->insert('c_award', $obj);
+    		$result=parent::_insert($obj);
     		return $result;
 		}
 		catch(Zend_Db_Exception $ex)
