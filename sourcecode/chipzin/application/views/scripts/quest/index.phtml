@@ -90,10 +90,10 @@ function addNextQuest(questID,key){
 function deleteNextQuest(questID,id,key){
 	var count = $(".next-quest-"+questID).size();
 	if(count <=1){
-		alert("at least 1 Next-Quest! Only Set Null");
+		alert("At least 1 Next-Quest! Only Set Null");
 		return;
 	}
-	if(confirm("Báº¡n cÃ³ muá»‘n xÃ³a Next-Quest?")){
+	if(confirm("Delete Next-Quest?")){
 		$.ajax({
 			type: "POST",
 			url:"<?php echo $this->baseUrl.'/quest/updatenextquest'?> ",
@@ -129,7 +129,7 @@ function updateNextQuest(id,questid,key)
 		},	
 		success: function(data){
 			if(parseInt(data) == 1){	
-				alert("Cáº­p nháº­t thÃ nh cÃ´ng");
+				alert("Successfull");
 				loadQuest();
 			}else{
 				alert(data);
