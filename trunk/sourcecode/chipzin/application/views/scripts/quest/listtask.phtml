@@ -1,4 +1,4 @@
-<?php if($this->errMsg) :?>
+﻿<?php if($this->errMsg) :?>
 	<?php $this->showError($this->errMsg)?>
 <?php endif; ?>
 <?php if($this->msg) :?>		
@@ -42,13 +42,6 @@ else
 	<tr>
 		<td>Task ID</td>
 		<td><input type="text" id="TaskID" name="TaskID" class="disabled" readonly="readonly" class="taskid" value="<?php echo $val->TaskID?>"/></td>
-		<td>Task Name</td>
-		<td><input type="text" id="TaskName" name="TaskName" value="<?php echo $val->TaskName?>"/></td>
-		
-	</tr>
-	<tr>
-		<td>Task String</td>
-		<td><input type="text" id="TaskString" name="TaskString" value="<?php echo $val->TaskString?>"/></td>
 		<td>Action (*) </td>
 		<td>
 		<select id="Action" name="Action">
@@ -68,12 +61,34 @@ else
 			?>
 		</select>
 		</td>
+		
+		
+	</tr>
+	<tr>
+		<td>Task Name</td>
+		<td>
+			<input type="text" id="TaskName" name="TaskName" value="<?php echo $val->TaskName?>"/>
+		</td>
+		<td>Task String</td>
+		<td>
+			<input type="text" id="TaskString-<?php echo $key?>" name="TaskString" value="<?php echo $val->TaskString?>"  onchange="getvalue('TaskString-<?php echo $key?>')" title="TaskString-string-value-<?php echo $key?>" />
+			<a title="chon" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('TaskString-<?php echo $key?>','')"></a>
+			<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('TaskString-<?php echo $key?>','')"></a>
+			<p class="string-value" id = "TaskString-string-value-<?php echo $key?>" ></p>
+		</td>
+		
 	</tr>
 	<tr>
 		<td>Desc</td>
 		<td><input type="text" id="DescString" name="DescString" value="<?php echo $val->DescString?>"/></td>
 		<td>DescString</td>
-		<td><input type="text" id="DescID" name="DescID" value="<?php echo $val->DescID?>"/></td>
+		<td>
+			<input type="text" id="DescID-<?php echo $key?>" name="DescID" value="<?php echo $val->DescID?>" onchange="getvalue('DescID-<?php echo $key?>')" title="DescID-string-value-<?php echo $key?>"/>
+			<a title="chn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('DescID-<?php echo $key?>','')"></a>
+			<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('DescID-<?php echo $key?>','')"></a>
+			<p class="string-value" id = "DescID-string-value-<?php echo $key?>" ></p>
+		</td>
+		
 	</tr>
 	<tr>
 		<td>Icon Class Name</td>

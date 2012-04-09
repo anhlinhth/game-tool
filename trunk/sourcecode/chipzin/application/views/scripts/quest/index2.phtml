@@ -1,0 +1,246 @@
+<?php if($this->errMsg) : session_start();?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+print_r($this->obj);
+?>
+<form  class="myform" id="formPaging" name="formPaging" action="" method="post">
+<div class="mybox">
+	<h3>Quest</h3>
+	<table class="filter">	
+		<tr style="border: 0px;">
+			<td>Quest ID
+			<input type="text" name="QuestID" id="QuestID" value="<?php print_r( $this->item->QuestID);?>" style="width: 110px;"/></td>
+			<td></td>
+			<td>Quest Line
+				<select name="QuestLineID" id = "QuestLineID" onChange="changeQuestLine()">
+				<option value="">Select QuestLine </option>
+				<?php echo $this->options($this->arrQuestLine,$this->obj->QuestLineID,array('key'=>'QuestLineID','name'=>'QuestLineName'))?>							
+				</select>				
+			</td>
+			<td>
+				<input type="submit" name="button1" id = "button1" value="search"/>
+				<a class="btn add" href="<?php echo $this->baseUrl.'/quest/new'?>">Add</a>
+			</td>
+		</tr>
+	</table>
+	<table class="list" id="list-quest-hd">
+		<thead>
+		<tr>
+			<td width="10"><input type="checkbox" name="chkall" value="1" onclick="checkAll(document.formPaging)"/></td>
+			<td width="30"><a href="#">ID</a></td>
+			<td><a href="#">Name</a></td>
+			<td><a href="#">Quest line</a></td>
+			<td><a href="#">NeedQuest</a></td>
+			<td><a href="#">NextQuest</a></td>
+			<td class="center" style="width:35px"><a href="#">Status</a></td>
+			<td class="center" style="width:45px"><a href="#" >Tool</a></td>
+		</tr>
+		</thead>
+		<tbody id="list-quest-bd">
+		<tr id="quest-row-temp">
+			<td align="center"><input type="checkbox" name="chkid" value="45"></td>
+			<td class="center">45</td>
+			<td>{aaa}</td>							
+			<td>{bbb}</td>
+			<td style="width: 20%;">
+				<select style="min-width:200px" name="needquest-45" id="needquest-45" class="needquest" onchange="updateNeedquest(45);"> 
+				</select>
+			</td>
+			<td style="width: 27%;">
+				<div class="next-quest-45" id="next-quest-div-45-0">							
+					<select style="min-width:200px;max-width:200px" id="nextquest-45-0" name="nextquest-45-0" onchange="updateNextQuest(80,45,0);"></select>
+					<a class="tool-16 delete" href="javascript:deleteNextQuest(45,80,0)"></a>
+					<a class="tool-16 add" href="javascript:addNextQuest(45,0)"></a>
+				</div>
+			</td>
+			<td align="center"><a title="" class="ico-16 ok" id="warning"></a></td>
+			<td align="center">	
+				<a class="tool-16 edit" href="#"></a>&nbsp;&nbsp;
+				<a class="tool-16 delete" href="#"></a>
+			</td>
+		</tr>	
+		</tbody>
+		
+	</table>
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this);?>
+
+	<input type="submit" name="button1" id = "button1" style="width:100px" onclick="deletechose(document.formPaging)" value="DELETE"/>
+</div>
+</form>
+<div style="">
+
+<script>
+/////////////////////////////////
+function addNextQuest(questID,key){		
+	$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/updatenextquest'?> ",
+			data: {
+				questID:questID,
+				Action:'insert'
+			},			
+			success: function(data){
+				if(parseInt(data) == 1){
+					loadQuest();
+				}else{
+					alert(data);								
+				}
+			}
+	});
+}
+///////////////////////
+function deleteNextQuest(questID,id,key){
+	var count = $(".next-quest-"+questID).size();
+	if(count <=1){
+		alert("At least 1 Next-Quest! Only Set Null");
+		return;
+	}
+	if(confirm("Delete Next-Quest?")){
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/updatenextquest'?> ",
+			data: {
+				ID:id,
+				Action:'delete'
+			},			
+			success: function(data){
+				if(parseInt(data) == 1){						
+					loadQuest();
+				}else{
+					alert(data);
+					alert("Error");				
+				}
+			}
+		});
+	}
+	
+}
+/////////////////////
+
+function updateNextQuest(id,questid,key)
+{	
+	var value = document.getElementById('nextquest-'+questid+'-'+key).value;
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/updatenextquest/'?> ",
+		data: {
+				Action:'update',
+				ID:id,
+				QuestID:questid,				
+				NextQuest:value
+		},	
+		success: function(data){
+			if(parseInt(data) == 1){	
+				alert("Successfull");
+				loadQuest();
+			}else{
+				alert(data);
+				alert("Error");				
+			}
+			
+		}
+	});
+}
+
+
+function updateNeedquest(id)
+{
+	var needquest = document.getElementById('needquest-'+id).value;
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/updateneedquest/'?> ",
+		data: "questid=" + id +"&needquest="+ needquest,	
+		success: function(data){			
+			if(data=="1"){	 
+				alert("Successful");
+				loadQuest();
+			}else{
+				alert(data);							
+			}
+		}
+	});
+}
+
+function deleteQuest(key){	
+	if(confirm("Delelte Quest: "+key+" ?")){
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/delete/'?> ",
+			data: {
+				id:key
+			},			
+			success: function(data){
+				alert(data);				
+				loadQuest();
+			}
+		});
+	}
+	
+}
+function deletechose(theform){	
+	
+	var chkitems = theform.chkid.length;
+	var state = theform.chkall.checked;
+	if(chkitems > 0)
+	{
+		for(var i = 0; i < chkitems; i++)
+		{
+			if(theform.chkid[i].checked == true)
+			{
+				key = theform.chkid[i].value;
+				if(confirm("Delelte Quest: "+key+" ?")){
+					$.ajax({
+						type: "POST",
+						url:"<?php echo $this->baseUrl.'/quest/delete/'?> ",
+						data: {
+							id:key
+						},			
+						success: function(data){				
+							loadQuest();
+						}
+					});
+				}
+			}
+		}
+	}
+}
+///////////////ThaoNX//////////////////////////
+//Load quest
+function loadQuest(){
+	//$("#list-quest-bd").html("<tr><td colspan='8' class='center'><h1>Loading......<a class='ico-16 loading'></a></h1></td></tr>");
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/getdata/'?> ",
+		data: {
+			page:<?php echo $this->page;?>,
+			items:<?php echo $this->items;?>,
+		<?php if($this->obj->QuestLineID!=null) 
+			echo "QuestLineID:".$this->obj->QuestLineID.","
+		?>
+		<?php if($this->obj->QuestID!=null) 
+			echo "QuestID:".$this->obj->QuestID.","
+		?>			
+		},
+		dataType :"json",
+		success: function(data){
+			var tr_cloned= $("tr#quest-row-temp").clone();
+			$.each(data, function(key, val) {
+				$("#list-quest-bd").append(tr_cloned);
+			});
+			
+		}
+	});
+}
+
+function changeQuestLine(){	
+	$("#formPaging").submit();
+}
+//////////////////////////////////////////
+$(document).ready(function(){	
+	loadQuest();		
+});
+</script>
