@@ -5,9 +5,8 @@ require_once ROOT_APPLICATION_MODELS . DS . 'Models_Log.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' . DS . 'Models_C_import_arr.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' . DS . 'Models_C_importlogic2.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' . DS . 'Models_C_Backup.php';
+require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' . DS . 'Models_C_DeleteData.php';
 
-
-require_once ROOT_APPLICATION . DS . 'modules' . DS . 'campaign' . DS . 'models' . DS . 'Models_C_Layout.php';
 
 
 class Campaign_Import2Controller extends BaseController {
@@ -26,14 +25,13 @@ class Campaign_Import2Controller extends BaseController {
 			
 			if ($this->_request->isPost ()) {
 				
-				$mdLayout = new Models_C_Layout (); 
-				//print_r($mdLayout->getAllLayout());
-				//die();
+				
 				
 				
 				$mdAr = new Models_C_import_arr();
 				$mdLogic= new Models_C_importlogic2();
 				$mdBK=new Models_C_Backup();
+				$mdDelete=new Models_C_DeleteData();
 				
 				$arrMap=null;
 				$arrBattle=null;
@@ -46,7 +44,7 @@ class Campaign_Import2Controller extends BaseController {
 			
 				
 				if ($file11 ['name']) {
-					$pos = strpos ( $file11 ['name'], 'MapBattle.conf.php' );
+					$pos = strpos ( $file11 ['name'], 'apBattle.conf.php' );
 					
 					if($pos == false)
 					{
@@ -63,7 +61,7 @@ class Campaign_Import2Controller extends BaseController {
 				if ($file12 ['name']) {
 									
 					
-				 if (strpos ( $file12 ['name'], 'Battle.conf.php' ) !== FALSE)
+				 if (strpos ( $file12 ['name'], 'attle.conf.php' ) !== FALSE)
 					{
 						$arrBattle = $mdAr->battle( $file12 ['tmp_name'] );
 						}
@@ -78,18 +76,22 @@ class Campaign_Import2Controller extends BaseController {
 					if($arrBattle!=null && $arrMap!=null)
 					{
 						$mdBK->create();
+						$mdDelete->deltele();
 					}
-					
+					else {
+						$this->view->errMsg="Có lỗi ! Phải đủ cả 2 file";
+							return ;
+					}
 					
 					
 					if($arrMap!=null)
 					{
-						
+						$mdLogic->map($arrMap);
 						
 					}
 			if ($arrBattle!=null)
 					{
-						
+						$mdLogic->battle($arrBattle);
 						
 					}
 					
