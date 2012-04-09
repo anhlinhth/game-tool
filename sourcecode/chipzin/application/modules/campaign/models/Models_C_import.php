@@ -127,5 +127,3 @@ class Models_C_import extends Models_Base {
 
 	//public function importLayout($filename)
 }
-
-?>
