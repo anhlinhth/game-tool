@@ -49,9 +49,9 @@ class Models_Restore extends Models_Base
 		    $sql="
 		    	DELETE
 		    		FROM c_backup
-		    	WHERE
+		 	  	WHERE
 		   			 ID='".$ID."'";		    	
-		    $data=$this->_db->query($sql);
+			    $data=$this->_db->query($sql);
 		   	
 		}
 		catch(Zend_Db_Exception $ex)
