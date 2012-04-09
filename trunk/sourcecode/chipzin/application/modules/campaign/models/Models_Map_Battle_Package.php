@@ -73,7 +73,7 @@ class Models_Map_Battle_Package extends Models_Base
 		{
 			if($row['TypeID']==1)
 			{
-				$str .= "\tMAP_".$row['ID']." => array \n ";
+				$str .= "\t".$row['ID']." => array \n ";
 				$str .= "\t(\n";
 				$str .= "\t\t'openBattles' => array(";
 				$bat=$this->getBattle($row['ID']);
@@ -91,6 +91,7 @@ class Models_Map_Battle_Package extends Models_Base
 				}
 				$str ."),\n";
 				$str .=")\n";
+				$str .= "\t\t'award' => array()\n";
 				if($j<$countc)
 					$str .="\t),\n";
 				else 
@@ -100,7 +101,7 @@ class Models_Map_Battle_Package extends Models_Base
 			}
 			else 
 			{
-				$str .= "\tBARRACK_".$row['ID']." => array \n ";
+				$str .= "\t".$row['ID']." => array \n ";
 				$str .= "\t(\n";
 				$str .= "\t\t'openBattles' => array(";
 				$bat=$this->getBattle($row['ID']);
@@ -118,6 +119,7 @@ class Models_Map_Battle_Package extends Models_Base
 				}
 				$str ."),\n";
 				$str .=")\n";
+				$str .= "\t\t'award' => array()\n";
 				if($j<$countc)
 					$str .="\t),\n";
 				else 
