@@ -90,7 +90,7 @@ class Models_Battle_Package extends Models_Base
 	public function getnamesoldier($id)
 	{
 		$sql = "SELECT
-					Name
+					NameSV
 				FROM
 					c_soldier
 				WHERE
