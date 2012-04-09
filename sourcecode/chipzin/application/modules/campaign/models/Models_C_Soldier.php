@@ -1,5 +1,7 @@
 <?php
-class Models_C_Soldier 
+require_once ROOT_APPLICATION_MODELS . DS . 'Models_Base.php';
+
+class Models_C_Soldier extends Models_Base
 {
 public function getIDSoldier($name)
 	{
