@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 09, 2012 at 09:17 AM
+-- Generation Time: Apr 09, 2012 at 11:47 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -718,7 +718,26 @@ CREATE TABLE IF NOT EXISTS `c_backup` (
   `DateTime` datetime NOT NULL,
   `Link` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+--
+-- Dumping data for table `c_backup`
+--
+
+INSERT INTO `c_backup` (`ID`, `DateTime`, `Link`) VALUES
+(4, '2012-04-09 15:04:14', 'backup_2012-04-09_15-09.sql'),
+(5, '2012-04-09 15:04:33', 'backup_2012-04-09_15-09.sql'),
+(6, '2012-04-09 15:04:53', 'backup_2012-04-09_15-09.sql'),
+(7, '2012-04-09 15:04:03', 'backup_2012-04-09_15-10.sql'),
+(8, '2012-04-09 15:04:58', 'backup_2012-04-09_15-13.sql'),
+(9, '2012-04-09 15:04:11', 'backup_2012-04-09_15-15.sql'),
+(10, '2012-04-09 15:04:54', 'backup_2012-04-09_15-15.sql'),
+(11, '2012-04-09 15:16:31', 'backup_2012-04-09_15-16.sql'),
+(12, '2012-04-09 15:30:27', 'backup_2012-04-09_15-30.sql'),
+(13, '2012-04-09 15:33:41', 'backup_2012-04-09_15-33.sql'),
+(14, '2012-04-09 15:34:28', 'backup_2012-04-09_15-34.sql'),
+(15, '2012-04-09 15:35:44', 'backup_2012-04-09_15-35.sql'),
+(16, '2012-04-09 15:51:53', 'backup_2012-04-09_15-51.sql');
 
 -- --------------------------------------------------------
 
@@ -2503,7 +2522,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `action` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5451 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5458 ;
 
 --
 -- Dumping data for table `log`
@@ -7966,7 +7985,14 @@ INSERT INTO `log` (`id`, `action_date`, `user`, `action`, `note`) VALUES
 (5447, '2012-03-21 10:34:16', 'admin', 'act_update_Soldier', NULL),
 (5448, '2012-03-21 10:42:13', 'admin', 'act_update_Soldier', NULL),
 (5449, '2012-03-21 10:42:22', 'admin', 'act_update_Soldier', NULL),
-(5450, '2012-04-09 12:35:13', 'admin', 'act_login', NULL);
+(5450, '2012-04-09 12:35:13', 'admin', 'act_login', NULL),
+(5451, '2012-04-09 15:08:34', 'admin', 'Backup data', NULL),
+(5452, '2012-04-09 15:09:14', 'admin', 'Backup data', NULL),
+(5453, '2012-04-09 15:09:33', 'admin', 'Backup data', NULL),
+(5454, '2012-04-09 15:09:53', 'admin', 'Backup data', NULL),
+(5455, '2012-04-09 15:10:04', 'admin', 'Backup data', NULL),
+(5456, '2012-04-09 15:13:58', 'admin', 'Backup data', NULL),
+(5457, '2012-04-09 15:15:11', 'admin', 'Backup data', NULL);
 
 -- --------------------------------------------------------
 
@@ -8499,20 +8525,6 @@ ALTER TABLE `c_battle`
 ALTER TABLE `c_battle_soldier`
   ADD CONSTRAINT `c_battle_soldier_ibfk_1` FOREIGN KEY (`BattleID`) REFERENCES `c_battle` (`ID`) ON DELETE NO ACTION,
   ADD CONSTRAINT `c_battle_soldier_ibfk_2` FOREIGN KEY (`Soldier`) REFERENCES `c_soldier` (`ID`) ON DELETE NO ACTION;
-
---
--- Constraints for table `c_campaign`
---
-ALTER TABLE `c_campaign`
-  ADD CONSTRAINT `c_campaign_ibfk_1` FOREIGN KEY (`WorldMap`) REFERENCES `c_worldmap` (`ID`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `c_campaign_ibfk_3` FOREIGN KEY (`TypeID`) REFERENCES `c_typemap` (`ID`) ON DELETE NO ACTION;
-
---
--- Constraints for table `c_nextcamp`
---
-ALTER TABLE `c_nextcamp`
-  ADD CONSTRAINT `c_nextcamp_ibfk_1` FOREIGN KEY (`CampID`) REFERENCES `c_campaign` (`ID`) ON DELETE NO ACTION,
-  ADD CONSTRAINT `c_nextcamp_ibfk_2` FOREIGN KEY (`NextCamp`) REFERENCES `c_campaign` (`ID`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `q_award`
