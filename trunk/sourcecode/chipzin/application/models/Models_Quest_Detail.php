@@ -81,7 +81,20 @@ class Models_Quest_Detail extends Models_Base
 		
 		return $data;
 	}
-
+	
+	public function getQuest2($id = "")
+	{
+		$sql = "SELECT
+			QuestID,QuestName 
+		FROM
+			q_quest ORDER BY QuestName ASC";
+		if(!empty($id)){
+			$sql."WHERE QuestID !=$id ";
+		}
+		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);	
+		return $data;
+	}
+	
 	public function filterQuest($arrID = Array())
 	{
 		//print_r($arrID);
