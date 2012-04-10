@@ -42,6 +42,7 @@ class Models_C_importlogic2 extends Models_Base {
 					
 					if($type_aw=='honour')
 					{
+						
 						$type_aw_id=$mdAwType->getIDType('exp');
 					}
 					else 
@@ -97,6 +98,7 @@ class Models_C_importlogic2 extends Models_Base {
 			}
 			
 		}
+		return 1;
 	}
 	
 	function map($arr) {
@@ -154,7 +156,7 @@ class Models_C_importlogic2 extends Models_Base {
 			}
 			
 			//--------------------------------------------------------
-			
+			return 1;
 		}
 	
 	}
