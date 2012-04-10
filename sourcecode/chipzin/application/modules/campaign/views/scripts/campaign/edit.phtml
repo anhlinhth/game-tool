@@ -85,10 +85,8 @@ td.b_award input{
 	<table>
 	<tr>
 		<td>
-			<label>World Map:</label>
-			<select name='nextCampaign' id='nextCampaign' onchange="javascript:changeworldmap();">
-				<?php echo $this->options($this->arrworldmap,$this->campaign->WorldMap,array('key'=>"ID",'name'=>"Name"))?>
-			</select>
+			<label>Campaign ID:</label>
+			<input type="text" id = "CampaignID" name = "CampaignID" value="<?php echo $this->campaign->ID;?>" onclick="javascript:chk()">
 		</td>
 		<td id='campaign'>
 			<label>Select Campaign:</label>			
@@ -100,7 +98,6 @@ td.b_award input{
 			<label>Campaign Name:</label>
 			<input disabled="disabled" type="text" name='Name' id='Name' value='<?php echo $this->campaign->Name;?>' />
 		</td>
-		
 		</tr>
 	</table>
 	<h3>Battle</h3>	
@@ -260,7 +257,6 @@ td.b_award input{
 							
 						<?php } ?>	
 						<?php echo $this->options($this->arrawardtype,$row->AwardTypeID,array('key'=>'AwardTypeID','name'=>'Name'))?>
-						<option  value="-1" style="color:red">New Type</option>
 						</select>					
 						<input type='text' id='Value' name='Value[]' class='require' value='<?php echo $row->Value?>'/>					
 						<a class='tool-16 delete' href='#'></a>	
@@ -928,6 +924,12 @@ $(document).ready(function(){
 	});
 	
 });
-	
+$("#CampaignID").keyup(function(event){
+    if(event.keyCode == 13){
+    	location.replace("<?php echo $this->baseUrl.'/campaign/campaign/edit/id/'?>"+ $("#CampaignID").val());
+    }
+});
+
+
 </script><!-- Javascript  --><!-- Javascript  -->
 <!-- End Javascript  -->
