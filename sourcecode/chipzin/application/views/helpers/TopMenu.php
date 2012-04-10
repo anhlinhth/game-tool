@@ -39,9 +39,11 @@ class Zend_View_Helper_TopMenu
         if(Utility::checkPrivilege($view, "quest", "index"))
             $strList .= "<li class='$selectQuest'><a href='$view->baseUrl/quest/index'>Quest</a></li>"; 
 
+        if(Utility::checkPrivilege($view, "quest", "index"))
+        	 $strList .= "<li class='$campaign'><a href='$view->baseUrl/campaign/campaign'>Campaign</a></li>";
         
-        $strList .= "<li class='$campaign'><a href='$view->baseUrl/campaign/campaign'>Campaign</a></li>";
-        $strList .= "<li class='$localite'><a href='$view->baseUrl/localite/language'>Localize</a></li>";
+        if(Utility::checkPrivilege($view, "quest", "index"))
+        	$strList .= "<li class='$localite'><a href='$view->baseUrl/localite/language'>Localize</a></li>";
                 
 		$strList .=		"</ul>
 					</div>";
