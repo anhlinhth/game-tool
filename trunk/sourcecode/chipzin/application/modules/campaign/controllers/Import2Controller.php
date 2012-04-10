@@ -86,15 +86,26 @@ class Campaign_Import2Controller extends BaseController {
 					
 					if($arrMap!=null)
 					{
-						$mdLogic->map($arrMap);
+						$kt1=$mdLogic->map($arrMap);
 						
 					}
 			if ($arrBattle!=null)
 					{
-						$mdLogic->battle($arrBattle);
+						$kt2=$mdLogic->battle($arrBattle);
 						
 					}
 					
+					if($kt1==1 && $kt2==1)
+					{
+						$this->view->msg="Thành công";
+						
+						
+					}
+					else {
+						$this->view->errMsg="Có lỗi trong quá trình import ! Hãy thử lại.";
+							return ;
+						
+					}
 				
 			
 
