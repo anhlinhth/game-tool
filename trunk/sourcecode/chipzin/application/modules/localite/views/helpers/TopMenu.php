@@ -33,7 +33,10 @@ class Zend_View_Helper_TopMenu
 			case 'layout':
 				$campaign = 'current';
 				break;
-			case 'language':         	
+			case 'language':
+			case 'lgroup':
+			case 'string':
+			case 'iefile':
 				$localite = 'current';
 				break;		
 		}
@@ -54,7 +57,7 @@ class Zend_View_Helper_TopMenu
         
         $strList .= "<li class='$campaign'><a href='$view->baseUrl/campaign/campaign'>Campaign</a></li>";
         
-        $strList .= "<li class='$localite'><a href='$view->baseUrl/localite/language'>localite</a></li>";
+        $strList .= "<li class='$localite'><a href='$view->baseUrl/localite/language'>Localize</a></li>";
         
 		$strList .=		"</ul>
 					</div>";

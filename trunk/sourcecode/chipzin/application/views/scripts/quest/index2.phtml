@@ -5,7 +5,6 @@
 	<?php $this->showMessage($this->msg)?>	
 <?php 
 endif;
-print_r($this->obj);
 ?>
 <form  class="myform" id="formPaging" name="formPaging" action="" method="post">
 <div class="mybox">
@@ -30,8 +29,8 @@ print_r($this->obj);
 	<table class="list" id="list-quest-hd">
 		<thead>
 		<tr>
-			<td width="10"><input type="checkbox" name="chkall" value="1" onclick="checkAll(document.formPaging)"/></td>
-			<td width="30"><a href="#">ID</a></td>
+			<td class="center" style='width:10px'><input type="checkbox" name="chkall" value="1" onclick="checkAll(document.formPaging)"/></td>
+			<td class="center" style="width:10px"><a href="#">ID</a></td>
 			<td><a href="#">Name</a></td>
 			<td><a href="#">Quest line</a></td>
 			<td><a href="#">NeedQuest</a></td>
@@ -41,28 +40,7 @@ print_r($this->obj);
 		</tr>
 		</thead>
 		<tbody id="list-quest-bd">
-		<tr id="quest-row-temp">
-			<td align="center"><input type="checkbox" name="chkid" value="45"></td>
-			<td class="center">45</td>
-			<td>{aaa}</td>							
-			<td>{bbb}</td>
-			<td style="width: 20%;">
-				<select style="min-width:200px" name="needquest-45" id="needquest-45" class="needquest" onchange="updateNeedquest(45);"> 
-				</select>
-			</td>
-			<td style="width: 27%;">
-				<div class="next-quest-45" id="next-quest-div-45-0">							
-					<select style="min-width:200px;max-width:200px" id="nextquest-45-0" name="nextquest-45-0" onchange="updateNextQuest(80,45,0);"></select>
-					<a class="tool-16 delete" href="javascript:deleteNextQuest(45,80,0)"></a>
-					<a class="tool-16 add" href="javascript:addNextQuest(45,0)"></a>
-				</div>
-			</td>
-			<td align="center"><a title="" class="ico-16 ok" id="warning"></a></td>
-			<td align="center">	
-				<a class="tool-16 edit" href="#"></a>&nbsp;&nbsp;
-				<a class="tool-16 delete" href="#"></a>
-			</td>
-		</tr>	
+		
 		</tbody>
 		
 	</table>
@@ -71,8 +49,12 @@ print_r($this->obj);
 	<input type="submit" name="button1" id = "button1" style="width:100px" onclick="deletechose(document.formPaging)" value="DELETE"/>
 </div>
 </form>
-<div style="">
-
+<div style="display:none" >
+<select id="temp">
+<option></option>
+<?php echo $this->options($this->arrAllQuest,-1,array('key'=>"QuestID",'name'=>"QuestName"))?>
+</select>
+</div>
 <script>
 /////////////////////////////////
 function addNextQuest(questID,key){		
@@ -210,6 +192,7 @@ function deletechose(theform){
 }
 ///////////////ThaoNX//////////////////////////
 //Load quest
+var jsondatas;
 function loadQuest(){
 	//$("#list-quest-bd").html("<tr><td colspan='8' class='center'><h1>Loading......<a class='ico-16 loading'></a></h1></td></tr>");
 	$.ajax({
@@ -227,15 +210,44 @@ function loadQuest(){
 		},
 		dataType :"json",
 		success: function(data){
-			var tr_cloned= $("tr#quest-row-temp").clone();
+			jsondata = data;
 			$.each(data, function(key, val) {
-				$("#list-quest-bd").append(tr_cloned);
+				window.setTimeout( function(){doUpdateTable(val)}, 10);				
 			});
 			
 		}
 	});
 }
-
+function doUpdateTable(val){
+		var selectNextQuest = $("select#temp").clone();			
+			selectNextQuest.find("option[value='"+val.NeedQuest+"']").attr("selected","selected");
+				var tr=""+
+				"<tr id='quest-row-'>"+
+					"<td class='center' style='width:10px'><input type='checkbox' name='chkid' value='"+val.QuestID+"'></td>"+
+					"<td class='center' style='width:10px'>"+val.QuestID+"</td>"+
+					"<td>"+val.QuestName+"</td>"+							
+					"<td>"+val.QuestLineName+"</td>"+
+					"<td style='width:20%;'>"+
+						"<select style='min-width:200px' name='needquest-45' id='needquest-45' class='needquest-45' onchange='updateNeedquest("+val.QuestID+")'>"+selectNextQuest.html()+
+						"</select>"+
+					"</td>"+
+					"<td style='width:27%;'>"+
+						"<div class='next-quest-45' id='next-quest-div-45-0'>"+							
+							"<select style='min-width:200px;max-width:200px' id='nextquest-' name='nextquest-' onchange='updateNextQuest(80,45,0)'>"+selectNextQuest.html()+
+							"</select>"+
+							"<a class='tool-16 delete' href='javascript:deleteNextQuest(45,80,0)'></a>"+
+							"<a class='tool-16 add' href='javascript:addNextQuest(45,0)'></a>"+
+						"</div>"+
+					"</td>"+
+					"<td align='center'><a title='' class='ico-16 ok' id='warning'></a></td>"+
+					"<td align='center'>"+	
+						"<a class='tool-16 edit' href='#'></a>&nbsp;&nbsp;"+
+						"<a class='tool-16 delete' href='#'></a>"+
+					"</td>"+
+				"</tr>";				
+				$("#list-quest-bd").append(tr);			
+}
+/////////////////////////////////////////////////
 function changeQuestLine(){	
 	$("#formPaging").submit();
 }

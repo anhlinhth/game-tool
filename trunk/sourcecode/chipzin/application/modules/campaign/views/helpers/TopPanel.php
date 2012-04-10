@@ -72,27 +72,23 @@ class Zend_View_Helper_TopPanel
 			case 'layout':
 			case 'import2':
 			
-            	if (Utility::checkPrivilege($view, 'campaign', 'index'))
+            	//if (Utility::checkPrivilege($view, 'campaign', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/campaign/campaign/index' class='report'>Campaign Manager</a></li>";               
-				if (Utility::checkPrivilege($view, 'campaign', 'index'))
+				//if (Utility::checkPrivilege($view, 'campaign', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/campaign/campaign/edit' class='report'>Campaign Edit</a></li>";               
-                if (Utility::checkPrivilege($view, 'soldier', 'index'))
-                    $strList .= "<li><a href='$view->baseUrl/campaign/soldier/index' class='report'>Soldier</a></li>";
-                if (Utility::checkPrivilege($view, 'typemap', 'index'))
-                	$strList .= "<li><a href='$view->baseUrl/campaign/typemap/index' class='report'>Type map</a></li>";
-                if (Utility::checkPrivilege($view, 'awardtype', 'index'))
+                //if (Utility::checkPrivilege($view, 'soldier', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/campaign/soldier/index' class='report'>Soldier</a></li>";               
+                //if (Utility::checkPrivilege($view, 'awardtype', 'index'))
                 	$strList .= "<li><a href='$view->baseUrl/campaign/awardtype/index' class='report'>Award type</a></li>";
-					if (Utility::checkPrivilege($view, 'campaign', 'index'))
-                    $strList .= "<li><a href='$view->baseUrl/campaign/import2/index' class='report'>Import file</a></li>"; 
-        		if (Utility::checkPrivilege($view, 'export', 'index'))
-                	$strList .= "<li><a href='$view->baseUrl/campaign/worldmap/index' class='report'>Worldmap</a></li>";
-				if (Utility::checkPrivilege($view, 'export', 'index'))
-                	$strList .= "<li><a href='$view->baseUrl/campaign/layout/index' class='report'>Layout</a></li>";	
-                if (Utility::checkPrivilege($view, 'restore', 'index'))
+                //if (Utility::checkPrivilege($view, 'export', 'index'))
+                	$strList .= "<li><a href='$view->baseUrl/campaign/layout/index' class='report'>Layout</a></li>";
+				//if (Utility::checkPrivilege($view, 'campaign', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/campaign/import2/index' class='report'>Import file</a></li>";
+                //if (Utility::checkPrivilege($view, 'exportcamp', 'index'))
+                    $strList .= "<li><a href='$view->baseUrl/campaign/exportcamp/export' class='report'>Export Campaign</a></li>";
+                //if (Utility::checkPrivilege($view, 'restore', 'index'))
                 	$strList .= "<li><a href='$view->baseUrl/campaign/restore/' class='report'>Restore</a></li>";
-                 if (Utility::checkPrivilege($view, 'exportcamp', 'index'))
-                	$strList .= "<li><a href='$view->baseUrl/campaign/exportcamp/export' class='report'>Export Campaign</a></li>";	
-                 if (Utility::checkPrivilege($view, 'backup', 'index'))
+                // if (Utility::checkPrivilege($view, 'backup', 'index'))
                 	$strList .= "<li><a href='$view->baseUrl/campaign/bkrt/' class='report'>Backup</a></li>";	
         }
         $strList .= "</ul>
