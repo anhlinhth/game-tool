@@ -10,6 +10,7 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Award.php';
 
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Action.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_l_content.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Award_type.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Detail.php';
@@ -178,18 +179,16 @@ class QuestController extends BaseController
 			{	
 				$this->_helper->layout->disableLayout();
 				$this->_helper->viewRenderer->setNoRender();
-				
 				$form = new Forms_Quest_Detail();
 				$form->_requestToForm($this);					
 				$form->validate(UPDATE);			
 				$md = new Models_Quest_Detail();				
-				$md->update($form->obj);
+				$md->update($form->obj);				
 				//////////////////Update Award Item////////////////////////////
 				$mdAwardItem = new Models_Quest_Award();
 				$mdAwardItem->delete($form->obj->QuestID);
 				$arrAwardValue = $_POST['AwardValue'];
 				$arrAwardType = $_POST['AwardType'];
-				
 				if(!empty($arrAwardType))
 				{
 					foreach($arrAwardType as $key=>$value)
@@ -207,10 +206,10 @@ class QuestController extends BaseController
 				Models_Log::insert($this->view->user->username, "act_update_award_item");
 				echo "1";
 			}else{		
-				$md = new Models_Quest_Detail();
+				$md = new Models_Quest_Detail();						
 				$mdawartype = new Models_Q_Award_Type();
 				$id = $this->_request->getParam("id");
-				$this->view->obj = $md->_getByKey($id);				
+				$this->view->obj = $md->_getByKey($id);							
 				$this->view->arrQuestLine = $md->_getQuestLine();
 				$this->view->arrNeedQuest = $md->getQuest();
 				$this->view->arrAward = $md->getAward($id);
@@ -218,6 +217,24 @@ class QuestController extends BaseController
 				$this->view->arrTask = $md->getTask($id);
 				$this->view->arrQuest = $md->getQuest($id);				
 				$this->view->arrawardtype = $mdawartype->getAwardtype();
+					//////////Get group name and lkey ////				
+				$QuestDescString=$this->view->obj->QuestDescString;	
+				$QuestString=$this->view->obj->QuestString;
+				$QuestGroupString=$this->view->obj->QuestGroupString;
+
+				////////Cat ki tu #////
+				$questDS=explode('#',$QuestDescString);
+				$questS=explode('#',$QuestString);
+				$questGS=explode('#',$QuestGroupString);
+				
+				$mdfindname=new Models_l_content();				
+				$regquestDS = $mdfindname->findname($questDS[1], substr($questDS[0],1));
+				$regquestS = $mdfindname->findname($questS[1], substr($questS[0],1));
+				$regquestGS = $mdfindname->findname($questGS[1], substr($questGS[0],1));
+
+				$this->view->regquestDS=$regquestDS[0]->text;
+				$this->view->regquestS=$regquestS[0]->text;
+				$this->view->regquestGS=$regquestGS[0]->text;											
 			}	
 				
 		}
