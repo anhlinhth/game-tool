@@ -143,7 +143,7 @@ td.b_award input{
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
 							</select>																												
-							<em>lv:</em><input type='text' class='<?php echo  $strclass;?>' id='levelSolider' name='levelSolider[0]' value="<?php echo $arrBS['Level'];?>"/>
+							<em>lv:</em><input type='text' class='number' id='levelSolider' name='levelSolider[0]' value="<?php echo $arrBS['Level'];?>"/>
 						</td>
 						
 						
@@ -528,7 +528,7 @@ td.b_award input{
 		updateStatus(a_status,"loading","loading");	
 		var data = parent_tr.find("*").serialize();
 		var arr_data = parent_tr.find("*").serializeArray();			
-		validateForm(parent_tr);	
+		//validateForm(parent_tr);	
 		if(validate2(arr_data)==false){
 			$("#dialog").dialog({
 				title: "Diaglog",
@@ -659,9 +659,7 @@ td.b_award input{
 		});
 	}
 	///Save All
-	function saveAll(){
-		var form = $("#formPaging");
-		validateForm(form);		
+	function saveAll(){		
 		$("table#battle").find("td.action .save").not(".disabled").each(function (index){
 			
 			$(this).click();
@@ -823,18 +821,23 @@ td.b_award input{
 	function validate2(data){
 		
 		$("#dialog .ct").html("");		
-		jQuery.each(data, function(i, field){  			
-			if(field.value=="" && field.name=='Layout' ){
-				$("#dialog .ct").append("<p class='error'>"+field.name +"  không du?c b? tr?ng</p>" );								
+		jQuery.each(data, function(i, field){  	
+			
+			
+				
+			
+			return;
+			if(field.value=="" && field.name!='BattleID' ){
+				$("#dialog .ct").append("<p class='error'>"+field.name +"  không được bỏ trống</p>" );								
 			}			
-			/*else if(isNaN(field.value))
+			else if(isNaN(field.value))
 			{
-				$("#dialog .ct").append("<p class='error'>"+ field.name +"ph?i là s?</p>" );				
+				$("#dialog .ct").append("<p class='error'>"+ field.name +"phải là sô</p>" );				
 			}
 			
-			else if( (Number(field.value)>100 || Number(field.value)<0) && field.name!='Value[]' && field.name!='BattleID')
+			/*else if( (Number(field.value)>100 || Number(field.value)<0) && field.name!='Value[]' && field.name!='BattleID' && field.name!='solider')
 				{					
-					$("#dialog .ct").append("<p class='error'>"+ field.name +"Level ph?i n?m trong kho?ng 0 ->100</p>" );
+					$("#dialog .ct").append("<p class='error'>"+ field.name +"Level phải nằm trong khoảng 0 ->100</p>" );
 				}
 			*/
 		});
