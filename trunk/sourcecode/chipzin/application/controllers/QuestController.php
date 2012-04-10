@@ -414,6 +414,7 @@ class QuestController extends BaseController
 	public function listtaskAction(){
 		try
 		{
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_l_content.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Action.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Task_Target.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Task_Client.php';
@@ -430,7 +431,20 @@ class QuestController extends BaseController
 	
 			//Hiện List q_action
 			$this->view->arrTask = $md->getTask($questid);
-						
+			foreach ($this->view->arrTask as $key=>$row)
+			{
+				$TaskString = $row->TaskString;
+				$DescString = $row->DescID;
+				
+				$task = explode ('#', $TaskString);
+				$desc = explode ('#', $DescString);
+				
+				$mdlc = new Models_l_content();
+				$gNameTask = $mdlc->findname($task[1], substr($task[0],1));
+				$gNamedesc = $mdlc->findname($desc[1], substr($desc[0],1));
+				$this->view->arrTask[$key]->gNameTask = $gNameTask[0]->text;
+				$this->view->arrTask[$key]->gNamedesc = $gNamedesc[0]->text;
+			}
 			$this->view->arrAction = $mdAction->_getAction();
 			$this->view->arrTemp = $mdtemp->_filter(null,"TaskName",null,null);
 			$this->view->arrTaskTarget = $mdTT->select($questid);

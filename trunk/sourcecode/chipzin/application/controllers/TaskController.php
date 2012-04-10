@@ -105,10 +105,20 @@ class TaskController extends BaseController
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNorender();
 		try
-		{			
+		{		
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_l_content.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Template.php';
 			$mdtemp = new Models_template();
 			$return = $mdtemp->_getByKey($_POST[id]);
+			$TaskString = $return->TaskString;
+			$DescString = $return->DescID;
+			
+			$task = explode ('#', $TaskString);
+			$desc = explode ('#', $DescString);
+			
+			$mdlc = new Models_l_content();
+			$gNameTask = $mdlc->findname($task[1], substr($task[0],1));
+			$gNamedesc = $mdlc->findname($desc[1], substr($desc[0],1));
 			$arr =  (array)$return;
 			if($return->TargetType == "")
 			{
@@ -119,6 +129,8 @@ class TaskController extends BaseController
 			}else{
 				
 			}
+			$arr['gNameTask'] = $gNameTask[0]->text;
+			$arr['gNamedesc'] = $gNamedesc[0]->text;
 			echo json_encode($arr);
 			
 		}
