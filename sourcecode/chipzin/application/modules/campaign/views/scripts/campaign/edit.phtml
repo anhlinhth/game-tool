@@ -98,7 +98,7 @@ td.b_award input{
 		</td>			
 		<td>
 			<label>Campaign Name:</label>
-			<input type="text" name='Name' id='Name' value='<?php echo $this->campaign->Name;?>' />
+			<input disabled="disabled" type="text" name='Name' id='Name' value='<?php echo $this->campaign->Name;?>' />
 		</td>
 		
 		</tr>
@@ -758,7 +758,7 @@ td.b_award input{
 						$(e).val(msg.LayoutID);
 						$(e).change();// delegate to change envent selectbox
 					}else{					
-						alert('Tên Layout dã t?n t?i');
+						alert('Tên Layout đã tồn tại');
 					}
 				}
 			});			

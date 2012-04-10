@@ -263,6 +263,7 @@ class Campaign_CampaignController extends BaseController
 
         }
     }
+    
     public function loadcampaignAction()
     {
     	$this->_helper->layout->disableLayout();
