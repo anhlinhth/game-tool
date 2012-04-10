@@ -255,7 +255,7 @@ function loadTask(key){
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/quest/listtask/'?> ",
 		data: "id=" + key,	
-		success: function(data){		
+		success: function(data){	
 			if(data != ""){ 				
 				$("#list-task").html(data);
 				$(".add-target").click(function(){
@@ -496,7 +496,7 @@ function loadTemplate(key){
 		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
 		data: "id=" + id,	
 		dataType: "json",
-		success: function(msg){				
+		success: function(msg){	
 			$(".form-task-" + key +" input[name='TaskString']").val(msg.TaskString);
 			$(".form-task-" + key +" #TaskName").val(msg.TaskName);
 			$(".form-task-" + key +" input[name='DescID']").val(msg.DescID);
@@ -507,6 +507,8 @@ function loadTemplate(key){
 			$(".form-task-" + key +" #Quantity").val(msg.Quantity);
 			$(".form-task-" + key +" #IconClassName").val(msg.IconClassName);			
 			$(".form-task-" + key +" #IconPackageName").val(msg.IconPackageName);
+			$(".form-task-" + key +" #TaskString-string-value-"+ key).html(msg.gNameTask);
+			$(".form-task-" + key +" #DescID-string-value-"+ key).html(msg.gNamedesc);
 			if(msg.TargetType==null){				
 				$(".form-task-" + key+ " .list").html("");
 				$(".form-task-" + key + " #TargetType").val('');

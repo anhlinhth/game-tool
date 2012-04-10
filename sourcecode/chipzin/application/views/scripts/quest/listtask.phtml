@@ -74,7 +74,7 @@ else
 			<input type="text" id="TaskString-<?php echo $key?>" name="TaskString" value="<?php echo $val->TaskString?>"  onchange="getvalue('TaskString-<?php echo $key?>')" title="TaskString-string-value-<?php echo $key?>" />
 			<a title="chon" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('TaskString-<?php echo $key?>','')"></a>
 			<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('TaskString-<?php echo $key?>','')"></a>
-			<p class="string-value" id = "TaskString-string-value-<?php echo $key?>" ></p>
+			<p class="string-value" id = "TaskString-string-value-<?php echo $key?>" ><?php echo $val->gNameTask?></p>
 		</td>
 		
 	</tr>
@@ -86,7 +86,7 @@ else
 			<input type="text" id="DescID-<?php echo $key?>" name="DescID" value="<?php echo $val->DescID?>" onchange="getvalue('DescID-<?php echo $key?>')" title="DescID-string-value-<?php echo $key?>"/>
 			<a title="chn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('DescID-<?php echo $key?>','')"></a>
 			<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('DescID-<?php echo $key?>','')"></a>
-			<p class="string-value" id = "DescID-string-value-<?php echo $key?>" ></p>
+			<p class="string-value" id = "DescID-string-value-<?php echo $key?>" ><?php echo $val->gNamedesc?></p>
 		</td>
 		
 	</tr>
