@@ -151,16 +151,16 @@ class Models_Battle_Package extends Models_Base
 					if($i<$count)
 					{
 						if(trim(strtolower($this->getawardtype($row2['AwardTypeID'])))=="exp")
-							$str .="honour"." => ".$row2['Value'].",";
+							$str .="HONOUR"." => ".$row2['Value'].",";
 						else
-							$str .=strtolower($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'].",";
+							$str .=strtoupper($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'].",";
 					}
 					else 
 					{
 						if(trim(strtolower($this->getawardtype($row2['AwardTypeID'])))=="exp")
-							$str .="honour"." => ".$row2['Value'].",";
+							$str .="HONOUR"." => ".$row2['Value'].",";
 						else
-						$str .=strtolower($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'];
+						$str .=strtoupper($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'];
 					}
 					$i++;
 				}
