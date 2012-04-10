@@ -69,6 +69,18 @@ class Models_Map_Battle_Package extends Models_Base
 		$countc = $this->count();
 		$error = array();
 		$str .= "<?php\nreturn array\n(\n";
+		$str .= "\tCONFIG_DEFAULT_VALUE => array\n";
+		$str .= "\t(\n";
+		$str .= "\t'robBattle' => null,\n";
+		$str .= "\t'openBattles' => array(),\n";
+		$str .= "\t'awards' => array(),\n";
+		$str .= "\t),\n";
+		
+	
+		
+		
+		
+	
 		foreach ($data as $row)
 		{
 			if($row['TypeID']==1)
