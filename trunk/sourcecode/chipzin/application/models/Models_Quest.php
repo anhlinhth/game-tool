@@ -86,7 +86,7 @@ class Models_Quest extends Models_Base
 	public function filter($objSearch,$order,$offset,$count)
 	{
 		$sql = "SELECT
-					Q.QuestID,Q.QuestName,QL.QuestLineID,QL.QuestLineName
+					Q.NeedQuest,Q.QuestID,Q.QuestName,QL.QuestLineID,QL.QuestLineName
 				FROM
 					q_quest as Q, q_questline as QL
 				WHERE
