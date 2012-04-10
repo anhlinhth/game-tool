@@ -471,6 +471,8 @@ function loadTemplate(key){
 			$(".form-task-" + key +" #Quantity").val(msg.Quantity);
 			$(".form-task-" + key +" #IconClassName").val(msg.IconClassName);			
 			$(".form-task-" + key +" #IconPackageName").val(msg.IconPackageName);
+			$(".form-task-" + key +" #TaskString-string-value-"+ key).html(msg.gNameTask);
+			$(".form-task-" + key +" #DescID-string-value-"+ key).html(msg.gNamedesc);
 			if(msg.TargetType==null){				
 				$(".form-task-" + key+ " .list").html("");
 				$(".form-task-" + key + " #TargetType").val('');
