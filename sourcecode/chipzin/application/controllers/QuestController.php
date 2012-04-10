@@ -721,8 +721,10 @@ class QuestController extends BaseController
 			
 			$md= new Models_Quest();
 			$mdqd = new Models_Quest_Detail();
-			$md_questLine = new Models_Quest_Line();			
-			$count = $md->count($form->obj);			
+			$md_questLine = new Models_Quest_Line();
+						
+			$count = $md->count($form->obj);
+			$this->view->arrAllQuest = $mdqd->getQuest2();// get all quest			
 			$this->view->arrQuest = $md->filter($form->obj, "QuestName ASC", ($pageNo - 1)*$items, $items);	
 			$this->view->arrQuestLine = $md->getQuestlineID();
 			$this->view->items = $items;

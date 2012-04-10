@@ -53,7 +53,7 @@ class Zend_View_Helper_TopMenu
 
         
         $strList .= "<li class='$campaign'><a href='$view->baseUrl/campaign/campaign'>Campaign</a></li>";
-                
+        $strList .= "<li class='$localite'><a href='$view->baseUrl/localite/language'>Localize</a></li>";
 		$strList .=		"</ul>
 					</div>";
 		
