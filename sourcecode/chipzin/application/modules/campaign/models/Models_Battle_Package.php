@@ -149,9 +149,19 @@ class Models_Battle_Package extends Models_Base
 				foreach ($aw as $row2)
 				{
 					if($i<$count)
-						$str .=strtolower($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'].",";
+					{
+						if(trim(strtolower($this->getawardtype($row2['AwardTypeID'])))=="exp")
+							$str .="honour"." => ".$row2['Value'].",";
+						else
+							$str .=strtolower($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'].",";
+					}
 					else 
+					{
+						if(trim(strtolower($this->getawardtype($row2['AwardTypeID'])))=="exp")
+							$str .="honour"." => ".$row2['Value'].",";
+						else
 						$str .=strtolower($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'];
+					}
 					$i++;
 				}
 				$str .=")\n";
