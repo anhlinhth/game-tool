@@ -1,27 +1,17 @@
 <?php
 return array
 (
-	MAP_1 => array 
+	BARRACK_1=> array 
  	{
-		'type' => MAP,  
-		'name' => 'campaign1',
+		'type' => BARRACK, 
 		'needmap' => NULL,  
 		'nextmap' => NULL,
-		'width' => 40, 
-		'height' => 40, 
-		'blocks' => array(), 
-		'freeWorker' => 0 
 	},
-	MAP_2 => array 
+	BARRACK_2=> array 
  	{
-		'type' => MAP,  
-		'name' => 'campaign2',
+		'type' => BARRACK, 
 		'needmap' => NULL,  
 		'nextmap' => NULL,
-		'width' => 40, 
-		'height' => 40, 
-		'blocks' => array(), 
-		'freeWorker' => 0 
 	},
 	BARRACK_3=> array 
  	{
@@ -29,104 +19,101 @@ return array
 		'needmap' => NULL,  
 		'nextmap' => NULL,
 	},
-	MAP_5 => array 
+	BARRACK_4=> array 
  	{
-		'type' => MAP,  
-		'name' => 'Campaign',
+		'type' => BARRACK, 
 		'needmap' => NULL,  
 		'nextmap' => NULL,
-		'width' => 40, 
-		'height' => 40, 
-		'blocks' => array(), 
-		'freeWorker' => 0 
 	},
-	MAP_6 => array 
+	BARRACK_5=> array 
  	{
-		'type' => MAP,  
-		'name' => 'Campaign',
+		'type' => BARRACK, 
 		'needmap' => NULL,  
 		'nextmap' => NULL,
-		'width' => 40, 
-		'height' => 40, 
-		'blocks' => array(), 
-		'freeWorker' => 0 
 	},
-	MAP_7 => array 
+	BARRACK_6=> array 
  	{
-		'type' => MAP,  
-		'name' => 'Campaign',
+		'type' => BARRACK, 
 		'needmap' => NULL,  
 		'nextmap' => NULL,
-		'width' => 40, 
-		'height' => 40, 
-		'blocks' => array(), 
-		'freeWorker' => 0 
 	},
-	MAP_8 => array 
+	BARRACK_7=> array 
  	{
-		'type' => MAP,  
-		'name' => 'Campaign',
+		'type' => BARRACK, 
 		'needmap' => NULL,  
 		'nextmap' => NULL,
-		'width' => 40, 
-		'height' => 40, 
-		'blocks' => array(), 
-		'freeWorker' => 0 
 	},
-	MAP_9 => array 
+	BARRACK_8=> array 
  	{
-		'type' => MAP,  
-		'name' => 'Campaign',
+		'type' => BARRACK, 
 		'needmap' => NULL,  
 		'nextmap' => NULL,
-		'width' => 40, 
-		'height' => 40, 
-		'blocks' => array(), 
-		'freeWorker' => 0 
 	},
-	MAP_10 => array 
+	BARRACK_9=> array 
  	{
-		'type' => MAP,  
-		'name' => 'Campaign',
+		'type' => BARRACK, 
 		'needmap' => NULL,  
 		'nextmap' => NULL,
-		'width' => 40, 
-		'height' => 40, 
-		'blocks' => array(), 
-		'freeWorker' => 0 
 	},
-	MAP_11 => array 
+	BARRACK_10=> array 
  	{
-		'type' => MAP,  
-		'name' => 'Campaign',
+		'type' => BARRACK, 
 		'needmap' => NULL,  
 		'nextmap' => NULL,
-		'width' => 40, 
-		'height' => 40, 
-		'blocks' => array(), 
-		'freeWorker' => 0 
 	},
-	MAP_12 => array 
+	BARRACK_11=> array 
  	{
-		'type' => MAP,  
-		'name' => 'Campaign',
+		'type' => BARRACK, 
 		'needmap' => NULL,  
 		'nextmap' => NULL,
-		'width' => 40, 
-		'height' => 40, 
-		'blocks' => array(), 
-		'freeWorker' => 0 
 	},
-	MAP_13 => array 
+	BARRACK_12=> array 
  	{
-		'type' => MAP,  
-		'name' => 'Campaign',
+		'type' => BARRACK, 
 		'needmap' => NULL,  
 		'nextmap' => NULL,
-		'width' => 40, 
-		'height' => 40, 
-		'blocks' => array(), 
-		'freeWorker' => 0 
+	},
+	BARRACK_13=> array 
+ 	{
+		'type' => BARRACK, 
+		'needmap' => NULL,  
+		'nextmap' => NULL,
+	},
+	BARRACK_14=> array 
+ 	{
+		'type' => BARRACK, 
+		'needmap' => NULL,  
+		'nextmap' => NULL,
+	},
+	BARRACK_15=> array 
+ 	{
+		'type' => BARRACK, 
+		'needmap' => NULL,  
+		'nextmap' => NULL,
+	},
+	BARRACK_16=> array 
+ 	{
+		'type' => BARRACK, 
+		'needmap' => NULL,  
+		'nextmap' => NULL,
+	},
+	BARRACK_17=> array 
+ 	{
+		'type' => BARRACK, 
+		'needmap' => NULL,  
+		'nextmap' => NULL,
+	},
+	BARRACK_18=> array 
+ 	{
+		'type' => BARRACK, 
+		'needmap' => NULL,  
+		'nextmap' => NULL,
+	},
+	BARRACK_19=> array 
+ 	{
+		'type' => BARRACK, 
+		'needmap' => NULL,  
+		'nextmap' => NULL,
 	}
 );
 ?>

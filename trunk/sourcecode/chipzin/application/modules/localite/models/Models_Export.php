@@ -25,7 +25,7 @@ class Models_Export
 	public function Replacekeyintext($text,$lang)
 	{
 		
-		$tam = split('{@', $text);
+		$tam = explode('{@', $text);
 		$rs = "";
 		$rs.=$tam[0];
 		$i=0;
