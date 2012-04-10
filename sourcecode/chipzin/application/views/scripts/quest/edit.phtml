@@ -10,7 +10,7 @@
 	<h3>Edit Quest</h3>
 	<form class="quest" id="form" action="" method="post">
 	  <fieldset id="info">
-		<legend>ThÃ´ng tin Quest </legend>
+		<legend>Thông tin Quest </legend>
 		<table id="quest">
 			<tr>
 				<td width="55%">
@@ -28,8 +28,8 @@
 				<td>
 					<label for="queststring">Quest String: </label> 
 					<input name="QuestString" value="<?php echo $this->obj->QuestString?>" id="queststring" type="text" tabindex="1" onchange="getvalue('queststring')" title="queststring-string-value"/>
-					<a title="chá»�n" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('queststring','')"></a>
-					<a title="thÃªm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('queststring','')"></a>
+					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('queststring','')"></a>
+					<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('queststring','')"></a>
 					<label></label><p class="string-value" id = "queststring-string-value" ><?php echo $this->regquestS;?></p>
 				</td>
 
@@ -43,8 +43,8 @@
 				<td>
 					<label for="QuestGroupString">Q_Group String: </label> 
 					<input name="QuestGroupString" value="<?php echo $this->obj->QuestGroupString?>" id="questgroupstring" type="text" tabindex="1" onchange="getvalue('questgroupstring')" title="questgroup-string-value" />
-					<a title="chá»�n" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('questgroupstring','')"></a>
-					<a title="thÃªm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('questgroupstring','')"></a>
+					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('questgroupstring','')"></a>
+					<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('questgroupstring','')"></a>
 					<label></label><p class="string-value" id = "questgroup-string-value" ><?php echo $this->regquestGS;?></p>
 				</td>		
 		
@@ -58,8 +58,8 @@
 				<td>
 					<label for="questdescString">Q_Desc String: </label> 
 					<input name="QuestDescString" value="<?php echo $this->obj->QuestDescString?>" id="questdescstring" type="text" tabindex="1" onchange="getvalue('QuestDescString')" title="questdesc-string-value">					
-					<a title="chá»�n" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('questdescstring','')"></a>
-					<a title="thÃªm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('questdescstring','')"></a>
+					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('questdescstring','')"></a>
+					<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('questdescstring','')"></a>
 					<label></label><p class="string-value" id = "questdesc-string-value" ><?php echo $this->regquestDS;?></p>
 				</td>			
 			</tr>
@@ -300,44 +300,46 @@ function validate(){
 		value = $(val).find(" #TaskString").val();		
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString khÃ´ng Ä‘Æ°á»£c Ä‘á»ƒ trá»‘ng</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString không được để trống</p>");					
 			flag=false;
 		}		
 		value = $(val).find("#TaskName").val();
 		
-		value = $(val).find("#DescID").val();
+		value = $(val).find("#DescID-"+key).val();
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescString khÃ´ng Ä‘Æ°á»£c bá»� trá»‘ng</p>");	
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescString không được để trống</p>");	
 			flag=false;
 		}
+
+		
 		value = $(val).find("#QuestTC").val();
 		value = $(val).find("#UnlockCoin").val();
 		if(isNaN(value))
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin pháº£i lÃ  sá»‘</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin phải là số</p>");					
 			flag=false;
 		}
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlickCoin khÃ´ng Ä‘Æ°á»£c Ä‘á»ƒ trá»‘ng</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlickCoin không được để trống</p>");					
 			flag=false;
 		}
 		value = $(val).find("#Quantity").val();
 		if(isNaN(value))
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity pháº£i lÃ  sá»‘</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity phải là số</p>");					
 			flag=false;
 		}
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity khÃ´ng Ä‘Æ°á»£c Ä‘á»ƒ trá»‘ng</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity không được để trống</p>");					
 			flag=false;
 		}
 		value = $(val).find("#Action").val();	
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>HÃ£y chá»�n Action</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Hãy chọn Action</p>");					
 			flag=false;
 		}
 		//////////////
@@ -346,12 +348,12 @@ function validate(){
 			targetType=$(val).find("#TargetType").val();
 			if(targetType=='')
 			{
-				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType khÃ´ng Ä‘Æ°á»£c bá»� trá»‘ng</p>");					
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType không được để trống</p>");					
 				flag=false;
 			}
 			else if(isNaN(targetType))
 			{
-				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType pháº£i lÃ  sá»‘</p>");					
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType phải là số</p>");					
 				flag=false;
 			}
 		}else{			
@@ -359,18 +361,18 @@ function validate(){
 			count = $(val).find(".target-list").size();			
 			if(count==0)
 			{								
-					$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList chÆ°a Ä‘Æ°á»£c táº¡o</p>");					
+					$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList chưa được tạo</p>");					
 					flag=false;				
 			}
 			else if(targetList=='' &&count!=0 )
 			{
 				
-				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList khÃ´ng Ä‘Æ°á»£c bá»� trá»‘ng</p>");					
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList không được để trống</p>");					
 				flag=false;
 			}
 			else if(isNaN(targetList) &&count!=0)
 			{
-				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList pháº£i lÃ  sá»‘</p>");					
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList phải là số</p>");					
 				flag=false;
 			}
 		}
@@ -580,7 +582,7 @@ function findstring(textbox,link)
 			
 			tam = result.split('<div id="splip"></div>');
 			tam2=tam[1];
-			tam2=tam2.replace('<input class="btn search" type="submit" name="search" value="search" />','<a style="padding:4px;border:1px solid #ddd;background:#f8f8f8;" href="JavaScript:void(0)" onClick="searchlink()">TÃ¬m kiáº¿m</a>')
+			tam2=tam2.replace('<input class="btn search" type="submit" name="search" value="search" />','<a style="padding:4px;border:1px solid #ddd;background:#f8f8f8;" href="JavaScript:void(0)" onClick="searchlink()">Tìm kiếm</a>')
 			tam2=tam2.replace("searchlink()","searchlink('"+textbox+"')");
 			for(i=0;i<10;i++)
 			{
@@ -658,7 +660,7 @@ function newstring(textbox,link)
 			  },
 		success: function (result) {
 			tam = result.split('<div id="splip"></div>');
-			tam1 = tam[1].replace('<input id="button" type="submit" value="OK">','<a style=" border: 1px solid #C3D7DB;padding:2px 4px;margin:4px;" href="JavaScript:void(0);" title="lÆ°u" onClick="'+ham+'">LÆ°u</a>');
+			tam1 = tam[1].replace('<input id="button" type="submit" value="OK">','<a style=" border: 1px solid #C3D7DB;padding:2px 4px;margin:4px;" href="JavaScript:void(0);" title="Lưu" onClick="'+ham+'">Lưu</a>');
 			tam2 = tam1+'</div></div></div>';
 			$('#stringmain').html(tam2);
 		}
@@ -671,7 +673,7 @@ function addnewstring(textbox){
 	var gname = $("select#l_group option[value='"+l_group+"']").text();
 	var test = $('textarea[name=test]').val();
 	var test1 = $('textarea[name=test1]').val();
-	if(test==''||test1==''){alert('Báº¡n nháº­p chÆ°a Ä‘áº§y Ä‘á»§ cÃ¡c string vui lÃ²ng nháº­p láº¡i');return;}
+	if(test==''||test1==''){alert('Bạn chưa nhập đầy đủ các ô,vui lòng nhập lại');return;}
 	$.ajax({
 		type: "POST",
 		url: '<?php echo $this->baseUrl?>/localite/string/insert?key='+key+'&l_group='+l_group+'&test='+test+'&test1='+test1,
