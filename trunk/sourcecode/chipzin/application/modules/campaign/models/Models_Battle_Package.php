@@ -119,6 +119,7 @@ class Models_Battle_Package extends Models_Base
 		$str .= "\t'max_turn' => 100,\n";
 		$str .= "\t'random_min' => 1,\n";
 		$str .= "\t'random_max' => 2,\n";
+		$str .= "\t'loseGold' => 10,\n";
 		$j=1;
 		$countB = $this->countBattle(); 
 		foreach($data as $row)
