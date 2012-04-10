@@ -126,7 +126,6 @@ class Models_Battle_Package extends Models_Base
 			$str .= "\t".$row['ID']." => array \n";
 			$str .= "\t{\n";
 			$sol = $this->getsoldier($row['ID']);
-			$ij=0;
 			if($sol)
 			{
 				$str .= "\t\t'soldiers' => array\n";
@@ -135,19 +134,30 @@ class Models_Battle_Package extends Models_Base
 				
 				foreach ($sol as $row3)
 				{
-					
 					$str .= "\t\t\t".$row3['Point']." => array (".$this->getnamesoldier($row3['Soldier']).",".$row3['Level']."),\n";
-					if($ij==0)
-						$ij=$row3['Level'];
 				}
 				$str .= "\t\t),\n";
 			}
 			else 
 				$str .= "\t\t'soldiers' => NULL,\n";
-				$va = 40 + 15*$ij;
+			$aw = $this->getawards($row['ID']);
+			if($aw)
+			{
+				$count = $this->getcountaward($row['ID']);
 				$str .= "\t\t'awards' => array (";
-				$str .= "GOLD => ".$va.",EXP => 1";
+				$i =1;
+				foreach ($aw as $row2)
+				{
+					if($i<$count)
+						$str .=strtolower($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'].",";
+					else 
+						$str .=strtolower($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'];
+					$i++;
+				}
 				$str .=")\n";
+			}
+			else 
+				$str .= "\t\t'awards' => NULL\n";
 			if($j<$countB)
 				$str .= "\t},\n";
 			else
