@@ -70,7 +70,7 @@ class Zend_View_Helper_TopPanel
            	case 'backup':			   
 			case 'worldmap':
 			case 'layout':
-			case 'import':
+			case 'import2':
 			
             	if (Utility::checkPrivilege($view, 'campaign', 'index'))
                     $strList .= "<li><a href='$view->baseUrl/campaign/campaign/index' class='report'>Campaign Manager</a></li>";               
