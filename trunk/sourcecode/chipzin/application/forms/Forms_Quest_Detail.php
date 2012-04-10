@@ -31,6 +31,21 @@ class Forms_Quest_Detail extends Forms_Base
 			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
 			array_push($arrNote, "QuestName không được để trống<br>");
 		}		
+		if(empty($this->obj->QuestString))
+		{
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
+			array_push($arrNote, "QuestString không được để trống<br>");
+		}
+		if(empty($this->obj->QuestGroupString))
+		{
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
+			array_push($arrNote, "QuestGroupString không được để trống<br>");
+		}
+		if(empty($this->obj->QuestDescString))
+		{
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
+			array_push($arrNote, "QuestDescString không được để trống<br>");
+		}
 		
 		if(empty ($this->obj->QuestLineID))
 		{
