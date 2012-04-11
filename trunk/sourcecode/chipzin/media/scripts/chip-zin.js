@@ -90,6 +90,14 @@ function validateInput(e)
 						$(this).css({ border: "1px solid red" }).focus();						
 					}					
 				}
+		 else if($(this).hasClass('require'))
+			 {
+			 	if($(this).val()=="")
+			 		{
+			 			rs += " ";	
+			 			$(this).css({ border: "1px solid red" }).focus();	
+			 		}
+			 }
 	});
 		
 	
