@@ -125,7 +125,7 @@ class Models_Battle_Package extends Models_Base
 		foreach($data as $row)
 		{
 			$str .= "\t".$row['ID']." => array \n";
-			$str .= "\t{\n";
+			$str .= "\t(\n";
 			$sol = $this->getsoldier($row['ID']);
 			if($sol)
 			{
@@ -159,7 +159,7 @@ class Models_Battle_Package extends Models_Base
 					else 
 					{
 						if(trim(strtolower($this->getawardtype($row2['AwardTypeID'])))=="exp")
-							$str .="HONOUR"." => ".$row2['Value'].",";
+							$str .="HONOUR"." => ".$row2['Value'];
 						else
 						$str .=strtoupper($this->getawardtype($row2['AwardTypeID']))." => ".$row2['Value'];
 					}
@@ -170,9 +170,9 @@ class Models_Battle_Package extends Models_Base
 			else 
 				$str .= "\t\t'awards' => NULL\n";
 			if($j<$countB)
-				$str .= "\t},\n";
+				$str .= "\t),\n";
 			else
-				$str .= "\t}\n";
+				$str .= "\t)\n";
 			$j++;
 		}
 		$str .= ");\n?>";
