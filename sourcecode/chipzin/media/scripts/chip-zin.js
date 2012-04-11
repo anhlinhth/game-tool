@@ -49,25 +49,52 @@ function validateForm(e){
 }
 
 function validateInput(e)
-{	flag=true;
+{	
+	var rs = "";	
 	var input=e.find('input');
+	var select=e.find('select');
 	input.each(function(index)
-	{
-		
-		if($(this).hasClass('require'))
-			{
-				if($(this).val()=='')
+	{	
+		$(this).css({ border: " 1px solid #EFEFEF" });
+		if( $(this).is(':disabled')==true){							
+		}
+		else if($(this).hasClass('number'))
+				{
+					if($(this).val()=='')
 					{
-						$(this).css({ border: "1px solid red" }).focus();
-						flag=false;
+						rs += " ";						
+						$(this).css({ border: "1px solid red" }).focus();						
 					}
-				else if($(this).val()!='')
-					{
-						$(this).css({ border: "none" });						
-					}
-			}
+					else if(isNaN($(this).val()))
+						{
+							rs += " ";						
+							$(this).css({ border: "1px solid red" }).focus();
+						}
+					else if(Number($(this).val())<0 ||Number($(this).val())>100 )
+						{
+							rs += " ";
+							$(this).css({ border: "1px solid red" }).focus();							
+						}
+					
+		}		
+		 
 	});
-	return flag;
+	select.each(function(index){
+		$(this).css({ border: " 1px solid #ADD8E6" });
+		
+		 if($(this).hasClass('layout'))
+				{
+					if($(this).val()=='')
+					{
+						rs += 'Layout không được bỏ trống<br>';	
+						$(this).css({ border: "1px solid red" }).focus();						
+					}					
+				}
+	});
+		
+	
+	return rs;
+	
 }
 
 function validateInput2(e)
