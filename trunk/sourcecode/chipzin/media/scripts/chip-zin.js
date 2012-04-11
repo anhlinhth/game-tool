@@ -74,9 +74,16 @@ function validateInput(e)
 						{
 							rs += " ";
 							$(this).css({ border: "1px solid red" }).focus();							
-						}
-					
+				}								
 		}		
+		else if($(this).hasClass('require'))
+			{
+			if($(this).val()=='')
+			{
+				rs += "Award Type không được để trống";						
+				$(this).css({ border: "1px solid red" }).focus();						
+			}
+			}
 		 
 	});
 	select.each(function(index){
