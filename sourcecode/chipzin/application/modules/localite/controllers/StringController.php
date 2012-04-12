@@ -103,7 +103,7 @@ class Localite_StringController extends BaseController
 			else 
 			{
 				$string->update($_REQUEST['key'], $_REQUEST['group'], $_REQUEST['test'], $_REQUEST['test1']);
-				$this->_redirect('/localite/string/index');
+				//$this->_redirect('/localite/string/index');
 			}
 		}
 	}
@@ -120,5 +120,51 @@ class Localite_StringController extends BaseController
 		if($tam!='')
 			echo '/n/'.$model->Replacekeyintext($model->gettextbykey($lang, $tam), $lang).'/n/';
 		else echo '/n//n/';
+	}
+	
+	//////////////////////////ThaoNX///////////////////////////
+	public function editAction()
+	{
+		$md_string = new Models_String();	
+	    try{					
+	        $viewtype = $this->_request->getParam('view');		
+			if($viewtype=="dialog"){
+				$this->_helper->layout->disableLayout();
+				if($this->_request->isPost()){
+				    $this->_helper->viewRenderer->setNoRender();					
+					$key = $_POST['key'];
+					$group_name = $_POST['group_name'];
+					$default 	= $_POST['default'];
+					$index 		= $_POST['index'];						
+					$md_string->update2($key,null,$group_name, $default, $index);				
+					echo $default;
+					return;
+				}
+			}
+			$string = $this->_request->getParam("string");	
+			
+			$arrString = explode('#',$string);		
+			$key   	= $arrString[1];
+			$group_name = substr($arrString[0],1);			
+			$lang_default_id = $md_string->getlangdefaultid();
+			$lang_index_id = $md_string->getlangindexid();
+			
+			$this->view->lang_default_text = $md_string->getTextBylang2($lang_default_id, $key, $groupid,$group_name);			
+			$this->view->lang_index_text = $md_string->getTextBylang2($lang_index_id, $key, $groupid,$group_name);
+				
+			$this->view->group_name = $group_name;		
+	        $this->view->key = $key;
+			
+			$this->view->viewtype = $viewtype;
+	        $this->view->lang_default = $md_string->getlangdefault();
+	        $this->view->lang_index = $md_string->getlangindex();			
+	        
+	    }catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	
 	}
 }

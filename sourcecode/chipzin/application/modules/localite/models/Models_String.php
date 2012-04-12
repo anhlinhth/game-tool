@@ -197,5 +197,26 @@ class Models_String
 					);
 		$this->db->update('l_content',$data,$where);
 	}
+	//////////////////ThaoNX//////////////////////
 	
+	public function getTextBylang2($lang,$key,$groupid=null,$groupname=null)
+	{
+		$sql = "SELECT text FROM l_content WHERE lang ='".$lang."' AND lkey = '".$key."'";
+		if($groupid && !empty($groupid))
+			$sql.=" AND lgroup = '".$groupid."'";
+		if($groupname && !empty($groupname))
+			$sql.=" AND lgroup = (SELECT id FROM l_group WHERE name='".$groupname."')";		
+		$rs = $this->db->fetchOne($sql);
+		return $rs;
+	}
+	public function update2($key,$groupid=null,$groupname=null,$text,$text1)
+	{
+//		$sql = "select id from l_language where status = 1";
+		$sql ="UPDATE l_content SET text='$text' WHERE l_content.lang=(SELECT id FROM l_language where status = 1) AND lkey=$key";	
+		if($groupid && !empty($groupid))
+			$sql.=" AND lgroup = '".$groupid."'";
+		if($groupname && !empty($groupname))
+			$sql.=" AND lgroup = (SELECT id FROM l_group WHERE name='".$groupname."')";			
+		$result= $this->db->query($sql);		
+	}
 }

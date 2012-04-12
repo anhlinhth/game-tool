@@ -13,7 +13,7 @@
 		<legend>Thông tin Quest </legend>
 		<table id="quest">
 			<tr>
-				<td  style="width: 55%;">
+				<td  style="width: 50%;">
 					<label for="QuestID">Quest ID : </label> 
 					<input class="disabled" readonly name="QuestID" value="<?php echo $this->obj->QuestID ?>" id="QuestID" type="text" tabindex="1" /></td>
 				<td>
@@ -29,6 +29,7 @@
 					<label for="queststring">Quest String: </label> 
 					<input name="QuestString" value="<?php echo $this->obj->QuestString?>" id="queststring" type="text" tabindex="1" onchange="getvalue('queststring')" title="queststring-string-value" />	
 					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('queststring','')"></a>&nbsp;
+					<a title="sửa" id="queststring-string-value" class="tool-16 edit" href="JavaScript:void(0);"></a>&nbsp;
 					<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('queststring','')"></a>
 					<label></label><p class="string-value" id = "queststring-string-value" ></p>
 				</td>
@@ -44,6 +45,7 @@
 					<label for="QuestGroupString">Q_Group String: </label> 
 					<input name="QuestGroupString" value="<?php echo $this->obj->QuestGroupString?>" id="questgroupstring" type="text" tabindex="1" onchange="getvalue('questgroupstring')" title="questgroup-string-value" />
 					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('questgroupstring','')"></a>&nbsp;
+					<a title="sửa" id="questgroup-string-value" class="tool-16 edit" href="JavaScript:void(0);"></a>&nbsp;
 					<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('questgroupstring','')"></a>
 					<label></label><p class="string-value" id = "questgroup-string-value" ></p>
 				</td>		
@@ -59,6 +61,7 @@
 					<label for="questdescString">Q_Desc String: </label> 
 					<input name="QuestDescString" value="<?php echo $this->obj->QuestDescString?>" id="questdescstring" type="text" tabindex="1" onchange="getvalue('QuestDescString')" title="questdesc-string-value"/>
 					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('questdescstring','')"></a>&nbsp;
+					<a title="sửa" id="questdesc-string-value" class="tool-16 edit" href="JavaScript:void(0);"></a>&nbsp;
 					<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('questdescstring','')"></a>
 					<label></label><p class="string-value" id = "questdesc-string-value" ></p>
 				</td>			
@@ -121,6 +124,9 @@
 <div id = "stringmain"   style="position:fixed;top:100px;width:950px;margin:10px auto;z-index:10000;background:#fff;overflow:scroll;display:none;padding:5px;border:15px solid #f4f4f4;border-radius:8px;">
 </div>
 <div id='dialog_edit_template'>
+		
+</div>
+<div id='dialog_edit_localize'>
 		
 </div>
 <div style="display:none" id='tempAward'>
@@ -471,8 +477,10 @@ function loadTemplate(key){
 			$(".form-task-" + key +" #Quantity").val(msg.Quantity);
 			$(".form-task-" + key +" #IconClassName").val(msg.IconClassName);			
 			$(".form-task-" + key +" #IconPackageName").val(msg.IconPackageName);
-			$(".form-task-" + key +" #TaskString-string-value-"+ key).html(msg.gNameTask);
-			$(".form-task-" + key +" #DescID-string-value-"+ key).html(msg.gNamedesc);
+			$(".form-task-" + key +" p#TaskString-string-value-"+ key).html(msg.gNameTask);
+			$(".form-task-" + key +" a#TaskString-string-value-"+ key).attr("href","javascript:editstring('"+msg.TaskString+"','TaskString-string-value-"+key+"');");
+			$(".form-task-" + key +" p#DescID-string-value-"+ key).html(msg.gNamedesc);
+			$(".form-task-" + key +" a#DescID-string-value-"+ key).attr("href","javascript:editstring('"+msg.DescID+"','DescID-string-value-"+key+"');");
 			if(msg.TargetType==null){				
 				$(".form-task-" + key+ " .list").html("");
 				$(".form-task-" + key + " #TargetType").val('');
@@ -518,18 +526,24 @@ $("#dialog_edit_template").dialog({
 function getvalue(textbox)
 {
 	
-	tam = $('#'+textbox).val();
-	tam1 = tam.split('@');
+	var tam = $('#'+textbox).val();	
+	var tam1 = tam.split('@');
+	var str_split = tam1[1].split('#');
+	var groupname = str_split[0];
+	var key = str_split[1]	
 	$.ajax({
 		type: "POST",
 		url: '<?php echo $this->baseUrl?>/localite/string/viewkey',
 		data: { 
 					value : tam1[1]
 			  },
-		success: function (result) {
+		success: function (result) {			
+			tam2 = result.split('/n/');
+			var title = $('#'+textbox).attr('title');
+			$('p#'+title).html(tam2[1]);
+			$('a#'+title).attr("href","javascript:editstring('"+tam+"','"+title+"');");
 			
-			tam = result.split('/n/');
-			$('#'+$('#'+textbox).attr('title')).html(tam[1]);
+			
 		}
 		}); 
 }
@@ -537,7 +551,7 @@ function findstring(textbox,link)
 {
 	$.ajax({
 		type: "POST",
-		url: '<?php echo $this->baseUrl?>/localite/string/index?ajax=true&size=10'+link,
+		url: '<?php echo $this->baseUrl?>/localite/string/index?ajax=true&size=20'+link,
 		data: { 
 					
 			  },
@@ -572,8 +586,8 @@ function findstring(textbox,link)
 function addstring(textbox,value)
 {
 	$('#'+textbox).attr("value",value);
-	$('#stringmain').html("");
-	getvalue(textbox);
+	$('#stringmain').html("");	
+	getvalue(textbox);	
 	hidelightbox();
 }
 function searchlink(textbox)
@@ -644,7 +658,7 @@ function addnewstring(textbox){
 			  },
 		success: function (result) {
 			var value = '@'+gname+'#'+key; 
-			addstring(textbox,value);
+			addstring(textbox,value);			
 			hidelightbox();
 		}
 	});
@@ -659,6 +673,52 @@ function getgroupname(key){
 			return result;
 		}
 	});
+}
+///////Thaonx/////////////////
+//////////////Edit Language////////////////
+var local_title = "";
+function editstring(string,title){
+	local_title = title;	
+	 $.ajax({
+		type: "GET",		
+		url: "<?php echo $this->baseUrl?>/localite/string/edit?view=dialog&string="+encodeURIComponent(string)+"",
+		success: function (msg) {
+			
+			$("#dialog_edit_localize").html(msg);
+			//local_title = title;
+			$("#dialog_edit_localize").dialog("open");
+		}
+	});
+}
+// init dialog
+$("#dialog_edit_localize").dialog({
+	autoOpen: false,
+	height: 400,
+	width: 400,
+	modal: true,
+	buttons: {
+		"Save": function() {
+			saveLanguage();
+		},
+		"Cancel": function() {
+			$(this).dialog("close");
+		}
+	}
+});
+//save Language
+function saveLanguage(){
+	var data = $("form#insertstring").serialize();
+	data +="&view=dialog";
+	var string_value = $("form#insertstring textarea[name='default']").val();
+	$.ajax({
+		type: "POST",		
+		url: "<?php echo $this->baseUrl?>/localite/string/edit/",
+		data:data,
+		success: function (msg) {							
+				$("#dialog_edit_localize").dialog("close");
+				$("p#"+local_title).text(msg);			
+		}
+	});	
 }
 
 </script>

@@ -33,7 +33,7 @@ class Models_Export
 		{
 			if($i>0)
 			{
-				$tam1 = split('}', $vl);
+				$tam1 = explode('}', $vl);
 				$rs.=$this->gettextbykey($lang,$tam1[0]);
 				$j=0;
 				foreach ($tam1 as $vl1)
