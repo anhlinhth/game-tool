@@ -20,5 +20,16 @@ class Models_l_content extends Models_Base
 		
 		return $data;
 	}
+	
+	public function getGroupID($groupname)
+	{
+		$sql = "SELECT id 
+				FROM l_group 
+				WHERE name = '$groupname'";
+		
+		$data = $this->_db->fetchOne($sql, null, Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}
 }
 ?>

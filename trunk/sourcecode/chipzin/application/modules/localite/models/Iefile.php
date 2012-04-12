@@ -83,10 +83,28 @@ class Models_Localite_Iefile extends Models_Base
 	public function read_text_file($in_filename) {
 	    $file = fopen($in_filename, 'r');
 	    $output = array();
+		
+		$item = '';
 	    while (!feof($file)) {
-	        $buf = fgets($file);
-	        $output[] = $buf;
-	    }
+	        $ln = trim(fgets($file));
+			if (strlen($ln) == 0) { continue; }
+			
+			if ($ln[0] == '@')	// Line starts with '@'
+			{
+				$output[] = $item;
+				echo 'added:' . $item . '<br>';
+				
+				$item = $ln;
+			}
+			else // Line does not starts with '@' => continue from last line
+			{
+				$item = $item . "\n" . $ln;
+			}
+			
+	    } // while
+		
+		if ($ln!='') $output[] = $ln;
+		
 	    fclose($file);
 	    return $output;
 	}  

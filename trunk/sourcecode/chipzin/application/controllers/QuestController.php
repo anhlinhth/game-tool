@@ -222,16 +222,28 @@ class QuestController extends BaseController
 				$QuestString=$this->view->obj->QuestString;
 				$QuestGroupString=$this->view->obj->QuestGroupString;
 
-				////////Cat ki tu #////
+				////////Get String Text////
+				$md_content=new Models_l_content();				
 				$questDS=explode('#',$QuestDescString);
 				$questS=explode('#',$QuestString);
 				$questGS=explode('#',$QuestGroupString);
+				$regquestDS = $md_content->findname($questDS[1], substr($questDS[0],1));
+				$regquestS = $md_content->findname($questS[1], substr($questS[0],1));
+				$regquestGS = $md_content->findname($questGS[1], substr($questGS[0],1));
+				//////////////////ThaoNX/////////
+				//Get GroupID, Get Key
+				$this->view->qs = Array();// localize: quest string
+				$this->view->qs['groupname'] = substr($questS[0],1);				
+				$this->view->qs['key'] = $questS[1];				
 				
-				$mdfindname=new Models_l_content();				
-				$regquestDS = $mdfindname->findname($questDS[1], substr($questDS[0],1));
-				$regquestS = $mdfindname->findname($questS[1], substr($questS[0],1));
-				$regquestGS = $mdfindname->findname($questGS[1], substr($questGS[0],1));
-
+				$this->view->qgs = Array();// localize: quest group string
+				$this->view->qgs['groupname'] = substr($questGS[0],1);				
+				$this->view->qgs['key'] = $questGS[1];
+					
+				$this->view->qds = Array();// localize: quest desc string
+				$this->view->qds['groupname'] = substr($questDS[0],1);				
+				$this->view->qds['key'] = $questDS[1];		
+				////////////////End ThaoNX/////////////
 				$this->view->regquestDS=$regquestDS[0]->text;
 				$this->view->regquestS=$regquestS[0]->text;
 				$this->view->regquestGS=$regquestGS[0]->text;											
@@ -459,8 +471,15 @@ class QuestController extends BaseController
 				$mdlc = new Models_l_content();
 				$gNameTask = $mdlc->findname($task[1], substr($task[0],1));
 				$gNamedesc = $mdlc->findname($desc[1], substr($desc[0],1));
-				$this->view->arrTask[$key]->gNameTask = $gNameTask[0]->text;
+				$this->view->arrTask[$key]->gNameTask = $gNameTask[0]->text;				
 				$this->view->arrTask[$key]->gNamedesc = $gNamedesc[0]->text;
+				////////////////ThaoNX: Use Tan's Function///////////////
+				$gidTS =   $mdlc->getGroupID(substr($task[0],1));
+				$gidTDS =  $mdlc->getGroupID(substr($desc[0],1));
+				$this->view->arrTask[$key]->gidTS = $gidTS;// goup id of Task String
+				$this->view->arrTask[$key]->keyTS = $task[1];// goup id of Task String
+				$this->view->arrTask[$key]->gidTDS = $gidTDS;// goup id of Task Desc String
+				$this->view->arrTask[$key]->keyTDS = $desc[1];// goup id of Task Desc String
 			}
 			$this->view->arrAction = $mdAction->_getAction();
 			$this->view->arrTemp = $mdtemp->_filter(null,"TaskName",null,null);

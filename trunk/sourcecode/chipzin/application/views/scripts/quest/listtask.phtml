@@ -9,7 +9,7 @@
 if(empty($this->arrTask)){
 	exit();
 }
-foreach($this->arrTask as $key =>$val){  ?>
+foreach($this->arrTask as $key =>$val){ ?>
 <div class='task' id="task-<?php echo $key;?>">
 <h4><a href="#">+</a>Task <?php echo $key+1?>&nbsp;&nbsp;<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask(<?php echo $key?>)'></a>
 <em>Template</em><select class='task-template' id="template<?php echo $key;?>" onChange='javascript:loadTemplate(<?php echo $key;?>)'>
@@ -72,7 +72,8 @@ else
 		<td>Task String</td>
 		<td>
 			<input type="text" id="TaskString-<?php echo $key?>" name="TaskString" value="<?php echo $val->TaskString?>"  onchange="getvalue('TaskString-<?php echo $key?>')" title="TaskString-string-value-<?php echo $key?>" />
-			<a title="chon" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('TaskString-<?php echo $key?>','')"></a>&nbsp;
+			<a title="chon" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" onClick="findstring('TaskString-<?php echo $key?>','')"></a>&nbsp;
+			<a title="sua" id="TaskString-string-value-<?php echo $key?>" class="tool-16 edit" href="JavaScript:editstring('<?php echo $val->TaskString?>','TaskString-string-value-<?php echo $key?>');"></a>&nbsp;
 			<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('TaskString-<?php echo $key?>','')"></a>
 			<p class="string-value" id = "TaskString-string-value-<?php echo $key?>" ><?php echo $val->gNameTask?></p>
 		</td>
@@ -85,6 +86,7 @@ else
 		<td>
 			<input type="text" id="DescID-<?php echo $key?>" name="DescID" value="<?php echo $val->DescID?>" onchange="getvalue('DescID-<?php echo $key?>')" title="DescID-string-value-<?php echo $key?>"/>
 			<a title="chn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('DescID-<?php echo $key?>','')"></a>&nbsp;
+			<a title="sua" id="DescID-string-value-<?php echo $key?>" class="tool-16 edit" href="JavaScript:editstring('<?php echo $val->DescID?>','DescID-string-value-<?php echo $key?>');"></a>&nbsp;
 			<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('DescID-<?php echo $key?>','')"></a>
 			<p class="string-value" id = "DescID-string-value-<?php echo $key?>" ><?php echo $val->gNamedesc?></p>
 		</td>
