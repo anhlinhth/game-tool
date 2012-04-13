@@ -210,13 +210,20 @@ class Models_String
 		return $rs;
 	}
 	public function update2($key,$groupid=null,$groupname=null,$text,$text1)
-	{
-//		$sql = "select id from l_language where status = 1";
-		$sql ="UPDATE l_content SET text='$text' WHERE l_content.lang=(SELECT id FROM l_language where status = 1) AND lkey=$key";	
+	{		
+		// default language
+		$sql ="UPDATE l_content SET text='$text' WHERE l_content.lang=(SELECT id FROM l_language where status = 1 ORDER BY status DESC LIMIT 1) AND lkey=$key";	
 		if($groupid && !empty($groupid))
 			$sql.=" AND lgroup = '".$groupid."'";
 		if($groupname && !empty($groupname))
 			$sql.=" AND lgroup = (SELECT id FROM l_group WHERE name='".$groupname."')";			
-		$result= $this->db->query($sql);		
+		$result= $this->db->query($sql);
+		// index language		
+		$sql ="UPDATE l_content SET text='$text1' WHERE l_content.lang IN (SELECT id FROM l_language where status <> 1) AND lkey=$key";	
+		if($groupid && !empty($groupid))
+			$sql.=" AND lgroup = '".$groupid."'";
+		if($groupname && !empty($groupname))
+			$sql.=" AND lgroup = (SELECT id FROM l_group WHERE name='".$groupname."')";			
+		$result= $this->db->query($sql);
 	}
 }
