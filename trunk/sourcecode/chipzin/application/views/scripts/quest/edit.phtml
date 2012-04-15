@@ -599,16 +599,16 @@ function findstring(textbox,link)
 			tam2=tam[1];
 			tam2=tam2.replace('<input class="btn search" type="submit" name="search" value="search" />','<a style="padding:4px;border:1px solid #ddd;background:#f8f8f8;" href="JavaScript:void(0)" onClick="searchlink()">Tìm kiếm</a>')
 			tam2=tam2.replace("searchlink()","searchlink('"+textbox+"')");
-			for(i=0;i<10;i++)
+			for(i=0;i<20;i++)
 			{
 				tam2 = tam2.replace("(testajax,","('"+textbox+"',");
 				tam2 = tam2.replace("/n/","'");
 			}
-			for(i=0;i<10;i++)
+			for(i=0;i<20;i++)
 				tam2 = tam2.replace("/n/","'");
 				tam3 = tam[2].split('"');
 				tam4 = tam3[1].split('/n/');
-				tam5 = tam4[0]/10;
+				tam5 = tam4[0]/20;
 				i=0;
 				for(i=0;i<tam5;i++);
 				strf = '<tfoot><tr><td colspan="7" align="center"><a onClick="firstpage(/n/'+textbox+'/n/,/n/'+link+'/n/,1)" href="JavaScript:void(0)"><<</a><a onClick="firstpage(/n/'+textbox+'/n/,/n/'+link+'/n/,'+(tam4[1]-1)+')" href="JavaScript:void(0)" ><</a><a>'+tam4[1]+'/'+i+'</a><a onClick="firstpage(/n/'+textbox+'/n/,/n/'+link+'/n/,'+(tam4[1]-(-1))+')" href="JavaScript:void(0)">></a><a onClick="firstpage(/n/'+textbox+'/n/,/n/'+link+'/n/,'+i+')" href="#">>></a></td></tr></tfoot>';

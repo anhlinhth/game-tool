@@ -35,81 +35,56 @@ function validateForm(e){
 			
 	});
 	select.each(function(index){
-		if($(this).attr('id')=='Layout'){
+		if($(this).hasClass('require')){
 			if($(this).val()=="")
 				$(this).css({ border: "1px solid red" }).focus();
 			else
-				{
-					$(this).css({ border: "1px solid #EFEFEF" });
-					
-				}
+				$(this).css({ border: "1px solid #EFEFEF" });			
 		}
 		
 	});		
 }
 
 function validateInput(e)
-{	
-	var rs = "";	
+{		
+	var err_msg = "";	
 	var input=e.find('input');
 	var select=e.find('select');
-	input.each(function(index)
-	{	
-		$(this).css({ border: " 1px solid #EFEFEF" });
-		if( $(this).is(':disabled')==true){							
-		}
-		else if($(this).hasClass('number'))
-				{
-					if($(this).val()=='')
-					{
-						rs += " ";						
-						$(this).css({ border: "1px solid red" }).focus();						
-					}
-					else if(isNaN($(this).val()))
-						{
-							rs += " ";						
-							$(this).css({ border: "1px solid red" }).focus();
-						}
-					else if(Number($(this).val())<0 ||Number($(this).val())>100 )
-						{
-							rs += " ";
-							$(this).css({ border: "1px solid red" }).focus();							
-				}								
-		}		
-		else if($(this).hasClass('require'))
-			{
-			if($(this).val()=='')
-			{
-				rs += "Award Type không được để trống";						
-				$(this).css({ border: "1px solid red" }).focus();						
-			}
-			}
-		 
-	});
-	select.each(function(index){
-		$(this).css({ border: " 1px solid #ADD8E6" });
-		
-		 if($(this).hasClass('layout'))
-				{
-					if($(this).val()=='')
-					{
-						rs += 'Layout không được bỏ trống<br>';	
-						$(this).css({ border: "1px solid red" }).focus();						
-					}					
+	input.each(function(index){
+		var element = $(this);
+		element.css({ border: " 1px solid #EFEFEF" });
+		if( element.is(':disabled')==true){		
+			//code here			
+		}else{			
+			if(element.hasClass('require')){
+				if(element.val()==''){
+					err_msg += "Null</br>";						
+					element.css({ border: "1px solid red" }).focus();						
 				}
-		 else if($(this).hasClass('require'))
-			 {
-			 	if($(this).val()=="")
-			 		{
-			 			rs += " ";	
-			 			$(this).css({ border: "1px solid red" }).focus();	
-			 		}
-			 }
-	});
+			};
+			if(element.hasClass('number')){
+				var val = element.val();				
+				if(isNaN(val)){
+					err_msg += "Not a Number</br>";						
+					element.css({ border: "1px solid red" }).focus();						
+				}
+			};
+		}
+		 
+	});	
+	select.each(function(index){
+		if($(this).hasClass('require')){
+			alert("");
+			if($(this).val()==""){
+				$(this).css({ border: "1px solid red" }).focus();
+				err_msg += "NULL</br>";	
+			}else{
+				$(this).css({ border: "1px solid #EFEFEF" });
+			}	
+		}
 		
-	
-	return rs;
-	
+	});	
+	return err_msg;	
 }
 
 function validateInput2(e)
@@ -133,8 +108,7 @@ function validateInput2(e)
 		e.addClass("ok");		
 	}
 	else {
-			e.removeClass("ok");
-		}
-	
+		e.removeClass("ok");
+	}	
 	return flag;
 }

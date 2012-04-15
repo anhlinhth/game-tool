@@ -125,7 +125,7 @@ td.b_award input{
 				<input type="text" name='Order'  id='Order' value='<?php echo $rowbattle->Order;?>'/>
 			</td>
 			<td class="b_layout" width="300px" style="text-align: center;">				
-				<select style="width=100%;border: 2px solid lightblue;" class="layout"  name="Layout" tabindex="2">
+				<select style="width=100%;border: 2px solid lightblue;" class="layout require"  name="Layout" tabindex="2">
 					<?php echo $this->options($this->arrlayout,$rowbattle->Layout,array('key'=>"ID",'name'=>"Name"))?>
 					<option  value="-1" style="color:red">New Layout</option>	
 				</select>
@@ -355,7 +355,7 @@ td.b_award input{
 				<input type="text" name="Order" id="Order" value="1">
 			</td>
 			<td width="300px" style="text-align: center;">				
-				<select style="width=100%;border: 1px solid lightblue;" class='layout' name="Layout" id='Layout' tabindex="2">
+				<select style="width=100%;border: 1px solid lightblue;" class='layout require' name="Layout" id='Layout' tabindex="2">
 					<option value=""></option>	
 						<?php echo $this->options($this->arrlayout,-1,array('key'=>"ID",'name'=>"Name"))?>
 					<option  value="-1" style="color:red">New Layout</option>	
@@ -363,21 +363,21 @@ td.b_award input{
 				<table id='tb_layout'>
 					<tr>						
 						<td id="point0" class="visible">
-							<select style="width=100%;border: 1px solid lightblue;" class='require'  name="solider[0]" tabindex="2">
+							<select style="width=100%;border: 1px solid lightblue;" class=''  name="solider[0]" tabindex="2">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
 							</select>																			
 							<em>lv:</em><input type='text' class='number' id='levelSolider' name='levelSolider[0]' value=""/>
 						</td>						
 						<td id="point3" class="visible" > 
-							<select style="width=100%;border: 1px solid lightblue;" class='require' name="solider[3]" tabindex="3">
+							<select style="width=100%;border: 1px solid lightblue;" class='' name="solider[3]" tabindex="3">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
 							</select>							
 							<em>lv:</em><input type='text' class='number' id='levelSolider' name='levelSolider[3]' value=""/>
 						</td>						
 						<td id="point6" class="visible" >
-							<select style="width=100%;border: 1px solid lightblue;" class='require' name="solider[6]" tabindex="6">
+							<select style="width=100%;border: 1px solid lightblue;" class='' name="solider[6]" tabindex="6">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
 							</select>	
@@ -386,21 +386,21 @@ td.b_award input{
 					</tr>
 					<tr>						
 						<td  id="point1" class="visible" >
-							<select style="width=100%;border: 1px solid lightblue;" class='require' name="solider[1]" tabindex="1">
+							<select style="width=100%;border: 1px solid lightblue;" class='' name="solider[1]" tabindex="1">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
 							</select>	
 							<em>lv:</em><input type='text' class='number' id='levelSolider' name='levelSolider[1]' value=''/>
 						</td>					
 						<td  id="point4"class="visible" >
-							<select style="width=100%;border: 1px solid lightblue;" class='require' name="solider[4]" tabindex="4">
+							<select style="width=100%;border: 1px solid lightblue;" class='' name="solider[4]" tabindex="4">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
 							</select>	
 							<em>lv:</em><input type='text' class='number' id='levelSolider' name='levelSolider[4]' value=''/>
 						</td>						
 						<td  id="point7"class="visible" >
-							<select style="width=100%;border: 1px solid lightblue;" class='require' name="solider[7]" tabindex="7">
+							<select style="width=100%;border: 1px solid lightblue;" class='' name="solider[7]" tabindex="7">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
 							</select>	
@@ -409,14 +409,14 @@ td.b_award input{
 					</tr>
 					<tr>						
 						<td id="point2" class="visible" >
-							<select style="width=100%;border: 1px solid lightblue;" class='require' name="solider[2]" tabindex="2">
+							<select style="width=100%;border: 1px solid lightblue;" class='' name="solider[2]" tabindex="2">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
 							</select>	
 							<em>lv:</em><input type='text' class='number' id='levelSolider' name='levelSolider[2]' value=''/>
 						</td>						
 						<td id="point5" class="visible">
-							<select style="width=100%;border: 1px solid lightblue;" class='require' name="solider[5]" tabindex="5">
+							<select style="width=100%;border: 1px solid lightblue;" class='' name="solider[5]" tabindex="5">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
 							</select>	
@@ -424,7 +424,7 @@ td.b_award input{
 						</td>
 						
 						<td id="point8" class="visible">
-							<select style="width=100%;border: 1px solid lightblue;" class='require' name="solider[8]" tabindex="8">
+							<select style="width=100%;border: 1px solid lightblue;" class='' name="solider[8]" tabindex="8">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
 							</select>	
@@ -510,8 +510,10 @@ td.b_award input{
 		});
 	}
 	////////////////////////////////
-	function saveBattle(e){
-		$("#dialog .ct").html("");
+	function saveBattle(e,action){
+		if(action !="save_all"){
+			$("#dialog .ct").html("");
+		}		
 		var campaignID = $("#campaignID").val();		
 		var parent_tr = $(e).parent().parent();
 		var a_status = parent_tr.find(".status");
@@ -520,11 +522,10 @@ td.b_award input{
 		updateStatus(a_status,"loading","loading");	
 		var data = parent_tr.find("*").serialize();
 		var arr_data = parent_tr.find("*").serializeArray();			
-		flag=validateInput(parent_tr);	
+		var err=validateInput(parent_tr);		
 		var BattleID =parent_tr.find('#BattleID').val();		
-		if(flag!="")
-		{			
-			$("#dialog .ct").append("<p class='error'><label style='color:#2121FF'> Battle"+BattleID +"</label><br>Level không được bỏ trống,phải là số <br>Level phải lớn hơn 0 và nhỏ hơn 100<br>Solider không được bỏ trống"+flag+"</p>" );			
+		if(err!="")	{			
+			$("#dialog .ct").append("<p class='error'><label style='color:#2121FF'> Errors: </label></br>"+err+"</p>" );			
 			$("#dialog").dialog({
 				title: "Diaglog",
 				height: 400,
@@ -535,13 +536,9 @@ td.b_award input{
 						$(this).dialog("close");							
 					}										
 				}
-		});
-			return;
-		}
-		data += "&Campaign="+campaignID;	
-		if(flag=="")
-		{	
-			
+			});			
+		}else{	
+			data += "&Campaign="+campaignID;	
 			$.ajax({
 				type: "POST",
 				url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
@@ -659,9 +656,9 @@ td.b_award input{
 	}
 	///Save All
 	function saveAll(){		
-		$("table#battle").find("td.action .save").not(".disabled").each(function (index){
-			
-			$(this).click();
+		$("#dialog .ct").html("");
+		$("table#battle").find("td.action .save").not(".disabled").each(function (index){		
+			saveBattle($(this),'save_all');
 		});
 	}
 	///Add battle///
@@ -817,27 +814,8 @@ td.b_award input{
 	}
 	/***********************************************/
 	// validate
-	function validate2(data){
-		
-		$("#dialog .ct").html("");		
-		jQuery.each(data, function(i, field){  	
-						
-			if(field.value=="" && field.name!='BattleID' ){
-				$("#dialog .ct").append("<p class='error'>"+field.name +"  không được bỏ trống</p>" );								
-			}			
-			else if(isNaN(field.value))
-			{
-				$("#dialog .ct").append("<p class='error'>"+ field.name +"phải là sô</p>" );				
-			}
-			/*
-			else if( (Number(field.value)>100 || Number(field.value)<0) && field.name!='Value[]' && field.name!='BattleID' && field.name!='solider')
-				{					
-					$("#dialog .ct").append("<p class='error'>"+ field.name +"Level phải nằm trong khoảng 0 ->100</p>" );
-				}*/			
-		});
-		if($("#dialog .ct").html()!=""){			
-			return false;
-		}
+	function validate2(data){		
+		alert("stracking");
 		return true;
 	}	
 /* -------------- changewordmap ------------------------*/
@@ -895,7 +873,7 @@ $(document).ready(function(){
 		if($(this).hasClass("disabled")){
 			alert("disabled");
 		}else{
-			saveBattle(this);
+			saveBattle(this,"save");
 		}		
 		return false;		
 	});
