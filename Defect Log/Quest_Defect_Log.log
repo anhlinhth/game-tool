@@ -1,0 +1,9 @@
+﻿1- Bỏ Quest Group & Quest Group String
+2- Thêm một thuộc tính "Optional" trong Quest:
+	True: cho phép người chơi có thể bỏ qua Quest đó
+	False: bắt buộc người chơi phải thực hiện Quest đó
+3- Thêm một Field Time: thời gian để nhận Quest
+<<<<<<hỏi thêm bên Tech>>>>>>>>>>>
+4- Localize (New&Edit Quest): trong form (dialog) tạo chuỗi mới, lúc chọn một Group khác phải update lại Key ( lay key lớn nhất theo Group đó trong bảng l_content)
+
+	
