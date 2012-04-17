@@ -27,8 +27,10 @@ public function _setUserPrivileges()
 		$filename = 'localization/vnm.xfz';
 		if ($this->_request->isPost ()) {
 			$lang = $this->_request->getParam("llang");
-			$filename = $this->_request->getParam("filename",$lang);			
+			$filename = $this->_request->getParam("filename",$lang);
+			if($filename!='')			
 			$model->WriteFile($model->GetAllContentByLang($lang), 'export/'.$filename.'.txt');
+			else $this->view->errMsg="Phải đặt tên file export !";
 		}
 	}
 	public function importAction(){	
