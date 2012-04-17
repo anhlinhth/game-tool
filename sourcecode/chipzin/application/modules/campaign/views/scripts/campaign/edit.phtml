@@ -1,4 +1,4 @@
-<?php if($this->errMsg) :?>
+﻿<?php if($this->errMsg) :?>
 	<?php $this->showError($this->errMsg)?>
 <?php endif; ?>
 <?php if($this->msg) :?>		
@@ -47,10 +47,12 @@ table#tb_layout td select, table#tb_layout td input{
 }
 table#tb_layout td select{
 	width: 70%;
+	height: 20px;
 	float: left;
 }
 table#tb_layout td input{
-	width: 22%;	
+	width: 22%;
+	height: 20px;	
 }
 table#tb_layout td.invisible,table#tb_layout td.invisible *{	
 	opacity:0.0;
@@ -66,7 +68,7 @@ table#tb_layout td.visible{
 }
 /**************************/
 td.b_award select{
-	width: 65%;
+	width: 65%;	
 } 
 td.b_award input{
 	width: 20%;
@@ -138,7 +140,7 @@ td.b_award input{
 						<td id="point0" class="<?php echo  $strclass?>">
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0);
 							?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[0]" tabindex="0">
+							<select style="width=100%;border: 1px solid lightblue;" class="" name="solider[0]" tabindex="0">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
@@ -151,7 +153,7 @@ td.b_award input{
 						<td id="point3" class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3);
 							?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[3]" tabindex="3">
+							<select style="width=100%;border: 1px solid lightblue;" class="" name="solider[3]" tabindex="3">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
@@ -164,7 +166,7 @@ td.b_award input{
 						<td id="point6" class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
 							?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[6]" tabindex="6">
+							<select style="width=100%;border: 1px solid lightblue;" class="" name="solider[6]" tabindex="6">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
@@ -176,7 +178,7 @@ td.b_award input{
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][1])?"visible":"invisible"?>
 						<td  id="point1" class="<?php echo  $strclass?>" >
 							<?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); ?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[1]" tabindex="1">
+							<select style="width=100%;border: 1px solid lightblue;" class="" name="solider[1]" tabindex="1">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
@@ -188,7 +190,7 @@ td.b_award input{
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visible":"invisible"?>
 						<td  id="point4"class="<?php echo  $strclass?>" >
 							<?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); ?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[4]" tabindex="4">
+							<select style="width=100%;border: 1px solid lightblue;" class="" name="solider[4]" tabindex="4">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
@@ -200,7 +202,7 @@ td.b_award input{
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][7])?"visible":"invisible"?>
 						<td  id="point7"class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7);?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[7]" tabindex="7">
+							<select style="width=100%;border: 1px solid lightblue;" class="" name="solider[7]" tabindex="7">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
@@ -212,7 +214,7 @@ td.b_award input{
 						<?php $strclass = ($this->arrPoint[$rowbattle->ID][2])?"visible":"invisible"?>
 						<td id="point2" class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); ?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require"  name="solider[2]" tabindex="2">
+							<select style="width=100%;border: 1px solid lightblue;" class=""  name="solider[2]" tabindex="2">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
@@ -225,7 +227,7 @@ td.b_award input{
 						<td id="point5" class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5); 
 							?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[5]" tabindex="5">
+							<select style="width=100%;border: 1px solid lightblue;" class="" name="solider[5]" tabindex="5">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
@@ -238,7 +240,7 @@ td.b_award input{
 						<td id="point8" class="<?php echo  $strclass?>" >
 							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
 							?>
-							<select style="width=100%;border: 1px solid lightblue;" class="require" name="solider[8]" tabindex="8">
+							<select style="width=100%;border: 1px solid lightblue;" class="" name="solider[8]" tabindex="8">
 								<option value=""></option>	
 									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
 																array('key'=>"ID",'name'=>"Name"))?>								
@@ -522,7 +524,7 @@ td.b_award input{
 		updateStatus(a_status,"loading","loading");	
 		var data = parent_tr.find("*").serialize();
 		var arr_data = parent_tr.find("*").serializeArray();			
-		var err=validateInput(parent_tr);		
+		var err= validateInput(parent_tr);		
 		var BattleID =parent_tr.find('#BattleID').val();		
 		if(err!="")	{			
 			$("#dialog .ct").append("<p class='error'><label style='color:#2121FF'> Errors: </label></br>"+err+"</p>" );			
@@ -784,11 +786,11 @@ td.b_award input{
 		$.each(json, function(key, val) {
 			if(val==0){
 				table.find("td#"+key).removeClass("visible").addClass("invisible");				
-				table.find("td#"+key +" select").attr('disabled',true).removeClass("require");				
+				table.find("td#"+key +" select").attr('disabled',true).removeClass("");				
 				table.find("td#"+key +" input").attr('disabled',true).attr("value","");										
 			}else{
 				table.find("td#"+key).removeClass("invisible").addClass("visible");
-				table.find("td#"+key +" select").attr('disabled',false).addClass("require");
+				table.find("td#"+key +" select").attr('disabled',false).addClass("");
 				table.find("td#"+key +" input").attr('disabled',false);				
 			}
 		});											
@@ -814,8 +816,7 @@ td.b_award input{
 	}
 	/***********************************************/
 	// validate
-	function validate2(data){		
-		alert("stracking");
+	function validate2(data){	
 		return true;
 	}	
 /* -------------- changewordmap ------------------------*/
