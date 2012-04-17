@@ -933,7 +933,8 @@ $("table#battle").delegate("tr.tr-battle .solider", "change", function(){
 		{
 			input.addClass('number');
 			input.addClass('require');	
-			$(this).addClass('require');	
+			$(this).addClass('require');
+			$(this).css({ background: "#EFEFEF"});	
 		}
 		
 });
@@ -953,7 +954,7 @@ $("table#battle").delegate("tr.tr-battle .level", "change", function(){
 	else{		
 		$(this).addClass('number');
 		$(this).addClass('require');
-		select.addClass('require');		
+		select.addClass('require');				
 	}	
 });
 
