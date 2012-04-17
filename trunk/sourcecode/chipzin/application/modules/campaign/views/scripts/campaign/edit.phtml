@@ -675,7 +675,7 @@ td.b_award input{
 		var selected = element.value;
 		if(selected.value!="")
 		{
-			$(element).css({ background: "#EFEFEF" });
+			$(element).css({ background: "#EFEFEF",color:"#000000" });
 		}
 		if(selected == -1){
 			addAwardType();
@@ -807,7 +807,7 @@ td.b_award input{
 		$("#insert-layout #namelayout").val("");
 		if(layoutID!="")
 		{
-			$(e).css({ background: "#EFEFEF" });
+			$(e).css({ background: "#EFEFEF",color:"#000000"});
 		}
 		if(layoutID==-1){				
 			popupInsertLayout(e);//e la the <td>		
@@ -920,7 +920,7 @@ $("table#battle").delegate("tr.tr-battle .solider", "change", function(){
 	input=$(this).parent().find('input');
 	if(select=="")
 	{
-		input.val("");
+		input.val("").css({ background: "#EFEFEF"});		
 		input.removeClass('require');
 		input.removeClass('number');
 		$(this).removeClass('require');
