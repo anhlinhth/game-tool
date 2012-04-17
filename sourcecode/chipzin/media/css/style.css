@@ -15,7 +15,9 @@ a, a:visited{
 }
 img{
     border:0;
-    margin:1px;
+	margin-bottom:3px;
+	margin-left:2px;
+	padding:3px;
 	vertical-align: middle;
 }
 p{
