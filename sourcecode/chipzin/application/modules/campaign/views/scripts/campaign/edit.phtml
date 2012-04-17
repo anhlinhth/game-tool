@@ -799,7 +799,12 @@ td.b_award input{
 	function changeLayout(e){		
 		var parent_td=$(e).parent();		
 		var layoutID=$(e).val();
+		
 		$("#insert-layout #namelayout").val("");
+		if(layoutID!="")
+		{
+			$(e).css({ background: "#FFF" });
+		}
 		if(layoutID==-1){				
 			popupInsertLayout(e);//e la the <td>		
 		}else{	
@@ -906,8 +911,7 @@ $("#CampaignID").keyup(function(event){
     	location.replace("<?php echo $this->baseUrl.'/campaign/campaign/edit/id/'?>"+ $("#CampaignID").val());
     }
 });
-
-$('.solider').change(function(){	
+$("table#battle").delegate("tr.tr-battle .solider", "change", function(){ 
 	select=$(this).val();
 	input=$(this).parent().find('input');
 	if(select=="")
