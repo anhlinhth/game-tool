@@ -20,11 +20,11 @@ function validateInput(e)
 		if( element.is(':disabled')==true){		
 			//code here			
 		}else{
-			element.css({ background: "transparent" });
+			element.css({ background: "#EFEFEF"});
 			if(element.hasClass('require')){
 				if(element.val()==''){
 					err_msg += "Null</br>";						
-					element.css({ background: "red" }).focus();						
+					element.css({ background: "red"}).focus();						
 				}
 			};
 			if(element.hasClass('number')){
@@ -40,10 +40,10 @@ function validateInput(e)
 	select.each(function(index){		
 		if($(this).hasClass('require')){
 			if($(this).val()==""){
-				$(this).css({ background: "red" }).focus();
+				$(this).css({ background: "red"}).focus();
 				err_msg += "NULL</br>";	
 			}else{
-				$(this).css({ background: "transparent"});
+				$(this).css({ background: "#EFEFEF"});
 			}	
 		}
 		
