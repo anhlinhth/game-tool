@@ -8,7 +8,7 @@ endif;
 $model = new Models_Localite_Group();
 ?>
 <div id="box">
-<h3>Danh sách nhóm</h3>
+<h3>Danh sách</h3>
 <form id="form" method="post">
 	<table width="100%">
 		<thead>
@@ -16,8 +16,8 @@ $model = new Models_Localite_Group();
 				<th width="40">STT</th>
 				<th width="14">#</th>
 				<th width="35">ID</th>
-				<th>Tên nhóm</th>				
-				<th width="40" align="center">Thao tác</th>
+				<th></th>				
+				<th width="50" align="center">Thao tác</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,10 +28,10 @@ $model = new Models_Localite_Group();
 					echo '<td>'.$i.'</td>';
 					echo '<td><input id="'.$value['id'].'" type="checkbox" name="'.$value['id'].'"></td>';
 					echo '<td>'.$value['id'].'</td>';
-					echo '<td>'.$value['name'].'</td>';
+					echo '<td><input id="aka'.$value['id'].'" value="'.$value['name'].'"type="text"></td>';
 					echo '<td>';
-						echo '<a href="'.$this->baseUrl.'/localite/lgroup/ledit?id='.$value['id'].'"><img src="'.$this->baseUrl.'/media/images/icons/edit-icon.gif" ></a>';
-						echo '<a href="'.$this->baseUrl.'/localite/lgroup/ldelete?id='.$value['id'].'"><img src="'.$this->baseUrl.'/media/images/icons/delete.gif" ></a>';
+						echo '<a href="javascript:editL('.$value['id'].')"><img src="'.$this->baseUrl.'/media/images/icons/edit-icon.gif" ></a>';
+						echo '<a href="'."javascript:deleteL(".$value['id'].')"><img src="'.$this->baseUrl.'/media/images/icons/delete.gif" ></a>';
 					echo '</td>';
 				echo '</tr>';
 				$i++;
@@ -41,8 +41,62 @@ $model = new Models_Localite_Group();
 		</tbody>
 	</table>
 	<div style="margin-top:20px;"><a class="btn add" type="submit" href="<?php echo $this->baseUrl?>/localite/lgroup/ladd">Add</a> 
-		<button value="btsave" name="btsave" type="submit">Sửa</button>
-		<button value="btdelete" name="btdelete" type="submit">Xóa</button>
+		<button value="btsave" name="btsave" type="submit">edit</button>
+		<button value="btdelete" name="btdelete" type="submit">delete</button>
 	</div>
 </form>
 </div>
+<script type="text/javascript">
+function editL(key)
+{
+	name = document.getElementById('aka'+key).value;
+	id = key;
+	if(!confirm("bạn có muốn edit dòng này không ?")){
+		return false;
+	};
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $this->baseUrl.'/localite/lgroup/ledit'?> ",
+		data:{
+			name:name,
+			id:id,
+		},
+		success: function(msg){
+			if(msg){	
+					
+				window.location.reload();
+			}
+			else{
+				window.location.reload();		
+			}			
+		}
+	});	
+	
+}
+function deleteL(key)
+{
+	
+	id = key;
+	if(!confirm("bạn có muốn delete dòng này không ?")){
+		return false;
+	};
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $this->baseUrl.'/localite/lgroup/ldelete'?> ",
+		data:{
+			id:id,
+		},
+		success: function(msg){
+			if(msg){	
+					
+				window.location.reload();
+			}
+			else{
+				window.location.reload();		
+			}			
+		}
+	});	
+	
+}
+</script>
+
