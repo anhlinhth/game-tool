@@ -567,6 +567,9 @@ td.b_award input{
 		var parent_tr = $(e).parent().parent();
 		var a_status = parent_tr.find(".status");
 		var battle_id = parent_tr.find("#BattleID").val();		
+		if(!confirm("Delete Battle ? Are you sure ?")){
+			return false;
+		}
 		updateStatus(a_status,"loading","loading");			
 		if(battle_id){
 			$.ajax({
