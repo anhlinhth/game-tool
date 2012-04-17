@@ -39,8 +39,8 @@ public function _setUserPrivileges()
 		$mdmB = new Models_Map_Battle_Package();
 		$data = $tuo->getdata();
 		$mdmB->generate($data);
-		
-		$this->_redirect ("campaign/exportcamp/index");
+		echo "<script>";echo "if(confirm('thành công'))window.location=\"index\""; echo "</script>";
+		//$this->_redirect ("campaign/exportcamp/index");
 		}
 		catch (Exception $e)
 		{
