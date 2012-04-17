@@ -40,6 +40,7 @@ class ExportController extends BaseController
 	
 	public function exportAction()
 	{
+		
 		$model = new Models_Quest_Package();
 		$tuo = new Models_Quest_Package();
 		$data = $tuo->getGiftType();
@@ -62,8 +63,8 @@ class ExportController extends BaseController
 		$tuo2 = new Models_Quest_xfj();
 		$data2 = $tuo2->getGiftType();
 		$model2->generate($data2);
-		
-		$this->_redirect ("/export/download");
+		 echo "<script>";echo "if(confirm('th�nh c�ng'))window.location=\"download\""; echo "</script>";
+		//$this->_redirect ("/export/download");
 		//	echo GIFT_PACKAGE_PHP_FILE;
 		// $f=ROOT.'/config/Gift.php'; //Khai bÃ¡o Ä‘Æ°á»�ng dáº«n cá»§a file cáº§n ghi dá»¯ liá»‡u @ 
 		// $ft=fopen($f,"w"); //Má»Ÿ file cáº§n ghi 
@@ -84,6 +85,7 @@ class ExportController extends BaseController
 	{
 		try
 		{
+			
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Gift_Package.php';
 			
 			$this->_getArrEvent();
