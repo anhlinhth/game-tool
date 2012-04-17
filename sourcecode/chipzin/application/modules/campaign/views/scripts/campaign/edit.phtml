@@ -260,7 +260,7 @@ td.b_award input{
 						<?php } ?>	
 						<?php echo $this->options($this->arrawardtype,$row->AwardTypeID,array('key'=>'AwardTypeID','name'=>'Name'))?>
 						</select>					
-						<input type='text' id='Value' name='Value[]' class='require' value='<?php echo $row->Value?>'/>					
+						<input type='text' id='Value' name='Value[]' class='number require' value='<?php echo $row->Value?>'/>					
 						<a class='tool-16 delete' href='#'></a>	
 					</div>
 				<?php }?>			
@@ -268,7 +268,7 @@ td.b_award input{
 			<td class="center action">
 				<a class='tool-24 save disabled' id="" href='#'></a><br><br>
 				<a class='tool-24 reset disabled' href='javascript:resetBattle(<?php echo $rowbattle->ID ?>)'></a><br><br>
-				<a class='tool-24 delete' id="" href='javascript:deleteBattle(<?php echo $rowbattle->ID ?>)'></a>
+				<a class='tool-24 delete' id="" href='javascript:deleteBattle(<?php echo $rowbattle->ID ?>)' ></a>
 			</td>
 			<!--Status-->
 			<td class="td-status"><a title="ok" class="status tool-16 ok"></a></td>
@@ -303,7 +303,7 @@ td.b_award input{
 				<?php echo $this->options($this->arrawardtype,0,array('key'=>'AwardTypeID','name'=>'Name'))?>	
 				<?php echo "<option  value='-1' style='color:red'> New Type</option>"?>		
 			</select>
-			<input type='text' name='Value[]' value=''/>					
+			<input type='text' name='Value[]' value='' class='number require'/>					
 			<a class='tool-16 delete' href='#'></a>	
 		</div>	
 
@@ -803,7 +803,7 @@ td.b_award input{
 		$("#insert-layout #namelayout").val("");
 		if(layoutID!="")
 		{
-			$(e).css({ background: "#FFF" });
+			$(e).css({ background: "#EFEFEF" });
 		}
 		if(layoutID==-1){				
 			popupInsertLayout(e);//e la the <td>		
@@ -937,7 +937,7 @@ $('.level').change(function(){
 $("table#battle").delegate("tr.tr-battle .level", "change", function(){ 	
 	var val=$(this).val();	
 	var select=$(this).parent().find('select');
-	if(val=="")
+	if(val=="" && select.val()=="")
 	{
 		select.removeClass('require');
 		$(this).removeClass('number');
@@ -946,11 +946,8 @@ $("table#battle").delegate("tr.tr-battle .level", "change", function(){
 	else{		
 		$(this).addClass('number');
 		$(this).addClass('require');
-		select.addClass('require');
-		
-		
-	}
-	
+		select.addClass('require');		
+	}	
 });
 
 
