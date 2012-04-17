@@ -673,6 +673,10 @@ td.b_award input{
 	 //onchange AwardType
 	function changeAwardType(element){		
 		var selected = element.value;
+		if(selected.value!="")
+		{
+			$(element).css({ background: "#EFEFEF" });
+		}
 		if(selected == -1){
 			addAwardType();
 		}
