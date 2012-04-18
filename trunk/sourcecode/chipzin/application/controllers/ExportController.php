@@ -48,6 +48,7 @@ class ExportController extends BaseController
 		
 		if(!empty($questIdError)){
 			//$this->view->val = 1;
+			echo "<script>";echo "alert(\"thất  bại cần phải edit lại quest\")"; echo "</script>";
 			$this->view->questIdError = $questIdError;	
 		}else{
 					
@@ -63,7 +64,7 @@ class ExportController extends BaseController
 		$tuo2 = new Models_Quest_xfj();
 		$data2 = $tuo2->getGiftType();
 		$model2->generate($data2);
-		 echo "<script>";echo "if(confirm('th�nh c�ng'))window.location=\"download\""; echo "</script>";
+		 echo "<script>";echo "if(confirm('thành công'))window.location=\"download\""; echo "</script>";
 		//$this->_redirect ("/export/download");
 		//	echo GIFT_PACKAGE_PHP_FILE;
 		// $f=ROOT.'/config/Gift.php'; //Khai bÃ¡o Ä‘Æ°á»�ng dáº«n cá»§a file cáº§n ghi dá»¯ liá»‡u @ 
