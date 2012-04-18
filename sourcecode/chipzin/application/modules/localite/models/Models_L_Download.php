@@ -7,11 +7,14 @@ class Models_L_Download extends Models_Base
 		
 		//-------get folder to arr---------------------------------------------------------
 		$arr = null;
+		$num=1;
 		foreach ( glob (ROOT."\Export"."/*.txt" ) as $key => $filename ) {
 			$pieces = explode ( "/", $filename );
 			$a = count ( $pieces ) - 1;
 			$arr [$key] ['Name'] = $pieces [$a];
 			$arr [$key] ['DateTime'] = date ( "d-m-Y H:i:s", filemtime ( $filename ) );
+			$arr [$key] ['Num']=$num;
+			$num++;
 		}
 		//=================================================================================
 		

@@ -24,12 +24,14 @@ class Localite_DownloadController extends BaseController
 			
             $pageNo = $this->_request->getParam("page");
             $items = $this->_request->getParam("items");
-
+			
+            
             if ($pageNo == 0)
                 $pageNo = 1;
             if ($items == 0)
-                $items = DEFAULT_ITEM_PER_PAGE;
-			
+                $items = 10;
+			//var_dump($pageNo);
+			//die();
             $md_Down = new Models_L_Download();
    
             

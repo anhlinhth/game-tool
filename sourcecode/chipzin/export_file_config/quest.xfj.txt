@@ -3,101 +3,193 @@
 	{
 		"1":
 		{
+<<<<<<< .mine
+			 "group" : 7,
+			 "nextQuest" : [],
+			 "tasks" : ["7","9"],
+=======
 			 "group" : 3,
 			 "nextQuest" : ["2","10"],
 			 "tasks" : ["7","9"],
+>>>>>>> .r602
 			 "txtName" : "@quest#47",
 			 "txtAlias" : "@quest#46",
 			 "txtDesc" : "@quest#48",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
 			 "award" :[]
+>>>>>>> .r602
 		}, 
 
 		"2":
 		{
+<<<<<<< .mine
+			 "group" : 7,
+			 "nextQuest" : [],
+			 "tasks" : ["10"],
+=======
 			 "group" : 3,
 			 "nextQuest" : ["1"],
 			 "tasks" : ["10"],
+>>>>>>> .r602
 			 "txtName" : "@quest#54",
 			 "txtAlias" : "@quest#53",
 			 "txtDesc" : "@quest#55",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 1
+			 } 
+=======
 			 "award" :[]
+>>>>>>> .r602
 		}, 
 
 		"3":
 		{
 			 "group" : 3,
-			 "nextQuest" : ["4"],
+			 "nextQuest" : [],
 			 "tasks" : ["11"],
 			 "txtName" : "@quest#59",
 			 "txtAlias" : "@quest#58",
 			 "txtDesc" : "@quest#60",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 1
+			 } 
+=======
 			 "award" :[]
+>>>>>>> .r602
 		}, 
 
 		"4":
 		{
 			 "group" : 3,
-			 "nextQuest" : ["5"],
+			 "nextQuest" : [],
 			 "tasks" : ["12"],
 			 "txtName" : "@quest#64",
 			 "txtAlias" : "@quest#63",
 			 "txtDesc" : "@quest#65",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 1
+			 } 
+=======
 			 "award" :[]
+>>>>>>> .r602
 		}, 
 
 		"5":
 		{
 			 "group" : 3,
-			 "nextQuest" : ["6"],
+			 "nextQuest" : [],
 			 "tasks" : ["13"],
 			 "txtName" : "@quest#69",
 			 "txtAlias" : "@quest#68",
 			 "txtDesc" : "@quest#70",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
 			 "award" :[]
+>>>>>>> .r602
 		}, 
 
 		"6":
 		{
 			 "group" : 3,
-			 "nextQuest" : ["7"],
+			 "nextQuest" : [],
 			 "tasks" : ["14"],
 			 "txtName" : "@quest#74",
 			 "txtAlias" : "@quest#73",
 			 "txtDesc" : "@quest#75",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
 			 "award" :[]
+>>>>>>> .r602
 		}, 
 
 		"7":
 		{
+<<<<<<< .mine
+			 "group" : 7,
+			 "nextQuest" : [],
+=======
 			 "group" : 3,
 			 "nextQuest" : ["1"],
+>>>>>>> .r602
 			 "tasks" : ["15","18"],
 			 "txtName" : "@quest#79",
 			 "txtAlias" : "@quest#78",
 			 "txtDesc" : "@quest#80",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
 			 "award" :[]
+>>>>>>> .r602
 		}, 
 
 		"8":
 		{
+<<<<<<< .mine
+			 "group" : 7,
+			 "nextQuest" : [],
+=======
 			 "group" : 3,
 			 "nextQuest" : [],
+>>>>>>> .r602
 			 "tasks" : ["16"],
 			 "txtName" : "@quest#84",
 			 "txtAlias" : "@quest#83",
 			 "txtDesc" : "@quest#85",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
 			 "award" :[]
+>>>>>>> .r602
 		}, 
 
+<<<<<<< .mine
+		"10":
+		{
+			 "group" : 7,
+			 "nextQuest" : [],
+=======
 		"10":
 		{
 			 "group" : 3,
 			 "nextQuest" : ["8"],
+>>>>>>> .r602
 			 "tasks" : ["20","21"],
 			 "txtName" : "@quest#96",
 			 "txtAlias" : "@quest#95",
 			 "txtDesc" : "@quest#97",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
 			 "award" :[]
+>>>>>>> .r602
 		 } 
 },
 
