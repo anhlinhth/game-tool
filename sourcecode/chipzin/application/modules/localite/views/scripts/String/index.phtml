@@ -44,8 +44,8 @@ endif;
 <div id="box">
 	<h3>String Manager
 	<select style="margin-left:610px;" name="l_language" onChange="changeMap(this)">
-			<?php foreach ($this->language as $vllang) 
-				echo '<option value="'.$vllang[id].'">'.$vllang['name'].'</option>';
+			<?php print_r($this->arr_lang); foreach ($this->arr_lang as $lang) 
+				echo '<option value="'.$lang[id].'">'.$lang['name'].'</option>';
 			?>
 	</select>
 	</h3>

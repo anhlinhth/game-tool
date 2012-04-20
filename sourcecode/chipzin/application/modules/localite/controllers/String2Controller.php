@@ -47,12 +47,16 @@ class Localite_String2Controller extends BaseController
 			}
 			if(isset($_POST["ldefault"])){
 				$content_item->ldefault = $_POST["ldefault"];				
-			}
+			}			
 			if(isset($_POST["lindex"])){
 				$content_item->lindex = $_POST["lindex"];				
 			}
+			if(isset($_POST["l_language"])){
+				$md_string->updateindexlang2($_POST["l_language"]);			
+			}
 			$arr_string = $md_string->filter2($content_item,$page,$size);
 			$count = $md_string->getCount2($content_item);
+
 			if(($_POST["action"]) == "ajax"){
 				$this->_helper->layout->disableLayout();
 				$this->_helper->viewRenderer->setNorender();
@@ -61,7 +65,9 @@ class Localite_String2Controller extends BaseController
 				echo json_encode(($rs));				
 			}else{
 				$arr_group = $md_string->getAllGroup2();
-				$max_key = 	$md_string->getMaxKeyOfGroup($content_item->lgroup);				
+				$max_key = 	$md_string->getMaxKeyOfGroup($content_item->lgroup);
+				$arr_lang = $md_string->getlanguage2();	
+				$index_lang = $md_string->getlangindex2();	
 				//$this->view->datanopage =  $string->getDataNopage($l_group,$id_s,$l_Search_type);
 				$this->view->page = $page;
 				$this->view->size = $size;
@@ -70,6 +76,8 @@ class Localite_String2Controller extends BaseController
 				$this->view->searchtype = $searchtype;
 				$this->view->searchbox = $searchbox;
 				$this->view->max_key = $max_key + 1;
+				$this->view->arr_lang = $arr_lang;
+				$this->view->index_lang = $index_lang;
 				$this->view->num = $count/$size;
 				$this->view->arr_group = $arr_group;
 			}

@@ -8,18 +8,32 @@ class Models_String2 extends Models_Base
 	}
 	
 	//////////////////ThaoNX//////////////////////
+	public function getlanguage2()
+	{
+		$sql = "select * from l_language where status <> 1 ORDER BY status DESC";
+		return $this->_db->fetchAll($sql);
+	}
+	
 	public function getlangdefault2()
 	{
 		$sql = "select id,name from l_language where status = 1";
 		$lang = $this->_db->fetchRow($sql, null, Zend_Db::FETCH_OBJ);
 		return $lang;
 	}
+	
 	public function getlangindex2()
 	{
 		$sql = "select id,name from l_language where status <> 1 ORDER BY status DESC";
 		$lang = $this->_db->fetchRow($sql, null, Zend_Db::FETCH_OBJ);
 		return $lang;
 	}	
+	public function updateindexlang2($id)
+	{
+		$sql = "UPDATE l_language SET status= 0 WHERE status <> 1;";
+		$sql .="UPDATE l_language SET status= 2 WHERE id ='$id';";
+		$stmt = $this->_db->query($sql);
+		$result = $stmt->rowCount();
+	}
 	
 	public function getCount2($content)
 	{
@@ -37,6 +51,7 @@ class Models_String2 extends Models_Base
 		$count = $this->_db->fetchONE($sql, null, Zend_Db::FETCH_OBJ);
 		return $count;
 	}
+	
 	public function filter2 ($content,$page,$size){
 				$sql = "SELECT a.id as id,g.name as gname,g.id as gid,a.lkey as lkey,a.text as ldefault, b.text as lindex
 				FROM l_content a
@@ -66,11 +81,13 @@ class Models_String2 extends Models_Base
 		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
 		return $data;
 	}
+
 	public function getAllGroup2(){
 		$sql = "SELECT * FROM l_group";
 		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
 		return $data;
 	}
+
 	public function getTextBylang2($lang,$key,$groupid=null,$groupname=null){
 		$sql = "SELECT text FROM l_content WHERE lang ='".$lang."' AND lkey = '".$key."'";
 		if($groupid && !empty($groupid))
@@ -80,6 +97,7 @@ class Models_String2 extends Models_Base
 		$rs = $this->_db->fetchOne($sql);
 		return $rs;
 	}
+
 	public function update2($content){		
 		// default language
 		$content->ldefault = htmlentities($content->ldefault,ENT_QUOTES);
@@ -96,12 +114,12 @@ class Models_String2 extends Models_Base
 		$stmt = $this->_db->query($sql);
 		$result = $stmt->rowCount();
 		// index language
-		$sql ="SELECT id FROM l_content ".$where." AND lang = (SELECT id FROM l_language where status <> 1 LIMIT 0,1)"; 
+		$sql ="SELECT id FROM l_content ".$where." AND lang = (SELECT id FROM l_language where status <> 1 ORDER BY status DESC LIMIT 0,1)"; 
 		$content_id = $this->_db->fetchOne($sql);
 		$content->lindex = htmlentities($content->lindex,ENT_QUOTES);
 		$content->lindex = htmlentities($content->lindex,ENT_NOQUOTES);
 		if($content_id==0){
-			$sql ="INSERT l_content(lgroup,lkey,text,lang) VALUE(".$content->lgroup.",".$content->lkey.",'".$content->lindex."',"."(SELECT id FROM l_language where status <> 1 LIMIT 0,1)) ";			
+			$sql ="INSERT l_content(lgroup,lkey,text,lang) VALUE(".$content->lgroup.",".$content->lkey.",'".$content->lindex."',"."(SELECT id FROM l_language where status <> 1 ORDER BY status DESC LIMIT 0,1)) ";			
 		}else{
 			$sql ="UPDATE l_content SET text='".$content->lindex."' WHERE 1 AND id=".$content_id; 			
 		}
@@ -111,6 +129,7 @@ class Models_String2 extends Models_Base
 		return $result;
 		
 	}	
+
 	public function insert2($content){
 		$data = Array('lkey'=>$content->lkey,'lgroup'=>$content->lgroup);		
 
@@ -128,6 +147,7 @@ class Models_String2 extends Models_Base
 		}			
 		return $id;
 	}
+
 	public function delete2($item){
 		$sql = "DELETE FROM l_content WHERE 1";
 		if(isset($item->lgroup) && !empty($item->lgroup)){
@@ -140,6 +160,7 @@ class Models_String2 extends Models_Base
         $result = $stmt->rowCount();
 		return $result;
 	}
+
 	public function getMaxKeyOfGroup($lgroup){
 		$sql = "SELECT MAX(lkey) FROM l_content";
 		if(isset($lgroup) && !empty($lgroup)){
