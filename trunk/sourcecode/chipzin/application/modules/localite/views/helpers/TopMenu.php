@@ -5,37 +5,11 @@ class Zend_View_Helper_TopMenu
 	{
 		switch ($view->controllerName)
 		{
-			case 'user':
-				$selectUser = 'current';
-				break;
-			case 'group':
-				$selectGroup = 'current';
-				break;
-			case 'tool':
-				$selectTool = 'current';
-				break;
-            case 'shopeditor':
-                $selectShopeditor = 'current';
-                break;    
-			case 'event':
-				$selectEvent = 'current';
-				break;
-			case 'gift':
-				$selectGift = 'current';
-				break;
-			case 'quest':
-				$selectQuest = 'current';
-				break;
-			case 'campaign':
-			case 'soldier':
-           	case 'typemap':
-           	case 'awardtype': 
-			case 'layout':
-				$campaign = 'current';
-				break;
+			
 			case 'language':
 			case 'lgroup':
 			case 'string':
+			case 'string2':
 			case 'iefile':
 				$localite = 'current';
 				break;		
