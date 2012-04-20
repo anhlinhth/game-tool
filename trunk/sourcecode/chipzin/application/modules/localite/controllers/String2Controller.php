@@ -31,7 +31,7 @@ class Localite_String2Controller extends BaseController
 			$searchtype = $_POST["searchtype"];
 			$searchbox = $_POST["searchbox"];
 			$search = $_POST["searchbox"];
-			if($search="search"){
+			if($search=="search"){
 				$size = 1000;// no paggiing
 			}
 			if($searchtype == "stext")

@@ -30,8 +30,8 @@ $model = new Models_Localite_Group();
 					echo '<td>'.$value['id'].'</td>';
 					echo '<td><input id="aka'.$value['id'].'" value="'.$value['name'].'"type="text"></td>';
 					echo '<td>';
-						echo '<a href="javascript:editL('.$value['id'].')"><img src="'.$this->baseUrl.'/media/images/icons/edit-icon.gif" ></a>';
-						echo '<a href="'."javascript:deleteL(".$value['id'].')"><img src="'.$this->baseUrl.'/media/images/icons/delete.gif" ></a>';
+						echo '<a href="javascript:editL('.$value['id'].')"><img src="'.$this->baseUrl.'/media/images/p2/icons/16/save.png" ></a>';
+						echo '<a href="'."javascript:deleteL(".$value['id'].')"><img src="'.$this->baseUrl.'/media/images/p2/icons/16/delete.png" ></a>';
 					echo '</td>';
 				echo '</tr>';
 				$i++;
@@ -40,8 +40,7 @@ $model = new Models_Localite_Group();
 			?>
 		</tbody>
 	</table>
-	<div style="margin-top:20px;"><a class="btn add" type="submit" href="<?php echo $this->baseUrl?>/localite/lgroup/ladd">Add</a> 
-		<button value="btsave" name="btsave" type="submit">edit</button>
+	<div style="margin-top:20px;"><a class="btn add" type="submit" href="<?php echo $this->baseUrl?>/localite/lgroup/ladd">Add</a> 		
 		<button value="btdelete" name="btdelete" type="submit">delete</button>
 	</div>
 </form>
