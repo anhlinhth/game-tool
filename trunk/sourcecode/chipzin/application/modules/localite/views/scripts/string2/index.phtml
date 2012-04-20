@@ -81,9 +81,7 @@ td.ldefault textarea,td.lindex textarea
 <div id="box">
 	<h3>String Manager
 	<select name="l_language" onChange="changeLang(this)">
-			<?php //foreach ($this->language as $vllang) 
-				//echo '<option value="'.$vllang[id].'">'.$vllang['name'].'</option>';
-			?>
+			<?php echo $this->options($this->arr_lang,$this->index_lang->id,array('key'=>'id','name'=>'name'))?>
 	</select>
 	</h3>
 	<table class="" >		
@@ -123,7 +121,7 @@ td.ldefault textarea,td.lindex textarea
 				<div>
 					<input name="lkey" type="text" value="<?php echo $this->max_key?>"></input>
 					<a id="btn_add_text" class="tool-24 add" href="" class="button"></a>&nbsp;&nbsp;
-					<a id="btn_cancel_text" class="tool-24 reset" href="#" class="button"></a>
+					<a id="btn_reset_text" class="tool-24 reset" href="javascript:void(0)" class="button"></a>
 				</div>
 				<div class="text">
 					<textarea name="ldefault" value="" ><?php echo $this->item->ldefault?></textarea>				
@@ -140,7 +138,7 @@ td.ldefault textarea,td.lindex textarea
 				<td style="width:200px;">Group</td>
 				<td style="width:30px;">Key</td>
 				<td style="width:30%;">Default Language</td>
-				<td style="width:30%;">Index Language</td>
+				<td style="width:30%;">Index Language: <?php echo $this->index_lang->name?></td>
 				<td  style="width:10%;" class="center" >Action</td>
 			</tr>
 		</thead> 	
@@ -154,7 +152,7 @@ td.ldefault textarea,td.lindex textarea
 						
 		?>
 			<tr id="tr-<?php echo $row->id?>" class="<?php echo $alt;?>">	
-				<td><?php echo $key?><input type="checkbox" name="check" value="checkall" /></td>
+				<td><input type="checkbox" name="check" value="checkall" /></td>
 				<td><?php echo $row->id?></td>
 				<td class="lgroup"><?php echo $row->gname?></td>
 				<td class="lkey"><?php echo $row->lkey?></td>
@@ -188,13 +186,13 @@ td.ldefault textarea,td.lindex textarea
 	</table>
 
 	<div style="margin-top:20px;margin-bottom:20px">
-		
+		<a id="btn_del_select" class="btn add" href="#">Delete</a>
 	</div>
 </div>	
 </form>
 <script type="text/javascript">
 //local var
-
+var ACTION = "";
 function showLoading(key){
 	var loading = $("div.loading");
 	if(key == 1){		
@@ -238,8 +236,6 @@ function changeGroup(e){
 	
 }
 
-
-
 function updateTable(action,obj){
 	if(action=="insert"){
 		updateSTT();
@@ -247,7 +243,7 @@ function updateTable(action,obj){
 		var alt 		= first_tr.hasClass("alt")?"":"alt";		
 		var lgroup_name = $("select[name='lgroup'] option:selected").text();		
 		var str_tr 		= '<tr id="tr-'+obj.id+'" class="'+alt+'">'+
-			'<td>0</td>'+
+			'<td><input type="checkbox" name="check" value="checkall" /></td>'+
 			'<td>'+obj.id+'</td>'+
 			'<td class="lgroup">'+lgroup_name+'</td>'+
 			'<td class="lkey">'+obj.lkey+'</td>'+
@@ -275,7 +271,7 @@ function updateTable(action,obj){
 		$.each(obj.data,function(key,val){
 			alt = (alt=="alt")?"":"alt";
 			var str_tr = '<tr id="tr-'+val.id+'" class="'+alt+'">'+
-			'<td>0</td>'+
+			'<td><input type="checkbox" name="check" value="checkall" /></td>'+
 			'<td>'+val.id+'</td>'+
 			'<td class="lgroup">'+val.gname+ '<span class="gid" style="display:none">'+val.gid+'</span></td>'+
 			'<td>'+val.lkey+'</td>'+
@@ -297,9 +293,11 @@ function updateSTT(){
 	});
 }
 
-
 $("form#language").delegate("a#btn_del_string","click",function(){
-	if(!confirm("Delete string????")){
+	
+	if(ACTION == "DEL_SELECTED"){
+		
+	}else if(!confirm("Delete string????")){
 		return false;
 	}
 	$(this).removeClass("delete").addClass("loading");
@@ -396,6 +394,17 @@ $("form#language").delegate("a#btn_reset_string","click",function(){
 	
 	btn_save.removeClass("save").addClass("delete").attr("id","btn_del_string");
 	btn_reset.removeClass("reset").addClass("edit").attr("id","btn_edit_string");
+	return false;
+});
+
+$("form#language").delegate("a#btn_del_select","click",function(){
+	$("input:checkbox[name='check']:checked").each(function()
+	{
+		var btn = $(this).parent().parent().find("a#btn_del_string");
+		ACTION = "DEL_SELECTED";
+		btn.click();
+	});
+	ACTION = "	";
 	return false;
 });
 
