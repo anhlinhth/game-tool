@@ -118,7 +118,9 @@ class Localite_String2Controller extends BaseController
 				$content_item->id = $id_inserted;
 				$content_item->max_key = $md_string->getMaxKeyOfGroup($content_item->lgroup);			
 				echo json_encode((Array)$content_item);
-			}			
+			}else{
+				return null;
+			}
 	       
 	    }catch (Exception $ex)
 		{

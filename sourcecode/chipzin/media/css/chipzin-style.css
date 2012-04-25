@@ -273,6 +273,9 @@ a.tool-16:hover{
 .tool-24.save{
 	background-image:url("../images/p2/icons/24/save.png"); 
 }
+.tool-24.copy{
+	background-image:url("../images/p2/icons/24/left_right.png"); 
+}
 .tool-24.add{
 	background-image:url("../images/p2/icons/24/add.png"); 
 }
