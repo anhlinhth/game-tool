@@ -36,11 +36,11 @@ endif;
 	<div id='body'>
 		<div>
 			<div id = 'idlabel'><label for="street">Key : </label></div>
-			<input id="id" type="text" tabindex="1" value="<?php echo $this->string->generateId();?>" name="key">
+			<input id="id" type="text" tabindex="1" value="<?php echo $this->string->generateId();?>" name="key" class="id">
 		</div>
 		<div>
 			<div id = 'idlabel'><label for="street">Group : </label></div>
-			<select id="l_group" name="l_group" onChange="changeMap(this)">	
+			<select id="l_group" name="l_group" onChange="changeMap(this)" class="l_group">	
 			<?php foreach ($this->group as $vlgroup) 
 				echo '<option value="'.$vlgroup[id].'">'.$vlgroup['name'].'</option>';
 			?>
