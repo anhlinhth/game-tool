@@ -130,12 +130,16 @@ class Models_String2 extends Models_Base
 	}	
 
 	public function insert2($content){
-		$data = Array('lkey'=>$content->lkey,'lgroup'=>$content->lgroup);		
-
+		$data = Array('lkey'=>$content->lkey,'lgroup'=>$content->lgroup);
 		$lang_default = $this->getlangdefault2();
 		$data['lang']= $lang_default->id ;	
 		$data['text']= $content->ldefault ;
 		$id = 0;
+		$sql="SELECT COUNT(id) FROM l_content WHERE lgroup=$content->lgroup AND lkey=$content->lkey AND lang='".$lang_default->id."'";
+		$count = $this->_db->fetchOne($sql);
+		if($count!=0){
+			return 0;
+		}
 		if($this->_db->insert("l_content",$data))
 			$id = $this->_db->lastInsertId();
 		if(isset($content->lindex) && !empty($content->lindex)){

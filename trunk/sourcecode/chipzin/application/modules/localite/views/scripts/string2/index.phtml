@@ -36,10 +36,26 @@ endif;
 {
 	text-align:center;
 }
+#language table div#ldefault 
+{
+	float: left;
+	width: 48%;
+}
+#language table div#lindex 
+{
+	float: right;
+	width: 48%;
+}
+#language table div#lcopy 
+{
+	float: left;
+	margin-top: 36px;
+	width: 4%;
+}
 #language table textarea
 {
 	height : 80px;
-	width:49%;
+	width:100%;
 }
 
 td.ldefault textarea,td.lindex textarea
@@ -120,12 +136,13 @@ td.ldefault textarea,td.lindex textarea
 			<td  colspan="2">
 				<div>
 					<input name="lkey" type="text" value="<?php echo $this->max_key?>"></input>
-					<a id="btn_add_text" class="tool-24 add" href="" class="button"></a>&nbsp;&nbsp;
-					<a id="btn_reset_text" class="tool-24 reset" href="javascript:void(0)" class="button"></a>
+					<a id="btn_add_string" class="tool-24 add" href="" ></a>&nbsp;&nbsp;
+					<a id="btn_reset_text" class="tool-24 reset" href="javascript:void(0)" ></a>
 				</div>
 				<div class="text">
-					<textarea name="ldefault" value="" ><?php echo $this->item->ldefault?></textarea>				
-					<textarea name="lindex" value=""><?php echo $this->item->lindex?></textarea>
+					<div id="ldefault" ><textarea name="ldefault" value="" ><?php echo $this->item->ldefault?></textarea></div>
+					<div id="lcopy"><a title="Ctr+D" id="btn_copy" tabindex="1" class="tool-24 copy"></a></div>					
+					<div id="lindex"><textarea name="lindex" value=""><?php echo $this->item->lindex?></textarea></div>
 				</div>
 			</td>
 		</tr>
@@ -133,7 +150,7 @@ td.ldefault textarea,td.lindex textarea
 	<table class="list" id="tbLocalize">	
 		<thead>
 			<tr>			
-				<td style="width:10px;"><input type="checkbox" name="checkall" value="checkall" /></td>
+				<td style="width:10px;"><input type="checkbox" name="checkall" value="checkall" onclick="checkAll(this)"/></td>
 				<td style="width:50px;"> <a href="#">ID</a></td>
 				<td style="width:200px;">Group</td>
 				<td style="width:30px;">Key</td>
@@ -152,7 +169,7 @@ td.ldefault textarea,td.lindex textarea
 						
 		?>
 			<tr id="tr-<?php echo $row->id?>" class="<?php echo $alt;?>">	
-				<td><input type="checkbox" name="check" value="checkall" /></td>
+				<td><input type="checkbox" name="check" value="" /></td>
 				<td><?php echo $row->id?></td>
 				<td class="lgroup"><?php echo $row->gname?></td>
 				<td class="lkey"><?php echo $row->lkey?></td>
@@ -235,10 +252,12 @@ function changeGroup(e){
 	});	
 	
 }
-
+function checkAll(e){	
+	$("input:checkbox[name='check']").attr("checked",e.checked);
+}
 function updateTable(action,obj){
 	if(action=="insert"){
-		updateSTT();
+		//updateSTT();
 		var first_tr 	= $("#tbLocalize").find("tbody tr").eq(0);			
 		var alt 		= first_tr.hasClass("alt")?"":"alt";		
 		var lgroup_name = $("select[name='lgroup'] option:selected").text();		
@@ -292,7 +311,24 @@ function updateSTT(){
 		$(this).find("td").eq(0).text(index+1);
 	});
 }
+var ctrlDown  = false;
+$(document).keydown(function(e){	
+	if (e.keyCode == 17) ctrlDown = true;
+}).keyup(function(e){	
+	if (e.keyCode == 17) ctrlDown = false;
+});
 
+$("textarea[name='ldefault']").keydown(function(e){	
+	if(e.ctrlKey==true && e.keyCode==68){
+		$("a#btn_copy").click();
+		return false;
+	}
+});
+
+$("a#btn_copy").click(function(){
+	var txt_default = $("textarea[name='ldefault']").val();
+	$("textarea[name='lindex']").val(txt_default);
+});
 $("form#language").delegate("a#btn_del_string","click",function(){
 	
 	if(ACTION == "DEL_SELECTED"){
@@ -322,7 +358,7 @@ $("form#language").delegate("a#btn_del_string","click",function(){
 	return false;	
 });
 
-$("form#language").delegate("a#btn_add_text","click",function(){
+$("form#language").delegate("a#btn_add_string","click",function(){
 	var txt_default = $("textarea[name='ldefault']").val();
 	var txt_index = $("textarea[name='lindex']").val();
 	var lgroup = $("select[name='lgroup']").val();
@@ -348,8 +384,12 @@ $("form#language").delegate("a#btn_add_text","click",function(){
 		},
 		dataType: "json",
 		success: function(obj){
-			$("form#language input[name='lkey']").val(parseInt(obj.max_key)+1);
-			updateTable("insert",obj);
+			if(obj==null){
+				alert("Insert Failed!! Key is exist");
+			}else{
+				$("form#language input[name='lkey']").val(parseInt(obj.max_key)+1);
+				updateTable("insert",obj);				
+			}
 			showLoading(0);
 		}			
 	});
