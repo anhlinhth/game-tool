@@ -50,7 +50,7 @@ function editL(key)
 {
 	name = document.getElementById('aka'+key).value;
 	id = key;
-	if(!confirm("bạn có muốn edit dòng này không ?")){
+	if(!confirm("Bạn có muốn edit group : "+name+"  không ?")){
 		return false;
 	};
 	$.ajax({
@@ -74,9 +74,9 @@ function editL(key)
 }
 function deleteL(key)
 {
-	
+	name = document.getElementById('aka'+key).value;
 	id = key;
-	if(!confirm("bạn có muốn delete dòng này không ?")){
+	if(!confirm("Bạn có muốn xóa group : "+name+"  không ?")){
 		return false;
 	};
 	$.ajax({
