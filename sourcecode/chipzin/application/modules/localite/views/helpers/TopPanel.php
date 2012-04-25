@@ -18,6 +18,8 @@ class Zend_View_Helper_TopPanel
             	if (Utility::checkPrivilege($view, 'localite', 'language'))
                     $strList .= "<li><a href='$view->baseUrl/localite/language/index' class='report'>Language Manager</a></li>";
 				if (Utility::checkPrivilege($view, 'localite', 'string'))
+                    $strList .= "<li><a href='$view->baseUrl/localite/string/index' class='report'>String Manage</a></li>";	
+				if (Utility::checkPrivilege($view, 'localite', 'string'))
                     $strList .= "<li><a href='$view->baseUrl/localite/string2/index' class='report'>String Manage(fixed)</a></li>";
 				if (Utility::checkPrivilege($view, 'localite', 'lgroup'))
                     $strList .= "<li><a href='$view->baseUrl/localite/lgroup/index' class='report'>Group Manager</a></li>";
