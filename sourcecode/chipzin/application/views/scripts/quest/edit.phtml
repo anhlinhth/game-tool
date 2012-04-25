@@ -750,7 +750,7 @@ function saveLanguage(){
 		type: "POST",		
 		url: "<?php echo $this->baseUrl?>/localite/string/edit/",
 		data:data,
-		success: function (msg) {							
+		success: function (msg) {						
 				$("#dialog_edit_localize").dialog("close");
 				$("p#"+local_title).text(msg);			
 		}
@@ -758,6 +758,15 @@ function saveLanguage(){
 }
 
 //////////////////////
-
-
+function changeMap()
+{
+	value = $('.l_group').val();
+	$.ajax({
+		type: "GET",		
+		url: "<?php echo $this->baseUrl?>/localite/string/insert?action=getid&idl_group="+value,
+		success: function (msg) {
+			$('.id').val(msg);
+		}
+	});
+}
 </script>

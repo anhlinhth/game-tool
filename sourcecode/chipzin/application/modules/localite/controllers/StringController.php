@@ -68,7 +68,14 @@ class Localite_StringController extends BaseController
 	}
 	public function insertAction()
 	{
-		$string = new Models_String();		
+		$string = new Models_String();
+		if(isset($_REQUEST['action']))
+		{
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNoRender();
+			echo($string->getid($_REQUEST['idl_group']));
+			RETURN;
+		}
 		$this->view->group = $string->getGroup();
 		$this->view->string = $string;
 		$this->view->test = $this->_request->getParam("test",-1);
@@ -88,6 +95,7 @@ class Localite_StringController extends BaseController
 				$this->_redirect('/localite/string/index');
 			}
 		}
+		
 	}
 	public function updateAction()
 	{
@@ -165,6 +173,5 @@ class Localite_StringController extends BaseController
 			echo $this->view->errMsg;
             Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}
-	
 	}
 }

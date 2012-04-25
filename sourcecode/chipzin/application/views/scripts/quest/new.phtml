@@ -721,4 +721,15 @@ function saveLanguage(){
 	});	
 }
 
+function changeMap()
+{
+	value = $('.l_group').val();
+	$.ajax({
+		type: "GET",		
+		url: "<?php echo $this->baseUrl?>/localite/string/insert?action=getid&idl_group="+value,
+		success: function (msg) {
+			$('.id').val(msg);
+		}
+	});
+}
 </script>

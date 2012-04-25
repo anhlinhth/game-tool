@@ -226,4 +226,19 @@ class Models_String
 			$sql.=" AND lgroup = (SELECT id FROM l_group WHERE name='".$groupname."')";			
 		$result= $this->db->query($sql);
 	}
+	public function getid($idgroup)
+	{
+		$sql = "SELECT 
+					(max(lkey) +1)
+				FROM 
+					l_content
+				WHERE 
+					lgroup = $idgroup";
+		$rs = $this->db->fetchOne($sql);
+		if($rs == "")
+		{
+			return 1;
+		}
+		return $rs;
+	}
 }
