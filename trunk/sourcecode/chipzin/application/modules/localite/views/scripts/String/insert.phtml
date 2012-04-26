@@ -36,13 +36,27 @@ endif;
 	<div id='body'>
 		<div>
 			<div id = 'idlabel'><label for="street">Key : </label></div>
+<<<<<<< .mine
+			<div >
+				<input id="id" type="text" tabindex="1" value="<?php echo $this->string->generateId();?>" name="key">
+			</div>
+			
+=======
 			<input id="id" type="text" tabindex="1" value="<?php echo $this->string->generateId();?>" name="key" class="id">
+>>>>>>> .r754
 		</div>
 		<div>
 			<div id = 'idlabel'><label for="street">Group : </label></div>
 			<select id="l_group" name="l_group" onChange="changeMap(this)" class="l_group">	
-			<?php foreach ($this->group as $vlgroup) 
-				echo '<option value="'.$vlgroup[id].'">'.$vlgroup['name'].'</option>';
+				'<option value="">-- Chon Group --</option>';
+			<?php 
+				foreach ($this->group as $vlgroup) 
+				{
+					if ($this->current_group == $vlgroup[id]) 
+						echo '<option value="'.$vlgroup[id].'" selected="selected">'.$vlgroup['name'].'</option>';
+					else 
+						echo '<option value="'.$vlgroup[id].'">'.$vlgroup['name'].'</option>';
+				}
 			?>
 			</select>
 		</div>
@@ -55,8 +69,8 @@ endif;
 			<textarea rows="3" cols="30" name="test1"><?php if($this->test1!=-1) echo $this->test1;?></textarea>
 		</div>		
 		<div style="overflow:hidden;padding:10px;">
-			<input id="button" type="submit" value="OK">
-			<div id="splip"></div>
+			<input id="button" type="submit" value="OK">&nbsp;
+			<!--<div id="splip"></div>-->
 			<input id="button1" type="button" onclick="history.go(-1)" value="Quay lại">
 		</div>
 	</div>
