@@ -1,0 +1,159 @@
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+function Page(url, page)
+{
+	var link;
+	
+	if(url.indexOf('?') == -1)
+	{
+		link = url + "?page=" + page;
+	}
+	else
+	{
+		link = url + "&page=" + page;
+	}
+	
+	parent.location = link;
+}
+</script>
+
+<style>
+.text
+{   
+    background-color: #FFFF80;
+    font-weight: bolder;
+}
+
+.editbox
+{
+	width: 150px;
+	margin: 5px 5px 5px 5px;
+}
+
+.combobox
+{
+	width: 50px;
+	margin: 1px 1px 1px 1px;
+}
+
+.comboboxName
+{
+    border:1px #999 solid;
+    padding: 6px 10px; 
+    margin:2px 0; 
+    font-size:1.3em; 
+    color:#666; 
+    font-family:Verdana, Geneva, sans-serif;
+}
+</style>
+
+<h3 style="margin-left: 15px;">Danh sách item</h3>
+
+<div id="main">
+    <form id="form" action="" method="get" >
+    <table class="centerTable" border="0" style="margin-bottom: 20px;">
+        <tr align="center">            
+            <td width="120px" style="text-align: right;">Tên ngoại trang:</td>
+            <td>
+                <input type="text" class="editbox" name="searchName" />
+            </td>
+            <td width="120px" style="text-align: right;">Loại ngoại trang:</td>
+            <td>
+	            <select class="combobox2" name="searchType">
+	            	<option value="1"></option>
+	            	<option value="2">Thức ăn</option>
+	            	<option value="3">Ngoại cảnh</option>
+	            	<option value="4">Thuốc</option>
+	            	<option value="5">Ngoại trang</option>	          
+				</select>
+				</td>
+				
+            <td width="50px"><input style="width: 50px;" type="submit" value="Tìm" name="search" /></td>      
+            <td width="50px"><input style="width: 50px;" type="submit" value="All" name="searchAll" /></td>
+        </tr>
+    </table>
+    </form>
+	
+    <form id="postform" action="" method="post">
+	<table class="centerTable" border="1px">
+		<thead>
+		<tr align="center">
+			<th width="50px"></th>
+			<th width="50px">Hình aaaa</th>
+			<th width="250px">Tên</th>
+			<th width="100px">Giá (vàng/kg)</th>
+			<th width="100px">Loại</th>
+		</tr>
+		</thead>
+		<tbody>
+		<?php
+		for($i = 0; $i < count($this->dislayData); $i++)
+		{
+			$imgUrl = $this->baseUrl."/media/images/item/". $this->dislayData[$i]->image;
+			$str = "";
+			if($this->dislayData[$i]->type == 3 || $this->dislayData[$i]->type == 1 || $this->dislayData[$i]->type == 6) // Thuoc, thuc an, ngọc tinh luyện
+				$str = 'groupitem';
+			if($this->dislayData[$i]->type == 4 || $this->dislayData[$i]->type == 2) // Ngoai canh, trang bi
+				$str = 'item';
+			
+			echo "
+				<tr align='center' id='row_{$this->dislayData[$i]->id}'>
+					<td width='50px'><input class='deletecheckbox' name='checkbox[]' onclick='choose(this)' type='checkbox' id='{$this->dislayData[$i]->id}' value='{$this->dislayData[$i]->id}' /></td>
+					<td width='50px'><img src='$imgUrl' /></td>
+					<td align='left' width='250px'>{$this->dislayData[$i]->name}</td>
+					<td width='100px'>{$this->dislayData[$i]->priceInGame}</td>
+					<td width='100px'>$str</td>
+				</tr>";
+		}
+		?>
+		<tr align="center">			
+			<td colspan="5">
+				<?php
+				if($this->TotalPage > 1)
+				{
+					$url = Utility::curPageURL();
+				
+					echo "<table border='1px'>
+							<tr>
+								<td>
+									Page:&nbsp;
+									<select name='page' id='pageselection' onchange='Page(\"$this->baseUrl/gift/itemshop\", this.selectedIndex + 1);'>";
+										for($i = 1; $i <= $this->TotalPage; $i++)
+										{
+											if($i == $this->CurPage)
+											{
+												echo "<option SELECTED value='$i'>$i</option>";
+											}
+											else
+											{
+												echo "<option value='$i'>$i</option>";
+											}
+										}
+					echo "
+									</select>
+									/ $this->TotalPage
+								</td>
+							</tr>
+						</table>";
+				}
+				?>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	</form>	
+</div>
+<script type="text/javascript">
+	function choose(self)
+	{
+		var id = self.id;
+		var objName= $("#row_" + id + " td:nth-child(3)").text();	
+		var type = $("#row_" + id + " td:nth-child(5)").text();
+		
+		window.opener.document.getElementById("object_id").value = id;
+		$(window.opener.document.getElementById("name")).val(objName);
+		$(window.opener.document.getElementById("hidType")).val(type);
+		$(window.opener.document.getElementById("info")).show();
+		window.close();
+	}
+</script>

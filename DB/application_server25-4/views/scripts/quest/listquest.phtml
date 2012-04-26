@@ -1,0 +1,10 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+
+<?php 
+//($this->arrNextQuest[2]);
+$this->listQuest2($this->arrQuest,$this->arrAllQuest,$this->arrNextQuest,$this->Task, $this->page, $this->items, $this) ?>

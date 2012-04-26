@@ -1,0 +1,92 @@
+<script type="text/javascript" src="<?php echo $this->baseUrl; ?>/media/scripts/statistic.js"></script>
+<script type="text/javascript">
+    var baseURL = '<?php echo $this->baseUrl; ?>';
+</script>
+<!--div style="text-align: center; color: red; font-size: 24px; font-weight: bold; margin-bottom: 3px;">THỐNG KÊ ĐỀN BÙ</div-->
+<div id="box">
+    <h3 id="adduser">THỐNG KÊ ĐỀN BÙ</h3>
+    <form id="form">
+    <div>
+        <fieldset>
+            <legend>Filter</legend>
+            <table border="0" style="border: none; width: 600px;">
+                <tr>
+                    <td style="border: none;">
+                        <label>Thống kê theo</label>
+                        <select id="key" class="width150">
+                            <option value="0">Lý do</option>
+                            <option value="1">Nhóm vật phẩm</option>
+                        </select>
+                    </td>
+                    <td style="border: none;">
+                        <label id="lblReason" style="display: none;">Mục đích</label>
+                        <select id="reason" class="width150" style="display: none;">
+                            <option value="<?php echo AppConstant::COMPENSATION_REASON_DENBU ?>">Đền bù</option>
+                            <option value="<?php echo AppConstant::COMPENSATION_REASON_VANHANH ?>">Vận hành</option>
+                            <option value="<?php echo AppConstant::COMPENSATION_REASON_KHAC ?>">Khác</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: none;">
+                        <label>Từ ngày</label>
+                        <input id="datefrom" class="width100" type="text" />
+                    </td>
+                    <td style="border: none;">
+                        <label>Đến ngày</label>
+                        <input id="dateto" class="width100" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="border: none;">
+                        <hr />
+                    </td>
+                <tr>
+                    <td colspan="4" style="border: none;">
+                        Loại biểu đồ
+                        
+                        <select id="typechart" class="width100">
+                            <option value="column">Column</option>
+                            <option value="line">Line</option>
+                            <option value="bar">Bar</option>
+                            <option value="pie">Pie</option>
+                        </select>
+                        
+                        <input id="xembieubo" type="button" value="Xem biểu đồ" class="button" onclick="xemBieuDo();" />
+                        <input id="xembangsolieu" type="button" value="Xem bảng số liệu" class="button" onclick="xemBangSoLieu();" />
+                        <input id="xemcahai" type="button" value="Xem cả hai" class="button" onclick="xemCaHai();" />
+                        <input id="xuatexcel" type="button" value="Xuất excel" class="button" onclick="xuatExcel();" />
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    </form>
+
+    <center><img id="loading" style="display: none;" width="50px" height="50px" src="<?php echo $this->baseUrl; ?>/media/images/wait.gif" /></center>
+
+    <p id="header_bieudo" style="font-weight: bold; display: none;">Biểu đồ</p>
+    <div id="chartArea" align="center" style="margin-top: 10px;"></div>
+
+    <div id="tableArea" style="margin-top: 10px;">
+        <p id="header_bangsolieu" style="font-weight: bold; display: none;">Bảng số liệu</p>
+        <table border="1" style="text-align: center;"></table>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $('#key').change(function(){
+        var val = this.value;
+        if (val == 1) // Nhom vat pham
+        {
+            $('#lblReason').show();
+            $('#reason').show();
+        }
+        else
+        {
+            $('#lblReason').hide();
+            $('#reason').hide();
+        }
+    });
+</script>

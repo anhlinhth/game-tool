@@ -1,0 +1,212 @@
+<!--<script src="<?php echo $this->baseUrl.DS.MEDIA_JS.DS; ?>jquery-1.4.4.min.js"></script>-->
+
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jquery-1.4.4.min.js"></script>
+<script>
+$("document").ready(function()
+{
+	$("title").html("Chi tiết ngoại trang");
+	
+	$("#form").submit(function()
+	{		
+		$("#selectedStatus option").attr("selected", true);
+	});
+});
+
+function UpdateUploadStatus()
+{
+	if($("#upload").attr("checked") == false)
+	{
+		$("#image").attr("disabled", true);
+	}
+	else
+	{
+		$("#image").removeAttr("disabled");
+	}
+}
+
+function Selected()
+{
+	var value = $("#status").val();
+	var text = $("#status :selected").text();
+	
+	var content = "<option value='" + value + "'>" + text + "</option>";
+	
+	$("#selectedStatus").append(content);
+	
+	$("#status :selected").remove();
+}
+
+function Removed()
+{
+	var value = $("#selectedStatus").val();
+	var text = $("#selectedStatus :selected").text();
+	
+	var content = "<option value='" + value + "'>" + text + "</option>";
+	
+	$("#status").append(content);
+	
+	$("#selectedStatus :selected").remove();
+}
+</script>
+
+<style>
+.editbox, .combobox
+{
+	width: 150px;
+	margin: 5px 5px 5px 5px;
+}
+
+.combobox2
+{
+	width: 75px;
+	margin: 5px 5px 5px 5px;
+}
+
+.editbox2
+{
+	width: 220px;
+	margin: 5px 5px 5px 5px;
+}
+
+.listbox
+{
+	width: 90px;
+	margin: 5px 5px 5px 5px;
+}
+
+.file
+{
+	width: 250px;
+	margin: 5px 5px 5px 5px;
+}
+
+.text
+{
+	text-align: right;
+    color: blue;
+    font-weight: bolder;
+}
+
+.button
+{
+	width: 200px;
+	height: 100px;
+	margin-top: 50px;
+}
+
+.swf, .img
+{
+	width: 175px;
+	height: 175px;
+}
+</style>
+<form id="form" action="<?php echo $this->baseUrl ?>/shopeditor/item" method="post" enctype="multipart/form-data">
+
+<div class="toolbar">
+	<table class="centerTable" border="1px" align="center" width="1000px">
+		<tr>
+			<td width="100px"><input type="submit" value="<?php echo $this->button; ?>" name="submit" style="width: 100px;" /></td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</div>
+
+<div id="header">Chi tiết ngoại trang</div>
+
+<div id="main">
+	<table class="centerTable" border="0">
+		
+		<tr>
+			<td class="text">PriceInGame :</td>
+			<td><input type="text" class="editbox" name="priceInGame" value="<?php echo $this->item->priceInGame; ?>"/>(giá mua item tính theo vàng (nếu tính theo giá xu thì ghi 0))</td>
+		</tr>
+		<tr>
+			<td class="text">PriceOutGame :</td>
+			<td><input type="text" class="editbox" name="priceOutGame" value="<?php echo $this->item->priceOutGame; ?>"/>(giá mua item tính theo xu (nếu tính theo giá vàng thì ghi 0))</td>
+		</tr>
+		
+		<tr>			
+			<td class="text">DisCount :</td>
+			<td>
+                <select id="disCount" class="combobox" name="disCount">
+                    <?php
+                        echo "<option selected value='{$this->item->disCount}'>{$this->item->disCount}</option>";    
+                        for( $i = 0; $i <= 100; $i += 5 )
+                        {
+                            echo "<option value='{$i}'>{$i}</option>";    
+                        }                        
+                    ?> 
+                </select>% ( item được giảm giá bao nhiêu phần trăm)
+            </td>        
+		</tr>
+		
+		<tr>
+			<td class="text">New :</td>
+			<td>
+				<select id="new" class="combobox" name="new">
+					<?php
+                        if( $this->item->new )
+                        {
+                            echo "<option selected value={$this->item->new}>Có</option>";    
+                        }
+						else
+                        {
+                            echo "<option selected value={$this->item->new}>Không</option>";    
+                        }
+						echo "<option value='true'>Có</option>";
+						echo "<option value='false'>Không</option>";
+					?> 
+				</select> ( trạng thái item mới thêm vào shop)
+			</td>		
+		</tr>
+		
+		<tr>
+			<td class="text">EnableInShop :</td>
+			<td>
+				<select id="enableInShop" class="combobox" name="enableInShop">
+					<?php
+                        if( $this->item->enableInShop )
+                        {
+                            echo "<option selected value={$this->item->enableInShop}>Có</option>";    
+                        }
+                        else
+                        {
+                            echo "<option selected value={$this->item->enableInShop}>Không</option>";    
+                        }
+						
+						echo "<option value='true'>Có</option>";
+						echo "<option value='false'>Không</option>";
+					?>
+				</select> (item có được đưa vào shop hay không)
+			</td>		
+		</tr>
+		
+		<!--<tr>
+			<td class="text">Loại item gói quà :</td>
+			<td>
+				<select id="giftType" class="combobox" name="giftType">					
+					<option value="0"></option>
+					<option <?php if($this->item->giftType == GIFT_TYPE_REWARD) echo "selected"?> value="<?php echo GIFT_TYPE_REWARD ?>">Gói quà sự kiện</option>
+					<option <?php if($this->item->giftType == GIFT_TYPE_SELLOFF) echo "selected"?> value="<?php echo GIFT_TYPE_SELLOFF ?>">Gói quà giảm giá</option>					
+				</select>
+			</td>		
+		</tr>
+		<tr>
+			<td class="text">Mã gói quà :</td>
+			<td>
+				 <input type="text" class="editbox" name="giftPackage" value="<?php echo $this->item->giftPackage; ?>"/>
+			</td>		
+		</tr>-->
+	</table>
+</div>
+
+<input type="hidden" value="<?php echo $_GET['id']; ?>" name="id" />
+<div class="toolbar">
+	<table class="centerTable" border="1px" align="center" width="1000px">
+		<tr>
+			<td width="100px"><input type="submit" value="<?php echo $this->button; ?>" name="submit" style="width: 100px;" /></td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</div>
+</form>

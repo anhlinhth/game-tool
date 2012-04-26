@@ -1,0 +1,378 @@
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery.ui.datetimepicker.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquery.bubblepopup.v2.3.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquery.bubblepopup.v2.3.1.css" />
+
+<div id="box">
+    <h3>Danh sách event</h3>
+</div>
+
+<table >
+                <tr>
+                    <td align="right" colspan="4" style="border: none;">
+                    	<input  id="import" name="import" type="button" value="Import File"/>
+                        <input  id="export" name="export" type="button" value="Export File"/>
+						<input  type="hidden" name="hidSync" id="hidSync"/>	
+						<input  type="hidden" name="hidLocation" id="hidLocation"/>
+						<input id="button2" class="btnSync" type="button" value="Sync" /> 					                    
+      					
+                    </td>
+                  
+                </tr>
+                <tr>
+					<td align="center">
+
+					</td>	
+                </tr>
+  <tr >
+  	<td colspan="2" id="listEvent" valign="top"> 
+  		<table id="tblListEvent"></table>
+         <div id="pagerEvent"></div>
+  	</td>  	
+  </tr>
+  <tr >
+    <td>
+        <table width="100%">
+            <tr>
+              <td id="tree" width="30%" valign="top"></td>
+              <td id="detail"width="70%"  valign="top"> 
+                  <table id="tblListKey"></table>
+                 <div id="pager"></div>
+              </td>
+            </tr>
+        </table>
+    </td>
+  </tr>
+</table>
+
+
+
+
+ <script type="text/javascript">
+ var keyParent =  -1;
+ var lastSelEvent;
+	$(document).ready(function(){
+		$("#export").click(onClickExportFile);
+		$("#import").click(onClickImportFile);
+		createGridListEvent();
+		
+	});
+ 
+ function createGridListEvent()
+ {
+	
+     $('#tblListEvent').jqGrid({
+    	    url:'<?php echo $this->baseUrl?>/event/listevent',
+    	    editurl:'<?php echo $this->baseUrl?>/event/operationevent',
+    	    mtype: 'POST',
+    	    datatype: 'json',
+    	    colNames:["ID","Name","Name Config","Desc","Start Date","End Date","Enable"],
+    	    colModel:[
+    	        {name:"id",index:"id",key:true,width:40,editable:false,hidden:true},
+    	        {name:"name",index:"name",key:true,width:150,editable:true,hidden:false},
+    	        {name:"name_config",index:"name_config",key:true,width:150,editable:true,edittype:'text',hidden:false},
+    	        {name:"desc",index:"desc",key:true,width:200,editable:true,edittype:'text',hidden:false},
+    	        {name:"start_date",index:"start_date",key:true,width:100,editable:true,hidden:false,
+    	        	align: 'center',
+    	        	"sorttype":"datetime",
+    	        	"formatter":"date",
+                    "formatoptions":{"srcformat":"Y-m-d H:i:s","newformat":"Y-m-d H:i:s"},
+                    "editoptions":{
+                        "dataInit":function(elm){setTimeout(function(){
+                            $(elm).datetimepicker({
+                				dateFormat: 'yyyy-mm-dd hh:mm:ss',
+                				changeYear: true,
+                				changeMonth:true,
+                				showButtonPanel:true
+                			});
+                            $('.ui-datetimepicker').css({'font-size':'100%'});
+                        },300);}}},
+    	        {name:"end_date",index:"end_date",key:true,width:100,editable:true,hidden:false,
+                        	align: 'center',       
+    	        	"sorttype":"datetime",
+    	        	"formatter":"date",
+                    "formatoptions":{"srcformat":"Y-m-d H:i:s","newformat":"Y-m-d H:i:s"},
+                    "editoptions":{
+                        "dataInit":function(elm){setTimeout(function(){
+                            $(elm).datetimepicker({
+                				dateFormat: 'yyyy-mm-dd hh:mm:ss',
+                				changeYear: true,
+                				changeMonth:true,
+                				showButtonPanel:true
+                			});
+                            $('.ui-datetimepicker').css({'font-size':'100%'});
+                        },300);}}},
+    	        {name:"enable",index:"enable",key:true,width:50,editable:true,hidden:false,edittype:'checkbox', 
+                        	align: 'center',formatter: 'checkbox', editoptions: {value: '1:0'}}
+    	    ],
+    	    edit:{
+        	    addCaption: "Thêm sự kiện mới",
+        	    editCaption: "Thay đổi sự kiện"
+            	    
+        	    },
+    	    rowNum:20,
+    	    rowList:[10,20,30,60,100],
+    	    pager: '#pagerEvent',
+    	    shrinkToFit: true,
+    	    rownumbers:true,
+    	    hidegrid:false,
+    	    emptyrecords: "Không có dữ liệu",
+    	    height: "100%",
+    	    autowidth: true,
+    	    viewrecords: true,
+    	    caption: "Danh sách chi tiết các sự kiện",
+    	    gridComplete: function(){
+    		  		var id = $('#tblListEvent').getDataIDs()[0];
+    		  		$('#tblListEvent').setSelection(id,true);
+    		  		var name = $('#tblListEvent').getCell(id,'name');
+    		  		createTree(id,name);    		  		
+    	    	},
+    	    onSelectRow: function(id){
+        	    	if(id && id!==lastSelEvent)
+        	    	{
+        	    		$('#tblListKey').GridUnload();
+        	    		$("#tree").dynatree('destroy');
+        	    		var name = $('#tblListEvent').getCell(id,'name');
+        	    		createTree(id,name);
+        	    		lastSelEvent = id;
+        	    	}
+    	    	
+    	    	},
+           	multiselect:true,
+			multiboxonly:true  	   		
+    	});
+     $('#tblListEvent').jqGrid('navGrid','#pagerEvent',
+             {search:false,edit:true,add:true,del:true,cloneToTop:false}, //options,
+     		 {onclickSubmit: function(rp_ge,postdata){
+                 if ($('#enable:checked').val())
+                 {
+                     postdata.enable = 1;
+                 }
+                 else
+                 {
+                     postdata.enable = 0;
+                 }
+       		 	}},
+     		 {onclickSubmit: function(rp_ge,postdata){
+                 if ($('#enable:checked').val())
+                 {
+                     postdata.enable = 1;
+                 }
+                 else
+                 {
+                     postdata.enable = 0;
+                 }
+					}}
+              
+                         );
+ }
+ function createTree(idEvent,nameEvent)
+ {
+	 
+	    $("#tree").dynatree({
+		      title: "Danh sach các key",
+	          initAjax: {
+	              url: '<?php echo $this->baseUrl?>/event/listdetailevent',
+	              datatype: "json",
+	              type: "POST",
+	              data: {
+	            	  idEvent:idEvent,
+	            	  nameEvent:nameEvent
+	              },
+	              complete: function(){
+	            	  
+		              }
+	      		},
+	      	onFocus: function(node){
+	      		var key = node.data.key;
+	      		createGridListKey(key);
+		      	//$("#tblListKey").clearGridData();
+		      	//$("#tblListKey").trigger("reloadGrid",[{keyNode:key}]); 
+	      		}	
+	      });
+	      
+	    
+			 
+ }
+ function createGridListKey(key)
+ {
+	 $('#tblListKey').GridUnload();
+	  	$('#tblListKey').jqGrid({
+	  	    url:'<?php echo $this->baseUrl?>/event/listkey',
+	  	    editurl:'<?php echo $this->baseUrl?>/event/operationkey',
+	  	    mtype: 'POST',
+	  	    datatype: 'json',
+		  	postData: {
+		  		keyNode:key
+		  	    },
+		  	ajaxGridOptions: {cache:false},    
+	  	    colNames:["ID","ID_Event","Name","Desc","Type","Value","ID_Parent"],
+	  	    colModel:[
+	  	        {name:"id",index:"id",key:true,width:40,editable:false,hidden:true},
+		  	    {name:"id_event",index:"id_event",key:true,width:40,editable:false,hidden:true},
+	  	        {name:"name",index:"name",key:true,width:150,editable:true,hidden:false},
+	  	        {name:"desc",index:"desc",key:true,width:200,editable:true,hidden:false},
+	  	        {name:"type",index:"type",key:true,width:100,editable:true,hidden:false,
+		  	        	edittype:'select',editoptions:{value:"0:Chuỗi;1:Số;2:Mảng"}},
+	  	        {name:"value",index:"value",key:true,width:100,editable:true,hidden:false},
+		  	    {name:"id_parent",index:"id_parent",key:true,width:40,editable:false,hidden:true},
+	  	    ],
+	  	    rowNum:20,
+	  	    rowList:[10,20,30,60,100],
+	  	    pager: '#pager',
+	  	    shrinkToFit: true,
+	  	    rownumbers:true,
+	  	    hidegrid:false,
+	  	    emptyrecords: "Không có dữ liệu",
+		  	height: "100%",
+	  	    width: "100%",
+	  	    viewrecords: true
+	  	}); 
+	$('#tblListKey').jqGrid('navGrid','#pager',
+	             {search:false,edit:true,add:true,del:true,cloneToTop:false}, //options
+	             {onclickSubmit: function(rp_ge,postdata){
+	            	 	postdata.keyNode =key;}},
+	             {onclickSubmit: function(rp_ge,postdata){
+		             var idEventSelect = $('#tblListEvent').jqGrid('getGridParam','selrow');
+		             postdata.idEventSelect = idEventSelect;
+	            	 postdata.keyNode =key;}}
+	                         );	  		 
+ } 
+function onClickExportFile()
+{
+    var ids = $('#tblListEvent').jqGrid('getGridParam','selarrrow');
+    if(ids == '')
+    {
+        alert('Chọn event cần xuất file');
+    }
+    else
+    {
+        $.ajax({
+            type: "POST",
+            url: '<?php echo $this->baseUrl?>/event/exportevent',
+            data: "listId=" + ids,
+            dataType: "json",
+            success: function(data){
+				var i;
+				var str = 'THÔNG BÁO KẾT QUẢ EXPORT\n';
+            	for(i in data)
+            	{
+                	str = str + data[i] + '\n';
+                	
+            	}
+            	alert(str);
+            }
+        });        
+    }	
+}
+
+
+function onClickImportFile()
+{
+    var ids = $('#tblListEvent').jqGrid('getGridParam','selarrrow');
+    if(ids == '')
+    {
+        alert('Chọn event cần import file');
+    }
+    else
+    {
+        $.ajax({
+            type: "POST",
+            url: '<?php echo $this->baseUrl?>/event/importevent',
+            data: "listId=" + ids,
+            dataType: "json",
+            success: function(data){
+				var i;
+				var str = 'THÔNG BÁO KẾT QUẢ IMPORT\n';
+            	for(i in data)
+            	{
+                	str = str + data[i] + '\n';
+                	
+            	}
+            	alert(str);
+            }
+        });        
+    }	
+}
+
+
+
+function syncData()
+{
+	var option;
+	if($("#rdDev").is(":checked"))
+	{
+		option = <?php echo DEV ?>;
+		$("#hidLocation").val($("#rdDev").val());
+	}
+	else
+	{
+		option = <?php echo LIVE ?>;
+		$("#hidLocation").val($("#rdLive").val());
+	}
+	
+	if(confirm("Bạn có chắc thực hiện sync dữ liệu với server không?") == true)
+	{
+		$("#hidSync").val(1);
+        $.ajax({
+            type: "POST",
+            url: '<?php echo $this->baseUrl?>/event/syncdata',
+            data: "server=" + option,
+            dataType: "json",
+            success: function(data){
+				
+            }	
+        });	
+	}	
+}
+
+$(function(){		
+	$('.btnSync').CreateBubblePopup({
+												align: 'right',
+												
+												innerHtml: 'Click to sync data', 
+												innerHtmlStyle: {
+																	color:'#FFFFFF', 
+																	'text-align':'center'
+																},
+																
+												themeName: 	'all-black',
+												themePath: 	'<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquerybubblepopup-theme'
+										   });
+	
+	$('.btnSync').click(function(){		
+		var btn = $(this);
+
+		// show a bubble popup with new options when "this" shoppingcart button is clicked
+		btn.ShowBubblePopup({
+
+												align: 'center',
+												innerHtml: '<p id="errorpop" style="color:red"></p>'+
+															'<p><input id="rdDev" checked name="rdLocation" value="<?php echo DEV ?>" type="radio"/> <span style="color:blue;font-weight:bold">DEV</span>&nbsp;&nbsp;&nbsp;&nbsp;<input id="rdLive" name="rdLocation" type="radio" value="<?php echo LIVE ?>"/> <span style="color:red;font-weight:bold;">LIVE</span></p>' + 
+														   '<p><input type="button" onclick="syncData()" id="btnOk" value="Đồng ý"/>&nbsp;&nbsp;<input type="button" id="btnClose" value="Hủy"/></p>',
+
+												innerHtmlStyle:{ 
+																color:'#666666', 
+																'text-align':'left'
+															   },
+
+												themeName: 	'azure',
+												themePath: 	'<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquerybubblepopup-theme'
+
+											}, false); //save_options = false; it will use new options only on click event, it does not overwrite old options.
+
+
+		// "freeze" the Bubble Popup then it will not respond to mouse events (as mouseover/mouseout) 
+		// until ".ShowBubblePopup()" or ".HideBubblePopup()" is called again.
+		btn.FreezeBubblePopup(); 
+
+		// when the "close" link is clicked, hide the bubble popup
+		$('#btnClose').click(function(){
+			$(btn).HideBubblePopup();
+		});
+	});//end onclick event
+});
+</script>
+
+</head>
+

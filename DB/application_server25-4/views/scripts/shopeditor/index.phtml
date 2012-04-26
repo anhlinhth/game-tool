@@ -1,0 +1,190 @@
+<script src="<?php echo $this->baseUrl.DS.MEDIA_JS.DS; ?>jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+$("document").ready(function()
+{
+	$("title").html("Danh sách heo");
+	$("#postform").submit(function()
+	{
+		alert($(".deletecheckbox:checked").length)
+		return confirm("Bạn có muốn xóa không ?");
+	});
+});
+
+
+function PigDetail(id)
+{
+	parent.location = "<?php echo $this->baseUrl.DS. PAGE.DS; ?>" + "pigdetail?id=" + id;
+}
+
+function SelectAll(checkboxall)
+{
+	$(".deletecheckbox").attr("checked", checkboxall.checked);
+}
+
+function Page(url, page)
+{
+	var link;
+	
+	if(url.indexOf('?') == -1)
+	{
+		link = url + "?page=" + page;
+	}
+	else
+	{
+		link = url + "&page=" + page;
+	}
+	
+	parent.location = link;
+}
+</script>
+
+<style>
+.text
+{   
+    background-color: #FFFF80;
+    font-weight: bolder;
+}
+
+.editbox
+{
+	width: 150px;
+	margin: 5px 5px 5px 5px;
+}
+
+.combobox
+{
+	width: 50px;
+	margin: 1px 1px 1px 1px;
+}
+
+.comboboxName
+{
+    border:1px #999 solid;
+    padding: 6px 10px; 
+    margin:2px 0; 
+    font-size:1.3em; 
+    color:#666; 
+    font-family:Verdana, Geneva, sans-serif;
+}
+</style>
+
+<div id="header">Danh sách heo</div>
+
+<div id="main">
+    <form action="" method="get" >
+    <table class="centerTable" border="0" style="margin-bottom: 20px;">
+    
+        <tr align="center">  
+	        
+            <td width="120px" style="text-align: right;">Tên heo cần tìm:</td>
+            <td>
+                <input type="text" class="editbox" name="name" />
+            </td>
+            <td width="120px" style="text-align: right;">Giống heo cần tìm:</td>
+            <td>
+                <select class="combobox" name="gender">
+                    <option value=""></option>
+					<option value="1">Đực</option>
+					<option value="0">Cái</option>
+				</select>
+            </td>
+            <td width="120px" style="text-align: right;">Cấp độ cần tìm:</td>    
+            <td>
+                <select class="combobox" name="level">
+                    <option value=""></option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+				</select>
+            </td>  
+            <td width="50px"><input style="width: 50px;" type="submit" value="Tìm" name="search" /></td>      
+            <td width="50px"><input style="width: 50px;" type="submit" value="All" name="searchAll" /></td>
+        </tr>
+    </table>
+    </form>
+	
+    <form id="postform" action="" method="post">
+	<table class="centerTable" border="1px">
+		<tr align="center">
+			
+			<td width="50px"><input type="checkbox" onchange="SelectAll(this);" /></td>
+			<td class="text" width="50px">STT</td>
+			<td class="text" width="50px">Loại</td>			
+			<td width="50px">&nbsp;</td>
+			<td class="text" width="250px">Tên</td>
+			<td class="text"width="100px">Giống</td>
+			<td class="text"width="100px">Vòng đời</td>
+			<td class="text"width="200px">Tăng trọng (kg/h)</td>
+			<td class="text"width="100px">Giá (vàng/kg)</td>
+			<td width="75px">&nbsp;</td>
+		</tr>
+		<?php
+		for($i = 0; $i < count($this->dislayData); $i++)
+		{
+			$gender = "Cái";
+			if($this->dislayData[$i]->gender)
+			{
+				$gender = "Đực";
+			}
+
+			$imgUrl = $this->baseUrl.DS.MEDIA_LOCALDATA_IMG_ITEM.DS.$this->dislayData[$i]->image;
+
+			echo "
+				<tr align='center'>
+					<td width='50px'><input class='deletecheckbox' name='checkbox[]' type='checkbox' value='{$this->dislayData[$i]->id}' /></td>
+					<td width='100px'>{$this->dislayData[$i]->id}</td>
+					<td width='100px'>{$this->dislayData[$i]->type}</td>
+					<td width='50px'><img width='50px' height='50px' src='$imgUrl' /></td>
+					<td width='250px'>{$this->dislayData[$i]->name}</td>
+					<td width='100px'>{$gender}</td>
+					<td width='100px'>{$this->dislayData[$i]->lifeCycle}</td>
+					<td width='200px'>{$this->dislayData[$i]->weightGainPerHour}</td>
+					<td width='100px'>{$this->dislayData[$i]->priceForOneKg}</td>
+					<td width='75px'><input type='button' value='Chi tiết' style='width:75px' onclick='PigDetail({$this->dislayData[$i]->id})'/></td>
+				</tr>";
+		}
+		?>
+		<tr align="center">
+			<td width="50px"><input style="width: 50px;" type="submit" value="Xóa" name="delete" /></td>
+			<td colspan="7">
+				<?php
+				if($this->TotalPage > 1)
+				{
+					$url = curPageURL();
+				
+					echo "<table border='1px'>
+							<tr>
+								<td>
+									Page:&nbsp;
+									<select name='page' id='pageselection' onchange='Page(\"$url\", this.selectedIndex + 1);'>";
+										for($i = 1; $i <= $this->TotalPage; $i++)
+										{
+											if($i == $this->CurPage)
+											{
+												echo "<option SELECTED value='$i'>$i</option>";
+											}
+											else
+											{
+												echo "<option value='$i'>$i</option>";
+											}
+										}
+					echo "
+									</select>
+									/ $this->TotalPage
+								</td>
+							</tr>
+						</table>";
+				}
+				?>
+			</td>
+		</tr>
+	</table>
+	</form>	
+</div>
