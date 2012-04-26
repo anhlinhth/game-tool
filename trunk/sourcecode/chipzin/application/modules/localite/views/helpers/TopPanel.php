@@ -21,6 +21,8 @@ class Zend_View_Helper_TopPanel
                     $strList .= "<li><a href='$view->baseUrl/localite/string/index' class='report'>String Manage</a></li>";	
 				if (Utility::checkPrivilege($view, 'localite', 'string'))
                     $strList .= "<li><a href='$view->baseUrl/localite/string2/index' class='report'>String Manage(fixed)</a></li>";
+				 if (Utility::checkPrivilege($view, 'localite', 'language'))
+                   $strList .= "<li><a href='$view->baseUrl/localite/string/insert' class='report'>Add String</a></li>";
 				if (Utility::checkPrivilege($view, 'localite', 'lgroup'))
                     $strList .= "<li><a href='$view->baseUrl/localite/lgroup/index' class='report'>Group Manager</a></li>";
                 
@@ -30,6 +32,7 @@ class Zend_View_Helper_TopPanel
                     $strList .= "<li><a href='$view->baseUrl/localite/iefile/index' class='report'>Export</a></li>";
                     if (Utility::checkPrivilege($view, 'localite', 'language'))
                     $strList .= "<li><a href='$view->baseUrl/localite/download/index' class='report'>Download file</a></li>";
+					
                     break;
 				
 			
