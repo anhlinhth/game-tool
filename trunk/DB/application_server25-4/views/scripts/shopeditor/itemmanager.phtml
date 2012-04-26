@@ -1,0 +1,207 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquery.bubblepopup.v2.3.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquery.bubblepopup.v2.3.1.css" />
+<form id="form" name="formPaging" action="" method="post">
+	<input type="hidden" name="hidAdvanceSearch" id="hidAdvanceSearch" value="<?php echo $this->form->hidAdvanceSearch ?>"/>	
+<div id="box">
+	<h3>Item Shop</h3>
+	<br/>
+	<table class="filter">
+		<tr>
+			<th>Id</th>
+			<td><input style="width: 110px;" name="id" value="<?php echo $this->form->id ?>" id="id" type="text" tabindex="1" /></td>			
+			<th>Tên</th>
+			<td><input style="width: 110px;" name="name" value="<?php echo $this->form->name ?>" id="alias" type="text" tabindex="1" /></td>
+			<th>Loại Item</th>
+			<td><?php $this->itemType($this->form->type) ?></td>						
+			<td>
+				<input id="button1" type="submit" value="Tìm" name="btnSearch" />
+				<input id="button1" type="reset" value="Làm lại" name="btnSearch" />
+				<br/>				
+				<input id="button1" type="button" value="Tìm nâng cao" onclick="openSearchAdvance()" name="btnSearchAdvance" />
+			</td>
+		</tr>
+		<?php 
+			if($this->form->hidAdvanceSearch)
+				$display = "";
+			else
+				$display = "display:none";
+		?>
+		<tr id="advance" style="<?php echo $display ?>">
+			<td colspan="7">
+				<table width="100%">
+					<tr>
+						<th align="left" width="15%">Giá bằng vàng từ</th>
+						<th align="left"><input style="width: 110px;" name="priceInGameFrom" value="<?php echo $this->form->priceInGameFrom ?>" type="text" tabindex="1" /> đến
+						<input style="width: 110px;" name="priceInGameTo" value="<?php echo $this->form->priceInGameTo ?>" id="id" type="text" tabindex="1" /></th>
+					</tr>
+					<tr>
+						<th align="left">Giá bằng xu từ</th>
+						<th align="left"><input style="width: 110px;" name="priceOutGameFrom" value="<?php echo $this->form->priceOutGameFrom ?>" type="text" tabindex="1" /> đến
+						<input style="width: 110px;" name="priceOutGameTo" value="<?php echo $this->form->priceOutGameTo ?>" id="id" type="text" tabindex="1" /></th>
+					</tr>
+					<tr>
+						<th align="left">Trạng thái</th>
+						<th align="left">
+							<select name="enableInShop">
+								<option value="0"></option>
+								<option <?php if($this->form->enableInShop == 1) echo "selected"; ?> value="1">Bán trong shop</option>
+								<option <?php if($this->form->enableInShop == 2) echo "selected"; ?> value="2">Không bán trong shop</option>
+							</select>							
+						</th>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>	
+	<div style="padding-left: 8px;">
+	<p align="left" style="margin-top: 10px;">
+		<input style="margin-left: 0px" id="button2" class="btnSysn" onclick="changeStatus(1)" type="button" value="Đặt trong shop" /> &nbsp;&nbsp;
+		<input style="margin-left: 0px" id="button2" class="btnSysn" onclick="changeStatus(0)" type="button" value="Gỡ bỏ" />
+	</p>
+	<table width="100%">
+		<thead>
+			<tr>
+				<th width="3%"><input type="checkbox" name="chkall" value="1" onclick="checkAll(document.formPaging)"/></a></th>				
+				<th><a href="#">Id</a></th>
+				<th><a href="#">Tên</a></th>
+				<th><a href="#">Hình</a></th>
+				<th><a href="#">Loại</a></th>				
+				<th width="120px">Bán trong shop</th>				
+				<th width="80px">Thao tác</th>
+			</tr>
+		</thead>
+		<?php $this->listItem($this->data, $this->page, $this->items, $this) ?>		
+	</table>	
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>		
+		<input type="hidden" name="hidSync" id="hidSync"/>	
+		<input type="hidden" name="hidLocation" id="hidLocation"/>
+		<p align="center">
+		<input id="button2" class="btnSync" type="button" value="Sync" /> 
+		</p>
+	</div>
+</div>
+</form>
+<script type="text/javascript">
+	function openSearchAdvance()
+	{
+		if($("#advance").is(":hidden"))
+		{
+			$("#advance").show();	
+			$("#hidAdvanceSearch").val(1);
+		}
+		else
+		{
+			$("#advance").hide();
+			$("#hidAdvanceSearch").val("");
+		}
+			
+	}
+	
+	function syncData()
+	{
+		if($("#rdDev").is(":checked"))
+			$("#hidLocation").val($("#rdDev").val());
+		else
+			$("#hidLocation").val($("#rdLive").val());
+		
+		if(confirm("Bạn có chắc thực hiện sync dữ liệu với các server không?") == true)
+		{
+			$("#hidSync").val(1);
+			$("#form").submit();
+		}	
+	}
+	
+	$(function(){		
+		$('.btnSync').CreateBubblePopup({
+													align: 'right',
+													
+													innerHtml: 'Click to sync data', 
+													innerHtmlStyle: {
+																		color:'#FFFFFF', 
+																		'text-align':'center'
+																	},
+																	
+													themeName: 	'all-black',
+													themePath: 	'<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquerybubblepopup-theme'
+											   });
+		
+		$('.btnSync').click(function(){		
+			var btn = $(this);
+
+			// show a bubble popup with new options when "this" shoppingcart button is clicked
+			btn.ShowBubblePopup({
+
+													align: 'center',
+													innerHtml: '<p id="errorpop" style="color:red"></p>'+
+																'<p><input id="rdDev" checked name="rdLocation" value="<?php echo DEV ?>" type="radio"/> <span style="color:blue;font-weight:bold">DEV</span>&nbsp;&nbsp;&nbsp;&nbsp;<input id="rdLive" name="rdLocation" type="radio" value="<?php echo LIVE ?>"/> <span style="color:red;font-weight:bold;">LIVE</span></p>' + 
+															   '<p><input type="button" onclick="syncData()" id="btnOk" value="Đồng ý"/>&nbsp;&nbsp;<input type="button" id="btnClose" value="Hủy"/></p>',
+
+													innerHtmlStyle:{ 
+																	color:'#666666', 
+																	'text-align':'left'
+																   },
+
+													themeName: 	'azure',
+													themePath: 	'<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquerybubblepopup-theme'
+
+												}, false); //save_options = false; it will use new options only on click event, it does not overwrite old options.
+
+
+			// "freeze" the Bubble Popup then it will not respond to mouse events (as mouseover/mouseout) 
+			// until ".ShowBubblePopup()" or ".HideBubblePopup()" is called again.
+			btn.FreezeBubblePopup(); 
+
+			// when the "close" link is clicked, hide the bubble popup
+			$('#btnClose').click(function(){
+				$(btn).HideBubblePopup();
+			});
+		});//end onclick event
+	});
+	
+	function changeStatus(status)
+	{	
+		var count = 0;
+		var listId = "";
+		$("input[name='chkid']").each(function(){
+			if($(this).is(":checked"))
+			{
+				count++;
+				if(listId == "")
+					listId += $(this).val();
+				else
+					listId += "," + $(this).val();
+			}
+		});
+		
+		if(count == 0)
+		{
+			alert("Vui lòng chọn item");
+			return;
+		}
+		else
+		{
+			$.ajax({
+				type: "POST",
+				url: "<?php echo $this->baseUrl."/".$this->controllerName ?>/activeitem",
+				data: "id=" + listId + "&status=" + status,
+				success: function(msg){		
+					if(msg == "")
+					{
+						alert("Lưu thành công");
+						window.location = location.href;
+					}	
+					else
+					{
+						alert("Bạn không có quyền thay đổi trạng thái item");
+					}
+				}
+			});
+		}
+	}
+</script>

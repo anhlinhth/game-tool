@@ -1,0 +1,184 @@
+﻿<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+
+<?php 
+if(empty($this->arrTask)){
+	exit();
+}
+foreach($this->arrTask as $key =>$val){  ?>
+<div class='task' id="task-<?php echo $key;?>">
+<h4><a href="#">+</a>Task <?php echo $key+1?>&nbsp;&nbsp;<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask(<?php echo $key?>)'></a>
+<em>Template</em><select class='task-template' id="template<?php echo $key;?>" onChange='javascript:loadTemplate(<?php echo $key;?>)'>
+<option value = ""></option>
+<?php 
+foreach ($this->arrTemp as $row)
+{
+?>
+	<option value = "<?php echo $row->TaskID;?>"><?php echo $row->TaskName;?></option>
+<?php 
+}
+?>
+</select>
+<a class="btn add" title=' Add' href='javascript:addTemplate(<?php echo $key?>)'>Add To Template</a>
+<a class="btn edit" title=' Edit' href='javascript:editTemplate()'>Edit Template</a>	
+</h4>
+<form  id="form" class="form-task-<?php echo $key?>" action="" method="post" enctype="multipart/form-data">
+<?php
+if($val->Counter == 1)
+{
+	$flag = 'checked';
+}
+else 
+{
+	$flag = "";
+}
+?>
+<input type="checkbox" id="Counter" <?php echo $flag?> name ="Counter" value="check">&nbsp;Counter
+<table>
+	<tr>
+		<td>Task ID</td>
+		<td><input type="text" id="TaskID" name="TaskID" class="disabled" readonly="readonly" class="taskid" value="<?php echo $val->TaskID?>"/></td>
+		<td>Action (*) </td>
+		<td>
+		<select id="Action" name="Action">
+			
+			<?php 
+				foreach($this->arrAction as $row)
+				{
+					$str="";
+					if($val->ActionID == $row->ActionID )
+					{
+						$str= "selected";
+					}
+			?>
+					<option <?php echo $str;?> value="<?php echo $row->ActionID ?>"><?php echo $row->ActionName ?></option>
+			<?php
+				}
+			?>
+		</select>
+		</td>
+		
+		
+	</tr>
+	<tr>
+		<td>Task Name</td>
+		<td>
+			<input type="text" id="TaskName" name="TaskName" value="<?php echo $val->TaskName?>"/>
+		</td>
+		<td>Task String</td>
+		<td>
+			<input type="text" id="TaskString-<?php echo $key?>" name="TaskString" value="<?php echo $val->TaskString?>"  onchange="getvalue('TaskString-<?php echo $key?>')" title="TaskString-string-value-<?php echo $key?>" />
+			<a title="chon" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('TaskString-<?php echo $key?>','')"></a>&nbsp;
+			<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('TaskString-<?php echo $key?>','')"></a>
+			<p class="string-value" id = "TaskString-string-value-<?php echo $key?>" ><?php echo $val->gNameTask?></p>
+		</td>
+		
+	</tr>
+	<tr>
+		<td>Desc</td>
+		<td><input type="text" id="DescString" name="DescString" value="<?php echo $val->DescString?>"/></td>
+		<td>DescString</td>
+		<td>
+			<input type="text" id="DescID-<?php echo $key?>" name="DescID" value="<?php echo $val->DescID?>" onchange="getvalue('DescID-<?php echo $key?>')" title="DescID-string-value-<?php echo $key?>"/>
+			<a title="chn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('DescID-<?php echo $key?>','')"></a>&nbsp;
+			<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('DescID-<?php echo $key?>','')"></a>
+			<p class="string-value" id = "DescID-string-value-<?php echo $key?>" ><?php echo $val->gNamedesc?></p>
+		</td>
+		
+	</tr>
+	<tr>
+		<td>Icon Class Name</td>
+		<td><input type="text" id="IconClassName" name="IconClassName" value="<?php echo $val->IconClassName?>"/></td>
+		<td>Icon Bucket Name</td>
+		<td><input type="text" id="IconPackageName" name="IconPackageName" value="<?php echo $val->IconPackageName?>"/></td>		
+	</tr>
+	<tr> 
+
+		<td>Quantity (*) </td>
+		<td><input type="text" id="Quantity" name="Quantity" value="<?php echo $val->Quantity?>"/></td>	
+		
+		<!-- 
+		<td>
+		<INPUT TYPE=RADIO NAME="TargetType" VALUE="" CHECKED> Target Type<BR>
+		<INPUT TYPE=RADIO NAME="TargetType" VALUE="null"> Target List<BR>
+		</td>
+		--><td>UnlockCoin (*) </td>
+		<td><input type="text" id="UnlockCoin" name="UnlockCoin" value="<?php echo $val->UnlockCoin?>"/></td>
+	</tr>
+	<tr>		
+		<td rowspan=1">Target(*)</td>
+		<td rowspan="1" id="target">
+		<?php if($val->TargetType != NULL){
+					$chkType = "checked";
+					$chkList = "";
+			}else{
+				$chkType = "";
+				$chkList = "checked";
+			}
+		
+		?>
+			<input type="radio" id="Type" name="Target" <?php echo $chkType?> value="TargetType"> Type<input  id="TargetType"  style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value="<?php echo $val->TargetType;?>"> <br>
+			<div>
+			<input type="radio" id="List" name="Target" <?php echo $chkList?>  value="TargetList"> List <a class="ico-16 add add-target" href="#"></a><br>
+				<div class='list'>
+					<?php
+					$count = 0;
+					if($chkList == "checked"){
+						foreach ($this->arrTaskTarget as $row)
+						{
+						
+							if ($val->TaskID == $row->TaskID)
+						{
+						?>
+							
+						<input  id="target-"<?php  echo $count?>" class="target-list"  type="text"  value="<?php  echo $row->TargetID?>" name="TargetList[]"  style="margin-left: 50px; width: 153px;"><br>	
+						<?php 
+							$count++;
+						}
+					}
+					}
+					?>
+				</div>
+			</div>
+		</td>
+		<td>Quest Task Client</td>
+		<!-- ////////////////Hien Quest Task Client vao commbobox/////////////////// -->
+		
+		<td>
+		<select id="QuestTC" name="QuestTC">
+			
+			<?php 
+				foreach($this->arrQuestTC as $row)
+				{
+					$str="";
+					if($val->QTC_ID == $row->QTC_ID )
+					{
+						$str= "selected";
+					}
+			?>
+					<option <?php echo $str;?> value="<?php echo $row->QTC_ID ?>"><?php echo $row->QTC_Name ?></option>
+			<?php
+				}
+			?>
+		</select>
+		</td>
+		
+		<!--   <td><input type="text" id="QTC_ID" name="QTC_ID" value="<?php echo $val->QTC_ID?>"/></td>-->
+		<!-- /////////////////////////////////// -->
+	</tr>
+	<tr>
+		
+	</tr>
+</table>
+</form>
+</div>
+<?php }?>
+
+
+
+
+

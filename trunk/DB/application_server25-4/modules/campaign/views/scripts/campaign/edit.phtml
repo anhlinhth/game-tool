@@ -1,0 +1,964 @@
+﻿<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+<style>
+.soldier{
+	width: 40px;
+}
+table#battle{
+	border:1px solid; 	
+}
+
+table#battle input{	
+	overflow: hidden;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+table#battle .hidden{
+	opacity:0.3;
+}
+table#battle td{
+	margin: 0;
+	overflow: hidden;
+	vertical-align: middle;
+}
+.c_order input{
+	width:30px;
+	text-align:center; 
+}
+/**************Table Layout********************/
+ table#tb_layout{
+	border-collapse: separate;
+	border-spacing: 10px;
+ }
+table#tb_layout td select, table#tb_layout td input{
+	border:none;
+	max-width: 200px;	
+	overflow: hidden;
+	background-color: #D9EAED;
+	padding:0px;
+	margin: 0px;
+}
+table#tb_layout td select{
+	width: 70%;
+	height: 20px;
+	float: left;
+}
+table#tb_layout td input{
+	width: 22%;
+	height: 20px;	
+}
+table#tb_layout td.invisible,table#tb_layout td.invisible *{	
+	opacity:0.0;
+}
+
+table#tb_layout td.visible,table#tb_layout td.visible *{
+	background: #EFEFEF;	
+	opacity:1.0;
+    color: blue;
+}
+table#tb_layout td.visible{
+	border: 2px solid lightblue;
+}
+/**************************/
+td.b_award select{
+	width: 65%;	
+} 
+td.b_award input{
+	width: 20%;
+}
+
+/**************End Table Layout****************/
+.style{
+	margin: auto;text-align: center;padding-top: 2px;padding-bottom: 2px;
+}
+
+
+</style>
+<form  class="myform" id="formPaging" name="formPaging" action="" method="post">
+<div class='mybox'>
+	<h3>Campaign Edit</h3>
+	<table>
+	<tr>
+		<td title="enter">
+			<label>Campaign ID:</label>
+			<input type="text" id = "CampaignID" name = "CampaignID" value="<?php echo $this->campaign->ID;?>" onclick="javascript:chk()">
+		</td>
+		<td id='campaign'>
+			<label>Select Campaign:</label>			
+			<select name='campaignID' id='campaignID'>							
+				<?php echo $this->options($this->arrCampaign,$this->campaign->ID,array('key'=>"ID",'name'=>"Name","flag"=>1))?>				
+			</select>
+		</td>			
+		<td>
+			<label>Campaign Name:</label>
+			<input disabled="disabled" type="text" name='Name' id='Name' value='<?php echo $this->campaign->Name;?>' />
+		</td>
+		</tr>
+	</table>
+	<h3>Battle</h3>	
+
+	<table class="list" id='battle'>
+		<thead>
+			<tr>
+				<td width="15px">ID</td>
+				<td width="15px" class="center"><a onclick="order();" href='#'>Order</a></td>
+				<td width="600px" class="center">Layout</td>
+				<td>Award</td>
+				<td class="center" width="20px">Action</td>
+				<td width="5"></td>	
+			</tr>
+		</thead>
+		<tbody id="list-battle">	
+		<?php foreach ($this->arrbattle as $rowbattle){?>
+		<tr class='tr-battle' id='battle-<?php echo $rowbattle->ID?>'>
+			<td class="b_id">
+                <span><?php echo $rowbattle->ID;?></span>
+                <input style="display:none" type="text" id='BattleID' name='BattleID' value='<?php echo $rowbattle->ID;?>'/>
+            </td>
+
+			<td class="center c_order">
+				<input type="text" name='Order'  id='Order' value='<?php echo $rowbattle->Order;?>'/>
+			</td>
+			<td class="b_layout" width="300px" style="text-align: center;">				
+				<select style="width=100%;border: 2px solid lightblue;" class="layout require"  name="Layout" tabindex="2">
+					<?php echo $this->options($this->arrlayout,$rowbattle->Layout,array('key'=>"ID",'name'=>"Name"))?>
+					<option  value="-1" style="color:red">New Layout</option>	
+				</select>
+				
+				<table id='tb_layout'>
+					<tr>					
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][0])?"visible":"invisible";
+															 		
+						?>
+						<td id="point0" class="<?php echo  $strclass?>">
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],0);
+							?>
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[0]" tabindex="0">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
+																array('key'=>"ID",'name'=>"Name"))?>								
+							</select>																												
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[0]' value="<?php echo $arrBS['Level'];?>"/>
+						</td>
+						
+						
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][3])?"visible":"invisible"?>
+						<td id="point3" class="<?php echo  $strclass?>" >
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],3);
+							?>
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[3]" tabindex="3">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
+																array('key'=>"ID",'name'=>"Name"))?>								
+							</select> 							
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[3]' value="<?php echo $arrBS['Level'];?>"/>
+						</td>
+						
+						
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][6])?"visible":"invisible"?>
+						<td id="point6" class="<?php echo  $strclass?>" >
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],6); 
+							?>
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[6]" tabindex="6">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
+																array('key'=>"ID",'name'=>"Name"))?>								
+							</select>
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[6]' value='<?php echo $arrBS['Level'];?>'/>
+						</td>						
+					</tr>
+					<tr>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][1])?"visible":"invisible"?>
+						<td  id="point1" class="<?php echo  $strclass?>" >
+							<?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],1); ?>
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[1]" tabindex="1">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
+																array('key'=>"ID",'name'=>"Name"))?>								
+							</select>
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[1]' value='<?php echo $arrBS['Level'];?>'/>
+						</td>
+						
+						
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][4])?"visible":"invisible"?>
+						<td  id="point4"class="<?php echo  $strclass?>" >
+							<?php  $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],4); ?>
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[4]" tabindex="4">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
+																array('key'=>"ID",'name'=>"Name"))?>								
+							</select>
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[4]' value='<?php echo $arrBS['Level'];?>'/>
+						</td>
+						
+						
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][7])?"visible":"invisible"?>
+						<td  id="point7"class="<?php echo  $strclass?>" >
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],7);?>
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[7]" tabindex="7">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
+																array('key'=>"ID",'name'=>"Name"))?>								
+							</select>
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[7]' value='<?php echo $arrBS['Level'];?>'/>
+						</td>
+					</tr>
+					<tr>
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][2])?"visible":"invisible"?>
+						<td id="point2" class="<?php echo  $strclass?>" >
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],2); ?>
+							<select style="width=100%;border: 1px solid lightblue;" class="solider"  name="solider[2]" tabindex="2">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
+																array('key'=>"ID",'name'=>"Name"))?>								
+							</select>
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[2]' value='<?php echo $arrBS['Level'];?>'/>
+						</td>
+						
+						
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][5])?"visible":"invisible"?>
+						<td id="point5" class="<?php echo  $strclass?>" >
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],5); 
+							?>
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[5]" tabindex="5">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
+																array('key'=>"ID",'name'=>"Name"))?>								
+							</select>
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[5]' value='<?php echo $arrBS['Level'];?>'/>
+						</td>
+						
+						
+						<?php $strclass = ($this->arrPoint[$rowbattle->ID][8])?"visible":"invisible"?>
+						<td id="point8" class="<?php echo  $strclass?>" >
+							<?php $arrBS = $this->GetPoint($this->arrBattleSolider[$rowbattle->ID],8); 
+							?>
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[8]" tabindex="8">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,$arrBS['Solider'],
+																array('key'=>"ID",'name'=>"Name"))?>								
+							</select>
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[8]' value='<?php echo $arrBS['Level'];?>'/>
+						</td>						
+					</tr>
+				</table>
+			</td>
+			<td width="200px" class="b_award">					
+				<div><a class='tool-16 add' href=''></a></div>
+				<?php foreach ($this->arraward[$rowbattle->ID] as $key=>$row){?>					
+					<div>
+						<select  name='AwardTypeID[]' onChange='changeAwardType(this)' class='require'>
+						<?php if (empty($row->AwardTypeID)){?>
+							
+						<?php } ?>	
+						<?php echo $this->options($this->arrawardtype,$row->AwardTypeID,array('key'=>'AwardTypeID','name'=>'Name'))?>
+						</select>					
+						<input type='text' id='Value' name='Value[]' class='number require' value='<?php echo $row->Value?>'/>					
+						<a class='tool-16 delete' href='#'></a>	
+					</div>
+				<?php }?>			
+			</td>
+			<td class="center action">
+				<a class='tool-24 save disabled' id="" href='#'></a><br><br>
+				<a class='tool-24 reset disabled' href='javascript:resetBattle(<?php echo $rowbattle->ID ?>)'></a><br><br>
+				<a class='tool-24 delete' id="" href='javascript:deleteBattle(<?php echo $rowbattle->ID ?>)' ></a>
+			</td>
+			<!--Status-->
+			<td class="td-status"><a title="ok" class="status tool-16 ok"></a></td>
+		</tr>
+		
+		<?php }?>
+	</tbody>
+	</table>
+	<div class="style" style="margin:20px">
+		<a class="btn add" href="javascript:addBattle()"> New </a>	
+		<a class="btn save" href="javascript:saveAll()">Save All</a>
+
+	</div>
+</div>
+</form>
+
+<!-- hidden div: dung de de thay doi html -->
+<div style='display:none'>
+
+	<!-- # Show loi~-->
+	<div id='dialog'>
+		<p class='ct'></p>
+		<p class='ft'> </p>
+	</div>
+	<!-- # Show loi~-->
+	
+	<!-- Dung de them 1 award -->
+	<div id="temp-select-award">
+		<div>
+			<select name="AwardTypeID[]" onChange="changeAwardType(this)" class='require'>
+				<?php echo "<option selected value='' style='color:red'></option>"?>
+				<?php echo $this->options($this->arrawardtype,0,array('key'=>'AwardTypeID','name'=>'Name'))?>	
+				<?php echo "<option  value='-1' style='color:red'> New Type</option>"?>		
+			</select>
+			<input type='text' name='Value[]' value='' class='number require'/>					
+			<a class='tool-16 delete' href='#'></a>	
+		</div>	
+
+	</div>
+	<!-- # Them AwardType~-->
+	<div  id='insert-awardtype'>		
+		<input  type="text" id="awardtype" name="awardtype" value="AwardType" />		
+	</div>
+	<!-- # Them AwardType-->
+	
+	<!-- #Them Layout-->
+	<div id='insert-layout'>
+		<form  id="layout" name="layout" action="" method="post">
+			<table>
+				<tr>
+					<td colspan="3">
+					Tên layout :<input type="text" name="namelayout" id='namelayout'>
+					</td>
+				</tr>
+				<tr>
+					<td>1<input type="checkbox" name="point" value="0" /></td>
+					<td>4<input type="checkbox" name="point" value="3" /></td>
+					<td>7<input type="checkbox" name="point" value="6" /></td>
+				</tr>
+				<tr>
+					<td>2<input type="checkbox" name="point" value="1" /></td>
+					<td>5<input type="checkbox" name="point" value="4" /></td>
+					<td>8<input type="checkbox" name="point" value="7" /></td>
+				</tr>
+				<tr>
+					<td>3<input type="checkbox" name="point" value="2" /></td>
+					<td>6<input type="checkbox" name="point" value="5" /></td>
+					<td>9<input type="checkbox" name="point" value="8" /></td>
+				</tr>
+			</table>
+		</form>	
+	</div>
+	<!-- #Them Layout-->
+	
+	<!-- #Them Battle-->
+	<div>
+		<table id="battle-temp">
+		<tbody>	
+			<tr class="tr-battle">
+			<td class="b_id">
+				<span>!</span>
+				<input style="display:none" type="text" id="BattleID" name="BattleID" value="">
+			</td>
+
+			<td class="center c_order">
+				<input type="text" name="Order" id="Order" value="1">
+			</td>
+			<td width="300px" style="text-align: center;">				
+				<select style="width=100%;border: 1px solid lightblue;" class='layout require' name="Layout" id='Layout' tabindex="2">
+					<option value=""></option>	
+						<?php echo $this->options($this->arrlayout,-1,array('key'=>"ID",'name'=>"Name"))?>
+					<option  value="-1" style="color:red">New Layout</option>	
+				</select>				
+				<table id='tb_layout'>
+					<tr>						
+						<td id="point0" class="visible">
+							<select style="width=100%;border: 1px solid lightblue;" class="solider"  name="solider[0]" tabindex="2">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
+							</select>																			
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[0]' value=""/>
+						</td>						
+						<td id="point3" class="visible" > 
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[3]" tabindex="3">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
+							</select>							
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[3]' value=""/>
+						</td>						
+						<td id="point6" class="visible" >
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[6]" tabindex="6">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
+							</select>	
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[6]' value=''/>
+						</td>						
+					</tr>
+					<tr>						
+						<td  id="point1" class="visible" >
+							<select style="width=100%;border: 1px solid lightblue;"class="solider" name="solider[1]" tabindex="1">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
+							</select>	
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[1]' value=''/>
+						</td>					
+						<td  id="point4"class="visible" >
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[4]" tabindex="4">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
+							</select>	
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[4]' value=''/>
+						</td>						
+						<td  id="point7"class="visible" >
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[7]" tabindex="7">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
+							</select>	
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[7]' value=''/>
+						</td>
+					</tr>
+					<tr>						
+						<td id="point2" class="visible" >
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[2]" tabindex="2">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
+							</select>	
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[2]' value=''/>
+						</td>						
+						<td id="point5" class="visible">
+							<select style="width=100%;border: 1px solid lightblue;" class="solider" name="solider[5]" tabindex="5">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
+							</select>	
+							<em>lv:</em><input type='text' class='level' name='levelSolider[5]' value=''/>
+						</td>
+						
+						<td id="point8" class="visible">
+							<select style="width=100%;border: 1px solid lightblue;" class='' name="solider[8]" tabindex="8">
+								<option value=""></option>	
+									<?php echo $this->options($this->arrSoldier,-1,array('key'=>"ID",'name'=>"Name"))?>								
+							</select>	
+							<em>lv:</em><input type='text' class='level' id='levelSolider' name='levelSolider[8]' value=''/>
+						</td>						
+					</tr>
+				</table>
+			</td>
+			<td width="200px" class="b_award">					
+				<div><a class="tool-16 add" href=""></a></div>							
+			</td>
+			<td class="center action">
+				<a class="tool-24 save disbled" id="" href="#"></a><br><br>
+				<a class="tool-24 reset" href="javascript:resetBattle(26)"></a><br><br>
+				<a class="tool-24 delete" id="" href="#"></a>
+			</td>
+			<!--Status-->
+			<td class="td-status"><a title="Not Save" class="status tool-16 warning"></a></td>
+		</tr>
+			</tbody>
+		</table>
+	
+	</div>
+</div>
+
+
+<!-- Javascript  -->
+<script>
+
+/************************ThaoNX********************/
+	function showDiaglog(){	
+		$("#dialog").dialog({
+				title: "Diaglog",
+				height: 400,
+				width: 350,
+				modal: true,
+				buttons: {
+					"Save": function() {						
+						$(this).dialog("close");							
+					}										
+				}
+		});
+	}
+	////////////////////////////////
+	function updateStatus(e,status,title){
+		e.removeClass("ok");	
+		e.removeClass("warning");
+		e.removeClass("loading");
+		e.addClass(status);
+		e.attr("title",title);
+	}	
+	////////////////////////////////
+	function addAward(e){
+		var parent_td = $(e).parent().parent();
+		var parent_tr = parent_td.parent();	
+		var html = $("div#temp-select-award div").clone();
+		parent_td.append(html);
+		parent_tr.change();
+	}
+	/////////////////////////////
+	function removeAward(e){
+		var parent_div = $(e).parent();
+		var parent_tr = $(e).parent().parent().parent();				
+		parent_div.remove();
+		parent_tr.change();
+	}
+	/////////////////////////
+	function saveAward(key){
+		var data = $("#div-battle-award-"+key+" *").serialize();
+		data += "&Action=update-all&BattleID="+key+"";
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/campaign/campaign/updateaward'?> ",
+			data: data,
+			success: function(msg){
+				if(msg == '1'){					
+					alert("Successfull");
+				}else{
+					alert("Error");					
+				}
+				window.location.reload();
+			}
+		});
+	}
+	////////////////////////////////
+	function saveBattle(e,action){
+		if(action !="save_all"){
+			$("#dialog .ct").html("");
+		}		
+		var campaignID = $("#campaignID").val();		
+		var parent_tr = $(e).parent().parent();
+		var a_status = parent_tr.find(".status");
+		var a_save = parent_tr.find(".tool-24.save");
+		var a_reset = parent_tr.find(".tool-24.reset");
+		updateStatus(a_status,"loading","loading");	
+		var data = parent_tr.find("*").serialize();
+		var arr_data = parent_tr.find("*").serializeArray();			
+		var err= validateInput(parent_tr);		
+		var BattleID =parent_tr.find('#BattleID').val();		
+		if(err!="")	{			
+			$("#dialog .ct").append("<p class='error'><label style='color:#2121FF'> Errors: </label></br>"+err+"</p>" );			
+			$("#dialog").dialog({
+				title: "Diaglog",
+				height: 400,
+				width: 350,
+				modal: true,
+				buttons: {
+					"Continue": function() {								
+						$(this).dialog("close");							
+					}										
+				}
+			});			
+		}else{	
+			data += "&Campaign="+campaignID;	
+			$.ajax({
+				type: "POST",
+				url: "<?php echo $this->baseUrl.'/campaign/battle/save'?> ",
+				data: data,
+				dataType:"json",
+				success: function(msg){	
+					if(msg.msg == '1'){					
+						 updateStatus(a_status,"ok","ok");
+						 a_save.addClass("disabled");
+						 a_reset.addClass("disabled");
+						 if(msg.BattleID){ 						
+							parent_tr.find("td.b_id input[name='BattleID']").attr("value",msg.BattleID);
+							parent_tr.find("td.b_id span").text(msg.BattleID);						
+	                };   
+					}else{
+						alert(msg.msg);					
+					}				
+				}
+			});	
+		}	
+	}
+	////////////////////////
+	function deleteBattle(e){
+		var parent_tr = $(e).parent().parent();
+		var a_status = parent_tr.find(".status");
+		var battle_id = parent_tr.find("#BattleID").val();		
+		if(!confirm("Delete Battle ? Are you sure ?")){
+			return false;
+		}
+		updateStatus(a_status,"loading","loading");			
+		if(battle_id){
+			$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/campaign/battle/delete'?> ",
+			data: {
+				BattleID:battle_id
+			},
+			success: function(msg){				
+					if(msg == '1'){					
+						parent_tr.remove();						
+					}else{
+						alert(msg);					
+					}
+				
+				}
+			});			
+		}else{
+			parent_tr.remove();
+		}
+	}
+	////////////////////////
+	function resetBattle(key){
+		if(!confirm("Reset???")){
+			return false;
+		}
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/campaign/battle/getinfo'?> ",
+			data: {
+				BattleID:key
+			},
+			dataType: 'json',
+			success: function(data)
+			{	
+				var awardtype = data['awardtype'][0];
+				var award = data['award'][0];
+				var soldier = data['soldier'][0];
+				
+				$('#battle-'+key +' #Order').val(data['battle'][0]['ID']);
+				$('#battle-'+key +' .layout').val(data['battle'][0]['Layout']);
+				var listaward = '<div><a class="tool-16 add" href=""></a></div>';
+				$.each(award, function(keyaward, valaward) 
+				{
+					listaward += "<div><select onchange='changeAwardType(this)' name='AwardTypeID[]'>";
+					$.each(awardtype, function(keyawardtype, valawardtype) 
+					{
+						if(award[keyaward]['AwardTypeID'] == awardtype[keyawardtype]['AwardTypeID'])
+						{
+							listaward += "<option value="+awardtype[keyawardtype]['AwardTypeID']+" selected='selected'>"+awardtype[keyawardtype]['Name']+"</option>";
+						}
+						else
+						{
+							listaward += "<option value="+awardtype[keyawardtype]['AwardTypeID']+">"+awardtype[keyawardtype]['Name']+"</option>";
+						}
+					});
+					listaward += '<option style="color:red" value="-1">New Type</option></select> <input id="Value" type="text" value="'+award[keyaward]['Value']+'" name="Value[]"> <a class="tool-16 delete" href="#"></a></div>';
+				});
+				$('#battle-'+key +' .b_award').html(listaward);
+				var Point = data['battle'][0]['Point'];
+				var flagpoint = 0;
+				for(var i = 1; i< 18; i+=2)
+				{
+					if(Point[i] == 1)
+					{
+						$.each(soldier, function(keysoldier, valsoldier) 
+						{
+							if(soldier[keysoldier]['Point'] == flagpoint)
+							{
+								$('#battle-'+key +' select[name$="solider['+flagpoint+']"]').val(soldier[keysoldier]['Soldier']);
+								$('#battle-'+key +' input[name$="levelSolider['+flagpoint+']"]').val(soldier[keysoldier]['Level']);
+								return;
+							}
+						});
+						$('#battle-'+key +' #point'+flagpoint).removeClass('invisible').addClass('visible');
+						$('#battle-'+key +' select[name$="solider['+flagpoint+']"]').attr('disabled',false);
+						$('#battle-'+key +' input[name$="levelSolider['+flagpoint+']"]').attr('disabled',false);
+					}
+					else
+					{
+						$('#battle-'+key +' #point'+flagpoint).removeClass('visible').addClass('invisible');
+						$('#battle-'+key +' select[name$="solider['+flagpoint+']"]').attr('disabled',true);
+						$('#battle-'+key +' input[name$="levelSolider['+flagpoint+']"]').attr('disabled',true);
+					}
+					flagpoint++;
+				}
+			}
+		});
+	}
+	///Save All
+	function saveAll(){		
+		$("#dialog .ct").html("");
+		$("table#battle").find("td.action .save").not(".disabled").each(function (index){		
+			saveBattle($(this),'save_all');
+		});
+	}
+	///Add battle///
+	function addBattle(){		
+	 	var html = $("table#battle-temp .tr-battle").clone();		
+		$("table#battle tbody#list-battle").append(html);		
+	}
+
+	/********************AwardType****************************/
+	 //onchange AwardType
+	function changeAwardType(element){		
+		var selected = element.value;
+		if(selected.value!="")
+		{
+			$(element).css({ background: "#EFEFEF",color:"#000000" });
+		}
+		if(selected == -1){
+			addAwardType();
+		}
+	}
+	//Show Dialog
+	function addAwardType(){
+		$("#insert-awardtype").dialog({
+			title: "New AwardType",
+			height: 400,
+			width: 250,
+			modal: true,
+			buttons: {
+				"Save": function() {
+					type_name = $('div#insert-awardtype #awardtype').val();											
+					$.ajax({
+						type: "POST",
+						url: "<?php echo $this->baseUrl.'/campaign/AwardType/insert' ?> ",
+						data: "Name=" + type_name,
+						success: function(msg){																		
+							updateAwardTypeSelect(msg,type_name);													
+						}
+					});
+					$(this).dialog("close");		
+				}											
+			}
+		});		
+	}
+	//update selectbox award
+	function updateAwardTypeSelect(type_id,type_name){
+		var option_html = "<option value='"+type_id+"'>"+type_name+"</option>"
+		$("select[name='AwardTypeID[]'] option[value='-1']").before(option_html);
+		$("select[name='AwardTypeID[]']").each(function(index){
+			if($(this).val()==-1){
+				$(this).val(type_id);
+			}	
+		});
+		//$("td.b_award select option[value='-1']").before(option_html);
+	}
+	/*******************Layout**************************/
+	//insert layout into database
+	function checkCount()
+	{
+		var dem=0;
+		count=document.layout.point.length;
+		 for(var i=0;i<count;i++)
+		 {
+			 if(document.layout.point[i].checked==true)
+			 {
+		      dem++;
+			 }
+		 }
+		return dem;
+	}
+	function insertLayout(e){		
+			var arraytemp = new Array();
+			var name = document.layout.namelayout.value;
+			c_value = "[";
+			for (var i=0; i < document.layout.point.length; i++){
+				if (document.layout.point[i].checked) {
+					arraytemp[i] = 1;
+				}else{
+					arraytemp[i] = 0;
+				}
+			}
+			c_value += arraytemp[0]+','+arraytemp[3] +','+ arraytemp[6] + ','+ arraytemp[1] + ','+ arraytemp[4] + ','+ arraytemp[7] + ','+ arraytemp[2] + ','+ arraytemp[5] + ','+ arraytemp[8];
+			c_value += "]&name="+name;
+			$.ajax({
+				type: "POST",
+				url: "<?php echo $this->baseUrl.'/campaign/Layout/insert' ?> ",
+				data: "point=" + c_value,
+				dataType:"json",
+				success: function(msg){									
+					if(msg.msg == "1"){
+						updateLayoutSelect(msg.LayoutID,name);
+						$(e).val(msg.LayoutID);
+						$(e).change();// delegate to change envent selectbox
+					}else{					
+						alert('Tên Layout đã tồn tại');
+					}
+				}
+			});			
+	}	
+	//popup form insert layout
+	function popupInsertLayout(e){		
+		$("#insert-layout").dialog({
+				title: "New Layout",
+				height: 250,
+				width: 220,
+				modal: true,
+				buttons: {
+					"Save": function() {						
+						count = checkCount();
+						name = $("#insert-layout #namelayout").val();												
+						if(count>0 && name!="")
+						{
+							insertLayout(e);
+							$(this).dialog("close");
+						}							
+					}										
+				}
+		});
+	}
+	//update selectbox Layout
+	function updateLayoutSelect(layout_id,layout_name){		
+		var option_html = "<option value='"+layout_id+"'>"+layout_name+"</option>";
+		$("select.layout option[value='-1']").before(option_html);		
+	}
+	//update layout point when change layout ID
+	function updateLayoutPoint(e,json){//e la the <td>		
+		var table = e.children("table#tb_layout");
+		$.each(json, function(key, val) {
+			if(val==0){
+				table.find("td#"+key).removeClass("visible").addClass("invisible");				
+				table.find("td#"+key +" select").attr('disabled',true);				
+				table.find("td#"+key +" input").attr('disabled',true).attr("value","");										
+			}else{
+				table.find("td#"+key).removeClass("invisible").addClass("visible");
+				table.find("td#"+key +" select").attr('disabled',false);
+				table.find("td#"+key +" input").attr('disabled',false);				
+			}
+		});											
+	}
+	//change layout
+	function changeLayout(e){		
+		var parent_td=$(e).parent();		
+		var layoutID=$(e).val();
+		
+		$("#insert-layout #namelayout").val("");
+		if(layoutID!="")
+		{
+			$(e).css({ background: "#FFFFFF" });			
+		}
+		if(layoutID==-1){				
+			popupInsertLayout(e);//e la the <td>		
+		}else{	
+			$.ajax({
+				type: "POST",
+				url: "<?php echo $this->baseUrl.'/campaign/campaign/loadlayout'?> ",
+				data: "id=" + layoutID,
+				dataType: "json",
+				success: function(data){				
+					updateLayoutPoint(parent_td,data);
+				}			
+			});
+		}
+	}
+	/***********************************************/
+	// validate
+	function validate2(data){	
+		return true;
+	}	
+/* -------------- changewordmap ------------------------*/
+function changeworldmap()
+{
+	var id = $("select[name='nextCampaign']").val();
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $this->baseUrl.'/campaign/campaign/loadcampaign'?> ",
+		data: "id=" + id,
+		dataType: "json",
+		success: function(data){
+			var sel = "<label>Select Campaign:</label><select name='CampaignID' id='CampaignID' onchange='javascript:changecan()'><option value=''>&nbsp;</option>";			
+			$.each(data, function(key, value)
+			{
+				sel += "<option value='"+value['ID']+"'>"+value['Name']+"</option>";
+			});
+			sel += "</select>";
+			$('#campaign').html(sel);
+			$('#Name').val("");
+		}			
+	});
+}
+function changecan()
+{
+ 	var campaignID=$("select[name='CampaignID']").val();
+ 	var url = "<?php echo $this->baseUrl.'/campaign/campaign/edit/id/'?>"+campaignID;
+	$(location).attr('href',url);
+}
+/***************JQUERY***************************/
+
+$(document).ready(function(){
+
+	//update disable status
+	$("td.invisible").find("select").attr('disabled','disabled').removeClass("require");
+	
+	$("td.invisible").find("input").attr('disabled',true).removeClass("require");
+	//change CampaignID selectbox
+	$('#campaignID').change(function(){
+		 	var campaignID=$(this).val();
+		 	var url = "<?php echo $this->baseUrl.'/campaign/campaign/edit/id/'?>"+campaignID;
+		 	$(location).attr('href',url);
+	});
+	///////////////Delegate/////////////////
+	
+	//Onchange
+	$("table#battle").delegate(".tr-battle", "change", function() {
+		$(this).find(".action a.save").removeClass("disabled");
+		$(this).find(".action a.reset").removeClass("disabled");		
+		$(this).find(".td-status a").removeClass("ok").addClass("warning").attr("title","Not Save");
+		return false;
+	});
+	//save a battle
+	$("table#battle").delegate("td.action .save", "click", function() {
+		if($(this).hasClass("disabled")){
+			alert("disabled");
+		}else{
+			saveBattle(this,"save");
+		}		
+		return false;		
+	});
+	//delete a battle
+	$("table#battle").delegate("td.action .delete", "click", function() {
+		deleteBattle(this);
+		return false;		
+	});
+	///////Add A Award///////
+	$("table#battle").delegate("td.b_award .add", "click", function() {
+		addAward(this);		
+		return false;		
+	});
+	///////Remove A Award///////
+	$("table#battle").delegate("td.b_award .delete", "click", function(){ 	
+		removeAward(this);		
+		return false;		
+	});
+	
+	///////Onchange Layout///////
+	$("table#battle").delegate("select.layout", "change", function(){ 		
+		changeLayout(this);		
+		
+	});
+	
+});
+$("#CampaignID").keyup(function(event){
+    if(event.keyCode == 13){
+    	location.replace("<?php echo $this->baseUrl.'/campaign/campaign/edit/id/'?>"+ $("#CampaignID").val());
+    }
+});
+$("table#battle").delegate("tr.tr-battle .solider", "change", function(){ 
+	select=$(this).val();
+	input=$(this).parent().find('input');
+	if(select=="")
+	{
+		input.val("").css({ background: "#EFEFEF"});		
+		input.removeClass('require');
+		input.removeClass('number');
+		$(this).removeClass('require');
+		
+	}
+	else
+		{
+			input.addClass('number');
+			input.addClass('require');	
+			$(this).addClass('require');
+			$(this).css({ background: "#EFEFEF"});	
+		}
+		
+});
+$('.level').change(function(){	
+	
+	
+});
+$("table#battle").delegate("tr.tr-battle .level", "change", function(){ 	
+	var val=$(this).val();	
+	var select=$(this).parent().find('select');
+	if(val=="" && select.val()=="")
+	{
+		select.removeClass('require');
+		$(this).removeClass('number');
+		$(this).removeClass('require');	
+	}
+	else{		
+		$(this).addClass('number');
+		$(this).addClass('require');
+		select.addClass('require');				
+	}	
+});
+
+
+
+</script><!-- Javascript  --><!-- Javascript  -->
+<!-- End Javascript  -->

@@ -1,0 +1,101 @@
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jquery.ui.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jquery.editinplace.js"></script>
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<div id="box">
+	<h3 id="adduser">Nội dung gói phần thưởng</h3>
+	<form id="form" action="" method="post">
+	  <fieldset id="personal">
+		<legend>Thông tin gói phần thưởng</legend>
+		<table style="width: 40%;">
+			<tr>
+				<td style="border: none">ID</td>
+				<td style="border: none"><?php echo $this->obj->alias ?></td>
+			</tr>
+			<tr>
+				<td style="border: none">Tên</td>
+				<td style="border: none"><?php echo $this->obj->name ?></td>
+			</tr>
+			<tr>
+				<td style="border: none">Mô tả</td>
+				<td style="border: none"><?php echo $this->obj->description ?></td>
+			</tr>
+			<tr>
+				<td style="border: none">Trạng thái</td>
+				<td style="border: none"><?php if($this->obj->enabled) echo "Kích hoạt"; else echo "Chưa kích hoạt" ?></td>
+			</tr>
+		</table>		
+		<div align="center">		  
+		  <input id="button1" type="button" value="Quay lại" onclick="window.location='<?php echo $this->baseUrl ?>/gift/index'" />
+		 </div>
+	  </fieldset>
+	</form>
+	
+	<div style="padding: 5px">
+		<form id="form">
+			<input style="width: 135px" id="button1" name="btnAddItem" value="Thêm phần thưởng" onclick="addItem()"/>
+		</form>	
+		<table width="100%">
+			<thead>
+				<tr>
+					<th width="60px"><a href="#">STT</a></th>
+					<th width="200px">Loại</th>
+					<th>Tên</th>
+					<th>Cấp</th>
+					<th width="200px">Số lượng</th>						
+					<th width="60px">Thao tác</th>
+				</tr>
+			</thead>
+			<?php $this->listItemInGift($this->data, $this) ?>		
+		</table>		
+	</div>
+</div>
+<script>
+	function addItem()
+	{
+		var url = "<?php echo $this->baseUrl ?>/gift/additem/id/" + "<?php echo $this->obj->id ?>";
+		openWindow(url, "Thêm phần thưởng", 720, 350, 'scrollbars');
+	}
+	
+	$(document).ready(function(){		
+		$(".rank").each(function(){
+			var id = $(this).attr("id");
+			$(this).editInPlace({
+				url: '<?php echo $this->baseUrl ?>/gift/edititem',
+				show_buttons: true,
+				value_required:true,
+				success: function(msg){
+					if(msg)
+					{
+						var arr = msg.split("!");
+						$("#" + id).html(arr[1]);
+						if(arr[0] == '-1')						
+							alert("Giá trị phải là số");
+					}
+				}
+			});
+		});		
+		
+		$(".quantity").each(function(){
+			var id = $(this).attr("id");
+			$(this).editInPlace({
+				url: '<?php echo $this->baseUrl ?>/gift/edititem',
+				show_buttons: true,
+				value_required:true,
+				success: function(msg){
+					if(msg)
+					{
+						var arr = msg.split("!");
+						$("#" + id).html(arr[1]);
+						if(arr[0] == '-1')						
+							alert("Giá trị phải là số");
+					}
+				}
+			});
+		});
+	});
+</script>

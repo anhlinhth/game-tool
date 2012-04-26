@@ -1,0 +1,468 @@
+<!--﻿<script src="<?php echo $this->baseUrl.DS.MEDIA_JS.DS; ?>jquery-1.4.4.min.js"></script>-->
+
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jquery-1.4.4.min.js"></script>
+<script>
+
+$("document").ready(function()
+{
+	$("title").html("Chi tiết heo");
+	
+	$("#form").submit(function()
+	{
+		$("#filename").val($("#type :selected").text());
+		$("#currentStatus option").attr("selected", true);
+	});
+});
+
+function SelectMaterial()
+{
+	$("#filename").val($("#materials :selected").text());
+	var str = $("#filename").attr("value");
+
+	$.post("<?php echo $this->baseUrl.DS.PAGE.DS; ?>" + "getmaterial", {str: str}, function(receive)
+	{
+		var data = $.parseJSON(receive);
+
+		$(".swf").attr("src", "<?php echo $this->baseUrl.DS.MEDIA.DS; ?>" + data["url"]);
+	});
+}
+
+function UpdateUploadStatus()
+{
+	if($("#upload").attr("checked") == true)
+	{
+		$("#materials").attr("disabled", true);
+		$("#uploadmaterial").removeAttr("disabled");
+	}
+	else
+	{
+		$("#materials").removeAttr("disabled");
+		$("#uploadmaterial").attr("disabled", true);
+	}
+}
+
+function Selected()
+{
+	var value = $("#status").val();
+	var text = $("#status :selected").text();
+	
+	var content = "<option value='" + value + "'>" + text + "</option>";
+	
+	$("#currentStatus").append(content);
+	
+	$("#status :selected").remove();
+}
+
+function Removed()
+{
+	var value = $("#currentStatus").val();
+	var text = $("#currentStatus :selected").text();
+	
+	var content = "<option value='" + value + "'>" + text + "</option>";
+	
+	$("#status").append(content);
+	
+	$("#currentStatus :selected").remove();
+}
+
+</script>
+
+<style>
+.editbox, .combobox
+{
+	width: 170px;
+	margin: 5px 5px 5px 5px;
+}
+
+.combobox2
+{
+	width: 75px;
+	margin: 5px 5px 5px 5px;
+}
+
+.listbox
+{
+	width: 90px;
+	margin: 5px 5px 5px 5px;
+}
+
+.editbox2
+{
+	width: 400px;
+	margin: 5px 5px 5px 5px;
+}
+
+.file
+{
+	width: 250px;
+	margin: 5px 5px 5px 5px;
+}
+
+.text
+{
+	text-align: right;
+    color: blue;
+    font-weight: bolder;
+}
+
+.button
+{
+	width: 200px;
+	height: 100px;
+	margin-top: 50px;
+}
+
+.swf, .img
+{
+	width: 175px;
+	height: 175px;
+}
+</style>
+
+<form id="form" action="<?php echo $this->baseUrl ?>/shopeditor/pig" method="post" enctype="multipart/form-data">
+
+<div class="toolbar">
+	<table class="centerTable" border="1px" align="center" width="1000px">
+		<tr>
+			<td width="100px"><input type="submit" value="<?php echo $this->button; ?>" name="submit" style="width: 100px;" /></td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</div>
+
+<div id="header">Chi tiết heo</div>
+
+<div id="main">
+	<table class="centerTable" border="0">
+	<!--	<tr>
+			<td class="text">Type :</td>
+			<td>
+				<select id="type" class="combobox" name="type">
+					<?php
+						
+						for($i = 0 ; $i < count($this->type); $i ++)
+						{
+							$j = $i + 1;
+							if($this->type[$i] == $this->pig->type)
+							{								
+								echo "<option selected value='{$j}'>{$this->type[$i]}</option>";
+							}
+							else
+							{
+								echo "<option value='{$j}'>{$this->type[$i]}</option>";
+							}
+						}
+					?>
+				</select> (Loại heo)
+			</td>
+			
+			</tr>
+			<tr>
+				<td class="text">Name :</td>
+				<td><input type="text" class="editbox" name="name" value="<?php echo $this->pig->name; ?>"/>(Tên heo)</td>
+			</tr>
+			<tr>
+			<td class="text">Gender :</td>
+			<td>
+				<select class="combobox2" name="gender">
+					<option <?php if($this->pig->gender == "1") echo "selected"; ?> value="1">Đực</option>
+					<option <?php if($this->pig->gender == "0") echo "selected"; ?> value="0">Cái</option>
+				</select> (Giới tính của heo)
+			</td>
+		</tr>
+		<tr>
+			<td class="text">Material</td>
+			<td colspan="5">
+				<select id="materials" class="combobox" name="material" onchange="SelectMaterial();">
+					<?php
+					for($i = 0; $i < count($this->materials); $i++)
+					{
+						$j = $i + 1;
+						$name = basename($this->materials[$i]->url);
+
+						if(strpos($this->materials[$i]->url, "Pig_" . $this->pig->type) > 0)
+						{
+							echo "<option SELECTED value='{$j}'>$name</option>";
+							$materialIndex = $i;
+						}
+						else
+						{
+							
+							echo "<option  value='{$j}'>$name</option>";
+						}
+					}
+					?>
+				</select>
+				<input id="upload" type="checkbox" onchange="UpdateUploadStatus();" name="upload"/>
+				Upload
+				<input id="uploadmaterial" type="file" class="file" name="uploadmaterial" disabled="true"/>(Chọn file flash cho heo)</td>
+			</td>
+		</tr>
+		<tr align="center">
+			<td colspan="3">
+				<embed class="swf" src="<?php echo $this->baseUrl.DS.MEDIA.DS.$this->materials[$materialIndex]->url; ?>" loop="false" scale="ExactFit" type="application/x-shockwave-flash" />
+			</td>
+			
+		</tr>
+		<tr>
+			<td class="text">Image:</td>
+			<td><input id="image" type="file" class="file" name="image"/>(Hình ảnh đại diện của heo)</td>
+		</tr>
+		<tr align="center">
+			<td colspan="3"><img class="img" src="<?php echo $this->baseUrl.DS.MEDIA_LOCALDATA_IMG_ITEM.DS.$this->pig->image; ?>"/></td>
+		</tr>
+		<tr>
+			<td class="text">Description :</td>
+			<td colspan="5"><input type="text" class="editbox2" name="description" value="<?php echo $this->pig->description; ?>"/>(Mô tả đầy đủ về heo)</td>
+		</tr>
+		<tr>
+			<td class="text">ShortDesc:</td>
+			<td><input type="text" class="editbox" name="shortDesc" value="<?php echo $this->pig->shortDesc; ?>"/>(Mô tả ngắn gọn về heo)</td>
+		</tr>
+		<tr>
+			<td class="text">StatusInShop :</td>
+			<td><input type="text" class="editbox" name="statusInShop" value="<?php echo $this->pig->statusInShop; ?>"/>(Trạng thái của heo trong shop)</td>
+		</tr>
+		<tr>
+			<td class="text">StealPunish :</td>
+			<td><input type="text" class="editbox" name="stealPunish" value="<?php echo $this->pig->stealPunish; ?>"/>(Số tiền vàng bị phạt khi người chơi trộm heo)</td>
+		</tr>
+		<tr>
+			<td class="text">BegetPrice :</td>
+			<td><input type="text" class="editbox" name="begetPrice" value="<?php echo $this->pig->begetPrice; ?>"/>(giá tiền phối giống mặc định nhỏ nhất)</td>
+		</tr>
+		<tr>
+			<td class="text">BegetPriceMax :</td>
+			<td><input type="text" class="editbox" name="begetPriceMax" value="<?php echo $this->pig->begetPriceMax; ?>"/>(giá tiền phối giống mặc định lớn nhất)</td>
+		</tr>
+		<tr>
+			<td class="text">Level :</td>
+			<td>
+				<select class="combobox2" name="level">
+				<?php
+					for($i = 1; $i <= 100; $i ++)
+					{
+						if($this->pig->level == $i)
+						{
+							echo "<option selected value='{$i}'>{$i}</option>";
+						}
+						else
+						{
+							echo "<option value='{$i}'>{$i}</option>";
+						}
+					}
+				?>					
+				</select>(level unlock)
+			</td>
+		</tr>
+		<tr>
+			<td class="text">Heal :</td>
+			<td><input type="text" class="editbox" name="health" value="<?php echo $this->pig->health; ?>"/>(sức khỏe của heo)</td>
+		</tr>
+		<tr>
+			<td class="text">LifeCircle :</td>
+			<td><input type="text" class="editbox" name="lifeCycle" value="<?php echo $this->pig->lifeCycle; ?>"/>(Vòng đời của heo (tính theo ngày) )</td>
+		</tr>
+		<tr>
+			<td class="text">SpecialPig ?</td>
+			<td>
+				<select class="combobox2" name="specialPig">
+					<option value="0">Không</option>
+					<option value="1">Có</option>
+				</select>(heo này có phải là heo đặc biệt hay không ?)
+			</td>
+		</tr>
+		<tr>
+			<td class="text">Weight :</td>
+			<td><input type="text" class="editbox" name="weight" value="<?php echo $this->pig->weight; ?>"/>(trọng lượng ban đầu của heo)</td>
+		</tr>
+		<tr>
+			<td class="text">PriceForOneKg :</td>
+			<td><input type="text" class="editbox" name="priceForOneKg" value="<?php echo $this->pig->priceForOneKg; ?>"/>(tỉ lệ qui đổi từ trọng lượng sang tiền vàng)</td>		
+		</tr>
+		<tr>
+			<td class="text">WeightGainPerHour :</td>
+			<td><input type="text" class="editbox" name="weightGainPerHour" value="<?php echo $this->pig->weightGainPerHour; ?>"/>(tỉ lệ tăng cân của bản thân heo)</td>
+			
+		</tr>
+		<tr>
+			<td class="text">WeightDownPerHour :</td>
+			<td><input type="text" class="editbox" name="weightDownPerHour" value="<?php echo $this->pig->weightDownPerHour; ?>"/>(tỉ lệ giảm tăng trọng của bản thân heo (tính từ ngày thứ 2))</td>
+		</tr>
+		<tr>
+			<td class="text">Status</td>
+			<td>
+				<table border="0">
+					<tr>
+						<td rowspan="2">
+							<select id="status" class="listbox" size="5" name="status[]" multiple>
+								<option value="1">Chết</option>
+								<option value="2">Ngất xỉu</option>
+								<option value="3">Vui khi tắm</option>
+								<option value="4">Vui khi ăn</option>
+								<option value="5">Bệnh</option>
+								<option value="6">Yêu</option>
+								<option value="7">Có thai</option>
+								<option value="8">Mới sinh</option>
+								<option value="9">Đói bụng</option>
+								<option value="10">Dơ</option>
+								<option value="11">Sung mãn</option>							
+							</select>
+							
+							<td><input type="button" name="select" value=">>" onclick="Selected();" /></td>
+							
+							<td rowspan="2">
+								<select id="currentStatus" class="listbox" size="5" name="currentStatus[]" multiple>
+								<?php
+									for($i = 0; $i < count($this->pig->status) ; $i ++)
+									{	
+										if($this->pig->status[$i] == 1)
+											echo "<option value='1'>Chết</option>";
+										if($this->pig->status[$i] == 2)
+											echo "<option value='2'>Ngất xỉu</option>";
+										if($this->pig->status[$i] == 3)
+											echo "<option value='3'>Vui khi tắm</option>";
+										if($this->pig->status[$i] == 4)
+											echo "<option value='4'>Vui khi ăn</option>";
+										if($this->pig->status[$i] == 5)
+											echo "<option value='5'>Bệnh</option>";
+										if($this->pig->status[$i] == 6)
+											echo "<option value='6'>Yêu</option>";
+										if($this->pig->status[$i] == 7)
+											echo "<option value='7'>Có thai</option>";
+										if($this->pig->status[$i] == 8)
+											echo "<option value='8'>Mới sinh</option>";
+										if($this->pig->status[$i] == 9)
+											echo "<option value='9'>Đói bụng</option>";
+										if($this->pig->status[$i] == 10)
+											echo "<option value='10'>Dơ</option>";
+										if($this->pig->status[$i] == 11)
+											echo "<option value='11'>Sung mãn</option>";										
+									}
+								?>
+								</select>
+							</td>
+						</td>
+					</tr>
+					<tr>
+						<td><input type="button" name="remove" value="<<" onclick="Removed();" /></td>
+					</tr>
+
+				</table>(tình trạng của heo)
+		</td>
+		</tr>	-->
+            <!--<input id="upload" type="checkbox" onchange="UpdateUploadStatus();" name="upload"/>
+            Upload
+            <input id="uploadmaterial" type="file" class="file" name="uploadmaterial" disabled="true"/>(Chọn hình cho heo)</td>-->
+        <tr>
+            <td class="text">Avartar :</td>                                                              
+            <td><img width='100px' height='86px' src="<?php echo $this->baseUrl.DS.'media/images/pig/Pig_'. $this->pig->type . '_' . $this->pig->gender . '.png'; ?>" /></td>
+        </tr>
+        <tr>
+			<td class="text">PriceInGame :</td>
+			<td><input type="text" class="editbox" name="priceInGame" value="<?php echo $this->pig->priceInGame; ?>"/>(giá mua heo tính theo vàng (nếu tính theo giá xu thì ghi 0))</td>
+		</tr>
+		<tr>
+			<td class="text">PriceOutGame :</td>
+			<td><input type="text" class="editbox" name="priceOutGame" value="<?php echo $this->pig->priceOutGame; ?>"/>(giá mua heo tính theo xu (nếu tính theo giá vàng thì ghi 0))</td>
+		</tr>
+	<!--	<tr>
+			<td class="text">GiftGoldMinHome :</td>
+			<td><input type="text" class="editbox" name="giftGoldMinHome" value="<?php echo $this->pig->giftGoldMinHome; ?>"/>(vàng nhận được (Min vàng) khi người chơi nhặt hộp quà tại nhà mình)</td>
+		</tr>
+		<tr>
+			<td class="text">GiftGoldMaxHome :</td>
+			<td><input type="text" class="editbox" name="giftGoldMaxHome" value="<?php echo $this->pig->giftGoldMaxHome; ?>"/>(vàng nhận được (Max vàng) khi người chơi nhặt hộp quà tại nhà mình)</td>
+		</tr>
+		<tr>
+			<td class="text">GiftHonourHome :</td>
+			<td><input type="text" class="editbox" name="giftHonourHome" value="<?php echo $this->pig->giftHonourHome; ?>"/>(danh vọng nhận được khi người chơi nhặt hộp quà tại nhà mình)</td>
+		</tr>
+		<tr>
+			<td class="text">GiftGoldMinFriend :</td>
+			<td><input type="text" class="editbox" name="giftGoldMinFriend" value="<?php echo $this->pig->giftGoldMinFriend; ?>"/>(vàng nhận được (Min vàng) khi người chơi nhặt hộp quà tại nhà bạn)</td>
+		</tr>
+		<tr>
+			<td class="text">GiftGoldMaxFriend :</td>
+			<td><input type="text" class="editbox" name="giftGoldMaxFriend" value="<?php echo $this->pig->giftGoldMaxFriend; ?>"/>(vàng nhận được (Max vàng) khi người chơi nhặt hộp quà tại nhà bạn)</td>
+		</tr>
+		<tr>
+			<td class="text">SellExp :</td>
+			<td><input type="text" class="editbox" name="sellExp" value="<?php echo $this->pig->sellExp; ?>"/>(Exp nhận được sau khi bán heo (heo trưởng thành))</td>
+		</tr>
+		<tr>
+			<td class="text">Unit :</td>
+			<td><input type="text" class="editbox" name="unit" value="<?php echo $this->pig->unit; ?>"/>(đơn vị thức ăn cho heo)</td>
+		</tr>
+		<tr>			
+			<td class="text">Age :</td>
+			<td><input type="text" class="editbox" name="age" value="<?php echo $this->pig->age; ?>"/>(tuổi của heo)</td>
+		</tr>
+		<tr>
+			<td><input style="display: none;" id="filename" type="text" class="editbox" name="filename"/></td>
+		</tr>	-->
+		
+		<tr>			
+			<td class="text">DisCount :</td>
+            <td><input type="text" class="editbox" name="disCount" value="<?php echo $this->pig->disCount; ?>"/> % (heo giảm giá bao nhiêu phần trăm)
+                   
+		</tr>
+		
+		<!--<tr>
+			<td class="text">New :</td>
+			<td>
+				<select id="new" class="combobox" name="new">
+					<?php
+                        if( $this->pig->new )
+                        {
+                            echo "<option selected value={$this->pig->new}>Có</option>";    
+                        }
+                        else
+                        {
+                            echo "<option selected value={$this->pig->new}>Không</option>";    
+                        }
+						echo "<option value='true'>Có</option>";
+						echo "<option value='false'>Không</option>";
+					?> 
+				</select> ( trạng thái mới của heo )
+			</td>		
+		</tr> -->
+		
+		<tr>
+			<td class="text">EnableInShop :</td>
+			<td>
+				<select id="enableInShop" class="combobox" name="enableInShop">
+					<?php
+                        if( $this->pig->enableInShop )
+                        {
+                            echo "<option selected value='{$this->pig->enableInShop}'>Có</option>";    
+                        }
+						else
+                        {
+                            echo "<option selected value='{$this->pig->enableInShop}'>Không</option>";    
+                        }
+						echo "<option value='true'>Có</option>";
+						echo "<option value='false'>Không</option>";
+					?>
+				</select> (Heo có được đưa vào shop hay không)
+			</td>		
+		</tr>
+		
+	<!--	<tr>			
+			<td class="text">Age :</td>
+			<td><input type="text" class="editbox" name="age" value="<?php echo $this->pig->age; ?>"/>(tuổi của heo)</td>
+		</tr>    -->
+	</table>
+</div>
+
+<input type="hidden" value="<?php echo $_GET['id']; ?>" name="id" />
+
+<div class="toolbar">
+	<table class="centerTable" border="1px" align="center" width="1000px">
+		<tr>
+			<td width="100px"><input type="submit" value="<?php echo $this->button; ?>" name="submit" style="width: 100px;" /></td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</div>
+</form>

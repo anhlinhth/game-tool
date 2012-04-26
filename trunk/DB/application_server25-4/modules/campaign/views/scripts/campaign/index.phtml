@@ -1,0 +1,382 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<style>
+td.c_worldmap select, td.c_type select, td.c_needcampaign select{	
+	width:80%;
+}
+#tbCampaign td.c_needcampaign{
+	width:16%;	
+}
+#tbCampaign td.c_nextcampaign{
+	width:20%;	
+}
+td.c_needcampaign select{
+	width:100%;
+}
+td.c_name input{
+	width:100px;
+}
+td.status{
+	vertical-align: middle;
+}
+#tbCampaign select{
+	width:100%;
+}
+#tbCampaign tr.alt{
+	background:#EAF2D3;
+}
+
+#tbCampaign td.c_nextcampaign select{
+	width:80%;	
+}
+
+#tbCampaign td.action{
+	padding: 0px;
+	width: 10%;
+	overflow: hidden;
+}
+</style>
+<form class="myform"  id="formPaging" action="" name="formPaging" method="post">
+<div id="box">
+	<h3>Campaign Manager</h3>
+	<table  class='list' style="margin: auto;width:80%;margin-bottom: 8px;">		
+		<tr>
+			<td>
+				Campaign ID : <input style="width:110px;" type="text" name="S_ID" id="ID" class="searchbox" value="<?php echo $this->obj->ID?>"/>
+				<input class="btn search" type="submit" name="search" value="search" />
+			</td>
+			<td>World Map:
+				<select name="S_WorldMap" onChange="changeMap(this)">
+					<option onclick="changeMap1()" value=""></option>
+					<?php echo $this->options($this->arrWorldMap,$this->obj->WorldMap,array("key"=>"ID","name"=>"Name"));?>
+					<option  style="color:red" value="-1">New Map</option>
+				</select>
+			</td>
+			<td>				
+
+			</td>
+		</tr>
+		
+	</table>
+	<table class="list" id="tbCampaign" style='margin: auto;width: 80%;'>	
+		<thead>
+			<tr>			
+				<td width="20"><a href="#">STT</a></td>
+				<td width="30"><a href="#">ID</a></td>
+				<td width="40">Tên</td>
+				<td>Type</td>				
+				<td>Thao tác</td>
+				<td width="5"></td>				
+			</tr>
+		</thead> 	
+		<tbody>
+			
+				<?php foreach($this->data as $key =>$campRow){ 
+								
+					$btn_save = "<a class='tool-24 save disabled' style='display:none;' href=''></a>";
+					$btn_edit = "<a class='tool-24 edit' href='$this->baseUrl/campaign/campaign/edit/id/$campRow->ID'></a>";
+					$btn_delete = "<a class='tool-24 delete' style='display:none;' href=''></a>";								
+					$alt= ($alt=="alt"?"2":"alt");
+					
+				?>
+				<tr class="tr-camp <?php echo $alt?>" id='tr-camp-<?php echo $campRow->ID ?>'>
+					<td><?php echo ($key+1) ?></td>
+					<td class="c_id">
+                        <span><?php echo $campRow->ID ?></span>
+                        <input style="display:none" type="text" name="ID" value="<?php echo $campRow->ID ?>" />
+                    </td>	
+					<td class="center c_name">
+						<input type="text" name="Name" readonly="readonly" class='require' value="<?php echo $campRow->Name ?>" />
+					</td>
+					<td class="c_type">
+					<?php
+						if($campRow->ID <=1000)
+						{						
+					?>
+						Map
+					<?php
+						}
+						else if($campRow->ID >=1001 ) {
+					?>
+						Barack
+					<?php
+						} 
+					?>						
+					</td>					
+					
+					<td class="action center">
+						<?php echo $btn_save ?>
+						<?php echo $btn_edit ?>
+						<?php echo $btn_delete ?>						
+					</td>
+					<td class="td-status"><a title="ok" class="status tool-16 ok"></a></td>
+					
+				</tr>			
+				<?php }?>
+			
+		</tbody>
+	
+	</table>
+	<div style="margin-top:20px;margin-bottom:20px;display:none;">
+		<a class="btn add" type="submit"  href="javascript:addCamp()">Add</a>
+		<a class="btn save" type="submit" href="javascript:saveAll()">Save All</a>
+	</div>
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
+</div>	
+</form>
+<!--Temp Div For add a campp-->
+	<div id="div-temp" style="display:none">
+		<table id="tbCampaign-temp">
+			<tbody>
+				<tr class="tr-camp" id='tr-camp-new'>
+						<td></td>
+						<td class="c_id">
+							<span>!</span>
+                            <input style="display:none" type="text" id="ID" name="ID" value="" />
+						</td>	
+						<td class="center c_name">
+							<input type="text" name="Name" value="Campaign" />
+						</td>
+						
+						<td class="c_type">
+							<select id='TypeID' name='TypeID'>
+								<?php echo $this->options($this->arrMapType,0,array("key"=>"ID","name"=>"Name"));?>
+							</select>
+						</td>				
+						<td class="action center">
+							<a class='tool-24 save ' href='javascript:saveCampaign(0)'></a>
+							<a class='tool-24 edit disabled' href='javascript:editCamp(0)'></a>
+							<a class='tool-24 delete ' href='javascript:deleteCamp(0)'></a>
+						</td>
+						<td class="td-status">
+							<a title="Not Save" class="status tool-16 warning"></a>
+						</td>					
+				</tr>
+			</tbody>	
+			</table>		
+		<div id="div-new-world-map">
+		<input style="width:90%" type="text" value="New Map"></input>
+		</div><!-- End #next-camp-temp  -->		
+	</div><!--End temp-->
+<script type="text/javascript">
+//////////////ThaoNX//////////////
+/**********************************/
+function changeMap(e){
+	var key = e.options[e.selectedIndex].value;
+	if(key == -1){
+		$("#div-new-world-map").dialog({
+				title: "New Map",
+				height: 200,
+				width: 300,
+				modal: true,
+				buttons: {
+					"Save": function() {
+						/*var award = $('#awardtype').val();
+						alert(award);
+						$.ajax({
+							type: "POST",
+							url: "<?php echo $this->baseUrl.'/campaign/AwardType/insert' ?> ",
+							data: "award=" + award,
+							dataType: "json",
+							success: function(smg){	
+								//smg là json có giá trị là awart_type lớn nhất.
+								alert('Thành Công');							
+							}
+						});	*/
+						$(this).dialog("close");				
+					}											
+				}
+			});		
+	}else{
+		$("#formPaging").submit();
+	};
+}
+/**********************************/
+function updateSelectCamp(campid,name,action){
+	if(action=="add"){
+		var option_html = "<option value="+campid+">"+name+"["+campid+"]</option>";		
+		$(".select-next-camp").append(option_html);
+		$(".select-need-camp").append(option_html);
+	}else if(action=="del"){
+		$(".select-next-camp option[value='"+campid+"']").remove();
+		$(".select-need-camp option[value='"+campid+"']").remove();
+		//$(".select-next-camp option[value='"+campid+"']").remove();
+		//$(".select-next-camp [value='"+campid+"']").remove();
+		$("select.select-next-camp").each(function(index){			
+			if($(this).val()==""){				
+				//$(this).parent().remove();				
+			}
+		});
+	}else if(action=="update"){
+	};
+}
+/**********************************/
+function updateStatus(e,status,title){
+	e.removeClass("ok");	
+	e.removeClass("warning");
+	e.removeClass("loading");
+	e.addClass(status);
+	e.attr("title",title);
+}
+/**********************************/
+function updateSTT(){
+	$("#tbCampaign tbody .tr-camp").each(function(index){
+		$(this).find("td").eq(0).html(index+1);
+	});		
+	
+}
+/**********************************/
+function deleteNextCamp(e){
+	var parent_div = $(e).parent();
+	var parent_td = parent_div.parent();
+	var parent_tr = parent_td.parent();
+	parent_div.remove();
+	var count = parent_td.find(".next-camp").size();	
+	if(count==0){
+		
+		var btn = "<div><a class='tool-16 add' href=''></a><div>";		
+		parent_td.html(btn);		
+	}
+	parent_tr.change();
+}
+/**********************************/
+function addNextCamp(e){	
+	var parent_td = $(e).parent().parent();
+	var parent_tr = parent_td.parent();
+	var count = parent_td.find(".next-camp").size();	
+	var html=$("#next-camp-temp").clone().removeAttr("id").attr("class","next-camp");;	
+	if(count==0){// delete btn-add in td tag
+		parent_td.html("");
+	}	
+	parent_td.append(html);		
+	parent_tr.change();
+}
+/**********************************/
+function saveCamp(e){	
+	var parent_tr = $(e).parent().parent();	
+	flag=validateInput2(parent_tr);
+	if(flag==true)
+	{
+		if(parent_tr.hasClass('ok'))
+		{		
+			var data = parent_tr.find("*").serialize();							
+			var a_status = parent_tr.find(".status");
+			var a_save = parent_tr.find(".tool-24.save");
+			updateStatus(a_status,"loading","loading");	
+			$.ajax({	   
+		       type: "POST",
+		       url: "<?php echo $this->baseUrl.'/campaign/campaign/save'?> ",            
+		       data: data,
+		       dataType:"json",
+				   success: function(msg){	       
+		  		   if(msg.msg=="1"){  		        
+		                updateStatus(a_status,"ok","ok");
+		  		        a_save.addClass("disabled");
+		                if(msg.CampID){                    
+		                    parent_tr.find("td.c_id input[name='ID']").attr("value",msg.CampID);
+		                    parent_tr.find("td.c_id span").text(msg.CampID);
+							updateSelectCamp(msg.CampID,msg.Name,"add");
+		                };                
+		  		   }else{
+		    			alert(msg.msg);
+		    	   };
+		   	}
+			});	
+		}
+	}
+}
+/**********************************/
+function addCamp(){			
+			updateSTT();	
+			var tr = $("#tbCampaign-temp tr");
+			var count = $("#tbCampaign tbody .tr-camp").size();		
+			if(count%2==0){
+				tr.addClass("alt");
+			}else{
+				tr.removeClass("alt");
+			}
+			tr.children("td").eq(0).html(count+1);
+			
+			tr.find(".action a.edit").toggleClass("disabled");
+			tr.find(".action a.edit").toggleClass("disabled");
+			var s = $("#tbCampaign-temp tbody").html();
+			$("#tbCampaign tbody").append(s);
+			return;		
+}
+/**********************************/
+/**********************************/
+function deleteCamp(e){   
+    var parent_tr = $(e).parent().parent();
+   	var a_status = parent_tr.find(".status");
+    var CampID = parent_tr.find("input[name='ID']").val();
+    updateStatus(a_status,"loading","loading");	
+    if(CampID){        
+        $.ajax({	   
+            type: "POST",
+            url: "<?php echo $this->baseUrl.'/campaign/campaign/delete'?>",            
+            data: {
+               CampID:CampID, 
+            },        
+            success: function(msg){       
+        	   if(msg=="1"){  		        
+                    parent_tr.remove();	
+					updateSelectCamp(CampID,"","del");	
+        	   }else{
+        			alert(msg);
+        	   };
+            }
+	   });	
+    }else{
+        parent_tr.remove();
+    }
+    updateSTT();	
+}
+/**********************************/
+/**********************************/
+function saveAll(){
+	$("#tbCampaign").find("td.action .save").not(".disabled").each(function (index){		
+			$(this).click();
+	});
+	
+}
+/***************JQuery*******************/
+$(function(){
+	//onchange in battle
+	$("body").delegate(".tr-camp", "change", function() {
+		$(this).find("a.save").removeClass("disabled");;		
+		$(this).find(".td-status a").removeClass("ok").addClass("warning").attr("title","Not Save");
+		return false;
+	});
+	
+	//Delete a campaign
+	$("#tbCampaign").delegate("td.action .delete", "click", function() {
+		deleteCamp(this);
+		return false;		
+	});
+    
+	// Save a Camppaign
+	$("#tbCampaign").delegate("td.action .save", "click", function() {
+		if($(this).hasClass("disabled")){
+			alert("disabled");
+		}else{
+			saveCamp(this);
+		}		
+		return false;		
+	});
+	///////Add A Next Camp///////
+	$("#tbCampaign").delegate("td.c_nextcampaign .add", "click", function() {
+		addNextCamp(this);
+		return false;		
+	});
+	///////Delete A Next Camp///////
+	$("#tbCampaign").delegate("td.c_nextcampaign .delete", "click", function() {
+		deleteNextCamp(this);
+		return false;		
+	});
+    
+});
+</script>

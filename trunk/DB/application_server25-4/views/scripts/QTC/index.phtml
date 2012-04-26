@@ -1,0 +1,124 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<form id ="formPaging" name='formPaging' action="" method="post">
+
+<div id="box">
+	<h3>Quest Task Client</h3>
+	<table class="filter">
+		<tr>
+			
+			<td>Quest Task Client ID : <input style="width:110px;" type="text" name="QTC_ID" id="QTC_ID" class="searchbox" /></td>
+			<td><input type="submit" name="search" id="button1" class="search" value="search" /></td>
+		</tr>
+		
+		<tr>
+			
+			<td>ID : <input type="text" name="QTC_ID1" disabled="disabled" id="QTC_ID1" style="width:110px;" /></td>
+			
+			<td>Name : <input type="text" name="desc1" id="desc1" /></td>
+			<td><input type="submit" name="update" id="button1" class="update" value="Update" style="width:100px;" /></td>
+			<td><input type="submit" name="cancel" id="button2" class="cancel" value="Cancel" style="width:100px;" /></td>
+			<td><input type="submit" name="add" id="button3" class="add" value="Add"  style="width:100px;" /></td>
+		</tr>
+	</table>
+	<table>	
+		<tr>
+			<table>
+				<thead>
+				<th width="40"><a href="#">STT</a></th>
+				<th width="40"><a href="#">ID</a></th>
+				<th>Tên</th>							
+				<th width="80">Thao tác</th>
+				</thead>
+				<tr>
+					<?php $this->listQTC($this->data, $this->page, $this->items, $this) ?>
+				</tr>				
+			</table>
+		</tr>
+		
+			<div align="center">
+				<input id="button4" type="submit" value="Lưu" style="width:100px;">
+				
+			</div>
+	
+	</table>
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
+</div>
+</form>
+<script type="text/javascript">
+$(function(){
+	$(".search").click(function(){
+		searchbox=document.getElementById('QTC_ID').value;
+		if(searchbox=='')
+		{
+		
+				return false;
+		}
+		});
+});
+$(function(){
+	/// sua mot QTC
+	
+	$(".update").click(function(){
+		id = document.getElementById('QTC_ID1').value;	
+		if(id==''){
+			
+			return false;
+		}
+		desc1 = document.getElementById('desc1').value;
+		$.ajax({
+			type: "POST",
+		
+			url: "<?php echo $this->baseUrl.'/QTC/update/'?> ",
+			data: "desc=" + desc1 +"&id="+id,
+			success: function(msg){
+				if(msg != "")
+				{					
+					alert(msg);
+				}
+				else
+				{
+					alert("Update KO thành công");
+					
+				}
+				window.location.reload();
+			}
+		});
+		return false;	
+	});
+
+	////Them 1 quest line
+	$(".add").click(function(){				
+		desc1 = document.getElementById('desc1').value;
+		id = document.getElementById('QTC_ID1').value;
+		if(desc1=='' ||id!=''){
+			return false;
+		}
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/QTC/add/'?> ",
+			data: "desc=" + desc1,
+			success: function(msg){
+				if(msg != "")
+				{					
+					alert(msg);
+				}
+				else
+				{
+					alert("Thêm  không thành công");
+					
+				}
+				window.location.reload();
+			}
+		});
+		return false;	
+	});
+
+});
+
+
+</script>
