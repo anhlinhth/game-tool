@@ -25,9 +25,10 @@ public function _setUserPrivileges()
 	public function indexAction(){	
 		$model = new Models_Localite_Iefile();
 		$filename = 'localization/vnm.xfz';
-		if ($this->_request->isPost ()) {
+		if ($this->_request->isPost ()) 
+		{
 			$lang = $this->_request->getParam("llang");
-			$filename = $this->_request->getParam("filename",$lang);
+			$filename = $this->_request->getParam("filename",$lang);			
 			if($filename!='')			
 			$model->WriteFile($model->GetAllContentByLang($lang), 'export/'.$filename.'.txt');
 			else $this->view->errMsg="Phải đặt tên file export !";
