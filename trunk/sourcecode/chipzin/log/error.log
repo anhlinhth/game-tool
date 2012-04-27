@@ -472,3 +472,126 @@ Stack trace:
 #8 F:\VNG\Zend 1.6\Zend\Controller\Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
 #9 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\index.php(37): Zend_Controller_Front->dispatch()
 #10 {main}
+[2012/04/12-16:58:57][F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php:49] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`chip_94`.`c_battle`, CONSTRAINT `c_battle_ibfk_1` FOREIGN KEY (`Layout`) REFERENCES `c_layout` (`ID`) ON DELETE NO ACTION)' in F:\VNG\Zend 1.6\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 F:\VNG\Zend 1.6\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 F:\VNG\Zend 1.6\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 F:\VNG\Zend 1.6\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('UPDATE `c_battl...', Array)
+#3 F:\VNG\Zend 1.6\Zend\Db\Adapter\Abstract.php(551): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `c_battl...', Array)
+#4 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php(43): Zend_Db_Adapter_Abstract->update('c_battle', Array, 'ID = 1')
+#5 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\modules\campaign\models\Models_Battle.php(39): Models_Base->_update(Object(Obj_Battle))
+#6 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\modules\campaign\controllers\BattleController.php(46): Models_Battle->saveBattle(Object(Obj_Battle))
+#7 F:\VNG\Zend 1.6\Zend\Controller\Action.php(502): Campaign_BattleController->saveAction()
+#8 F:\VNG\Zend 1.6\Zend\Controller\Dispatcher\Standard.php(293): Zend_Controller_Action->dispatch('saveAction')
+#9 F:\VNG\Zend 1.6\Zend\Controller\Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\index.php(37): Zend_Controller_Front->dispatch()
+#11 {main}
+[2012/04/12-16:59:22][F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php:49] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`chip_94`.`c_battle`, CONSTRAINT `c_battle_ibfk_1` FOREIGN KEY (`Layout`) REFERENCES `c_layout` (`ID`) ON DELETE NO ACTION)' in F:\VNG\Zend 1.6\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 F:\VNG\Zend 1.6\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 F:\VNG\Zend 1.6\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 F:\VNG\Zend 1.6\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('UPDATE `c_battl...', Array)
+#3 F:\VNG\Zend 1.6\Zend\Db\Adapter\Abstract.php(551): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `c_battl...', Array)
+#4 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php(43): Zend_Db_Adapter_Abstract->update('c_battle', Array, 'ID = 1')
+#5 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\modules\campaign\models\Models_Battle.php(39): Models_Base->_update(Object(Obj_Battle))
+#6 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\modules\campaign\controllers\BattleController.php(46): Models_Battle->saveBattle(Object(Obj_Battle))
+#7 F:\VNG\Zend 1.6\Zend\Controller\Action.php(502): Campaign_BattleController->saveAction()
+#8 F:\VNG\Zend 1.6\Zend\Controller\Dispatcher\Standard.php(293): Zend_Controller_Action->dispatch('saveAction')
+#9 F:\VNG\Zend 1.6\Zend\Controller\Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\index.php(37): Zend_Controller_Front->dispatch()
+#11 {main}
+[2012/04/17-15:49:03][F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php:64] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`chip_94`.`c_award`, CONSTRAINT `c_award_ibfk_2` FOREIGN KEY (`AwardTypeID`) REFERENCES `c_award_type` (`AwardTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION)' in F:\VNG\Zend 1.6\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 F:\VNG\Zend 1.6\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 F:\VNG\Zend 1.6\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 F:\VNG\Zend 1.6\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('DELETE FROM `c_...', Array)
+#3 F:\VNG\Zend 1.6\Zend\Db\Adapter\Abstract.php(577): Zend_Db_Adapter_Pdo_Abstract->query('DELETE FROM `c_...')
+#4 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php(60): Zend_Db_Adapter_Abstract->delete('c_award_type', 'AwardTypeID = '...')
+#5 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\modules\campaign\controllers\AwardTypeController.php(54): Models_Base->_delete('5')
+#6 F:\VNG\Zend 1.6\Zend\Controller\Action.php(502): Campaign_AwardTypeController->deleteAction()
+#7 F:\VNG\Zend 1.6\Zend\Controller\Dispatcher\Standard.php(293): Zend_Controller_Action->dispatch('deleteAction')
+#8 F:\VNG\Zend 1.6\Zend\Controller\Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#9 F:\VNG\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\index.php(37): Zend_Controller_Front->dispatch()
+#10 {main}
+[2012/04/27-12:57:34][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:53] QuestDescString không được để trống<br>.;
+[2012/04/27-12:57:46][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:53] QuestDescString không được để trống<br>.;
+[2012/04/27-12:57:55][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php:32] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'QuestGroupString' cannot be null' in C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('INSERT INTO `q_...', Array)
+#3 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Abstract.php(508): Zend_Db_Adapter_Pdo_Abstract->query('INSERT INTO `q_...', Array)
+#4 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php(25): Zend_Db_Adapter_Abstract->insert('q_quest', Array)
+#5 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\controllers\QuestController.php(294): Models_Base->_insert(Object(Obj_Quest_Detail))
+#6 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Action.php(502): QuestController->newAction()
+#7 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Dispatcher\Standard.php(293): Zend_Controller_Action->dispatch('newAction')
+#8 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#9 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\index.php(37): Zend_Controller_Front->dispatch()
+#10 {main}
+[2012/04/27-12:59:54][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:53] QuestDescString không được để trống<br>.;
+[2012/04/27-13:00:05][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php:32] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'QuestString' cannot be null' in C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('INSERT INTO `q_...', Array)
+#3 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Abstract.php(508): Zend_Db_Adapter_Pdo_Abstract->query('INSERT INTO `q_...', Array)
+#4 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php(25): Zend_Db_Adapter_Abstract->insert('q_quest', Array)
+#5 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\controllers\QuestController.php(294): Models_Base->_insert(Object(Obj_Quest_Detail))
+#6 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Action.php(502): QuestController->newAction()
+#7 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Dispatcher\Standard.php(293): Zend_Controller_Action->dispatch('newAction')
+#8 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#9 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\index.php(37): Zend_Controller_Front->dispatch()
+#10 {main}
+[2012/04/27-13:03:45][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:53] QuestDescString không được để trống<br>.;
+[2012/04/27-13:04:03][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:53] QuestDescString không được để trống<br>.;
+[2012/04/27-13:11:04][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:53] QuestDescString không được để trống<br>.;
+[2012/04/27-13:12:28][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:53] QuestDescString không được để trống<br>.;
+[2012/04/27-13:12:33][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:53] QuestDescString không được để trống<br>.;
+[2012/04/27-13:12:39][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php:32] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'QuestString' cannot be null' in C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('INSERT INTO `q_...', Array)
+#3 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Abstract.php(508): Zend_Db_Adapter_Pdo_Abstract->query('INSERT INTO `q_...', Array)
+#4 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php(25): Zend_Db_Adapter_Abstract->insert('q_quest', Array)
+#5 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\controllers\QuestController.php(294): Models_Base->_insert(Object(Obj_Quest_Detail))
+#6 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Action.php(502): QuestController->newAction()
+#7 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Dispatcher\Standard.php(293): Zend_Controller_Action->dispatch('newAction')
+#8 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#9 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\index.php(37): Zend_Controller_Front->dispatch()
+#10 {main}
+[2012/04/27-13:15:06][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php:32] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'QuestString' cannot be null' in C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('INSERT INTO `q_...', Array)
+#3 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Abstract.php(508): Zend_Db_Adapter_Pdo_Abstract->query('INSERT INTO `q_...', Array)
+#4 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php(25): Zend_Db_Adapter_Abstract->insert('q_quest', Array)
+#5 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\controllers\QuestController.php(294): Models_Base->_insert(Object(Obj_Quest_Detail))
+#6 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Action.php(502): QuestController->newAction()
+#7 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Dispatcher\Standard.php(293): Zend_Controller_Action->dispatch('newAction')
+#8 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#9 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\index.php(37): Zend_Controller_Front->dispatch()
+#10 {main}
+[2012/04/27-13:15:40][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:54] QuestString không được để trống<br>.;
+[2012/04/27-13:20:08][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:53] QuestDescString không được để trống<br>.;
+[2012/04/27-13:20:12][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php:32] exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'QuestString' cannot be null' in C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Statement\Pdo.php:238
+Stack trace:
+#0 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Statement.php(283): Zend_Db_Statement_Pdo->_execute(Array)
+#1 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Abstract.php(430): Zend_Db_Statement->execute(Array)
+#2 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Pdo\Abstract.php(220): Zend_Db_Adapter_Abstract->query('INSERT INTO `q_...', Array)
+#3 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Db\Adapter\Abstract.php(508): Zend_Db_Adapter_Pdo_Abstract->query('INSERT INTO `q_...', Array)
+#4 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\models\Models_Base.php(25): Zend_Db_Adapter_Abstract->insert('q_quest', Array)
+#5 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\controllers\QuestController.php(294): Models_Base->_insert(Object(Obj_Quest_Detail))
+#6 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Action.php(502): QuestController->newAction()
+#7 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Dispatcher\Standard.php(293): Zend_Controller_Action->dispatch('newAction')
+#8 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\library\Zend1.6\Zend\Controller\Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#9 C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\index.php(37): Zend_Controller_Front->dispatch()
+#10 {main}
+[2012/04/27-13:23:46][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:53] QuestDescString không được để trống<br>.;
+[2012/04/27-13:44:22][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:56] QuesName không được để trống<br>.;QuestString không được để trống<br>.;QuestGroupString không được để trống<br>.;QuestDescString không được để trống<br>.;
+[2012/04/27-13:47:36][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:56] QuesName không được để trống<br>.;QuestString không được để trống<br>.;QuestGroupString không được để trống<br>.;QuestDescString không được để trống<br>.;
+[2012/04/27-13:50:15][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:56] QuesName không được để trống<br>.;QuestString không được để trống<br>.;QuestGroupString không được để trống<br>.;QuestDescString không được để trống<br>.;
+[2012/04/27-13:51:33][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:56] QuesName không được để trống<br>.;
+[2012/04/27-13:57:34][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:56] QuesName không được để trống<br>.;QuestString không được để trống<br>.;QuestGroupString không được để trống<br>.;QuestDescString không được để trống<br>.;
+[2012/04/27-13:58:26][C:\xampp\htdocs\vng\Project\game-tool\sourcecode\chipzin\application\forms\Forms_Quest_Detail.php:56] QuesName không được để trống<br>.;QuestString không được để trống<br>.;QuestGroupString không được để trống<br>.;QuestDescString không được để trống<br>.;
