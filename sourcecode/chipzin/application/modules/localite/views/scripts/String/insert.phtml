@@ -39,8 +39,6 @@ endif;
 			<div >
 				<input id="id" type="text" tabindex="1" value="<?php echo $this->string->generateId();?>" name="key" class="id">
 			</div>
-			
-
 		</div>
 		<div>
 			<div id = 'idlabel'><label for="street">Group : </label></div>
@@ -74,4 +72,16 @@ endif;
 </div>
 
 </form>
-
+<script>
+function changeMap()
+{
+	value = $('.l_group').val();
+	$.ajax({
+		type: "GET",		
+		url: "<?php echo $this->baseUrl?>/localite/string/insert?action=getid&idl_group="+value,
+		success: function (msg) {
+			$('.id').val(msg);
+		}
+	});
+}
+</script>
