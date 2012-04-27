@@ -291,14 +291,14 @@ function validate(){
 	flag=true;	
 	$(".task_form").each(function(key,val){
 		num = key+1;
-		value = $(val).find("#TaskString").val();		
+		value = $(val).find("#TaskString-"+key).val();		
 		if(value=='')
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString không được để trống</p>");					
 			flag=false;
 		}		
 		
-		value = $(val).find("#DescID").val();
+		value = $(val).find("#DescID-"+key).val();
 		if(value=='')
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescString không được để trống</p>");	
@@ -313,7 +313,7 @@ function validate(){
 		}
 		if(value=='')
 		{
-			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlickCoin không được để trống</p>");					
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin không được để trống</p>");					
 			flag=false;
 		}
 		value = $(val).find("#Quantity").val();
