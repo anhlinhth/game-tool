@@ -304,7 +304,7 @@ function validate(){
 	
 	$(".task").each(function(key,val){
 		num = key+1;
-		value = $(val).find(" #TaskString").val();		
+		value = $(val).find(" #TaskString-"+key).val();		
 		if(value=='')
 		{
 			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString không được để trống</p>");					
