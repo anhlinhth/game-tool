@@ -24,6 +24,7 @@ class Zend_View_Helper_TopMenu
 			case 'iefile':
 				$localite = 'current';
 				break;
+			
 		}
 		
 		$strList .= "<div id='topmenu'>
@@ -43,7 +44,8 @@ class Zend_View_Helper_TopMenu
         
         if(Utility::checkPrivilege($view, "quest", "index"))
         	$strList .= "<li class='$localite'><a href='$view->baseUrl/localite/language'>Localize</a></li>";
-                
+        //if(Utility::checkPrivilege($view, "compensation", "index"))
+        	$strList .= "<li class='$compensation'><a href='$view->baseUrl/compensation/compensation'>compensation</a></li>";        
 		$strList .=		"</ul>
 					</div>";
 		
