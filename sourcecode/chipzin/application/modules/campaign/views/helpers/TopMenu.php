@@ -5,27 +5,6 @@ class Zend_View_Helper_TopMenu
 	{
 		switch ($view->controllerName)
 		{
-			case 'user':
-				$selectUser = 'current';
-				break;
-			case 'group':
-				$selectGroup = 'current';
-				break;
-			case 'tool':
-				$selectTool = 'current';
-				break;
-            case 'shopeditor':
-                $selectShopeditor = 'current';
-                break;    
-			case 'event':
-				$selectEvent = 'current';
-				break;
-			case 'gift':
-				$selectGift = 'current';
-				break;
-			case 'quest':
-				$selectQuest = 'current';
-				break;
 			case 'campaign':
            	case 'soldier':
            	case 'typemap':
@@ -54,6 +33,7 @@ class Zend_View_Helper_TopMenu
         
         $strList .= "<li class='$campaign'><a href='$view->baseUrl/campaign/campaign'>Campaign</a></li>";
         $strList .= "<li class='$localite'><a href='$view->baseUrl/localite/language'>Localize</a></li>";
+		$strList .= "<li class='$compensation'><a href='$view->baseUrl/compensation/compensation'>compensation</a></li>";        
 		$strList .=		"</ul>
 					</div>";
 		
