@@ -1,0 +1,38 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+<form  class="myform" id="formPaging" name="formPaging" action="" method="post">
+
+<div class="mybox">
+	<h3>Item Shop</h3>
+	<table>
+		<tr>			
+			<td><label>Search</label><input type="text" name='searchID' id='searchID'/>
+			<input type="submit" value='Search'/></td> 
+		</tr>
+	</table>
+	<table class="list">
+		
+		<thead>
+			<tr  style="border: 0px;">
+				<td>ID</td>
+				<td>Entity</td>
+				<td>Item</td>
+				<td>Kind</td>
+				<td>Icon</td>
+				<td>Level</td>
+				<td>Tool</td>
+			</tr>
+		</thead>
+		<tbody>
+					<?php $this->listItemShop($this->data, $this->page, $this->items, $this) ?>	
+			
+		</tbody>
+	</table>		
+</div>
+</form>
