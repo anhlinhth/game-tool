@@ -1,0 +1,74 @@
+<?php
+require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_ItemShop.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Base.php';
+
+class Models_Item_Shop extends Models_Base
+{
+	public function __construct()
+	{
+		parent::__construct();		
+		$this->_key = "ID";
+		$this->_table = "s_itemshop";	
+	}
+	
+	public function getItemShop()
+	{
+		$sql = "select x.ID as I, y.Entity as E, x.Item as Item,x.K as K,x.Icon,x.Level
+				From
+				(select a.ID, b.Name as Item,a.Kind,a.Icon,a.Level,s_type_kind.Name as K
+				from s_itemshop a left join s_items b on a.Item = b.ID , s_type_kind where s_type_kind.ID=a.Kind) x,
+				(select s.ID, c.Name as Entity
+				from s_itemshop s left join s_items c on s.Entity = c.ID) y
+				where x.ID = y.ID
+				ORDER BY x.ID ASC
+					";
+		
+		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
+		
+		return $data;
+	}
+			
+	public function filter($objSearch,$order,$offset,$count)
+	{
+		$sql = "SELECT
+					*
+				FROM
+					s_itemshop
+				WHERE
+					1 ";
+		
+		if($objSearch->ID)
+			$sql .= " AND ID = '$objSearch->ID'";						
+		if($order)
+			$sql .= " ORDER BY $order";
+		
+		if($count > 0)
+			$sql .= " LIMIT $offset,$count";
+		$data = $this->_db->fetchAll($sql, "", Zend_Db::FETCH_OBJ);
+		
+		return $data;		
+	}
+	public function count($objSearch)
+	{
+		$sql = "SELECT
+					COUNT(ID)
+				FROM
+					s_itemshop
+				WHERE
+					1";
+		
+		if($objSearch->ID)
+			$sql .= " AND ID = '$objSearch->ID'";		
+		
+		$count = $this->_db->fetchOne($sql);
+		
+		return $count;
+	}
+	public function delete($id)
+	{
+		parent::_delete($id,null);
+		
+	}
+
+}
+?>

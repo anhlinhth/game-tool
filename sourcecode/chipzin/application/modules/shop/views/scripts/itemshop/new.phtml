@@ -1,0 +1,131 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+
+<form  class="myform" id="form" name="form" action="" method="post">
+
+<div class="box">
+	<h3>Add Item Shop</h3>
+	<table id='tb_require'>
+	<tr>
+		<td><label>ID</label></td>
+		<td>
+			<input type="text" name='ID' value="" readonly="readonly"/>
+		</td>
+		<td><label>Icon</label>	</td>
+		<td><input type="text" value='' name='icon' /></td>		
+	</tr>
+	<tr>
+		<td><label>Entity</label></td>
+		<td><input type="text" value='' name='entity' /></td>
+		<td><label>Item</label></td>
+		<td><input type="text" value='' name='item' /></td>	
+	</tr>
+	<tr>
+		<td><label>Kind</label></td>
+		<td>
+			<select>
+				<option value='0'>Chọn Kind</option>
+				<option value='1'>1</option>
+				<option value='2'>2</option>
+			</select>
+		</td>
+		<td><label>Level</label></td>
+		<td><input type="text" value='' name='level' /></td>
+	</tr>
+	
+	<tr>
+		<td  rowspan="1">
+					<label>Require:</label>
+					</td>
+		<td class="type-require">
+					<div><a class='tool-16 add' href=''></a></div>
+					</td>
+		
+		<td>Unlock</td>		
+			<td class="type-unblock">
+					<div style="padding-left:0;"><a class='tool-16 add' href=''></a></div>					
+		</td>
+	</tr>
+	</table>
+	<div style="text-align: center;">
+	 <input id="button1" type="submit" value="Lưu" /> &nbsp;&nbsp;
+	 <input id="button2" type="reset" value="Làm lại" /> 
+	 </div> 
+</div>
+<!-- Div require -->
+<div style="display:none" id='type-require'>
+	<div >
+		<select name='' style='margin-bottom: 1px;width:35%'>		
+			<option value =0'>1</option>		
+		</select>		
+		<input name='' value='' id='' type='text' tabindex='1' style='margin-bottom:1px;width:35%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
+	</div>
+</div>
+<!-- Div unblock -->
+<div style="display:none" id='type-unblock'>
+	<div >
+		<select name='' style='margin-bottom: 1px;width:35%'>		
+			<option value =0'>1</option>		
+		</select>		
+		<input name='' value='' id='' type='text' tabindex='1' style='margin-bottom:1px;width:35%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
+	</div>
+</div>  
+</div>
+</form>
+<script>
+	$(document).ready(function(){
+		$('.type-require').click(function(){
+				
+			});
+		});
+	$("table#tb_require").delegate("td.type-require .add", "click", function() {			
+		addRequire(this);		
+		return false;		
+	});
+	$("table#tb_require").delegate("td.type-unblock .add", "click", function() {			
+		addRequire(this);		
+		return false;		
+	});
+	///////ADD REQUIRE////
+	function  addRequire(e){		
+		var parent_div = $(e).parent();
+		var parent_td = parent_div.parent();
+		var parent_tr = parent_td.parent();
+		var html=$("#type-require").html();
+		parent_td.append(html);
+		parent_tr.change();
+	}
+///////ADD Block////
+	function  addBlock(e){		
+		var parent_div = $(e).parent();
+		var parent_td = parent_div.parent();
+		var parent_tr = parent_td.parent();
+		var html=$("#type-unblock").html();
+		parent_td.append(html);
+		parent_tr.change();
+	}
+	/////Delete require Click////
+	$("table#tb_require").delegate("td.type-require .delete", "click", function() {			
+		deleteRequire(this);		
+		return false;		
+	});
+	////Delete block Click////
+	$("table#tb_require").delegate("td.type-unblock .delete", "click", function() {			
+		deleteRequire(this);		
+		return false;		
+	});
+	////delete function///
+	function deleteRequire(e){
+		var parent_div = $(e).parent();
+		var parent_td = parent_div.parent();
+		var parent_tr = parent_td.parent();
+		parent_div.remove();
+		parent_tr.change();
+	}
+</script>
