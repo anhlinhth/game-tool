@@ -73,6 +73,9 @@ define('ROOT_APPLICATION_OBJECT_MANAGER',           ROOT_APPLICATION_OBJECT.DS.'
 define('TYPE_GOLD', 1);
 define('TYPE_EXP', 2);
 
+//php.exe
+define('"C:/xampp/php/php.exe" ',ROOT_php_exe);
+
 //Name of config files
 define('BATTLE_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'Battle.conf.php.txt');
 define('MAP_BATTLE_PACKAGE_PHP_FILE',ROOT_EXPORT_FILE.DS.'MapBattle.conf.php.txt');
