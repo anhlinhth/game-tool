@@ -12,7 +12,7 @@ endif;
 	<h3>Item Shop</h3>
 	<table>
 		<tr>			
-			<td><label>Search</label><input type="text" name='searchID' id='searchID'/>
+			<td><label>Search</label><input type="text" name='ID' id='ID'/>
 			<input type="submit" value='Search'/></td> 
 		</tr>
 	</table>
@@ -30,9 +30,24 @@ endif;
 			</tr>
 		</thead>
 		<tbody>
-					<?php $this->listItemShop($this->data, $this->page, $this->items, $this) ?>	
-			
+					<?php $this->listItemShop($this->data, $this->page, $this->items, $this) ?>				
 		</tbody>
 	</table>		
 </div>
 </form>
+<script>
+	function deleteItemShop(key)
+	{		
+		if(confirm('Bạn có muốn xóa Item Shop này không'))
+		{
+			$.ajax({
+				type: "POST",
+				url:"<?php echo $this->baseUrl.'/shop/itemshop/delete/'?> ",
+				data: "id="+key,			
+				success: function(data){
+					alert(data);				
+				}
+			});
+		}
+	}
+</script>

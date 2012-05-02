@@ -1,0 +1,69 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+<form  class="myform" id="form" name="form" action="" method="post">
+
+<div class="box">
+	<h3>Add Item Shop</h3>
+	<table id='tb_require'>
+	<tr>
+		<td class="type-require" rowspan="2">
+					<label>Require:</label>
+					<div><a class='tool-16 add' href=''></a></div>
+		</td>	
+	</tr>
+	
+	
+	</table>
+	<div style="text-align: center;">
+	 <input id="button1" type="submit" value="Lưu" /> &nbsp;&nbsp;
+	 </div>
+<!-- ADD -->
+<div style="display:none" id='type'>
+	<div >
+		<select name='' style='margin-bottom: 1px;width:31%'>		
+			<option value =0'>1</option>		
+		</select>		
+		<label></label><input name='' value='' id='' type='text' tabindex='1' style='margin-bottom:1px;width:15%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
+	</div>
+</div> 
+</div>
+</form>
+<script>
+	$(document).ready(function(){
+		$('.type-require').click(function(){
+				
+			});
+		});
+	$("table#tb_require").delegate("td.type-require .add", "click", function() {			
+		addRequire(this);		
+		return false;		
+	});
+	///////ADD REQUIRE////
+	function  addRequire(e){		
+		var parent_div = $(e).parent();
+		var parent_td = parent_div.parent();
+		var parent_tr = parent_td.parent();
+		var html=$("#type").html();
+		parent_td.append(html);
+		parent_tr.change();
+	}
+	/////Delete Click////
+	$("table#tb_require").delegate("td.type-require .delete", "click", function() {			
+		deleteRequire(this);		
+		return false;		
+	});
+	////delete function///
+	function deleteRequire(e){
+		var parent_div = $(e).parent();
+		var parent_td = parent_div.parent();
+		var parent_tr = parent_td.parent();
+		parent_div.remove();
+		parent_tr.change();
+	}
+</script>
