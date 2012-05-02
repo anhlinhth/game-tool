@@ -32,7 +32,7 @@ class Zend_View_Helper_TopMenu
         $strList .= "<li class='$campaign'><a href='$view->baseUrl/campaign/campaign'>Campaign</a></li>";
         
         $strList .= "<li class='$localite'><a href='$view->baseUrl/localite/language'>Localize</a></li>";
-        
+        $strList .= "<li class='$shop'><a href='$view->baseUrl/shop/shop'>Shop</a></li>";
 		$strList .=		"</ul>
 					</div>";
 		$strList .= "<li class='$compensation'><a href='$view->baseUrl/compensation/compensation'>compensation</a></li>";        
