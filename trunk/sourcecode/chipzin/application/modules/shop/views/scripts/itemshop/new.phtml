@@ -13,7 +13,7 @@ endif;
 	<h3>Add Item Shop</h3>
 	<table id='tb_require'>
 	<tr>
-		<td><label>ID</label></td>
+		<td width="50"><label>ID</label></td>
 		<td>
 			<input type="text" name='ID' value="" readonly="readonly"/>
 		</td>
@@ -21,7 +21,7 @@ endif;
 		<td><input type="text" value='' name='icon' /></td>		
 	</tr>
 	<tr>
-		<td><label>Entity</label></td>
+		<td width="50"><label>Entity</label></td>
 		<td><input type="text" value='' name='entity' /></td>
 		<td><label>Item</label></td>
 		<td><input type="text" value='' name='item' /></td>	
@@ -35,7 +35,7 @@ endif;
 				<option value='2'>2</option>
 			</select>
 		</td>
-		<td><label>Level</label></td>
+		<td width="50"><label>Level</label></td>
 		<td><input type="text" value='' name='level' /></td>
 	</tr>
 	
@@ -43,12 +43,12 @@ endif;
 		<td  rowspan="1">
 					<label>Require:</label>
 					</td>
-		<td class="type-require">
+		<td class="type-require" width="50%">
 					<div><a class='tool-16 add' href=''></a></div>
 					</td>
 		
-		<td>Unlock</td>		
-			<td class="type-unblock">
+		<td width="50">Unlock</td>		
+			<td class="type-unblock" width="50%">
 					<div style="padding-left:0;"><a class='tool-16 add' href=''></a></div>					
 		</td>
 	</tr>
@@ -59,7 +59,7 @@ endif;
 	 </div> 
 </div>
 <!-- Div require -->
-<div style="display:none" id='type-require'>
+<div style="display:none;width: 300px;" id='type-require'>
 	<div >
 		<select name='' style='margin-bottom: 1px;width:35%'>		
 			<option value =0'>1</option>		
@@ -76,7 +76,6 @@ endif;
 		<input name='' value='' id='' type='text' tabindex='1' style='margin-bottom:1px;width:35%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
 	</div>
 </div>  
-</div>
 </form>
 <script>
 	$(document).ready(function(){
