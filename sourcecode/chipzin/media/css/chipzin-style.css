@@ -2,12 +2,13 @@
 .mybox{
 	border: 1px solid #C3D7DB;
 }
-.mybox h3{
+.mybox h3,.box h3{
     background: #D9EAED;
 	border-bottom: 1px solid #C3D7DB;
 	color: #294145;
 	padding: 10px;
 }
+
 .mybox h4{
     background: #D9EAED;
 	border-bottom: 1px solid #C3D7DB;
