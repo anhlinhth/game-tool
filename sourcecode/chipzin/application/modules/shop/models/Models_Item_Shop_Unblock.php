@@ -10,5 +10,20 @@ class Models_Item_Shop_Unblock extends Models_Base
 		$this->_key = "ID";
 		$this->_table = "s_itemshop_unblock";	
 	}
+	public function update($obj)
+	{
+		parent::_update($obj,null);
+	}
+	public function delete($id)
+	{
+		$sql="
+			DELETE 
+				FROM
+			s_itemshop_unblock
+			WHERE
+			 s_itemshop_unblock.ItemShopID=$id
+		";
+		$this->_db->query($sql);
+	}
 }
 ?>
