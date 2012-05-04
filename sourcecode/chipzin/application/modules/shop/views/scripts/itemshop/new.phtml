@@ -6,37 +6,65 @@
 <?php 
 endif;
 ?>
-
+<div id='dialog'>
+	<div id='ct'></div>
+	<div id='ft'> </div>
+</div>
 <form  class="myform" id="form" name="form" action="" method="post">
 
 <div class="box">
 	<h3>Add Item Shop</h3>
 	<table id='tb_require'>
 	<tr>
-		<td width="50"><label>ID</label></td>
+		<td width="50"><label>Title</label></td>
 		<td>
-			<input type="text" name='ID' value="" readonly="readonly"/>
+			<input type="text" name='Title' id='Title' value=""/>
+			<input type="hidden" name='ID' id='ID' value="<?php echo $this->maxid;?>"/>
 		</td>
 		<td><label>Icon</label>	</td>
-		<td><input type="text" value='' name='icon' /></td>		
+		<td><input type="text" value='' name='Icon' /></td>		
 	</tr>
 	<tr>
-		<td width="50"><label>Entity</label></td>
-		<td><input type="text" value='' name='entity' /></td>
-		<td><label>Item</label></td>
-		<td><input type="text" value='' name='item' /></td>	
-	</tr>
-	<tr>
-		<td><label>Kind</label></td>
-		<td>
-			<select>
-				<option value='0'>Chọn Kind</option>
-				<option value='1'>1</option>
-				<option value='2'>2</option>
+		<td width="50">
+			<label>
+      			<input type="radio" name="check" value="entity_radio" id="Entity_1"   checked="checked" />
+     		 Entity</label>
+		</td>		
+		<td >
+			<select name='Entity' style="width: 160px;"  class='entity' >
+			<?php foreach ($this->item as $row){?>
+				<option value='<?php echo $row['ID'];?>'><?php echo $row['Name'];?></option>
+			<?php }?>
 			</select>
 		</td>
+		<td><label>
+     		 <input type="radio" name="check" value="item_radio" id="Item_1" />
+      		Item</label></td>
+		<td>
+			<select name='Item' style="width: 160px;" class='item'>
+			<?php foreach ($this->item as $row){?>
+				<option value='<?php echo $row['ID'];?>'><?php echo $row['Name'];?></option>
+			<?php }?>
+			</select>
+		</td>	
+		
+		
+	</tr>
+	<tr>
+	<td><label>Kind</label></td>
+		<td>
+			<select name='Kind' style="width: 160px;">				
+				<?php
+					foreach($this->kind as $kind)
+					{ 
+				?>	
+				<option value='<?php echo $kind['ID']; ?>'><?php echo $kind['Name']?></option>
+				<?php }?>			
+			</select>
+		</td>
+		
 		<td width="50"><label>Level</label></td>
-		<td><input type="text" value='' name='level' /></td>
+		<td><input type="text" value='' name='Level' /></td>
 	</tr>
 	
 	<tr>
@@ -54,29 +82,36 @@ endif;
 	</tr>
 	</table>
 	<div style="text-align: center;">
-	 <input id="button1" type="submit" value="Lưu" /> &nbsp;&nbsp;
-	 <input id="button2" type="reset" value="Làm lại" /> 
+	 <input id="button1" type='button' onclick="Save()" value="Lưu" /> &nbsp;&nbsp;
+	 <input id="button2" type="reset" value="Làm lại" onclick="return confirm('Bạn có muốn làm lại không?')" /> 
 	 </div> 
 </div>
+
+
+</form>
 <!-- Div require -->
 <div style="display:none;width: 300px;" id='type-require'>
 	<div >
-		<select name='' style='margin-bottom: 1px;width:35%'>		
-			<option value =0'>1</option>		
+		<select name='itemshoprequire[]' style='margin-bottom: 1px;width:35%'>	
+			<?php foreach ($this->require as $row){?>	
+			<option value ='<?php echo $row['ID'];?>'><?php echo $row['Name'];?></option>		
+			<?php }?>
 		</select>		
-		<input name='' value='' id='' type='text' tabindex='1' style='margin-bottom:1px;width:35%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
+		<input name='valuerequire[]' value='' class='valuerequire' type='text' tabindex='1' style='margin-bottom:1px;width:35%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
 	</div>
 </div>
 <!-- Div unblock -->
 <div style="display:none" id='type-unblock'>
 	<div >
-		<select name='' style='margin-bottom: 1px;width:35%'>		
-			<option value =0'>1</option>		
+		<select name='itemunblock[]' style='margin-bottom: 1px;width:35%'>
+		<?php foreach($this->unblock as $row){?>		
+			<option value ='<?php echo $row['ID'];?>'><?php echo $row['Name'];?></option>		
+		<?php }?>
 		</select>		
-		<input name='' value='' id='' type='text' tabindex='1' style='margin-bottom:1px;width:35%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
+		<input name='valueunblock[]' class='valueunblock' value='' type='text' tabindex='1' style='margin-bottom:1px;width:35%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
 	</div>
 </div>  
-</form>
+
 <script>
 	$(document).ready(function(){
 		$('.type-require').click(function(){
@@ -88,7 +123,7 @@ endif;
 		return false;		
 	});
 	$("table#tb_require").delegate("td.type-unblock .add", "click", function() {			
-		addRequire(this);		
+		addBlock(this);		
 		return false;		
 	});
 	///////ADD REQUIRE////
@@ -126,5 +161,134 @@ endif;
 		var parent_tr = parent_td.parent();
 		parent_div.remove();
 		parent_tr.change();
+	}
+	//////Radiobox////
+	$(document).ready(function(){
+		$('.item').hide();
+		$('.item').attr('disabled',true);
+		$('.entity').attr('disabled',false);
+		});
+	$("input[name='check']").change(function(){
+		
+		 if ($("input[@name='check']:checked").val() == 'entity_radio')
+			{
+			    $('.item').hide();
+			    $('.entity').show();
+			    $('.item').attr('disabled',true);
+			    $('.entity').attr('disabled',false);
+		    }
+		    else
+			{
+		    	$('.item').show();
+			    $('.entity').hide();	
+			    $('.item').attr('disabled',false);
+			    $('.entity').attr('disabled',true);	    	
+			}
+	});
+	/////Save////
+	function Save(){		
+			$("#dialog #ct").html("");
+			var data = $(".myform").serialize();
+			var id=$('#ID').val();
+			flag=validate();
+			if(flag==false)
+			{
+				$("#dialog").dialog({			
+					height: 400,
+					width: 350,
+					modal: true,
+					buttons: {
+						"Continue": function() {								
+							$(this).dialog("close");						
+						}										
+					}
+				});
+			}
+			else{	
+				$.ajax({
+					type: "POST",
+					url:"<?php echo $this->baseUrl.'/shop/itemshop/new'?>",
+					data: data,		
+					success: function(msg){
+								
+						if(parseInt(msg)==1){	
+							$("#dialog #ct").append("<p class='msg'>Add ItemShop Success<p>");						
+							$("#dialog").dialog({
+								height: 300,
+								width: 350,
+								modal: true,
+								buttons: {
+									"Success": function() {								
+										$(this).dialog("close");
+										location.replace("<?php echo $this->baseUrl.'/shop/itemshop/'?>");							
+									},
+									"Edit": function() {								
+										$(this).dialog("close");
+										location.replace("<?php echo $this->baseUrl.'/shop/itemshop/edit/id/'?>"+id);
+										//alert(quest_id);
+									},
+									"New": function() {								
+										$(this).dialog("close");
+										location.replace("<?php echo $this->baseUrl.'/shop/itemshop/new/'?>");
+										window.location.reload();							
+									}										
+								}
+								});
+						}
+						else {
+							$("#dialog #ct").append("<p class='error'>Failed:<br>"+msg+"<p>");				
+							$("#dialog").dialog({
+								height: 300,
+								width: 350,
+								modal: true,
+								buttons: {
+									"Error": function() {								
+										$(this).dialog("close");																
+									}
+								}
+								});
+						}
+					}
+				});
+			}		
+	}
+	//////Validate////
+	function validate()
+	{
+		flag=true;	
+		title=$('#form').find("#Title").val();
+		if(title=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Title không được để trống </p>");
+			flag=false;
+			
+		}				
+		level=$('#form').find("input[name='Level']").val();
+		if(level=="")
+		{
+			$("#dialog #ct").append("<p class='error'>Level không được để trống</p>");
+			flag=false;
+		}
+		if(isNaN(level))
+		{
+			$("#dialog #ct").append("<p class='error'>Level phải là số</p>");
+			flag=false;
+		}
+		valuerequire=$('#form').find(".valuerequire").val();
+				
+		countrequire=$('#form').find('.valuerequire').size();
+		if(isNaN(valuerequire) && countrequire!=0)
+		{
+			$("#dialog #ct").append("<p class='error'>Require phải là số</p>");
+			flag=false;
+		}
+		valueunblock=$('#form').find(".valueunblock").val();
+		countblock=$('#form').find('.valueunblock').size();
+		if(isNaN(valueunblock) && valueunblock!="" && countblock!=0)
+		{
+			$("#dialog #ct").append("<p class='error'>Unblock phải là số</p>");
+			flag=false;
+		}
+		return flag;	
 	}
 </script>

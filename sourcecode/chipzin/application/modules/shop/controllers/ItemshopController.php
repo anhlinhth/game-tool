@@ -2,8 +2,12 @@
 require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_ItemShop.php';
+require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Base.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_ItemShopRequire.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'forms'.DS.'Forms_ItemShop.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'models'.DS.'Models_Item_Shop.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'models'.DS.'Models_Item_Shop_Require.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'models'.DS.'Models_Item_Shop_Unblock.php';
 class Shop_ItemshopController extends BaseController
 {
 	public function _setUserPrivileges()
@@ -71,11 +75,82 @@ class Shop_ItemshopController extends BaseController
 	}
 	public function newAction()
 	{
-		
-	}
-	public function newrequireAction()
-	{
-		
-	}
+		try 
+		{						
+			$mdKind=new Models_Item_Shop();
+			$this->view->maxid=$mdKind->getMaxId();
+			$this->view->kind=$mdKind->getKind();
+			$this->view->require=$mdKind->getRequire();
+			$this->view->unblock=$mdKind->getUnblock();
+			$this->view->item=$mdKind->getItem();
+			if($this->_request->isPost())
+			{				
+				$this->_helper->layout()->disableLayout();
+				$this->_helper->viewRenderer->setNoRender();	
+				$form=new Forms_ItemShop();
+				$form->_requestToForm($this);
+				$md=new Models_Item_Shop();
+				$entity=$this->_request->getParam('Entity');
+				$item=$this->_request->getParam('Item');
+				if(isset($entity))
+				{
+					$form->obj->Item=null;					
+					$md->insert($form->obj);
+				}
+				else
+				{ 
+					$form->obj->Entity=null;					
+					$md->insert($form->obj);
+				}
+				/////////
+				$requireData=$this->_request->getParam('itemshoprequire');
+				$requireValue=$this->_request->getParam('valuerequire');
+				$unblockData=$this->_request->getParam('itemunblock');
+				$UnblockValue=$this->_request->getParam('valueunblock');
+				$mdRQ=new Models_Item_Shop_Require();
+				$mdUB=new Models_Item_Shop_Unblock();
+				/////
+				
+				if(!empty($requireData))
+				{
+					foreach($requireData as $key=>$value)
+					{
+						if(!empty($requireValue[$key]))
+						{
+							$objRequire=new Obj_Base();
+							$objRequire->ItemShopID=$mdKind->getMaxId();
+							$objRequire->TypeRequire=$value;
+							$objRequire->Value = $requireValue[$key];														
+							$mdRQ->_insert($objRequire);
+									
+						}
+					}
+				}
+				if(!empty($unblockData))
+				{
+					foreach($unblockData as $key=>$value)
+					{
+						if(!empty($UnblockValue[$key]))
+						{
+							$objUnbock=new Obj_Base();
+							$objUnbock->ItemShopID=28;
+							$objUnbock->TypeUnblockID=$value;
+							$objUnbock->Value=$UnblockValue[$key];
+							$mdUB->_insert($objUnbock);
+							
+						}
+					}
+				}				
+				
+				echo "1";	
+			}
+			
+		}
+		catch(Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}	
 	
 }
