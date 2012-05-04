@@ -69,6 +69,64 @@ class Models_Item_Shop extends Models_Base
 		parent::_delete($id,null);
 		
 	}
+	public function getKind()
+	{
+		$sql="
+			SELECT 
+				*
+			FROM
+				s_type_kind 
+		";
+		$result=$this->_db->fetchAll($sql);
+		return $result;
+	}
+	public function getRequire()
+	{
+		$sql="
+			SELECT 
+				* 
+			FROM
+				s_type_require
+		";		
+		$result=$this->_db->fetchAll($sql);
+		return $result;
+	}
+	public function getUnblock()
+	{
+		$sql="
+			SELECT 
+				* 
+			FROM
+				s_type_unblock
+		";		
+		$result=$this->_db->fetchAll($sql);
+		return $result;
+	}
+	public function getItem()
+	{
+			$sql="
+			SELECT 
+				* 
+			FROM
+				s_items
+		";		
+		$result=$this->_db->fetchAll($sql);
+		return $result;
+	}
+	public function getMaxId()
+	{
+		$sql="
+			SELECT MAX(ID)+1
+			FROM 
+				s_itemshop
+		";
+		$result=$this->_db->fetchOne($sql);
+		return $result;
+	}
+	public function insert($obj)
+	{
+		parent::_insert($obj);
+	}
 
 }
 ?>
