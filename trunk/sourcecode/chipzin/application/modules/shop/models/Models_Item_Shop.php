@@ -69,6 +69,10 @@ class Models_Item_Shop extends Models_Base
 		parent::_delete($id,null);
 		
 	}
+	public function update($id)
+	{
+		parent::_update($id,null);
+	}
 	public function getKind()
 	{
 		$sql="
@@ -127,6 +131,47 @@ class Models_Item_Shop extends Models_Base
 	{
 		parent::_insert($obj);
 	}
-
+	 public function getItemShopById($id)
+	 {
+	 	$sql="
+	 		select x.ID as I, y.Entity as E, x.Item as Item,x.K as K,x.Icon,x.Level
+				From
+				(select a.ID, b.Name as Item,a.Kind,a.Icon,a.Level,s_type_kind.Name as K
+				from s_itemshop a left join s_items b on a.Item = b.ID , s_type_kind where s_type_kind.ID=a.Kind) x,
+				(select s.ID, c.Name as Entity
+				from s_itemshop s left join s_items c on s.Entity = c.ID) y
+				where x.ID = y.ID
+			 and x.ID=$id
+	 	";
+	 	$result=$this->_db->fetchOne($sql);
+	 	return $result;
+	 }
+	 public function getRequireByID($id)
+	 {
+	 	$sql="SELECT 
+	 			*
+	 		  FROM 
+	 			s_itemshop_require  R,s_type_require TR
+	 		  WHERE 
+				R.TypeRequire=TR.ID and R.ItemShopID={$id} 
+			ORDER BY R.ID ASC 		
+	 	";
+	 	$result=$this->_db->fetchAll($sql);
+	 	return $result;
+	 }
+	 public function getUnblockById($id)
+	 {
+	 	$sql="SELECT 
+	 			*
+	 		  FROM 
+	 			s_itemshop_unblock,s_type_unblock
+	 		  WHERE 
+				s_itemshop_unblock.TypeUnblockID=s_type_unblock.ID and s_itemshop_unblock.ItemShopID=$id
+			ORDER BY s_itemshop_unblock.ID ASC		
+	 	
+	 	";
+	 	$result=$this->_db->fetchAll($sql);
+	 	return $result;
+	 }
 }
 ?>

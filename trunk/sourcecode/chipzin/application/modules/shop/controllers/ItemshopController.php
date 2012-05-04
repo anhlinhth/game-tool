@@ -79,12 +79,14 @@ class Shop_ItemshopController extends BaseController
 		{						
 			$mdKind=new Models_Item_Shop();
 			$this->view->maxid=$mdKind->getMaxId();
+			$id=$mdKind->getMaxId();
 			$this->view->kind=$mdKind->getKind();
 			$this->view->require=$mdKind->getRequire();
 			$this->view->unblock=$mdKind->getUnblock();
 			$this->view->item=$mdKind->getItem();
+			
 			if($this->_request->isPost())
-			{				
+			{								
 				$this->_helper->layout()->disableLayout();
 				$this->_helper->viewRenderer->setNoRender();	
 				$form=new Forms_ItemShop();
@@ -118,14 +120,14 @@ class Shop_ItemshopController extends BaseController
 						if(!empty($requireValue[$key]))
 						{
 							$objRequire=new Obj_Base();
-							$objRequire->ItemShopID=$mdKind->getMaxId();
+							$objRequire->ItemShopID=$id;
 							$objRequire->TypeRequire=$value;
 							$objRequire->Value = $requireValue[$key];														
 							$mdRQ->_insert($objRequire);
 									
 						}
 					}
-				}
+				}				
 				if(!empty($unblockData))
 				{
 					foreach($unblockData as $key=>$value)
@@ -133,7 +135,7 @@ class Shop_ItemshopController extends BaseController
 						if(!empty($UnblockValue[$key]))
 						{
 							$objUnbock=new Obj_Base();
-							$objUnbock->ItemShopID=28;
+							$objUnbock->ItemShopID=$id;
 							$objUnbock->TypeUnblockID=$value;
 							$objUnbock->Value=$UnblockValue[$key];
 							$mdUB->_insert($objUnbock);
@@ -152,5 +154,99 @@ class Shop_ItemshopController extends BaseController
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}
 	}	
+	
+	public function editAction()
+	{
+		try 
+		{
+			
+			
+			if($this->_request->isPost())
+			{
+				$this->_helper->layout()->disableLayout();
+				$this->_helper->viewRenderer->setNoRender();
+				$id=$this->_request->getParam('ID');
+				$md=new Models_Item_Shop();			
+				$form=new Forms_ItemShop();
+				$form->_requestToForm($this);			
+				$entity=$this->_request->getParam('Entity');
+				$item=$this->_request->getParam('Item');
+				if(isset($entity))
+				{
+					$form->obj->Item=null;					
+					$md->update($form->obj);
+				}
+				else
+				{ 
+					$form->obj->Entity=null;					
+					$md->update($form->obj);
+				}
+				/////////
+				$requireData=$this->_request->getParam('itemshoprequire');
+				$requireValue=$this->_request->getParam('valuerequire');
+				$unblockData=$this->_request->getParam('itemshopunblock');
+				$unblockValue=$this->_request->getParam('valueunblock');
+				$mdRQ=new Models_Item_Shop_Require();
+				
+				
+				/////
+				
+				if(!empty($requireData))
+				{
+					$mdRQ->delete($id);
+					foreach($requireData as $key=>$value)
+					{
+						if(!empty($requireValue[$key]))
+						{
+							$objRequire=new Obj_Base();
+							$objRequire->ItemShopID=$id;
+							$objRequire->TypeRequire=$value;
+							$objRequire->Value = $requireValue[$key];														
+							$mdRQ->_insert($objRequire);
+									
+						}
+					}
+				}	
+				$mdUB=new Models_Item_Shop_Unblock();
+				
+				if(!empty($unblockData))
+				{
+					$mdUB->delete($id);	
+					foreach($unblockData as $key=>$value)
+					{
+						if(!empty($unblockValue[$key]))
+						{
+							$objUnbock=new Obj_Base();
+							$objUnbock->ItemShopID=$id;
+							$objUnbock->TypeUnblockID=$value;
+							$objUnbock->Value=$unblockValue[$key];
+							$mdUB->_insert($objUnbock);
+							
+						}
+					}
+				}	
+				echo "1";				
+				
+				
+						
+			}
+			else {
+				$md=new Models_Item_Shop();	
+				$id=$this->_request->getParam('id');	
+				$this->view->obj=$md->_getByKey($id);	
+				$this->view->require=$md->getRequire();
+				$this->view->requireById=$md->getRequireByID($id);
+				$this->view->unblock=$md->getUnblock();
+				$this->view->unblockById=$md->getUnblockById($id);
+				$this->view->items=$md->getItem();
+				$this->view->kind=$md->getKind();
+			}			
+		}
+		catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());	
+		}
+	}
 	
 }
