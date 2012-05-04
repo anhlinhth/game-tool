@@ -6,3 +6,26 @@
 <?php 
 endif;
 ?>
+<form  class="myform" id="formPaging" name="formPaging" action="" method="post">
+
+<div class="mybox">
+	<h3>Shop</h3>
+	<table>
+		<tr>			
+			<td><label>Search</label><input type="text" name='ID' id='ID'/>
+			<input type="submit" value='Search'/></td> 
+		</tr>
+	</table>
+	<table class="list">
+		
+		<thead>
+			<tr  style="border: 0px;">
+				<td>Name</td>
+				<td>Value</td>
+				<td>Tool</td>
+			</tr>
+		</thead>
+		<?php $this->listShop($this->data, $this->page, $this->items, $this) ?>				
+	</table>		
+</div>
+</form>
