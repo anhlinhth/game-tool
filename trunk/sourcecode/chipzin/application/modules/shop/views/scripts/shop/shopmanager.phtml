@@ -200,6 +200,14 @@ function deleteItemShop(key)
 }
 function addItemShop()
 {
+	$("input[name='IDitemshop']").val('');
+	$("input[name='icon']").val("");
+	$("input[name='item']").val("");
+	$("input[name='entity']").val("");
+	$("input[name='kind']").val("");
+	$("input[name='level']").val("");
+	$("#Require").html("");
+	$("#Unlock").html('');
 	$.ajax({
 		url: "<?php echo $this->baseUrl.'/shop/shop/getlistitemshop'?> ",
 		dataType:"json",
@@ -219,7 +227,7 @@ function addItemShop()
 	});
 	$("#itemshop").dialog
 	({
-		title: "Item Shop",
+		title: "Add Item Shop",
 		height: 300,
 		width: 700,
 		modal: true,
