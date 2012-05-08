@@ -570,12 +570,12 @@ function getvalue(textbox)
 		data: { 
 					value : tam1[1]
 			  },
-		success: function (result) {			
+		success: function (result) {		
 			tam2 = result.split('/n/');
 			var title = $('#'+textbox).attr('title');
 			$('p#'+title).html(tam2[1]);
 			$('a#'+title).attr("href","javascript:editstring('"+tam+"','"+title+"');");
-			
+
 			
 		}
 		}); 

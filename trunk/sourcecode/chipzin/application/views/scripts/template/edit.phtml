@@ -48,18 +48,18 @@ if($this->temp)
 		</select>
 		</td>
 		<td>Task String</td>
-		<td><input type="text" id="TaskString" name="TaskString" value="<?php echo $this->obj->TaskString?>" onchange="getvalue('TaskString')"/>
+		<td><input type="text" id="TaskString" name="TaskString" value="<?php echo $this->obj->TaskString?>" onchange="getvalue('TaskString')" title="TaskString-string-value"/>
 		<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('TaskString','')"></a>&nbsp;
 		<a title="sửa" id="taskstring-value" class="tool-16 edit" href="JavaScript:editstring('<?php echo $this->obj->TaskString?>','taskstring-value');" title = "asds"></a>&nbsp;
 		<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('TaskString','')"></a>
-		<p class="string-value" id = "TaskString-string-value" ><?php echo $this->obj->gNameTask?></p>
+		<p class="string-value" id = "TaskString-string-value"><?php echo $this->obj->gNameTask?></p><p class="string-value" id = "questdesc-string-value" ><?php echo $this->regquestDS;?></p>
 		</td>
 	</tr>
 	<tr>
 		<td>Desc</td>
 		<td><input type="text" id="DescString" name="DescString" value="<?php echo $this->obj->DescString?>" onchange="getvalue('DescString')"/></td>
 		<td>DescString</td>
-		<td><input type="text" id="DescID" name="DescID" value="<?php echo $this->obj->DescID?>"/>
+		<td><input type="text" id="DescID" name="DescID" value="<?php echo $this->obj->DescID?>" title="DescID-string-value"/>
 		<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('DescID','')"></a>&nbsp;
 		<a title="sửa" id="taskstring-value" class="tool-16 edit" href="JavaScript:editstring('<?php echo $this->obj->DescID?>','taskstring-value');" title = "asds"></a>&nbsp;
 		<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('DescID','')"></a>
@@ -138,7 +138,6 @@ $("#dialog_edit_template").dialog({
 //////////////////Localite///////////////////
 function getvalue(textbox)
 {
-	
 	var tam = $('#'+textbox).val();	
 	var tam1 = tam.split('@');
 	var str_split = tam1[1].split('#');
@@ -155,8 +154,6 @@ function getvalue(textbox)
 			var title = $('#'+textbox).attr('title');
 			$('p#'+title).html(tam2[1]);
 			$('a#'+title).attr("href","javascript:editstring('"+tam+"','"+title+"');");
-			
-			
 		}
 		}); 
 }
