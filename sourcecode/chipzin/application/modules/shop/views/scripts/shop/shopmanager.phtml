@@ -12,6 +12,13 @@ endif;
 	<h3>Shop Manager</h3>
 	<br>
 	<table style="width: 50%; margin: auto;border: none;">
+		<thead>	
+			<tr  style="border: 0px;">
+				<td>Id</td>
+				<td>Name Item</td>
+				<td>Tool</td>
+			</tr>
+		</thead>
 		<tbody name='listitem'>
 			<?php $this->listshopmanager($this->data) ?>
 		</tbody>
@@ -246,12 +253,12 @@ function addItemShop()
 								var edit = "<a class='tool-16 edit' href='javascript:viewItemShop("+msg+")'></a>";
 								var del = "<a class='tool-16 delete' href='javascript:deleteItemShop("+msg+")'></a>";
 								item+="<tr>";
-								item+=" 	<td style='border: none;'>";
-								item+="		<input type='text' style='width: 80%;'name='Name"+msg+"' value='"+name+"'>";
+								item+="		<td style='width: 35px'><input type='text' style='width: 30px;border: none;' name='shop_itemID"+msg+"' value='"+msg+"'></td>";
+								item+=" 	<td>";
+								item+="		<input type='text' style='width: 80%;border: none;'name='Name"+msg+"' value='"+name+"'>";
 								item+="		<input type='hidden' name='itemshopID"+msg+"' value='"+iditem+"'>";
-								item+="		<input type='hidden' name='shop_itemID"+msg+"' value='"+msg+"'>";
 								item+="		</td>";
-								item+="<td style='border: none;'align='center'>"+edit+"&nbsp"+del+"&nbsp</td></tr>";
+								item+="<td align='center'>"+edit+"&nbsp"+del+"&nbsp</td></tr>";
 							
 								$('tbody[name="listitem"]').append(item);
 							}
