@@ -282,13 +282,8 @@ endif;
 			$("#dialog #ct").append("<p class='error'>Require phải là số</p>");
 			flag=false;
 		}
-		valueunblock=$('#form').find(".valueunblock").val();
-		countblock=$('#form').find('.valueunblock').size();
-		if(isNaN(valueunblock) && valueunblock!="" && countblock!=0)
-		{
-			$("#dialog #ct").append("<p class='error'>Unblock phải là số</p>");
-			flag=false;
-		}
+		
 		return flag;	
 	}
+	
 </script>

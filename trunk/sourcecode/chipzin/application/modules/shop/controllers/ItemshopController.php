@@ -37,7 +37,10 @@ class Shop_ItemshopController extends BaseController
 			$form->_requestToForm($this);	
 			$md=new Models_Item_Shop();
 			$searchID=$this->_request->getParam('ID');
-			$data = $md->getItemShop();//filter($form->obj, "ID ASC",($pageNo - 1)*$items, $items);
+		
+				$data = $md->getItemShop();
+		
+			//filter($form->obj, "ID ASC",($pageNo - 1)*$items, $items);
 			$count = $md->count($form->obj);
 			$this->view->data = $data;
 			$this->view->items = $items;
@@ -86,7 +89,7 @@ class Shop_ItemshopController extends BaseController
 			$this->view->item=$mdKind->getItem();
 			
 			if($this->_request->isPost())
-			{								
+			{												
 				$this->_helper->layout()->disableLayout();
 				$this->_helper->viewRenderer->setNoRender();	
 				$form=new Forms_ItemShop();
@@ -128,7 +131,7 @@ class Shop_ItemshopController extends BaseController
 						}
 					}
 				}				
-				if(!empty($unblockData))
+				if(!empty($unblockData) )
 				{
 					foreach($unblockData as $key=>$value)
 					{
@@ -137,8 +140,8 @@ class Shop_ItemshopController extends BaseController
 							$objUnbock=new Obj_Base();
 							$objUnbock->ItemShopID=$id;
 							$objUnbock->TypeUnblockID=$value;
-							$objUnbock->Value=$UnblockValue[$key];
-							$mdUB->_insert($objUnbock);
+							$objUnbock->Value=$UnblockValue[$key];																				
+							$mdUB->_insert($objUnbock);							
 							
 						}
 					}
@@ -171,6 +174,7 @@ class Shop_ItemshopController extends BaseController
 				$form->_requestToForm($this);			
 				$entity=$this->_request->getParam('Entity');
 				$item=$this->_request->getParam('Item');
+				
 				if(isset($entity))
 				{
 					$form->obj->Item=null;					
@@ -182,9 +186,9 @@ class Shop_ItemshopController extends BaseController
 					$md->update($form->obj);
 				}
 				/////////
-				$requireData=$this->_request->getParam('itemshoprequire');
+				$requireData=$this->_request->getParam('itemrequire');
 				$requireValue=$this->_request->getParam('valuerequire');
-				$unblockData=$this->_request->getParam('itemshopunblock');
+				$unblockData=$this->_request->getParam('itemunblock');
 				$unblockValue=$this->_request->getParam('valueunblock');
 				$mdRQ=new Models_Item_Shop_Require();
 				
@@ -196,7 +200,7 @@ class Shop_ItemshopController extends BaseController
 					$mdRQ->delete($id);
 					foreach($requireData as $key=>$value)
 					{
-						if(!empty($requireValue[$key]))
+						if(!empty($requireValue[$key])&& $requireValue[$key]!=0)
 						{
 							$objRequire=new Obj_Base();
 							$objRequire->ItemShopID=$id;

@@ -92,13 +92,13 @@ endif;
 		<td><input type="text" value='<?php echo $this->obj->Level;?>' name='Level' /></td>
 	</tr>
 	
-	<tr>
+	<tr class='number'>
 		<td  rowspan="1">
 					<label>Require:</label>
 					</td>
 		<td class="type-require" width="50%">
 			
-					<div><a class='tool-16 add' href=''></a>
+					<div ><a class='tool-16 add' href=''></a>
 										
 					<?php if($this->requireById!=null)
 					{
@@ -107,7 +107,7 @@ endif;
 					?>
 					
 						<div >
-							<select name='itemshoprequire[]' style='margin-bottom: 1px;width:35%'>	
+							<select name='itemrequire[]' style='margin-bottom: 1px;width:35%'>	
 								<?php
 								$select = ""; 
 								foreach ($this->require as $row1)
@@ -146,7 +146,7 @@ endif;
 					?>
 					
 						<div >
-							<select name='itemshopunblock[]' style='margin-bottom: 1px;width:35%'>	
+							<select name='itemunblock[]' style='margin-bottom: 1px;width:35%'>	
 								<?php
 								$select = ""; 
 								foreach ($this->unblock as $row1)
@@ -182,9 +182,9 @@ endif;
 
 </form>
 <!-- Div require -->
-<div style="display:none;width: 300px;" id='type-require'>
-	<div>
-		<select name='itemshoprequire[]' style='margin-bottom: 1px;width:35%'>	
+<div style="display:none;width: 300px;" id='type-require' >
+	<div >
+		<select name='itemrequire[]' style='margin-bottom: 1px;width:35%'>	
 			<?php foreach ($this->require as $row){?>	
 			<option value ='<?php echo $row['ID'];?>'><?php echo $row['Name'];?></option>		
 			<?php }?>
@@ -194,7 +194,7 @@ endif;
 </div>
 <!-- Div unblock -->
 <div style="display:none" id='type-unblock'>
-	<div>
+	<div >
 		<select name='itemunblock[]' style='margin-bottom: 1px;width:35%'>
 		<?php foreach($this->unblock as $row){?>		
 			<option value ='<?php echo $row['ID'];?>'><?php echo $row['Name'];?></option>		
@@ -222,13 +222,15 @@ $("table#tb_require").delegate("td.type-unblock .add", "click", function() {
 	return false;		
 });
 ///////ADD REQUIRE////
-function  addRequire(e){		
+function  addRequire(e){
+	
 	var parent_div = $(e).parent();
 	var parent_td = parent_div.parent();
 	var parent_tr = parent_td.parent();
 	var html=$("#type-require").html();
 	parent_td.append(html);
 	parent_tr.change();
+
 }
 ///////ADD Block////
 function  addBlock(e){		
@@ -363,18 +365,54 @@ function Save(){
 function validate()
 {
 	flag=true;	
-	$('.type-require').each(function(e){
-		
-		
-	valuerequire=$(e).find('input').val();
-			
-	countrequire=$(e).find('input[name="valuerequire"]').size();
-	if(isNaN(valuerequire) && countrequire!=0)
+	flag_require=true;
+	flag_block=true;
+	title=$('#form').find("#Title").val();
+	if(title=='')
 	{
-		$("#dialog #ct").append("<p class='error'>Require phải là số</p>");
+		$("#dialog #ct").append("<p class='error'>Title không được để trống </p>");
+		flag=false;
+		
+	}				
+	level=$('#form').find("input[name='Level']").val();
+	if(level=="")
+	{
+		$("#dialog #ct").append("<p class='error'>Level không được để trống</p>");
 		flag=false;
 	}
-	});
+	if(isNaN(level))
+	{
+		$("#dialog #ct").append("<p class='error'>Level phải là số</p>");
+		flag=false;
+	}			
+
+	require=$('#form').find('.valuerequire');
+	block=$('#form').find('.valueunblock');
+	$(require).each(function(){
+        if(isNaN($(this).val()))
+        {
+        	//
+        	flag_require=false;
+        }
+        
+        }); 
+    $(block).each(function(){
+        if(isNaN($(this).val())&& $(this).val()!=0)
+        {
+        	flag_block=false;
+        }
+        });
+	if(flag_require==false)
+    {
+    	$("#dialog #ct").append("<p class='error'>Require phải là số</p>");
+    	flag=false;
+    }  
+	if(flag_block==false)
+    {
+    	$("#dialog #ct").append("<p class='error'>Block phải là số</p>");
+    	flag=false;
+    }                   
+	  
 	return flag;	
 }
 </script>
