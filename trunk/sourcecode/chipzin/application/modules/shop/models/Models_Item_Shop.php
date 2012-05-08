@@ -30,17 +30,19 @@ class Models_Item_Shop extends Models_Base
 			
 	public function filter($objSearch,$order,$offset,$count)
 	{
-		$sql = "SELECT
-					*
-				FROM
-					s_itemshop
-				WHERE
-					1 ";
+		$sql = "select x.ID as I, y.Entity as E, x.Item as Item,x.K as K,x.Icon,x.Level
+				From
+				(select a.ID, b.Name as Item,a.Kind,a.Icon,a.Level,s_type_kind.Name as K
+				from s_itemshop a left join s_items b on a.Item = b.ID , s_type_kind where s_type_kind.ID=a.Kind) x,
+				(select s.ID, c.Name as Entity
+				from s_itemshop s left join s_items c on s.Entity = c.ID) y
+				where x.ID = y.ID
+					";
 		
 		if($objSearch->ID)
-			$sql .= " AND ID = '$objSearch->ID'";						
+			$sql .= " AND x.ID = '$objSearch->ID'";						
 		if($order)
-			$sql .= " ORDER BY $order";
+			$sql .= " ORDER BY x.ID ASC";
 		
 		if($count > 0)
 			$sql .= " LIMIT $offset,$count";
