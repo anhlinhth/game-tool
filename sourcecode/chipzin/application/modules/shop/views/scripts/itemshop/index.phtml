@@ -13,7 +13,7 @@ endif;
 	<table>
 		<tr>			
 			<td><label>Search</label><input type="text" name='ID' id='ID'/>
-			<input type="submit" value='Search'/></td> 
+			<input type="submit" value='Search' name='search'/></td> 
 		</tr>
 	</table>
 	<table class="list">
@@ -32,7 +32,8 @@ endif;
 		<tbody>
 					<?php $this->listItemShop($this->data, $this->page, $this->items, $this) ?>				
 		</tbody>
-	</table>		
+	</table>	
+				
 </div>
 </form>
 <script>
@@ -45,7 +46,8 @@ endif;
 				url:"<?php echo $this->baseUrl.'/shop/itemshop/delete/'?> ",
 				data: "id="+key,			
 				success: function(data){
-					alert(data);				
+					alert('Xóa thành công');
+					window.location.reload();			
 				}
 			});
 		}

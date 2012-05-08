@@ -538,14 +538,9 @@ function loadTemplate(key){
 	});	
 }
 function editTemplate(){
-	$.ajax({
-		type: "POST",		
-		url:"<?php echo $this->baseUrl.'/template/index/?layout=disabled'?> ",				
-		success: function(msg){			
-			$("div#dialog_edit_template").html(msg);
-		}
-	});	
-	$("div#dialog_edit_template").dialog("open");
+		windown.location= "<?php $this->baseUrl.'/template/index/'?>";				
+		
+	
 }
 
 ////////Init Diaglog//////////

@@ -13,6 +13,7 @@ class Zend_View_Helper_ListTemplate
 			$edit = "";
 			$delete = "";
 			$privilege = "";			
+				$edit= "<a href='$view->baseUrl/template/edit/id/$row->TaskID'><img src='$view->baseUrl/media/images/icons/edit-icon.gif' title='Sửa' width='16' height='16' /></a>";
 				$delete = "<a href='javascript:deleteTemplate($row->TaskID)'><img src='$view->baseUrl/media/images/icons/delete.gif' title='Xóa' width='16' height='16' /></a>";								
 			$strList .= "<tr id='temp-$row->TaskID'>
 							<td class='descid'>$row->TaskID</td>	

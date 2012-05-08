@@ -24,7 +24,7 @@ foreach ($this->arrTemp as $row)
 ?>
 </select>
 <a class="btn add" title=' Add' href='javascript:addTemplate(<?php echo $key?>)'>Add To Template</a>
-<a class="btn edit" title=' Edit' href='javascript:editTemplate()'>Edit Template</a>	
+<a class="btn edit" title=' Edit' href='<?php echo $this->baseUrl?>/template/index'>Edit Template</a>	
 </h4>
 <form  id="form" class="form-task-<?php echo $key?>" action="" method="post" enctype="multipart/form-data">
 <?php

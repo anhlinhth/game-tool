@@ -137,6 +137,8 @@ class TemplateController extends BaseController
 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Template.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_QTC.php';
 			require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Action.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_l_content.php';
+			
 			$id = $this->_request->getParam("id");		
 			$md = new Models_template();
 			$this->view->obj = $md->_getByKey($id);
@@ -144,6 +146,17 @@ class TemplateController extends BaseController
 			$this->view->arrQuestTC = $mdQTC->_filter();
 			$mdAction = new Models_Action();
 			$this->view->arrAction = $mdAction->_filter();
+						
+				$DescString = $this->view->obj->DescID;
+				$TaskString = $this->view->obj->TaskString;
+				$task = explode('#', $TaskString);
+				$desc = explode('#', $DescString);
+				
+				$mdlc = new Models_l_content();
+				$gNameTask = $mdlc->findname($task[1], substr($task[0],1));
+				$gNamedesc = $mdlc->findname($desc[1], substr($desc[0],1));
+				$this->view->obj->gNameTask = $gNameTask[0]->text;				
+				$this->view->obj->gNamedesc = $gNamedesc[0]->text;
 		}
 	}
 	public function deleteAction()
