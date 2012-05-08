@@ -38,8 +38,7 @@ class Forms_Quest_Detail extends Forms_Base
 		}
 		if(empty($this->obj->QuestGroupString))
 		{
-			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
-			array_push($arrNote, "QuestGroupString không được để trống<br>");			
+			$this->obj->QuestGroupString=NULL;			
 		}
 		if(empty($this->obj->QuestDescString))
 		{
