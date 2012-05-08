@@ -22,7 +22,7 @@ endif;
 			<input type="hidden" name='ID' id='ID' value="<?php echo $this->maxid;?>"/>
 		</td>
 		<td><label>Icon</label>	</td>
-		<td><input type="text" value='' name='Icon' /></td>		
+		<td><input type="file" value='' name='Icon' id='Icon' /></td>		
 	</tr>
 	<tr>
 		<td width="50">
@@ -256,6 +256,8 @@ endif;
 	function validate()
 	{
 		flag=true;	
+		flag_require=true;
+		flag_block=true;
 		title=$('#form').find("#Title").val();
 		if(title=='')
 		{
@@ -273,17 +275,35 @@ endif;
 		{
 			$("#dialog #ct").append("<p class='error'>Level phải là số</p>");
 			flag=false;
-		}
-		valuerequire=$('#form').find(".valuerequire").val();
-				
-		countrequire=$('#form').find('.valuerequire').size();		
-		if(isNaN(valuerequire) && countrequire!=0)
-		{
-			$("#dialog #ct").append("<p class='error'>Require phải là số</p>");
-			flag=false;
-		}
-		
+		}			
+
+		require=$('#form').find('.valuerequire');
+		block=$('#form').find('.valueunblock');
+		/*$(require).each(function(){
+	        if(isNaN($(this).val()))
+	        {
+	        	//
+	        	flag_require=false;
+	        }
+	        
+	        }); 
+	    $(block).each(function(){
+	        if(isNaN($(this).val())&& $(this).val()!=0)
+	        {
+	        	flag_block=false;
+	        }
+	        });
+		if(flag_require==false)
+	    {
+	    	$("#dialog #ct").append("<p class='error'>Require phải là số</p>");
+	    	flag=false;
+	    }  
+		if(flag_block==false)
+	    {
+	    	$("#dialog #ct").append("<p class='error'>Block phải là số</p>");
+	    	flag=false;
+	    }                   
+		  */
 		return flag;	
 	}
-	
 </script>
