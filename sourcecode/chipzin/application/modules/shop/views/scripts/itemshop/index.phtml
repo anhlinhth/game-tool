@@ -34,7 +34,7 @@ endif;
 					<?php $this->listItemShop($this->data, $this->page, $this->items, $this) ?>				
 		</tbody>
 	</table>	
-				
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this); echo $_SESSION['items']; ?>		
 </div>
 </form>
 <script>

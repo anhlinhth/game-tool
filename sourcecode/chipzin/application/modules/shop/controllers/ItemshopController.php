@@ -30,17 +30,13 @@ class Shop_ItemshopController extends BaseController
 				$pageNo = 1;
 			if($items == 0)
 				$items = DEFAULT_ITEM_PER_PAGE;
-				
-			$pageNo = $this->_request->getParam("page");
-			$items = $this->_request->getParam("items");
+
 			$form = new Forms_ItemShop();
 			$form->_requestToForm($this);	
 			$md=new Models_Item_Shop();
 			$searchID=$this->_request->getParam('ID');
-		
-				$data = $md->getItemShop();
-		
-			//filter($form->obj, "ID ASC",($pageNo - 1)*$items, $items);
+
+			$data = $md->filter($form->obj, "ID ASC",($pageNo - 1)*$items, $items);
 			$count = $md->count($form->obj);
 			$this->view->data = $data;
 			$this->view->items = $items;
