@@ -101,7 +101,7 @@ class Shop_ItemshopController extends BaseController
 					if(!$checkFile)
 						throw new Invalid_Argument_Exception(Invalid_Argument_Exception::ERR_FIELD_NULL,"Không đúng định dạng hình ảnh");
 					
-					move_uploaded_file( $file['tmp_name'] , ROOT_MEDIA_IMAGE_ITEM_ITEMGIFT.DS . $_FILES['Icon']['name'] ) ;																	
+					move_uploaded_file( $file['tmp_name'] , ROOT_MEDIA_IMAGE_ITEM_ITEMSHOP.DS . $_FILES['Icon']['name'] ) ;																	
 				$this->_helper->layout()->disableLayout();
 				$this->_helper->viewRenderer->setNoRender();	
 				///
@@ -198,7 +198,7 @@ class Shop_ItemshopController extends BaseController
 					if(!$checkFile)
 						throw new Invalid_Argument_Exception(Invalid_Argument_Exception::ERR_FIELD_NULL,"Không đúng định dạng hình ảnh");
 					
-					move_uploaded_file( $file['tmp_name'] , ROOT_MEDIA_IMAGE_ITEM_ITEMGIFT.DS . $_FILES['Icon']['name'] ) ;																	
+					move_uploaded_file( $file['tmp_name'] , ROOT_MEDIA_IMAGE_ITEM_ITEMSHOP.DS . $_FILES['Icon']['name'] ) ;																	
 				$this->_helper->layout()->disableLayout();
 				$this->_helper->viewRenderer->setNoRender();	
 				///
