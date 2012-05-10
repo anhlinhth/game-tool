@@ -2,6 +2,7 @@
 require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Base.php';
+require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_S_ibshop_item.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'models'.DS.'Models_Ib_Shop.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'forms'.DS.'Forms_IbShop.php';
@@ -33,8 +34,9 @@ class Shop_IbshopController extends BaseController
 			$form = new Forms_IbShop();
 			$form->_requestToForm($this);
 			$md = new Models_Ib_Shop();
+			$this->view->dataindex=$md->getTabIndex();
 			$searchID=$this->_request->getParam('ID');		
-			$data = $md->filter($form->obj, "ID ASC",($pageNo - 1)*$items, $items);
+			$data = $md->filter($form->obj,"TabIndex ASC",($pageNo - 1)*$items, $items);
 			$count = $md->count($form->obj);			
 			$this->view->data = $data;
 			$this->view->items = $items;
@@ -69,5 +71,36 @@ class Shop_IbshopController extends BaseController
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}		
 	} 
+	
+	public function updatetabindexAction()
+	{
+		try {
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();													
+			if($this->_request->isPost())
+			{				
+				
+				$array=$this->_request->getParam('arrayorder');
+				$md=new Models_Ib_Shop();
+				$count=1;
+				foreach($array as $row)
+				{				
+						
+					$md->updateIndex($count, $row['TabIndex']);
+					$count++;
+				}	
+				echo "Update Order thành công.Refresh lại trang ";					
+												
+				Models_Log::insert($this->view->user->username, "act_update_ibshop", $obj->name);
+													
+			}
+		
+		}
+		catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}		
+	}
 	
 }
