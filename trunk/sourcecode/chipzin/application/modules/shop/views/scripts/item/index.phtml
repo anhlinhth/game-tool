@@ -110,7 +110,14 @@ $(function(){
 		if($(this).hasClass("disabled")){
 			return false;
 		}
-		updateItem();			
+		var name=$('#itemName').val();
+		var namesv=$('#itemNameSV').val();
+		if(name=="" || namesv=="")
+			alert("Không được bỏ trống các ô");
+		else
+		{
+			updateItem();
+		}			
 	});		
 
 	$(".btn.add").click(function(){
