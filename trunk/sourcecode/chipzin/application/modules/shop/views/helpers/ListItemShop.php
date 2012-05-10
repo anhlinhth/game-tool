@@ -15,10 +15,9 @@ public function listItemShop($data, $curPage, $itemPerPage ,$view)
 				$edit = "<a class='tool-16 edit' href='$view->baseUrl/shop/itemshop/edit/id/$row->I'></a>";				
 				$delete = "<a class='tool-16 delete' href='javascript:deleteItemShop($row->I)'></a>";;								
 			$strList .= "<tr id=''>							
-							<td class=''>$row->I</td>	
-							<td class=''>$row->E</td>
-							<td class=''>$row->Item</td>
-							<td class=''>$row->K</td>
+							<td class=''>$row->name</td>	
+							<td class=''>$row->tabindex</td>
+							<td class=''>$row->itemname</td>							
 							<td class=''><img width='50' heigh='50' src='$view->baseUrl/media/images/item/itemshop/$row->Icon' /></td>
 							<td class=''>$row->Level</td>			
 							<td align='center'>								

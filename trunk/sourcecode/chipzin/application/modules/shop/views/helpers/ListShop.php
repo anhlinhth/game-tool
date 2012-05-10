@@ -10,8 +10,8 @@ class Zend_View_Helper_ListShop
 		foreach($data as $key =>$row)
 		{
 			$arritem = "";
-			foreach ($row->arrItem as $itemname)				
-					$arritem .= $itemname->Name .' ;';
+			
+					$arritem .= $itemname->Name .";";
 			$edit = "";
 			$delete = "";
 			$privilege = "";					
