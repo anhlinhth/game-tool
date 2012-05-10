@@ -132,7 +132,8 @@ class Models_Shop extends Models_Base
 							FROM
 								s_itemshop ih, s_items i
 							WHERE
-								(ih.Entity = i.ID OR ih.Item = i.ID)";
+								(ih.Entity = i.ID OR ih.Item = i.ID)
+							ORDER BY ih.`ID`";
 		$listitem = $this->_db->fetchAll($sqlgetitemlist, "", Zend_Db::FETCH_OBJ);
 		return $listitem;
 	}
