@@ -85,22 +85,39 @@ class Shop_ItemshopController extends BaseController
 			$this->view->item=$mdKind->getItem();
 			
 			if($this->_request->isPost())
-			{												
-				$this->_helper->layout()->disableLayout();
-				$this->_helper->viewRenderer->setNoRender();	
+			{						
+				
 				$form=new Forms_ItemShop();
 				$form->_requestToForm($this);
+				$form->validate(INSERT);
 				$md=new Models_Item_Shop();
+				
+				/////
+				$file = $_FILES['Icon'];
+					if(!$file)
+						throw new Invalid_Argument_Exception(Invalid_Argument_Exception::ERR_FIELD_NULL,"Vui lòng chọn hình");
+					
+					$checkFile = Utility::validateFile($file);
+					if(!$checkFile)
+						throw new Invalid_Argument_Exception(Invalid_Argument_Exception::ERR_FIELD_NULL,"Không đúng định dạng hình ảnh");
+					
+					move_uploaded_file( $file['tmp_name'] , ROOT_MEDIA_IMAGE_ITEM_ITEMGIFT.DS . $_FILES['Icon']['name'] ) ;																	
+				$this->_helper->layout()->disableLayout();
+				$this->_helper->viewRenderer->setNoRender();	
+				///
+				
 				$entity=$this->_request->getParam('Entity');
 				$item=$this->_request->getParam('Item');
 				if(isset($entity))
 				{
-					$form->obj->Item=null;					
+					$form->obj->Item=null;
+					$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];			
 					$md->insert($form->obj);
 				}
 				else
 				{ 
-					$form->obj->Entity=null;					
+					$form->obj->Entity=null;
+					$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];					
 					$md->insert($form->obj);
 				}
 				/////////
@@ -143,7 +160,7 @@ class Shop_ItemshopController extends BaseController
 					}
 				}				
 				
-				echo "1";	
+				$this->_redirect("/shop/itemshop/index");
 			}
 			
 		}
@@ -167,18 +184,34 @@ class Shop_ItemshopController extends BaseController
 				$id=$this->_request->getParam('ID');
 				$md=new Models_Item_Shop();			
 				$form=new Forms_ItemShop();
-				$form->_requestToForm($this);			
+				$form->_requestToForm($this);
+				$form->validate(INSERT);	
 				$entity=$this->_request->getParam('Entity');
 				$item=$this->_request->getParam('Item');
 				
+				/////
+				$file = $_FILES['Icon'];
+					if(!$file)
+						throw new Invalid_Argument_Exception(Invalid_Argument_Exception::ERR_FIELD_NULL,"Vui lòng chọn hình");
+					
+					$checkFile = Utility::validateFile($file);
+					if(!$checkFile)
+						throw new Invalid_Argument_Exception(Invalid_Argument_Exception::ERR_FIELD_NULL,"Không đúng định dạng hình ảnh");
+					
+					move_uploaded_file( $file['tmp_name'] , ROOT_MEDIA_IMAGE_ITEM_ITEMGIFT.DS . $_FILES['Icon']['name'] ) ;																	
+				$this->_helper->layout()->disableLayout();
+				$this->_helper->viewRenderer->setNoRender();	
+				///
 				if(isset($entity))
 				{
-					$form->obj->Item=null;					
+					$form->obj->Item=null;	
+					$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];				
 					$md->update($form->obj);
 				}
 				else
 				{ 
-					$form->obj->Entity=null;					
+					$form->obj->Entity=null;
+					$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];					
 					$md->update($form->obj);
 				}
 				/////////
@@ -224,8 +257,9 @@ class Shop_ItemshopController extends BaseController
 							
 						}
 					}
-				}	
-				echo "1";				
+				}					
+				$this->_redirect("/shop/itemshop/");
+					
 				
 				
 						
