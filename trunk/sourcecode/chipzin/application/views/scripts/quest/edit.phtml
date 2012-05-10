@@ -155,7 +155,7 @@
 		<?php 
 		}
 		?>
-		</select>		
+		</select>	
 		<label></label><input name='AwardValue[]' value='' id='' type='text' tabindex='1' style='margin-bottom: 1px;width:15%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
 	</div>
 </div>
@@ -353,12 +353,7 @@ function validate(){
 		target = $(val).find("#target :radio:checked").val();
 		if(target == "TargetType"){
 			targetType=$(val).find("#TargetType").val();
-			if(targetType=='')
-			{
-				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType không được để trống</p>");					
-				flag=false;
-			}
-			else if(isNaN(targetType))
+			if(isNaN(targetType))
 			{
 				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType phải là số</p>");					
 				flag=false;
@@ -366,12 +361,12 @@ function validate(){
 		}else{			
 			targetList=$(val).find(".target-list").val();
 			count = $(val).find(".target-list").size();			
-			if(count==0)
+		/*	if(count==0)
 			{								
 					$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList chưa được tạo</p>");					
 					flag=false;				
 			}
-			else if(targetList=='' &&count!=0 )
+			else*/ if(targetList=='' &&count!=0 )
 			{
 				
 				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList không được để trống</p>");					
