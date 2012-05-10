@@ -338,12 +338,12 @@ function validate(){
 		if(target == "TargetType")
 		{
 			targetType=$(val).find("#TargetType").val();
-			if(targetType=='')
+			/*if(targetType=='')
 			{
 				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType không được bỏ trống</p>");					
 				flag=false;
 			}
-			else if(isNaN(targetType))
+			else */if(isNaN(targetType))
 			{
 				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType phải là số</p>");					
 				flag=false;
@@ -353,12 +353,12 @@ function validate(){
 		{			
 			targetList=$(val).find(".target-list").val();
 			count = $(val).find(".target-list").size();			
-			if(count==0)
+			/*if(count==0)
 			{								
 					$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList chưa được tạo</p>");					
 					flag=false;				
 			}
-			else if(targetList=='' && count!=0)
+			else*/ if(targetList=='' && count!=0)
 			{
 				
 				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList không được bỏ trống</p>");					
