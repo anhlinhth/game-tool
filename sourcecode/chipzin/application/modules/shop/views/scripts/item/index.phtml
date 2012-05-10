@@ -77,6 +77,7 @@ $(function(){
  	 	}else{
  	 		document.getElementById('itemID').value = '';
  	 		document.getElementById('itemName').value = '';
+ 	 		document.getElementById('itemNameSV').value = '';
  	 		disable($(".btn.add"));
 			disable($(".btn.save"));
 			disable($(".btn.cancel"));
@@ -99,7 +100,7 @@ $(function(){
 				enable($(".btn.save"));				
 			}else{
 				enable($(".btn.add"));
-				disable($(".btn.save"));
+				enable($(".btn.save"));
 			}
 		}		
 	});	
@@ -171,7 +172,8 @@ function updateItem(){
 			if(msg != ""){
 				if(parseInt(msg)==1)
 				{
-					if(!confirm("Bạn có muốn edit Item: " + name)){
+					if(!confirm("Bạn có muốn edit Item: " + name))
+						{
 						return false;
 					}
 				}
