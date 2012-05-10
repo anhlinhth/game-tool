@@ -246,7 +246,10 @@ class TaskController extends BaseController
 			    $form->validate(INSERT);				
 				if($_POST[Target]=="TargetType")
 			    {
-			    	$obj->TargetType = $_POST[TargetType];
+			    	if($_POST[TargetType] != "")
+			    		$obj->TargetType = $_POST[TargetType];
+			    	else
+			    		$obj->TargetType = null;
 			    }
 			    else
 			    {
