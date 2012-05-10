@@ -310,7 +310,7 @@ class TaskController extends BaseController
 			
 				    if ($_POST[TargetType] == "")
 				    {
-				    	$obj->TargetType = "NULL";
+				    	$obj->TargetType = NULL;
 				    }
 				    else 
 				    {
