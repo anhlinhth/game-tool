@@ -14,13 +14,13 @@ public function listItemShop($data, $curPage, $itemPerPage ,$view)
 			$privilege = "";					
 				$edit = "<a class='tool-16 edit' href='$view->baseUrl/shop/itemshop/edit/id/$row->I'></a>";				
 				$delete = "<a class='tool-16 delete' href='javascript:deleteItemShop($row->I)'></a>";;								
-			$strList .= "<tr id='itemshop-$key'>							
-							<td class='shop-id'>$row->I</td>	
-							<td class='shop-entity'>$row->E</td>
-							<td class='shop-item'>$row->Item</td>
-							<td class='shop-kind'>$row->K</td>
-							<td class='shop-icon'>$row->Icon</td>
-							<td class='shop-level'>$row->Level</td>			
+			$strList .= "<tr id=''>							
+							<td class=''>$row->I</td>	
+							<td class=''>$row->E</td>
+							<td class=''>$row->Item</td>
+							<td class=''>$row->K</td>
+							<td class=''>$row->Icon</td>
+							<td class=''>$row->Level</td>			
 							<td align='center'>								
 								$edit&nbsp								
 								$delete								

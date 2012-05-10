@@ -8,16 +8,16 @@ endif;
 ?>
 <form  class="myform" id="formPaging" name="formPaging" action="" method="post">
 
-<div class="mybox">
+<div class="box">
 	<h3>Item Shop</h3>
-	<table>
+	<table class="filter">
 		<tr>			
 			<td><label>Search</label><input type="text" name='ID' id='ID'/>
 			<input type="submit" value='Search' name='search'/></td>
 			<td><a class="btn add" href="<?php echo $this->baseUrl;?>/shop/itemshop/new">Add</a></td> 
 		</tr>
 	</table>
-	<table class="list">
+	<table>
 		
 		<thead>
 			<tr  style="border: 0px;">
