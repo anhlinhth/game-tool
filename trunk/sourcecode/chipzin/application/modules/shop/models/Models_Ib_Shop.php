@@ -28,7 +28,9 @@ class Models_Ib_Shop extends Models_Base
 				FROM
 					s_ibshop
 				WHERE
-					1 ";
+					1
+				 
+					";
 		
 		if($objSearch->ID)
 			$sql .= " AND ID = '$objSearch->ID'";						
@@ -72,6 +74,32 @@ class Models_Ib_Shop extends Models_Base
 	{
 		parent::_delete($id,null);
 		
+	}
+	public function getTabIndex()
+	{
+		$sql="
+			SELECT 
+				*
+			FROM
+				s_ibshop
+			
+				ORDER BY TabIndex ASC 
+				
+				";
+		$result=$this->_db->fetchAll($sql);
+		return $result;
+	}
+	public function updateIndex($count,$id)
+	{		
+		$sql="
+			UPDATE 
+				s_ibshop
+			SET 
+				TabIndex=$count
+			WHERE 
+				ID=$id;
+		";
+		$this->_db->query($sql);			
 	}
 }
 ?>

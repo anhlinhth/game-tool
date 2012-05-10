@@ -1,6 +1,6 @@
 <?php
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Base.php';
-require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_Base.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_S_item.php';
 
 class Models_Item extends Models_Base
 {
