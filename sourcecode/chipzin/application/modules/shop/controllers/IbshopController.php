@@ -1,5 +1,7 @@
 <?php
 require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_S_ibshop.php';
+
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Base.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
@@ -101,6 +103,47 @@ class Shop_IbshopController extends BaseController
 			$this->view->errMsg = $ex->getMessage();
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}		
+	}
+	
+	public function editAction()
+	{
+		try
+		{
+			if($this->_request->isPost())
+			{
+				$this->_helper->layout->disableLayout();
+				$this->_helper->viewRenderer->setNorender();
+				
+				$md = new Models_Ib_Shop();
+				
+				$obj = new Obj_S_ibshop();
+				$obj->ID = $_POST['id'];
+				$obj->Name = $_POST['name'];
+				$obj->Resclass = $_POST['Resclass'];
+				$obj->Title = $_POST['Title'];
+				$obj->TabIndex = $md->getTab($obj->ID);
+				
+				$kq = $md->_update($obj);
+				echo(1);
+			}
+			else
+			{
+				require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'models'.DS.'Models_Item_Shop.php';
+				$id = $this->_request->getParam("id");
+				$md= new Models_Ib_Shop();
+				$ibshop = $md->getibshopByID($id);
+				
+				$mditemshop = new Models_Item_Shop();
+				$arritemshop = $mditemshop->getItemShop();
+				$this->view->arritem = $arritemshop;
+				$this->view->ibshop = $ibshop;
+			}
+		}
+		catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
 	}
 	
 }
