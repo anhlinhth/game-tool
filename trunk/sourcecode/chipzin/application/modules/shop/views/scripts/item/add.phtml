@@ -1,0 +1,163 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+<style>
+.err	{
+	width:500px;
+	float:left;
+	margin-left:100px;
+	color:red;
+}
+
+</style>
+<form id="form" class="myform" name='form' action="" method="post">
+<div class="mybox">
+	<h3>Add Item</h3>
+	<table >
+	
+		<tr>
+		<td >
+		<label>ID Item</label>
+			<input type="text" name='ID' value="" onkeyup="checkid();"  /><br>
+			<p class='err'></p>
+		</td>
+		
+		<tr>
+		<td >
+			<label>Item Nname</label>
+			<input type="text" value="" name="Name"/>
+		
+		</td>	
+		
+		</tr>
+		<tr>
+			<td >
+				<label>NameServer</label>
+				<input type="text"  value="" name="NameSV"/>
+			</td>
+			
+		</tr>
+		</tr>
+	</table>	
+	
+	<div align="center" style="margin: 20px;">		
+		<input type="button" value="Save" id="button1" onclick="Save()"/>
+		<input type="button" value="Cancel" id="button2" onclick="checkid()"/>
+		
+	</div>
+</div>
+
+</form>
+
+<script>
+$(docment).ready(function(){
+	//$('.error').hide();
+	alert("");	
+});
+	function Save()
+	{
+		s = $("form#form").serialize();			
+		flag=validate();		
+		if(flag==false || flag2==false)
+			return false;
+		else{
+			$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/shop/item/add'?> ",
+			data: s,	
+			success: function(data){		
+				
+				if(data=="1")
+				{
+					alert("Thêm item thành công")
+					window.location.reload();
+					
+				}
+					
+			}
+		});
+		}
+	}
+	function validate()
+	{
+		flag=true;
+		id=$('input[name="ID"]').val();
+		name=$('input[name="Name"]').val();
+		nameSV=$('input[name="NameSV"]').val();
+		if(id=="")
+		{
+			alert("Id không được để trống");
+			id.focus();
+			flag=false;
+		}
+		else if(isNaN(id))
+		{
+			alert("Id phải là số");
+			id.focus();
+			flag=false;
+		}
+		else if(name=="")
+		{
+			alert("Name không được để trống");
+			name.focus();
+			flag=false;
+		}
+		else if(nameSV=="")
+		{
+			alert("Name Server không được để trống");
+			name.focus();
+			flag=false;
+		}
+	return flag;
+	}
+
+	function keypress(e){
+		//Hàm dùng để ngăn người dùng nhập các ký tự khác ký tự số vào TextBox
+		var keypressed = null;
+		if (window.event)
+		{
+		keypressed = window.event.keyCode; //IE
+		}
+		else
+		{ 
+		keypressed = e.which; //NON-IE, Standard
+		}
+
+		if (keypressed < 48 || keypressed > 57)
+		{ //CharCode của 0 là 48 (Theo bảng mã ASCII)
+		//CharCode của 9 là 57 (Theo bảng mã ASCII)
+		if (keypressed == 8 || keypressed == 127)
+		{//Phím Delete và Phím Back
+		return;
+		}
+		return false;
+		}
+		checkid();	
+	}
+function checkid()
+{
+	
+	$('.er').html("");
+	id=$('input[name="ID"]').val();
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/shop/item/checkid'?> ",
+		data: "id="+id,	
+		success: function(data){					
+				if(data=='1')
+				{
+					$('.err').append("ID da ton tai trong server");
+					$('#button1').attr('disabled',true);	
+				}
+				else if(data!="" &&data!="1")
+					$('#button1').attr('disabled',false);
+		}
+	});
+
+}
+</script>

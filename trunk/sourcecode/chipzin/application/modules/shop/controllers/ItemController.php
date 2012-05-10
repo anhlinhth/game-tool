@@ -57,22 +57,23 @@ public function _setUserPrivileges()
         }
 	}
 	
-	public function insertAction()
+	public function addAction()
 	{
 		try
-		{
-			$this->_helper->layout->disableLayout();
-			$this->_helper->viewRenderer->setNorender();
+		{						
 			if($this->_request->isPost())
 			{
-				$name = $this->_request->getParam("Name");
-				$md = new Models_Item();
-				$obj = new Obj_Item();
-				$obj->ID = "NULL";
-				$obj->Name = $name;
-				$id = $md->insertAward($obj);
-				print_r($id);
+				$this->_helper->layout->disableLayout();
+				$this->_helper->viewRenderer->setNoRender();				
+				$form = new Forms_Item();
+				$form->_requestToForm($this);					
+				$form->validate(UPDATE);
+				$md=new Models_Item();												
+				$md->_insert($form->obj);							
+				//Models_Log::insert($this->view->user->username, "act_add_items", $obj->name);
+					echo(1);																
 			}
+			
 		}
 		catch(Exception $ex)
 		{
@@ -81,7 +82,7 @@ public function _setUserPrivileges()
 		}
 	}
 	
-public function updateAction(){
+	public function updateAction(){
 		try{
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();
@@ -113,6 +114,7 @@ public function updateAction(){
 		{
 			$md=new Models_Item();
 			$arraward = $md->getItem();
+			
 			$arr = (array)$arraward;
 			echo(json_encode($arr));
 		}
@@ -122,5 +124,36 @@ public function updateAction(){
 			echo $this->view->errMsg;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}
+	}
+	
+	public function checkidAction()
+	{
+		try
+		{
+			if($this->_request->isPost())
+			{
+				$this->_helper->layout->disableLayout();
+				$this->_helper->viewRenderer->setNorender();
+				$id=$this->_request->getParam('id');
+				$md=new Models_Item();			
+				$result=$md->checkiditem($id);				
+				if($result==1)
+				{
+					echo(1);					
+				}
+				else if($result!=1)
+				{
+					echo(0);
+				}
+			}
+					
+		}
+		catch(Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}	
+	
 	}
 }

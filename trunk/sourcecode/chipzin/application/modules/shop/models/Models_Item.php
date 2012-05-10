@@ -35,7 +35,7 @@ public function filter($objSearch,$order,$offset,$count)
 		return $data;
 	
 	}
-public function count($objSearch)
+	public function count($objSearch)
 	{
 		$sql = "SELECT
 					COUNT(ID)
@@ -75,17 +75,15 @@ public function count($objSearch)
 		}
 		
 	}
-public function update($obj)
-	{
-		var_dump($obj);
-		die();
+	public function update($obj)
+	{			
 		parent::_update($obj);
 	}
-public function insert($obj)
+	public function insert($obj)
 	{
 		parent::_insert($obj);		
 	}
-public  function isExistItem($objSearch)
+	public  function isExistItem($objSearch)
 	{
 		$sql = "SELECT
 					COUNT(ID)
@@ -98,7 +96,7 @@ public  function isExistItem($objSearch)
 		
 		return $count;
 	}
-public function getAllItem()
+	public function getAllItem()
 	{
 		$sql="
 			SELECT 
@@ -110,20 +108,22 @@ public function getAllItem()
 		
 		return $data;
 	}
+		
 	
-	public function insertItem($obj)
+	public function checkiditem($id)
 	{
-		try
-		{
-			$data = Utility::transferObjectToArray($obj);
-			$this->_db->insert("s_items", $data);
-			$id = $this->_db->lastInsertId();
-			return $id;
-		}
-		catch(Zend_Db_Exception $ex)
-		{
-			throw new Internal_Error_Exception($ex);
-		}
-	}
+		$sql="
+			SELECT 
+				*
+			FROM
+				s_items
+			WHERE 
+				ID=$id
+		";
+			$data = $this->_db->query($sql)->rowCount();	
+			
+
+		return  $data;
+	}						
 }
 ?>
