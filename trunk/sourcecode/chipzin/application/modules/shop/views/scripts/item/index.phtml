@@ -12,12 +12,11 @@ endif;
 	<h3>Item</h3>
 	<table class="filter" style="width: 80%;margin: auto;margin-bottom: 20px;margin-top: 10px";>	
 		<tr>
-			<td>ID</td>
-			<td><input id="itemID"  readonly class="disabled" name="itemID" type="text" style="width:110px;" /></td>
+			<td>ID<input id="itemID"  readonly class="disabled" name="itemID" type="text" style="width:110px;" /></td>
 			<td>Name
 			<input id="itemName" type="text" name="itemName"/>
+			NameSV<input id="itemNameSV" type="text" name="itemNameSV"/>
 				<a class="btn save disabled " href="">Save</a>
-				<a class="btn add disabled " href="">Add</a>
 				<a class="btn cancel disabled " href="">Cancel</a>
 			</td>
 		</tr>
@@ -123,8 +122,10 @@ $(function(){
 function editItem(key){
 	id = $("#Item-"+key+" .id").text();
 	name = $("#Item-"+key+" .name").text();
+	nameSV = $("#Item-"+key+" .nameSV").text();
 	document.getElementById('itemID').value = id;
 	document.getElementById('itemName').value = name;
+	document.getElementById('itemNameSV').value = nameSV;
 	if($(".btn.save").hasClass('disabled')){
 		$(".btn.save").removeClass("disabled");		
 	}
@@ -161,10 +162,11 @@ function deleteItem(key){
 function updateItem(){
 	var id = $("#itemID").val();
 	var name = $("#itemName").val();
+	var nameSV = $("#itemNameSV").val();
 	$.ajax({
 		type: "POST",
 		url: "<?php echo $this->baseUrl.'/shop/item/update/'?> ",
-		data: "Name=" +name +"&ID="+id,
+		data: "Name=" +name +"&NameSV=" +nameSV+"&ID="+id,
 		success: function(msg){
 			if(msg != ""){
 				if(parseInt(msg)==1)
