@@ -10,7 +10,7 @@ endif;
 	<div id='ct'></div>
 	<div id='ft'> </div>
 </div>
-<form  class="myform" id="form" name="form" action="" method="post">
+<form  class="myform" id="form" name="form" action="" method="post" enctype="multipart/form-data">
 
 <div class="box">
 	<h3>Add Item Shop</h3>
@@ -22,7 +22,10 @@ endif;
 			<input type="hidden" name='ID' id='ID' value="<?php echo $this->maxid;?>"/>
 		</td>
 		<td><label>Icon</label>	</td>
-		<td><input type="file" value='' name='Icon' id='Icon' /></td>		
+		<td><input type="file" value='' name='Icon' id='Icon' onchange="uploadFile(this);"onchange="uploadFile(this);" />
+		<div><img  id="img_preview" width="100" height="100" src=""/></div>	
+		</td>	
+		
 	</tr>
 	<tr>
 		<td width="50">
@@ -82,7 +85,7 @@ endif;
 	</tr>
 	</table>
 	<div style="text-align: center;">
-	 <input id="button1" type='button' onclick="Save()" value="Lưu" /> &nbsp;&nbsp;
+	 <input id="button1" type="submit"  value="Lưu" /> &nbsp;&nbsp;
 	 <input id="button2" type="reset" value="Làm lại" onclick="return confirm('Bạn có muốn làm lại không?')" /> 
 	 </div> 
 </div>
@@ -186,6 +189,76 @@ endif;
 			}
 	});
 	/////Save////
+	$('form').submit(function(){
+		$("#dialog #ct").html("");
+		var data = $(".myform").serialize();
+		var id=$('#ID').val();
+		flag=validate();
+		if(flag==false)
+		{
+			$("#dialog").dialog({			
+				height: 400,
+				width: 350,
+				modal: true,
+				buttons: {
+					"Continue": function() {								
+						$(this).dialog("close");						
+					}										
+				}
+			});
+			return false;
+		}
+		else{
+			
+			$.ajax({
+				type: "POST",
+				url:"<?php echo $this->baseUrl.'/shop/itemshop/new'?>",
+				data: data,		
+				success: function(msg){									
+					if(parseInt(msg)==1){	
+						$("#dialog #ct").append("<p class='msg'>Add ItemShop Success<p>");						
+						$("#dialog").dialog({
+							height: 300,
+							width: 350,
+							modal: true,
+							buttons: {
+								"Success": function() {								
+									$(this).dialog("close");
+									location.replace("<?php echo $this->baseUrl.'/shop/itemshop/'?>");							
+								},
+								"Edit": function() {								
+									$(this).dialog("close");
+									location.replace("<?php echo $this->baseUrl.'/shop/itemshop/edit/id/'?>"+id);
+									//alert(quest_id);
+								},
+								"New": function() {								
+									$(this).dialog("close");
+									location.replace("<?php echo $this->baseUrl.'/shop/itemshop/new/'?>");
+									window.location.reload();							
+								}										
+							}
+							});
+					}
+					else {
+						$("#dialog #ct").append("<p class='error'>Failed:<br>"+msg+"<p>");				
+						$("#dialog").dialog({
+							height: 300,
+							width: 350,
+							modal: true,
+							buttons: {
+								"Error": function() {								
+									$(this).dialog("close");																
+								}
+							}
+							});
+					}
+				}
+			});
+			
+		}return true;
+		
+});
+	/*
 	function Save(){		
 			$("#dialog #ct").html("");
 			var data = $(".myform").serialize();
@@ -205,12 +278,13 @@ endif;
 				});
 			}
 			else{	
+
 				$.ajax({
 					type: "POST",
 					url:"<?php echo $this->baseUrl.'/shop/itemshop/new'?>",
 					data: data,		
 					success: function(msg){
-								
+				alert(msg);							
 						if(parseInt(msg)==1){	
 							$("#dialog #ct").append("<p class='msg'>Add ItemShop Success<p>");						
 							$("#dialog").dialog({
@@ -250,8 +324,12 @@ endif;
 						}
 					}
 				});
+				
+			
 			}		
 	}
+	*/
+	
 	//////Validate////
 	function validate()
 	{
@@ -306,4 +384,15 @@ endif;
 		  */
 		return flag;	
 	}
+	function uploadFile(input) {         
+
+		if (input.files && input.files[0]) {            
+
+		 var reader = new FileReader();   
+		 reader.onload = function (e) {                 
+			 $('#img_preview').attr('src', e.target.result).width(100).height(100);             
+		 };               
+			 reader.readAsDataURL(input.files[0]);        
+		 }     
+		} 
 </script>
