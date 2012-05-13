@@ -1,14 +1,9 @@
 <?php
 require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
-require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'models'.DS.'Models_AwardType.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
-require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'object'.DS.'Obj_AwardType.php';
-require_once ROOT_APPLICATION.DS.'modules'.DS.'campaign'.DS.'form'.DS.'Forms_AwardType.php';
-
-require_once ROOT_APPLICATION.DS.'modules'.DS.'localite'.DS.'models'.DS.'Models_String.php';
-require_once ROOT_APPLICATION.DS.'modules'.DS.'localite'.DS.'models'.DS.'Models_Export.php';
-
+require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Base.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'compensation'.DS.'models'.DS.'Models_Compensation.php';
 class Compensation_CompensationController extends BaseController
 {
 	public function _setUserPrivileges()
@@ -23,11 +18,136 @@ class Compensation_CompensationController extends BaseController
 	}
 	public function indexAction()
 	{
+		try{	
+			$md = new Models_Compensation();
+			$options = $md->getOptions();
+			
+			$this->view->options = $options;
 		
+		}
+		catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}	
 	}
-	public function index2Action()
+	
+	public function syncAction()
 	{
-		
+		try{
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();					
+			var_dump($_POST);		
+		}
+		catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}	
+	}
+	// public function savechangedAction()
+	// {		
+	    // try{	
+			// $this->_helper->layout->disableLayout();
+			// $this->_helper->viewRenderer->setNorender();
+			
+	        // $item = new Obj_Base();
+			// $item->Path = $_POST['path'];
+			// $item->OldValue = $_POST['old_value'];
+			// $item->NewValue = $_POST['new_value'];
+			// $md = new Models_Compensation();
+			// $rs = $md->savechanged($item);
+			// if($rs != 0){
+				// echo 1;// successfull
+			// }	
+	    // }catch (Exception $ex)
+		// {
+			// $this->view->errMsg = $ex->getMessage();
+			// echo $this->view->errMsg;
+            // Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		// }
+	// }
+	public function logsAction()
+	{		
+	    try{	
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();
+			
+			$arr_modify = $_POST["Modify"];
+			$md = new Models_Compensation();
+			foreach($arr_modify as $row){
+				$item = new Obj_Base();
+				$item->User = $this->view->user->username;
+				$item->Path = $row['path'];
+				$item->OldValue = $row['old_value'];
+				$item->NewValue = $row['new_value'];			
+				$md->logs($item);				
+			}
+			
+	    }catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}
+	public function getlogsAction()
+	{		
+	    try{	
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();			
+			
+			$md = new Models_Compensation();
+			$rs = $md->getLogs();
+			echo json_encode($rs);
+			
+	    }catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}
+	public function deletelogsAction()
+	{		
+	    try{	
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();			
+			$arr_id = $_POST['ARRAY_ID'];
+			$md = new Models_Compensation();
+			if(!empty($arr_id)){
+				foreach($arr_id as $id){
+					$md->deleteLog($id);
+				}							
+			}	
+			echo "1";
+			
+	    }catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}
+	public function optionsAction()
+	{		
+	    try{	
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();			
+			$md = new Models_Compensation();
+			$item = new Obj_Base();
+			$item->GetFrom = $_POST["GetFrom"];
+			$item->PostTo= $_POST["PostTo"];
+			$md->updateOptions($item);
+			echo "1";
+	    }catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+            Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
 	}
 	public function getdataAction()
 	{

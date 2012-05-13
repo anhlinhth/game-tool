@@ -286,7 +286,7 @@ a.tool-16:hover{
 
 /********************************/
 a.loading{
-	min-width=100%;
+	min-width:100%;
 	background-image:url("../images/p2/icons/loading_1.gif"); 
 	background-size: 100%;	
 }

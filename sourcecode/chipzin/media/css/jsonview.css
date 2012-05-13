@@ -1,22 +1,34 @@
-div.x-panel {
+/*overide to lagrer*/
+
+#top-panel{
+	width:99%;
+}
+div.x-panel, div#tabs-1,div#tabs-3 {
 	/*background: #d6d6d6;*/
 	background: white;
 }
-div#mywrapper{
-	width:100%;
-	position:absolute;
+
+div#tabs-1{
+	width:100%;	
 	left : 0px;
-	top: 127px;
+	top: 165px;
+}
+div#tabs-3{
+	width:100%;	
+	left : 0px;
+	top: 165px;
+}
+div#tabs-2{
+	margin-top : 10px;
 }
 div#x-toolbar {	
 	background:#257EC5;
-	height:29px;
+	height:32px;
 	width:100%
 }
 div#wrapper #tree{
 	float:left;
-	width:50%;
-	height:600px;
+	width:50%;	
 	overflow-x: scroll;
 	overflow-y: scroll;
 }
@@ -24,7 +36,7 @@ div#wrapper #tree .x-div{
 	cursor: pointer;
 }
 div#wrapper #tree .x-div:hover{
-	color:blue;
+	background-color:#F9EDBE;
 }
 div#wrapper #tree .x-div.selected{
 	color:blue;
@@ -54,7 +66,8 @@ div#wrapper #grid  td.value input.disabled{
 	cursor:pointer;
 }
 div#wrapper #grid  td.name{
-	width:315px;
+	width:auto
+	max-width:315px;
 }
 
 div#wrapper #split{	
@@ -113,12 +126,14 @@ div#wrapper #split{
  }
  .x-icon.array{
 	background-image: url("../images/p2/tree/x-icon-array.gif"); 
+	cursor: pointer;
  }
  .x-icon.string{
 	background-image: url("../images/p2/tree/x-icon-string.gif"); 
  }
   .x-icon.null{
 	background-image: url("../images/p2/tree/x-icon-null.gif"); 
+	
  }
  
  .x-icon.ebow{
@@ -130,3 +145,69 @@ div#wrapper #split{
  .x-icon.ebow-end{
 	background-image: url("../images/p2/tree/x-icon-ebow-end2.gif"); 
  }
+ 
+
+/**********Right Menu***********/
+/* *******************************/
+ /* Generic context menu styles */
+.contextMenu {
+	position: absolute;
+	width: 120px;
+	z-index: 99999;
+	border: solid 1px #CCC;
+	background: #EEE;
+	padding: 0px;
+	margin: 0px;
+	display: none;
+}
+
+.contextMenu LI {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.contextMenu A {
+	color: #333;
+	text-decoration: none;
+	display: block;
+	line-height: 20px;
+	height: 20px;
+	background-position: 6px center;
+	background-repeat: no-repeat;
+	outline: none;
+	padding: 1px 5px;
+	padding-left: 28px;
+}
+
+.contextMenu LI.hover A {
+	color: #FFF;
+	background-color: #3399FF;
+}
+
+.contextMenu LI.disabled A {
+	color: #AAA;
+	cursor: default;
+}
+
+.contextMenu LI.hover.disabled A {
+	background-color: transparent;
+}
+
+.contextMenu LI.separator {
+	border-top: solid 1px #CCC;
+}
+
+/*
+	Adding Icons
+	
+	You can add icons to the context menu by adding
+	classes to the respective LI element(s)
+*/
+
+.contextMenu LI.edit A { background-image: url(images/page_white_edit.png); }
+.contextMenu LI.cut A { background-image: url(images/cut.png); }
+.contextMenu LI.copy A { background-image: url(images/page_white_copy.png); }
+.contextMenu LI.paste A { background-image: url(images/page_white_paste.png); }
+.contextMenu LI.delete A { background-image: url(images/page_white_delete.png); }
+.contextMenu LI.quit A { background-image: url(images/door.png); }
