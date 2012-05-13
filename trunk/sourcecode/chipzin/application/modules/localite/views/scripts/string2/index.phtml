@@ -260,7 +260,8 @@ function updateTable(action,obj){
 		//updateSTT();
 		var first_tr 	= $("#tbLocalize").find("tbody tr").eq(0);			
 		var alt 		= first_tr.hasClass("alt")?"":"alt";		
-		var lgroup_name = $("select[name='lgroup'] option:selected").text();		
+		var lgroup_name = $("select[name='lgroup'] option:selected").text();
+		console.log(obj.ldefault);		
 		var str_tr 		= '<tr id="tr-'+obj.id+'" class="'+alt+'">'+
 			'<td><input type="checkbox" name="check" value="checkall" /></td>'+
 			'<td>'+obj.id+'</td>'+
@@ -388,6 +389,8 @@ $("form#language").delegate("a#btn_add_string","click",function(){
 				alert("Insert Failed!! Key is exist");
 			}else{
 				$("form#language input[name='lkey']").val(parseInt(obj.max_key)+1);
+				$("textarea[name='ldefault']").val("");
+				$("textarea[name='lindex']").val("");
 				updateTable("insert",obj);				
 			}
 			showLoading(0);
@@ -400,11 +403,14 @@ $("form#language").delegate("a#btn_edit_string","click",function(){
 	var parent_tr 	= $(this).parent().parent();
 	
 	var td_ldefault = parent_tr.find(".ldefault");
-	var td_lindex 	= parent_tr.find(".lindex");
+	var td_lindex 	= parent_tr.find(".lindex");	
 	var btn_edit = parent_tr.find("a.tool-24.edit");
 	var btn_delete= parent_tr.find("a.tool-24.delete");
-	var ldefault = td_ldefault.text();
-	var lindex = td_lindex.text();
+	
+	var td_ldefault_p = parent_tr.find(".ldefault p");
+	var td_lindex_p 	= parent_tr.find(".lindex p");
+	var ldefault = td_ldefault_p.html();
+	var lindex = td_lindex_p.html();	
 	
 	td_ldefault.find("p").hide();
 	td_lindex.find("p").hide();
@@ -476,8 +482,8 @@ $("form#language").delegate("a#btn_save_string","click",function(){
 		},		
 		success: function(msg){		
 			if(msg=="true"){
-				td_ldefault.find("p").text(ldefault).show();
-				td_lindex.find("p").text(lindex).show();
+				td_ldefault.find("p").html(ldefault).show();
+				td_lindex.find("p").html(lindex).show();
 				td_ldefault.find("textarea").remove();
 				td_lindex.find("textarea").remove();
 				btn_save.removeClass("loading").addClass("delete").attr("id","btn_del_string");
