@@ -73,25 +73,7 @@
 					<label>Award:</label>
 					<div><a class='tool-16 add' href=''></a></div>
 				</td>
-				<td id="list-need-quest">
-					<label>Need Quest : </label>				
-					<select name='NeedQuest' style='margin-bottom:5px;margin-top:5px;min-width:50px'>
-						<option value=''></option>
-						<?php 
-						$strSelectQuest = "";
-						foreach ($this->arrNeedQuest as $row)
-						{
-							$select = "";
-							if($row->QuestID == $this->obj->NeedQuest)
-							{
-								$select = "selected";
-							}
-							$strSelectQuest .= "<option $select value='". $row->QuestID ."'>(ID:$row->QuestID) $row->QuestName</option>";
-						}
-						echo $strSelectQuest;
-						?>
-					</select>
-				</td>
+				
 			</tr>
 			<tr>						
 					<td>
