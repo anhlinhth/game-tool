@@ -118,7 +118,7 @@ class Models_Quest_Detail extends Models_Base
 			$sql = "SELECT
 						*
 					FROM
-						q_NextQuest							 	
+						q_nextquest							 	
 							WHERE QuestID = $questid
 								ORDER BY  ID ASC ";
 			
@@ -126,6 +126,21 @@ class Models_Quest_Detail extends Models_Base
 			return $data;
 		}
 	
+		
+public function getNeedQuest($questid)
+		{
+			$sql = "SELECT
+						*
+					FROM
+						q_needquest							 	
+							WHERE QuestID = $questid
+								ORDER BY  ID ASC ";
+			
+			$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);			
+			return $data;
+		}
+		
+		
 	public function getTask($questid)
 		{
 			$sql = "SELECT
@@ -155,21 +170,49 @@ class Models_Quest_Detail extends Models_Base
 		public function insertNextQuest($obj){
 		    
 		    $data = (array)$obj;
-		    $this->_db->insert('q_NextQuest', $data);
+		    $this->_db->insert('q_nextquest', $data);
 		    $id = $this->_db->lastInsertId();
 		    return $id;
 		}
 		public function deleteNextQuest($id,$questID=null,$nextquest=null){
-		    $this->_db->delete('q_NextQuest', "ID=$id");
+		    $this->_db->delete('q_nextquest', "ID=$id");
 		}
 		
-		public function updateNextQuest($obj){		
+		public function updateNextQuest($obj){			
+			
 			try
 			{
 				$data = Utility::transferObjectToArray($obj);
 				$key = $data[ID];
 				unset($data[ID]);			
-				$this->_db->update('q_NextQuest', $data, "ID = $key");	
+				$this->_db->update('q_nextquest', $data, "ID = $key");	
+	    		return $key;
+			}
+			catch(Zend_Db_Exception $ex)
+			{
+				throw new Internal_Error_Exception($ex);
+	    	}    
+		}
+		
+public function insertNeedQuest($obj){
+		    
+		    $data = (array)$obj;
+		    $this->_db->insert('q_needquest', $data);
+		    $id = $this->_db->lastInsertId();
+		    return $id;
+		}
+		public function deleteNeedQuest($id,$questID=null,$needquest=null){
+		    $this->_db->delete('q_needquest', "ID=$id");
+		}
+		
+		public function updateNeedQuest($obj){			
+			
+			try
+			{
+				$data = Utility::transferObjectToArray($obj);
+				$key = $data[ID];
+				unset($data[ID]);			
+				$this->_db->update('q_needquest', $data, "ID = $key");	
 	    		return $key;
 			}
 			catch(Zend_Db_Exception $ex)
