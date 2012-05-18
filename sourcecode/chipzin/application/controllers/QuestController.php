@@ -298,7 +298,12 @@ class QuestController extends BaseController
 				$objNextquest=new Obj_Quest_NextQuest();
 				$objNextquest->ID="NULL";
 				$objNextquest->QuestID=$id;
-				$mdNextquest->insertNextQuest($objNextquest);				
+				$mdNextquest->insertNextQuest($objNextquest);
+				
+				$objNeedquest=new Obj_Quest_Needquest();
+				$objNeedquest->ID="NULL";
+				$objNeedquest->QuestID=$id;
+				$mdNextquest->insertNeedQuest($objNeedquest);				
 				//////////
 				//$form->obj->QuestID = $questID;
 				//$obj_nextquest = new Obj_Quest_NextQuest();
