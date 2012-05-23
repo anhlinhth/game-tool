@@ -92,7 +92,7 @@ class Models_Localite_Iefile extends Models_Base
 			if ($ln[0] == '@')	// Line starts with '@'
 			{
 				$output[] = $item;
-				echo 'added:' . $item . '<br>';
+				//echo 'added:' . $item . '<br>';
 				
 				$item = $ln;
 			}
@@ -122,10 +122,19 @@ class Models_Localite_Iefile extends Models_Base
 				try {
 					if($mgroup->CheckExistGroup($content['group']) == false){
 						$gid = $mgroup->InsertGroup($content['group']);
+						//print_r($gid);die();
 					}
 					$gid = $mgroup->GetGroupIdByName($content['group']);
-					if($this->CheckExistContent($content['key'], $gid, $lang) == false && $content['key']!='' && $content['key']!=' ')
-						$cid =$this->InsertContent($content['key'], $gid, $lang, $content['content']);
+					if( $content['key']!='' && $content['key']!=' ')
+					{
+						
+						if($this->CheckExistContent($content['key'], $gid, $lang) == false )
+							$cid =$this->InsertContent($content['key'], $gid, $lang, $content['content']);
+						if($this->CheckExistContent($content['key'], $gid, $lang) == true ) 
+							$cid=$this->UpdateContent($content['key'], $gid, $lang, $content['content']);
+					}
+					
+					
 				} catch (Exception $e) {
 				}
 		}
@@ -153,9 +162,35 @@ class Models_Localite_Iefile extends Models_Base
 		'lang' => $lang,
 		'text' => $text
 		);
+		//print_r( $key."...".$group."...".$lang."...".$text);
 		$this->_db->insert ( 'l_content', $data );
 		return $this->_db->lastInsertId ();
 	}
+	
+public function UpdateContent($key,$group,$lang,$text) {		
+		
+	/*
+	$sql = "
+	UPDATE `l_content` SET `text`='$text' WHERE `lkey`=$key AND `lgroup`=$group AND`lang`='$lang'
+	";
+	print_r($this->_db->query($sql));
+	die();
+	return $this->_db->query($sql);
+	*/
+	
+	$data = array(
+    'text' => $text
+);
+ 
+$where[] ="lgroup = '$group'";
+$where[] ="lang =  '$lang'";
+$where[] = "lkey = '$key'";
+
+$n = $this->_db->update('l_content', $data, $where);
+//print_r($n);die();
+return $n;
+	}
+	
 	public function CheckExistContent($key,$group,$lang){
 		$sql = 'select * from l_content where lkey='.$key.' and lgroup='.$group.' and lang="'.$lang.'"';
 		$result = $this->_db->fetchAll($sql);
