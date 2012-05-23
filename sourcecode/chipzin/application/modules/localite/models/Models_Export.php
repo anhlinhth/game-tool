@@ -17,14 +17,14 @@ class Models_Export
 		$sql = "select text from l_content where lang = '".$lang."' and lkey = '".$tam[1]."' and lgroup = ".$tam1['id'];
 		$rs = $this->db->fetchRow($sql);
 		if(isset($rs['text']))
-			return $rs['text'];
+			return htmlspecialchars_decode($rs['text']);
 		else 
 			return "{@".$key."}";
 		
 	}
 	public function Replacekeyintext($text,$lang)
 	{
-		
+		$text = htmlspecialchars_decode($text,ENT_QUOTES);
 		$tam = explode('{@', $text);
 		$rs = "";
 		$rs.=$tam[0];
