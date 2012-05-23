@@ -59,8 +59,8 @@ class Models_String2 extends Models_Base
 				LEFT JOIN l_group g ON (a.lgroup=g.id)
 				WHERE a.lang = (SELECT id FROM l_language WHERE status=1)";
 		
-		$content->text = htmlentities($content->text,ENT_QUOTES);
-		$content->text = htmlentities($content->text,ENT_NOQUOTES);
+		//$content->text = htmlentities($content->text,ENT_QUOTES);
+		//$content->text = htmlentities($content->text,ENT_NOQUOTES);
 		
 		if(isset($content->lgroup)&& !empty($content->lgroup)){
 			$sql .= " AND a.lgroup = ".$content->lgroup;
@@ -101,7 +101,7 @@ class Models_String2 extends Models_Base
 	public function update2($content){		
 		// default language
 		//$content->ldefault = htmlentities($content->ldefault,ENT_QUOTES);
-		//$content->ldefault = htmlspecialchars($content->ldefault,ENT_QUOTES);
+		$content->ldefault = htmlspecialchars($content->ldefault,ENT_QUOTES);
 		$sql ="UPDATE l_content SET text='$content->ldefault' ";
 		$where = " WHERE 1";
 		if($content->lkey && !empty($content->lkey))
@@ -116,7 +116,7 @@ class Models_String2 extends Models_Base
 		// index language
 		$sql ="SELECT id FROM l_content ".$where." AND lang = (SELECT id FROM l_language where status <> 1 ORDER BY status DESC LIMIT 0,1)"; 
 		$content_id = $this->_db->fetchOne($sql);
-		//$content->lindex = htmlspecialchars($content->lindex,ENT_QUOTES);		
+		$content->lindex = htmlspecialchars($content->lindex,ENT_QUOTES);		
 		if($content_id==0){
 			$sql ="INSERT l_content(lgroup,lkey,text,lang) VALUE(".$content->lgroup.",".$content->lkey.",'".$content->lindex."',"."(SELECT id FROM l_language where status <> 1 ORDER BY status DESC LIMIT 0,1)) ";			
 		}else{

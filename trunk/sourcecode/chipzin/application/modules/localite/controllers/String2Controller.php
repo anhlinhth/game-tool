@@ -101,8 +101,8 @@ class Localite_String2Controller extends BaseController
 			$this->_helper->viewRenderer->setNorender();
 			
 			$content_item = new Obj_Base();
-			$content_item->lindex = $_POST['lindex'];
-			$content_item->ldefault = $_POST['ldefault'];
+			$content_item->lindex = htmlspecialchars($_POST['lindex'],ENT_QUOTES);
+			$content_item->ldefault = htmlspecialchars($_POST['ldefault'],ENT_QUOTES);
 			if(empty($_POST['ldefault']))
 				$content_item->ldefault = null;
 			if(empty($_POST['lindex']))
