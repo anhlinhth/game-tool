@@ -36,6 +36,7 @@ public function _setUserPrivileges()
 	}
 	public function importAction(){	
 		$model = new Models_Localite_Iefile();
+		
 		$filename = 'localization/vnm.xfz';
 		if ($this->_request->isPost ()) {
 			$lang = $this->_request->getParam("llang");
@@ -45,7 +46,7 @@ public function _setUserPrivileges()
 			$imgname = str_replace(' ', '-', $model->curentday().$filename);
 			$fielpath =  ROOT_UPLOAD.'/localite/'.$imgname;
 			if(move_uploaded_file($file_temp,$fielpath)){
-				$array = $model->read_text_file($fielpath);
+				$array = $model->read_text_file($fielpath);				
 				$model->ImportFile($array,$lang);
 				$this->view->msg = 'Import thành công!';
 				unlink($fielpath);

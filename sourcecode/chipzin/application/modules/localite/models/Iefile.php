@@ -92,7 +92,7 @@ class Models_Localite_Iefile extends Models_Base
 			if ($ln[0] == '@')	// Line starts with '@'
 			{
 				$output[] = $item;
-				//echo 'added:' . $item . '<br>';
+				echo 'added:' . $item . '<br>';
 				
 				$item = $ln;
 			}
@@ -103,7 +103,7 @@ class Models_Localite_Iefile extends Models_Base
 			
 	    } // while
 		
-		if ($ln!='') $output[] = $ln;
+		if ($item!='') $output[] = $item;
 		
 	    fclose($file);
 	    return $output;
@@ -113,8 +113,15 @@ class Models_Localite_Iefile extends Models_Base
 		$str = $today['year'].'-'. $today['mon'].'-'. $today['mday'].' '.$today['hours'].'-'. $today['minutes'].'-'. $today['seconds'];
 		return $str;
 	}
+	public function emptyLang($lang){
+		$sql = "DELETE FROM l_content WHERE 1 AND lang='".$lang."'";
+		$stmt = $this->_db->query($sql);
+        $result = $stmt->rowCount();
+		return $result;
+	}
 	public function ImportFile($array,$lang){
 		$mgroup = new  Models_Localite_Group();
+		$this->emptyLang($lang);
 	//	echo '<pre>';
 		foreach ($array as $value) {
 			$content = $this->splitArray($value);
@@ -122,19 +129,10 @@ class Models_Localite_Iefile extends Models_Base
 				try {
 					if($mgroup->CheckExistGroup($content['group']) == false){
 						$gid = $mgroup->InsertGroup($content['group']);
-						//print_r($gid);die();
 					}
 					$gid = $mgroup->GetGroupIdByName($content['group']);
-					if( $content['key']!='' && $content['key']!=' ')
-					{
-						
-						if($this->CheckExistContent($content['key'], $gid, $lang) == false )
-							$cid =$this->InsertContent($content['key'], $gid, $lang, $content['content']);
-						if($this->CheckExistContent($content['key'], $gid, $lang) == true ) 
-							$cid=$this->UpdateContent($content['key'], $gid, $lang, $content['content']);
-					}
-					
-					
+					if($this->CheckExistContent($content['key'], $gid, $lang) == false && $content['key']!='' && $content['key']!=' ')
+						$cid =$this->InsertContent($content['key'], $gid, $lang, $content['content']);
 				} catch (Exception $e) {
 				}
 		}
@@ -142,15 +140,19 @@ class Models_Localite_Iefile extends Models_Base
 	public function splitArray($str){
 		$str = ltrim($str);
 		$str = rtrim($str);
-		$result = array();		
-		if($str!='' && $str!=' ')
-			$array1 = explode('=', $str);
-			$array2 = explode('#', $array1[0]);
+		$str1 = strstr($str, '=',true);
+		$str2 = strstr($str, '=');
+		
+		$result = array();
+		$content = substr($str2,1);//str_replace('=','',$str2);
+		$content = htmlspecialchars($content, ENT_QUOTES);		
+		if($str!='' && $str!=' ')			
+			$array2 = explode('#', $str1);
 			$group = str_replace('@', '', $array2[0]);
 			$result = array(
 			'group' => $group,
 			'key' => $array2[1],
-			'content' => $array1[1]
+			'content' => $content
 			);
 		return $result;
 	}
@@ -162,35 +164,9 @@ class Models_Localite_Iefile extends Models_Base
 		'lang' => $lang,
 		'text' => $text
 		);
-		//print_r( $key."...".$group."...".$lang."...".$text);
 		$this->_db->insert ( 'l_content', $data );
 		return $this->_db->lastInsertId ();
 	}
-	
-public function UpdateContent($key,$group,$lang,$text) {		
-		
-	/*
-	$sql = "
-	UPDATE `l_content` SET `text`='$text' WHERE `lkey`=$key AND `lgroup`=$group AND`lang`='$lang'
-	";
-	print_r($this->_db->query($sql));
-	die();
-	return $this->_db->query($sql);
-	*/
-	
-	$data = array(
-    'text' => $text
-);
- 
-$where[] ="lgroup = '$group'";
-$where[] ="lang =  '$lang'";
-$where[] = "lkey = '$key'";
-
-$n = $this->_db->update('l_content', $data, $where);
-//print_r($n);die();
-return $n;
-	}
-	
 	public function CheckExistContent($key,$group,$lang){
 		$sql = 'select * from l_content where lkey='.$key.' and lgroup='.$group.' and lang="'.$lang.'"';
 		$result = $this->_db->fetchAll($sql);
