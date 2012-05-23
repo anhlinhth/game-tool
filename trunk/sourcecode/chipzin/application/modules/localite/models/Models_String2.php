@@ -54,7 +54,7 @@ class Models_String2 extends Models_Base
 	
 	public function filter2 ($content,$page,$size){
 				$sql = "SELECT a.id as id,g.name as gname,g.id as gid,a.lkey as lkey,a.text as ldefault, b.text as lindex
-				FROM l_content a
+				FROM l_content a 
 				LEFT JOIN l_content b ON (a.lgroup=b.lgroup AND a.lkey=b.lkey AND b.lang = (SELECT id FROM l_language WHERE status<>1 ORDER BY l_language.status DESC LIMIT 0,1))
 				LEFT JOIN l_group g ON (a.lgroup=g.id)
 				WHERE a.lang = (SELECT id FROM l_language WHERE status=1)";
