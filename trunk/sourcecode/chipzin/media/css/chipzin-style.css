@@ -249,7 +249,7 @@ a.tool-24:hover{
 }
 /************tool-16**************/
 a.tool-16:hover{	
-	
+	cursor:pointer;
 }
 .tool-16.edit{
 	background-image:url("../images/p2/icons/16/edit.png"); 
@@ -264,7 +264,13 @@ a.tool-16:hover{
 .tool-16.explore{
 	background-image:url("../images/p2/icons/16/explore.png"); 
 }
+.tool-16.expand{
+	background-image:url("../images/p2/icons/16/expand.png"); 
+}
 
+.tool-16.collapse{
+	background-image:url("../images/p2/icons/16/collapse.png"); 
+}
 .tool-24.edit{
 	background-image:url("../images/p2/icons/24/edit.png"); 
 }

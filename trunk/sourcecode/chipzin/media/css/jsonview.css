@@ -65,7 +65,7 @@ div#wrapper #grid  td.value input{
 div#wrapper #grid  td.value input.disabled{
 	cursor:pointer;
 }
-div#wrapper #grid  td.name{
+div#wrapper #grid  td.key{
 	width:auto
 	max-width:315px;
 }
@@ -198,6 +198,17 @@ div#wrapper #split{
 	border-top: solid 1px #CCC;
 }
 
+.session span.info{	
+	
+	margin-left:10px;
+	margin-right:20px;
+}
+.row_logs{
+	margin-top:5px;
+}
+a.tool-16.expand :hover{
+	cursor:pointer;
+}
 /*
 	Adding Icons
 	
@@ -211,3 +222,14 @@ div#wrapper #split{
 .contextMenu LI.paste A { background-image: url(images/page_white_paste.png); }
 .contextMenu LI.delete A { background-image: url(images/page_white_delete.png); }
 .contextMenu LI.quit A { background-image: url(images/door.png); }
+
+
+#logs_paging a{
+	margin: 3px;
+padding: 3px;
+border: 1px solid #DDD;
+overflow: hidden;
+}
+#logs_paging a.curent{
+ border: 2px solid lightBlue;
+}
