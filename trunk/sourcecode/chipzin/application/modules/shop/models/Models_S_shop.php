@@ -23,5 +23,28 @@ ALTER TABLE s_shop AUTO_INCREMENT=1;
 		$kq=$this->_db->query($sql);
 		return kq;
 	}
+	
+	public function getIDShop($name)
+	{
+		$sql = "
+		SELECT ID
+		FROM s_shop
+		WHERE Name = '$name'
+		";
+		
+		return $this->_db->fetchAll($sql);
+	}
+	
+	public function getShopClient()
+	{
+		$sql = "
+		SELECT *
+		FROM s_shop
+		WHERE TypeID=1
+		ORDER BY ID
+		";
+		
+		return $this->_db->fetchAll($sql);
+	}
 }
 ?>

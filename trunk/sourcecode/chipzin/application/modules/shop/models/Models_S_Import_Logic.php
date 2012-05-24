@@ -8,6 +8,7 @@ require_once ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'models' . D
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'models' . DS . 'Models_S_unblock.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'models' . DS . 'Models_S_itemshop.php';
 
+
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'object' . DS . 'Obj_S_ibshop.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'object' . DS . 'Obj_S_ibshop_item.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'object' . DS . 'Obj_S_item.php';
@@ -78,6 +79,8 @@ class Models_S_Import_Logic {
 			$objItemshop->Icon=$val_items['icon'];
 			$objItemshop->Title=$val_items['title'];
 			$objItemshop->Level=null;
+			$objItemshop->NeedCamp=0;
+			$objItemshop->pricePerLevel=null;
 			
 			 $mdItemshop->insert($objItemshop, $val_items['kind']);
 			
@@ -99,10 +102,14 @@ class Models_S_Import_Logic {
 		if($val_items['unblock']!=null)
 			{
 				foreach ($val_items['unblock'] as $k_un => $val_un)
-				{	
+				{	if($val_un=="unknow")
+					{
+						$unblockVal= -1;
+					}
+					else $unblockVal=$val_un;
 					$objUnblock=null;
 					$objUnblock->ItemShopID=$k_items;
-					$objUnblock->Value=$val_un;
+					$objUnblock->Value=$unblockVal;
 					$ktunblock=$mdUnblock->insert($objUnblock,$k_un);
 					
 				}
@@ -155,7 +162,7 @@ class Models_S_Import_Logic {
 			$objShop=null;
 			
 			$objShop->Name=$k_ots;
-			
+			$objShop->TypeID=1;
 			$idShop=$mdShop->insert($objShop);
 			
 				//---item_shop--------------
@@ -210,5 +217,79 @@ class Models_S_Import_Logic {
 		return 1;
 	}
 	
+	function updateItemshop($arr)
+	{
+		$mdItemshop=new Models_S_itemshop();
+		
+		$objItemshop=new Obj_ItemShop();
+		
+		foreach ($arr as $k => $val)
+		{
+			
+			
+			foreach ($val as $k_item => $val_item)
+			{
+				if($val_item['level'] != null)
+				{
+					$objItemshop=null;
+					$objItemshop->ID=$k_item;
+					$objItemshop->Level=$val_item['level'];
+							
+					
+					$mdItemshop->updateLevel($objItemshop);
+				}
+				
+				if($val_item['pricePerLevel'] != null)
+				{
+					$objItemshop=null;
+					$objItemshop->ID=$k_item;
+					$objItemshop->pricePerLevel=$val_item['pricePerLevel'];
+					
+					$mdItemshop->updateLevel($objItemshop);
+ 	
+				}
+				
+				if ($val_item['needCampaign'] == 'true')
+				{
+					$objItemshop=null;
+					$objItemshop->ID=$k_item;
+					$objItemshop->NeedCamp=1;
+					
+					$mdItemshop->updateLevel($objItemshop);
+				}
+			}
+		}
+		return 1;
+	}
+	
+	
+	function shopServer($arr)
+	{
+		$mdShopSV = new Models_S_shop();
+		$mdShopSV_item=new Models_S_shop_item();
+		
+		$objShopSV_item= new Obj_S_shop_item();
+		$objShopSV=new Obj_S_shop();
+		
+		foreach ($arr as $k => $val)
+		{
+			$objShopSV->Name=$k;
+			$objShopSV->TypeID=2;
+			
+			
+			$idShopsv = $mdShopSV->insert($objShopSV);
+			
+			foreach ($val as $k_shop => $val_shop)
+			{
+				$objShopSV_item=null;
+				
+				$objShopSV_item->ItemID=$k_shop;
+				$objShopSV_item->ShopID=$idShopsv;
+				
+				$mdShopSV_item->insert($objShopSV_item);
+			}
+		}
+		return 1;
+	}
 }
 ?>

@@ -24,5 +24,22 @@ ALTER TABLE s_shop_item AUTO_INCREMENT=1;
 		return kq;
 		
 	}
+	
+	public function getItemsID($idshop)
+	{
+		try{
+		$sql = "
+		SELECT ItemID
+		From s_shop_item
+		WHERE ShopID=$idshop
+		";
+		
+		return $this->_db->fetchAll($sql);
+		}
+		catch (Exception $e)
+		{
+			//print_r($idshop);die();
+		}
+	}
 }
 ?>

@@ -69,5 +69,33 @@ class Models_S_Import_GetArray {
 			unset($data['CONFIG_DEFAULT_VALUE']);
 			return $data;	
 	}
+	
+	function building($path)
+	{
+		$data = null;		
+			
+			$data = require_once( $path );			
+			unset($data['CONFIG_DEFAULT_VALUE']);
+			return $data;	
+	}
+	
+	function shopitem($path)
+	{
+		$data = null;		
+			
+			$data = require_once($path);
+			
+			unset($data['CONFIG_DEFAULT_VALUE']);
+			return $data;	
+	}
+	
+	function quantity($path)
+	{
+		$data = null;		
+			
+			$data = require_once( $path );
+			unset($data['CONFIG_DEFAULT_VALUE']);
+			return $data;	
+	}
 }
 ?>
