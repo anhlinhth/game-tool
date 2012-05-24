@@ -2,6 +2,8 @@
 require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'models' . DS.'Models_S_Import_GetArray.php';
 require_once ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'models' . DS.'Models_S_Import_Logic.php';
+require_once ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'models' . DS . 'Models_S_version.php';
+
 class Shop_ImportController extends BaseController
 {
 	public function _setUserPrivileges()
@@ -25,6 +27,10 @@ class Shop_ImportController extends BaseController
 			$file12 = $_FILES ['file2'];
 			$file13 = $_FILES ['file3'];
 			$file14 = $_FILES ['file4'];
+			
+			$fileBuilding=$_FILES ['fileBuilding'];
+			$fileItem=$_FILES ['fileItem'];
+			$fileQuantity=$_FILES ['fileQuan'];
 								
 			if($file11 ['name']==null || $file12['name']==null)
 			{
@@ -100,20 +106,70 @@ class Shop_ImportController extends BaseController
 				}
 			}else $this->view->errMsg = "Có lỗi ! Chưa có ShopHero.conf.php";
 			
+		//------------------------------fix ....
+			
+		if ($fileBuilding ['name']) {
+				if (strpos ( $fileBuilding ['name'], 'ShopBuilding.conf.php' ) !== FALSE) {
+					$destBuilding = ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'file_import' . DS . 'building.php';
+					move_uploaded_file ( $fileBuilding ['tmp_name'], $destBuilding );
+					
+					$arrShopSV['ShopBuilding'] = $mdArr->building($destBuilding);
+									
+				} else {
+					$this->view->errMsg = "Có lỗi ! File name : ShopBuilding.conf.php";
+					return;
+				}
+			}else $this->view->errMsg = "Có lỗi ! Chưa có ShopBuilding.conf.php";
+			
+			if ($fileItem ['name']) {
+				if (strpos ( $fileItem ['name'], 'ShopItem.conf.php' ) !== FALSE) {
+					$destItem = ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'file_import' . DS . 'item.php';
+					move_uploaded_file ( $fileItem ['tmp_name'], $destItem );
+					//print_r($mdArr->shopitem($destItem));die();
+					$arrShopSV['ShopItem'] = $mdArr->shopitem($destItem);
+									
+				} else {
+					$this->view->errMsg = "Có lỗi ! File name : ShopItem.conf.php";
+					return;
+				}
+			}else $this->view->errMsg = "Có lỗi ! Chưa có ShopItem.conf.php";
+			
+			if ($fileQuantity['name']) {
+				if (strpos ( $fileQuantity ['name'], 'ShopItemQuantity.conf.php' ) !== FALSE) {
+					$destQuantity = ROOT_APPLICATION . DS . 'modules' . DS . 'shop' . DS . 'file_import' . DS . 'quantity.php';
+					move_uploaded_file ( $fileQuantity ['tmp_name'], $destQuantity );
+					
+					$arrShopSV['ShopItemQuantity'] = $mdArr->quantity($destQuantity);
+									
+				} else {
+					$this->view->errMsg = "Có lỗi ! File name : ShopItemQuantity.conf.php";
+					return;
+				}
+			}else $this->view->errMsg = "Có lỗi ! Chưa có ShopItemQuantity.conf.php";
+			
+			
 		
 			
-			if($arrHero!=null && $arrSol!=null)
+			if($arrShopSV['ShopItemQuantity']!=null && $arrShopSV['ShopItem'] != null && $arrShopSV['ShopBuilding'] != null && $arrHero!=null && $arrSol!=null)
 			{
+				$arrShopSV['ShopHero']=$arrHero;
+				$arrShopSV['ShopSoldier']=$arrSol;
+				$kq3 = $mdLogic->updateItemshop($arrShopSV);
+				$kq4 = $mdLogic->shopServer($arrShopSV);
 				
-				$kq3= $mdLogic->updatelevel($arrHero,$arrSol);
 			}
+			else $this->view->errMsg = "Có lỗi ! Thử lại!";
+		//--------------------------------
+			
+			
 			
 			
 			//print_r($kq1.$kq2.$kq3);
-			if($kq1==1 && $kq2==1 && $kq3==1)
+			if($kq1==1 && $kq2==1 && $kq3==1 && $kq4==1)
 			{
 				$this->view->msg="Thành công !";
-							
+					$mdver= new Models_S_version();
+					$mdver->insert();		
 			}
 		
 		}
