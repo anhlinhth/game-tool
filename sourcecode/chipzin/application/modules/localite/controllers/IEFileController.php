@@ -49,7 +49,7 @@ public function _setUserPrivileges()
 				$array = $model->read_text_file($fielpath);				
 				$model->ImportFile($array,$lang);
 				$this->view->msg = 'Import thành công!';
-				unlink($fielpath);
+				//unlink($fielpath);
 			}
 			else{
 				$this->view->msg = 'Không tìm thấy file';
