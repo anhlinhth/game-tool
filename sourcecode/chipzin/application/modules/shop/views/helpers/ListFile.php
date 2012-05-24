@@ -21,7 +21,7 @@ class Zend_View_Helper_ListFile
 			$num=$row['Num'];
 			if($num>($itemPerPage*($curPage-1)))
 			{	
-			$urll="$base/Export/$name";			
+			$urll="$base/application/modules/shop/file_export/$name";			
 				$delete = "<a class='tool-24 delete' href='javascript:deleteres($key)'></a>";;	
 			$strList .= "<tr id='Type-$key' height=\"60\">
 							<td class='ID' >$items</td>
