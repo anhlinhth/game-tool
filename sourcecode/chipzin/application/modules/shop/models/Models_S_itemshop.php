@@ -35,9 +35,28 @@ public function insert($obj,$kind)
 	
 	public function updateLevel($obj)
 	{
-		$data=array('Level'=>$obj->Level);
+		try{
+		$data=array();
+		if($obj->Level!=null)
+		{
+			$data['Level']=$obj->Level;
+		}
+		if($obj->pricePerLevel!=nulll)
+		{
+			$data['pricePerLevel']=$obj->pricePerLevel;
+		}
+		if($obj->NeedCamp!=null)
+		{
+			$data['NeedCamp']=$obj->NeedCamp;
+		}
+		
 	$id = $this->_db->update('s_itemshop', $data, 'ID = '.$obj->ID);
-	return $id;
+	return $id;}
+	catch(Exception $e)
+	{
+		print_r($obj);
+		die();
+	}
 	}
 	
 	public function deleteall()
@@ -48,5 +67,29 @@ ALTER TABLE s_itemshop AUTO_INCREMENT=1;
 		";
 		$kq=$this->_db->query($sql);
 		return kq;
+	}
+	
+	
+public function getInfoItem($id)
+	{
+		$sql="
+		SELECT *
+		FROM s_itemshop
+		WHERE ID=$id
+		";
+		
+		return $this->_db->fetchAll($sql);
+	}
+	
+	public function getAll()
+	{
+		$sql="
+		SELECT *
+		FROM s_itemshop
+		WHERE 1
+		ORDER BY ID
+		";
+		
+		return $this->_db->fetchAll($sql);
 	}
 }

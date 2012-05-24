@@ -24,5 +24,16 @@ ALTER TABLE s_ibshop AUTO_INCREMENT=1;
 		return kq;
 		
 	}
+	
+	public function getTabs()
+	{
+		$sql="
+		SELECT *
+		FROM s_ibshop
+		WHERE 1
+		";
+		
+		return $this->_db->fetchAll($sql);
+	}
 }
 ?>

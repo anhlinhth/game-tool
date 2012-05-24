@@ -30,5 +30,16 @@ ALTER TABLE s_ibshop_item AUTO_INCREMENT=1;
 		$kq=$this->_db->query($sql);
 		return kq;
 }
+
+public function Items($idshop)
+{
+	$sql="
+		SELECT *
+		FROM s_ibshop_item
+		WHERE IbShopID=$idshop
+		";
+		
+		return $this->_db->fetchAll($sql);
+}
 }
 ?>

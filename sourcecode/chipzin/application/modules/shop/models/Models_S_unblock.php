@@ -42,5 +42,16 @@ ALTER TABLE s_itemshop_unblock AUTO_INCREMENT=1;
 		$kq=$this->_db->query($sql);
 		return kq;
 	}
+	
+public function getItemUnblock($idItem)
+	{
+		$sql="
+		SELECT *
+		FROM s_itemshop_unblock
+		WHERE ItemShopID=$idItem
+		";
+		
+		return $this->_db->fetchAll($sql);
+	}
 }
 ?>

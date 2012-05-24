@@ -53,5 +53,17 @@ public function insert($obj)
 			return $this->insert($obj);
 		}
 	}
+	
+	public function getNameItem($id)
+	{
+		
+		$sql="
+		SELECT NameSV
+		FROM s_items
+		WHERE ID=$id
+		";
+		
+		return $this->_db->fetchAll($sql);
+	}
 }
 ?>

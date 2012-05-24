@@ -41,5 +41,16 @@ ALTER TABLE s_itemshop_require AUTO_INCREMENT=1;
 		return kq;
 		
 	}
+	
+public function getItemReq($idItem)
+	{
+		$sql="
+		SELECT *
+		FROM s_itemshop_require
+		WHERE ItemShopID=$idItem
+		";
+		
+		return $this->_db->fetchAll($sql);
+	}
 }
 ?>
