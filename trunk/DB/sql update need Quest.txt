@@ -1,0 +1,8 @@
+UPDATE q_needquest
+SET q_needquest.NeedQuest=	( SELECT q_quest.NeedQuest
+FROM q_quest
+WHERE q_quest.QuestID= q_needquest.QuestID)
+WHERE EXISTS
+  ( SELECT q_quest.NeedQuest
+FROM q_quest
+WHERE q_quest.QuestID= q_needquest.QuestID);
