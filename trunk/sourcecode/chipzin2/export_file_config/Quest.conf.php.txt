@@ -1,0 +1,229 @@
+<?php
+return array
+(
+<<<<<<< .mine
+1 => array(
+	'group'=> 7,
+	'needQuest' =>2,
+	'tasks' => 
+	array(
+	 0 => 7 ,
+	 1 => 9 ,
+=======
+	1 => array
+	(
+		'group' => 3,
+		'needQuest' => 0,
+		'tasks' => array
+		(
+			 0 => 7,
+			 1 => 9,
+		),
+		'award' => NULL
+>>>>>>> .r602
+	),
+<<<<<<< .mine
+	'award' => 
+  array(
+	'Honour'=> 2,
+			),
+),
+2 => array(
+	'group'=> 7,
+	'needQuest' =>1,
+	'tasks' => 
+	array(
+	 0 => 10 ,
+=======
+	2 => array
+	(
+		'group' => 3,
+		'needQuest' => 3,
+		'tasks' => array
+		(
+			 0 => 10,
+		),
+		'award' => NULL
+>>>>>>> .r602
+	),
+<<<<<<< .mine
+	'award' => 
+  array(
+	'Honour'=> 1,
+			),
+),
+3 => array(
+	'group'=> 7,
+	'needQuest' =>2,
+	'tasks' => 
+	array(
+	 0 => 11 ,
+=======
+	3 => array
+	(
+		'group' => 3,
+		'needQuest' => 1,
+		'tasks' => array
+		(
+			 0 => 11,
+		),
+		'award' => NULL
+>>>>>>> .r602
+	),
+<<<<<<< .mine
+	'award' => 
+  array(
+	'Honour'=> 1,
+			),
+),
+4 => array(
+	'group'=> 7,
+	'needQuest' =>3,
+	'tasks' => 
+	array(
+	 0 => 12 ,
+=======
+	4 => array
+	(
+		'group' => 3,
+		'needQuest' => 3,
+		'tasks' => array
+		(
+			 0 => 12,
+		),
+		'award' => NULL
+>>>>>>> .r602
+	),
+<<<<<<< .mine
+	'award' => 
+  array(
+	'Honour'=> 1,
+			),
+),
+5 => array(
+	'group'=> 7,
+	'needQuest' =>4,
+	'tasks' => 
+	array(
+	 0 => 13 ,
+=======
+	5 => array
+	(
+		'group' => 3,
+		'needQuest' => 4,
+		'tasks' => array
+		(
+			 0 => 13,
+		),
+		'award' => NULL
+>>>>>>> .r602
+	),
+<<<<<<< .mine
+	'award' => 
+  array(
+	'Honour'=> 2,
+			),
+),
+6 => array(
+	'group'=> 7,
+	'needQuest' =>5,
+	'tasks' => 
+	array(
+	 0 => 14 ,
+=======
+	6 => array
+	(
+		'group' => 3,
+		'needQuest' => 5,
+		'tasks' => array
+		(
+			 0 => 14,
+		),
+		'award' => NULL
+>>>>>>> .r602
+	),
+<<<<<<< .mine
+	'award' => 
+  array(
+	'Honour'=> 2,
+			),
+),
+7 => array(
+	'group'=> 7,
+	'needQuest' =>6,
+	'tasks' => 
+	array(
+	 0 => 15 ,
+	 1 => 18 ,
+=======
+	7 => array
+	(
+		'group' => 3,
+		'needQuest' => 6,
+		'tasks' => array
+		(
+			 0 => 15,
+			 1 => 18,
+		),
+		'award' => NULL
+>>>>>>> .r602
+	),
+<<<<<<< .mine
+	'award' => 
+  array(
+	'Honour'=> 2,
+			),
+),
+8 => array(
+	'group'=> 7,
+	'needQuest' =>10,
+	'tasks' => 
+	array(
+	 0 => 16 ,
+=======
+	8 => array
+	(
+		'group' => 3,
+		'needQuest' => 10,
+		'tasks' => array
+		(
+			 0 => 16,
+		),
+		'award' => NULL
+>>>>>>> .r602
+	),
+<<<<<<< .mine
+	'award' => 
+  array(
+	'Honour'=> 2,
+			),
+),
+10 => array(
+	'group'=> 7,
+	'needQuest' => NULL,
+	'tasks' => 
+	array(
+	 0 => 20 ,
+	 1 => 21 ,
+	),
+	'award' => 
+  array(
+	'Honour'=> 2,
+			),
+),
+=======
+	10 => array
+	(
+		'group' => 3,
+		'needQuest' => null,
+		'tasks' => array
+		(
+			 0 => 20,
+			 1 => 21,
+		),
+		'award' => NULL
+	),
+>>>>>>> .r602
+
+);
+?>

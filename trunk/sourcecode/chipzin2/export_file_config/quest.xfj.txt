@@ -1,0 +1,354 @@
+{
+ 	"quests"  :
+	{
+		"1":
+		{
+<<<<<<< .mine
+			 "group" : 7,
+			 "nextQuest" : [],
+			 "tasks" : ["7","9"],
+=======
+			 "group" : 3,
+			 "nextQuest" : ["2","10"],
+			 "tasks" : ["7","9"],
+>>>>>>> .r602
+			 "txtName" : "@quest#47",
+			 "txtAlias" : "@quest#46",
+			 "txtDesc" : "@quest#48",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
+			 "award" :[]
+>>>>>>> .r602
+		}, 
+
+		"2":
+		{
+<<<<<<< .mine
+			 "group" : 7,
+			 "nextQuest" : [],
+			 "tasks" : ["10"],
+=======
+			 "group" : 3,
+			 "nextQuest" : ["1"],
+			 "tasks" : ["10"],
+>>>>>>> .r602
+			 "txtName" : "@quest#54",
+			 "txtAlias" : "@quest#53",
+			 "txtDesc" : "@quest#55",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 1
+			 } 
+=======
+			 "award" :[]
+>>>>>>> .r602
+		}, 
+
+		"3":
+		{
+			 "group" : 3,
+			 "nextQuest" : [],
+			 "tasks" : ["11"],
+			 "txtName" : "@quest#59",
+			 "txtAlias" : "@quest#58",
+			 "txtDesc" : "@quest#60",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 1
+			 } 
+=======
+			 "award" :[]
+>>>>>>> .r602
+		}, 
+
+		"4":
+		{
+			 "group" : 3,
+			 "nextQuest" : [],
+			 "tasks" : ["12"],
+			 "txtName" : "@quest#64",
+			 "txtAlias" : "@quest#63",
+			 "txtDesc" : "@quest#65",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 1
+			 } 
+=======
+			 "award" :[]
+>>>>>>> .r602
+		}, 
+
+		"5":
+		{
+			 "group" : 3,
+			 "nextQuest" : [],
+			 "tasks" : ["13"],
+			 "txtName" : "@quest#69",
+			 "txtAlias" : "@quest#68",
+			 "txtDesc" : "@quest#70",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
+			 "award" :[]
+>>>>>>> .r602
+		}, 
+
+		"6":
+		{
+			 "group" : 3,
+			 "nextQuest" : [],
+			 "tasks" : ["14"],
+			 "txtName" : "@quest#74",
+			 "txtAlias" : "@quest#73",
+			 "txtDesc" : "@quest#75",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
+			 "award" :[]
+>>>>>>> .r602
+		}, 
+
+		"7":
+		{
+<<<<<<< .mine
+			 "group" : 7,
+			 "nextQuest" : [],
+=======
+			 "group" : 3,
+			 "nextQuest" : ["1"],
+>>>>>>> .r602
+			 "tasks" : ["15","18"],
+			 "txtName" : "@quest#79",
+			 "txtAlias" : "@quest#78",
+			 "txtDesc" : "@quest#80",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
+			 "award" :[]
+>>>>>>> .r602
+		}, 
+
+		"8":
+		{
+<<<<<<< .mine
+			 "group" : 7,
+			 "nextQuest" : [],
+=======
+			 "group" : 3,
+			 "nextQuest" : [],
+>>>>>>> .r602
+			 "tasks" : ["16"],
+			 "txtName" : "@quest#84",
+			 "txtAlias" : "@quest#83",
+			 "txtDesc" : "@quest#85",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
+			 "award" :[]
+>>>>>>> .r602
+		}, 
+
+<<<<<<< .mine
+		"10":
+		{
+			 "group" : 7,
+			 "nextQuest" : [],
+=======
+		"10":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["8"],
+>>>>>>> .r602
+			 "tasks" : ["20","21"],
+			 "txtName" : "@quest#96",
+			 "txtAlias" : "@quest#95",
+			 "txtDesc" : "@quest#97",
+<<<<<<< .mine
+			 "award" :
+			 { 
+				 "exp" : 2
+			 } 
+=======
+			 "award" :[]
+>>>>>>> .r602
+		 } 
+},
+
+ 	"quest_tasks"  :
+	{
+		"7" :
+		{
+			 "questId" : 1,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest#49",
+			 "txtHelp" : "@quest#51",
+			 "iconClassName" : "sample",
+			 "iconBucketName" : "sample"
+		 },
+
+		"9" :
+		{
+			 "questId" : 1,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_OrderFarmPlant ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest#50",
+			 "txtHelp" : "@quest#52",
+			 "iconClassName" : "sample",
+			 "iconBucketName" : "sample"
+		 },
+
+		"10" :
+		{
+			 "questId" : 2,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest#56",
+			 "txtHelp" : "@quest#57",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"11" :
+		{
+			 "questId" : 3,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestGold ",
+			 "entityType" : ["2004"],
+			 "txtContent" : "@quest#61",
+			 "txtHelp" : "@quest#62",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"12" :
+		{
+			 "questId" : 4,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2004"],
+			 "txtContent" : "@quest#66",
+			 "txtHelp" : "@quest#67",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"13" :
+		{
+			 "questId" : 5,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2022"],
+			 "txtContent" : "@quest#71",
+			 "txtHelp" : "@quest#72",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"14" :
+		{
+			 "questId" : 6,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_CreateCMan ",
+			 "txtContent" : "@quest#76",
+			 "txtHelp" : "@quest#77",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"15" :
+		{
+			 "questId" : 7,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2001"],
+			 "txtContent" : "@quest#81",
+			 "txtHelp" : "@quest#82",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"16" :
+		{
+			 "questId" : 8,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7001"],
+			 "txtContent" : "@quest#87",
+			 "txtHelp" : "@quest#89",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"18" :
+		{
+			 "questId" : 7,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_OrderWoodLog",
+			 "entityType" : ["7001"],
+			 "txtContent" : "@quest#86",
+			 "txtHelp" : "@quest#87",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"20" :
+		{
+			 "questId" : 10,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_MoveBuilding ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest#98",
+			 "txtHelp" : "@quest#100",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"21" :
+		{
+			 "questId" : 10,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_SellBuilding ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest#99",
+			 "txtHelp" : "@quest#101",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 } 
+
+	 }
+}

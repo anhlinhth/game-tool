@@ -1,0 +1,49 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+
+ <div> 
+  <label>Browse file for MapBattle.conf.php :
+  <input type="file" name="file1" id="file1" value="Browse "/>
+   </label>
+<br></br>
+   <hr></hr>
+
+  </div>
+  <br></br>
+  <div>
+   <label>Browse file for Battle.conf.php :    
+    <input type="file" name="file2" id="file2" value="Browse "/>
+   </label>
+  </div>
+  
+   <div>
+   <br></br>
+   <hr></hr>
+   <br></br>
+   <center>
+   <label>
+    <input type="submit" name="btn" id="btn" value="Import file" />
+  </label>
+ </center>
+ </div>
+</form>
+<fieldset>
+</fieldset>
+</body>
+</html>

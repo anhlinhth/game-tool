@@ -1,0 +1,101 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+$model = new Models_Localite_Group();
+?>
+<div id="box">
+<h3>Danh sách</h3>
+<form id="form" method="post">
+	<table width="100%">
+		<thead>
+			<tr>
+				<th width="40">STT</th>
+				<th width="14">#</th>
+				<th width="35">ID</th>
+				<th></th>				
+				<th width="50" align="center">Thao tác</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php 
+			$i = 1;
+			foreach ($model->GetAllGroup() as $value) {
+				echo '<tr>';
+					echo '<td>'.$i.'</td>';
+					echo '<td><input id="'.$value['id'].'" type="checkbox" name="'.$value['id'].'"></td>';
+					echo '<td>'.$value['id'].'</td>';
+					echo '<td><input id="aka'.$value['id'].'" value="'.$value['name'].'"type="text"></td>';
+					echo '<td>';
+						echo '<a href="javascript:editL('.$value['id'].')"><img src="'.$this->baseUrl.'/media/images/p2/icons/16/save.png" ></a>';
+						echo '<a href="'."javascript:deleteL(".$value['id'].')"><img src="'.$this->baseUrl.'/media/images/p2/icons/16/delete.png" ></a>';
+					echo '</td>';
+				echo '</tr>';
+				$i++;
+			} 
+			
+			?>
+		</tbody>
+	</table>
+	<div style="margin-top:20px;"><a class="btn add" type="submit" href="<?php echo $this->baseUrl?>/localite/lgroup/ladd">Add</a> 		
+		<button value="btdelete" name="btdelete" type="submit">delete</button>
+	</div>
+</form>
+</div>
+<script type="text/javascript">
+function editL(key)
+{
+	name = document.getElementById('aka'+key).value;
+	id = key;
+	if(!confirm("Bạn có muốn edit group : "+name+"  không ?")){
+		return false;
+	};
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $this->baseUrl.'/localite/lgroup/ledit'?> ",
+		data:{
+			name:name,
+			id:id,
+		},
+		success: function(msg){
+			if(msg){	
+					
+				window.location.reload();
+			}
+			else{
+				window.location.reload();		
+			}			
+		}
+	});	
+	
+}
+function deleteL(key)
+{
+	name = document.getElementById('aka'+key).value;
+	id = key;
+	if(!confirm("Bạn có muốn xóa group : "+name+"  không ?")){
+		return false;
+	};
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $this->baseUrl.'/localite/lgroup/ldelete'?> ",
+		data:{
+			id:id,
+		},
+		success: function(msg){
+			if(msg){	
+					
+				window.location.reload();
+			}
+			else{
+				window.location.reload();		
+			}			
+		}
+	});	
+	
+}
+</script>
+

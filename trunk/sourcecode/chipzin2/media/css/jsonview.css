@@ -1,0 +1,235 @@
+/*overide to lagrer*/
+
+#top-panel{
+	width:99%;
+}
+div.x-panel, div#tabs-1,div#tabs-3 {
+	/*background: #d6d6d6;*/
+	background: white;
+}
+
+div#tabs-1{
+	width:100%;	
+	left : 0px;
+	top: 165px;
+}
+div#tabs-3{
+	width:100%;	
+	left : 0px;
+	top: 165px;
+}
+div#tabs-2{
+	margin-top : 10px;
+}
+div#x-toolbar {	
+	background:#257EC5;
+	height:32px;
+	width:100%
+}
+div#wrapper #tree{
+	float:left;
+	width:50%;	
+	overflow-x: scroll;
+	overflow-y: scroll;
+}
+div#wrapper #tree .x-div{
+	cursor: pointer;
+}
+div#wrapper #tree .x-div:hover{
+	background-color:#F9EDBE;
+}
+div#wrapper #tree .x-div.selected{
+	color:blue;
+}
+div#wrapper #tree ul{
+	list-style:none;
+	list-style-image:initial;
+	list-style-position:initial;
+	font-size:13pt;	
+}
+div#wrapper #tree li div{
+	white-space:nowrap;
+}
+
+div#wrapper #grid{
+	float:right;
+	width:50%;
+	height:600px;
+	overflow-x: scroll;
+	overflow-y: scroll;
+}
+
+div#wrapper #grid  td.value input{
+	width:98%;
+}
+div#wrapper #grid  td.value input.disabled{
+	cursor:pointer;
+}
+div#wrapper #grid  td.key{
+	width:auto
+	max-width:315px;
+}
+
+div#wrapper #split{	
+
+}
+/************************/
+ button.button{
+	padding: 5px;
+ }
+ 
+.ul-node{
+}
+ .ul-node, .li-node{
+	list-style:none;
+	list-style-image:initial;
+    list-style-position:initial;
+    white-space:nowrap;
+	
+ }
+ .x-icon{
+	padding-left: 18px;
+	padding-right: 0px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	background-repeat: no-repeat;
+	background-position: left center;	
+ }
+ .x-icon:hover{
+	color:blue;
+ }
+ .x-icon.selected{
+	color:blue;
+ }
+ .x-text{
+ }
+ .x-icon.plus{
+	background-image: url("../images/p2/tree/x-icon-plus.gif"); 
+	background-position: 0px 4px;
+	cursor: pointer;
+ }
+ .x-icon.minus{
+	background-image: url("../images/p2/tree/x-icon-minus.gif");
+	background-position: 0px 4px;	
+	cursor: pointer;
+ }
+ .x-icon.object{
+	background-image: url("../images/p2/tree/x-icon-object.gif"); 
+	cursor: pointer;
+ }
+ 
+ .x-icon.number{
+	background-image: url("../images/p2/tree/x-icon-number.gif"); 
+ }
+  .x-icon.boolean{
+	background-image: url("../images/p2/tree/x-icon-boolean.gif"); 
+ }
+ .x-icon.array{
+	background-image: url("../images/p2/tree/x-icon-array.gif"); 
+	cursor: pointer;
+ }
+ .x-icon.string{
+	background-image: url("../images/p2/tree/x-icon-string.gif"); 
+ }
+  .x-icon.null{
+	background-image: url("../images/p2/tree/x-icon-null.gif"); 
+	
+ }
+ 
+ .x-icon.ebow{
+	background-image: url("../images/p2/tree/x-icon-ebow.gif"); 
+ }
+ .x-icon.line{
+	background-image: url("../images/p2/tree/x-icon-line2.gif"); 
+ }
+ .x-icon.ebow-end{
+	background-image: url("../images/p2/tree/x-icon-ebow-end2.gif"); 
+ }
+ 
+
+/**********Right Menu***********/
+/* *******************************/
+ /* Generic context menu styles */
+.contextMenu {
+	position: absolute;
+	width: 120px;
+	z-index: 99999;
+	border: solid 1px #CCC;
+	background: #EEE;
+	padding: 0px;
+	margin: 0px;
+	display: none;
+}
+
+.contextMenu LI {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.contextMenu A {
+	color: #333;
+	text-decoration: none;
+	display: block;
+	line-height: 20px;
+	height: 20px;
+	background-position: 6px center;
+	background-repeat: no-repeat;
+	outline: none;
+	padding: 1px 5px;
+	padding-left: 28px;
+}
+
+.contextMenu LI.hover A {
+	color: #FFF;
+	background-color: #3399FF;
+}
+
+.contextMenu LI.disabled A {
+	color: #AAA;
+	cursor: default;
+}
+
+.contextMenu LI.hover.disabled A {
+	background-color: transparent;
+}
+
+.contextMenu LI.separator {
+	border-top: solid 1px #CCC;
+}
+
+.session span.info{	
+	
+	margin-left:10px;
+	margin-right:20px;
+}
+.row_logs{
+	margin-top:5px;
+}
+a.tool-16.expand :hover{
+	cursor:pointer;
+}
+/*
+	Adding Icons
+	
+	You can add icons to the context menu by adding
+	classes to the respective LI element(s)
+*/
+
+.contextMenu LI.edit A { background-image: url(images/page_white_edit.png); }
+.contextMenu LI.cut A { background-image: url(images/cut.png); }
+.contextMenu LI.copy A { background-image: url(images/page_white_copy.png); }
+.contextMenu LI.paste A { background-image: url(images/page_white_paste.png); }
+.contextMenu LI.delete A { background-image: url(images/page_white_delete.png); }
+.contextMenu LI.quit A { background-image: url(images/door.png); }
+
+
+#logs_paging a{
+	margin: 3px;
+padding: 3px;
+border: 1px solid #DDD;
+overflow: hidden;
+}
+#logs_paging a.curent{
+ border: 2px solid lightBlue;
+}
