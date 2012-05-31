@@ -1,0 +1,18 @@
+﻿<h2 align="center"">
+ </h2>
+<?php
+if ($this->questIdError!=null)
+	foreach ($this->questIdError as $questid) 
+	{
+		echo "<a style='text-decoration:underline;color=#CCC;font-size:17px;' href='$this->baseUrl/quest/edit/id/$questid'/>Cần phải Edit lại Quest $questid</a><br>";
+		
+	}
+?>
+
+<form action="" name="formPaging" name="formPaging" method="post">
+	<table>
+		<thead>
+			
+		</thead>
+	</table>
+</form> 

@@ -1,0 +1,35 @@
+<?php echo $this->doctype() ?>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Chip & Zin Support</title>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/css/theme.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/css/style.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/css/chipzin-style.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->baseUrl ?>/media/css/jquery-ui-1.8.16.custom.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->baseUrl ?>/media/css/ui.jqgrid.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->baseUrl ?>/media/scripts/jqgrid/plugins/ui.multiselect.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->baseUrl ?>/media/scripts/dynatree/skin/ui.dynatree.css" /> 
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/flashs/chart/FusionCharts.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jquery-ui-1.8.16.custom.min.js" ></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/form.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/chip-zin.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jqgrid/grid.locale-en.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jqgrid/jquery.jqGrid.min.js" ></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/utility.js"></script>
+</head>
+<body>
+<div id="container">
+	<?php echo $this->render('_partial/_header.phtml');?>
+	<?php $this->topPanel($this->controllerName, $this) ?> 
+    <div id="wrapper">
+        <div id="content">
+			<?php echo $this->layout()->content ?>       			              
+        </div>            
+    </div>
+	<?php echo $this->render('_partial/_footer.phtml');?>
+</div><!-- End #ccontainer -->
+</body>
+</html>
+

@@ -1,0 +1,717 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+ 
+<?php //print_r($this->arrawardtype);?>
+<div  class="mybox" id="quest">
+	<h3>Thêm Quest</h3>
+	<form class="quest-info" id="form" action="" method="post" enctype="multipart/form-data">
+	  <fieldset id="info">
+		<legend>Thông tin Quest </legend>
+		<table id="quest">
+			<tr>
+				<td  style="width: 50%;">
+					<label for="QuestID">Quest ID : </label> 
+					<input class="disabled" readonly name="QuestID" value="<?php echo $this->obj->QuestID ?>" id="QuestID" type="text" tabindex="1" /></td>
+				<td>
+					<label for="name" >Quest Line : </label>							
+					<?php $this->selectQuestLine2($this->obj->QuestLineID,$this->arrQuestLine) ;?>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="questname">Quest Name : </label> 
+					<input name="QuestName" class="width" value="<?php echo $this->obj->QuestName?>" id="questnamestring" type="text" tabindex="1" /></td>
+				<td>
+					<label for="queststring">Quest String: </label> 
+					<input name="QuestString" value="<?php echo $this->obj->QuestString?>" id="queststring" type="text" tabindex="1" onchange="getvalue('queststring')" title="queststring-string-value" />	
+					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('queststring','')"></a>&nbsp;
+					<a title="sửa" id="queststring-string-value" class="tool-16 edit" href="JavaScript:void(0);"></a>&nbsp;
+					<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('queststring','')"></a>
+					<label></label><p class="string-value" id = "queststring-string-value" ></p>
+				</td>
+
+			</tr>
+			
+			<tr>
+				<td>
+					<label for="questgroup">Quest Group: </label> 
+					<input name="QuestGroup" value="<?php echo $this->obj->QuestGroup?>" id="questgroup" type="text" tabindex="1" />
+				</td>
+				<td>
+					<label for="QuestGroupString">Q_Group String: </label> 
+					<input name="QuestGroupString" value="<?php echo $this->obj->QuestGroupString?>" id="questgroupstring" type="text" tabindex="1" onchange="getvalue('questgroupstring')" title="questgroup-string-value" />
+					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('questgroupstring','')"></a>&nbsp;
+					<a title="sửa" id="questgroup-string-value" class="tool-16 edit" href="JavaScript:void(0);"></a>&nbsp;
+					<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('questgroupstring','')"></a>
+					<label></label><p class="string-value" id = "questgroup-string-value" ></p>
+				</td>		
+		
+			</tr>
+			
+			<tr>
+				<td>
+					<label for="QuestDesc">Quest Desc: </label> 
+					<input name="QuestDesc" value="<?php echo $this->obj->QuestDesc?>" id="questdesc" type="text" tabindex="1" />
+				</td>
+				<td>
+					<label for="questdescString">Q_Desc String: </label> 
+					<input name="QuestDescString" value="<?php echo $this->obj->QuestDescString?>" id="questdescstring" type="text" tabindex="1" onchange="getvalue('QuestDescString')" title="questdesc-string-value"/>
+					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('questdescstring','')"></a>&nbsp;
+					<a title="sửa" id="questdesc-string-value" class="tool-16 edit" href="JavaScript:void(0);"></a>&nbsp;
+					<a title="thêm" id="newstring" class="tool-16 add" href="JavaScript:void(0);" title = "asds" onClick="newstring('questdescstring','')"></a>
+					<label></label><p class="string-value" id = "questdesc-string-value" ></p>
+				</td>			
+			</tr>
+				
+			
+			<tr>
+				<td class="q_award" rowspan="2">
+					<label>Award:</label>
+					<div><a class='tool-16 add' href=''></a></div>
+				</td>
+				
+			</tr>
+			<tr>						
+					<td>
+					<label>Temp Field: </label><input name="Temp" value="" id="Temp" type="text" tabindex="1" /><br/>
+					</td>
+					
+			</tr>
+		</table>				
+		</fieldset>		
+		</form>
+		<div id="mybox">
+			<fieldset>
+				<legend>Task:  <a id='addItem' class='ico-16 add' title='Add Task' href='javascript:addTask(0)'></a></legend>
+				<div id='list-task' style="margin-top: 10px;">
+					<div id='task-0'></div>									
+				</div>
+					
+		  	</fieldset>
+	  	</div>
+	  	<div style="margin: auto; text-align: center; margin-top: 10px;margin-bottom: 10px">				  
+ 				<a id="save-all"  class="btn save" href="javascript:saveAll()"> Save All</a>		
+		</div>			  	
+</div>
+
+<div id='dialog'>
+	<div id='ct'></div>
+	<div id='ft'> </div>
+</div>
+<div id="llightbox" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;display:none;opacity:0.7;background:#222;"></div>
+<div id = "stringmain" style="position:fixed;top:20px;width:80%;height:80%;margin:auto;z-index:10000;background:#fff;overflow:scroll;display:none;padding:5px;border:15px solid #f4f4f4;border-radius:8px;">
+</div>
+<div id='dialog_edit_template'>
+		
+</div>
+<div id='dialog_edit_localize'>
+		
+</div>
+<div style="display:none" id='tempAward'>
+	<div >
+		<select name='AwardType[]' style='margin-bottom: 1px;width:31%'>
+		<?php foreach ($this->arrawardtype as $row)
+		{
+		?>
+		<option value ='<?php echo $row->AwardTypeID;?>'><?php echo $row->Name;?></option>
+		<?php 
+		}
+		?>
+		</select>		
+		<label></label><input name='AwardValue[]' value='' id='' type='text' tabindex='1' style='margin-bottom:1px;width:15%'/><a class='tool-16 delete' title='Delete Item' href=''></a>
+	</div>
+</div>
+<script>
+//*****************************Award Item****************//
+//Add A Award///////
+$("table#quest").delegate("td.q_award .add", "click", function() {
+	addAwardItem(this);		
+	return false;		
+});
+//Remove A Award///////
+$("table#quest").delegate("td.q_award .delete", "click", function() {
+	deleteAwardItem(this);
+	return false;		
+});
+//Add Award Item
+function  addAwardItem(e){		
+	var parent_div = $(e).parent();
+	var parent_td = parent_div.parent();
+	var parent_tr = parent_td.parent();
+	var html=$("#tempAward").html();
+	parent_td.append(html);
+	parent_tr.change();
+}
+//delete A Award
+function deleteAwardItem(e){
+	var parent_div = $(e).parent();
+	var parent_td = parent_div.parent();
+	var parent_tr = parent_td.parent();
+	parent_div.remove();
+	parent_tr.change();
+}
+//*********************************************//
+////////////////////////////////
+function  addNeedQuest(key){	
+	var id = $("#QuestID").serialize();
+	var count = $(".need_quest").size() + 1;
+	var btnDelete = "<a class='tool-16 delete' title='Delete Item' href='javascript:deleteNeedQuest("+count+")'></a>";
+	var select = "<select id='type' name='need-quest-add[]' style='margin-bottom:5px;margin-top:5px;min-width:50px'>";
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/listquest/'?> ",	
+		data:id,		
+		success: function(data){
+			if(data != ""){
+			
+				var div = "<div class='need_quest new' id='need_quest_"+count+"'><label></label>"+ select+data+"</select>"+btnDelete+"</div>";
+				$("#add-need-quest").before(div);
+			}
+			else
+			{
+				alert("Thêm  không thành công");
+				
+			}
+			
+		}
+	});
+	
+}
+function  deleteNeedQuest(key){
+	//alert("asd");
+	var div =  $("div#need_quest_" + key);
+	if(div.hasClass("new"))
+		div.html("");
+	else{	
+		div.hide();
+		div.children("a").remove();
+		div.children("select").children(".data").remove();
+		
+	}	
+}
+/////////////////////////Task/////////////////////////////////
+function addTask(key){
+	var count_div = $(".task-div").size();
+	count_form = $("#list-task form").size();	
+	if(count_form >= 3){
+		alert("Failed!!!! Limited 3 Task in a Quest");
+		return false;
+	}			
+	count_form = count_form + 1;
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/task/new/'?> ",
+		data :{
+				flag: count_div
+		},
+		success: function(data){					
+			if(data != ""){
+				var btnDel = "<a class='ico-16 del' title='Delete Task' href='javascript:deleteTask("+count_div+")'></a>";
+				//var btnAddTo = "<a class='ico-16 template' title='Add To Template' href='javascript:addTemplate("+count_div+")'>Add To Template</a>";
+				//var edittemp = "<a title='Edit Temp' href='<?php echo $this->baseUrl.'/template'?>'>Edit Template</a>";
+				var title = "<h4> Task "+count_form+"&nbsp"+btnDel+"</h4>";
+				var check = "";
+				var str = "<div class='task-div' id='task-div-"+count_div+"'>"+title + data+"</div>";
+				$("#task-0").before(str);
+				
+				
+			}else{
+				alert("Error");				
+			}
+			
+		}
+	});
+}
+function deleteTask(key){	
+	task_div = $("#task-div-"+key);	
+	task_div.children('h4').remove();
+	task_div.children('form').remove();
+}
+///////////////////////////////////////
+function targetChange(key){
+	
+	selected = ($(key).val());
+	if(selected == "TargetType"){
+		
+	}else{
+		
+	}
+}
+function addTarget(key){
+	count = $("#target-list-"+key +' .target-list').size();	
+	input ='<input id = "target-'+count+'"  class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value=""> <br>'
+	$("#target-list-"+key).append(input);
+}
+function saveTask(){
+	quest_id = $("#QuestID").val();
+
+	$(".task_form").each(function(key,value){		
+		var data = $(this).serialize();	
+		key = key + 1;
+		taskname = $(this).find("#TaskName").val();	
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/task/insert/'?> ",
+			data: data + "&QuestID="+ quest_id,		
+			success: function(msg){	
+				if(parseInt(msg)==1){
+					$("#dialog #ft").before("<p class='success'>Task "+ key +":Success<p>");
+				}else{					
+					$("#dialog #ft").before("<p class='error'>Task " + key + ":	<br>"+ msg + "</p>");					
+				}		
+			}
+		});
+	});
+	
+			
+}
+function validate(){
+	flag=true;	
+	$(".task_form").each(function(key,val){
+		num = key+1;
+		value = $(val).find("#TaskString-"+key).val();		
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TaskString không được để trống</p>");					
+			flag=false;
+		}		
+		
+		value = $(val).find("#DescID-"+key).val();
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>DescString không được để trống</p>");	
+			flag=false;
+		}
+		value = $(val).find("#QuestTC").val();
+		value = $(val).find("#UnlockCoin").val();
+		if(isNaN(value))
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin phải là số</p>");					
+			flag=false;
+		}
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>UnlockCoin không được để trống</p>");					
+			flag=false;
+		}
+		value = $(val).find("#Quantity").val();
+		if(isNaN(value))
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity phải là số</p>");					
+			flag=false;
+		}
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Quantity không được để trống</p>");					
+			flag=false;
+		}
+		value = $(val).find("#Action").val();	
+		if(value=='')
+		{
+			$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>Hãy chọn Action</p>");					
+			flag=false;
+		}
+		
+		target = $(val).find("#target :radio:checked").val();		
+		if(target == "TargetType")
+		{
+			targetType=$(val).find("#TargetType").val();
+			/*if(targetType=='')
+			{
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType không được bỏ trống</p>");					
+				flag=false;
+			}
+			else */if(isNaN(targetType))
+			{
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetType phải là số</p>");					
+				flag=false;
+			}
+		}
+		else
+		{			
+			targetList=$(val).find(".target-list").val();
+			count = $(val).find(".target-list").size();			
+			/*if(count==0)
+			{								
+					$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList chưa được tạo</p>");					
+					flag=false;				
+			}
+			else*/ if(targetList=='' && count!=0)
+			{
+				
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList không được bỏ trống</p>");					
+				flag=false;
+			}
+			else if(isNaN(targetList) &&count!=0)
+			{
+				$("#dialog #ct").append("<p class='error'>Task " + num + ":	<br>TargetList phải là số</p>");					
+				flag=false;
+			}
+		}		
+	});
+	return flag;	
+}
+function saveAll(){	
+	quest_id = $("#QuestID").val();
+	data = $(".quest-info").serialize();		
+	$("#dialog #ct").html("");	
+	test = validate();
+	if(test==false){
+		$("#dialog").dialog({			
+			height: 400,
+			width: 350,
+			modal: true,
+			buttons: {
+				"Continue": function() {								
+					$(this).dialog("close");						
+				}										
+			}
+		});
+	}else{
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/new/'?>",
+		data: data,		
+		success: function(msg){				
+			if(parseInt(msg)==1){	
+				$("#dialog #ct").append("<p class='msg'>Add Quest Success<p>");
+				saveTask();	
+				//$("#dialog").dialog("open");
+				$("#dialog").dialog({
+					height: 300,
+					width: 350,
+					modal: true,
+					buttons: {
+						"Success": function() {								
+							$(this).dialog("close");
+							location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
+						},
+						"Edit": function() {								
+							$(this).dialog("close");
+							location.replace("<?php echo $this->baseUrl.'/quest/edit/id/'?>"+quest_id);
+							//alert(quest_id);
+						},
+						"New": function() {								
+							$(this).dialog("close");
+							location.replace("<?php echo $this->baseUrl.'/quest/new/'?>");
+							window.location.reload();							
+						}										
+					}
+					});
+			}else{				
+				$("#dialog #ct").append("<p class='error'>Failed:<br>"+msg+"<p>");				
+				$("#dialog").dialog({
+					height: 300,
+					width: 350,
+					modal: true,
+					buttons: {
+						"Error": function() {								
+							$(this).dialog("close");
+							//location.replace("<?php echo $this->baseUrl.'/quest/'?>");							
+						}
+					}
+					});
+			}
+						
+								
+		}
+	});	
+	}	
+}
+////////////////////////////////////Template//////////////////////
+function addTemplate(key){
+	data = $(".form-task-" + key).serialize();	
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/Template/save/'?> ",
+		data: data,
+		dataType:"json",	
+		success: function(msg){			
+			if( msg.msg=="1"){
+				var option_html = "<option value='"+msg.TempID+"'>"+msg.Name+"</option>";
+				$("select.task-template").append(option_html);
+				alert("Successfull");			
+			}else{
+				alert(msg.msg);				
+			}
+		}
+	});
+}
+function loadTemplate(key){
+	var id = $("#template"+key).val();	
+	$.ajax({
+		type: "POST",		
+		url:"<?php echo $this->baseUrl.'/task/loadtemplate/'?> ",
+		data: "id=" + id,	
+		dataType: "json",
+		success: function(msg){ 				
+			$(".form-task-" + key +" input[name='TaskString']").val(msg.TaskString);
+			$(".form-task-" + key +" #TaskName").val(msg.TaskName);
+			$(".form-task-" + key +" input[name='DescID']").val(msg.DescID);
+			$(".form-task-" + key +" #DescString").val(msg.DescString);
+			$(".form-task-" + key +" #QuestTC").val(msg.QTC_ID);
+			$(".form-task-" + key +" #Action").val(msg.ActionID);
+			$(".form-task-" + key +" #UnlockCoin").val(msg.UnlockCoin);
+			$(".form-task-" + key +" #Quantity").val(msg.Quantity);
+			$(".form-task-" + key +" #IconClassName").val(msg.IconClassName);			
+			$(".form-task-" + key +" #IconPackageName").val(msg.IconPackageName);
+			$(".form-task-" + key +" p#TaskString-string-value-"+ key).html(msg.gNameTask);
+			$(".form-task-" + key +" a#TaskString-string-value-"+ key).attr("href","javascript:editstring('"+msg.TaskString+"','TaskString-string-value-"+key+"');");
+			$(".form-task-" + key +" p#DescID-string-value-"+ key).html(msg.gNamedesc);
+			$(".form-task-" + key +" a#DescID-string-value-"+ key).attr("href","javascript:editstring('"+msg.DescID+"','DescID-string-value-"+key+"');");
+			if(msg.TargetType==null){				
+				$(".form-task-" + key+ " .list").html("");
+				$(".form-task-" + key + " #TargetType").val('');
+				$(".form-task-" + key+ " #List").attr("checked", true);				
+				$.each(msg.TargetList, function(key1,val){				
+					count = $(".form-task-" + key+' .target-list').size();	
+					input ='<input id = "target-'+count+'" class="target-list" style="margin-left: 50px;width: 153px;" type="text" name="TargetList[]" value="'+val.TargetID+'"> <br>'
+					$(".form-task-" + key + " .list").append(input);
+				});
+			}else{								
+				$(".form-task-" + key + " #TargetType").val(msg.TargetType);
+				$(".form-task-" + key + " .list").html("");
+				$(".form-task-" + key + " #Type").attr("checked", true);
+			}
+		}
+	});	
+	
+}
+function editTemplate(){
+	$.ajax({
+		type: "POST",		
+		url:"<?php echo $this->baseUrl.'/template/index/?layout=disabled'?> ",				
+		success: function(msg){			
+			$("div#dialog_edit_template").html(msg);
+		}
+	});	
+	$("div#dialog_edit_template").dialog("open");
+}
+////////Init Diaglog//////////
+$("#dialog_edit_template").dialog({
+				autoOpen: false,
+				height: $(window).height()-50,
+				width: $(window).width()-100,
+				modal: true,
+				buttons: {
+					"Ok": function() {						
+						$(this).dialog("close");
+					}
+				}
+});
+
+/////////////Localite////////////]
+function getvalue(textbox)
+{
+	
+	var tam = $('#'+textbox).val();	
+	var tam1 = tam.split('@');
+	var str_split = tam1[1].split('#');
+	var groupname = str_split[0];
+	var key = str_split[1]	
+	$.ajax({
+		type: "POST",
+		url: '<?php echo $this->baseUrl?>/localite/string/viewkey',
+		data: { 
+					value : tam1[1]
+			  },
+		success: function (result) {			
+			tam2 = result.split('/n/');
+			var title = $('#'+textbox).attr('title');
+			$('p#'+title).html(tam2[1]);
+			$('a#'+title).attr("href","javascript:editstring('"+tam+"','"+title+"');");
+			
+			
+		}
+		}); 
+}
+function findstring(textbox,link)
+{
+	$.ajax({
+		type: "POST",
+		url: '<?php echo $this->baseUrl?>/localite/string/index?ajax=true&size=20'+link,
+		data: { 
+					
+			  },
+		success: function (result) {
+			
+			tam = result.split('<div id="splip"></div>');
+			tam2=tam[1];
+			tam2=tam2.replace('<input class="btn search" type="submit" name="search" value="search" />','<a style="padding:4px;border:1px solid #ddd;background:#f8f8f8;" href="JavaScript:void(0)" onClick="searchlink()">Tìm kiếm</a>')
+			tam2=tam2.replace("searchlink()","searchlink('"+textbox+"')");
+			for(i=0;i<20;i++)
+			{
+				tam2 = tam2.replace("(testajax,","('"+textbox+"',");
+				tam2 = tam2.replace("/n/","'");
+			}
+			for(i=0;i<20;i++)
+				tam2 = tam2.replace("/n/","'");
+				tam3 = tam[2].split('"');
+				tam4 = tam3[1].split('/n/');
+				tam5 = tam4[0]/20;
+				i=0;
+				for(i=0;i<tam5;i++);
+				strf = '<tfoot><tr><td colspan="7" align="center"><a onClick="firstpage(/n/'+textbox+'/n/,/n/'+link+'/n/,1)" href="#"><<</a><a onClick="firstpage(/n/'+textbox+'/n/,/n/'+link+'/n/,'+(tam4[1]-1)+')" href="JavaScript:void(0)" ><</a><a>'+tam4[1]+'/'+i+'</a><a onClick="firstpage(/n/'+textbox+'/n/,/n/'+link+'/n/,'+(tam4[1]-(-1))+')" href="JavaScript:void(0)">></a><a onClick="firstpage(/n/'+textbox+'/n/,/n/'+link+'/n/,'+i+')" href="#">>></a></td></tr></tfoot>';
+				for(i=0;i<16;i++)
+				{
+					strf = strf.replace("/n/","'");
+				}
+				$('#stringmain').html(tam2+strf);
+				showlightbox()
+		}
+		}); 
+}
+function addstring(textbox,value)
+{
+	$('#'+textbox).attr("value",value);
+	$('#stringmain').html("");	
+	getvalue(textbox);	
+	hidelightbox();
+}
+function searchlink(textbox)
+{
+	var id = $('input#ID').val();
+	var type = $('select[name=l_Search_type]').val();
+	var group = $('select[name=l_group]').val();
+	findstring(textbox,"&page=1&l_Search_type="+type+"&S_ID="+id+"&l_group="+group);
+}
+function firstpage(textbox,link,page)
+{
+	if(link=='')
+		link = '&page=1&l_Search_type=lkey&S_ID=-1&l_group=-1';
+	tam = link.split('page=');
+	tam1 = tam[1].split('&');
+	tam2 = 'page='+tam1[0];
+	tam3 = link.replace(tam2,"page="+page);
+	findstring(textbox,tam3);
+}
+
+
+
+
+
+$('#llightbox').click(function(){
+   	$('#stringmain').hide('slow').css('display','none');
+	$('#llightbox').animate({opacity:0},500).css('display','none');
+});
+function hidelightbox(){
+	$('#stringmain').hide('slow').css('display','none');
+	$('#llightbox').animate({opacity:0},500).css('display','none');
+}
+function showlightbox(){
+	$('table tfoot td a').css('margin','5px');
+	$('#llightbox').css('display','block').css('opacity','0').animate({opacity:0.7},200);
+	$('#stringmain').css('display','block');
+}
+function newstring(textbox,link)
+{
+	$('input#button1').hide();
+	var ham = "addnewstring('"+textbox+"')";
+	$.ajax({
+		type: "POST",
+		url: '<?php echo $this->baseUrl?>/localite/string/insert',
+		data: { 
+
+			  },
+		success: function (result) {
+			tam = result.split('<div id="splip"></div>');
+			tam1 = tam[1].replace('<input id="button" type="submit" value="OK">','<a style=" border: 1px solid #C3D7DB;padding:2px 4px;margin:4px;" href="JavaScript:void(0)" title="lưu" onClick="'+ham+'">Lưu</a>');
+			tam2 = tam1+'</div></div></div>';
+			$('#stringmain').html(tam2);
+		}
+	}); 
+	showlightbox();
+}
+function addnewstring(textbox){
+	var key = $('input#id').val();
+	var l_group = $('select#l_group').val();
+	var gname = $("select#l_group option[value='"+l_group+"']").text();
+	var test = $('textarea[name=test]').val();
+	var test1 = $('textarea[name=test1]').val();
+	if(test==''||test1==''){alert('Bạn nhập chưa đầy đủ các string vui lòng nhập lại');return;}
+	$.ajax({
+		type: "POST",
+		url: '<?php echo $this->baseUrl?>/localite/string/insert?key='+key+'&l_group='+l_group+'&test='+test+'&test1='+test1,
+		data: { 
+			  },
+		success: function (result) {
+			var value = '@'+gname+'#'+key; 
+			addstring(textbox,value);			
+			hidelightbox();
+		}
+	});
+}
+function getgroupname(key){
+	$.ajax({
+		type: "POST",
+		url: '<?php echo $this->baseUrl?>/localite/lgroup/getgroupname?id='+key,
+		data: { 
+			  },
+		success: function (result) {
+			return result;
+		}
+	});
+}
+///////Thaonx/////////////////
+//////////////Edit Language////////////////
+var local_title = "";
+function editstring(string,title){
+	local_title = title;	
+	 $.ajax({
+		type: "GET",		
+		url: "<?php echo $this->baseUrl?>/localite/string/edit?view=dialog&string="+encodeURIComponent(string)+"",
+		success: function (msg) {
+			
+			$("#dialog_edit_localize").html(msg);
+			//local_title = title;
+			$("#dialog_edit_localize").dialog("open");
+		}
+	});
+}
+// init dialog
+$("#dialog_edit_localize").dialog({
+	autoOpen: false,
+	height: 400,
+	width: 400,
+	modal: true,
+	buttons: {
+		"Save": function() {
+			saveLanguage();
+		},
+		"Cancel": function() {
+			$(this).dialog("close");
+		}
+	}
+});
+//save Language
+function saveLanguage(){
+	var data = $("form#insertstring").serialize();
+	data +="&view=dialog";
+	var string_value = $("form#insertstring textarea[name='default']").val();
+	$.ajax({
+		type: "POST",		
+		url: "<?php echo $this->baseUrl?>/localite/string/edit/",
+		data:data,
+		success: function (msg) {							
+				$("#dialog_edit_localize").dialog("close");
+				$("p#"+local_title).text(msg);			
+		}
+	});	
+}
+
+function changeMap()
+{
+	value = $('.l_group').val();
+	$.ajax({
+		type: "GET",		
+		url: "<?php echo $this->baseUrl?>/localite/string/insert?action=getid&idl_group="+value,
+		success: function (msg) {
+			$('.id').val(msg);
+		}
+	});
+}
+</script>

@@ -1,0 +1,42 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+<style>
+#insertlanguage>div>div
+{
+	padding: 5px;
+}
+#insertlanguage>div>div>div
+{
+	padding: 5px;
+}
+#insertlanguage>div>div>div>input#id
+{
+	margin-left:22px;
+}
+</style>
+<form id="insertlanguage" class="myform" action="" name="language" method="post">
+<div id="box">
+<h3>Insert Language</h3>
+	<div id='body'>
+		<div>
+			<label for="street">ID : </label>
+			<input readonly="readonly" id="id" type="text" tabindex="1" value="<?php echo $this->id;?>" name="id">
+		</div>
+		<div>
+			<label for="street">Name : </label>
+			<input id="name" type="text" tabindex="1" value="<?php echo $this->name;?>" name="name">
+		</div>
+		<div>
+			<input id="button1" name="button" type="submit" value="OK">
+			<input id="button1" type="button" onclick="history.go(-1)" value="Quay lại">
+		</div>
+	</div>
+</div>
+</form>
+

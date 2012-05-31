@@ -1,0 +1,179 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<form id="frmQuestLine" class="myform" action="" method="post">
+
+<div class="mybox">
+	<h3>Quest Line</h3>
+	<table class="filter" style="width: 90%;margin: auto;margin-bottom: 20px;margin-top: 10px";>
+		<tr>
+			<td>Quest Line ID</td>
+			<td><input style="width:110px;" type="text" name="searchID" id="searchID" class="searchbox" /></td>
+			<td><input type="submit" name="search_ql" class="btn search" id="search-ql" value="search" /></td>
+		
+		</tr>		
+		<tr>
+			<td>ID<input id="QuestLineID"  class="disabled" name="QuestLineID" type="text"  readonly  style="width:50px;" /></td>
+			<td>Name<input id="QuestLineName" type="text" name="QuestLineName"/></td>
+			<td>Icon<input id="QuestLineIcon" type="text" name="QuestLineIcon"/></td>
+			<td  style="  width: 50%;">
+				<a class="btn save" href="">Save</a>
+				<a class="btn add disabled" href="">Add</a>
+				<a class="btn cancel" href="">Cancel</a>
+			</td>
+		</tr>
+	</table>
+	<table class="list" id="list_ql" style="width: 90%;margin:auto ;border: 1px solid;">	
+		<thead>
+			<tr>									
+				<td width="40"><a href="#">ID</a></td>
+				<td>Quest Line Name</td>
+				<td>Quest Line Icon</td>							
+				<td class="center" width="80">Action</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<?php $this->listQuestLine($this->data, $this->page, $this->items, $this) ?>
+			</tr>
+		</tbody>						
+	</table>
+	<div align="center" style="margin: 20px;">		
+		<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this) ?>
+	</div>	
+	
+</div>
+</form>
+<script type="text/javascript">
+/**************************
+ * reset event
+ */
+$("a.btn.disabled").click(function(){
+	//alert("disabled");
+	return false;
+});
+
+
+$(function(){	
+	////////////////click Cancel//////////////////////////
+	$(".btn.cancel").click(function(){
+		if($(".btn.cancel").hasClass('disabled')){			
+ 	 	}else{
+ 	 		document.getElementById('QuestLineID').value = '';
+ 	 		document.getElementById('QuestLineName').value = '';
+ 	 		document.getElementById('QuestLineIcon').value = '';
+ 	 		disable($(".btn.add"));
+			disable($(".btn.save"));
+			disable($(".btn.cancel"));
+ 	 	}
+ 	 	return false;
+ 	});
+
+///////////////////Input Event///////////////////////////
+	$("#QuestLineName").keyup(function(e){
+		var id = $("#QuestLineID").val();
+		var name = $("#QuestLineName").val();
+		var icon = $("#QuestLineIcon").val();
+		
+		if(name == ''){
+			disable($(".btn.add"));
+			disable($(".btn.save"));
+		}else{	
+			enable($(".btn.cancel"));					
+			if(id != ''){
+				disable($(".btn.add"));
+				enable($(".btn.save"));				
+			}else{
+				enable($(".btn.add"));
+				disable($(".btn.save"));
+			}
+		}
+	});
+///////////////Save click/////////////////
+	$(".btn.save").click(function(){
+		if($(this).hasClass("disabled")){
+			return false;
+		}
+		updateQuestLine();			
+	});		
+
+	$(".btn.add").click(function(){
+		if($(this).hasClass("disabled")){
+			return false;
+		}
+		updateQuestLine();			
+	});	
+});
+
+///////////////////Function///////////////////////
+/*******click edit button***********/
+function editQuestLine(key){
+	id = $("#quest-line-"+key+" .id").text();
+	name = $("#quest-line-"+key+" .name").text();
+	icon = $("#quest-line-"+key+" .QLIcon").text();
+	document.getElementById('QuestLineID').value = id;
+	document.getElementById('QuestLineName').value = name;
+	document.getElementById('QuestLineIcon').value = icon;
+	if($(".btn.save").hasClass('disabled')){
+		$(".btn.save").removeClass("disabled");		
+	}
+	if($(".btn.cancel").hasClass('disabled')){
+		$(".btn.cancel").removeClass("disabled");		
+	}
+	if(!$(".btn.add").hasClass('disabled')){
+		$(".btn.add").addClass("disabled");
+	}
+	
+}
+
+/*******click edit button***********/
+function deleteQuestLine(key){
+	id = $("#quest-line-"+key+" .id").text();
+	name = $("#quest-line-"+key+" .name").text();
+	if(!confirm("Bạn có muốn xóa QuestLine: " + name)){
+		return false;
+	};
+	$.ajax({
+		type: "POST",
+		url: "http://localhost/vng/game-tool/sourcecode/chipzin/questline/update",
+		url: "<?php echo $this->baseUrl.'/QuestLine/delete/'?> ",
+		data: "QuestLineID="+id,
+		success: function(msg){
+			if(msg != ""){					
+				alert(msg);
+			}
+			else{
+				window.location.reload();		
+			}			
+		}
+	});	
+	
+}
+///////////UpdateQuestLine///////////////
+//Neu co QuestLineID thi se Update, nguoc lai se insert
+
+function updateQuestLine(){
+	var id = $("#QuestLineID").val();
+	var name = $("#QuestLineName").val();
+	var icon = $("#QuestLineIcon").val();
+	$.ajax({
+		type: "POST",
+		url: "http://localhost/vng/game-tool/sourcecode/chipzin/questline/update",
+		url: "<?php echo $this->baseUrl.'/QuestLine/update/'?> ",
+		data: "QuestLineName=" + name +"&QuestLineIcon=" + icon+"&QuestLineID="+id,
+		success: function(msg){
+			if(msg != ""){					
+				window.location.reload();
+			}
+			else{
+				alert("Update KO thành công");				
+			}			
+		}
+	});	
+}
+
+
+</script>
