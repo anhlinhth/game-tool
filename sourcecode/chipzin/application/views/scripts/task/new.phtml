@@ -13,9 +13,9 @@ foreach ($this->arrTemplate as $row) {?>
 <tr>
 	
 	<td>Counter</td>
-	<td><input type="checkbox" id="Counter" name ="Counter" onclick="changeCheckbox();" value="check">&nbsp; </td>
+	<td><input type="checkbox" id="Counter-<?php echo $this->key1?>" name ="Counter" onclick="changeCheckbox(<?php echo $this->key1?>);" value="check">&nbsp; </td>
 	<td>Area</td>
-	<td><input style="display: none;" type="text" id="Area" name="Area"  class="taskid" value=""/></td>
+	<td><input style="display: none;" type="text" id="Area-<?php echo $this->key1?>" name="Area"  class="taskid" value=""/></td>
 	
 	</tr>
 	<tr>
@@ -124,18 +124,19 @@ foreach ($this->arrTemplate as $row) {?>
 </table>
 </form>
 <script  type='text/javascript'> 
-function changeCheckbox() { 
-	if(document.getElementById("Counter").checked)
+function changeCheckbox(key) {
+	
+	if(document.getElementById("Counter-"+key).checked)
 	{
 		
-		document.getElementById("Area").style.display=""; // this is for hiding
+		document.getElementById("Area-"+key).style.display=""; // this is for hiding
 		
 		
 	}
 	else 
 		{
-			document.getElementById("Area").style.display="none"; // this is for showing
-			document.getElementById("Area").value=null;
+			document.getElementById("Area-"+key).style.display="none"; // this is for showing
+			document.getElementById("Area-"+key).value=null;
 		}
 }
 </script>
