@@ -25,28 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `s_shop`
 --
-
-CREATE TABLE IF NOT EXISTS `s_shop` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) NOT NULL,
-  `TypeID` int(11) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `TypeID` (`TypeID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
-
---
--- Dumping data for table `s_shop`
---
-
-INSERT INTO `s_shop` (`ID`, `Name`, `TypeID`) VALUES
-(1, 'stone_shop', 1),
-(2, 'wood_shop', 1),
-(3, 'farm_shop', 1),
-(4, 'mine_shop', 1),
-(5, 'soldier_shop_bobinh', 1),
-(6, 'soldier_shop_kibinh', 1),
-(7, 'soldier_shop_phaobinh', 1),
-(8, 'mil_research_shop', 1);
+ alter table `s_shop` add `TypeID` INT(11) NOT NULL;
 
 -- --------------------------------------------------------
 
