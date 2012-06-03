@@ -27,7 +27,7 @@ class Localite_String2Controller extends BaseController
 			$page = $this->_request->getParam("page",'1');
 			if($page==0)
 				$page = 1;
-			$size = $this->_request->getParam("size",'20');
+			$size = $this->_request->getParam("size",'100');
 			$searchtype = $_POST["searchtype"];
 			$searchbox = $_POST["searchbox"];
 			$search = $_POST["searchbox"];
