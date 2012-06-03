@@ -129,13 +129,13 @@ function updateNextQuest(id,questid,key)
 				NextQuest:value
 		},	
 		success: function(data){
-			if(parseInt(data) == 1){	
+		//	if(parseInt(data) == 1){	
 				alert("Successfull");
 				loadQuest();
-			}else{
-				alert(data);
-				alert("Error");				
-			}
+		//	}else{
+		//		alert(data);
+		//		alert("Error");				
+		//	}
 			
 		}
 	});
@@ -200,14 +200,16 @@ function updateNeedQuest(id,questid,key)
 				QuestID:questid,				
 				NeedQuest:value
 		},	
+		
 		success: function(data){
-			if(parseInt(data) == 1){	
+		
+			//if(parseInt(data) == 1){	
 				alert("successfull");
 				loadQuest();
-			}else{
-				alert(data);
-				alert("Error");				
-			}
+		//	}else{
+		//		alert(data);
+		//		alert("Error");				
+		//	}
 			
 		}
 	});
@@ -229,6 +231,7 @@ function updateNeedquest(id)
 		}
 	});
 }
+
 function loadQuest(){
 	$("#list-quest").html("<tr><td colspan='8' class='center'><h1>Loading......<a class='ico-16 loading'></a></h1></td></tr>");
 	$.ajax({
