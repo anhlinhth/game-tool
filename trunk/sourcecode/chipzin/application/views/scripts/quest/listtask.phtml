@@ -31,14 +31,41 @@ foreach ($this->arrTemp as $row)
 if($val->Counter == 1)
 {
 	$flag = 'checked';
+	$area= "";
 }
 else 
 {
 	$flag = "";
+	$area= "none";
 }
 ?>
-<input type="checkbox" id="Counter" <?php echo $flag?> name ="Counter" value="check">&nbsp;Counter
+
+<script  type='text/javascript'> 
+function changeCheckbox() { 
+	if(document.getElementById("Counter").checked)
+	{
+		
+		document.getElementById("Area").style.display=""; // this is for hiding
+		
+		
+	}
+	else 
+		{
+			document.getElementById("Area").style.display="none"; // this is for showing
+			document.getElementById("Area").value=null;
+		}
+}
+</script>
+
 <table>
+	<tr>
+	
+	<td>Counter</td>
+	<td><input type="checkbox" id="Counter" <?php echo $flag?> name ="Counter" onclick="changeCheckbox();" value="check">&nbsp; </td>
+	<td>Area</td>
+	<td><input style="display: <?php echo $area?>;" type="text" id="Area" name="Area"  class="taskid" value="<?php echo $val->Area?>"/></td>
+	
+	</tr>
 	<tr>
 		<td>Task ID</td>
 		<td><input type="text" id="TaskID" name="TaskID" class="disabled" readonly="readonly" class="taskid" value="<?php echo $val->TaskID?>"/></td>
