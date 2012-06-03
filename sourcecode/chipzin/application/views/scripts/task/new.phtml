@@ -8,8 +8,16 @@ foreach ($this->arrTemplate as $row) {?>
 </select>
 <a class="btn add" title=' Add' href='javascript:addTemplate(<?php echo $this->key1?>)'>Add To Template</a>
 <a class="btn edit" title=' Edit' href='javascript:editTemplate()'>Edit Template</a><br/>
-<input type="checkbox" id="Counter" name ="Counter" value="check">&nbsp;Counter
+
 <table>
+<tr>
+	
+	<td>Counter</td>
+	<td><input type="checkbox" id="Counter" name ="Counter" onclick="changeCheckbox();" value="check">&nbsp; </td>
+	<td>Area</td>
+	<td><input style="display: none;" type="text" id="Area" name="Area"  class="taskid" value=""/></td>
+	
+	</tr>
 	<tr>
 		<td>Task ID</td>
 		<td><input type="text" id="TaskID" name="TaskID" class="disabled" readonly="readonly" class="taskid" value=""/></td>
@@ -115,4 +123,20 @@ foreach ($this->arrTemplate as $row) {?>
 </tr>
 </table>
 </form>
+<script  type='text/javascript'> 
+function changeCheckbox() { 
+	if(document.getElementById("Counter").checked)
+	{
+		
+		document.getElementById("Area").style.display=""; // this is for hiding
+		
+		
+	}
+	else 
+		{
+			document.getElementById("Area").style.display="none"; // this is for showing
+			document.getElementById("Area").value=null;
+		}
+}
+</script>
 
