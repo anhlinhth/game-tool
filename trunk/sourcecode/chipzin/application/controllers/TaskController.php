@@ -161,6 +161,7 @@ class TaskController extends BaseController
 			$obj->QTC_ID = 1;
 			$obj->ActionID = 1;
 			$obj->Counter = 0;
+			$obj->Area=null;
 			$md->_insert($obj);
 			Models_Log::insert($this->view->user->username, "act_add_new_task", $obj->name);				
 			echo "1";
@@ -236,10 +237,12 @@ class TaskController extends BaseController
 			    if(isset($_POST[Counter]))
 			    {
 			    	$obj->Counter = '1';
+			    	$obj->Area=$_POST[Area];
 			    }
 			    else
 			    {
 			    	$obj->Counter = '0';
+			    	$obj->Area=null;
 			    }
 			    $form = new Forms_Task();
 			    $form->obj = $obj;
@@ -326,10 +329,12 @@ class TaskController extends BaseController
 				    if(isset($_POST[Counter]))
 				    {
 				    	$obj->Counter = '1';
+				    	$obj->Area=$_POST[Area];
 				    }
 				    else
 				    {
 				    	$obj->Counter = '0';
+				    	$obj->Area=null;
 				    }
 				    $form = new Forms_Task();
 				    $form->obj = $obj;
@@ -359,10 +364,12 @@ class TaskController extends BaseController
 				    if(isset($_POST[Counter]))
 				    {
 				    	$obj->Counter = '1';
+				    	$obj->Area=$_POST[Area];
 				    }
 				    else
 				    {
 				    	$obj->Counter = '0';
+				    	$obj->Area=null;
 				    }
 				    $form = new Forms_Task();
 				    $form->obj = $obj;
