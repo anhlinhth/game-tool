@@ -59,6 +59,10 @@ class Models_Task_Package extends Models_Base
 					$str .="\n\t 'counter' => false,";
 				else 
 					$str .="\n\t 'counter' => true,";
+				if($row['Area']==null || $row['Area']==0 )
+					$str .="\n\t 'area' => null,";
+				else 
+					$str .="\n\t 'area' => ".(int)$row['Area'].",";
 				$str .="\n"."),";
 				$i++;
 			}
