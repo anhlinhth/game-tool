@@ -14,5 +14,6 @@ class Obj_Task
 	public $ActionID;
 	public $QuestID;
 	public $TargetType;
+	public $Area;
 	public $Counter;
 }
