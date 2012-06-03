@@ -53,11 +53,11 @@ class Models_String2 extends Models_Base
 	}
 	
 	public function filter2 ($content,$page,$size){
-				$sql = "SELECT a.id as id,g.name as gname,g.id as gid,a.lkey as lkey,a.text as ldefault, b.text as lindex
-				FROM l_content a 
-				LEFT JOIN l_content b ON (a.lgroup=b.lgroup AND a.lkey=b.lkey AND b.lang = (SELECT id FROM l_language WHERE status<>1 ORDER BY l_language.status DESC LIMIT 0,1))
-				LEFT JOIN l_group g ON (a.lgroup=g.id)
-				WHERE a.lang = (SELECT id FROM l_language WHERE status=1)";
+		$sql = "SELECT a.id as id, g.id as gid, g.name as gname, a.lkey as lkey ,a.text as ldefault,(SELECT text FROM l_content AS b WHERE b.lang=(SELECT id FROM l_language WHERE status<>1 ORDER BY l_language.status DESC LIMIT 0,1) AND a.lgroup = b.lgroup AND a.lkey = b.lkey) as lindex
+						FROM l_content AS a, l_group as g
+						WHERE a.lang = (SELECT id FROM l_language WHERE status=1) AND a.lgroup = g.id ";
+				
+						
 		
 		//$content->text = htmlentities($content->text,ENT_QUOTES);
 		//$content->text = htmlentities($content->text,ENT_NOQUOTES);
@@ -77,7 +77,6 @@ class Models_String2 extends Models_Base
 			$sql .= " LIMIT ".($page-1)*$size.",".$size;
 		}
 		
-		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
 		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
 		return $data;
 	}
