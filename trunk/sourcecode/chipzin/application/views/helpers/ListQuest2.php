@@ -39,13 +39,14 @@ class Zend_View_Helper_ListQuest2
 							<td>$row->QuestLineName</td>
 							<td style='width: 27%;'>";	
 				$flag2 = 1;
+				$flag1=1;
 				//-----------------------------------------------------------------
 				foreach($arrNeedQuest[$row->QuestID] as $key => $needQuestRow){
 					
 					//$strList.='&gt;';
 					
 					if($needQuestRow->NeedQuest==NULL){
-						$flag2 = 0;
+						$flag1 = 0;
 					}
 					$strList.= "<div class='need-quest-$row->QuestID' id='need-quest-div-$row->QuestID-$key'>							
 							<select style='min-width:200px;max-width:200px' id='needquest-$row->QuestID-$key' name='needquest-$row->QuestID-$key' onChange='updateNeedQuest($needQuestRow->ID,$row->QuestID,$key);'>";
@@ -67,7 +68,7 @@ class Zend_View_Helper_ListQuest2
 					</div>";
 				}
 				if(empty($arrNeedQuest)){
-					$flag2 = 0;
+					$flag1 = 0;
 				}
 				//------------------------------------------------------------
 				$strList.="</td>	
