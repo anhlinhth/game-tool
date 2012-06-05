@@ -1,2 +1,0 @@
-You can get Zend 1.6 from svn by link:
-  http://10.30.9.110:81/svn/backend/trunk/library/Zend1.6
