@@ -1,0 +1,92 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<div id="box">	
+	<h3 id="adduser">Phân quyền nhóm <?php echo $this->group->name ?></h3><br/>	
+	<form id="form" action="" method="post" enctype="multipart/form-data">
+		&nbsp;&nbsp;<input onclick="showAll(this,'<?php echo $this->controllerList ?>')" type="checkbox"/> Hiện toàn bộ
+		<?php $this->listPrivileges($this->privileges,$this->groupPrivileges,$this) ?>		
+		<p align="center">
+			<input id="button1" type="submit" value="OK" /> &nbsp;&nbsp;
+			<input id="button1" type="button" value="Quay lại" onclick="history.go(-1)" />
+		</p>
+	</form>
+</div>
+<script type="text/javascript">
+	function openPrivilege(controllerName)
+	{
+		var privilege = $('tr[id^='+ controllerName + '_]');
+		$(privilege).show();
+		$('#imgOpen' + controllerName).remove();
+		$('#imgClose' + controllerName).remove();
+		$('#tdImg' + controllerName).prepend("<img id='imgClose"+ controllerName +"' onclick='closePrivilege(\""+ controllerName +"\")' style='vertical-align: middle;cursor:pointer' src='<?php echo $this->baseUrl ?>/media/images/icons/arrow-on.gif'/>");
+	}
+	
+	function closePrivilege(controllerName)
+	{
+		var privilege = $('tr[id^='+ controllerName + '_]');
+		$(privilege).hide();
+		$('#imgOpen' + controllerName).remove();
+		$('#imgClose' + controllerName).remove();
+		$('#tdImg' + controllerName).prepend("<img id='imgOpen"+ controllerName +"' onclick='openPrivilege(\""+ controllerName +"\")' style='vertical-align: middle;cursor:pointer' src='<?php echo $this->baseUrl ?>/media/images/icons/arrow-off.gif'/>");
+	}
+	
+	function showAll(self,controllerList)
+	{
+		var arrController = controllerList.split(',');
+		if($(self).is(":checked"))
+		{
+			for(var i = 0; i < arrController.length; i++)
+			{
+				if(arrController[i] == "")
+					continue;
+				else
+					openPrivilege(arrController[i]);
+			}			
+		}
+		else
+		{
+			for(var i = 0; i < arrController.length; i++)
+			{
+				if(arrController[i] == "")
+					continue;
+				else
+					closePrivilege(arrController[i]);
+			}
+		}
+	}
+	
+	function checkAll(self,controllerName)
+	{
+		if($(self).is(":checked"))
+		{			
+			$("input[class='chk"+ controllerName +"']").each(function(){
+				$(this).attr('checked','checked');
+			});
+		}
+		else
+		{			
+			$("input[class='chk"+ controllerName +"']").each(function(){				
+				$(this).removeAttr("checked");
+			});
+		}		
+	}
+	
+	function checkItem(controllerName)
+	{
+		var chk = $("input[class='chk"+ controllerName +"']");		
+		
+		var count = 0;
+		for(var i = 0; i < chk.length; i++)
+			if(chk[i].checked == true)			
+				count++;
+		
+		if(count == chk.length)
+			$("input[id='chkAll"+ controllerName +"']").attr("checked", "checked");
+		else
+			$("input[id='chkAll"+ controllerName +"']").removeAttr("checked");
+	}
+</script>

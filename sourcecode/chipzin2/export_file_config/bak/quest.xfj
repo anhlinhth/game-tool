@@ -1,0 +1,32 @@
+{
+ 	"membase1":
+	{	
+		"level_342787": 1,
+		"energy_342787": false
+	},
+	"memcache1":
+	{		
+		"session2_342787": {
+			"session": "1F0189887042E038FD854667",
+			"sound": true,
+			"music": true
+		}	
+	}
+}
+
+{
+  "url-base": "http://example.com/music/", 
+  "playlist-name": "Epic Playlist", 
+  "songs": [
+    {
+      "url": "1.mp3", 
+      "artist": "Grayceon", 
+      "title": "Sounds Like Thunder"
+    }, 
+    {
+      "url": "2.mp3", 
+      "artist": "Thou", 
+      "title": "Their Hooves Carve Craters in the Earth"
+    }
+  ]
+}

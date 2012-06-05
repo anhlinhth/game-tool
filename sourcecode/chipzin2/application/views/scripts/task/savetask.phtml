@@ -1,0 +1,98 @@
+<?php ECHO $this->key?>
+<form  id="form" class="task_form<?php echo $this->key;?>">
+Template : <select id ="Template<?php echo $this->key;?>" name ="Template<?php echo $this->key;?>" onchange ="loadTemplate(<?php echo $this->key;?>)">
+<?php 
+foreach ($this->arrTemplate as $row)
+{
+?>
+	<option value ="<?php echo $row->TaskID;?>"><?php echo $row->TaskName;?></option>
+<?php 
+}
+?>
+</select>
+<table>
+	<tr>
+		<td>Task ID</td>
+		<td><input type="text" id="TaskID" name="TaskID" class="disabled" readonly="readonly" class="taskid" value=""/></td>
+		<td>Task Name</td>
+		<td><input type="text" id="TaskName" name="TaskName" value=""/></td>
+		
+	</tr>
+	
+	<tr>
+		<td>Task String</td>
+		<td><input type="text" id="TaskString" name="TaskString" value=""/></td>
+		<td>Action (*) </td>
+		<td>
+		<select id="Action" name="Action">
+			
+			<?php 
+				foreach($this->arrAction as $row)
+				{
+					$str="";
+					if($val->ActionID == $row->ActionID )
+					{
+						$str= "selected";
+					}
+			?>
+					<option <?php echo $str;?> value="<?php echo $row->ActionID ?>"><?php echo $row->ActionName ?></option>
+			<?php
+				}
+			?>
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Desc</td>
+		<td><input type="text" id="DescID" name="DescID" value=""/></td>
+		<td>DescString</td>
+		<td><input type="text" id="DescString" name="DescString" value=""/></td>
+	</tr>
+	<tr> 
+
+		<td>Quantity (*) </td>
+		<td><input type="text" id="Quantity" name="Quantity" value=""/></td>	
+		
+		<!-- 
+		<td>
+		<INPUT TYPE=RADIO NAME="TargetType" VALUE="" CHECKED> Target Type<BR>
+		<INPUT TYPE=RADIO NAME="TargetType" VALUE="null"> Target List<BR>
+		</td>
+		--><td>UnlockCoin (*) </td>
+		<td><input type="text" id="UnlockCoin" name="UnlockCoin" value=""/></td>
+	</tr>
+	<tr>		
+		<td rowspan=1">Target(*)</td>
+		<td rowspan="1" id="target">
+			<input checked type="radio" name="Target"  value="TargetType"> Type<input style="margin-left: 10px;width: 153px;" type="text" name="TargetType" value=""> <br>
+			<div>
+			<input type="radio" name="Target" value="TargetList"> List <a  class="ico-16 add add-target" href="#"></a><br>
+			
+			</div>
+		</td>
+		<td>Quest Task Client</td>
+		<!-- ////////////////Hien Quest Task Client vao commbobox/////////////////// -->
+		
+		<td>
+		<select id="QuestTC" name="QuestTC">
+			
+			<?php 
+				foreach($this->arrQuestTC as $row)
+				{
+					$str="";
+					if($val->QTC_ID == $row->QTC_ID )
+					{
+						$str= "selected";
+					}
+			?>
+					<option <?php echo $str;?> value="<?php echo $row->QTC_ID ?>"><?php echo $row->QTC_Name ?></option>
+			<?php
+				}
+			?>
+		</select>
+		</td>	
+	</tr>
+	<tr>		
+</tr>
+</table>
+</form>

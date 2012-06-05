@@ -1,0 +1,336 @@
+
+.mybox{
+	border: 1px solid #C3D7DB;
+}
+.mybox h3,.box h3{
+    background: #D9EAED;
+	border-bottom: 1px solid #C3D7DB;
+	color: #294145;
+	padding: 10px;
+}
+
+.mybox h4{
+    background: #D9EAED;
+	border-bottom: 1px solid #C3D7DB;
+	background-color: #D9EAED;
+	margin-left: 5PX;
+	margin-right: 13PX;
+}
+
+.mybox#quest input[type="text"]{
+	width: 55%;
+}
+input.disabled{
+	background: #EFEFEF !important;
+}
+/**
+ * ***********************Form*******************************
+ */
+.myform input[type="text"]{
+	background-image: none;
+}
+
+.myform input[type="text"].width{
+	width: 190px;
+}
+
+#mybox legend {
+width: 200px;
+background: white url('../images/form_mix.gif') repeat-x center left;
+margin: 14px 14px 10px 10px;
+padding: 2px 52px 4px 9px;
+}
+#mybox fieldset{
+	display: block;
+	padding: 5px 10px 5px 7px;
+	line-height: 20px;
+	margin-bottom: 10px;
+	
+	margin: 5px 10px 5px 10px;
+}
+/**
+ * ***********************List*******************************
+ */
+table.list {
+	border-collapse: collapse;
+	width: 100%;
+	border-top: 1px solid #DDDDDD;
+	border-left: 1px solid #DDDDDD;
+	margin: 0px;
+	
+	
+}
+table.list td {
+	border-right: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
+}
+table.list thead td {
+	background-color: #EFEFEF;
+	padding: 0px 5px;
+}
+table.list thead td a, .list thead td {
+	text-decoration: none;
+	color: #222222;
+	font-weight: bold;
+}
+table.list tbody td a {
+	text-decoration: underline;
+}
+table.list tbody td {
+	/*vertical-align: top;*/
+	padding: 5px 5px;
+}
+table.list .left {
+	text-align: left;
+	padding: 7px;
+}
+table.list .right {
+	text-align: right;
+	padding: 7px;
+}
+table.list .center {
+	text-align: center;
+	padding: 7px;
+}
+
+/**
+ * ************************Button******************************
+ */
+.btn{
+	cursor: pointer;
+	background-repeat: no-repeat !important;
+	background-position: left;
+	background-position: 4px 2px;
+	font-weight: bold;
+}
+.btn.big{
+	padding: 6px 9px 7px 35px;
+}
+a.btn{
+	padding: 3px 10px 2px 25px;
+	border: 1px solid;
+	margin-left: 10px;
+}
+
+input.btn{
+	padding: 3px 10px 2px 25px;
+}
+a.btn.disabled{
+	cursor: default;
+	opacity: 0.5;
+	border:none;
+}
+a.btn.disabled:hover{
+	cursor: default;
+	opacity: 0.5;
+}
+
+.btn.active:hover{
+	border: 1px solid;
+	border-color: blue;
+}
+button.btn{
+	border-left: none;
+	border-right: none;
+}
+button.btn:hover {
+	cursor: pointer;
+}
+
+/******************************************/
+
+.btn.add{
+	background-image:url("../images/p2/icons/16/add.png") !important; 
+}
+.btn.edit{
+	background-image:url("../images/p2/icons/16/edit.png") !important; 
+}
+.btn.sync{
+	background-image:url("../images/p2/icons/24/sync.png") !important; 
+}
+.btn.cancel{
+	background-image:url("../images/p2/icons/16/cancel.png"); 
+}
+.btn.search{
+	background-image:url("../images/p2/icons/16/find.png"); 
+}
+.btn.save{
+	background-image:url("../images/p2/icons/16/save.png") !important; 
+}
+
+/*************************************/
+.ico-16{
+	padding: 3px 10px 0px 10px !important;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.ico-16:hover{
+	border: 1px solid;
+}
+.ico-16.add{
+	background-image:url("../images/p2/icons/16/add.png"); 
+}
+
+.ico-16.del{
+	background-image:url("../images/p2/icons/16/delete.png"); 
+}
+.ico-16.save{
+	background-image:url("../images/p2/icons/16/save.png"); 
+}
+
+.ico-16.explore{
+	background-image:url("../images/p2/icons/16/explore.png"); 
+}
+
+.ico-16.warning{
+	background-image:url("../images/p2/icons/16/warning.png"); 
+}
+.ico-16.warning:hover{
+		
+		border:none;
+}
+
+.ico-16.ok{
+	background-image:url("../images/p2/icons/16/ok.png"); 
+}
+.ico-16.ok:hover{
+		
+		border:none;
+}
+.ico-16.errors{
+	background-image:url("../images/p2/icons/16/error.png"); 
+}
+.ico-16.errors:hover{	
+		border:none;
+}
+
+.ico-24{
+	padding: 5px 17px 5px 11px !important;
+	cursor: pointer !important;
+}
+.ico-24.save{
+	background-image:url("../images/p2/icons/24/save.png") !important;
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+}
+/**
+ * ************************
+ */
+a.tool-16{
+	padding-left: 0px;
+	padding-right: 16px;
+	background-position: center;
+	background-repeat: no-repeat;
+
+}
+
+/*******tool-24*********/
+a.tool-24{
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	background-position: center;
+	background-repeat: no-repeat;
+}
+a.tool-24.disabled{
+	cursor: default;
+	opacity: 0.4;
+}
+a.tool-24.disabled:hover{
+	cursor: default;
+	opacity: 0.4;
+	border:none;
+}
+a.tool-24:hover{
+	border: 1px solid;
+	border-color: blue;
+}
+/************tool-16**************/
+a.tool-16:hover{	
+	cursor:pointer;
+}
+.tool-16.edit{
+	background-image:url("../images/p2/icons/16/edit.png"); 
+}
+.tool-16.save{
+	background-image:url("../images/p2/icons/16/save.png"); 
+}
+.tool-16.delete{
+	background-image:url("../images/p2/icons/16/delete.png"); 
+}
+
+.tool-16.explore{
+	background-image:url("../images/p2/icons/16/explore.png"); 
+}
+.tool-16.expand{
+	background-image:url("../images/p2/icons/16/expand.png"); 
+}
+
+.tool-16.collapse{
+	background-image:url("../images/p2/icons/16/collapse.png"); 
+}
+.tool-24.edit{
+	background-image:url("../images/p2/icons/24/edit.png"); 
+}
+.tool-24.reset{
+	background-image:url("../images/p2/icons/24/reset.png"); 
+}
+.tool-24.save{
+	background-image:url("../images/p2/icons/24/save.png"); 
+}
+.tool-24.copy{
+	background-image:url("../images/p2/icons/24/left_right.png"); 
+}
+.tool-24.add{
+	background-image:url("../images/p2/icons/24/add.png"); 
+}
+.tool-24.delete{
+	background-image:url("../images/p2/icons/24/delete.png"); 
+}
+
+/********************************/
+a.loading{
+	min-width:100%;
+	background-image:url("../images/p2/icons/loading_1.gif"); 
+	background-size: 100%;	
+}
+a.ok{
+	min-width=100%;
+	background-image:url("../images/p2/icons/16/ok.png"); 
+	background-size: 100%;	
+}
+a.warning{
+	min-width=100%;
+	background-image:url("../images/p2/icons/16/warning.png"); 
+	background-size: 100%;	
+}
+
+a.disabled{
+	cursor: default;
+	opacity: 0.5;	
+}
+a.disabled *{
+	cursor: default;
+	opacity: 0.5;	
+}
+a.disabled:hover{
+	cursor: default;
+	opacity: 0.5;
+	border:none;
+}
+/****************/
+
+#tb_layout  td{
+	
+	margin:0px;
+	padding:0px;
+}
+
+.string-value{
+	color: blue;
+	font-weight: bold;
+	font-size: 12px;
+	padding: 0px;
+}

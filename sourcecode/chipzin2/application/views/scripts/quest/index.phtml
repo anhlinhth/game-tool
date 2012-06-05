@@ -1,0 +1,311 @@
+<?php if($this->errMsg) : session_start();?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+<?php 
+if($this->temp)
+	$this->showMessage($this->temp)
+?>	
+<form  class="myform" id="formPaging" name="formPaging" action="" method="post">
+
+<div class="mybox">
+	<h3>Quest</h3>
+	<table class="filter">	
+		<tr style="border: 0px;">
+			<td>Quest ID
+			<input type="text" name="QuestID" id="QuestID" value="<?php print_r( $this->item->QuestID);?>" style="width: 110px;"/></td>
+			<td></td>
+			<td>Quest Line
+				<select name="QuestLineID" id = "QuestLineID" onChange="changeQuestLine()">
+				<option value="">Select QuestLine </option>
+				<?php 
+				foreach($this->dataquestlineid as $row){
+					$str = "";
+					if($this->QuestLineID == $row->QuestLineID){
+						$str="selected";
+					}
+				?>					
+					<option <?php echo $str; ?> value="<?php echo $row->QuestLineID ?>"><?php echo $row->QuestLineName ?></option>
+					
+				<?php
+				}
+				
+				?>				
+				</select>				
+			</td>
+			<td>
+				<input type="submit" name="button1" id = "button1" value="search"/>
+				<a class="btn add" href="<?php echo $this->baseUrl.'/quest/new'?>">Add</a>
+			</td>
+		</tr>
+	</table>
+	<table class="list" id="list_ql">
+		<thead>
+		<tr>
+			<td width="10"><input type="checkbox" name="chkall" value="1" onclick="checkAll(document.formPaging)"/></td>
+			<td width="30"><a href="#">ID</a></td>
+			<td><a href="#">Name</a></td>
+			<td><a href="#">Quest line</a></td>
+			<td><a href="#">NeedQuest</a></td>
+			<td><a href="#">NextQuest</a></td>
+			<td class="center" style="width:50px"><a href="#">Status</a></td>
+			<td class="center" style="width:50px"><a href="#" >Tool</a></td>
+		</tr>
+		</thead>
+		<tbody id="list-quest">
+			
+		</tbody>
+		
+	</table>
+	
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this); echo $_SESSION['items']; ?>
+	<br>
+		<center><input type="submit" name="button1" id = "button1" style="width:100px" onclick="deletechose(document.formPaging)" value="DELETE"/></center>
+</div>
+</form>
+<script>
+/////////////////////////////////
+function addNextQuest(questID,key){		
+	$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/updatenextquest'?> ",
+			data: {
+				questID:questID,
+				Action:'insert'
+			},			
+			success: function(data){
+				if(parseInt(data) == 1){
+					loadQuest();
+				}else{
+					alert(data);
+					alert("Error");				
+				}
+			}
+	});
+}
+///////////////////////
+function deleteNextQuest(questID,id,key){
+	var count = $(".next-quest-"+questID).size();
+	if(count <=1){
+		alert("At least 1 Next-Quest! Only Set Null");
+		return;
+	}
+	if(confirm("Delete Next-Quest?")){
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/updatenextquest'?> ",
+			data: {
+				ID:id,
+				Action:'delete'
+			},			
+			success: function(data){
+				if(parseInt(data) == 1){						
+					loadQuest();
+				}else{
+					alert(data);
+					alert("Error");				
+				}
+			}
+		});
+	}
+	
+}
+/////////////////////
+
+function updateNextQuest(id,questid,key)
+{	
+	var value = document.getElementById('nextquest-'+questid+'-'+key).value;
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/updatenextquest/'?> ",
+		data: {
+				Action:'update',
+				ID:id,
+				QuestID:questid,				
+				NextQuest:value
+		},	
+		success: function(data){
+		//	if(parseInt(data) == 1){	
+				alert("Successfull");
+				loadQuest();
+		//	}else{
+		//		alert(data);
+		//		alert("Error");				
+		//	}
+			
+		}
+	});
+}
+
+/////////////////////////////////
+function addNeedQuest(questID,key){		
+	$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/updateneedquest'?> ",
+			data: {
+				questID:questID,
+				Action:'insert'
+			},			
+			success: function(data){
+				if(parseInt(data) == 1){
+					loadQuest();
+				}else{
+					alert(data);
+					alert("Error");				
+				}
+			}
+	});
+}
+///////////////////////
+function deleteNeedQuest(questID,id,key){
+	var count = $(".need-quest-"+questID).size();
+	if(count <=1){
+		alert("at least 1 Need-Quest! Only Set Null");
+		return;
+	}
+	if(confirm("Bạn có muốn xóa need quest ?")){
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/updateneedquest'?> ",
+			data: {
+				ID:id,
+				Action:'delete'
+			},			
+			success: function(data){
+				if(parseInt(data) == 1){						
+					loadQuest();
+				}else{
+					alert(data);
+					alert("Error");				
+				}
+			}
+		});
+	}
+	
+}
+/////////////////////
+function updateNeedQuest(id,questid,key)
+{	
+	var value = document.getElementById('needquest-'+questid+'-'+key).value;
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/updateneedquest/'?> ",
+		data: {
+				Action:'update',
+				ID:id,
+				QuestID:questid,				
+				NeedQuest:value
+		},	
+		
+		success: function(data){
+		
+			//if(parseInt(data) == 1){	
+				alert("successfull");
+				loadQuest();
+		//	}else{
+		//		alert(data);
+		//		alert("Error");				
+		//	}
+			
+		}
+	});
+}
+function updateNeedquest(id)
+{
+	var needquest = document.getElementById('needquest-'+id).value;
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/updateneedquest/'?> ",
+		data: "questid=" + id +"&needquest="+ needquest,	
+		success: function(data){			
+			if(data=="1"){	 
+				alert("Successful");
+				loadQuest();
+			}else{
+				alert(data);							
+			}
+		}
+	});
+}
+
+function loadQuest(){
+	$("#list-quest").html("<tr><td colspan='8' class='center'><h1>Loading......<a class='ico-16 loading'></a></h1></td></tr>");
+	$.ajax({
+		type: "POST",
+		url:"<?php echo $this->baseUrl.'/quest/listquest/'?> ",
+		data: {
+			page:<?php echo $this->page;?>,
+			items:<?php echo $this->items;?>,
+			<?php 
+				if($this->obj->QuestLineID){
+					echo "QuestLineID:".$this->obj->QuestLineID.",";
+				}
+				if($this->obj->QuestID){
+					echo "QuestID:".$this->obj->QuestID.",";
+				}
+			?>
+		},			
+		success: function(data){					
+			$("#list-quest").html(data);
+		}
+	});
+}
+function deleteQuest(key){	
+	if(confirm("Delelte Quest: "+key+" ?")){
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/quest/delete/'?> ",
+			data: {
+				id:key
+			},			
+			success: function(data){
+				alert(data);				
+				loadQuest();
+			}
+		});
+	}
+	
+}
+function deletechose(theform){	
+	
+	var chkitems = theform.chkid.length;
+	var state = theform.chkall.checked;
+	if(chkitems > 0)
+	{
+		for(var i = 0; i < chkitems; i++)
+		{
+			if(theform.chkid[i].checked == true)
+			{
+				key = theform.chkid[i].value;
+				if(confirm("Delelte Quest: "+key+" ?")){
+					$.ajax({
+						type: "POST",
+						url:"<?php echo $this->baseUrl.'/quest/delete/'?> ",
+						data: {
+							id:key
+						},			
+						success: function(data){				
+							loadQuest();
+						}
+					});
+				}
+			}
+		}
+	}
+}
+/////////////////////////////////////////
+function changeQuestLine(){	
+	$("#formPaging").submit();
+}
+$(document).ready(function(){
+	///////////////////////////////
+	loadQuest();	
+	///////////////////////////////
+	
+});
+
+</script>
