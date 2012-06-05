@@ -1,0 +1,338 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+<form  class="myform" id="formPaging" name="formPaging" action="" method="post">
+
+<div class="mybox">
+	<h3>Shop Manager</h3>
+	<br>
+	<table style="width: 50%; margin: auto;border: none;">
+		<thead>	
+			<tr  style="border: 0px;">
+				<td>Id</td>
+				<td>Name Item</td>
+				<td>Tool</td>
+			</tr>
+		</thead>
+		<tbody name='listitem'>
+			<?php $this->listshopmanager($this->data) ?>
+		</tbody>
+	</table>
+	
+	<input type="hidden" name='IDshop' value='<?php echo $this->idshop?>' readonly="readonly"/>
+	<br>
+	<a class="btn add" style="margin: 50%;" href='javascript:addItemShop()'>Add</a>
+	<br>
+	<br>
+</div>
+</form>
+<div id='itemshop' style='display:none'>
+	<form  id="itemshop" name="itemshop" action="" method="post">
+		<table>
+		<tr>
+			<td><label>ID</label></td>
+			<td>
+				<input type="text" name='IDitemshop' value="" readonly="readonly"/>
+			</td>
+			<td><label>Icon</label>	</td>
+			<td><input type="text" value='' name='icon' readonly="readonly"/></td>	
+			<td name='listItem' rowspan="4">
+			</td>
+		</tr>
+		<tr>
+			<td><label>Entity</label></td>
+			<td><input type="text" value='' name='entity' readonly="readonly"/></td>
+			<td><label>Item</label></td>
+			<td><input type="text" value='' name='item' readonly="readonly"/></td>	
+		</tr>
+		<tr>
+			<td><label>Kind</label></td>
+			<td><input type="text" value='' name='kind' readonly="readonly"/></td>
+			<td><label>Level</label></td>
+			<td><input type="text" value='' name='level' readonly="readonly"/></td>
+		</tr>
+		<tr>
+			<td><label>Require:</label></td>
+			<td>
+				<table id='Require'>
+				</table>
+			</td>
+			<td>Unlock</td>
+			<td>
+				<table id='Unlock'>
+				</table>
+			</td>	
+		</tr>
+		</table>
+	</form>
+</div>
+<script>
+function viewItemShop(key)
+{
+	var id = $("input[name='itemshopID"+key+"']").val();
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $this->baseUrl.'/shop/shop/getitemshop'?> ",
+		data: "id=" + id,
+		dataType:"json",
+		success: function(data)
+		{
+			var selectlist = "";
+			var select = "";
+
+			selectlist +="<select name='listItem' size='9' onclick='javascript:loaditemshop()'>";
+			$.each(data[0]['listitem'], function(key, val) 
+			{
+				if(data[0]['ID'] == val['ID'])
+					select = 'selected';
+				else
+					select = "";
+				selectlist +=	"<option value='"+val['ID']+"'"+select+" >"+val['Name']+"</option>";
+			});
+			selectlist +="</select>";
+			$("td[name='listItem']").html(selectlist);
+		
+			$("input[name='item']").val('');
+			$("input[name='entity']").val('');
+			$("input[name='IDitemshop']").val(data[0]['ID']);
+			if(data[0]['Entity'] == null)
+			{
+				$("input[name='item']").attr('disabled',false);
+				$("input[name='item']").val(data[0]['Name']);
+				$("input[name='entity']").attr('disabled',true);
+			}
+			else
+			{
+				$("input[name='entity']").attr('disabled',false);
+				$("input[name='entity']").val(data[0]['Name']);	
+				$("input[name='item']").attr('disabled',true);
+			}
+			$("input[name='kind']").val(data[0]['KindName']);
+			$("input[name='level']").val(data[0]['Level']);	
+			$("input[name='icon']").val(data[0]['Icon']);
+			var Require = '';
+			var Unlock = '';
+			$.each(data[0]['require'], function(key, val) 
+			{
+				Require += "<tr><td>Type</td>";
+				Require += "<td><input type='text' value='"+val['Name']+"' name='type' style='width: 70px' readonly='readonly'/></td>";
+				Require += "<td>Value</td>";
+				Require += "<td><input type='text' value='"+val['Value']+"' name='value' style='width: 30px' readonly='readonly'/></td></tr>";
+			});
+
+			$.each(data[0]['unblock'], function(key, val) 
+			{
+				Unlock += "<tr><td>Type</td>";
+				Unlock += "<td><input type='text' value='"+val['Name']+"' name='type' style='width: 70px' readonly='readonly'/></td>";
+				Unlock += "<td>Value</td>";
+				Unlock += "<td><input type='text' value='"+val['Value']+"' name='value' style='width: 30px' readonly='readonly'/></td></tr>";
+			});
+			$("table[id='Require']").html(Require);
+			$("table[id='Unlock']").html(Unlock);	
+		}
+	});	
+	$("#itemshop").dialog
+	({
+		title: "Item Shop",
+		height: 300,
+		width: 700,
+		modal: true,
+		buttons: 
+		{
+			"Save": function() 
+			{
+				if($("input[name='entity']").val() != "")
+					$("input[name='Name"+key+"']").val($("input[name='entity']").val());
+				else
+					$("input[name='Name"+key+"']").val($("input[name='item']").val());
+				$("input[name='itemshopID"+key+"']").val($("input[name='IDitemshop']").val());
+				var iditem = $("input[name='IDitemshop']").val();
+				$.ajax({
+					type: "POST",
+					url: "<?php echo $this->baseUrl.'/shop/shop/edititem'?> ",
+					data: "iditem=" + iditem+"&id="+key,
+					success: function(msg)
+					{
+						if(msg == 1)
+							alert("Thành công");
+						else
+							alert("Thất Bại");
+					}
+				});	
+				$(this).dialog("close");					
+			},
+			"Cancel": function()
+			{
+				$(this).dialog("close");
+			}					
+		}
+	});
+}
+function deleteItemShop(key)
+{
+	if (confirm("Bạn có chắc muốn xóa mẩu item này không?"))
+	{
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/shop/shop/deleteitem'?> ",
+			data:"id="+key,
+			success: function(msg)
+			{
+				if(msg == 1)
+				{
+					alert("Thành công");
+					window.location.reload();
+				}
+				else
+					alert("Thất Bại");
+			}
+		});	
+	}
+	else
+	{
+		return;
+	}
+}
+function addItemShop()
+{
+	$("input[name='IDitemshop']").val('');
+	$("input[name='icon']").val("");
+	$("input[name='item']").val("");
+	$("input[name='entity']").val("");
+	$("input[name='kind']").val("");
+	$("input[name='level']").val("");
+	$("#Require").html("");
+	$("#Unlock").html('');
+	$.ajax({
+		url: "<?php echo $this->baseUrl.'/shop/shop/getlistitemshop'?> ",
+		dataType:"json",
+		success: function(data)
+		{
+			var selectlist = "";
+			
+			selectlist +="<select name='listItem' size='9' onclick='javascript:loaditemshop()'>";
+			$.each(data, function(key, val) 
+			{
+				selectlist +=	"<option value='"+val['ID']+"'>"+val['Name']+"</option>";
+			});
+			selectlist +="</select>";
+
+			$("td[name='listItem']").html(selectlist);
+		}
+	});
+	$("#itemshop").dialog
+	({
+		title: "Add Item Shop",
+		height: 300,
+		width: 700,
+		modal: true,
+		buttons: 
+		{
+			"Save": function() 
+			{
+				var iditem = $("input[name='IDitemshop']").val();
+				var idshop = $("input[name='IDshop']").val();
+				if(iditem == "")
+					alert('Vui lòng chọn item')
+				else
+				{
+					$.ajax({
+						type: "POST",
+						url: "<?php echo $this->baseUrl.'/shop/shop/newitemshop'?> ",
+						data: "iditem=" + iditem+"&idshop="+idshop,
+						success: function(msg)
+						{
+							if (!isNaN(Number(msg)))
+							{
+								var name = "";
+								var iditem = "";
+								if($("input[name='entity']").val() != "")
+									name = $("input[name='entity']").val();
+								else
+									name = $("input[name='item']").val();
+								iditem = $("input[name='IDitemshop']").val();
+								
+								var item="";
+								var edit = "<a class='tool-16 edit' href='javascript:viewItemShop("+msg+")'></a>";
+								var del = "<a class='tool-16 delete' href='javascript:deleteItemShop("+msg+")'></a>";
+								item+="<tr>";
+								item+="		<td style='width: 35px'><input type='text' style='width: 30px;border: none;' name='shop_itemID"+msg+"' value='"+msg+"'></td>";
+								item+=" 	<td>";
+								item+="		<input type='text' style='width: 80%;border: none;'name='Name"+msg+"' value='"+name+"'>";
+								item+="		<input type='hidden' name='itemshopID"+msg+"' value='"+iditem+"'>";
+								item+="		</td>";
+								item+="<td align='center'>"+edit+"&nbsp"+del+"&nbsp</td></tr>";
+							
+								$('tbody[name="listitem"]').append(item);
+							}
+							else
+								alert('thất bại');
+						}
+					});	
+					$(this).dialog("close");
+				}				
+			},
+			"Cancel": function()
+			{
+				$(this).dialog("close");
+			}					
+		}
+	});
+}
+function loaditemshop()
+{
+	var key = $("select[name='listItem']").val();
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $this->baseUrl.'/shop/shop/getitemshop'?> ",
+		data: "id=" + key,
+		dataType:"json",
+		success: function(data)
+		{
+			$("input[name='item']").val('');
+			$("input[name='entity']").val('');
+			$("input[name='IDitemshop']").val(data[0]['ID']);
+			if(data[0]['Entity'] == null)
+			{
+				$("input[name='item']").attr('disabled',false);
+				$("input[name='item']").val(data[0]['Name']);
+				$("input[name='entity']").attr('disabled',true);
+			}
+			else
+			{
+				$("input[name='entity']").attr('disabled',false);
+				$("input[name='entity']").val(data[0]['Name']);	
+				$("input[name='item']").attr('disabled',true);
+			}
+			$("input[name='kind']").val(data[0]['KindName']);
+			$("input[name='level']").val(data[0]['Level']);	
+			$("input[name='icon']").val(data[0]['Icon']);
+			var Require = '';
+			var Unlock = '';
+			$.each(data[0]['require'], function(key, val) 
+			{
+				Require += "<tr><td>Type</td>";
+				Require += "<td><input type='text' value='"+val['Name']+"' name='type' style='width: 70px' readonly='readonly'/></td>";
+				Require += "<td>Value</td>";
+				Require += "<td><input type='text' value='"+val['Value']+"' name='value' style='width: 30px' readonly='readonly'/></td></tr>";
+			});
+
+			$.each(data[0]['unblock'], function(key, val) 
+			{
+				Unlock += "<tr><td>Type</td>";
+				Unlock += "<td><input type='text' value='"+val['Name']+"' name='type' style='width: 70px' readonly='readonly'/></td>";
+				Unlock += "<td>Value</td>";
+				Unlock += "<td><input type='text' value='"+val['Value']+"' name='value' style='width: 30px' readonly='readonly'/></td></tr>";
+			});
+
+			$("table[id='Require']").html(Require);
+			$("table[id='Unlock']").html(Unlock);	
+		}
+	});	
+}
+</script>

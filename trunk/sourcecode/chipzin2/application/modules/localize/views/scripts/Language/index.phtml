@@ -1,0 +1,73 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+<style>
+#language table #stt
+{
+	width : 30px;
+}
+#language table #id
+{
+	width : 50px;
+}
+#language table #name
+{
+	width : 700px;
+}
+</style>
+<form id="language" class="myform" action="" name="language" method="post">
+<div id="box">
+	<h3>Language Manager</h3>
+	
+	
+	<table class="list" id="tbCampaign">	
+		<thead>
+			<tr>			
+				<td width="20"><a href="#">STT</a></td>
+				<td width="30"><a href="#">ID</a></td>
+				<td width="40">Tên</td>
+				<td>Thao tác</td>
+				<td width="5"></td>				
+			</tr>
+		</thead> 	
+		<tbody>
+		<?php 
+		echo $this->tam;
+		$stt =0;
+			foreach ($this->data as $Row)
+			{
+				$stt++;
+				$btn_save = "<a class='tool-24 save disabled' href=''></a>";
+				$btn_edit = "<a class='tool-24 edit' href='".$this->baseUrl."/localize/language/update?id=".$Row['id']."&name=".$Row['name']."'></a>";
+				$btn_delete = "<a class='tool-24 delete' href='".$this->baseUrl."/localize/language?id=".$Row['id']."'></a>";						
+				$alt= ($alt=="alt"?"2":"alt");
+		?>
+		<tr class="tr-camp <?php echo $alt?>" id='tr-camp-<?php echo $Row->ID ?>'>
+		<td id='stt'><?php echo ($stt) ?></td>
+		<td id='id'><?php echo ($Row['id']) ?></td>
+		<td id='name'><?php echo ($Row['name']) ?></td>
+		<td class="action center">
+						<?php echo $btn_edit ?>
+						<?php echo $btn_delete ?>	
+		
+		</td>
+		<td class="td-status"><?php if($Row['status']==1) echo '<a title="ok" class="status tool-16 ok"></a>';
+									else echo '<a title="not save" class="status tool-16 warning" href="'.$this->baseUrl."/localize/language?status=1&id=".$Row['id'].'"></a>';?></td>
+		</tr>
+		<?php 
+			};
+		?>
+		</tbody>
+	</table>
+	<div style="margin-top:20px;margin-bottom:20px">
+		<a class="btn add" type="submit" href="<?php echo $this->baseUrl."/localize/language/insert"?>">Add</a>
+		<a class="btn save" type="submit" href="javascript:saveAll()">Save All</a>
+	</div>
+</div>	
+</form>
+

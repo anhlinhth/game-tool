@@ -1,0 +1,40 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+$model = new Models_Localize_Iefile();
+?>
+<style>
+#form .element{overflow:hidden;margin:5px 0;}
+#form .element .left{width:49%;display:inline;float:left;text-align:right;margin-right:10px;}
+#form .element .right{width:49%;display:inline;float:left;}
+</style>
+<div id="box">
+	<h3>Import</h3>
+	<form id="form" method="post" enctype="multipart/form-data">
+	<div class="element">
+		<div class="left">Chọn ngôn ngữ</div>
+		<div class="right">
+			<select name="llang">
+			<?php 
+			foreach ($model->GetAllLanguage() as $value) {
+				echo '<option value="'.$value['id'].'">'.$value['name'].'</option>';
+			}
+			?>
+			</select>
+		</div>
+	</div>
+	<div class="element">
+		<div class="left">Chọn file</div>
+		<div class="right">
+			<input id="filename" type="file" name="filename">
+		</div>
+	</div>
+	<div class="element" style="text-align:center;">
+		<input id="button1" type="submit" value="Import">
+	</div>
+	</form>
+</div>

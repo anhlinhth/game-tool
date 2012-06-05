@@ -1,0 +1,97 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<?php
+$url=$this->baseUrl."/export_file_config/quest";
+$linkdown1=$_SERVER['HTTP_HOST'].$url."/Quest.conf.php.txt";
+$linkdown1="http://".str_replace("\\","/",$linkdown1);
+$linkdown2=$_SERVER['HTTP_HOST'].$url."/quest.xfj.txt";
+$linkdown2="http://".str_replace("\\","/",$linkdown2);
+$linkdown3=$_SERVER['HTTP_HOST'].$url."/Task.conf.php.txt";
+$linkdown3="http://".str_replace("\\","/",$linkdown3);
+?>
+<!--
+ <FORM>
+<INPUT TYPE="BUTTON" VALUE="Download Quest.conf.php.txt" ONCLICK="window.location.href='<?php echo $linkdown1;?>'"><br>
+<br>
+<INPUT TYPE="BUTTON" VALUE="Download quest.xfj.txt" ONCLICK="window.location.href='<?php echo $linkdown2;?>'"><br>
+<br>
+<INPUT TYPE="BUTTON" VALUE="Download Task.conf.php.txt" ONCLICK="window.location.href='<?php echo $linkdown3;?>'"> 
+</FORM>
+-->
+<a href='<?php echo $linkdown1;?>'>Quest.conf.php.txt</a>
+<br/><br/>
+<a href='<?php echo $linkdown2;?>'>quest.xfj.txt</a>
+<br/><br/>
+<a href='<?php echo $linkdown3;?>'> Task.conf.php.txt</a>
+
+<br/><br/>
+<hr/><hr/><br/><br/>
+<h4>Quest data upload</h4>
+<form name='questUpload' enctype='multipart/form-data' action='<?php echo $this->baseUrl.'/export_file_config/quest/quest_ftp_upload.php' ?>' method='post' >
+<input type='hidden' name='MAX_FILE_SIZE' value='5000000' />
+Server Path: <input name='server_path' type='text'/><br/>
+Password: <input name='server_password' type='password'/><br/>
+<br/>
+<input type='radio' name='target' value='DailyBuild' checked='true'/> Daily Build<br/>
+<input type='radio' name='target' value='DevBuild'/> Dev Build<br/>
+<input type='file' name='localization' onchange="check_xfz_file()" /> Localization file to Upload
+<br/>
+<input type='submit' value='Upload' />
+</form>
+
+<br/><br/><hr/><br/><br/>
+<h4>SWF media upload</h4>
+<form name='swfUpload' enctype='multipart/form-data' action='<?php echo $this->baseUrl.'/export_file_config/quest/swf_ftp_upload.php' ?>' method='post' >
+<input type='hidden' name='MAX_FILE_SIZE' value='5000000' />
+Server Path: <input name='server_path' type='text'/><br/>
+Password: <input name='server_password' type='password'/><br/>
+<br/>
+<input type='radio' name='target' value='DailyBuild' checked='true'/> Daily Build<br/>
+<input type='radio' name='target' value='DevBuild'/> Dev Build<br/>
+<input type='file' name='media' accept="*.swf" onchange="check_swf_file()" /> SWF media to Upload<br/>
+<input type='file' name='json' accept="*.xfj" onchange="check_json_file()" /> JSON data to Upload
+<br/>
+<input type='submit' value='Upload' />
+</form>
+
+<script type="text/javascript">
+	function check_xfz_file()
+	{
+		str = document.questUpload.localization.value;
+		str	= str.toUpperCase();
+		suffix = ".XFZ";
+		if( ! (str.indexOf(suffix, str.length - suffix.length) !== -1) )
+		{
+			alert( 'File type is not allow,\nAllowed file: *.xfz' );
+			document.questUpload.localization.value = '';
+		}		
+	}
+	
+	function check_swf_file()
+	{
+		str = document.swfUpload.media.value;
+		str	= str.toUpperCase();
+		suffix = ".SWF";
+		if( ! (str.indexOf(suffix, str.length - suffix.length) !== -1) )
+		{
+			alert( 'File type is not allow,\nAllowed file: *.swf' );
+			document.swfUpload.media.value = '';
+		}		
+	}
+	
+	function check_json_file()
+	{
+		str = document.swfUpload.json.value;
+		str	= str.toUpperCase();
+		suffix = ".XFJ";
+		if( ! (str.indexOf(suffix, str.length - suffix.length) !== -1) )
+		{
+			alert( 'File type is not allow,\nAllowed file: *.xfj' );
+			document.swfUpload.json.value = '';
+		}		
+	}
+</script>

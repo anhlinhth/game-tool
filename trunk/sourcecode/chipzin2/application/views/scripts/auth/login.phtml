@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Chip & Zin Support</title>
+		<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/css/login.css" />
+	</head>
+	<body>
+		<div style="display: block">
+			<div class="page-header">
+				<div style="float:left;width: 400px;">
+					<img style="vertical-align: middle" height="64" width="64" src="<?php echo $this->baseUrl ?>/media/images/unin.gif"/>&nbsp;&nbsp;&nbsp;<strong>Chip & Zin SUPPORT</strong>
+				</div>
+				<div style="float:left; width: 300px;margin-top: 15px;">
+					<img style="vertical-align: middle" height="40" width="40" src="<?php echo $this->baseUrl ?>/media/images/logo.gif"/>&nbsp;&nbsp;&nbsp;<strong>P2 TEAM</strong>
+				</div>
+			</div>
+			<div class="pad">
+				<?php if($this->errMsg) : ?>
+				<div style="display: block;" id="auth_failed_message" class="alert_red">
+					<div class="al_text"><?php echo $this->errMsg ?></div>
+				</div>
+				<?php endif; ?>				
+				<h1>&nbsp;</h1>
+				<form class="form block" id="login_form" method="post">
+				  <table>
+					<col width="">
+					<col width="">
+					<tbody><tr>
+					  <td class="label"><label for="login_inp">Tài khoản:</label></td>
+					  <td><input type="text" class="inp" id="login_inp" name="username"></td>
+					</tr>
+					<tr>
+					  <td class="label"><label for="password2_inp">Mật khẩu:</label></td>
+					  <td>
+						<input type="password" class="inp" id="password2_inp" name="password">
+					  </td>
+					</tr>
+					<tr>
+					  <td class="label"></td>
+					  <td>
+						<div class="right">						  
+						  <div class="pat_10">
+							<input type="submit" class="submit" value="Đăng nhập">
+						  </div>
+						</div>
+					  </td>
+					</tr>
+				  </tbody></table>
+				</form>
+			</div>
+		</div>		
+	</body>
+</html>	

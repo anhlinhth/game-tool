@@ -1,0 +1,16 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php endif;?>
+<div id="box">	
+	<h3 id="adduser">Nhóm</h3>
+	<form id="form" action="" method="post" enctype="multipart/form-data"> 	
+	<label for="street">Tên : </label> 
+	<input name="name" value="<?php echo $this->form->name ?>" id="name" type="text" tabindex="1" />
+	&nbsp;<input id="button1" type="submit" value="OK" /> &nbsp;&nbsp;
+	<input id="button1" type="button" value="Quay lại" onclick="history.go(-1)" />
+	<br />
+	</form>
+</div>

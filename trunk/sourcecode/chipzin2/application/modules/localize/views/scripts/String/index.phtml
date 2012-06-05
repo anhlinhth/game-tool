@@ -1,0 +1,175 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+<style>
+#language table #checkbox
+{
+	width : 22px;
+}
+#language table #id
+{
+	width : 22px;
+}
+#language table #group
+{
+	width : 60px;
+}
+#language table #key
+{
+	width : 60px;
+}
+#language table #text
+{
+	width : 310px;
+}
+#language table #name
+{
+	width : 100px;
+}
+#language table select
+{
+	width : 110px;
+}
+#language table tfoot{padding: 5px;text-align: center;height: 30px;}
+#language table tfoot a{margin: 3px;padding: 3px;border: 1px solid #ddd;overflow: hidden;}
+#language table tfoot a.current,
+#language table tfoot a:hover{background: #f4f4f4;}
+</style>
+<form id="language" class="myform" action="<?php echo $this->baseUrl."/localize/string/index"; ?>" name="language" method="post">
+<div id="box">
+	<h3>String Manager
+	<select style="margin-left:610px;" name="l_language" onChange="changeMap(this)">
+			<?php foreach ($this->language as $vllang) 
+				echo '<option value="'.$vllang[id].'">'.$vllang['name'].'</option>';
+			?>
+	</select>
+	</h3>
+	<div id="splip"></div>
+	<table class="filter">		
+		<tr>
+			<td>
+				Find : <input style="width:110px;margin-left:49px;" type="text" name="S_ID" id="ID" class="searchbox" value="<?php if($this->id_s!=-1) echo $this->id_s;?>"/>
+				Search Theo :
+				<select name="l_Search_type" style=" width = 100px">
+				<?php 
+					if($this->l_Search_type == 'lkey')
+						echo '<option value="lkey">Key</option><option value="text">Text</option>';
+					else echo '<option value="text">Text</option><option value="lkey">Key</option>';
+				?>
+				</select>
+				Group :
+				<select name="l_group">
+					<option value="<?php echo $this->l_group;?>"><?php echo $this->string->getGroupbyid($this->l_group);?></option>
+					<?php foreach ($this->group as $vlgroup) 
+							if($vlgroup[id]!=$this->l_group)
+							echo '<option value="'.$vlgroup[id].'">'.$vlgroup['name'].'</option>';
+					?>
+					<option value="-1">Tất cả</option>
+				</select>
+				<input class="btn search" type="submit" name="search" value="search" />
+			</td>
+			
+		
+		</tr>
+			<tr>
+				<td>
+					<?php if($_REQUEST['ajax']!=true)
+					{
+						echo 'Replace With : <input style="width:110px;" type="text" name="replace" id="ID" class="searchbox" value="';if($this->replace!=-1) echo $this->replace;echo'"/>';
+					
+						echo '<input class="btn search" type="submit" name="btreplace" value="Replace" />';
+					}
+					;?>
+				</td>
+			</tr>
+	</table>
+	<table class="list" id="tbCampaign">	
+		<thead>
+			<tr>			
+				<td><input type="checkbox" name="checkall" value="checkall" /></td>
+				<td><a href="#">ID</a></td>
+				<td>Group</td>
+				<td>Key</td>
+				<td><?php echo $this->string->getlangdefault();?></td>
+				<?php 
+				if($_REQUEST['ajax']!=true)
+				{
+				 echo '<td>'.$this->string->getlangindex().'</td>';
+				 echo '<td>Thao tác</td>	';	
+				}	
+				?>
+			</tr>
+		</thead> 	
+		<tbody>
+		<?php 		
+		$stt =-1;
+			foreach ($this->data as $Row)
+			{
+				$stt++;
+				$btn_save = "<a class='tool-24 save disabled' href=''></a>";
+				$btn_edit = "<a class='tool-24 edit' href='".$this->baseUrl."/localize/string/update?key=".$Row['lkey']."&group=".$Row['lgroup']."'></a>";
+				$btn_delete = "<a class='tool-24 delete' href='".$this->baseUrl."/localize/string?id=".$Row['lkey']."&group=".$Row['lgroup']."'></a>";						
+				$alt= ($alt=="alt"?"2":"alt");
+		?>
+		<tr class="tr-camp <?php echo $alt?>" id='tr-camp-<?php echo $Row->ID ?>'>
+		<td id='checkbox'><?php 
+							if($_REQUEST['ajax']!=true)
+								echo '<input id="checkbox-ajax" type="checkbox" name="'.$Row['id'].'"/>';
+							else echo '<a name="@'.$Row['name'].'#'.$Row['lkey'].'" id="checkbox-ajax'.$stt.'" class="tool-16 add" href="JavaScript:void(0);" onClick="addstring(testajax,'.'/n/@'.$Row['name'].'#'.$Row['lkey'].'/n/)"></a>';
+							
+							
+							
+						   ?></td>
+		<td id='id'><?php echo ($Row['id']) ?></td>
+		<td id='group'><?php echo ($Row['name']) ?></td>
+		<td id='key'>#<?php echo ($Row['lkey']) ?></td>
+		<td id='text'><?php echo ($Row['text']) ?></td>
+		<?php if($_REQUEST['ajax']!=true) echo "<td id='text'>".$this->string->getTextBylang($this->language[0]['id'],$Row['lkey'],$Row['lgroup']) .'</td>';?>
+		<?php
+		if($_REQUEST['ajax']!=true)
+		{
+			 echo '<td class="action center">';
+				echo $btn_edit ;
+				echo $btn_delete ;
+				echo '</td>'; }
+		?>
+		</tr>
+		<?php 
+				
+			};
+		?>
+		</tbody>
+		<div id="splip"></div>
+		<a title = "<?php echo count($this->datanopage).'/n/'.$this->page?>"></a>
+		<div id="splip"></div>
+		<tfoot>
+			<tr>
+				<td colspan="7">
+				<?php 
+				$numb = count($this->datanopage)/$this->size;
+				for ($i = 0; $i < $numb+1; $i++) {
+					$class= '';if(($i+1)==$this->page) $class = ' class = "current"';
+					echo '<a '.$class.' href="'.$this->baseUrl.'/localize/string/index?page='.($i+1).'&size='.$this->size.'&l_Search_type='.$this->l_Search_type.'&S_ID='.$this->id_s.'&l_group='.$this->l_group.'">'.($i+1).'</a>';
+				}
+				
+				?>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+
+	<div style="margin-top:20px;margin-bottom:20px">
+		<a class="btn add" type="submit" href="<?php echo $this->baseUrl."/localize/string/insert"?>">Add</a>
+	</div>
+</div>	
+</form>
+<script type="text/javascript">
+function changeMap(e){
+		$("#language").submit();
+}
+</script>
