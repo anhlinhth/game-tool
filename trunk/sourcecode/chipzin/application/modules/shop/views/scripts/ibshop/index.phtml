@@ -40,7 +40,6 @@ endif;
 
 </style>
 
-</script>
 <form  class="myform" id="formPaging" name="formPaging" action="" method="post">
 
 <div class="mybox">
@@ -106,13 +105,14 @@ endif;
 <script type="text/javascript">
 $(document).ready(function(){ 	
 	function slideout(){
+		
   		setTimeout(function(){
   			$("#response").slideDown("slow", function () {
       		});
 		}, 3000);
 	}
 	
-    $("#response").hide();
+    $("#response").hide();    
 	$(function() {
 		$("#list ul").sortable({ opacity: 0.8, cursor: 'move', update: function() {
 			var order = $(this).sortable("serialize") ; 

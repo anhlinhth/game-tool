@@ -7,6 +7,7 @@ require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Base.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_S_ibshop_item.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'models'.DS.'Models_Ib_Shop.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'models'.DS.'Models_Ib_Shop_Item.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'forms'.DS.'Forms_IbShop.php';
 
 class Shop_IbshopController extends BaseController
@@ -113,17 +114,29 @@ class Shop_IbshopController extends BaseController
 			{
 				$this->_helper->layout->disableLayout();
 				$this->_helper->viewRenderer->setNorender();
-				
+					
 				$md = new Models_Ib_Shop();
-				
+				$mdIB = new Models_Ib_Shop_Item();
 				$obj = new Obj_S_ibshop();
+				$id =$this->_request->getParam('id');
 				$obj->ID = $_POST['id'];
 				$obj->Name = $_POST['name'];
 				$obj->Resclass = $_POST['Resclass'];
 				$obj->Title = $_POST['Title'];
 				$obj->TabIndex = $md->getTab($obj->ID);
-				
+				$arritemshopID = $_POST['itemshopID'];				
+				$mdIB->delete($id);
+				foreach ($arritemshopID as $value)
+				{
+					
+						$obj_item= new Obj_Base();
+						$obj_item->ibShopID=$_POST['id'];
+						$obj_item->ItemID = $value;						
+						$mdIB->add($obj_item);
+						
+				}								
 				$kq = $md->_update($obj);
+				Models_Log::insert($this->view->user->username, "act_edit_ibshop", $obj->name);
 				echo(1);
 			}
 			else
@@ -138,6 +151,47 @@ class Shop_IbshopController extends BaseController
 				$this->view->arritem = $arritemshop;
 				$this->view->ibshop = $ibshop;
 			}
+		}
+		catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}
+	}
+	
+	public function newAction()
+	{
+	try
+		{
+			if($this->_request->isPost())
+			{
+				$this->_helper->layout->disableLayout();
+				$this->_helper->viewRenderer->setNorender();
+									
+				$md = new Models_Ib_Shop();
+			
+				$form = new Forms_IbShop();		
+				$form->_requestToForm($this);
+				$form->validate(INSERT);	
+				$maxtab= $md->getMaxTab();			
+				$form->obj->TabIndex=$maxtab;	
+				
+				$md->add($form->obj);				
+				$lastid= $md->getLastID();														
+				$arritemshopID = $_POST['itemshopID'];					
+				foreach ($arritemshopID as $key=>$value)
+					{					
+						$mdIB = new Models_Ib_Shop_Item();
+						$obj_item= new Obj_Base();
+						$obj_item->ibShopID=$lastid;
+						$obj_item->ItemID = $value;						
+						$mdIB->add($obj_item);					
+					}																
+				Models_Log::insert($this->view->user->username, "act_add_ibshop", $obj->name);
+				echo(1);
+			}
+			
+			
 		}
 		catch (Exception $ex)
 		{

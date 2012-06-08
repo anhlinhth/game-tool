@@ -14,18 +14,16 @@ endif;
 		<legend>Thông tin ibshop </legend>
 	<table >
 		<tr>
-			<td width="10%" height="20px">Name<input type="hidden" name = 'id' value="<?php echo $this->ibshop['ID'] ?>"></td><td width="30%"><input name="Name"  id='Name' value="<?php echo $this->ibshop['Name']?>" type="text" tabindex="1" /></td>
+			<td width="10%" height="20px">Name</td><td width="30%"><input name="Name" id='Name' value="" type="text" tabindex="1" /></td>
 			<td rowspan="3" valign="top" id="listitem">
-				Danh sách các item &nbsp&nbsp<a class="tool-16 add" href=""></a><br>
-				
-				<?php $this->listItem($this->ibshop['arritem'],$this->arritem) ?>
+				Danh sách các item &nbsp&nbsp<a class="tool-16 add" href=""></a><br>								
 			</td>
 		</tr>
 		<tr>
-			<td height="20px">Resclass</td><td><input  name="Resclass" id='Resclass' value="<?php echo $this->ibshop['Resclass']?>" type="text" tabindex="2" /></td>
+			<td height="20px">Resclass</td><td><input  name="Resclass" id='Resclass' value="" type="text" tabindex="2" /></td>
 		</tr>
 		<tr>
-			<td valign="top">Title</td><td valign="top"><input name="Title" id='Title' value="<?php echo $this->ibshop['Title']?>" type="text" tabindex="3" /></td>
+			<td valign="top">Title</td><td valign="top"><input name="Title" id='Title' value="" type="text" tabindex="3" /></td>
 		</tr>
 	</table>
 	</fieldset>
@@ -34,6 +32,10 @@ endif;
 	</div>
 </div>
 </form>
+<div id='dialog'>
+	<div id='ct'></div>
+	<div id='ft'> </div>
+</div>
 <div id='itemshop' style='display:none'>
 	<form  id="itemshop" name="itemshop" action="" method="post">
 		<table>
@@ -74,10 +76,7 @@ endif;
 		</table>
 	</form>
 </div>
-<div id='dialog'>
-	<div id='ct'></div>
-	<div id='ft'> </div>
-</div>
+
 <script>
 $("td#listitem").delegate(".delete", "click", function() {	
 	deleteItem(this);
@@ -170,35 +169,37 @@ function search(e){
 }
 
 function saveAll()
-{
-	data = $('#form').serialize();
+{	
+	data = $('#form').serialize();	
 	flag=validate();
 	if(flag==false)
 	{
-
-		$("#dialog").dialog({			
-			height: 400,
-			width: 350,
-			modal: true,
-			buttons: {
-				"Continue": function() {								
-					$(this).dialog("close");						
-				}										
-			}
-		});
+		
+			$("#dialog").dialog({			
+				height: 400,
+				width: 350,
+				modal: true,
+				buttons: {
+					"Continue": function() {								
+						$(this).dialog("close");						
+					}										
+				}
+			});
 	}
 	else
 	{
 		$.ajax({
 			type: "POST",
-			url:"<?php echo $this->baseUrl.'/shop/ibshop/edit'?> ",
+			url:"<?php echo $this->baseUrl.'/shop/ibshop/new'?> ",
 			data: data,			
-			success: function(msg){			
-				if(msg=='1')
+			success: function(msg){
+				alert(msg);			
+				/*if(msg=='1')
 				{
 					alert("Thành Công");
 					window.location.reload();
-				}		
+				}
+				*/		
 			}
 		});
 	}

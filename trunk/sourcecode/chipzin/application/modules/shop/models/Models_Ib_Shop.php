@@ -118,7 +118,25 @@ class Models_Ib_Shop extends Models_Base
 			WHERE 
 				ID=$id;
 		";
+
 		$this->_db->query($sql);			
+	}
+	public function add($obj)
+	{
+		parent::_insert($obj);
+	}
+	
+	public function  getLastID()
+	{
+		$sql="select ID from s_ibshop where 1 order by ID DESC limit 0,1";
+		$result = $this->_db->fetchOne($sql,"",Zend_db::FETCH_OBJ);
+		return $result;
+	}
+	public function getMaxTab()
+	{
+		$sql="select Max(TabIndex)+1 from s_ibshop ";
+		$result=$this->_db->fetchOne($sql,"",Zend_db::FETCH_OBJ);
+		return $result;
 	}
 }
 ?>

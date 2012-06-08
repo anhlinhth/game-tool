@@ -11,6 +11,27 @@ class Forms_IbShop extends Forms_Base
 	
 	public function validate($action)
 	{
+		$arrCode = array();
+		$arrNote = array();
+		
+		
+		if($action == UPDATE)
+		{
+			if(empty ($this->obj->ID))
+			{
+				array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
+				array_push($arrNote, "Không cập nhật được");
+			}			
+		}
+		
+		if(!empty($this->obj->Name))
+		{			
+			array_push($arrCode, Invalid_Argument_Exception::ERR_FIELD_NULL);
+			array_push($arrNote, "Name không được để trống<br>");		
+		}		
+				
+		if(!empty ($arrCode))
+		throw new Invalid_Argument_Exception($arrCode, $arrNote);
 	}
 }
 ?>
