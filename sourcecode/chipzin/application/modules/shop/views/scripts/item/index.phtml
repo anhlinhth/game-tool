@@ -12,7 +12,7 @@ endif;
 	<h3>Item</h3>
 	<table class="filter" style="width: 80%;margin: auto;margin-bottom: 20px;margin-top: 10px";>	
 		<tr>
-			<td >ID<input id="itemID" width="15%" class="disabled" name="itemID" type="text" style="width:110px;" /></td>
+			<td >ID<input id="itemID" width="15%"  readonly="readonly" disabled" name="itemID" type="text" style="width:110px;" /></td>
 		<td>Name
 			<input id="itemName" type="text" name="itemName" size="20"/>
 		</td>
@@ -20,7 +20,7 @@ endif;
 			NameSV<input id="itemNameSV" type="text" name="itemNameSV"/>
 			</td>
 			<td>
-				<a class="btn add" href="" onclick="additem();">Add</a>
+				<a class="btn add" href="javascript:additem();" >Add</a>
 			</td>
 			<td>
 				<a class="btn save disabled " href="">Save</a>
@@ -99,8 +99,8 @@ $(function(){
 	$("#itemName").keyup(function(e){
 		var id = $("#itemID").val();
 		var name = $("#itemName").val();
-		
-		if(name == ''){
+		var nameSV = $("#itemNameSV").val();
+		if(name == '' && nameSV==""){
 			disable($(".btn.add"));
 			disable($(".btn.save"));
 		}else{	
@@ -110,7 +110,7 @@ $(function(){
 				enable($(".btn.save"));				
 			}else{
 				enable($(".btn.add"));
-				enable($(".btn.save"));
+				disable($(".btn.save"));
 			}
 		}		
 	});	
@@ -129,9 +129,6 @@ $(function(){
 		}			
 	});		
 
-	$(".btn.add").click(function(){				
-		additem();
-	});
 });
 
 function editItem(key){
@@ -198,6 +195,37 @@ function updateItem(){
 			}			
 		}
 	});	
+}
+function additem()
+{
+	
+	//var id = $("#itemID").val();
+	var name = $("#itemName").val();
+	
+	var nameSV = $("#itemNameSV").val();
+	if(name=="" || nameSV=="")
+	{
+		alert("hãy điền đầy đủ thông tin");
+		return;
+	}
+	else
+	{ 	
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $this->baseUrl.'/shop/item/add/'?> ",
+			data: "Name=" +name +"&NameSV=" +nameSV,
+			success: function(msg){
+				if(parseInt(msg)==1)
+				{
+					alert("Thêm thành công");
+				window.location.reload();
+				}
+				else
+					alert("Eror");
+						
+			}
+		});	
+	}
 }
 </script>
 

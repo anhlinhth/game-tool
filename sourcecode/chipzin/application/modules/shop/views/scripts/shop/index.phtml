@@ -7,25 +7,72 @@
 endif;
 ?>
 <form  class="myform" id="formPaging" name="formPaging" action="" method="post">
-
 <div class="mybox">
 	<h3>Shop</h3>
 	<table>
 		<tr>			
 			<td><label>Search</label><input type="text" name='ID' id='ID'/>
-			<input type="submit" value='Search'/></td> 
+			<input type="submit" value='Search'/></td>
+			<td><a class="btn add" href="<?php echo $this->baseUrl;?>/shop/shop/new">Add</a></td> 
 		</tr>
 	</table>
 	<table class="list">
 		
 		<thead>
 			<tr  style="border: 0px;">
+				<td width="30">ID</td>
 				<td>Name</td>
+				<td width="200">TypeNameShop</td>
 				<td>Value</td>
-				<td>Tool</td>
+				<td width="50">Tool</td>
 			</tr>
 		</thead>
-		<?php $this->listShop($this->data, $this->page, $this->items, $this) ?>				
-	</table>		
+		<?php $this->listShop($this->data,$this->datatype, $this->page, $this->items, $this) ?>				
+	</table>
+	
+	<?php echo $this->pagingControl($this->items, $this->page, $this->totalRecord, $this)?>		
 </div>
 </form>
+<script>
+	function changetypeshop(key)
+	{
+		var id=$('#typeshop_'+key).val();
+		$.ajax({
+			type: "POST",
+			url:"<?php echo $this->baseUrl.'/shop/shop/updatetypeshop'?> ",
+			data: {
+				idshop:key,
+				idtype:id
+			},			
+			success: function(msg){
+				if(parseInt(msg)==1)
+				{
+					alert("Update Type Shop thành công");
+				}
+				else
+					alert("có Lỗi");
+			}
+		});
+	}
+	function deleteItemShop(key)
+	{
+		if(confirm("Bạn có muốn xóa shop này không ?"))
+		{
+			$.ajax({
+				type: "POST",
+				url:"<?php echo $this->baseUrl.'/shop/shop/delete'?> ",
+				data: "id="+key,
+				success: function(msg){
+					if(parseInt(msg)==1)
+					{
+						alert("Xóa thành công");
+						window.location.reload();
+					}
+					else
+						alert("Có lỗi");
+					
+				}
+			});
+		}
+	}
+</script>

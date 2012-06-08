@@ -60,18 +60,19 @@ public function _setUserPrivileges()
 	public function addAction()
 	{
 		try
-		{						
+		{		$this->_helper->layout->disableLayout();
+				$this->_helper->viewRenderer->setNoRender();				
 			if($this->_request->isPost())
 			{
-				$this->_helper->layout->disableLayout();
-				$this->_helper->viewRenderer->setNoRender();				
+							
 				$form = new Forms_Item();
 				$form->_requestToForm($this);					
-				$form->validate(UPDATE);
-				$md=new Models_Item();												
-				$md->_insert($form->obj);							
-				//Models_Log::insert($this->view->user->username, "act_add_items", $obj->name);
-					echo(1);																
+				$form->validate(INSERT);				
+				$md=new Models_Item();
+				
+				$md->insert($form->obj);							
+				Models_Log::insert($this->view->user->username, "act_add_items", $obj->name);
+				echo "1";															
 			}
 			
 		}

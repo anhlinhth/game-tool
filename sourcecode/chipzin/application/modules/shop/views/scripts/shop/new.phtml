@@ -1,0 +1,79 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+<form  class="myform" id="form" name="form" action="" method="post">
+<div class="box">
+	<h3>Add Shop</h3>
+	<table>
+	<tr>
+		<td width="50"><label>Name</label></td>
+		<td>
+			<input type="text" name='Name' id='Name' value=""/>			
+		</td>		
+	</tr>
+	<tr>
+	<td>TypeNameShop </td>
+		<td>
+			<select name='TypeID'>
+			<?php if ($this->typeshop!=null):?>
+			<?php foreach ($this->typeshop as $row):?>
+				<option value='<?php echo $row->ID ?>'><?php echo $row->Name?></option>
+			<?php endforeach;?>
+			<?php endif;?>
+			</select>
+		</td>
+	</tr>
+	
+	</table>
+	<div align="center" style="margin: 20px;">		
+		<input type="submit" value="Save" id="button1" />
+		<input type="reset" value="Cancel" id="button2" "/>
+		
+	</div>	
+</div>
+</form>
+<div id='itemshop' style='display:none'>
+	<form  id="itemshop" name="itemshop" action="" method="post">
+		<table>
+		<tr>
+			<td><label>ID</label></td>
+			<td>
+				<input type="text" name='IDitemshop' value="" readonly="readonly"/>
+			</td>
+			<td><label>Icon</label>	</td>
+			<td><input type="text" value='' name='icon' readonly="readonly"/></td>	
+			<td name='listItem' rowspan="4">
+			</td>
+		</tr>
+		<tr>
+			<td><label>Entity</label></td>
+			<td><input type="text" value='' name='entity' readonly="readonly"/></td>
+			<td><label>Item</label></td>
+			<td><input type="text" value='' name='item' readonly="readonly"/></td>	
+		</tr>
+		<tr>
+			<td><label>Kind</label></td>
+			<td><input type="text" value='' name='kind' readonly="readonly"/></td>
+			<td><label>Level</label></td>
+			<td><input type="text" value='' name='level' readonly="readonly"/></td>
+		</tr>
+		<tr>
+			<td><label>Require:</label></td>
+			<td>
+				<table id='Require'>
+				</table>
+			</td>
+			<td>Unlock</td>
+			<td>
+				<table id='Unlock'>
+				</table>
+			</td>	
+		</tr>
+		</table>
+	</form>
+</div>

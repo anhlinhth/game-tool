@@ -1,5 +1,5 @@
 <?php
-//require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_ItemShop.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_Shop.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Base.php';
 
 class Models_Shop extends Models_Base
@@ -8,20 +8,21 @@ class Models_Shop extends Models_Base
 	{
 		parent::__construct();		
 		$this->_key = "ID";
-		$this->_table = "s_itemshop";	
+		$this->_table = "s_shop";	
 	}
 		
 	public function filter($objSearch,$order,$offset,$count)
 	{
 		$sql = "SELECT
-					*
+						s_shop.*,s_type_shop.ID typeIDshop ,s_type_shop.`Name` typeNameshop
 				FROM
-					s_shop
+					s_shop,s_type_shop
 				WHERE
-					1 ";
+					1 
+					AND s_shop.TypeID = s_type_shop.ID";
 		
 		if($objSearch->ID)
-			$sql .= " AND ID = '$objSearch->ID'";						
+			$sql .= " AND s_shop.ID = '$objSearch->ID'";						
 		if($order)
 			$sql .= " ORDER BY $order";
 		
@@ -149,6 +150,43 @@ class Models_Shop extends Models_Base
 		$sqlGetid = "SELECT MAX(ID) FROM s_shop_item";
 		$id = $this->_db->fetchOne($sqlGetid, "", Zend_Db::FETCH_OBJ);
 		return $id;
+	}
+	public function count($objSearch)
+	{
+		$sql = "SELECT
+					COUNT(ID)
+				FROM
+					s_shop
+				WHERE
+					1";
+		
+		if($objSearch->ID)
+			$sql .= " AND ID = '$objSearch->ID'";		
+		
+		$count = $this->_db->fetchOne($sql);
+		
+		return $count;
+	}
+	public function updateTypeShop($idshop,$idtype)
+	{
+		$sql="UPDATE s_shop set TypeID=$idtype where ID=$idshop";
+		$this->_db->query($sql);
+	}
+	public function addShop($obj)
+	{
+		parent::_insert($obj);
+	}
+	public function lastInsert()
+	{
+		$sql='select ID from s_shop order by ID DESC limit 0,1';
+		$lastid = $this->_db->fetchOne($sql,"",Zend_db::FETCH_OBJ);
+		return $lastid;
+		  
+	}
+	
+	public function delete($obj)
+	{
+		parent::_delete($obj);
 	}
 }
 ?>

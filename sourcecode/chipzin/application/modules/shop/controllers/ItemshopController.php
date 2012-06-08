@@ -93,7 +93,7 @@ class Shop_ItemshopController extends BaseController
 				$md=new Models_Item_Shop();
 				
 				/////
-				$file = $_FILES['Icon'];
+				/*$file = $_FILES['Icon'];
 					if(!$file)
 						throw new Invalid_Argument_Exception(Invalid_Argument_Exception::ERR_FIELD_NULL,"Vui lòng chọn hình");
 					
@@ -103,7 +103,7 @@ class Shop_ItemshopController extends BaseController
 					
 					move_uploaded_file( $file['tmp_name'] , ROOT_MEDIA_IMAGE_ITEM_ITEMSHOP.DS . $_FILES['Icon']['name'] ) ;																	
 				$this->_helper->layout()->disableLayout();
-				$this->_helper->viewRenderer->setNoRender();	
+				$this->_helper->viewRenderer->setNoRender();	*/
 				///
 				
 				$entity=$this->_request->getParam('Entity');
@@ -111,13 +111,13 @@ class Shop_ItemshopController extends BaseController
 				if(isset($entity))
 				{
 					$form->obj->Item=null;
-					$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];			
+					//$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];			
 					$md->insert($form->obj);
 				}
 				else
 				{ 
 					$form->obj->Entity=null;
-					$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];					
+					//$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];					
 					$md->insert($form->obj);
 				}
 				/////////
@@ -190,7 +190,7 @@ class Shop_ItemshopController extends BaseController
 				$item=$this->_request->getParam('Item');
 				
 				/////
-				$file = $_FILES['Icon'];
+			/*	$file = $_FILES['Icon'];
 					if(!$file)
 						throw new Invalid_Argument_Exception(Invalid_Argument_Exception::ERR_FIELD_NULL,"Vui lòng chọn hình");
 					
@@ -200,18 +200,18 @@ class Shop_ItemshopController extends BaseController
 					
 					move_uploaded_file( $file['tmp_name'] , ROOT_MEDIA_IMAGE_ITEM_ITEMSHOP.DS . $_FILES['Icon']['name'] ) ;																	
 				$this->_helper->layout()->disableLayout();
-				$this->_helper->viewRenderer->setNoRender();	
+				$this->_helper->viewRenderer->setNoRender();	*/
 				///
 				if(isset($entity))
 				{
 					$form->obj->Item=null;	
-					$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];				
+					//$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];				
 					$md->update($form->obj);
 				}
 				else
 				{ 
 					$form->obj->Entity=null;
-					$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];					
+					//$form->obj->Icon=	$_FILES['Icon']['name'].$_FILES["type"];					
 					$md->update($form->obj);
 				}
 				/////////

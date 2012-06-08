@@ -1,8 +1,7 @@
 <?php
-class Obj_Shop
+class Obj_Type_Shop
 {
 	public $ID ;
 	public $Name ;
-	public $TypeID;
-}
+}	
 ?>
