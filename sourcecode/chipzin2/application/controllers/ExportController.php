@@ -1,6 +1,7 @@
 <?php
 require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
+
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Package.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Package_Detail.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_xfj.php';
@@ -10,7 +11,6 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Task_Package.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Task_Target_Package_Detail.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
-
 class ExportController extends BaseController
 {
 	public function _setUserPrivileges()
@@ -112,7 +112,7 @@ class ExportController extends BaseController
 				$items = $mdItem->_filter();
 				
 				$md->sync($data,$items,$saleOffData,$location);
-				$this->view->msg = "Sync Successfull";
+				$this->view->msg = "Sync dá»¯ liá»‡u thÃ nh cÃ´ng";
 			}
 			
 			$this->view->form = $form->obj;

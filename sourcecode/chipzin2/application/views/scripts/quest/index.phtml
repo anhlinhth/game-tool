@@ -129,91 +129,19 @@ function updateNextQuest(id,questid,key)
 				NextQuest:value
 		},	
 		success: function(data){
-		//	if(parseInt(data) == 1){	
+			if(parseInt(data) == 1){	
 				alert("Successfull");
 				loadQuest();
-		//	}else{
-		//		alert(data);
-		//		alert("Error");				
-		//	}
+			}else{
+				alert(data);
+				alert("Error");				
+			}
 			
 		}
 	});
 }
 
-/////////////////////////////////
-function addNeedQuest(questID,key){		
-	$.ajax({
-			type: "POST",
-			url:"<?php echo $this->baseUrl.'/quest/updateneedquest'?> ",
-			data: {
-				questID:questID,
-				Action:'insert'
-			},			
-			success: function(data){
-				if(parseInt(data) == 1){
-					loadQuest();
-				}else{
-					alert(data);
-					alert("Error");				
-				}
-			}
-	});
-}
-///////////////////////
-function deleteNeedQuest(questID,id,key){
-	var count = $(".need-quest-"+questID).size();
-	if(count <=1){
-		alert("at least 1 Need-Quest! Only Set Null");
-		return;
-	}
-	if(confirm("Bạn có muốn xóa need quest ?")){
-		$.ajax({
-			type: "POST",
-			url:"<?php echo $this->baseUrl.'/quest/updateneedquest'?> ",
-			data: {
-				ID:id,
-				Action:'delete'
-			},			
-			success: function(data){
-				if(parseInt(data) == 1){						
-					loadQuest();
-				}else{
-					alert(data);
-					alert("Error");				
-				}
-			}
-		});
-	}
-	
-}
-/////////////////////
-function updateNeedQuest(id,questid,key)
-{	
-	var value = document.getElementById('needquest-'+questid+'-'+key).value;
-	$.ajax({
-		type: "POST",
-		url:"<?php echo $this->baseUrl.'/quest/updateneedquest/'?> ",
-		data: {
-				Action:'update',
-				ID:id,
-				QuestID:questid,				
-				NeedQuest:value
-		},	
-		
-		success: function(data){
-		
-			//if(parseInt(data) == 1){	
-				alert("successfull");
-				loadQuest();
-		//	}else{
-		//		alert(data);
-		//		alert("Error");				
-		//	}
-			
-		}
-	});
-}
+
 function updateNeedquest(id)
 {
 	var needquest = document.getElementById('needquest-'+id).value;
@@ -231,7 +159,6 @@ function updateNeedquest(id)
 		}
 	});
 }
-
 function loadQuest(){
 	$("#list-quest").html("<tr><td colspan='8' class='center'><h1>Loading......<a class='ico-16 loading'></a></h1></td></tr>");
 	$.ajax({

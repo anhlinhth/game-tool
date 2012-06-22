@@ -1,0 +1,284 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery-ui.css" />
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/datetimepicker/jquery.ui.datetimepicker.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquery.bubblepopup.v2.3.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquery.bubblepopup.v2.3.1.css" />
+
+<?php if($this->errMsg) :?>
+    <?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>        
+    <?php $this->showMessage($this->msg)?>    
+<?php endif;?>
+
+<div id="box" >
+    <form id="form" method="post"  enctype="multipart/form-data">
+        <div id="openFile"> 
+            <label for="uploadImage" >Upload file :</label>
+            <input id="filePath" name="filePath" type="file" />
+            <br />
+            <input id="button1" name="Upload" type="submit" value="Load" /> &nbsp;&nbsp;       
+        </div>
+        <div id="info">
+        <?php
+            if( $this->dataPlayer != "" )
+            {
+                $i = 0 ;
+                foreach( $this->dataPlayer as $data )
+                {?>
+                   <fieldset id="event<?php echo $i ?>">
+                        <legend>Thông tin đền bù user &nbsp;&nbsp;<a title="Xóa" href="javascript:deleteEvent(<?php echo $i; ?>)"><img src="<?php echo $this->baseUrl ?>/media/images/icons/page_white_delete.png"/></a></legend>
+                        <input name="hidId[]" value="" type="hidden"/>
+                        <label for="infoPlayer">Tên : </label>
+                        <input name="txtInfo[]" value="<?php echo $data ?>" id="txtInfo<?php echo $i ?>" type="text" tabindex="1" />&nbsp;(Tên người chơi)
+                        <br />
+                        <label for="gold">Vàng : </label>
+                        <input name="txtGold[]" value="" id="txtGold<?php echo $i ?>" type="text" tabindex="1" />&nbsp;(số vàng)
+                        <br />
+                        <label for="exp">Kinh nghiệm : </label>
+                        <input name="txtExp[]" id="txtExp<?php echo $i ?>" value="" type="text" tabindex="2" />&nbsp;(số kinh nghiệm)
+                        <br />            
+                        <label for="pig">Pig : </label>
+                        <input name="txtPig[]" id="txtPig<?php echo $i ?>" value="" type="text" tabindex="3" />&nbsp;(type của heo)
+                        <br />     
+                        <label for="item">item : </label>
+                        <input name="txtItem[]" id="txtItem<?php echo $i ?>" value="" type="text" tabindex="4" />&nbsp;(id của item)            
+                        <br />     
+                        <label for="groupitem">GroupItem : </label>
+                        <input name="txtGroupItem[]" id="txtGroupItem<?php echo $i ?>" value="" type="text" tabindex="5" />&nbsp;(id của groupitem) 
+                        <br />     
+                        <label for="kiss">Kiss : </label>
+                        <input name="txtKiss[]" id="txtKiss<?php echo $i ?>" value="" type="text" tabindex="6" />&nbsp;(số nụ hôn)           
+                        <br />     
+                        <label for="card">Card : </label>
+                        <input name="txtCard[]" id="txtCard<?php echo $i ?>" value="" type="text" tabindex="7" />&nbsp;(id của card) 
+                  </fieldset>    
+                <?php $i ++; }
+                $this->dataPlayer = "" ;
+            }?>
+            <input id="button1" name="Save" type="submit" value="Save" /> &nbsp;&nbsp;       
+            </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    
+    function deleteEvent(id)
+    {
+        if(confirm("Bạn có muốn xóa sự kiện này không?") == true)
+            $("#event" + id).remove();        
+    }
+</script>
+
+<!--<div id="template"  style="display: none;" >
+    <fieldset id="event{id}">
+        <legend>Thông tin đền bù user &nbsp;&nbsp;<a title="Xóa" href="javascript:deleteEvent({id})"><img src="<?php echo $this->baseUrl ?>/media/images/icons/page_white_delete.png"/></a></legend>
+        <input name="hidId[]" value="" type="hidden"/>
+        <label for="gold">Vàng : </label>
+        <input name="txtGold[]" value="" id="txtGold{id}" type="text" tabindex="1" />&nbsp;(số vàng)
+        <br />
+        <label for="exp">Kinh nghiệm : </label>
+        <input name="txtExp[]" id="txtExp{id}" value="" type="text" tabindex="2" />&nbsp;(số kinh nghiệm)
+        <br />            
+        <label for="pig">Pig : </label>
+        <input name="txtPig[]" id="txtPig{id}" value="" type="text" tabindex="3" />&nbsp;(type của heo)
+        <br />     
+        <label for="item">item : </label>
+        <input name="txtItem[]" id="txtItem{id}" value="" type="text" tabindex="4" />&nbsp;(id của item)            
+        <br />     
+        <label for="groupitem">GroupItem : </label>
+        <input name="txtGroupItem[]" id="txtGroupItem{id}" value="" type="text" tabindex="5" />&nbsp;(id của groupitem) 
+        <br />     
+        <label for="kiss">Kiss : </label>
+        <input name="txtKiss[]" id="txtKiss{id}" value="" type="text" tabindex="6" />&nbsp;(số nụ hôn)           
+        <br />     
+        <label for="card">Card : </label>
+        <input name="txtCard[]" id="txtCard{id}" value="" type="text" tabindex="7" />&nbsp;(id của card) 
+  </fieldset>
+    <script type="text/javascript" >
+        $(function() 
+        {
+            $("#txtBeginTime{id}, #txtEndTime{id}").datetimepicker({
+                    dateFormat: 'mm/dd/yyyy HH:MM:00',
+                    changeYear: true,
+                    changeMonth:true,
+                    showButtonPanel:true
+                }
+            );
+        })
+    </script>
+</div>
+<div id="box">
+    <h3 id="adduser">Toàn bộ thông tin</h3>
+    <form id="form" action="" method="post" onSubmit="return validate()">  
+        <input type="hidden" name="hidSync" id="hidSync"/>        
+        <?php $this->listEvent($this->data, $this) ?>
+        <?php
+             
+        ?>
+      <div align="center">
+          <input id="button1" type="submit" value="Lưu" />&nbsp;&nbsp;
+          <input id="button2" class="btnSysn" onclick="synData()" type="button" value="Sync" /> 
+      </div>
+    </form>
+</div>
+<script type="text/javascript">
+    var count = <?php echo $this->count ?>;
+    function addEvent()
+    {
+        count++;
+        var html = $("#template").html();
+        html = html.replace(/{id}/gi, count);
+        $("#add").before(html);
+    }
+    
+    function deleteEvent(id)
+    {
+        if(confirm("Bạn có muốn xóa sự kiện này không?") == true)
+            $("#event" + id).remove();        
+    }
+    
+    function deleteEventReal(id,idHtml)
+    {
+        if(confirm("Bạn có muốn xóa sự kiện này không?") == true)
+        {
+            $.ajax({
+                type:"POST",
+                url:"<?php echo $this->baseUrl."/".$this->controllerName ?>/delelegoldexp",
+                data: "id=" + id,
+                success: function(msg)
+                {
+                    if(msg != "")
+                    {
+                        alert("Bạn không có quyền thực hiện thao tác này");
+                        return;
+                    }
+                    else
+                    {
+                        alert("Xóa thành công");
+                        $("#event" + idHtml).remove();
+                    }
+                }
+            });
+        }
+    }
+    
+    $(function(){
+        $("input[id*='txtBeginTime_']").each(function(){
+            $(this).datetimepicker({
+                    dateFormat: 'mm/dd/yyyy HH:MM:00',
+                    changeYear: true,
+                    changeMonth:true,
+                    showButtonPanel:true
+                }
+            )
+        });
+        
+        $("input[id*='txtEndTime_']").each(function(){
+            $(this).datetimepicker({
+                    dateFormat: 'mm/dd/yyyy HH:MM:00',
+                    changeYear: true,
+                    changeMonth:true,
+                    showButtonPanel:true
+                }
+            )
+        });
+        
+        /*$('.btnSysn').CreateBubblePopup({
+                                                    align: 'right',
+                                                    
+                                                    innerHtml: 'Click to sync data', 
+                                                    innerHtmlStyle: {
+                                                                        color:'#FFFFFF', 
+                                                                        'text-align':'center'
+                                                                    },
+                                                                    
+                                                    themeName:     'all-black',
+                                                    themePath:     '<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquerybubblepopup-theme'
+                                               });
+        
+        $('.btnSysn').click(function(){        
+            var btn = $(this);
+
+            // show a bubble popup with new options when "this" shoppingcart button is clicked
+            btn.ShowBubblePopup({
+
+                                                    align: 'center',
+                                                    innerHtml: '<p id="errorpop" style="color:red"></p>'+
+                                                                '<p><input id="chkClient" value="1" type="checkbox"/> Client&nbsp;&nbsp;&nbsp;&nbsp;<input id="chkServer" type="checkbox" value="1"/> Server</p>' + 
+                                                               '<p><input type="button" onclick="synData()" id="btnOk" value="Đồng ý"/>&nbsp;&nbsp;<input type="button" id="btnClose" value="Hủy"/></p>',
+
+                                                    innerHtmlStyle:{ 
+                                                                    color:'#666666', 
+                                                                    'text-align':'left'
+                                                                   },
+
+                                                    themeName:     'azure',
+                                                    themePath:     '<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquerybubblepopup-theme'
+
+                                                }, false); //save_options = false; it will use new options only on click event, it does not overwrite old options.
+
+
+            // "freeze" the Bubble Popup then it will not respond to mouse events (as mouseover/mouseout) 
+            // until ".ShowBubblePopup()" or ".HideBubblePopup()" is called again.
+            btn.FreezeBubblePopup(); 
+
+            // when the "close" link is clicked, hide the bubble popup
+            $('#btnClose').click(function(){
+                $(btn).HideBubblePopup();
+            });
+        });//end onclick event*/
+    });
+    
+    function validate()
+    {
+        var check = true;
+        $("input[name*='txtBeginTime']").each(function(){                
+            if($(this).val() == "" && $(this).attr("id") != "txtBeginTime{id}")
+            {                
+                check = false;
+                return;
+            }            
+        });
+        
+        if(!check)
+        {
+            alert("Vui lòng điền đầy đủ thời điểm bắt đầu");
+            return false;
+        }
+        
+        check = true;
+        $("input[name*='txtEndTime']").each(function(){            
+            if($(this).val() == "" && $(this).attr("id") != "txtEndTime{id}")
+            {
+                check = false;
+                return;                
+            }            
+        });
+        
+        if(!check)
+        {
+            alert("Vui lòng điền đầy đủ thời điểm kết thúc");
+            return false;
+        }
+        
+        return true;
+    }
+    
+    function synData()
+    {        
+        /*if(!$("#chkClient").is(":checked") && !$("#chkServer").is(":checked"))
+        {            
+            $("#errorpop").html("Bạn chưa chọn nơi sync");
+            return;
+        }
+        
+        if($("#chkClient").is(":checked"))
+            $("#hidClient").val(1);
+        
+        if($("#chkServer").is(":checked"))
+            $("#hidServer").val(1);*/
+        $("#hidSync").val(1);
+        $("#form").submit();
+    }
+</script>-->

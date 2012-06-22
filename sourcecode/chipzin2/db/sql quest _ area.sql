@@ -1,0 +1,1 @@
+Alter Table q_task add Area INT(11)

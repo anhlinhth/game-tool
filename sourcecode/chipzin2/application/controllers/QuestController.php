@@ -1,10 +1,14 @@
 <?php
 require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
+
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Detail.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
+
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
+
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Award.php';
+
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Action.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_l_content.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
@@ -12,9 +16,8 @@ require_once ROOT_APPLICATION_MODELS.DS.'Models_Q_Award_type.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_Detail.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_NextQuest.php';
 require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Q_Action.php';
-require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_NeedQuest.php';
+
 require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';	
-require_once ROOT_APPLICATION.DS.'modules'.DS.'localize'.DS.'models'.DS.'Models_String2.php';
 
 class QuestController extends BaseController
 {
@@ -51,7 +54,7 @@ class QuestController extends BaseController
 			{
 			
 				if($file11['name']=='Define.def.php')	
-				{		$dest1File = ROOT_IMPORT_FILE.DS.'Quest'.DS.$file11['name'];
+				{		$dest1File = ROOT_IMPORT_FILE.DS.$file11['name'];
 		 move_uploaded_file($file11['tmp_name'], $dest1File);
 		 
 				}
@@ -64,7 +67,7 @@ class QuestController extends BaseController
 				if($file12['name']=='system.xfj')
 				{
 				
-		$dest2File = ROOT_IMPORT_FILE.DS.'Quest'.DS.$file12['name'];
+		$dest2File = ROOT_IMPORT_FILE.DS.$file12['name'];
 		 move_uploaded_file($file12['tmp_name'], $dest2File);
 		 
 			}}
@@ -263,16 +266,11 @@ class QuestController extends BaseController
 			//Lay maxid
 			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_NextQuest.php';
 			$md_getmax= new Models_Quest();
-			$mdawartype = new Models_Q_Award_Type();
-			$md = new Models_Quest_Detail();		
-			$md_string = new Models_String2();
 			$idmax =$md_getmax->getMaxQuestID();
-			$id=$idmax+1;
-			
-			//$arr_string = $md_string->filter2(Array("lgroup"=>50),1,null);
-			//print_r($arr_string);
+			$id=$idmax+1;			
+			$mdawartype = new Models_Q_Award_Type();
 			$this->view->arrawardtype = $mdawartype->getAwardtype();
-				
+			$md = new Models_Quest_Detail();			
 			$this->view->obj = new Obj_Quest_Detail();
 			$this->view->obj->QuestID = $id;
 			$this->view->obj->QuestLineID=$_SESSION['QuestLine'];
@@ -299,12 +297,7 @@ class QuestController extends BaseController
 				$objNextquest=new Obj_Quest_NextQuest();
 				$objNextquest->ID="NULL";
 				$objNextquest->QuestID=$id;
-				$mdNextquest->insertNextQuest($objNextquest);
-				
-				$objNeedquest=new Obj_Quest_Needquest();
-				$objNeedquest->ID="NULL";
-				$objNeedquest->QuestID=$id;
-				$mdNextquest->insertNeedQuest($objNeedquest);				
+				$mdNextquest->insertNextQuest($objNextquest);				
 				//////////
 				//$form->obj->QuestID = $questID;
 				//$obj_nextquest = new Obj_Quest_NextQuest();
@@ -413,9 +406,6 @@ class QuestController extends BaseController
 			$this->view->filterQuestLine = $md_questLine->_getByKey($form->obj->QuestLineID);			
 			$arrQuest = $md->filter($form->obj, "QuestName ASC", ($pageNo - 1)*$items, $items);
 			$arrAllQuest = $mdqd->getQuest();
-			
-			//var_dump($arrQuest); die();
-			
 			$mdQT = new Models_Task();
 			$dataTask = $mdQT->listQuestInTask();
 			$dataquestlineID = $md->getQuestlineID();
@@ -426,12 +416,9 @@ class QuestController extends BaseController
 			
 			foreach($arrQuest as $quest){
 			    $arrNextQuest[$quest->QuestID] = $mdqd->getNextQuest($quest->QuestID);
-			    $arrNeedQuest[$quest->QuestID] = $mdqd->getNeedQuest($quest->QuestID);
 			};
 			
-			//print_r($arrNeedQuest);die();
 			
-			$this->view->arrNeedQuest=$arrNeedQuest;
 			$this->view->arrQuest = $arrQuest;
 			$this->view->arrNextQuest = $arrNextQuest;
 			$this->view->arrAllQuest= $arrAllQuest;
@@ -507,7 +494,31 @@ class QuestController extends BaseController
 	    }		
 	}
 		
-	
+	public function updateneedquestAction()
+	{
+		try{
+			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
+			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNoRender();
+			if($this->_request->isPost())
+			{
+				$this->QuestID=$this->_request->getParam('questid');
+				$this->NeedQuest=$this->_request->getParam('needquest');
+				$form=new Models_Quest();
+				$form->updateNeedquest($this->QuestID,$this->NeedQuest);
+				$md = new Models_Quest_Detail();				
+				Models_Log::insert($this->view->user->username, "act_update_need_quest");			
+			}
+			echo "1";
+		}
+		catch (Exception $ex)
+		{
+			$this->view->errMsg = $ex->getMessage();
+			echo $this->view->errMsg;
+			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
+		}		
+	}
 	
 	public function updatenextquestAction()
 	{
@@ -537,7 +548,8 @@ class QuestController extends BaseController
 			    		$md->deleteNextQuest($id);
 			    		echo "1";
 			    	break;
-			    	case "update":			    	   
+			    	case "update":		
+			    		$obj = new Obj_Quest_NextQuest();	    	   
 			    		$obj->ID = $_POST['ID'];
 			    		$obj->QuestID = $_POST['QuestID'];
 			    		$obj->NextQuest = $_POST['NextQuest'];	
@@ -575,63 +587,6 @@ class QuestController extends BaseController
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}		
 	}
-	
-	public function updateneedquestAction()
-	{
-		try{
- 			require_once ROOT_APPLICATION_FORMS.DS.'Forms_Quest_Detail.php';
-			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest.php';
-			require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Detail.php';
-			require_once ROOT_APPLICATION_OBJECT.DS.'Obj_Quest_NeedQuest.php';
-			$this->_helper->layout->disableLayout();
-			$this->_helper->viewRenderer->setNoRender();
-			if($this->_request->isPost())
-			{
-			   // print_r("aa");die();
-			    $action = $_POST['Action'];		    
-			    $md = new Models_Quest_Detail();
-			    switch ($action) {
-			    	case "insert":		
-			    	    $questID = $_POST['questID'];
-			        	$obj = new Obj_Quest_NeedQuest();
-			        	$obj->QuestID = $questID;
-			        	$obj->NeedQuest = null;
-			       	 	$md->insertNeedQuest($obj);
-			       	 	echo "1";
-			      	break;
-			    	case "delete":
-			    	    $id = $_POST['ID'];
-			    		$md->deleteNeedQuest($id);
-			    		echo "1";
-			    	break;
-			    	case "update":			    	   
-			    		$obj->ID = $_POST['ID'];
-			    		$obj->QuestID = $_POST['QuestID'];
-			    		$obj->NeedQuest = $_POST['NeedQuest'];	
-			    		if(empty($obj->NeedQuest)){
-			    		  $obj->NeedQuest = null;  
-			    		}	    	
-			    		
-			    		$md->updateNeedQuest($obj);
-			    		echo "1";
-			    		break;
-			    	default:			    		
-			    	break;
-			    }
-
-				
-				Models_Log::insert($this->view->user->username, "act_update_need_quest");
-			}
-			
-		}
-		catch(Exception $ex)
-		{
-			$this->view->errMsg = $ex->getMessage();
-			echo $this->view->errMsg;
-			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-		}		
-	}
-	
 	
 	public function updateAction()
 	{

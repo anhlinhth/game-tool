@@ -59,7 +59,7 @@ public function deleteAction()
              $this->_helper->viewRenderer->setNorender();
              $id = $this->_request->getParam("id");
                          
-             $url= ROOT_EXPORT_FILE.DS."localize".DS.$id;
+             $url= ROOT."\Export".DS.$id;
              unlink($url);
              Models_Log::insert( $this->view->user->username, "delete file $url");
           

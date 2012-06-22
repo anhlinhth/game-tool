@@ -1,5 +1,7 @@
 <?php
 require_once ROOT_APPLICATION_MODELS . DS . 'Models_Base.php';
+// require_once ROOT_APPLICATION_MODELS . DS . 'Models_Item.php';
+// require_once ROOT_APPLICATION_MODELS . DS . 'Models_SaleOff_Shop.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Quest_Line.php';
 
 class Models_Quest_xfj extends Models_Base {

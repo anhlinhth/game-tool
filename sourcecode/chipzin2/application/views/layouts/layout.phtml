@@ -7,15 +7,16 @@
 <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/css/style.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/css/chipzin-style.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->baseUrl ?>/media/css/jquery-ui-1.8.16.custom.css" />
+ 
 
 <script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jquery-ui-1.8.16.custom.min.js" ></script>
 <script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/form.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/chip-zin.js"></script>
 
 
 <script>
-   var StyleFile = "theme" + document.cookie.charAt(6) + ".css";
-   document.writeln('<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/css/' + StyleFile + '">');
+  
 </script>
 <!--[if IE]>
 <link rel="stylesheet" type="text/css" href="css/ie-sucks.css" />
@@ -24,23 +25,34 @@
 
 <body>
 	<div id="container">
-    	<div id="header">			
+    	<div id="header">
+			
 			<?php $this->topMenu($this) ?>			
 			<?php $this->showHello($this->user, $this) ?>
       </div>
         
 		<?php $this->topPanel($this->controllerName, $this) ?>      
-		<div style="clear:both">	</div>
+			
         <div id="wrapper">
             <div id="content">
 				<?php echo $this->layout()->content ?>       			              
             </div>            
       </div>
         <div id="footer">
-			<div id="credits">
-				<img style="vertical-align: middle" width="16" height="16" src="<?php echo $this->baseUrl ?>/media/images/logo.gif"/>&nbsp;<b>P2 TEAM</b>
-			</div>
-		</div>
+        <div id="credits">
+			<img style="vertical-align: middle" width="16" height="16" src="<?php echo $this->baseUrl ?>/media/images/logo.gif"/>&nbsp;<b>P2 TEAM</b>
+        </div>
+        <div id="styleswitcher">
+            <ul>
+                <li><a href="javascript: document.cookie='theme='; window.location.reload();" title="Default" id="mixswitch">d</a></li>
+                <li><a href="javascript: document.cookie='theme=1'; window.location.reload();" title="Blue" id="blueswitch">b</a></li>
+                <li><a href="javascript: document.cookie='theme=2'; window.location.reload();" title="Green" id="greenswitch">g</a></li>
+                <li><a href="javascript: document.cookie='theme=3'; window.location.reload();" title="Brown" id="brownswitch">b</a></li>
+                <li><a href="javascript: document.cookie='theme=4'; window.location.reload();" title="Mix" id="defswitch">m</a></li>                
+            </ul>
+        </div><br />
+
+        </div>
 </div>
 </body>
 </html>

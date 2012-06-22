@@ -1,0 +1,95 @@
+<?php if($this->errMsg) :?>
+    <?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>        
+    <?php $this->showMessage($this->msg)?>    
+<?php endif;?>
+<script type="text/javascript" src="<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquery.bubblepopup.v2.3.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquery.bubblepopup.v2.3.1.css" />
+<div id="box">
+    <h3 id="addpopup">Popup</h3>
+    <form id="form" action="" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="hidSync" id="hidSync"/>	
+		<input type="hidden" name="hidLocation" id="hidLocation"/>		
+      <fieldset id="personal">
+        <label for="uploadImage" >Upload hình :</label>
+        <input id="imgPath" name="imgPath" type="file" />
+        <br />
+         <label for="uploadImage" ></label><img src="<?php echo $this->baseUrl."/media/images/upload/". $this->form->picname; ?>" >
+        <br />
+        <label for="popupcontent">Link :</label>
+        <textarea style="margin-bottom: 5px" cols="70" rows="3" name="content" id="popupcontent" tabindex="3"><?php echo $this->form->content ?></textarea>       
+        <br />
+		<label for="active">Kích hoạt : </label>
+		<input style="vertical-align: middle; margin-top: 5px;" <?php if($this->form->enabled) echo "checked" ?> name="enabled" id="yes" type="checkbox" 
+		value="1" tabindex="35" />		
+		<br />
+      </fieldset>            
+      <div align="center">
+      <input id="button1" type="submit" value="Lưu" /> &nbsp;&nbsp;       
+      <input id="button1" type="button" class="btnSync" value="Sync"/>
+      </div>
+    </form>
+</div>
+<script type="text/javascript">
+	function syncData()
+	{
+		if($("#rdDev").is(":checked"))
+			$("#hidLocation").val($("#rdDev").val());
+		else
+			$("#hidLocation").val($("#rdLive").val());
+		
+		if(confirm("Bạn có chắc thực hiện sync dữ liệu với các server không?") == true)
+		{
+			$("#hidSync").val(1);
+			$("#form").submit();
+		}	
+	}
+	
+	$(function(){		
+		$('.btnSync').CreateBubblePopup({
+													align: 'right',
+													
+													innerHtml: 'Click to sync data', 
+													innerHtmlStyle: {
+																		color:'#FFFFFF', 
+																		'text-align':'center'
+																	},
+																	
+													themeName: 	'all-black',
+													themePath: 	'<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquerybubblepopup-theme'
+											   });
+		
+		$('.btnSync').click(function(){		
+			var btn = $(this);
+
+			// show a bubble popup with new options when "this" shoppingcart button is clicked
+			btn.ShowBubblePopup({
+
+													align: 'center',
+													innerHtml: '<p id="errorpop" style="color:red"></p>'+
+																'<p><input id="rdDev" checked name="rdLocation" value="<?php echo DEV ?>" type="radio"/> <span style="color:blue;font-weight:bold">DEV</span>&nbsp;&nbsp;&nbsp;&nbsp;<input id="rdLive" name="rdLocation" type="radio" value="<?php echo LIVE ?>"/> <span style="color:red;font-weight:bold;">LIVE</span></p>' + 
+															   '<p><input type="button" onclick="syncData()" id="btnOk" value="Đồng ý"/>&nbsp;&nbsp;<input type="button" id="btnClose" value="Hủy"/></p>',
+
+													innerHtmlStyle:{ 
+																	color:'#666666', 
+																	'text-align':'left'
+																   },
+
+													themeName: 	'azure',
+													themePath: 	'<?php echo $this->baseUrl ?>/media/scripts/jQueryBubblePopup/jquerybubblepopup-theme'
+
+												}, false); //save_options = false; it will use new options only on click event, it does not overwrite old options.
+
+
+			// "freeze" the Bubble Popup then it will not respond to mouse events (as mouseover/mouseout) 
+			// until ".ShowBubblePopup()" or ".HideBubblePopup()" is called again.
+			btn.FreezeBubblePopup(); 
+
+			// when the "close" link is clicked, hide the bubble popup
+			$('#btnClose').click(function(){
+				$(btn).HideBubblePopup();
+			});
+		});//end onclick event
+	});
+</script>

@@ -25,7 +25,7 @@
 				<td>
 					<label for="questname">Quest Name : </label> 
 					<input name="QuestName" class="width" value="<?php echo $this->obj->QuestName?>" id="questnamestring" type="text" tabindex="1" /></td>
-				<td style="width: 400px;">
+				<td>
 					<label for="queststring">Quest String: </label> 
 					<input name="QuestString" value="<?php echo $this->obj->QuestString?>" id="queststring" type="text" tabindex="1" onchange="getvalue('queststring')" title="queststring-string-value"/>
 					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('queststring','')"></a>&nbsp;
@@ -42,7 +42,7 @@
 					<label for="questgroup">Quest Group: </label> 
 					<input name="QuestGroup" value="<?php echo $this->obj->QuestGroup?>" id="questgroup" type="text" tabindex="1" />
 				</td>
-				<td style="width: 450px;">
+				<td>
 					<label for="QuestGroupString">Q_Group String: </label> 
 					<input name="QuestGroupString" value="<?php echo $this->obj->QuestGroupString?>" id="questgroupstring" type="text" tabindex="1" onchange="getvalue('questgroupstring')" title="questgroup-string-value" />
 					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('questgroupstring','')"></a>&nbsp;
@@ -83,7 +83,25 @@
 					<?php }?> 
 					
 				</td>
-				
+				<td id="list-need-quest">
+					<label>Need Quest : </label>				
+					<select name='NeedQuest' style='margin-bottom:5px;margin-top:5px;min-width:50px'>
+						<option value=''></option>
+						<?php 
+						$strSelectQuest = "";
+						foreach ($this->arrNeedQuest as $row)
+						{
+							$select = "";
+							if($row->QuestID == $this->obj->NeedQuest)
+							{
+								$select = "selected";
+							}
+							$strSelectQuest .= "<option $select value='". $row->QuestID ."'>(ID:$row->QuestID) $row->QuestName</option>";
+						}
+						echo $strSelectQuest;
+						?>
+					</select>
+				</td>
 			</tr>
 			<tr>		
 					
@@ -203,7 +221,7 @@ function addTask(key){
 		type: "POST",
 		url:"<?php echo $this->baseUrl.'/task/add/'?> ",
 		data: "id=" + quest_id,	
-		success: function(data){
+		success: function(data){			
 			if(data != ""){	
 				//alert(data);
 				loadTask(quest_id);

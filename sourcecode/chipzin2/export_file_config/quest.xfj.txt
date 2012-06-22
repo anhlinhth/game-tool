@@ -1,0 +1,4803 @@
+{
+ 	"quests"  :
+	{
+		"13":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["14"],
+			 "tasks" : ["26"],
+			 "txtName" : "@quest_CB#1",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#25",
+			 "award" :
+			 {
+ 				"exp" : 1,
+				"gold" : 10
+			 }
+		}, 
+
+		"14":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["39","76"],
+			 "tasks" : ["27"],
+			 "txtName" : "@quest_CB#2",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#26",
+			 "award" :
+			 {
+ 				"exp" : 5,
+				"gold" : 15
+			 }
+		}, 
+
+		"15":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["16","78"],
+			 "tasks" : ["29"],
+			 "txtName" : "@quest_CB#4",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#28",
+			 "award" :
+			 {
+ 				"exp" : 15
+			 }
+		}, 
+
+		"16":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["40"],
+			 "tasks" : ["31"],
+			 "txtName" : "@quest_CB#5",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#29",
+			 "award" :
+			 {
+ 				"exp" : 15,
+				"gold" : 20
+			 }
+		}, 
+
+		"17":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["42","63"],
+			 "tasks" : ["33"],
+			 "txtName" : "@quest_CB#9",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#33",
+			 "award" :
+			 {
+ 				"exp" : 15,
+				"gold" : 45
+			 }
+		}, 
+
+		"24":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["43"],
+			 "tasks" : ["44"],
+			 "txtName" : "@quest_CB#11",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#35",
+			 "award" :
+			 {
+ 				"exp" : 15,
+				"gold" : 75
+			 }
+		}, 
+
+		"25":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["27","59"],
+			 "tasks" : ["46"],
+			 "txtName" : "@quest_CB#8",
+			 "txtAlias" : "@quest_CB#8",
+			 "txtDesc" : "@quest_CB#32",
+			 "award" :
+			 {
+ 				"exp" : 30,
+				"gold" : 70
+			 }
+		}, 
+
+		"26":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["48"],
+			 "tasks" : ["48","49"],
+			 "txtName" : "@quest_CB#17",
+			 "txtAlias" : "@quest_CB#17",
+			 "txtDesc" : "@quest_CB#41",
+			 "award" :
+			 {
+ 				"exp" : 20,
+				"gold" : 750,
+				"iron" : 15
+			 }
+		}, 
+
+		"27":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["47"],
+			 "tasks" : ["88"],
+			 "txtName" : "@quest_CB#14",
+			 "txtAlias" : "@quest_CB#14",
+			 "txtDesc" : "@quest_CB#38",
+			 "award" :
+			 {
+ 				"exp" : 21,
+				"gold" : 180
+			 }
+		}, 
+
+		"28":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["178"],
+			 "tasks" : ["53","54"],
+			 "txtName" : "@quest_CB#22",
+			 "txtAlias" : "@quest_CB#22",
+			 "txtDesc" : "@quest_CB#46",
+			 "award" :
+			 {
+ 				"exp" : 40,
+				"gold" : 1250,
+				"stone" : 35
+			 }
+		}, 
+
+		"29":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["176"],
+			 "tasks" : ["55","56","57"],
+			 "txtName" : "@quest_CB#24",
+			 "txtAlias" : "@quest_CB#24",
+			 "txtDesc" : "@quest_CB#48",
+			 "award" :
+			 {
+ 				"exp" : 55,
+				"gold" : 1850,
+				"iron" : 50
+			 }
+		}, 
+
+		"39":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["15"],
+			 "tasks" : ["77","78"],
+			 "txtName" : "@quest_CB#3",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#27",
+			 "award" :
+			 {
+ 				"exp" : 15,
+				"gold" : 50
+			 }
+		}, 
+
+		"40":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["41"],
+			 "tasks" : ["79"],
+			 "txtName" : "@quest_CB#6",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#30",
+			 "award" :
+			 {
+ 				"exp" : 10,
+				"gold" : 45
+			 }
+		}, 
+
+		"41":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["25"],
+			 "tasks" : ["80","81"],
+			 "txtName" : "@quest_CB#7",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#31",
+			 "award" :
+			 {
+ 				"exp" : 20,
+				"gold" : 50
+			 }
+		}, 
+
+		"42":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["24"],
+			 "tasks" : ["82","83"],
+			 "txtName" : "@quest_CB#10",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#34",
+			 "award" :
+			 {
+ 				"exp" : 30,
+				"gold" : 150
+			 }
+		}, 
+
+		"43":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["44"],
+			 "tasks" : ["84","85"],
+			 "txtName" : "@quest_CB#12",
+			 "txtAlias" : "@quest_CB#12",
+			 "txtDesc" : "@quest_CB#36",
+			 "award" :
+			 {
+ 				"exp" : 15,
+				"gold" : 450,
+				"wood" : 10
+			 }
+		}, 
+
+		"44":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["45"],
+			 "tasks" : ["86"],
+			 "txtName" : "@quest_CB#13",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#37",
+			 "award" :
+			 {
+ 				"exp" : 18,
+				"gold" : 160
+			 }
+		}, 
+
+		"45":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["46"],
+			 "tasks" : ["90"],
+			 "txtName" : "@quest_CB#15",
+			 "txtAlias" : "@quest_CB#15",
+			 "txtDesc" : "@quest_CB#39",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 900,
+				"stone" : 20
+			 }
+		}, 
+
+		"46":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["26"],
+			 "tasks" : ["91","92"],
+			 "txtName" : "@quest_CB#16",
+			 "txtAlias" : "@quest_CB#16",
+			 "txtDesc" : "@quest_CB#40",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 900,
+				"wood" : 20
+			 }
+		}, 
+
+		"47":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["154"],
+			 "tasks" : ["94"],
+			 "txtName" : "@quest_CB#18",
+			 "txtAlias" : "@quest_CB#97",
+			 "txtDesc" : "@quest_CB#42",
+			 "award" :
+			 {
+ 				"exp" : 15
+			 }
+		}, 
+
+		"48":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["49"],
+			 "tasks" : ["96"],
+			 "txtName" : "@quest_CB#19",
+			 "txtAlias" : "@quest_CB#19",
+			 "txtDesc" : "@quest_CB#43",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 900,
+				"stone" : 20
+			 }
+		}, 
+
+		"49":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["115"],
+			 "tasks" : ["97","98"],
+			 "txtName" : "@quest_CB#20",
+			 "txtAlias" : "@quest_CB#20",
+			 "txtDesc" : "@quest_CB#44",
+			 "award" :
+			 {
+ 				"exp" : 20,
+				"gold" : 750,
+				"wood" : 15
+			 }
+		}, 
+
+		"50":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["28"],
+			 "tasks" : ["99"],
+			 "txtName" : "@quest_CB#21",
+			 "txtAlias" : "@quest_CB#21",
+			 "txtDesc" : "@quest_CB#45",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 900,
+				"iron" : 20
+			 }
+		}, 
+
+		"51":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["155"],
+			 "tasks" : ["100"],
+			 "txtName" : "@quest_CB#23",
+			 "txtAlias" : "@quest_CB#23",
+			 "txtDesc" : "@quest_CB#47",
+			 "award" :
+			 {
+ 				"exp" : 40,
+				"gold" : 1300,
+				"wood" : 35
+			 }
+		}, 
+
+		"54":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["61"],
+			 "tasks" : ["103"],
+			 "txtName" : "@quest_CB#151",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#161",
+			 "award" :
+			 {
+ 				"exp" : 30,
+				"iron" : 400,
+				"stone" : 400,
+				"wood" : 400
+			 }
+		}, 
+
+		"55":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["58"],
+			 "tasks" : ["104"],
+			 "txtName" : "@quest_CB#152",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#162",
+			 "award" :
+			 {
+ 				"exp" : 50
+			 }
+		}, 
+
+		"56":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["55"],
+			 "tasks" : ["105"],
+			 "txtName" : "@quest_CB#153",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#163",
+			 "award" :
+			 {
+ 				"exp" : 65,
+				"wood" : 1000,
+				"iron" : 1000
+			 }
+		}, 
+
+		"57":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["60"],
+			 "tasks" : ["106"],
+			 "txtName" : "@quest_CB#154",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#164",
+			 "award" :
+			 {
+ 				"exp" : 30
+			 }
+		}, 
+
+		"58":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["116"],
+			 "tasks" : ["107"],
+			 "txtName" : "@quest_CB#155",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#165",
+			 "award" :
+			 {
+ 				"exp" : 110,
+				"stone" : 1500,
+				"iron" : 1500
+			 }
+		}, 
+
+		"59":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["119"],
+			 "tasks" : ["108"],
+			 "txtName" : "@quest_CB#156",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#166",
+			 "award" :
+			 {
+ 				"exp" : 80
+			 }
+		}, 
+
+		"60":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["153"],
+			 "tasks" : ["109"],
+			 "txtName" : "@quest_CB#157",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#167",
+			 "award" :
+			 {
+ 				"exp" : 215,
+				"wood" : 3000
+			 }
+		}, 
+
+		"61":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["118"],
+			 "tasks" : ["110"],
+			 "txtName" : "@quest_CB#158",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#168",
+			 "award" :
+			 {
+ 				"exp" : 130
+			 }
+		}, 
+
+		"63":
+		{
+			 "group" : 2,
+			 "nextQuest" : ["64"],
+			 "tasks" : ["112","113"],
+			 "txtName" : "@quest_CB#117",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#123",
+			 "award" :
+			 {
+ 				"exp" : 3,
+				"gold" : 10
+			 }
+		}, 
+
+		"64":
+		{
+			 "group" : 2,
+			 "nextQuest" : ["65"],
+			 "tasks" : ["114"],
+			 "txtName" : "@quest_CB#216",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#197",
+			 "award" :
+			 {
+ 				"exp" : 2
+			 }
+		}, 
+
+		"65":
+		{
+			 "group" : 2,
+			 "nextQuest" : ["66"],
+			 "tasks" : ["115","116"],
+			 "txtName" : "@quest_CB#191",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#198",
+			 "award" :
+			 {
+ 				"exp" : 5,
+				"gold" : 25
+			 }
+		}, 
+
+		"66":
+		{
+			 "group" : 2,
+			 "nextQuest" : ["67"],
+			 "tasks" : ["117","118"],
+			 "txtName" : "@quest_CB#192",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#199",
+			 "award" :
+			 {
+ 				"gold" : 20,
+				"exp" : 2
+			 }
+		}, 
+
+		"67":
+		{
+			 "group" : 2,
+			 "nextQuest" : ["68"],
+			 "tasks" : ["119"],
+			 "txtName" : "@quest_CB#118",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#124",
+			 "award" :
+			 {
+ 				"exp" : 15
+			 }
+		}, 
+
+		"68":
+		{
+			 "group" : 2,
+			 "nextQuest" : ["70"],
+			 "tasks" : ["120"],
+			 "txtName" : "@quest_CB#122",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#128",
+			 "award" :
+			 {
+ 				"exp" : 5
+			 }
+		}, 
+
+		"70":
+		{
+			 "group" : 2,
+			 "nextQuest" : ["72"],
+			 "tasks" : ["122"],
+			 "txtName" : "@quest_CB#119",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#125",
+			 "award" :
+			 {
+ 				"exp" : 10
+			 }
+		}, 
+
+		"72":
+		{
+			 "group" : 2,
+			 "nextQuest" : ["73"],
+			 "tasks" : ["124"],
+			 "txtName" : "@quest_CB#120",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#126",
+			 "award" :
+			 {
+ 				"exp" : 10
+			 }
+		}, 
+
+		"73":
+		{
+			 "group" : 2,
+			 "nextQuest" : [],
+			 "tasks" : ["125"],
+			 "txtName" : "@quest_CB#195",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#202",
+			 "award" :
+			 {
+ 				"exp" : 10
+			 }
+		}, 
+
+		"76":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["77"],
+			 "tasks" : ["129"],
+			 "txtName" : "@quest_CB#217",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#233",
+			 "award" :
+			 {
+ 				"exp" : 2,
+				"gold" : 10
+			 }
+		}, 
+
+		"77":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["94"],
+			 "tasks" : ["130"],
+			 "txtName" : "@quest_CB#218",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#234",
+			 "award" :
+			 {
+ 				"exp" : 3,
+				"gold" : 20
+			 }
+		}, 
+
+		"78":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["90"],
+			 "tasks" : ["131","132"],
+			 "txtName" : "@quest_CB#284",
+			 "txtAlias" : "@quest_CB#284",
+			 "txtDesc" : "@quest_CB#300",
+			 "award" :
+			 {
+ 				"gold" : 200,
+				"exp" : 15
+			 }
+		}, 
+
+		"80":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["113","180"],
+			 "tasks" : ["133"],
+			 "txtName" : "@quest_CB#288",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#304",
+			 "award" :
+			 {
+ 				"exp" : 15
+			 }
+		}, 
+
+		"82":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["92"],
+			 "tasks" : ["134"],
+			 "txtName" : "@quest_CB#291",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#307",
+			 "award" :
+			 {
+ 				"exp" : 15,
+				"gold" : 600
+			 }
+		}, 
+
+		"83":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["117"],
+			 "tasks" : ["135"],
+			 "txtName" : "@quest_CB#292",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#308",
+			 "award" :
+			 {
+ 				"exp" : 20,
+				"gold" : 860
+			 }
+		}, 
+
+		"84":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["152"],
+			 "tasks" : ["136"],
+			 "txtName" : "@quest_CB#294",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#310",
+			 "award" :
+			 {
+ 				"exp" : 15,
+				"gold" : 800
+			 }
+		}, 
+
+		"85":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["86"],
+			 "tasks" : ["137"],
+			 "txtName" : "@quest_CB#295",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#311",
+			 "award" :
+			 {
+ 				"exp" : 20,
+				"gold" : 1000
+			 }
+		}, 
+
+		"86":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["167"],
+			 "tasks" : ["138"],
+			 "txtName" : "@quest_CB#296",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#312",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 1300
+			 }
+		}, 
+
+		"87":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["163"],
+			 "tasks" : ["139"],
+			 "txtName" : "@quest_CB#297",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#313",
+			 "award" :
+			 {
+ 				"exp" : 15,
+				"gold" : 800
+			 }
+		}, 
+
+		"88":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["181"],
+			 "tasks" : ["140"],
+			 "txtName" : "@quest_CB#298",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#314",
+			 "award" :
+			 {
+ 				"exp" : 20,
+				"gold" : 1000
+			 }
+		}, 
+
+		"89":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["114"],
+			 "tasks" : ["141"],
+			 "txtName" : "@quest_CB#299",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#666",
+			 "award" :
+			 {
+ 				"exp" : 100,
+				"gold" : 1000
+			 }
+		}, 
+
+		"90":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["91"],
+			 "tasks" : ["144"],
+			 "txtName" : "@quest_CB#285",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#301",
+			 "award" :
+			 {
+ 				"exp" : 2
+			 }
+		}, 
+
+		"91":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["82"],
+			 "tasks" : ["146","147"],
+			 "txtName" : "@quest_CB#287",
+			 "txtAlias" : "@quest_CB#287",
+			 "txtDesc" : "@quest_CB#303",
+			 "award" :
+			 {
+ 				"exp" : 10,
+				"gold" : 350
+			 }
+		}, 
+
+		"92":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["93"],
+			 "tasks" : ["148"],
+			 "txtName" : "@quest_CB#290",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#306",
+			 "award" :
+			 {
+ 				"exp" : 2
+			 }
+		}, 
+
+		"93":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["165"],
+			 "tasks" : ["149","150","151"],
+			 "txtName" : "@quest_CB#293",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#309",
+			 "award" :
+			 {
+ 				"exp" : 10
+			 }
+		}, 
+
+		"94":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["95"],
+			 "tasks" : ["152","153"],
+			 "txtName" : "@quest_CB#219",
+			 "txtAlias" : "@quest_CB#219",
+			 "txtDesc" : "@quest_CB#235",
+			 "award" :
+			 {
+ 				"gold" : 150,
+				"exp" : 15
+			 }
+		}, 
+
+		"95":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["96"],
+			 "tasks" : ["154","155"],
+			 "txtName" : "@quest_CB#220",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#236",
+			 "award" :
+			 {
+ 				"exp" : 12,
+				"gold" : 120
+			 }
+		}, 
+
+		"96":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["97"],
+			 "tasks" : ["156","157"],
+			 "txtName" : "@quest_CB#221",
+			 "txtAlias" : "@quest_CB#221",
+			 "txtDesc" : "@quest_CB#237",
+			 "award" :
+			 {
+ 				"exp" : 20,
+				"gold" : 200
+			 }
+		}, 
+
+		"97":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["98"],
+			 "tasks" : ["158","159"],
+			 "txtName" : "@quest_CB#222",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#238",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 250
+			 }
+		}, 
+
+		"98":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["99"],
+			 "tasks" : ["160","161"],
+			 "txtName" : "@quest_CB#223",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#239",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 350
+			 }
+		}, 
+
+		"99":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["100"],
+			 "tasks" : ["162","163"],
+			 "txtName" : "@quest_CB#224",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#240",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 380
+			 }
+		}, 
+
+		"100":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["101"],
+			 "tasks" : ["164","165"],
+			 "txtName" : "@quest_CB#225",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#241",
+			 "award" :
+			 {
+ 				"gold" : 500,
+				"exp" : 25
+			 }
+		}, 
+
+		"101":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["102"],
+			 "tasks" : ["166","167"],
+			 "txtName" : "@quest_CB#226",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#242",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 1000
+			 }
+		}, 
+
+		"102":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["103"],
+			 "tasks" : ["168","169"],
+			 "txtName" : "@quest_CB#227",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#243",
+			 "award" :
+			 {
+ 				"gold" : 750,
+				"exp" : 25
+			 }
+		}, 
+
+		"103":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["104"],
+			 "tasks" : ["170","171"],
+			 "txtName" : "@quest_CB#228",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#244",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 1500
+			 }
+		}, 
+
+		"104":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["105"],
+			 "tasks" : ["172","173"],
+			 "txtName" : "@quest_CB#229",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#245",
+			 "award" :
+			 {
+ 				"gold" : 1500,
+				"exp" : 35
+			 }
+		}, 
+
+		"105":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["106"],
+			 "tasks" : ["174","175"],
+			 "txtName" : "@quest_CB#230",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#246",
+			 "award" :
+			 {
+ 				"exp" : 35,
+				"gold" : 1800
+			 }
+		}, 
+
+		"106":
+		{
+			 "group" : 3,
+			 "nextQuest" : ["107"],
+			 "tasks" : ["176","177"],
+			 "txtName" : "@quest_CB#231",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#247",
+			 "award" :
+			 {
+ 				"exp" : 45,
+				"gold" : 2200
+			 }
+		}, 
+
+		"107":
+		{
+			 "group" : 3,
+			 "nextQuest" : [],
+			 "tasks" : ["178","179"],
+			 "txtName" : "@quest_CB#232",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#248",
+			 "award" :
+			 {
+ 				"exp" : 45,
+				"gold" : 2750
+			 }
+		}, 
+
+		"109":
+		{
+			 "group" : 2,
+			 "nextQuest" : [],
+			 "tasks" : ["181"],
+			 "txtName" : "@quest_CB#361",
+			 "txtAlias" : "@quest_CB#378",
+			 "txtDesc" : "@quest_CB#378",
+			 "award" :
+			 {
+ 				"gold" : 160,
+				"exp" : 10
+			 }
+		}, 
+
+		"110":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["87"],
+			 "tasks" : ["182"],
+			 "txtName" : "@quest_CB#362",
+			 "txtAlias" : "@quest_CB#379",
+			 "txtDesc" : "@quest_CB#379",
+			 "award" :
+			 {
+ 				"exp" : 15
+			 }
+		}, 
+
+		"111":
+		{
+			 "group" : 13,
+			 "nextQuest" : [],
+			 "tasks" : ["183"],
+			 "txtName" : "@quest_CB#380",
+			 "txtAlias" : "@quest_CB#381",
+			 "txtDesc" : "@quest_CB#381",
+			 "award" :
+			 {
+ 				"exp" : 100
+			 }
+		}, 
+
+		"112":
+		{
+			 "group" : 5,
+			 "nextQuest" : [],
+			 "tasks" : ["184"],
+			 "txtName" : "@quest_CB#384",
+			 "txtAlias" : "@quest_CB#385",
+			 "txtDesc" : "@quest_CB#385",
+			 "award" :
+			 {
+ 				"exp" : 100
+			 }
+		}, 
+
+		"113":
+		{
+			 "group" : 5,
+			 "nextQuest" : [],
+			 "tasks" : ["185","186","187"],
+			 "txtName" : "@quest_CB#388",
+			 "txtAlias" : "@quest_CB#388",
+			 "txtDesc" : "@quest_CB#389",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 1600
+			 }
+		}, 
+
+		"114":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["112"],
+			 "tasks" : ["188","189","190"],
+			 "txtName" : "@quest_CB#396",
+			 "txtAlias" : "@quest_CB#396",
+			 "txtDesc" : "@quest_CB#397",
+			 "award" :
+			 {
+ 				"gold" : 5250,
+				"exp" : 100
+			 }
+		}, 
+
+		"115":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["50"],
+			 "tasks" : ["191","192","193"],
+			 "txtName" : "@quest_CB#398",
+			 "txtAlias" : "@quest_CB#398",
+			 "txtDesc" : "@quest_CB#399",
+			 "award" :
+			 {
+ 				"gold" : 1700,
+				"exp" : 50
+			 }
+		}, 
+
+		"116":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["120"],
+			 "tasks" : ["194","195"],
+			 "txtName" : "@quest_CB#400",
+			 "txtAlias" : "@quest_CB#400",
+			 "txtDesc" : "@quest_CB#401",
+			 "award" :
+			 {
+ 				"gold" : 800,
+				"exp" : 20
+			 }
+		}, 
+
+		"117":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["84"],
+			 "tasks" : ["196","197"],
+			 "txtName" : "@quest_CB#404",
+			 "txtAlias" : "@quest_CB#404",
+			 "txtDesc" : "@quest_CB#405",
+			 "award" :
+			 {
+ 				"gold" : 850,
+				"exp" : 15
+			 }
+		}, 
+
+		"118":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["56"],
+			 "tasks" : ["198","199","200"],
+			 "txtName" : "@quest_CB#406",
+			 "txtAlias" : "@quest_CB#406",
+			 "txtDesc" : "@quest_CB#407",
+			 "award" :
+			 {
+ 				"gold" : 2050,
+				"exp" : 55
+			 }
+		}, 
+
+		"119":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["54"],
+			 "tasks" : ["202"],
+			 "txtName" : "@quest_CB#408",
+			 "txtAlias" : "@quest_CB#408",
+			 "txtDesc" : "@quest_CB#409",
+			 "award" :
+			 {
+ 				"exp" : 20
+			 }
+		}, 
+
+		"120":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["140"],
+			 "tasks" : ["204","205"],
+			 "txtName" : "@quest_CB#410",
+			 "txtAlias" : "@quest_CB#410",
+			 "txtDesc" : "@quest_CB#411",
+			 "award" :
+			 {
+ 				"gold" : 300,
+				"exp" : 15
+			 }
+		}, 
+
+		"122":
+		{
+			 "group" : 8,
+			 "nextQuest" : ["123"],
+			 "tasks" : ["207","208"],
+			 "txtName" : "@quest_CB#425",
+			 "txtAlias" : "@quest_CB#425",
+			 "txtDesc" : "@quest_CB#426",
+			 "award" :
+			 {
+ 				"gold" : 900,
+				"exp" : 10
+			 }
+		}, 
+
+		"123":
+		{
+			 "group" : 8,
+			 "nextQuest" : ["124"],
+			 "tasks" : ["209"],
+			 "txtName" : "@quest_CB#431",
+			 "txtAlias" : "@quest_CB#431",
+			 "txtDesc" : "@quest_CB#432",
+			 "award" :
+			 {
+ 				"gold" : 800,
+				"exp" : 10
+			 }
+		}, 
+
+		"124":
+		{
+			 "group" : 8,
+			 "nextQuest" : ["125"],
+			 "tasks" : ["210","211"],
+			 "txtName" : "@quest_CB#435",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#436",
+			 "award" :
+			 {
+ 				"gold" : 2000,
+				"exp" : 35
+			 }
+		}, 
+
+		"125":
+		{
+			 "group" : 8,
+			 "nextQuest" : ["126"],
+			 "tasks" : ["212"],
+			 "txtName" : "@quest_CB#441",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#442",
+			 "award" :
+			 {
+ 				"gold" : 2200,
+				"exp" : 35
+			 }
+		}, 
+
+		"126":
+		{
+			 "group" : 8,
+			 "nextQuest" : ["127"],
+			 "tasks" : ["213","214"],
+			 "txtName" : "@quest_CB#445",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#446",
+			 "award" :
+			 {
+ 				"gold" : 2400,
+				"exp" : 35
+			 }
+		}, 
+
+		"127":
+		{
+			 "group" : 8,
+			 "nextQuest" : ["128"],
+			 "tasks" : ["215","216"],
+			 "txtName" : "@quest_CB#451",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#452",
+			 "award" :
+			 {
+ 				"gold" : 7000,
+				"exp" : 100
+			 }
+		}, 
+
+		"128":
+		{
+			 "group" : 8,
+			 "nextQuest" : [],
+			 "tasks" : ["217","218","219"],
+			 "txtName" : "@quest_CB#455",
+			 "txtAlias" : "@quest_CB#455",
+			 "txtDesc" : "@quest_CB#456",
+			 "award" :
+			 {
+ 				"gold" : 7700,
+				"exp" : 110
+			 }
+		}, 
+
+		"129":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["144"],
+			 "tasks" : ["220","221"],
+			 "txtName" : "@quest_CB#459",
+			 "txtAlias" : "@quest_CB#459",
+			 "txtDesc" : "@quest_CB#460",
+			 "award" :
+			 {
+ 				"gold" : 1400,
+				"exp" : 40
+			 }
+		}, 
+
+		"131":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["132"],
+			 "tasks" : ["224","225"],
+			 "txtName" : "@quest_CB#467",
+			 "txtAlias" : "@quest_CB#467",
+			 "txtDesc" : "@quest_CB#468",
+			 "award" :
+			 {
+ 				"exp" : 75,
+				"gold" : 2500
+			 }
+		}, 
+
+		"132":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["133"],
+			 "tasks" : ["226","227"],
+			 "txtName" : "@quest_CB#473",
+			 "txtAlias" : "@quest_CB#473",
+			 "txtDesc" : "@quest_CB#474",
+			 "award" :
+			 {
+ 				"exp" : 80,
+				"gold" : 2250
+			 }
+		}, 
+
+		"133":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["134"],
+			 "tasks" : ["228"],
+			 "txtName" : "@quest_CB#479",
+			 "txtAlias" : "@quest_CB#479",
+			 "txtDesc" : "@quest_CB#480",
+			 "award" :
+			 {
+ 				"gold" : 4000,
+				"exp" : 115
+			 }
+		}, 
+
+		"134":
+		{
+			 "group" : 13,
+			 "nextQuest" : [],
+			 "tasks" : ["229"],
+			 "txtName" : "@quest_CB#483",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#484",
+			 "award" :
+			 {
+ 				"gold" : 4000,
+				"exp" : 120
+			 }
+		}, 
+
+		"136":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["146"],
+			 "tasks" : ["232","233"],
+			 "txtName" : "@quest_CB#493",
+			 "txtAlias" : "@quest_CB#493",
+			 "txtDesc" : "@quest_CB#494",
+			 "award" :
+			 {
+ 				"exp" : 55,
+				"gold" : 1900
+			 }
+		}, 
+
+		"137":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["145"],
+			 "tasks" : ["234","235"],
+			 "txtName" : "@quest_CB#495",
+			 "txtAlias" : "@quest_CB#495",
+			 "txtDesc" : "@quest_CB#496",
+			 "award" :
+			 {
+ 				"gold" : 1350,
+				"exp" : 40
+			 }
+		}, 
+
+		"138":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["137"],
+			 "tasks" : ["236"],
+			 "txtName" : "@quest_CB#499",
+			 "txtAlias" : "@quest_CB#499",
+			 "txtDesc" : "@quest_CB#500",
+			 "award" :
+			 {
+ 				"gold" : 1600,
+				"exp" : 50
+			 }
+		}, 
+
+		"139":
+		{
+			 "group" : 13,
+			 "nextQuest" : [],
+			 "tasks" : ["237"],
+			 "txtName" : "@quest_CB#501",
+			 "txtAlias" : "@quest_CB#501",
+			 "txtDesc" : "@quest_CB#502",
+			 "award" :
+			 {
+ 				"exp" : 35,
+				"gold" : 1150
+			 }
+		}, 
+
+		"140":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["57"],
+			 "tasks" : ["238"],
+			 "txtName" : "@quest_CB#503",
+			 "txtAlias" : "@quest_CB#503",
+			 "txtDesc" : "@quest_CB#504",
+			 "award" :
+			 {
+ 				"exp" : 10,
+				"gold" : 400
+			 }
+		}, 
+
+		"142":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["147","161"],
+			 "tasks" : ["241"],
+			 "txtName" : "@quest_CB#513",
+			 "txtAlias" : "@quest_CB#513",
+			 "txtDesc" : "@quest_CB#515",
+			 "award" :
+			 {
+ 				"gold" : 3900,
+				"exp" : 110
+			 }
+		}, 
+
+		"143":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["136"],
+			 "tasks" : ["243"],
+			 "txtName" : "@quest_CB#520",
+			 "txtAlias" : "@quest_CB#520",
+			 "txtDesc" : "@quest_CB#521",
+			 "award" :
+			 {
+ 				"exp" : 50,
+				"gold" : 1800
+			 }
+		}, 
+
+		"144":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["138"],
+			 "tasks" : ["244"],
+			 "txtName" : "@quest_CB#522",
+			 "txtAlias" : "@quest_CB#522",
+			 "txtDesc" : "@quest_CB#523",
+			 "award" :
+			 {
+ 				"gold" : 1800,
+				"exp" : 50
+			 }
+		}, 
+
+		"145":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["143"],
+			 "tasks" : ["246","247"],
+			 "txtName" : "@quest_CB#524",
+			 "txtAlias" : "@quest_CB#524",
+			 "txtDesc" : "@quest_CB#525",
+			 "award" :
+			 {
+ 				"gold" : 1500,
+				"exp" : 45
+			 }
+		}, 
+
+		"146":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["142"],
+			 "tasks" : ["248","249","250"],
+			 "txtName" : "@quest_CB#532",
+			 "txtAlias" : "@quest_CB#532",
+			 "txtDesc" : "@quest_CB#533",
+			 "award" :
+			 {
+ 				"gold" : 1750,
+				"exp" : 55
+			 }
+		}, 
+
+		"147":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["162"],
+			 "tasks" : ["251","252","253"],
+			 "txtName" : "@quest_CB#538",
+			 "txtAlias" : "@quest_CB#538",
+			 "txtDesc" : "@quest_CB#539",
+			 "award" :
+			 {
+ 				"gold" : 5000,
+				"exp" : 160
+			 }
+		}, 
+
+		"148":
+		{
+			 "group" : 8,
+			 "nextQuest" : ["139"],
+			 "tasks" : ["254","255"],
+			 "txtName" : "@quest_CB#543",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#544",
+			 "award" :
+			 {
+ 				"gold" : 720,
+				"exp" : 150
+			 }
+		}, 
+
+		"151":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["80"],
+			 "tasks" : ["260"],
+			 "txtName" : "@quest_CB#565",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#566",
+			 "award" :
+			 {
+ 				"exp" : 50,
+				"wood" : 100
+			 }
+		}, 
+
+		"152":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["85"],
+			 "tasks" : ["262"],
+			 "txtName" : "@quest_CB#711",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#571",
+			 "award" :
+			 {
+ 				"exp" : 50,
+				"stone" : 100
+			 }
+		}, 
+
+		"153":
+		{
+			 "group" : 6,
+			 "nextQuest" : ["129"],
+			 "tasks" : ["263"],
+			 "txtName" : "@quest_CB#574",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#575",
+			 "award" :
+			 {
+ 				"exp" : 315,
+				"iron" : 4900
+			 }
+		}, 
+
+		"154":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["157"],
+			 "tasks" : ["264"],
+			 "txtName" : "@quest_CB#576",
+			 "txtAlias" : "@quest_CB#576",
+			 "txtDesc" : "@quest_CB#577",
+			 "award" :
+			 {
+ 				"gold" : 100,
+				"exp" : 5
+			 }
+		}, 
+
+		"155":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["29"],
+			 "tasks" : ["265"],
+			 "txtName" : "@quest_CB#578",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#579",
+			 "award" :
+			 {
+ 				"gold" : 75,
+				"exp" : 15
+			 }
+		}, 
+
+		"157":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["158"],
+			 "tasks" : ["267","268","269"],
+			 "txtName" : "@quest_CB#582",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#583",
+			 "award" :
+			 {
+ 				"exp" : 5,
+				"gold" : 25
+			 }
+		}, 
+
+		"158":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["159"],
+			 "tasks" : ["270"],
+			 "txtName" : "@quest_CB#590",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#591",
+			 "award" :
+			 {
+ 				"gold" : 50,
+				"exp" : 5
+			 }
+		}, 
+
+		"159":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["17"],
+			 "tasks" : ["271"],
+			 "txtName" : "@quest_CB#594",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#595",
+			 "award" :
+			 {
+ 				"gold" : 25,
+				"exp" : 5
+			 }
+		}, 
+
+		"160":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["111"],
+			 "tasks" : ["272"],
+			 "txtName" : "@quest_CB#598",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#599",
+			 "award" :
+			 {
+ 				"gold" : 75,
+				"exp" : 15
+			 }
+		}, 
+
+		"161":
+		{
+			 "group" : 13,
+			 "nextQuest" : [],
+			 "tasks" : ["273"],
+			 "txtName" : "@quest_CB#600",
+			 "txtAlias" : "@quest_CB#600",
+			 "txtDesc" : "@quest_CB#601",
+			 "award" :
+			 {
+ 				"exp" : 25,
+				"gold" : 250
+			 }
+		}, 
+
+		"162":
+		{
+			 "group" : 13,
+			 "nextQuest" : ["131"],
+			 "tasks" : ["274"],
+			 "txtName" : "@quest_CB#602",
+			 "txtAlias" : "@quest_CB#602",
+			 "txtDesc" : "@quest_CB#603",
+			 "award" :
+			 {
+ 				"exp" : 50,
+				"gold" : 250
+			 }
+		}, 
+
+		"163":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["88"],
+			 "tasks" : ["275"],
+			 "txtName" : "@quest_CB#714",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#605",
+			 "award" :
+			 {
+ 				"exp" : 50,
+				"stone" : 150
+			 }
+		}, 
+
+		"164":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["169"],
+			 "tasks" : ["277"],
+			 "txtName" : "@quest_CB#715",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#611",
+			 "award" :
+			 {
+ 				"exp" : 50,
+				"wood" : 150
+			 }
+		}, 
+
+		"165":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["166"],
+			 "tasks" : ["278"],
+			 "txtName" : "@quest_CB#614",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#615",
+			 "award" :
+			 {
+ 				"exp" : 10,
+				"gold" : 460
+			 }
+		}, 
+
+		"166":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["151"],
+			 "tasks" : ["279"],
+			 "txtName" : "@quest_CB#618",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#619",
+			 "award" :
+			 {
+ 				"exp" : 2,
+				"gold" : 60
+			 }
+		}, 
+
+		"167":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["182"],
+			 "tasks" : ["280"],
+			 "txtName" : "@quest_CB#636",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#637",
+			 "award" :
+			 {
+ 				"exp" : 10,
+				"gold" : 550
+			 }
+		}, 
+
+		"168":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["164"],
+			 "tasks" : ["281"],
+			 "txtName" : "@quest_CB#640",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#641",
+			 "award" :
+			 {
+ 				"exp" : 20,
+				"gold" : 960
+			 }
+		}, 
+
+		"169":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["183"],
+			 "tasks" : ["282"],
+			 "txtName" : "@quest_CB#644",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#645",
+			 "award" :
+			 {
+ 				"exp" : 15,
+				"gold" : 650
+			 }
+		}, 
+
+		"170":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["175"],
+			 "tasks" : ["283"],
+			 "txtName" : "@quest_CB#648",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#649",
+			 "award" :
+			 {
+ 				"exp" : 30,
+				"gold" : 1450
+			 }
+		}, 
+
+		"171":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["172"],
+			 "tasks" : ["284"],
+			 "txtName" : "@quest_CB#652",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#653",
+			 "award" :
+			 {
+ 				"exp" : 30,
+				"gold" : 1600
+			 }
+		}, 
+
+		"172":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["173"],
+			 "tasks" : ["285"],
+			 "txtName" : "@quest_CB#656",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#657",
+			 "award" :
+			 {
+ 				"exp" : 30,
+				"gold" : 1300
+			 }
+		}, 
+
+		"173":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["89"],
+			 "tasks" : ["286"],
+			 "txtName" : "@quest_CB#660",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#661",
+			 "award" :
+			 {
+ 				"exp" : 30,
+				"gold" : 1450
+			 }
+		}, 
+
+		"174":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["170"],
+			 "tasks" : ["287","288"],
+			 "txtName" : "@quest_CB#674",
+			 "txtAlias" : "@quest_CB#674",
+			 "txtDesc" : "@quest_CB#675",
+			 "award" :
+			 {
+ 				"exp" : 20,
+				"gold" : 500
+			 }
+		}, 
+
+		"175":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["171"],
+			 "tasks" : ["289","290"],
+			 "txtName" : "@quest_CB#676",
+			 "txtAlias" : "@quest_CB#676",
+			 "txtDesc" : "@quest_CB#677",
+			 "award" :
+			 {
+ 				"gold" : 2500,
+				"exp" : 75
+			 }
+		}, 
+
+		"176":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["177"],
+			 "tasks" : ["291","292","293"],
+			 "txtName" : "@quest_CB#687",
+			 "txtAlias" : "@quest_CB#687",
+			 "txtDesc" : "@quest_CB#688",
+			 "award" :
+			 {
+ 				"gold" : 2100,
+				"exp" : 60,
+				"stone" : 55
+			 }
+		}, 
+
+		"177":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["179"],
+			 "tasks" : ["294","295"],
+			 "txtName" : "@quest_CB#689",
+			 "txtAlias" : "@quest_CB#689",
+			 "txtDesc" : "@quest_CB#690",
+			 "award" :
+			 {
+ 				"gold" : 3500,
+				"exp" : 100,
+				"wood" : 75
+			 }
+		}, 
+
+		"178":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["51"],
+			 "tasks" : ["296","297","298"],
+			 "txtName" : "@quest_CB#695",
+			 "txtAlias" : "@quest_CB#695",
+			 "txtDesc" : "@quest_CB#696",
+			 "award" :
+			 {
+ 				"gold" : 1600,
+				"exp" : 50
+			 }
+		}, 
+
+		"179":
+		{
+			 "group" : 7,
+			 "nextQuest" : ["160"],
+			 "tasks" : ["299","300","301"],
+			 "txtName" : "@quest_CB#697",
+			 "txtAlias" : "@quest_CB#697",
+			 "txtDesc" : "@quest_CB#698",
+			 "award" :
+			 {
+ 				"exp" : 100,
+				"gold" : 3350
+			 }
+		}, 
+
+		"180":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["83"],
+			 "tasks" : ["302"],
+			 "txtName" : "@quest_CB#712",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#713",
+			 "award" :
+			 {
+ 				"exp" : 50,
+				"iron" : 100
+			 }
+		}, 
+
+		"181":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["168"],
+			 "tasks" : ["303"],
+			 "txtName" : "@quest_CB#716",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#717",
+			 "award" :
+			 {
+ 				"exp" : 50,
+				"iron" : 150
+			 }
+		}, 
+
+		"182":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["110"],
+			 "tasks" : ["304","305"],
+			 "txtName" : "@quest_CB#719",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#720",
+			 "award" :
+			 {
+ 				"exp" : 25
+			 }
+		}, 
+
+		"183":
+		{
+			 "group" : 5,
+			 "nextQuest" : ["174"],
+			 "tasks" : ["306","307"],
+			 "txtName" : "@quest_CB#725",
+			 "txtAlias" : "",
+			 "txtDesc" : "@quest_CB#726",
+			 "award" :
+			 {
+ 				"exp" : 40
+			 }
+		 } 
+},
+
+ 	"quest_tasks"  :
+	{
+		"26" :
+		{
+			 "questId" : 13,
+			 "payFinish" : 3,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest_CB#49",
+			 "txtHelp" : "@quest_CB#106",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"27" :
+		{
+			 "questId" : 14,
+			 "payFinish" : 6,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_OrderFarmPlant ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#50",
+			 "txtHelp" : "@quest_CB#90",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"29" :
+		{
+			 "questId" : 15,
+			 "payFinish" : 3,
+			 "quantity" : 6,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["2004"],
+			 "txtContent" : "@quest_CB#54",
+			 "txtHelp" : "@quest_CB#92",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"31" :
+		{
+			 "questId" : 16,
+			 "payFinish" : 0,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_CreateCMan ",
+			 "txtContent" : "@quest_CB#56",
+			 "txtHelp" : "@quest_CB#94",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"33" :
+		{
+			 "questId" : 17,
+			 "payFinish" : 21,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5003"],
+			 "txtContent" : "@quest_CB#62",
+			 "txtHelp" : "@quest_CB#98",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"44" :
+		{
+			 "questId" : 24,
+			 "payFinish" : 48,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5004"],
+			 "txtContent" : "@quest_CB#65",
+			 "txtHelp" : "@quest_CB#99",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"46" :
+		{
+			 "questId" : 25,
+			 "payFinish" : 20,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["2020"],
+			 "txtContent" : "@quest_CB#60",
+			 "txtHelp" : "@quest_CB#96",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"48" :
+		{
+			 "questId" : 26,
+			 "payFinish" : 32,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5004"],
+			 "txtContent" : "@quest_CB#65",
+			 "txtHelp" : "@quest_CB#99",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"49" :
+		{
+			 "questId" : 26,
+			 "payFinish" : 58,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5005"],
+			 "txtContent" : "@quest_CB#72",
+			 "txtHelp" : "@quest_CB#102",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"53" :
+		{
+			 "questId" : 28,
+			 "payFinish" : 48,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5004"],
+			 "txtContent" : "@quest_CB#65",
+			 "txtHelp" : "@quest_CB#99",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"54" :
+		{
+			 "questId" : 28,
+			 "payFinish" : 103,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5007"],
+			 "txtContent" : "@quest_CB#83",
+			 "txtHelp" : "@quest_CB#104",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"55" :
+		{
+			 "questId" : 29,
+			 "payFinish" : 21,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5003"],
+			 "txtContent" : "@quest_CB#62",
+			 "txtHelp" : "@quest_CB#98",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"56" :
+		{
+			 "questId" : 29,
+			 "payFinish" : 54,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5006"],
+			 "txtContent" : "@quest_CB#80",
+			 "txtHelp" : "@quest_CB#103",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"57" :
+		{
+			 "questId" : 29,
+			 "payFinish" : 153,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5008"],
+			 "txtContent" : "@quest_CB#86",
+			 "txtHelp" : "@quest_CB#105",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"77" :
+		{
+			 "questId" : 39,
+			 "payFinish" : 2,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest_CB#49",
+			 "txtHelp" : "@quest_CB#106",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"78" :
+		{
+			 "questId" : 39,
+			 "payFinish" : 6,
+			 "quantity" : 4,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"79" :
+		{
+			 "questId" : 40,
+			 "payFinish" : 6,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5002"],
+			 "txtContent" : "@quest_CB#57",
+			 "txtHelp" : "@quest_CB#95",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"80" :
+		{
+			 "questId" : 41,
+			 "payFinish" : 4,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"81" :
+		{
+			 "questId" : 41,
+			 "payFinish" : 9,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5002"],
+			 "txtContent" : "@quest_CB#57",
+			 "txtHelp" : "@quest_CB#95",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"82" :
+		{
+			 "questId" : 42,
+			 "payFinish" : 10,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5002"],
+			 "txtContent" : "@quest_CB#57",
+			 "txtHelp" : "@quest_CB#95",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"83" :
+		{
+			 "questId" : 42,
+			 "payFinish" : 20,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5003"],
+			 "txtContent" : "@quest_CB#62",
+			 "txtHelp" : "@quest_CB#98",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"84" :
+		{
+			 "questId" : 43,
+			 "payFinish" : 6,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"85" :
+		{
+			 "questId" : 43,
+			 "payFinish" : 48,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5004"],
+			 "txtContent" : "@quest_CB#65",
+			 "txtHelp" : "@quest_CB#99",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"86" :
+		{
+			 "questId" : 44,
+			 "payFinish" : 25,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5004"],
+			 "txtContent" : "@quest_CB#65",
+			 "txtHelp" : "@quest_CB#99",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"88" :
+		{
+			 "questId" : 27,
+			 "payFinish" : 25,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["2021"],
+			 "txtContent" : "@quest_CB#70",
+			 "txtHelp" : "@quest_CB#100",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"90" :
+		{
+			 "questId" : 45,
+			 "payFinish" : 87,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5005"],
+			 "txtContent" : "@quest_CB#72",
+			 "txtHelp" : "@quest_CB#102",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"91" :
+		{
+			 "questId" : 46,
+			 "payFinish" : 21,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5003"],
+			 "txtContent" : "@quest_CB#62",
+			 "txtHelp" : "@quest_CB#98",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"92" :
+		{
+			 "questId" : 46,
+			 "payFinish" : 87,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5005"],
+			 "txtContent" : "@quest_CB#72",
+			 "txtHelp" : "@quest_CB#102",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"94" :
+		{
+			 "questId" : 47,
+			 "payFinish" : 0,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestGold ",
+			 "entityType" : ["2004"],
+			 "txtContent" : "@quest_CB#55",
+			 "txtHelp" : "@quest_CB#93",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"96" :
+		{
+			 "questId" : 48,
+			 "payFinish" : 108,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5006"],
+			 "txtContent" : "@quest_CB#80",
+			 "txtHelp" : "@quest_CB#103",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"97" :
+		{
+			 "questId" : 49,
+			 "payFinish" : 35,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5003"],
+			 "txtContent" : "@quest_CB#62",
+			 "txtHelp" : "@quest_CB#98",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"98" :
+		{
+			 "questId" : 49,
+			 "payFinish" : 54,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5006"],
+			 "txtContent" : "@quest_CB#80",
+			 "txtHelp" : "@quest_CB#103",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"99" :
+		{
+			 "questId" : 50,
+			 "payFinish" : 103,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5007"],
+			 "txtContent" : "@quest_CB#83",
+			 "txtHelp" : "@quest_CB#104",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"100" :
+		{
+			 "questId" : 51,
+			 "payFinish" : 153,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5008"],
+			 "txtContent" : "@quest_CB#86",
+			 "txtHelp" : "@quest_CB#105",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"103" :
+		{
+			 "questId" : 54,
+			 "payFinish" : 0,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_ExploreMapBlock",
+			 "txtContent" : "@quest_CB#171",
+			 "txtHelp" : "@quest_CB#181",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"104" :
+		{
+			 "questId" : 55,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["3003"],
+			 "txtContent" : "@quest_CB#172",
+			 "txtHelp" : "@quest_CB#182",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"105" :
+		{
+			 "questId" : 56,
+			 "payFinish" : 0,
+			 "quantity" : 6,
+			 "taskType" : "QUEST_TASK_ExploreMapBlock",
+			 "txtContent" : "@quest_CB#173",
+			 "txtHelp" : "@quest_CB#181",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"106" :
+		{
+			 "questId" : 57,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["3004"],
+			 "txtContent" : "@quest_CB#174",
+			 "txtHelp" : "@quest_CB#184",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"107" :
+		{
+			 "questId" : 58,
+			 "payFinish" : 0,
+			 "quantity" : 7,
+			 "taskType" : "QUEST_TASK_ExploreMapBlock",
+			 "txtContent" : "@quest_CB#175",
+			 "txtHelp" : "@quest_CB#181",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"108" :
+		{
+			 "questId" : 59,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["3001"],
+			 "txtContent" : "@quest_CB#176",
+			 "txtHelp" : "@quest_CB#186",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"109" :
+		{
+			 "questId" : 60,
+			 "payFinish" : 0,
+			 "quantity" : 8,
+			 "taskType" : "QUEST_TASK_ExploreMapBlock",
+			 "txtContent" : "@quest_CB#177",
+			 "txtHelp" : "@quest_CB#181",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"110" :
+		{
+			 "questId" : 61,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["3002"],
+			 "txtContent" : "@quest_CB#178",
+			 "txtHelp" : "@quest_CB#188",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"112" :
+		{
+			 "questId" : 63,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestMaterial",
+			 "entityType" : ["2051"],
+			 "txtContent" : "@quest_CB#416",
+			 "txtHelp" : "@quest_CB#417",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"113" :
+		{
+			 "questId" : 63,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestMaterial",
+			 "entityType" : ["2048"],
+			 "txtContent" : "@quest_CB#130",
+			 "txtHelp" : "@quest_CB#141",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"114" :
+		{
+			 "questId" : 64,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestMaterial",
+			 "entityType" : ["2056"],
+			 "txtContent" : "@quest_CB#204",
+			 "txtHelp" : "@quest_CB#210",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"115" :
+		{
+			 "questId" : 65,
+			 "payFinish" : 3,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestMaterial",
+			 "entityType" : ["2050"],
+			 "txtContent" : "@quest_CB#418",
+			 "txtHelp" : "@quest_CB#211",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"116" :
+		{
+			 "questId" : 65,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestMaterial",
+			 "entityType" : ["2046"],
+			 "txtContent" : "@quest_CB#206",
+			 "txtHelp" : "@quest_CB#212",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"117" :
+		{
+			 "questId" : 66,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestMaterial",
+			 "entityType" : ["2050"],
+			 "txtContent" : "@quest_CB#207",
+			 "txtHelp" : "@quest_CB#213",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"118" :
+		{
+			 "questId" : 66,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestMaterial",
+			 "entityType" : ["2049"],
+			 "txtContent" : "@quest_CB#208",
+			 "txtHelp" : "@quest_CB#214",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"119" :
+		{
+			 "questId" : 67,
+			 "payFinish" : 10,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2023"],
+			 "txtContent" : "@quest_CB#419",
+			 "txtHelp" : "@quest_CB#420",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"120" :
+		{
+			 "questId" : 68,
+			 "payFinish" : 5,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2024"],
+			 "txtContent" : "@quest_CB#138",
+			 "txtHelp" : "@quest_CB#149",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"122" :
+		{
+			 "questId" : 70,
+			 "payFinish" : 14,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2030"],
+			 "txtContent" : "@quest_CB#132",
+			 "txtHelp" : "@quest_CB#143",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"124" :
+		{
+			 "questId" : 72,
+			 "payFinish" : 14,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2061"],
+			 "txtContent" : "@quest_CB#134",
+			 "txtHelp" : "@quest_CB#145",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"125" :
+		{
+			 "questId" : 73,
+			 "payFinish" : 14,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2062"],
+			 "txtContent" : "@quest_CB#135",
+			 "txtHelp" : "@quest_CB#146",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"129" :
+		{
+			 "questId" : 76,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#249",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"130" :
+		{
+			 "questId" : 77,
+			 "payFinish" : 2,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_BoostFriendFarmHouse ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest_CB#250",
+			 "txtHelp" : "@quest_CB#280",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"131" :
+		{
+			 "questId" : 78,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["2019"],
+			 "txtContent" : "@quest_CB#316",
+			 "txtHelp" : "@quest_CB#699",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"132" :
+		{
+			 "questId" : 78,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["2081"],
+			 "txtContent" : "@quest_CB#317",
+			 "txtHelp" : "@quest_CB#700",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"133" :
+		{
+			 "questId" : 80,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleBarrack",
+			 "entityType" : ["1002"],
+			 "txtContent" : "@quest_CB#324",
+			 "txtHelp" : "@quest_CB#664",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"134" :
+		{
+			 "questId" : 82,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleBarrack",
+			 "entityType" : ["1001"],
+			 "txtContent" : "@quest_CB#327",
+			 "txtHelp" : "@quest_CB#668",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"135" :
+		{
+			 "questId" : 83,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleBarrack",
+			 "entityType" : ["1003"],
+			 "txtContent" : "@quest_CB#328",
+			 "txtHelp" : "@quest_CB#669",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"136" :
+		{
+			 "questId" : 84,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleBarrack",
+			 "entityType" : ["1004"],
+			 "txtContent" : "@quest_CB#332",
+			 "txtHelp" : "@quest_CB#673",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"137" :
+		{
+			 "questId" : 85,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleBarrack",
+			 "entityType" : ["1005"],
+			 "txtContent" : "@quest_CB#333",
+			 "txtHelp" : "@quest_CB#671",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"138" :
+		{
+			 "questId" : 86,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleVillage",
+			 "entityType" : ["1006"],
+			 "txtContent" : "@quest_CB#334",
+			 "txtHelp" : "@quest_CB#665",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"139" :
+		{
+			 "questId" : 87,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleBarrack",
+			 "entityType" : ["1008"],
+			 "txtContent" : "@quest_CB#335",
+			 "txtHelp" : "@quest_CB#672",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"140" :
+		{
+			 "questId" : 88,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleBarrack",
+			 "entityType" : ["1009"],
+			 "txtContent" : "@quest_CB#336",
+			 "txtHelp" : "@quest_CB#670",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"141" :
+		{
+			 "questId" : 89,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : " 	QUEST_TASK_WinBattleCastle",
+			 "entityType" : ["2"],
+			 "txtContent" : "@quest_CB#337",
+			 "txtHelp" : "@quest_CB#667",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"144" :
+		{
+			 "questId" : 90,
+			 "payFinish" : 2,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestSoldier",
+			 "entityType" : ["9001"],
+			 "txtContent" : "@quest_CB#318",
+			 "txtHelp" : "@quest_CB#340",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"146" :
+		{
+			 "questId" : 91,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["2082"],
+			 "txtContent" : "@quest_CB#322",
+			 "txtHelp" : "@quest_CB#701",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"147" :
+		{
+			 "questId" : 91,
+			 "payFinish" : 1,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestSoldier",
+			 "entityType" : ["9043"],
+			 "txtContent" : "@quest_CB#323",
+			 "txtHelp" : "@quest_CB#345",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"148" :
+		{
+			 "questId" : 92,
+			 "payFinish" : 2,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestSoldier",
+			 "entityType" : ["9022"],
+			 "txtContent" : "@quest_CB#326",
+			 "txtHelp" : "@quest_CB#348",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"149" :
+		{
+			 "questId" : 93,
+			 "payFinish" : 3,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestSoldier",
+			 "entityType" : ["9001"],
+			 "txtContent" : "@quest_CB#329",
+			 "txtHelp" : "@quest_CB#351",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"150" :
+		{
+			 "questId" : 93,
+			 "payFinish" : 3,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestSoldier",
+			 "entityType" : ["9022"],
+			 "txtContent" : "@quest_CB#330",
+			 "txtHelp" : "@quest_CB#352",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"151" :
+		{
+			 "questId" : 93,
+			 "payFinish" : 3,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestSoldier",
+			 "entityType" : ["9043"],
+			 "txtContent" : "@quest_CB#331",
+			 "txtHelp" : "@quest_CB#353",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"152" :
+		{
+			 "questId" : 94,
+			 "payFinish" : 2,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#251",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"153" :
+		{
+			 "questId" : 94,
+			 "payFinish" : 6,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_BoostFriendFarmHouse ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest_CB#252",
+			 "txtHelp" : "@quest_CB#280",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"154" :
+		{
+			 "questId" : 95,
+			 "payFinish" : 3,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#253",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"155" :
+		{
+			 "questId" : 95,
+			 "payFinish" : 3,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_BoostFriendWoodHouse ",
+			 "entityType" : ["2001","2003","2077"],
+			 "txtContent" : "@quest_CB#254",
+			 "txtHelp" : "@quest_CB#281",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"156" :
+		{
+			 "questId" : 96,
+			 "payFinish" : 4,
+			 "quantity" : 4,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#255",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"157" :
+		{
+			 "questId" : 96,
+			 "payFinish" : 6,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_BoostFriendIronHouse ",
+			 "entityType" : ["2003","2001","2077"],
+			 "txtContent" : "@quest_CB#256",
+			 "txtHelp" : "@quest_CB#282",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"158" :
+		{
+			 "questId" : 97,
+			 "payFinish" : 5,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#257",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"159" :
+		{
+			 "questId" : 97,
+			 "payFinish" : 9,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_BoostFriendStoneHouse",
+			 "entityType" : ["2077","2001","2003"],
+			 "txtContent" : "@quest_CB#258",
+			 "txtHelp" : "@quest_CB#283",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"160" :
+		{
+			 "questId" : 98,
+			 "payFinish" : 6,
+			 "quantity" : 6,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#259",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"161" :
+		{
+			 "questId" : 98,
+			 "payFinish" : 12,
+			 "quantity" : 6,
+			 "taskType" : "QUEST_TASK_BoostFriendFarmHouse ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest_CB#260",
+			 "txtHelp" : "@quest_CB#280",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"162" :
+		{
+			 "questId" : 99,
+			 "payFinish" : 7,
+			 "quantity" : 7,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#259",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"163" :
+		{
+			 "questId" : 99,
+			 "payFinish" : 12,
+			 "quantity" : 4,
+			 "taskType" : "QUEST_TASK_BoostFriendWoodHouse ",
+			 "entityType" : ["2001","2003","2077"],
+			 "txtContent" : "@quest_CB#254",
+			 "txtHelp" : "@quest_CB#281",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"164" :
+		{
+			 "questId" : 100,
+			 "payFinish" : 8,
+			 "quantity" : 8,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#259",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"165" :
+		{
+			 "questId" : 100,
+			 "payFinish" : 24,
+			 "quantity" : 12,
+			 "taskType" : "QUEST_TASK_BoostFriendFarmHouse ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest_CB#260",
+			 "txtHelp" : "@quest_CB#280",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"166" :
+		{
+			 "questId" : 101,
+			 "payFinish" : 9,
+			 "quantity" : 9,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#259",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"167" :
+		{
+			 "questId" : 101,
+			 "payFinish" : 48,
+			 "quantity" : 24,
+			 "taskType" : "QUEST_TASK_BoostFriendFarmHouse ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest_CB#260",
+			 "txtHelp" : "@quest_CB#280",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"168" :
+		{
+			 "questId" : 102,
+			 "payFinish" : 10,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#259",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"169" :
+		{
+			 "questId" : 102,
+			 "payFinish" : 30,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_BoostFriendIronHouse ",
+			 "entityType" : ["2003","2001","2077"],
+			 "txtContent" : "@quest_CB#732",
+			 "txtHelp" : "@quest_CB#282",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"170" :
+		{
+			 "questId" : 103,
+			 "payFinish" : 12,
+			 "quantity" : 12,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#259",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"171" :
+		{
+			 "questId" : 103,
+			 "payFinish" : 45,
+			 "quantity" : 15,
+			 "taskType" : "QUEST_TASK_BoostFriendStoneHouse",
+			 "entityType" : ["2077","2001","2003"],
+			 "txtContent" : "@quest_CB#258",
+			 "txtHelp" : "@quest_CB#283",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"172" :
+		{
+			 "questId" : 104,
+			 "payFinish" : 15,
+			 "quantity" : 15,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#259",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"173" :
+		{
+			 "questId" : 104,
+			 "payFinish" : 60,
+			 "quantity" : 20,
+			 "taskType" : "QUEST_TASK_BoostFriendWoodHouse ",
+			 "entityType" : ["2001","2003","2077"],
+			 "txtContent" : "@quest_CB#254",
+			 "txtHelp" : "@quest_CB#281",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"174" :
+		{
+			 "questId" : 105,
+			 "payFinish" : 18,
+			 "quantity" : 18,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#259",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"175" :
+		{
+			 "questId" : 105,
+			 "payFinish" : 63,
+			 "quantity" : 21,
+			 "taskType" : "QUEST_TASK_BoostFriendIronHouse ",
+			 "entityType" : ["2003","2001","2077"],
+			 "txtContent" : "@quest_CB#256",
+			 "txtHelp" : "@quest_CB#282",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"176" :
+		{
+			 "questId" : 106,
+			 "payFinish" : 20,
+			 "quantity" : 20,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#259",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"177" :
+		{
+			 "questId" : 106,
+			 "payFinish" : 75,
+			 "quantity" : 25,
+			 "taskType" : "QUEST_TASK_BoostFriendStoneHouse",
+			 "entityType" : ["2077","2001","2003"],
+			 "txtContent" : "@quest_CB#258",
+			 "txtHelp" : "@quest_CB#283",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"178" :
+		{
+			 "questId" : 107,
+			 "payFinish" : 21,
+			 "quantity" : 21,
+			 "taskType" : "QUEST_TASK_VisitFriendKingdom ",
+			 "txtContent" : "@quest_CB#259",
+			 "txtHelp" : "@quest_CB#279",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"179" :
+		{
+			 "questId" : 107,
+			 "payFinish" : 100,
+			 "quantity" : 50,
+			 "taskType" : "QUEST_TASK_BoostFriendFarmHouse ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest_CB#260",
+			 "txtHelp" : "@quest_CB#280",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"181" :
+		{
+			 "questId" : 109,
+			 "payFinish" : 14,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2029"],
+			 "txtContent" : "@quest_CB#369",
+			 "txtHelp" : "@quest_CB#374",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"182" :
+		{
+			 "questId" : 110,
+			 "payFinish" : 14,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2028"],
+			 "txtContent" : "@quest_CB#371",
+			 "txtHelp" : "@quest_CB#376",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"183" :
+		{
+			 "questId" : 111,
+			 "payFinish" : 218,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2034"],
+			 "txtContent" : "@quest_CB#382",
+			 "txtHelp" : "@quest_CB#383",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"184" :
+		{
+			 "questId" : 112,
+			 "payFinish" : 218,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ContructNewBuilding ",
+			 "entityType" : ["2035"],
+			 "txtContent" : "@quest_CB#386",
+			 "txtHelp" : "@quest_CB#387",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"185" :
+		{
+			 "questId" : 113,
+			 "payFinish" : 14,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5012"],
+			 "txtContent" : "@quest_CB#394",
+			 "txtHelp" : "@quest_CB#395",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"186" :
+		{
+			 "questId" : 113,
+			 "payFinish" : 27,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5010"],
+			 "txtContent" : "@quest_CB#390",
+			 "txtHelp" : "@quest_CB#391",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"187" :
+		{
+			 "questId" : 113,
+			 "payFinish" : 52,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5011"],
+			 "txtContent" : "@quest_CB#392",
+			 "txtHelp" : "@quest_CB#393",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"188" :
+		{
+			 "questId" : 114,
+			 "payFinish" : 162,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5006"],
+			 "txtContent" : "@quest_CB#80",
+			 "txtHelp" : "@quest_CB#103",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"189" :
+		{
+			 "questId" : 114,
+			 "payFinish" : 153,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5008"],
+			 "txtContent" : "@quest_CB#86",
+			 "txtHelp" : "@quest_CB#105",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"190" :
+		{
+			 "questId" : 114,
+			 "payFinish" : 70,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5003"],
+			 "txtContent" : "@quest_CB#62",
+			 "txtHelp" : "@quest_CB#98",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"191" :
+		{
+			 "questId" : 115,
+			 "payFinish" : 20,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"192" :
+		{
+			 "questId" : 115,
+			 "payFinish" : 15,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5002"],
+			 "txtContent" : "@quest_CB#57",
+			 "txtHelp" : "@quest_CB#95",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"193" :
+		{
+			 "questId" : 115,
+			 "payFinish" : 162,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5006"],
+			 "txtContent" : "@quest_CB#80",
+			 "txtHelp" : "@quest_CB#103",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"194" :
+		{
+			 "questId" : 116,
+			 "payFinish" : 10,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"195" :
+		{
+			 "questId" : 116,
+			 "payFinish" : 80,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5004"],
+			 "txtContent" : "@quest_CB#65",
+			 "txtHelp" : "@quest_CB#99",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"196" :
+		{
+			 "questId" : 117,
+			 "payFinish" : 20,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"197" :
+		{
+			 "questId" : 117,
+			 "payFinish" : 30,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5002"],
+			 "txtContent" : "@quest_CB#57",
+			 "txtHelp" : "@quest_CB#95",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"198" :
+		{
+			 "questId" : 118,
+			 "payFinish" : 206,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5007"],
+			 "txtContent" : "@quest_CB#83",
+			 "txtHelp" : "@quest_CB#104",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"199" :
+		{
+			 "questId" : 118,
+			 "payFinish" : 36,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5002"],
+			 "txtContent" : "@quest_CB#57",
+			 "txtHelp" : "@quest_CB#95",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"200" :
+		{
+			 "questId" : 118,
+			 "payFinish" : 42,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5003"],
+			 "txtContent" : "@quest_CB#62",
+			 "txtHelp" : "@quest_CB#98",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"202" :
+		{
+			 "questId" : 119,
+			 "payFinish" : 20,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"204" :
+		{
+			 "questId" : 120,
+			 "payFinish" : 30,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7001"],
+			 "txtContent" : "@quest_CB#412",
+			 "txtHelp" : "@quest_CB#413",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"205" :
+		{
+			 "questId" : 120,
+			 "payFinish" : 30,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7501"],
+			 "txtContent" : "@quest_CB#414",
+			 "txtHelp" : "@quest_CB#415",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"207" :
+		{
+			 "questId" : 122,
+			 "payFinish" : 25,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7002"],
+			 "txtContent" : "@quest_CB#427",
+			 "txtHelp" : "@quest_CB#428",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"208" :
+		{
+			 "questId" : 122,
+			 "payFinish" : 25,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7502"],
+			 "txtContent" : "@quest_CB#429",
+			 "txtHelp" : "@quest_CB#430",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"209" :
+		{
+			 "questId" : 123,
+			 "payFinish" : 45,
+			 "quantity" : 15,
+			 "taskType" : "QUEST_TASK_HarvestStone",
+			 "entityType" : ["8001"],
+			 "txtContent" : "@quest_CB#433",
+			 "txtHelp" : "@quest_CB#434",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"210" :
+		{
+			 "questId" : 124,
+			 "payFinish" : 63,
+			 "quantity" : 7,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7004"],
+			 "txtContent" : "@quest_CB#437",
+			 "txtHelp" : "@quest_CB#438",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"211" :
+		{
+			 "questId" : 124,
+			 "payFinish" : 69,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestStone",
+			 "entityType" : ["8004"],
+			 "txtContent" : "@quest_CB#439",
+			 "txtHelp" : "@quest_CB#440",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"212" :
+		{
+			 "questId" : 125,
+			 "payFinish" : 135,
+			 "quantity" : 15,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7503"],
+			 "txtContent" : "@quest_CB#443",
+			 "txtHelp" : "@quest_CB#444",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"213" :
+		{
+			 "questId" : 126,
+			 "payFinish" : 69,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7504"],
+			 "txtContent" : "@quest_CB#449",
+			 "txtHelp" : "@quest_CB#450",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"214" :
+		{
+			 "questId" : 126,
+			 "payFinish" : 69,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7005"],
+			 "txtContent" : "@quest_CB#447",
+			 "txtHelp" : "@quest_CB#448",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"215" :
+		{
+			 "questId" : 127,
+			 "payFinish" : 103,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5007"],
+			 "txtContent" : "@quest_CB#83",
+			 "txtHelp" : "@quest_CB#104",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"216" :
+		{
+			 "questId" : 127,
+			 "payFinish" : 304,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5009"],
+			 "txtContent" : "@quest_CB#702",
+			 "txtHelp" : "@quest_CB#454",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"217" :
+		{
+			 "questId" : 128,
+			 "payFinish" : 42,
+			 "quantity" : 21,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"218" :
+		{
+			 "questId" : 128,
+			 "payFinish" : 103,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5007"],
+			 "txtContent" : "@quest_CB#83",
+			 "txtHelp" : "@quest_CB#104",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"219" :
+		{
+			 "questId" : 128,
+			 "payFinish" : 295,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5015"],
+			 "txtContent" : "@quest_CB#457",
+			 "txtHelp" : "@quest_CB#458",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"220" :
+		{
+			 "questId" : 129,
+			 "payFinish" : 82,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7005"],
+			 "txtContent" : "@quest_CB#461",
+			 "txtHelp" : "@quest_CB#462",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"221" :
+		{
+			 "questId" : 129,
+			 "payFinish" : 82,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7505"],
+			 "txtContent" : "@quest_CB#463",
+			 "txtHelp" : "@quest_CB#464",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"224" :
+		{
+			 "questId" : 131,
+			 "payFinish" : 153,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7507"],
+			 "txtContent" : "@quest_CB#469",
+			 "txtHelp" : "@quest_CB#470",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"225" :
+		{
+			 "questId" : 131,
+			 "payFinish" : 153,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestStone",
+			 "entityType" : ["8007"],
+			 "txtContent" : "@quest_CB#471",
+			 "txtHelp" : "@quest_CB#472",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"226" :
+		{
+			 "questId" : 132,
+			 "payFinish" : 156,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestStone",
+			 "entityType" : ["8006"],
+			 "txtContent" : "@quest_CB#477",
+			 "txtHelp" : "@quest_CB#478",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"227" :
+		{
+			 "questId" : 132,
+			 "payFinish" : 156,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7006"],
+			 "txtContent" : "@quest_CB#475",
+			 "txtHelp" : "@quest_CB#476",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"228" :
+		{
+			 "questId" : 133,
+			 "payFinish" : 454,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestStone",
+			 "entityType" : ["8008"],
+			 "txtContent" : "@quest_CB#481",
+			 "txtHelp" : "@quest_CB#482",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"229" :
+		{
+			 "questId" : 134,
+			 "payFinish" : 468,
+			 "quantity" : 6,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7506"],
+			 "txtContent" : "@quest_CB#485",
+			 "txtHelp" : "@quest_CB#486",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"232" :
+		{
+			 "questId" : 136,
+			 "payFinish" : 42,
+			 "quantity" : 21,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"233" :
+		{
+			 "questId" : 136,
+			 "payFinish" : 176,
+			 "quantity" : 11,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5004"],
+			 "txtContent" : "@quest_CB#65",
+			 "txtHelp" : "@quest_CB#99",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"234" :
+		{
+			 "questId" : 137,
+			 "payFinish" : 78,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7006"],
+			 "txtContent" : "@quest_CB#475",
+			 "txtHelp" : "@quest_CB#476",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"235" :
+		{
+			 "questId" : 137,
+			 "payFinish" : 78,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestStone",
+			 "entityType" : ["8006"],
+			 "txtContent" : "@quest_CB#477",
+			 "txtHelp" : "@quest_CB#478",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"236" :
+		{
+			 "questId" : 138,
+			 "payFinish" : 189,
+			 "quantity" : 21,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7503"],
+			 "txtContent" : "@quest_CB#443",
+			 "txtHelp" : "@quest_CB#444",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"237" :
+		{
+			 "questId" : 139,
+			 "payFinish" : 135,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7505"],
+			 "txtContent" : "@quest_CB#490",
+			 "txtHelp" : "@quest_CB#491",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"238" :
+		{
+			 "questId" : 140,
+			 "payFinish" : 30,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7504"],
+			 "txtContent" : "@quest_CB#449",
+			 "txtHelp" : "@quest_CB#450",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"241" :
+		{
+			 "questId" : 142,
+			 "payFinish" : 449,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7009"],
+			 "txtContent" : "@quest_CB#516",
+			 "txtHelp" : "@quest_CB#517",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"243" :
+		{
+			 "questId" : 143,
+			 "payFinish" : 207,
+			 "quantity" : 9,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7004"],
+			 "txtContent" : "@quest_CB#447",
+			 "txtHelp" : "@quest_CB#448",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"244" :
+		{
+			 "questId" : 144,
+			 "payFinish" : 205,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7505"],
+			 "txtContent" : "@quest_CB#490",
+			 "txtHelp" : "@quest_CB#491",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"246" :
+		{
+			 "questId" : 145,
+			 "payFinish" : 90,
+			 "quantity" : 30,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7001"],
+			 "txtContent" : "@quest_CB#526",
+			 "txtHelp" : "@quest_CB#527",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"247" :
+		{
+			 "questId" : 145,
+			 "payFinish" : 90,
+			 "quantity" : 30,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7501"],
+			 "txtContent" : "@quest_CB#528",
+			 "txtHelp" : "@quest_CB#529",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"248" :
+		{
+			 "questId" : 146,
+			 "payFinish" : 65,
+			 "quantity" : 13,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7002"],
+			 "txtContent" : "@quest_CB#427",
+			 "txtHelp" : "@quest_CB#428",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"249" :
+		{
+			 "questId" : 146,
+			 "payFinish" : 70,
+			 "quantity" : 14,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7502"],
+			 "txtContent" : "@quest_CB#534",
+			 "txtHelp" : "@quest_CB#535",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"250" :
+		{
+			 "questId" : 146,
+			 "payFinish" : 75,
+			 "quantity" : 15,
+			 "taskType" : "QUEST_TASK_HarvestStone",
+			 "entityType" : ["8002"],
+			 "txtContent" : "@quest_CB#536",
+			 "txtHelp" : "@quest_CB#537",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"251" :
+		{
+			 "questId" : 147,
+			 "payFinish" : 227,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7508"],
+			 "txtContent" : "@quest_CB#505",
+			 "txtHelp" : "@quest_CB#506",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"252" :
+		{
+			 "questId" : 147,
+			 "payFinish" : 227,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7008"],
+			 "txtContent" : "@quest_CB#540",
+			 "txtHelp" : "@quest_CB#541",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"253" :
+		{
+			 "questId" : 147,
+			 "payFinish" : 227,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestStone",
+			 "entityType" : ["8008"],
+			 "txtContent" : "@quest_CB#481",
+			 "txtHelp" : "@quest_CB#482",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"254" :
+		{
+			 "questId" : 148,
+			 "payFinish" : 78,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["2021"],
+			 "txtContent" : "@quest_CB#550",
+			 "txtHelp" : "@quest_CB#551",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"255" :
+		{
+			 "questId" : 148,
+			 "payFinish" : 33,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["2020"],
+			 "txtContent" : "@quest_CB#548",
+			 "txtHelp" : "@quest_CB#549",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"260" :
+		{
+			 "questId" : 151,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_UpgradeSoldier",
+			 "entityType" : ["9001"],
+			 "txtContent" : "@quest_CB#705",
+			 "txtHelp" : "@quest_CB#731",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"262" :
+		{
+			 "questId" : 152,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_UpgradeSoldier",
+			 "entityType" : ["9043"],
+			 "txtContent" : "@quest_CB#707",
+			 "txtHelp" : "@quest_CB#573",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"263" :
+		{
+			 "questId" : 153,
+			 "payFinish" : 0,
+			 "quantity" : 9,
+			 "taskType" : "QUEST_TASK_ExploreMapBlock",
+			 "txtContent" : "@quest_CB#718",
+			 "txtHelp" : "@quest_CB#181",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"264" :
+		{
+			 "questId" : 154,
+			 "payFinish" : 10,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_CreateCMan ",
+			 "txtContent" : "@quest_CB#56",
+			 "txtHelp" : "@quest_CB#94",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"265" :
+		{
+			 "questId" : 155,
+			 "payFinish" : 15,
+			 "quantity" : 15,
+			 "taskType" : "QUEST_TASK_CreateCMan ",
+			 "txtContent" : "@quest_CB#56",
+			 "txtHelp" : "@quest_CB#94",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"267" :
+		{
+			 "questId" : 157,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_SellBuilding ",
+			 "entityType" : ["2002"],
+			 "txtContent" : "@quest_CB#588",
+			 "txtHelp" : "@quest_CB#589",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"268" :
+		{
+			 "questId" : 157,
+			 "payFinish" : 0,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_MoveBuilding ",
+			 "entityType" : ["2020"],
+			 "txtContent" : "@quest_CB#584",
+			 "txtHelp" : "@quest_CB#585",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"269" :
+		{
+			 "questId" : 157,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_MoveBuilding ",
+			 "entityType" : ["2021"],
+			 "txtContent" : "@quest_CB#586",
+			 "txtHelp" : "@quest_CB#587",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"270" :
+		{
+			 "questId" : 158,
+			 "payFinish" : 5,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_ChangeVillageName",
+			 "entityType" : ["0"],
+			 "txtContent" : "@quest_CB#592",
+			 "txtHelp" : "@quest_CB#593",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"271" :
+		{
+			 "questId" : 159,
+			 "payFinish" : 5,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_DisbandCMan",
+			 "txtContent" : "@quest_CB#596",
+			 "txtHelp" : "@quest_CB#597",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"272" :
+		{
+			 "questId" : 160,
+			 "payFinish" : 15,
+			 "quantity" : 3,
+			 "taskType" : "QUEST_TASK_DisbandCMan",
+			 "txtContent" : "@quest_CB#596",
+			 "txtHelp" : "@quest_CB#597",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"273" :
+		{
+			 "questId" : 161,
+			 "payFinish" : 25,
+			 "quantity" : 5,
+			 "taskType" : "QUEST_TASK_DisbandCMan",
+			 "txtContent" : "@quest_CB#596",
+			 "txtHelp" : "@quest_CB#597",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"274" :
+		{
+			 "questId" : 162,
+			 "payFinish" : 50,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_DisbandCMan",
+			 "txtContent" : "@quest_CB#596",
+			 "txtHelp" : "@quest_CB#597",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"275" :
+		{
+			 "questId" : 163,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_UpgradeSoldier",
+			 "entityType" : ["9002"],
+			 "txtContent" : "@quest_CB#708",
+			 "txtHelp" : "@quest_CB#607",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"277" :
+		{
+			 "questId" : 164,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_UpgradeSoldier",
+			 "entityType" : ["9044"],
+			 "txtContent" : "@quest_CB#710",
+			 "txtHelp" : "@quest_CB#613",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"278" :
+		{
+			 "questId" : 165,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["2101"],
+			 "txtContent" : "@quest_CB#616",
+			 "txtHelp" : "@quest_CB#617",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"279" :
+		{
+			 "questId" : 166,
+			 "payFinish" : 4,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestMilResearch",
+			 "entityType" : ["8501"],
+			 "txtContent" : "@quest_CB#627",
+			 "txtHelp" : "@quest_CB#626",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"280" :
+		{
+			 "questId" : 167,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : " 	QUEST_TASK_WinBattleHeroVilla",
+			 "entityType" : ["1007"],
+			 "txtContent" : "@quest_CB#638",
+			 "txtHelp" : "@quest_CB#639",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"281" :
+		{
+			 "questId" : 168,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleBarrack",
+			 "entityType" : ["1010"],
+			 "txtContent" : "@quest_CB#642",
+			 "txtHelp" : "@quest_CB#643",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"282" :
+		{
+			 "questId" : 169,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : " 	QUEST_TASK_WinBattleHeroVilla",
+			 "entityType" : ["1011"],
+			 "txtContent" : "@quest_CB#646",
+			 "txtHelp" : "@quest_CB#647",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"283" :
+		{
+			 "questId" : 170,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleBarrack",
+			 "entityType" : ["1012"],
+			 "txtContent" : "@quest_CB#650",
+			 "txtHelp" : "@quest_CB#651",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"284" :
+		{
+			 "questId" : 171,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleVillage",
+			 "entityType" : ["1013"],
+			 "txtContent" : "@quest_CB#654",
+			 "txtHelp" : "@quest_CB#655",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"285" :
+		{
+			 "questId" : 172,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleBarrack",
+			 "entityType" : ["1014"],
+			 "txtContent" : "@quest_CB#658",
+			 "txtHelp" : "@quest_CB#659",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"286" :
+		{
+			 "questId" : 173,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_WinBattleBarrack",
+			 "entityType" : ["1015"],
+			 "txtContent" : "@quest_CB#662",
+			 "txtHelp" : "@quest_CB#663",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"287" :
+		{
+			 "questId" : 174,
+			 "payFinish" : 30,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7002"],
+			 "txtContent" : "@quest_CB#427",
+			 "txtHelp" : "@quest_CB#428",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"288" :
+		{
+			 "questId" : 174,
+			 "payFinish" : 30,
+			 "quantity" : 10,
+			 "taskType" : "QUEST_TASK_HarvestIron",
+			 "entityType" : ["7502"],
+			 "txtContent" : "@quest_CB#429",
+			 "txtHelp" : "@quest_CB#430",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"289" :
+		{
+			 "questId" : 175,
+			 "payFinish" : 153,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5009"],
+			 "txtContent" : "@quest_CB#703",
+			 "txtHelp" : "@quest_CB#704",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"290" :
+		{
+			 "questId" : 175,
+			 "payFinish" : 153,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestWood ",
+			 "entityType" : ["7007"],
+			 "txtContent" : "@quest_CB#497",
+			 "txtHelp" : "@quest_CB#498",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"291" :
+		{
+			 "questId" : 176,
+			 "payFinish" : 60,
+			 "quantity" : 30,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"292" :
+		{
+			 "questId" : 176,
+			 "payFinish" : 75,
+			 "quantity" : 25,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5002"],
+			 "txtContent" : "@quest_CB#57",
+			 "txtHelp" : "@quest_CB#95",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"293" :
+		{
+			 "questId" : 176,
+			 "payFinish" : 103,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5007"],
+			 "txtContent" : "@quest_CB#83",
+			 "txtHelp" : "@quest_CB#104",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"294" :
+		{
+			 "questId" : 177,
+			 "payFinish" : 108,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5009"],
+			 "txtContent" : "@quest_CB#693",
+			 "txtHelp" : "@quest_CB#694",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"295" :
+		{
+			 "questId" : 177,
+			 "payFinish" : 304,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5006"],
+			 "txtContent" : "@quest_CB#691",
+			 "txtHelp" : "@quest_CB#692",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"296" :
+		{
+			 "questId" : 178,
+			 "payFinish" : 56,
+			 "quantity" : 8,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5003"],
+			 "txtContent" : "@quest_CB#62",
+			 "txtHelp" : "@quest_CB#98",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"297" :
+		{
+			 "questId" : 178,
+			 "payFinish" : 26,
+			 "quantity" : 13,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"298" :
+		{
+			 "questId" : 178,
+			 "payFinish" : 103,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5007"],
+			 "txtContent" : "@quest_CB#83",
+			 "txtHelp" : "@quest_CB#104",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"299" :
+		{
+			 "questId" : 179,
+			 "payFinish" : 30,
+			 "quantity" : 15,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5001"],
+			 "txtContent" : "@quest_CB#51",
+			 "txtHelp" : "@quest_CB#91",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"300" :
+		{
+			 "questId" : 179,
+			 "payFinish" : 153,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5008"],
+			 "txtContent" : "@quest_CB#86",
+			 "txtHelp" : "@quest_CB#105",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"301" :
+		{
+			 "questId" : 179,
+			 "payFinish" : 206,
+			 "quantity" : 2,
+			 "taskType" : "QUEST_TASK_HarvestFarm ",
+			 "entityType" : ["5007"],
+			 "txtContent" : "@quest_CB#83",
+			 "txtHelp" : "@quest_CB#104",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"302" :
+		{
+			 "questId" : 180,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_UpgradeSoldier",
+			 "entityType" : ["9022"],
+			 "txtContent" : "@quest_CB#706",
+			 "txtHelp" : "@quest_CB#569",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"303" :
+		{
+			 "questId" : 181,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_UpgradeSoldier",
+			 "entityType" : ["9023"],
+			 "txtContent" : "@quest_CB#709",
+			 "txtHelp" : "@quest_CB#609",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"304" :
+		{
+			 "questId" : 182,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["2102"],
+			 "txtContent" : "@quest_CB#721",
+			 "txtHelp" : "@quest_CB#722",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"305" :
+		{
+			 "questId" : 182,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestSoldier",
+			 "entityType" : ["16001"],
+			 "txtContent" : "@quest_CB#723",
+			 "txtHelp" : "@quest_CB#724",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"306" :
+		{
+			 "questId" : 183,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_FinishConstruction ",
+			 "entityType" : ["2103"],
+			 "txtContent" : "@quest_CB#727",
+			 "txtHelp" : "@quest_CB#728",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 },
+
+		"307" :
+		{
+			 "questId" : 183,
+			 "payFinish" : 0,
+			 "quantity" : 1,
+			 "taskType" : "QUEST_TASK_HarvestSoldier",
+			 "entityType" : ["16002"],
+			 "txtContent" : "@quest_CB#729",
+			 "txtHelp" : "@quest_CB#730",
+			 "iconClassName" : "",
+			 "iconBucketName" : ""
+		 } 
+
+	 }
+}

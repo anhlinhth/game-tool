@@ -1,0 +1,19 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_MOD_BY	Bostjan Mihoric	/ccompletion@gmail.com/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	/unofficial modification/
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	/unofficial modification/
+str	add.phtml	25;"	variable
+str	add.phtml	28;"	variable
+str	edit.phtml	25;"	variable
+str	edit.phtml	28;"	variable
+str	new.phtml	102;"	variable
+str	new.phtml	22;"	variable
+str	new.phtml	25;"	variable
+str	new.phtml	99;"	variable
+str	savetask.phtml	32;"	variable
+str	savetask.phtml	35;"	variable
+str	savetask.phtml	82;"	variable
+str	savetask.phtml	85;"	variable

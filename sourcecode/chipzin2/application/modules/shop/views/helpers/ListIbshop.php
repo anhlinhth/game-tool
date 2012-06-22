@@ -17,7 +17,8 @@ public function listIbShop($data, $curPage, $itemPerPage ,$view)
 			$privilege = "";					
 				$edit = "<a class='tool-16 edit' href='$view->baseUrl/shop/ibshop/edit/id/$row->ID'></a>";				
 				$delete = "<a class='tool-16 delete' href='javascript:deleteIbShop($row->ID)'></a>";;								
-			$strList .= "<tr >													
+			$strList .= "<tr >						
+							<td >$row->TabIndex</td>	
 							<td >$row->Name</td>								
 							<td >$arritem</td>																						
 							<td align='center'>								

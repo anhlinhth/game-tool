@@ -1,0 +1,440 @@
+<?php
+    $giftType = require_once ROOT_CONFIG.DS.'GiftType.php';
+    $reasonType = require_once ROOT_CONFIG.DS.'ReasonType.php';
+?>
+<div id="box">
+    <h3>Đền bù</h3>
+    <form id="form">
+    <div>
+        <fieldset>
+            <legend>Filter</legend>
+            <table border="0" style="border: none; width: 600px;">
+                <tr>
+                    <td style="border: none;">
+                        Tài khoản:
+                    </td>
+                    <td style="border: none;">
+                        <input id="txtAccount" type="text" />
+                    </td>
+                    <td colspan="2" style="border: none;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="border: none;">
+                        From date:
+                    </td>
+                    <td style="border: none;">
+                        <input id="fromDate" class="width125" type="text"/>
+                    </td>
+                    <td style="border: none;">
+                        To date:
+                    </td>
+                    <td style="border: none;">
+                        <input id="toDate" class="width125" type="text"/>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    </form>
+
+    <div>
+        <table id="tblList"></table>
+         <div id="pager"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var type = "";
+    var gender = "";
+    var subgrid_table_id;
+    var reasonDetail = <?php echo json_encode($this->data['reasonDetail'])?>;
+
+    $("document").ready(function()
+    {
+        // Add event
+        $("#txtAccount").change(loadData);
+        $("#fromDate").change(loadData);
+        $("#toDate").change(loadData);
+        
+        $("#fromDate, #toDate").datepicker({dateFormat: "yy-mm-dd"});
+        setDefaultDatePicker("#fromDate", "#toDate");
+
+        /*================ START1 JQGRID SCRIPT ===============*/
+        $('#tblList').jqGrid({
+            url:'<?php echo $this->baseUrl?>/compensation/listwaitingcompensation',
+            editurl:'<?php echo $this->baseUrl?>/compensation/operationcompensation',
+            mtype: 'POST',
+            datatype: 'json',
+            postData:{
+                account:function(){return $("#txtAccount").val()},
+                fromDate:function(){ return $("#fromDate").val()},
+                toDate:function(){ return $("#toDate").val()},
+            },
+            colNames:["ID","CharName","CharID","Reason", "Reason(New)", "ReasonDesc", "ReasonDesc(New)","Comment","Status","CreateDate","CreateBy"],
+            colModel:[
+                {name:"CompensationId",index:"CompensationId",key:true,width:40,editable:false,hidden:true},
+                {name:"CharName",index:"CharName",width:100,editable:true, editrules:{required:true},"formoptions": {elmsuffix: ' *'},
+                    editoptions:{
+                        dataEvents:[{
+                            type: 'change',
+                            fn: function(e)
+                            {
+                                var charName = this.value;
+                                $('input#CharID').val('');
+                                if (charName == '') return
+                                // Call ajax to check valid char name
+                                $.ajax({
+                                    type: "GET",
+                                    url: '<?php echo $this->baseUrl?>/compensation/checkname',
+                                    data: "charname=" + charName,
+                                    success: function(data){
+                                        if (!data)
+                                        {
+                                            // Get row display error message
+                                            $('#FormError').children().text('CharName không tồn tại!');
+                                            $('#FormError').show();
+                                            $('input#CharName').select();
+                                        }
+                                        else
+                                        {
+                                            $('input#CharID').val(data);
+                                            $('#FormError').hide();
+                                            $('textarea#Comment').focus();
+                                        }
+                                    }
+                                });
+                            }
+                    }]}},
+                {name:"CharID",index:"CharID",width:100,editable:true, editrules:{required:true},"formoptions": {elmsuffix: ' *'},editoptions:{readonly:true}},
+                {name:"Reason",index:"Reason",width:100,editable:true, edittype:'select',formatter:'select',
+                    editoptions:{
+                        value:<?php echo json_encode($reasonType);?>,
+                        dataEvents:[{
+                            type: 'change',
+                            fn: function(e)
+                            {
+                                var value = this.value;
+                                if (value == '<?php echo AppConstant::COMPENSATION_REASON_KHAC?>')
+                                {
+                                    $('#tr_ReasonDesc').show();
+                                }
+                                else
+                                {
+                                    $('#tr_ReasonDesc').hide();
+                                }
+                            }
+                        }]}},
+                {name:"reason_id",index:"reason_id",width:100,editable:true, edittype:'select',formatter:'select',
+                    editoptions:{
+                        value:{<?php foreach ($this->data['reason'] as $item)
+                            {
+                                echo $item['id'].':\''.$item['name'].'\',';
+                            }
+                            ?>},
+                        dataEvents:[{
+                            type: 'change',
+                            fn: function(e)
+                            {
+                                var value = this.value;
+                                updateReasonDetail(value);
+                            }
+                        }]}},
+                {name:"ReasonDesc",index:"ReasonDesc",width:100,editable:true, edittype:'textarea',editoptions:{rows:5, cols:50}},
+                {name:"reason_detail_id",index:"reason_detail_id",width:100,editable:true, edittype:'select',formatter:'select',
+                    editoptions:{
+                        value:{<?php foreach ($this->data['reasonDetail'] as $item)
+                            {
+                                echo $item['id'].':\''.$item['name'].'\',';
+                            }
+                            ?>}
+                    }
+                },
+                {name:"Comment",index:"Comment",width:250,editable:true,edittype:'textarea',
+                    editrules:{required:true},
+                    formoptions: {elmsuffix: ' *'},
+                    editoptions:{rows:5, cols:50}},
+                {name:"Status",index:"Status",width:100,editable:false,edittype:'select',formatter:'select',
+                    editoptions:{rows:5, cols:50, value:"-1:Chờ duyệt;0:Không duyệt;1:Đã duyệt;2: Đã thực thi"}},
+                {name:"CreateDate",index:"CreateDate",width:120,editable:false},
+                {name:"create_by",index:"create_by",width:120,editable:false}
+            ],
+            rowNum:20,
+            rowList:[10,20,30,60,100],
+            pager: '#pager',
+            shrinkToFit: false,
+            rownumbers:true,
+            hidegrid:false,
+            emptyrecords: "No records.",
+            autoheight: true,
+            autowidth: true,
+            toppager:true,
+            viewrecords: true,
+            subGrid: true,
+            subGridRowExpanded: function(subgrid_id, row_id) {
+                   subgrid_table_id = subgrid_id+"_t";
+                   subgrid_pager_id = "p_"+subgrid_id;  
+                   jQuery("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id ='"+ subgrid_pager_id + "' class='scroll'></div>");
+                   jQuery("#"+subgrid_table_id).jqGrid({
+                      url:'<?php echo $this->baseUrl?>/compensation/listcompensationdetail',
+                      editurl:'<?php echo $this->baseUrl?>/compensation/operationcompensationdetail',
+                      mtype: 'POST',
+                      datatype: 'json',
+                      postData:{
+                        compensation_id:function() { return row_id;},//return row_id;},
+                        },
+                      colNames: ['id','compensation_id','type','name','rank','image','quantity','object_id','image_save'],
+                      colModel: [
+                        {name:"id",index:"id",width:80,key:true,hidden:true},
+                        {name:"compensation_id",index:"compensation_id",width:130,hidden:true,editable:true, editoptions:{defaultValue:row_id}},
+                        {name:"type",index:"type",width:70,align:"center",editable:true,edittype:'select',formatter:'select',editoptions:{rows:5, cols:50, value:<?php echo json_encode($giftType);?>,
+                            dataEvents:[{
+                                    type: 'change',
+                                    fn: function(e){
+                                            var value = this.value;
+                                            if(value == "pig" || value == "item" || value == "groupitem" )
+                                            {   
+                                                $('#tr_name').show();
+                                                $('#tr_object_id').show();
+                                                $('#tr_image').show();
+                                            }
+                                            else
+                                            {
+                                                $('#tr_name').hide();
+                                                $('#tr_object_id').hide();
+                                                $('#tr_image').hide();
+                                            }
+                                        
+                                            if (value == "item")
+                                            {
+                                                $('#tr_rank').show();
+                                            }
+                                            else
+                                            {
+                                                $('#tr_rank').hide();
+                                            }
+                                    }
+                            }]}
+                        },
+                        {name:"name",index:"name",width:280,align:"left",editable:true,edittype:'text',
+                            editoptions:{dataInit:function(elem){
+                                $(elem).autocomplete({
+                                    source: function(request, response){
+                                        //pass request to server
+                                        $('#compensation_id').val(row_id);
+                                        type = $('#type').val();
+                                        var value = $(elem).val();
+                                        $.ajax({
+                                            type: "POST",
+                                            url: '<?php echo $this->baseUrl?>/compensation/suggestion',
+                                            data: "desc=" + value + "&"+"type=" + type,
+                                            dataType: "json",
+                                            success: function(data){
+                                                //create array for response objects
+                                                var suggestions = [];
+                                                //process response
+                                                $.each(data, function(i, val){                                
+                                                    //suggestions.push(val.name);
+                                                    suggestions.push(val);
+                                                });
+                                                //pass array to callback
+                                                response(suggestions);
+                                            }
+                                        });
+                                    },
+                                    focus: function (event, ui){
+                                        $(elem).val(ui.item.name);
+                                        return false;
+                                    },
+                                    select: function (event, ui){
+                                        if (type == "pig")
+                                        {
+                                            $('input#object_id').val(ui.item.type+'_'+ui.item.gender);
+                                            $(elem).val(ui.item.name + "|" + gender);
+                                        }
+                                        else
+                                        {
+                                            $('input#object_id').val(ui.item.id);
+                                            $(elem).val(ui.item.name);
+                                        }
+                                        
+                                        var src = '<?php echo $this->baseUrl ?>' + "/media/images/" + type + "/" + ui.item.image;
+                                        $('input#image_save').val(ui.item.image);
+                                        $('input#image').attr("src",src);
+                                        return false;
+                                    }
+                                }).data("autocomplete")._renderItem = function(ul, item){
+                                    var src = '<?php echo $this->baseUrl ?>' + "/media/images/" + type + "/" + item.image;
+                                    var strAppend = "<a><img style='width:50px;height:50px' src='"+ src +"'/>";
+                                    if (type == "pig")
+                                    {
+                                        gender = item.gender == 1? "Đực" : "Cái";
+                                        strAppend += item.type + "|" + item.name + "|" + gender;
+                                    }
+                                    else
+                                    {
+                                        strAppend += item.id+ "|" + item.name;
+                                    }
+                                    strAppend += "</a>"
+                                    return $("<li></li>")
+                                        .data("item.autocomplete", item)
+                                        .append(strAppend)
+                                        .appendTo(ul);
+                                };
+                            }}
+                        },    
+                        {name:"rank",index:"rank",width:50,align:"center",editable:true,edittype:'text', 
+                            editrules:{number:true, minValue:0, maxValue:10}},
+                        {name:"image",index:"image",width:100,align:"center",editable:true,edittype:'image', editoptions: {src: '', defaultValue:''}, formatter:imageFormat},  
+                        {name:"quantity",index:"quantity",width:55,align:"center",editable:true,editrules:{required:true,number:true, minValue:1}},
+                        {name:"object_id",index:"object_id",width:120,align:"right",sortable:false,editable:true,hidden:false, 
+                            editoptions:{readonly:true}},
+                        {name:"image_save",index:"image_save",width:80,align:"right",editable:true,hidden:true,formatter:imageSave},
+                      ],
+                      emptyrecords: "No records.",
+                      height: "100%",
+                      autowidth: false,
+                      rowNum:20,
+                      sortname: 'num',
+                      sortorder: "asc",
+                      pager: subgrid_pager_id
+                   });
+                   jQuery("#"+subgrid_table_id).jqGrid('navGrid',"#"+subgrid_pager_id,
+                        {search:false,edit:true,add:true,del:true,cloneToTop:true}, 
+                        editSettings2,
+                        addSettings2
+                        );
+                },
+            caption: "Danh sách đền bù",
+        });  
+        $('#tblList').jqGrid('navGrid','#pager',
+                        {search:false,edit:true,add:true,del:true,cloneToTop:true}, //options
+                        editSettings1, 
+                        addSettings1
+                        );
+        $('#tblList').setGridHeight(450,true);
+        $('.ui-jqgrid-titlebar-close','#gview_grid').remove();
+        /*================ END JQGRID SCRIPT ===============*/
+    });
+
+    function loadData()
+    {
+       $("#tblList").clearGridData();
+       $("#tblList").trigger("reloadGrid");               
+    }
+    
+    function imageFormat(cellValue, options, rowObject)
+    {
+        if (cellValue == '')
+        {
+            return '';
+        }
+        type = rowObject[2];
+        return '<img style="width:50px;height:50px" src="<?php echo $this->baseUrl ?>/media/images/'+ type + '/'+ cellValue + '"/>';
+    }
+    
+    function imageSave(cellValue, options, rowObject)
+    {
+        img = rowObject[5];
+        return img;
+    }
+
+    var editSettings1 = {
+        width: 400,
+        beforeShowForm:function(){
+            var selRowId = $("#tblList").jqGrid('getGridParam', 'selrow');
+            var rowData = $("#tblList").getRowData(selRowId);
+            var reason = rowData['Reason'];
+            if (reason == '<?php echo AppConstant::COMPENSATION_REASON_KHAC?>')
+            {
+                $('#tr_ReasonDesc').show();
+            }
+            else
+            {
+                $('#tr_ReasonDesc').hide();
+            }
+        }
+    };
+    var editSettings2 = {
+        recreateForm:true,
+        width: 400,
+        closeAfterEdit:true,
+        beforeInitData: function(){
+            var cm = $("#"+subgrid_table_id).jqGrid('getColProp', 'image');
+            var selRowId = $("#"+subgrid_table_id).jqGrid('getGridParam', 'selrow');
+            var rowData = $("#"+subgrid_table_id).getRowData(selRowId);
+            var image = rowData['image_save'];
+            var type = rowData['type'];
+            src= "<?php echo $this->baseUrl ?>/media/images/"+ type + "/" + image;
+            cm.editoptions.src = src;
+        },
+        beforeShowForm:function(){
+            var selRowId = $("#"+subgrid_table_id).jqGrid('getGridParam', 'selrow');
+            var rowData = $("#"+subgrid_table_id).getRowData(selRowId);
+            var type = rowData['type'];
+            if (type == '<?php echo AppConstant::GIFT_TYPE_ITEM ?>')
+            {
+                $('#tr_rank').show();
+            }
+            else
+            {
+                $('#tr_rank').hide();
+            }
+            if (type == '<?php echo AppConstant::GIFT_TYPE_ITEM ?>' || type == '<?php echo AppConstant::GIFT_TYPE_GROUPITEM ?>' || type == '<?php echo AppConstant::GIFT_TYPE_PIG ?>')
+            {
+                $('#tr_object_id').show();
+                $('#tr_name').show();
+                $('#tr_image').show();
+            }
+            else
+            {
+                $('#tr_object_id').hide();
+                $('#tr_name').hide();
+                $('#tr_image').hide();
+            }
+        }
+    };
+    var addSettings1 = {
+        recreateForm:true, 
+        width: 400,
+        modal:false,
+        reloadAfterSubmit:true,
+        closeOnEscape:true,
+        saveKey:[true,13],
+        closeAfterEdit:true,
+        top:0,
+        beforeShowForm:function(){
+            $('#tr_ReasonDesc').hide();
+        }
+    };
+    var addSettings2 = {
+        recreateForm:true, 
+        width: 400,
+        modal:false,
+        reloadAfterSubmit:true,
+        closeOnEscape:true,
+        saveKey:[true,13],
+        closeAfterEdit:true,
+        top:0,
+        beforeInitData:function(){
+            var cm = $("#"+subgrid_table_id).jqGrid('getColProp', 'image');
+            cm.editoptions.src = "";
+        },
+        beforeShowForm:function(){
+            $('#tr_rank').hide();
+            var cm = $("#"+subgrid_table_id).jqGrid('getColProp', 'image');
+            cm.editoptions.src = "";
+        }
+    };
+    
+    function updateReasonDetail(reason_id)
+    {
+        var detailHtml = '';
+        $('#reason_detail_id').html("<option value=''>Loading reason detail...</option>").attr("disabled","disabled");
+        $.each(reasonDetail, function(index, reason)
+        {
+            if (reason['reason_id'] == reason_id)
+                detailHtml += '<option value="' + reason['id'] + '">' + reason['name'] + '</option>';
+        });
+        $('#reason_detail_id').removeAttr("disabled").html(detailHtml);
+    }
+</script>

@@ -6,7 +6,7 @@ class Models_C_Backup{
 	
 	function loadConfig()
 	{
-		$config = new Zend_Config_Ini(ROOT_APPLICATION_CONFIGS.DS.'application.ini','db');
+		$config = new Zend_Config_Ini(ROOT_CONFIG.DS.'config.ini','db');
 		
 		$result = array();
 		$result['dbname'] = $config->db->params->dbname;

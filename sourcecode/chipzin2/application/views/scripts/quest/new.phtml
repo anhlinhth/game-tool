@@ -25,7 +25,7 @@
 				<td>
 					<label for="questname">Quest Name : </label> 
 					<input name="QuestName" class="width" value="<?php echo $this->obj->QuestName?>" id="questnamestring" type="text" tabindex="1" /></td>
-				<td style="width: 50%;">
+				<td>
 					<label for="queststring">Quest String: </label> 
 					<input name="QuestString" value="<?php echo $this->obj->QuestString?>" id="queststring" type="text" tabindex="1" onchange="getvalue('queststring')" title="queststring-string-value" />	
 					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('queststring','')"></a>&nbsp;
@@ -41,7 +41,7 @@
 					<label for="questgroup">Quest Group: </label> 
 					<input name="QuestGroup" value="<?php echo $this->obj->QuestGroup?>" id="questgroup" type="text" tabindex="1" />
 				</td>
-				<td style="width: 450px;">
+				<td>
 					<label for="QuestGroupString">Q_Group String: </label> 
 					<input name="QuestGroupString" value="<?php echo $this->obj->QuestGroupString?>" id="questgroupstring" type="text" tabindex="1" onchange="getvalue('questgroupstring')" title="questgroup-string-value" />
 					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('questgroupstring','')"></a>&nbsp;
@@ -57,7 +57,7 @@
 					<label for="QuestDesc">Quest Desc: </label> 
 					<input name="QuestDesc" value="<?php echo $this->obj->QuestDesc?>" id="questdesc" type="text" tabindex="1" />
 				</td>
-				<td style="width: 450px;">
+				<td>
 					<label for="questdescString">Q_Desc String: </label> 
 					<input name="QuestDescString" value="<?php echo $this->obj->QuestDescString?>" id="questdescstring" type="text" tabindex="1" onchange="getvalue('QuestDescString')" title="questdesc-string-value"/>
 					<a title="chọn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('questdescstring','')"></a>&nbsp;
@@ -137,11 +137,6 @@ $("table#quest").delegate("td.q_award .delete", "click", function() {
 	deleteAwardItem(this);
 	return false;		
 });
-$('#llightbox').click(function(){
-   	$('#stringmain').hide('slow').css('display','none');
-	$('#llightbox').animate({opacity:0},500).css('display','none');
-});
-
 //Add Award Item
 function  addAwardItem(e){		
 	var parent_div = $(e).parent();
@@ -274,7 +269,6 @@ function saveTask(){
 	
 			
 }
-
 function validate(){
 	flag=true;	
 	$(".task_form").each(function(key,val){
@@ -361,7 +355,6 @@ function validate(){
 	});
 	return flag;	
 }
-
 function saveAll(){	
 	quest_id = $("#QuestID").val();
 	data = $(".quest-info").serialize();		
@@ -448,9 +441,7 @@ function addTemplate(key){
 		}
 	});
 }
-
 function loadTemplate(key){
-	
 	var id = $("#template"+key).val();	
 	$.ajax({
 		type: "POST",		
@@ -490,7 +481,6 @@ function loadTemplate(key){
 	});	
 	
 }
-
 function editTemplate(){
 	$.ajax({
 		type: "POST",		
@@ -501,7 +491,6 @@ function editTemplate(){
 	});	
 	$("div#dialog_edit_template").dialog("open");
 }
-
 ////////Init Diaglog//////////
 $("#dialog_edit_template").dialog({
 				autoOpen: false,
@@ -516,7 +505,8 @@ $("#dialog_edit_template").dialog({
 });
 
 /////////////localize////////////]
-function getvalue(textbox){
+function getvalue(textbox)
+{
 	
 	var tam = $('#'+textbox).val();	
 	var tam1 = tam.split('@');
@@ -539,8 +529,8 @@ function getvalue(textbox){
 		}
 		}); 
 }
-
-function findstring(textbox,link){
+function findstring(textbox,link)
+{
 	$.ajax({
 		type: "POST",
 		url: '<?php echo $this->baseUrl?>/localize/string/index?ajax=true&size=20'+link,
@@ -575,22 +565,22 @@ function findstring(textbox,link){
 		}
 		}); 
 }
-
-function addstring(textbox,value){
+function addstring(textbox,value)
+{
 	$('#'+textbox).attr("value",value);
 	$('#stringmain').html("");	
 	getvalue(textbox);	
 	hidelightbox();
 }
-
-function searchlink(textbox){
+function searchlink(textbox)
+{
 	var id = $('input#ID').val();
 	var type = $('select[name=l_Search_type]').val();
 	var group = $('select[name=l_group]').val();
 	findstring(textbox,"&page=1&l_Search_type="+type+"&S_ID="+id+"&l_group="+group);
 }
-
-function firstpage(textbox,link,page){	
+function firstpage(textbox,link,page)
+{
 	if(link=='')
 		link = '&page=1&l_Search_type=lkey&S_ID=-1&l_group=-1';
 	tam = link.split('page=');
@@ -600,18 +590,25 @@ function firstpage(textbox,link,page){
 	findstring(textbox,tam3);
 }
 
+
+
+
+
+$('#llightbox').click(function(){
+   	$('#stringmain').hide('slow').css('display','none');
+	$('#llightbox').animate({opacity:0},500).css('display','none');
+});
 function hidelightbox(){
 	$('#stringmain').hide('slow').css('display','none');
 	$('#llightbox').animate({opacity:0},500).css('display','none');
 }
-
 function showlightbox(){
 	$('table tfoot td a').css('margin','5px');
 	$('#llightbox').css('display','block').css('opacity','0').animate({opacity:0.7},200);
 	$('#stringmain').css('display','block');
 }
-
-function newstring(textbox,link){
+function newstring(textbox,link)
+{
 	$('input#button1').hide();
 	var ham = "addnewstring('"+textbox+"')";
 	$.ajax({
@@ -629,7 +626,6 @@ function newstring(textbox,link){
 	}); 
 	showlightbox();
 }
-
 function addnewstring(textbox){
 	var key = $('input#id').val();
 	var l_group = $('select#l_group').val();
@@ -649,7 +645,6 @@ function addnewstring(textbox){
 		}
 	});
 }
-
 function getgroupname(key){
 	$.ajax({
 		type: "POST",
@@ -661,8 +656,7 @@ function getgroupname(key){
 		}
 	});
 }
-
-/**************************Thaonx*******************************/
+///////Thaonx/////////////////
 //////////////Edit Language////////////////
 var local_title = "";
 function editstring(string,title){
@@ -709,7 +703,8 @@ function saveLanguage(){
 	});	
 }
 
-function changeMap(){
+function changeMap()
+{
 	value = $('.l_group').val();
 	$.ajax({
 		type: "GET",		
@@ -719,35 +714,4 @@ function changeMap(){
 		}
 	});
 }
-
-$(function() {
-	var availableTags = [
-		"ActionScript",
-		"AppleScript",
-		"Asp",
-		"BASIC",
-		"C",
-		"C++",
-		"Clojure",
-		"COBOL",
-		"ColdFusion",
-		"Erlang",
-		"Fortran",
-		"Groovy",
-		"Haskell",
-		"Java",
-		"JavaScript",
-		"Lisp",
-		"Perl",
-		"PHP",
-		"Python",
-		"Ruby",
-		"Scala",
-		"Scheme"
-	];
-	$( "#questgroupstring" ).autocomplete({
-		source: availableTags
-	});
-});
-
 </script>
