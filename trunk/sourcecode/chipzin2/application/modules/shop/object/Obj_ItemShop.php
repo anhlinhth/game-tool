@@ -7,8 +7,6 @@ class Obj_ItemShop
 	public $Icon;
 	public $Title;
 	public $Kind;
-	public $Level;
-	public $pricePerLevel ;	
-	public $NeedCamp;
+	public $Level;	
 }
 ?>

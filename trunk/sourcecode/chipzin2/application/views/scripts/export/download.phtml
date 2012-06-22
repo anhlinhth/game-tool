@@ -5,7 +5,7 @@
 	<?php $this->showMessage($this->msg)?>	
 <?php endif;?>
 <?php
-$url=$this->baseUrl."/export_file_config/quest";
+$url=$this->baseUrl."/export_file_config";
 $linkdown1=$_SERVER['HTTP_HOST'].$url."/Quest.conf.php.txt";
 $linkdown1="http://".str_replace("\\","/",$linkdown1);
 $linkdown2=$_SERVER['HTTP_HOST'].$url."/quest.xfj.txt";
@@ -31,7 +31,7 @@ $linkdown3="http://".str_replace("\\","/",$linkdown3);
 <br/><br/>
 <hr/><hr/><br/><br/>
 <h4>Quest data upload</h4>
-<form name='questUpload' enctype='multipart/form-data' action='<?php echo $this->baseUrl.'/export_file_config/quest/quest_ftp_upload.php' ?>' method='post' >
+<form name='questUpload' enctype='multipart/form-data' action='<?php echo $this->baseUrl.'/export_file_config/quest_ftp_upload.php' ?>' method='post' >
 <input type='hidden' name='MAX_FILE_SIZE' value='5000000' />
 Server Path: <input name='server_path' type='text'/><br/>
 Password: <input name='server_password' type='password'/><br/>
@@ -45,7 +45,7 @@ Password: <input name='server_password' type='password'/><br/>
 
 <br/><br/><hr/><br/><br/>
 <h4>SWF media upload</h4>
-<form name='swfUpload' enctype='multipart/form-data' action='<?php echo $this->baseUrl.'/export_file_config/quest/swf_ftp_upload.php' ?>' method='post' >
+<form name='swfUpload' enctype='multipart/form-data' action='<?php echo $this->baseUrl.'/export_file_config/swf_ftp_upload.php' ?>' method='post' >
 <input type='hidden' name='MAX_FILE_SIZE' value='5000000' />
 Server Path: <input name='server_path' type='text'/><br/>
 Password: <input name='server_password' type='password'/><br/>

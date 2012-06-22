@@ -58,7 +58,7 @@ public function _setUserPrivileges()
 		}
 	}
 	public function leditAction(){	
-		$model = new Models_Localize_Group();
+		$model = new Models_Localite_Group();
 		$id = $this->_request->getParam("id",'');
 		$this->view->id = $id;
 		if ($this->_request->isPost ()) {
@@ -73,7 +73,7 @@ public function _setUserPrivileges()
 	public function ldeleteAction(){	
 		$this->_helper->layout()->disableLayout(); 
         $this->_helper->viewRenderer->setNoRender(true);
-		$model = new Models_Localize_Group();
+		$model = new Models_Localite_Group();
 		$id = $this->_request->getParam("id");
 		if($id){
 			if($model->CheckExistGroupById($id)){
@@ -88,7 +88,7 @@ public function _setUserPrivileges()
 	public function getgroupnameAction(){	
 		$this->_helper->layout()->disableLayout(); 
         $this->_helper->viewRenderer->setNoRender(true);
-		$model = new Models_Localize_Group();
+		$model = new Models_Localite_Group();
 		$id = $this->_request->getParam("id");
 		$info = $model->GetGroupInfo($id);
 		echo $info['name'];

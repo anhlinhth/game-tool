@@ -7,28 +7,18 @@
 endif;
 ?>
 
-<form id="form" class="myform" action="" method="post">
+<form id="Item" class="myform" action="" method="post">
 <div class="mybox">
 	<h3>Item</h3>
 	<table class="filter" style="width: 80%;margin: auto;margin-bottom: 20px;margin-top: 10px";>	
 		<tr>
-			<td >ID<input id="itemID" width="15%" class="disabled" name="itemID" type="text" style="width:110px;" /></td>
-		<td>Name
-			<input id="itemName" type="text" name="itemName" size="20"/>
-		</td>
-		<td>
+			<td>ID<input id="itemID"  readonly class="disabled" name="itemID" type="text" style="width:110px;" /></td>
+			<td>Name
+			<input id="itemName" type="text" name="itemName"/>
 			NameSV<input id="itemNameSV" type="text" name="itemNameSV"/>
-			</td>
-			<td>
-				<a class="btn add" href="" onclick="additem();">Add</a>
-			</td>
-			<td>
 				<a class="btn save disabled " href="">Save</a>
-			</td>
-			<td>
 				<a class="btn cancel disabled " href="">Cancel</a>
-			</td>			
-			
+			</td>
 		</tr>
 	</table>
 	<table class="list" id="list_Item" style="width: 80%;margin:auto ;border: 1px solid;">	
@@ -87,7 +77,6 @@ $(function(){
  	 	}else{
  	 		document.getElementById('itemID').value = '';
  	 		document.getElementById('itemName').value = '';
- 	 		document.getElementById('itemNameSV').value = '';
  	 		disable($(".btn.add"));
 			disable($(".btn.save"));
 			disable($(".btn.cancel"));
@@ -110,7 +99,7 @@ $(function(){
 				enable($(".btn.save"));				
 			}else{
 				enable($(".btn.add"));
-				enable($(".btn.save"));
+				disable($(".btn.save"));
 			}
 		}		
 	});	
@@ -119,18 +108,14 @@ $(function(){
 		if($(this).hasClass("disabled")){
 			return false;
 		}
-		var name=$('#itemName').val();
-		var namesv=$('#itemNameSV').val();
-		if(name=="" || namesv=="")
-			alert("Không được bỏ trống các ô");
-		else
-		{
-			updateItem();
-		}			
+		updateItem();			
 	});		
 
-	$(".btn.add").click(function(){				
-		additem();
+	$(".btn.add").click(function(){
+		if($(this).hasClass("disabled")){
+			return false;
+		}
+		updateItem();
 	});
 });
 
@@ -186,8 +171,7 @@ function updateItem(){
 			if(msg != ""){
 				if(parseInt(msg)==1)
 				{
-					if(!confirm("Bạn có muốn edit Item: " + name))
-						{
+					if(!confirm("Bạn có muốn edit Item: " + name)){
 						return false;
 					}
 				}
@@ -199,5 +183,6 @@ function updateItem(){
 		}
 	});	
 }
+
 </script>
 

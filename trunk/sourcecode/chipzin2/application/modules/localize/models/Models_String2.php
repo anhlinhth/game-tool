@@ -35,7 +35,8 @@ class Models_String2 extends Models_Base
 		$result = $stmt->rowCount();
 	}
 	
-	public function getCount2($content){
+	public function getCount2($content)
+	{
 		$sql = "select COUNT(id) from l_content where lang = (SELECT id from l_language WHERE status = 1)";
 		if(isset($content->lgroup)&& !empty($content->lgroup)){
 			$sql .= " AND l_content.lgroup = ".$content->lgroup;
@@ -51,25 +52,24 @@ class Models_String2 extends Models_Base
 		return $count;
 	}
 	
-	public function filter2 ($item,$page,$size){
-		$arrParam = array();
-		if(is_object($item))
-			$arrParam = Utility::transferObjectToArray($item);
-		else{
-			$arrParam = $item;
-		}
+	public function filter2 ($content,$page,$size){
 		$sql = "SELECT a.id as id, g.id as gid, g.name as gname, a.lkey as lkey ,a.text as ldefault,(SELECT text FROM l_content AS b WHERE b.lang=(SELECT id FROM l_language WHERE status<>1 ORDER BY l_language.status DESC LIMIT 0,1) AND a.lgroup = b.lgroup AND a.lkey = b.lkey) as lindex
 						FROM l_content AS a, l_group as g
 						WHERE a.lang = (SELECT id FROM l_language WHERE status=1) AND a.lgroup = g.id ";
+				
 						
-		if(isset($arrParam['lgroup'])&& !empty($arrParam['lgroup'])){
-			$sql .= " AND a.lgroup = ".$arrParam['lgroup'];
+		
+		//$content->text = htmlentities($content->text,ENT_QUOTES);
+		//$content->text = htmlentities($content->text,ENT_NOQUOTES);
+		
+		if(isset($content->lgroup)&& !empty($content->lgroup)){
+			$sql .= " AND a.lgroup = ".$content->lgroup;
 		}
-		if(isset($arrParam['lkey'])&& !empty($arrParam['lkey'])){
-			$sql .= " AND a.lkey = ".$arrParam['lkey'];
+		if(isset($content->lkey)&& !empty($content->lkey)){
+			$sql .= " AND a.lkey = ".$content->lkey;
 		}		
-		if(isset($arrParam['text'])&& !empty($arrParam['text'])){
-			$sql.= " AND  a.text like '%".$arrParam['text']."%' ";
+		if(isset($content->text)&& !empty($content->text)){
+			$sql.= " AND  a.text like '%".$content->text."%' ";
 		}
 		$sql .= " ORDER BY a.lkey DESC";
 		
@@ -80,8 +80,7 @@ class Models_String2 extends Models_Base
 		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
 		return $data;
 	}
-	
-	
+
 	public function getAllGroup2(){
 		$sql = "SELECT * FROM l_group";
 		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);

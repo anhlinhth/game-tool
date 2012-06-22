@@ -1,0 +1,2018 @@
+<?php
+return array
+(
+	13 => array
+	(
+		'group' => 7,
+		'needQuest' => null,
+		'tasks' => array
+		(
+			 0 => 26,
+		),
+		'award' => array
+		(
+			HONOUR => 1, 
+			GOLD => 10, 
+		),
+	),
+	14 => array
+	(
+		'group' => 7,
+		'needQuest' => 13,
+		'tasks' => array
+		(
+			 0 => 27,
+		),
+		'award' => array
+		(
+			HONOUR => 5, 
+			GOLD => 15, 
+		),
+	),
+	15 => array
+	(
+		'group' => 7,
+		'needQuest' => 39,
+		'tasks' => array
+		(
+			 0 => 29,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+		),
+	),
+	16 => array
+	(
+		'group' => 7,
+		'needQuest' => 15,
+		'tasks' => array
+		(
+			 0 => 31,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+			GOLD => 20, 
+		),
+	),
+	17 => array
+	(
+		'group' => 7,
+		'needQuest' => 159,
+		'tasks' => array
+		(
+			 0 => 33,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+			GOLD => 45, 
+		),
+	),
+	24 => array
+	(
+		'group' => 7,
+		'needQuest' => 42,
+		'tasks' => array
+		(
+			 0 => 44,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+			GOLD => 75, 
+		),
+	),
+	25 => array
+	(
+		'group' => 7,
+		'needQuest' => 41,
+		'tasks' => array
+		(
+			 0 => 46,
+		),
+		'award' => array
+		(
+			HONOUR => 30, 
+			GOLD => 70, 
+		),
+	),
+	26 => array
+	(
+		'group' => 7,
+		'needQuest' => 46,
+		'tasks' => array
+		(
+			 0 => 48,
+			 1 => 49,
+		),
+		'award' => array
+		(
+			HONOUR => 20, 
+			GOLD => 750, 
+			IRON => 15, 
+		),
+	),
+	27 => array
+	(
+		'group' => 7,
+		'needQuest' => 25,
+		'tasks' => array
+		(
+			 0 => 88,
+		),
+		'award' => array
+		(
+			HONOUR => 21, 
+			GOLD => 180, 
+		),
+	),
+	28 => array
+	(
+		'group' => 7,
+		'needQuest' => 50,
+		'tasks' => array
+		(
+			 0 => 53,
+			 1 => 54,
+		),
+		'award' => array
+		(
+			HONOUR => 40, 
+			GOLD => 1250, 
+			STONE => 35, 
+		),
+	),
+	29 => array
+	(
+		'group' => 7,
+		'needQuest' => 155,
+		'tasks' => array
+		(
+			 0 => 55,
+			 1 => 56,
+			 2 => 57,
+		),
+		'award' => array
+		(
+			HONOUR => 55, 
+			GOLD => 1850, 
+			IRON => 50, 
+		),
+	),
+	39 => array
+	(
+		'group' => 7,
+		'needQuest' => 14,
+		'tasks' => array
+		(
+			 0 => 77,
+			 1 => 78,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+			GOLD => 50, 
+		),
+	),
+	40 => array
+	(
+		'group' => 7,
+		'needQuest' => 16,
+		'tasks' => array
+		(
+			 0 => 79,
+		),
+		'award' => array
+		(
+			HONOUR => 10, 
+			GOLD => 45, 
+		),
+	),
+	41 => array
+	(
+		'group' => 7,
+		'needQuest' => 40,
+		'tasks' => array
+		(
+			 0 => 80,
+			 1 => 81,
+		),
+		'award' => array
+		(
+			HONOUR => 20, 
+			GOLD => 50, 
+		),
+	),
+	42 => array
+	(
+		'group' => 7,
+		'needQuest' => 17,
+		'tasks' => array
+		(
+			 0 => 82,
+			 1 => 83,
+		),
+		'award' => array
+		(
+			HONOUR => 30, 
+			GOLD => 150, 
+		),
+	),
+	43 => array
+	(
+		'group' => 7,
+		'needQuest' => 24,
+		'tasks' => array
+		(
+			 0 => 84,
+			 1 => 85,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+			GOLD => 450, 
+			WOOD => 10, 
+		),
+	),
+	44 => array
+	(
+		'group' => 7,
+		'needQuest' => 43,
+		'tasks' => array
+		(
+			 0 => 86,
+		),
+		'award' => array
+		(
+			HONOUR => 18, 
+			GOLD => 160, 
+		),
+	),
+	45 => array
+	(
+		'group' => 7,
+		'needQuest' => 44,
+		'tasks' => array
+		(
+			 0 => 90,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 900, 
+			STONE => 20, 
+		),
+	),
+	46 => array
+	(
+		'group' => 7,
+		'needQuest' => 45,
+		'tasks' => array
+		(
+			 0 => 91,
+			 1 => 92,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 900, 
+			WOOD => 20, 
+		),
+	),
+	47 => array
+	(
+		'group' => 7,
+		'needQuest' => 27,
+		'tasks' => array
+		(
+			 0 => 94,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+		),
+	),
+	48 => array
+	(
+		'group' => 7,
+		'needQuest' => 26,
+		'tasks' => array
+		(
+			 0 => 96,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 900, 
+			STONE => 20, 
+		),
+	),
+	49 => array
+	(
+		'group' => 7,
+		'needQuest' => 48,
+		'tasks' => array
+		(
+			 0 => 97,
+			 1 => 98,
+		),
+		'award' => array
+		(
+			HONOUR => 20, 
+			GOLD => 750, 
+			WOOD => 15, 
+		),
+	),
+	50 => array
+	(
+		'group' => 7,
+		'needQuest' => 49,
+		'tasks' => array
+		(
+			 0 => 99,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 900, 
+			IRON => 20, 
+		),
+	),
+	51 => array
+	(
+		'group' => 7,
+		'needQuest' => 178,
+		'tasks' => array
+		(
+			 0 => 100,
+		),
+		'award' => array
+		(
+			HONOUR => 40, 
+			GOLD => 1300, 
+			WOOD => 35, 
+		),
+	),
+	54 => array
+	(
+		'group' => 6,
+		'needQuest' => 119,
+		'tasks' => array
+		(
+			 0 => 103,
+		),
+		'award' => array
+		(
+			HONOUR => 30, 
+			IRON => 400, 
+			STONE => 400, 
+			WOOD => 400, 
+		),
+	),
+	55 => array
+	(
+		'group' => 6,
+		'needQuest' => 56,
+		'tasks' => array
+		(
+			 0 => 104,
+		),
+		'award' => array
+		(
+			HONOUR => 50, 
+		),
+	),
+	56 => array
+	(
+		'group' => 6,
+		'needQuest' => 118,
+		'tasks' => array
+		(
+			 0 => 105,
+		),
+		'award' => array
+		(
+			HONOUR => 65, 
+			WOOD => 1000, 
+			IRON => 1000, 
+		),
+	),
+	57 => array
+	(
+		'group' => 6,
+		'needQuest' => 140,
+		'tasks' => array
+		(
+			 0 => 106,
+		),
+		'award' => array
+		(
+			HONOUR => 30, 
+		),
+	),
+	58 => array
+	(
+		'group' => 6,
+		'needQuest' => 55,
+		'tasks' => array
+		(
+			 0 => 107,
+		),
+		'award' => array
+		(
+			HONOUR => 110, 
+			STONE => 1500, 
+			IRON => 1500, 
+		),
+	),
+	59 => array
+	(
+		'group' => 6,
+		'needQuest' => 25,
+		'tasks' => array
+		(
+			 0 => 108,
+		),
+		'award' => array
+		(
+			HONOUR => 80, 
+		),
+	),
+	60 => array
+	(
+		'group' => 6,
+		'needQuest' => 57,
+		'tasks' => array
+		(
+			 0 => 109,
+		),
+		'award' => array
+		(
+			HONOUR => 215, 
+			WOOD => 3000, 
+		),
+	),
+	61 => array
+	(
+		'group' => 6,
+		'needQuest' => 54,
+		'tasks' => array
+		(
+			 0 => 110,
+		),
+		'award' => array
+		(
+			HONOUR => 130, 
+		),
+	),
+	63 => array
+	(
+		'group' => 2,
+		'needQuest' => 17,
+		'tasks' => array
+		(
+			 0 => 112,
+			 1 => 113,
+		),
+		'award' => array
+		(
+			HONOUR => 3, 
+			GOLD => 10, 
+		),
+	),
+	64 => array
+	(
+		'group' => 2,
+		'needQuest' => 63,
+		'tasks' => array
+		(
+			 0 => 114,
+		),
+		'award' => array
+		(
+			HONOUR => 2, 
+		),
+	),
+	65 => array
+	(
+		'group' => 2,
+		'needQuest' => 64,
+		'tasks' => array
+		(
+			 0 => 115,
+			 1 => 116,
+		),
+		'award' => array
+		(
+			HONOUR => 5, 
+			GOLD => 25, 
+		),
+	),
+	66 => array
+	(
+		'group' => 2,
+		'needQuest' => 65,
+		'tasks' => array
+		(
+			 0 => 117,
+			 1 => 118,
+		),
+		'award' => array
+		(
+			GOLD => 20, 
+			HONOUR => 2, 
+		),
+	),
+	67 => array
+	(
+		'group' => 2,
+		'needQuest' => 66,
+		'tasks' => array
+		(
+			 0 => 119,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+		),
+	),
+	68 => array
+	(
+		'group' => 2,
+		'needQuest' => 67,
+		'tasks' => array
+		(
+			 0 => 120,
+		),
+		'award' => array
+		(
+			HONOUR => 5, 
+		),
+	),
+	70 => array
+	(
+		'group' => 2,
+		'needQuest' => 68,
+		'tasks' => array
+		(
+			 0 => 122,
+		),
+		'award' => array
+		(
+			HONOUR => 10, 
+		),
+	),
+	72 => array
+	(
+		'group' => 2,
+		'needQuest' => 70,
+		'tasks' => array
+		(
+			 0 => 124,
+		),
+		'award' => array
+		(
+			HONOUR => 10, 
+		),
+	),
+	73 => array
+	(
+		'group' => 2,
+		'needQuest' => 72,
+		'tasks' => array
+		(
+			 0 => 125,
+		),
+		'award' => array
+		(
+			HONOUR => 10, 
+		),
+	),
+	76 => array
+	(
+		'group' => 3,
+		'needQuest' => 14,
+		'tasks' => array
+		(
+			 0 => 129,
+		),
+		'award' => array
+		(
+			HONOUR => 2, 
+			GOLD => 10, 
+		),
+	),
+	77 => array
+	(
+		'group' => 3,
+		'needQuest' => 76,
+		'tasks' => array
+		(
+			 0 => 130,
+		),
+		'award' => array
+		(
+			HONOUR => 3, 
+			GOLD => 20, 
+		),
+	),
+	78 => array
+	(
+		'group' => 5,
+		'needQuest' => 15,
+		'tasks' => array
+		(
+			 0 => 131,
+			 1 => 132,
+		),
+		'award' => array
+		(
+			GOLD => 200, 
+			HONOUR => 15, 
+		),
+	),
+	80 => array
+	(
+		'group' => 5,
+		'needQuest' => 151,
+		'tasks' => array
+		(
+			 0 => 133,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+		),
+	),
+	82 => array
+	(
+		'group' => 5,
+		'needQuest' => 91,
+		'tasks' => array
+		(
+			 0 => 134,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+			GOLD => 600, 
+		),
+	),
+	83 => array
+	(
+		'group' => 5,
+		'needQuest' => 180,
+		'tasks' => array
+		(
+			 0 => 135,
+		),
+		'award' => array
+		(
+			HONOUR => 20, 
+			GOLD => 860, 
+		),
+	),
+	84 => array
+	(
+		'group' => 5,
+		'needQuest' => 117,
+		'tasks' => array
+		(
+			 0 => 136,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+			GOLD => 800, 
+		),
+	),
+	85 => array
+	(
+		'group' => 5,
+		'needQuest' => 152,
+		'tasks' => array
+		(
+			 0 => 137,
+		),
+		'award' => array
+		(
+			HONOUR => 20, 
+			GOLD => 1000, 
+		),
+	),
+	86 => array
+	(
+		'group' => 5,
+		'needQuest' => 85,
+		'tasks' => array
+		(
+			 0 => 138,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 1300, 
+		),
+	),
+	87 => array
+	(
+		'group' => 5,
+		'needQuest' => 110,
+		'tasks' => array
+		(
+			 0 => 139,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+			GOLD => 800, 
+		),
+	),
+	88 => array
+	(
+		'group' => 5,
+		'needQuest' => 163,
+		'tasks' => array
+		(
+			 0 => 140,
+		),
+		'award' => array
+		(
+			HONOUR => 20, 
+			GOLD => 1000, 
+		),
+	),
+	89 => array
+	(
+		'group' => 5,
+		'needQuest' => 173,
+		'tasks' => array
+		(
+			 0 => 141,
+		),
+		'award' => array
+		(
+			HONOUR => 100, 
+			GOLD => 1000, 
+		),
+	),
+	90 => array
+	(
+		'group' => 5,
+		'needQuest' => 78,
+		'tasks' => array
+		(
+			 0 => 144,
+		),
+		'award' => array
+		(
+			HONOUR => 2, 
+		),
+	),
+	91 => array
+	(
+		'group' => 5,
+		'needQuest' => 90,
+		'tasks' => array
+		(
+			 0 => 146,
+			 1 => 147,
+		),
+		'award' => array
+		(
+			HONOUR => 10, 
+			GOLD => 350, 
+		),
+	),
+	92 => array
+	(
+		'group' => 5,
+		'needQuest' => 82,
+		'tasks' => array
+		(
+			 0 => 148,
+		),
+		'award' => array
+		(
+			HONOUR => 2, 
+		),
+	),
+	93 => array
+	(
+		'group' => 5,
+		'needQuest' => 92,
+		'tasks' => array
+		(
+			 0 => 149,
+			 1 => 150,
+			 2 => 151,
+		),
+		'award' => array
+		(
+			HONOUR => 10, 
+		),
+	),
+	94 => array
+	(
+		'group' => 3,
+		'needQuest' => 77,
+		'tasks' => array
+		(
+			 0 => 152,
+			 1 => 153,
+		),
+		'award' => array
+		(
+			GOLD => 150, 
+			HONOUR => 15, 
+		),
+	),
+	95 => array
+	(
+		'group' => 3,
+		'needQuest' => 94,
+		'tasks' => array
+		(
+			 0 => 154,
+			 1 => 155,
+		),
+		'award' => array
+		(
+			HONOUR => 12, 
+			GOLD => 120, 
+		),
+	),
+	96 => array
+	(
+		'group' => 3,
+		'needQuest' => 95,
+		'tasks' => array
+		(
+			 0 => 156,
+			 1 => 157,
+		),
+		'award' => array
+		(
+			HONOUR => 20, 
+			GOLD => 200, 
+		),
+	),
+	97 => array
+	(
+		'group' => 3,
+		'needQuest' => 96,
+		'tasks' => array
+		(
+			 0 => 158,
+			 1 => 159,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 250, 
+		),
+	),
+	98 => array
+	(
+		'group' => 3,
+		'needQuest' => 97,
+		'tasks' => array
+		(
+			 0 => 160,
+			 1 => 161,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 350, 
+		),
+	),
+	99 => array
+	(
+		'group' => 3,
+		'needQuest' => 98,
+		'tasks' => array
+		(
+			 0 => 162,
+			 1 => 163,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 380, 
+		),
+	),
+	100 => array
+	(
+		'group' => 3,
+		'needQuest' => 99,
+		'tasks' => array
+		(
+			 0 => 164,
+			 1 => 165,
+		),
+		'award' => array
+		(
+			GOLD => 500, 
+			HONOUR => 25, 
+		),
+	),
+	101 => array
+	(
+		'group' => 3,
+		'needQuest' => 100,
+		'tasks' => array
+		(
+			 0 => 166,
+			 1 => 167,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 1000, 
+		),
+	),
+	102 => array
+	(
+		'group' => 3,
+		'needQuest' => 101,
+		'tasks' => array
+		(
+			 0 => 168,
+			 1 => 169,
+		),
+		'award' => array
+		(
+			GOLD => 750, 
+			HONOUR => 25, 
+		),
+	),
+	103 => array
+	(
+		'group' => 3,
+		'needQuest' => 102,
+		'tasks' => array
+		(
+			 0 => 170,
+			 1 => 171,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 1500, 
+		),
+	),
+	104 => array
+	(
+		'group' => 3,
+		'needQuest' => 103,
+		'tasks' => array
+		(
+			 0 => 172,
+			 1 => 173,
+		),
+		'award' => array
+		(
+			GOLD => 1500, 
+			HONOUR => 35, 
+		),
+	),
+	105 => array
+	(
+		'group' => 3,
+		'needQuest' => 104,
+		'tasks' => array
+		(
+			 0 => 174,
+			 1 => 175,
+		),
+		'award' => array
+		(
+			HONOUR => 35, 
+			GOLD => 1800, 
+		),
+	),
+	106 => array
+	(
+		'group' => 3,
+		'needQuest' => 105,
+		'tasks' => array
+		(
+			 0 => 176,
+			 1 => 177,
+		),
+		'award' => array
+		(
+			HONOUR => 45, 
+			GOLD => 2200, 
+		),
+	),
+	107 => array
+	(
+		'group' => 3,
+		'needQuest' => 106,
+		'tasks' => array
+		(
+			 0 => 178,
+			 1 => 179,
+		),
+		'award' => array
+		(
+			HONOUR => 45, 
+			GOLD => 2750, 
+		),
+	),
+	109 => array
+	(
+		'group' => 2,
+		'needQuest' => 80,
+		'tasks' => array
+		(
+			 0 => 181,
+		),
+		'award' => array
+		(
+			GOLD => 160, 
+			HONOUR => 10, 
+		),
+	),
+	110 => array
+	(
+		'group' => 5,
+		'needQuest' => 182,
+		'tasks' => array
+		(
+			 0 => 182,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+		),
+	),
+	111 => array
+	(
+		'group' => 13,
+		'needQuest' => 160,
+		'tasks' => array
+		(
+			 0 => 183,
+		),
+		'award' => array
+		(
+			HONOUR => 100, 
+		),
+	),
+	112 => array
+	(
+		'group' => 5,
+		'needQuest' => 114,
+		'tasks' => array
+		(
+			 0 => 184,
+		),
+		'award' => array
+		(
+			HONOUR => 100, 
+		),
+	),
+	113 => array
+	(
+		'group' => 5,
+		'needQuest' => 80,
+		'tasks' => array
+		(
+			 0 => 185,
+			 1 => 186,
+			 2 => 187,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 1600, 
+		),
+	),
+	114 => array
+	(
+		'group' => 5,
+		'needQuest' => 89,
+		'tasks' => array
+		(
+			 0 => 188,
+			 1 => 189,
+			 2 => 190,
+		),
+		'award' => array
+		(
+			GOLD => 5250, 
+			HONOUR => 100, 
+		),
+	),
+	115 => array
+	(
+		'group' => 7,
+		'needQuest' => 49,
+		'tasks' => array
+		(
+			 0 => 191,
+			 1 => 192,
+			 2 => 193,
+		),
+		'award' => array
+		(
+			GOLD => 1700, 
+			HONOUR => 50, 
+		),
+	),
+	116 => array
+	(
+		'group' => 6,
+		'needQuest' => 58,
+		'tasks' => array
+		(
+			 0 => 194,
+			 1 => 195,
+		),
+		'award' => array
+		(
+			GOLD => 800, 
+			HONOUR => 20, 
+		),
+	),
+	117 => array
+	(
+		'group' => 5,
+		'needQuest' => 83,
+		'tasks' => array
+		(
+			 0 => 196,
+			 1 => 197,
+		),
+		'award' => array
+		(
+			GOLD => 850, 
+			HONOUR => 15, 
+		),
+	),
+	118 => array
+	(
+		'group' => 6,
+		'needQuest' => 61,
+		'tasks' => array
+		(
+			 0 => 198,
+			 1 => 199,
+			 2 => 200,
+		),
+		'award' => array
+		(
+			GOLD => 2050, 
+			HONOUR => 55, 
+		),
+	),
+	119 => array
+	(
+		'group' => 6,
+		'needQuest' => 59,
+		'tasks' => array
+		(
+			 0 => 202,
+		),
+		'award' => array
+		(
+			HONOUR => 20, 
+		),
+	),
+	120 => array
+	(
+		'group' => 6,
+		'needQuest' => 116,
+		'tasks' => array
+		(
+			 0 => 204,
+			 1 => 205,
+		),
+		'award' => array
+		(
+			GOLD => 300, 
+			HONOUR => 15, 
+		),
+	),
+	122 => array
+	(
+		'group' => 8,
+		'needQuest' => 60,
+		'tasks' => array
+		(
+			 0 => 207,
+			 1 => 208,
+		),
+		'award' => array
+		(
+			GOLD => 900, 
+			HONOUR => 10, 
+		),
+	),
+	123 => array
+	(
+		'group' => 8,
+		'needQuest' => 122,
+		'tasks' => array
+		(
+			 0 => 209,
+		),
+		'award' => array
+		(
+			GOLD => 800, 
+			HONOUR => 10, 
+		),
+	),
+	124 => array
+	(
+		'group' => 8,
+		'needQuest' => 123,
+		'tasks' => array
+		(
+			 0 => 210,
+			 1 => 211,
+		),
+		'award' => array
+		(
+			GOLD => 2000, 
+			HONOUR => 35, 
+		),
+	),
+	125 => array
+	(
+		'group' => 8,
+		'needQuest' => 124,
+		'tasks' => array
+		(
+			 0 => 212,
+		),
+		'award' => array
+		(
+			GOLD => 2200, 
+			HONOUR => 35, 
+		),
+	),
+	126 => array
+	(
+		'group' => 8,
+		'needQuest' => 125,
+		'tasks' => array
+		(
+			 0 => 213,
+			 1 => 214,
+		),
+		'award' => array
+		(
+			GOLD => 2400, 
+			HONOUR => 35, 
+		),
+	),
+	127 => array
+	(
+		'group' => 8,
+		'needQuest' => 126,
+		'tasks' => array
+		(
+			 0 => 215,
+			 1 => 216,
+		),
+		'award' => array
+		(
+			GOLD => 7000, 
+			HONOUR => 100, 
+		),
+	),
+	128 => array
+	(
+		'group' => 8,
+		'needQuest' => 127,
+		'tasks' => array
+		(
+			 0 => 217,
+			 1 => 218,
+			 2 => 219,
+		),
+		'award' => array
+		(
+			GOLD => 7700, 
+			HONOUR => 110, 
+		),
+	),
+	129 => array
+	(
+		'group' => 13,
+		'needQuest' => 153,
+		'tasks' => array
+		(
+			 0 => 220,
+			 1 => 221,
+		),
+		'award' => array
+		(
+			GOLD => 1400, 
+			HONOUR => 40, 
+		),
+	),
+	131 => array
+	(
+		'group' => 13,
+		'needQuest' => 162,
+		'tasks' => array
+		(
+			 0 => 224,
+			 1 => 225,
+		),
+		'award' => array
+		(
+			HONOUR => 75, 
+			GOLD => 2500, 
+		),
+	),
+	132 => array
+	(
+		'group' => 13,
+		'needQuest' => 131,
+		'tasks' => array
+		(
+			 0 => 226,
+			 1 => 227,
+		),
+		'award' => array
+		(
+			HONOUR => 80, 
+			GOLD => 2250, 
+		),
+	),
+	133 => array
+	(
+		'group' => 13,
+		'needQuest' => 132,
+		'tasks' => array
+		(
+			 0 => 228,
+		),
+		'award' => array
+		(
+			GOLD => 4000, 
+			HONOUR => 115, 
+		),
+	),
+	134 => array
+	(
+		'group' => 13,
+		'needQuest' => 133,
+		'tasks' => array
+		(
+			 0 => 229,
+		),
+		'award' => array
+		(
+			GOLD => 4000, 
+			HONOUR => 120, 
+		),
+	),
+	136 => array
+	(
+		'group' => 13,
+		'needQuest' => 143,
+		'tasks' => array
+		(
+			 0 => 232,
+			 1 => 233,
+		),
+		'award' => array
+		(
+			HONOUR => 55, 
+			GOLD => 1900, 
+		),
+	),
+	137 => array
+	(
+		'group' => 13,
+		'needQuest' => 138,
+		'tasks' => array
+		(
+			 0 => 234,
+			 1 => 235,
+		),
+		'award' => array
+		(
+			GOLD => 1350, 
+			HONOUR => 40, 
+		),
+	),
+	138 => array
+	(
+		'group' => 13,
+		'needQuest' => 144,
+		'tasks' => array
+		(
+			 0 => 236,
+		),
+		'award' => array
+		(
+			GOLD => 1600, 
+			HONOUR => 50, 
+		),
+	),
+	139 => array
+	(
+		'group' => 13,
+		'needQuest' => 148,
+		'tasks' => array
+		(
+			 0 => 237,
+		),
+		'award' => array
+		(
+			HONOUR => 35, 
+			GOLD => 1150, 
+		),
+	),
+	140 => array
+	(
+		'group' => 6,
+		'needQuest' => 120,
+		'tasks' => array
+		(
+			 0 => 238,
+		),
+		'award' => array
+		(
+			HONOUR => 10, 
+			GOLD => 400, 
+		),
+	),
+	142 => array
+	(
+		'group' => 13,
+		'needQuest' => 146,
+		'tasks' => array
+		(
+			 0 => 241,
+		),
+		'award' => array
+		(
+			GOLD => 3900, 
+			HONOUR => 110, 
+		),
+	),
+	143 => array
+	(
+		'group' => 13,
+		'needQuest' => 145,
+		'tasks' => array
+		(
+			 0 => 243,
+		),
+		'award' => array
+		(
+			HONOUR => 50, 
+			GOLD => 1800, 
+		),
+	),
+	144 => array
+	(
+		'group' => 13,
+		'needQuest' => 129,
+		'tasks' => array
+		(
+			 0 => 244,
+		),
+		'award' => array
+		(
+			GOLD => 1800, 
+			HONOUR => 50, 
+		),
+	),
+	145 => array
+	(
+		'group' => 13,
+		'needQuest' => 137,
+		'tasks' => array
+		(
+			 0 => 246,
+			 1 => 247,
+		),
+		'award' => array
+		(
+			GOLD => 1500, 
+			HONOUR => 45, 
+		),
+	),
+	146 => array
+	(
+		'group' => 13,
+		'needQuest' => 136,
+		'tasks' => array
+		(
+			 0 => 248,
+			 1 => 249,
+			 2 => 250,
+		),
+		'award' => array
+		(
+			GOLD => 1750, 
+			HONOUR => 55, 
+		),
+	),
+	147 => array
+	(
+		'group' => 13,
+		'needQuest' => 142,
+		'tasks' => array
+		(
+			 0 => 251,
+			 1 => 252,
+			 2 => 253,
+		),
+		'award' => array
+		(
+			GOLD => 5000, 
+			HONOUR => 160, 
+		),
+	),
+	148 => array
+	(
+		'group' => 8,
+		'needQuest' => 73,
+		'tasks' => array
+		(
+			 0 => 254,
+			 1 => 255,
+		),
+		'award' => array
+		(
+			GOLD => 720, 
+			HONOUR => 150, 
+		),
+	),
+	151 => array
+	(
+		'group' => 5,
+		'needQuest' => 166,
+		'tasks' => array
+		(
+			 0 => 260,
+		),
+		'award' => array
+		(
+			HONOUR => 50, 
+			WOOD => 100, 
+		),
+	),
+	152 => array
+	(
+		'group' => 5,
+		'needQuest' => 84,
+		'tasks' => array
+		(
+			 0 => 262,
+		),
+		'award' => array
+		(
+			HONOUR => 50, 
+			STONE => 100, 
+		),
+	),
+	153 => array
+	(
+		'group' => 6,
+		'needQuest' => 60,
+		'tasks' => array
+		(
+			 0 => 263,
+		),
+		'award' => array
+		(
+			HONOUR => 315, 
+			IRON => 4900, 
+		),
+	),
+	154 => array
+	(
+		'group' => 7,
+		'needQuest' => 47,
+		'tasks' => array
+		(
+			 0 => 264,
+		),
+		'award' => array
+		(
+			GOLD => 100, 
+			HONOUR => 5, 
+		),
+	),
+	155 => array
+	(
+		'group' => 7,
+		'needQuest' => 51,
+		'tasks' => array
+		(
+			 0 => 265,
+		),
+		'award' => array
+		(
+			GOLD => 75, 
+			HONOUR => 15, 
+		),
+	),
+	157 => array
+	(
+		'group' => 7,
+		'needQuest' => 154,
+		'tasks' => array
+		(
+			 0 => 267,
+			 1 => 268,
+			 2 => 269,
+		),
+		'award' => array
+		(
+			HONOUR => 5, 
+			GOLD => 25, 
+		),
+	),
+	158 => array
+	(
+		'group' => 7,
+		'needQuest' => 157,
+		'tasks' => array
+		(
+			 0 => 270,
+		),
+		'award' => array
+		(
+			GOLD => 50, 
+			HONOUR => 5, 
+		),
+	),
+	159 => array
+	(
+		'group' => 7,
+		'needQuest' => 158,
+		'tasks' => array
+		(
+			 0 => 271,
+		),
+		'award' => array
+		(
+			GOLD => 25, 
+			HONOUR => 5, 
+		),
+	),
+	160 => array
+	(
+		'group' => 7,
+		'needQuest' => 177,
+		'tasks' => array
+		(
+			 0 => 272,
+		),
+		'award' => array
+		(
+			GOLD => 75, 
+			HONOUR => 15, 
+		),
+	),
+	161 => array
+	(
+		'group' => 13,
+		'needQuest' => 142,
+		'tasks' => array
+		(
+			 0 => 273,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+			GOLD => 250, 
+		),
+	),
+	162 => array
+	(
+		'group' => 13,
+		'needQuest' => 147,
+		'tasks' => array
+		(
+			 0 => 274,
+		),
+		'award' => array
+		(
+			HONOUR => 50, 
+			GOLD => 250, 
+		),
+	),
+	163 => array
+	(
+		'group' => 5,
+		'needQuest' => 87,
+		'tasks' => array
+		(
+			 0 => 275,
+		),
+		'award' => array
+		(
+			HONOUR => 50, 
+			STONE => 150, 
+		),
+	),
+	164 => array
+	(
+		'group' => 5,
+		'needQuest' => 168,
+		'tasks' => array
+		(
+			 0 => 277,
+		),
+		'award' => array
+		(
+			HONOUR => 50, 
+			WOOD => 150, 
+		),
+	),
+	165 => array
+	(
+		'group' => 5,
+		'needQuest' => 93,
+		'tasks' => array
+		(
+			 0 => 278,
+		),
+		'award' => array
+		(
+			HONOUR => 10, 
+			GOLD => 460, 
+		),
+	),
+	166 => array
+	(
+		'group' => 5,
+		'needQuest' => 165,
+		'tasks' => array
+		(
+			 0 => 279,
+		),
+		'award' => array
+		(
+			HONOUR => 2, 
+			GOLD => 60, 
+		),
+	),
+	167 => array
+	(
+		'group' => 5,
+		'needQuest' => 86,
+		'tasks' => array
+		(
+			 0 => 280,
+		),
+		'award' => array
+		(
+			HONOUR => 10, 
+			GOLD => 550, 
+		),
+	),
+	168 => array
+	(
+		'group' => 5,
+		'needQuest' => 181,
+		'tasks' => array
+		(
+			 0 => 281,
+		),
+		'award' => array
+		(
+			HONOUR => 20, 
+			GOLD => 960, 
+		),
+	),
+	169 => array
+	(
+		'group' => 5,
+		'needQuest' => 164,
+		'tasks' => array
+		(
+			 0 => 282,
+		),
+		'award' => array
+		(
+			HONOUR => 15, 
+			GOLD => 650, 
+		),
+	),
+	170 => array
+	(
+		'group' => 5,
+		'needQuest' => 174,
+		'tasks' => array
+		(
+			 0 => 283,
+		),
+		'award' => array
+		(
+			HONOUR => 30, 
+			GOLD => 1450, 
+		),
+	),
+	171 => array
+	(
+		'group' => 5,
+		'needQuest' => 175,
+		'tasks' => array
+		(
+			 0 => 284,
+		),
+		'award' => array
+		(
+			HONOUR => 30, 
+			GOLD => 1600, 
+		),
+	),
+	172 => array
+	(
+		'group' => 5,
+		'needQuest' => 171,
+		'tasks' => array
+		(
+			 0 => 285,
+		),
+		'award' => array
+		(
+			HONOUR => 30, 
+			GOLD => 1300, 
+		),
+	),
+	173 => array
+	(
+		'group' => 5,
+		'needQuest' => 172,
+		'tasks' => array
+		(
+			 0 => 286,
+		),
+		'award' => array
+		(
+			HONOUR => 30, 
+			GOLD => 1450, 
+		),
+	),
+	174 => array
+	(
+		'group' => 5,
+		'needQuest' => 183,
+		'tasks' => array
+		(
+			 0 => 287,
+			 1 => 288,
+		),
+		'award' => array
+		(
+			HONOUR => 20, 
+			GOLD => 500, 
+		),
+	),
+	175 => array
+	(
+		'group' => 5,
+		'needQuest' => 170,
+		'tasks' => array
+		(
+			 0 => 289,
+			 1 => 290,
+		),
+		'award' => array
+		(
+			GOLD => 2500, 
+			HONOUR => 75, 
+		),
+	),
+	176 => array
+	(
+		'group' => 7,
+		'needQuest' => 29,
+		'tasks' => array
+		(
+			 0 => 291,
+			 1 => 292,
+			 2 => 293,
+		),
+		'award' => array
+		(
+			GOLD => 2100, 
+			HONOUR => 60, 
+			STONE => 55, 
+		),
+	),
+	177 => array
+	(
+		'group' => 7,
+		'needQuest' => 176,
+		'tasks' => array
+		(
+			 0 => 294,
+			 1 => 295,
+		),
+		'award' => array
+		(
+			GOLD => 3500, 
+			HONOUR => 100, 
+			WOOD => 75, 
+		),
+	),
+	178 => array
+	(
+		'group' => 7,
+		'needQuest' => 28,
+		'tasks' => array
+		(
+			 0 => 296,
+			 1 => 297,
+			 2 => 298,
+		),
+		'award' => array
+		(
+			GOLD => 1600, 
+			HONOUR => 50, 
+		),
+	),
+	179 => array
+	(
+		'group' => 7,
+		'needQuest' => 177,
+		'tasks' => array
+		(
+			 0 => 299,
+			 1 => 300,
+			 2 => 301,
+		),
+		'award' => array
+		(
+			HONOUR => 100, 
+			GOLD => 3350, 
+		),
+	),
+	180 => array
+	(
+		'group' => 5,
+		'needQuest' => 80,
+		'tasks' => array
+		(
+			 0 => 302,
+		),
+		'award' => array
+		(
+			HONOUR => 50, 
+			IRON => 100, 
+		),
+	),
+	181 => array
+	(
+		'group' => 5,
+		'needQuest' => 88,
+		'tasks' => array
+		(
+			 0 => 303,
+		),
+		'award' => array
+		(
+			HONOUR => 50, 
+			IRON => 150, 
+		),
+	),
+	182 => array
+	(
+		'group' => 5,
+		'needQuest' => 167,
+		'tasks' => array
+		(
+			 0 => 304,
+			 1 => 305,
+		),
+		'award' => array
+		(
+			HONOUR => 25, 
+		),
+	),
+	183 => array
+	(
+		'group' => 5,
+		'needQuest' => 169,
+		'tasks' => array
+		(
+			 0 => 306,
+			 1 => 307,
+		),
+		'award' => array
+		(
+			HONOUR => 40, 
+		),
+	),
+
+);
+?>

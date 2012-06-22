@@ -17,29 +17,10 @@ class Models_Ib_Shop extends Models_Base
 				FROM 
 					s_ibshop
 				WHERE
-					ID = {$id}";
-		$result=$this->_db->fetchrow($sql);
-		
-		$sql="	SELECT 
-					ish.ID itemshopID , i.`Name` Name, ibi.ID ID
-				FROM 
-					s_ibshop_item ibi, s_items i , s_itemshop ish
-				WHERE 
-					ibi.ItemID = ish.ID AND (ish.Item = i.ID OR ish.Entity = i.ID)AND ibi.IbShopID =".$result['ID']." ORDER BY ish.ID";
-		$data = $this->_db->fetchAll($sql, null, Zend_Db::FETCH_OBJ);
-		
-		$result['arritem'] = $data;
+					ID = 1";
+		$result=$this->_db->fetchOne($sql);
 		return $result;
 	}
-	
-	public function getTab($ID)
-	{
-		$sql="SELECT TabIndex FROM s_ibshop WHERE ID = $ID";
-		
-		$data = $this->_db->fetchOne($sql);
-		return $data;
-	}
-
 	public function filter($objSearch,$order,$offset,$count)
 	{
 		$sql = "SELECT
@@ -47,9 +28,7 @@ class Models_Ib_Shop extends Models_Base
 				FROM
 					s_ibshop
 				WHERE
-					1
-				 
-					";
+					1 ";
 		
 		if($objSearch->ID)
 			$sql .= " AND ID = '$objSearch->ID'";						
@@ -93,32 +72,6 @@ class Models_Ib_Shop extends Models_Base
 	{
 		parent::_delete($id,null);
 		
-	}
-	public function getTabIndex()
-	{
-		$sql="
-			SELECT 
-				*
-			FROM
-				s_ibshop
-			
-				ORDER BY TabIndex ASC 
-				
-				";
-		$result=$this->_db->fetchAll($sql);
-		return $result;
-	}
-	public function updateIndex($count,$id)
-	{		
-		$sql="
-			UPDATE 
-				s_ibshop
-			SET 
-				TabIndex=$count
-			WHERE 
-				ID=$id;
-		";
-		$this->_db->query($sql);			
 	}
 }
 ?>

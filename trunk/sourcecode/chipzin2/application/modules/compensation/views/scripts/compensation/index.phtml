@@ -30,9 +30,9 @@ var arrNode = null; //array search result list
 
 	$(function(){		
 		var screen_h =  $(document).height();		
-		$("div#container").animate({"width": "98%"}, "slow");	
-		$("div#content").animate({"width": "98%"}, "slow");	
-		$("html,body,#container,#wrapper").css({"height": "98%"});	
+		//$("div#container").animate({"width": "98%"}, "slow");	
+		//$("div#content").animate({"width": "98%"}, "slow");	
+		//$("html,body,#container,#wrapper").css({"height": "98%"});	
 		$("#content").css({"height": "100%"});	
 		$("#tabs-1,#tabs-2,#tabs-3").css({"height": "91%"});	
 		JSONVIEWER.init();
@@ -302,7 +302,7 @@ var arrNode = null; //array search result list
 				$.each(data.session,function(key,item){	
 						var string = '<div class="row_logs">'+
 							'<div class="session">'+
-							    '<a>'+((page - 1)*num_item +key)+'</a>'+
+							    //'<a>'+((page - 1)*num_item +key)+'</a>'+
 								'<a class="tool-16 expand"></a>'+
 								'<span class="info" style="font-weight:bold" >'+item.Date+'</span>'+
 								'<span class="info"><span style="font-weight:bold">User ID:</span> '+item.UserID+'</span>'+
@@ -441,17 +441,26 @@ var arrNode = null; //array search result list
 			var root = e.parent();//$("#tree .ul-node-0 .li-node-0");
 			var parent = e.parent();
 			var	count = 0;
+			
+			
 			while(1){
+				
 				count++;
+				//console.log(e);
+				//console.log("----"+count);
 				if(e.hasClass("object")){
 					e.parent().children(".x-icon.plus").click();
+					console.log("----Ob"+count);
+					console.log(e);
 				}
 				if(e.hasClass("ul-node")){
-					e.parent().children(".x-icon.plus").click();
+					e.children().children(".x-icon.plus").click();
+					console.log("----Ul"+count);
+					console.log(e);
+				
 				}				
 				if(e.hasClass("li-node-0")){					
-					break;
-					
+					break;					
 				}				
 				e = e.parent();	
 			}
@@ -468,8 +477,8 @@ var arrNode = null; //array search result list
 				$("div#tree").delegate(".x-icon.plus","click",function(e){
 					
 					$(this).removeClass("plus").addClass("minus");
-					$(this).parent().find("ul").show();
-					$(this).parent().find("div").show();			
+					$(this).parent().children("ul").show();
+					$(this).parent().children("div").show();			
 					e.preventDefault();
 					return false;
 				});
@@ -566,17 +575,20 @@ var arrNode = null; //array search result list
 								type_value = jQuery.type(value);
 								curent_path = path + "/"+item;								
 								if(type_value =="object" || type_value=="array"){
+									var hide = '';
+									if(level>2)
+										hide = 'style="display:none"';
 									
-									return_str += '<ul class="ul-node"><li>';
+									return_str += '<ul class="ul-node" level="'+level+'" '+hide+'><li>';
 									for(var i = 0; i<level-1;i++){
 										return_str +='<span class="x-icon line"></span>';
 									}
 									
-									return_str += '<span class="x-icon minus key"></span>';
+									return_str += '<span class="x-icon plus key"></span>';
 									return_str += '<span id ="obj-node-'+JSONVIEWER._count+'" path='+curent_path+' class="x-icon key '+type_value+'">'+item+'</span>';
 									
 								}else{
-									return_str += '<div class="x-div" id="obj-node-'+JSONVIEWER._count+'" path='+curent_path+'>';
+									return_str += '<div class="x-div" id="obj-node-'+JSONVIEWER._count+'" path='+curent_path+' style="display:none">';
 									for(var i = 0; i<level-1;i++){
 										return_str +='<span class="x-icon line"></span>';
 									}
@@ -634,7 +646,7 @@ var arrNode = null; //array search result list
             case "collapse":
                 {
                     //Popup Insert Dialog- included in demo and in download
-					var objects = el.parent().children("ul");
+					var objects = el.parent().find("ul");					
 					$.each(objects,function(key,item){
 						//alert($(this).html());
 						$(this).children("li").children(".x-icon.minus").click();
@@ -647,20 +659,27 @@ var arrNode = null; //array search result list
                 }
         }
    }
-</script>
+	
+	function trimUserId(){		
+		var userID = $("input[name='userid']").val();
+		var index = userID.lastIndexOf("/");
+		var username = userID.substring(index+1,userID.length);
+		$("input[name='userid']").val(username);
+	}
+   </script>
 <div id="x-toolbar" >
 		<div style="float:left">
 		<button id="download" class="button">Download data</button>
 		<button id="load" class="button">Load data</button>
-		<input name="userid" type="text" style="width: 80px;"/>
-		
+		<input name="userid" type="text" style="width: 150px;"/>
+		<a href="javascript:trimUserId()" class="tool-16 edit" title="Get UserName" ></a>
 		<button id="search" class="button">Search</button>
 		<input name="searchkey" type="text" style="width: 200px;"/>
 		
 		
 		
 		</div>
-		<div style="float:right;margin-right:130px">
+		<div style="float:right;margin-right:10px">
 		<button id="view_logs" class="button">View Logs</button>
 		<button id="view_tree" class="button">View Tree</button>	
 		<button id="view_changed" class="button">View changed</button>	

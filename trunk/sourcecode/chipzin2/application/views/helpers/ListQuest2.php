@@ -1,11 +1,8 @@
 <?php
 class Zend_View_Helper_ListQuest2
 {
-	
-	
-	public function listQuest2($arrQuest,$arrAllQuest,$arrNeedQuest,$arrNextQuest,$Task, $curPage, $itemPerPage ,$view)
+	public function listQuest2($arrQuest,$arrAllQuest,$arrNextQuest,$Task, $curPage, $itemPerPage ,$view)
 	{
-		
 		if(!$arrQuest)
 			return;
 		$md = new Models_Quest();
@@ -37,44 +34,58 @@ class Zend_View_Helper_ListQuest2
 							<td class='center'>$row->QuestID</td>
 							<td>$row->QuestName</td>							
 							<td>$row->QuestLineName</td>
-							<td style='width: 27%;'>";	
-				$flag2 = 1;
-				$flag1=1;
-				//-----------------------------------------------------------------
-				foreach($arrNeedQuest[$row->QuestID] as $key => $needQuestRow){
-					
-					//$strList.='&gt;';
-					
-					if($needQuestRow->NeedQuest==NULL){
-						$flag1 = 0;
+							<td style='width: 20%;'>
+								<select style='min-width:200px'  name='needquest-$row->QuestID' id='needquest-$row->QuestID' class='needquest' onChange='updateNeedquest($row->QuestID);' > 
+							";
+			    $strList .= "<option selected  value=''>NULL</option>";
+			    $flag1 = 0;
+			    $flag2 = 0;
+				foreach ($arrAllQuest as $row2)
+				{
+					if($row->QuestID != $row2->QuestID)
+					{
+						$str="";
+						if($row->NeedQuest== $row2->QuestID)
+						{
+							$flag1 = 1;
+							$str="selected";
+						}
+							$strList .= "<option $str  value='$row2->QuestID'>$row2->QuestName</option>";
 					}
-					$strList.= "<div class='need-quest-$row->QuestID' id='need-quest-div-$row->QuestID-$key'>							
-							<select style='min-width:200px;max-width:200px' id='needquest-$row->QuestID-$key' name='needquest-$row->QuestID-$key' onChange='updateNeedQuest($needQuestRow->ID,$row->QuestID,$key);'>";
+				}
+				$strList.="</select></td>
+				<td style='width: 27%;'>";	
+				$flag2 = 1;
+				//$strList.='&amp;';
+				
+				// Dung : Temp fix
+				/*$tt = $arrNextQuest[$row->QuestID];
+				if ($tt==null)
+				{
+					$key_ = $row->QuestID;
+					$flag2 = 0;
+					$strList.= "<div class='next-quest-$row->QuestID' id='next-quest-div-$row->QuestID-$key_'>							
+							<select style='min-width:200px' id='nextquest-$row->QuestID-$key_' name='nextquest-$row->QuestID-$key_' 
+							onChange='updateNextQuest($nextQuestRow->ID,$row->QuestID,$key_);'>";
 					$strList .= "<option selected  value=''>NULL</option>";		
 					foreach ($arrAllQuest as $row3){
 						if($row3->QuestID==$row->NeedQuest){
 							continue;
 						}
 						$str="";
-						if($needQuestRow->NeedQuest == $row3->QuestID)
+						if($nextQuestRow->NextQuest == $row3->QuestID)
 						{							
 							$str="selected";
 						}						
 						$strList .= "<option $str  value='$row3->QuestID'>$row3->QuestName</option>";	
 					}
-					$strList.= "</select>
-					<a class='tool-16 delete' href='javascript:deleteNeedQuest($row->QuestID,$needQuestRow->ID,$key)'></a>
-					<a class='tool-16 add' href='javascript:addNeedQuest($row->QuestID,$key)'></a>
-					</div>";
-				}
-				if(empty($arrNeedQuest)){
-					$flag1 = 0;
-				}
-				//------------------------------------------------------------
-				$strList.="</td>	
-				<td style='width: 27%;'>";	
-				$flag2 = 1;
-								
+					$strList.= "</select>					
+					<a class='tool-16 delete' href='javascript:deleteNextQuest($row->QuestID,$nextQuestRow->ID,$key_)'></a>
+					<a class='tool-16 add' href='javascript:addNextQuest($row->QuestID,$key_)'></a>
+					</div>";				
+				}*/
+				///////////////
+				
 				foreach($arrNextQuest[$row->QuestID] as $key => $nextQuestRow){
 					
 					//$strList.='&gt;';
@@ -141,6 +152,5 @@ class Zend_View_Helper_ListQuest2
 		
 		echo $strList;
 	}
-	
 }
 ?>

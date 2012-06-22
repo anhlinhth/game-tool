@@ -3,7 +3,7 @@ require_once ROOT_APPLICATION_CONTROLLERS.DS.'BaseController.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'models'.DS.'Models_Item.php';
 require_once ROOT_LIBRARY_UTILITY.DS.'utility.php';
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Log.php';
-require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_S_Item.php';
+require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'object'.DS.'Obj_Item.php';
 require_once ROOT_APPLICATION.DS.'modules'.DS.'shop'.DS.'forms'.DS.'Forms_Item.php';
 
 class shop_ItemController extends BaseController
@@ -57,23 +57,22 @@ public function _setUserPrivileges()
         }
 	}
 	
-	public function addAction()
+	public function insertAction()
 	{
 		try
-		{						
+		{
+			$this->_helper->layout->disableLayout();
+			$this->_helper->viewRenderer->setNorender();
 			if($this->_request->isPost())
 			{
-				$this->_helper->layout->disableLayout();
-				$this->_helper->viewRenderer->setNoRender();				
-				$form = new Forms_Item();
-				$form->_requestToForm($this);					
-				$form->validate(UPDATE);
-				$md=new Models_Item();												
-				$md->_insert($form->obj);							
-				//Models_Log::insert($this->view->user->username, "act_add_items", $obj->name);
-					echo(1);																
+				$name = $this->_request->getParam("Name");
+				$md = new Models_Item();
+				$obj = new Obj_Item();
+				$obj->ID = "NULL";
+				$obj->Name = $name;
+				$id = $md->insertAward($obj);
+				print_r($id);
 			}
-			
 		}
 		catch(Exception $ex)
 		{
@@ -82,7 +81,7 @@ public function _setUserPrivileges()
 		}
 	}
 	
-	public function updateAction(){
+public function updateAction(){
 		try{
 			$this->_helper->layout->disableLayout();
 			$this->_helper->viewRenderer->setNorender();
@@ -114,7 +113,6 @@ public function _setUserPrivileges()
 		{
 			$md=new Models_Item();
 			$arraward = $md->getItem();
-			
 			$arr = (array)$arraward;
 			echo(json_encode($arr));
 		}
@@ -124,36 +122,5 @@ public function _setUserPrivileges()
 			echo $this->view->errMsg;
 			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
 		}
-	}
-	
-	public function checkidAction()
-	{
-		try
-		{
-			if($this->_request->isPost())
-			{
-				$this->_helper->layout->disableLayout();
-				$this->_helper->viewRenderer->setNorender();
-				$id=$this->_request->getParam('id');
-				$md=new Models_Item();			
-				$result=$md->checkiditem($id);				
-				if($result==1)
-				{
-					echo(1);					
-				}
-				else if($result!=1)
-				{
-					echo(0);
-				}
-			}
-					
-		}
-		catch(Exception $ex)
-		{
-			$this->view->errMsg = $ex->getMessage();
-			echo $this->view->errMsg;
-			Utility::log($ex->getMessage(), $ex->getFile(), $ex->getLine());
-		}	
-	
 	}
 }

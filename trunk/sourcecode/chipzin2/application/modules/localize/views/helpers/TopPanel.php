@@ -20,7 +20,7 @@ class Zend_View_Helper_TopPanel
 				if (Utility::checkPrivilege($view, 'localize', 'string'))
                     $strList .= "<li><a href='$view->baseUrl/localize/string/index' class='report'>String Manage</a></li>";	
 				if (Utility::checkPrivilege($view, 'localize', 'string'))
-                    $strList .= "<li><a href='$view->baseUrl/localize/string2/index?size=100' class='report'>String Manage(fixed)</a></li>";
+                    $strList .= "<li><a href='$view->baseUrl/localize/string2/index' class='report'>String Manage(fixed)</a></li>";
 				 if (Utility::checkPrivilege($view, 'localize', 'language'))
                    $strList .= "<li><a href='$view->baseUrl/localize/string/insert' class='report'>Add String</a></li>";
 				if (Utility::checkPrivilege($view, 'localize', 'lgroup'))

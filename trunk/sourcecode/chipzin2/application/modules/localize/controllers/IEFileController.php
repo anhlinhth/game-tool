@@ -30,7 +30,7 @@ public function _setUserPrivileges()
 			$lang = $this->_request->getParam("llang");
 			$filename = $this->_request->getParam("filename",$lang);			
 			if($filename!='')			
-			$model->WriteFile($model->GetAllContentByLang($lang), ROOT_EXPORT_FILE.DS.'localize'.DS.$filename.'.txt');
+			$model->WriteFile($model->GetAllContentByLang($lang), 'export/'.$filename.'.txt');
 			else $this->view->errMsg="Phải đặt tên file export !";
 		}
 	}
@@ -44,12 +44,12 @@ public function _setUserPrivileges()
 			$file_temp = $f['tmp_name'];
 			$filename = $f['name'];					
 			$imgname = str_replace(' ', '-', $model->curentday().$filename);
-			$fielpath =  ROOT_IMPORT_FILE.DS.'/localize/'.DS.$imgname;
+			$fielpath =  ROOT_UPLOAD.'/localize/'.$imgname;
 			if(move_uploaded_file($file_temp,$fielpath)){
 				$array = $model->read_text_file($fielpath);				
 				$model->ImportFile($array,$lang);
 				$this->view->msg = 'Import thành công!';
-				//unlink($fielpath);
+				unlink($fielpath);
 			}
 			else{
 				$this->view->msg = 'Không tìm thấy file';

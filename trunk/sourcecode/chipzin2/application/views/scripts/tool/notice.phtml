@@ -1,0 +1,86 @@
+<div id="template" style="display: none">
+	<fieldset id="notice{id}">
+		<legend>Thông báo &nbsp;&nbsp;<a title="Xóa" href="javascript:deleteNotice({id})"><img src="<?php echo $this->baseUrl ?>/media/images/icons/page_white_delete.png"/></a></legend>
+		<label for="street">Nội dung : </label> 
+		<textarea onblur="generateLink({id})" style="margin-bottom: 5px" cols="70" rows="3" name="txtContent{id}" id="txtContent{id}" tabindex="1"></textarea>
+		<br />
+		<label for="city">Username : </label>
+		<input onblur="generateLink({id})" name="txtUserName{id}" id="txtUserName{id}" type="text" tabindex="2" />
+		<br />
+		<label for="country">Link : </label> 
+		<textarea style="margin-bottom: 5px" cols="70" rows="3" name="txtNotice[]" id="txtNotice{id}" tabindex="3"></textarea>
+        <br/>
+        <label>Start date:</label>
+        <input name="txtStart[]" id="txtStart{id}" type="text" tabindex="4" />
+        Time <input name="txtStartTime[]" id="txtStartTime{id}" type="text" tabindex="5" maxlength="5" size="5"/>
+        <br/>
+        <label>End date:</label>
+        <input name="txtEnd[]" id="txtEnd{id}" type="text" tabindex="6"/>
+        Time <input name="txtEndTime[]" id="txtEndTime{id}" type="text" tabindex="7" maxlength="5" size="5"/>
+	 </fieldset>
+</div>
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>
+<?php endif;?>
+<div id="box">	
+	<h3 id="adduser">Điều chỉnh thông báo</h3>
+	<form id="form" action="" method="post">  
+		<?php $this->listNotice($this->data, $this) ?>
+		<div id="add" align="right">
+			<a href="javascript:addNotice()" title="Thêm thông báo"><img src="<?php echo $this->baseUrl ?>/media/images/icons/add.png"/></a>
+		</div>
+	  <div align="center">
+	  <input id="button1" type="submit" value="Lưu" /> 	  
+	  </div>
+	</form>
+</div>
+<script type="text/javascript">
+	var count = <?php echo $this->count ?>;
+	function addNotice()
+	{
+		count++;
+		var html = $("#template").html();
+		html = html.replace(/{id}/gi, count);
+		$("#add").before(html);
+        var txtStart = "#txtStart" + count;
+        var txtEnd = "#txtEnd" + count;
+        $(txtStart).datepicker({dateFormat: "yy-mm-dd"});
+        $(txtEnd).datepicker({dateFormat: "yy-mm-dd"});
+	}
+	
+	function deleteNotice(id)
+	{
+		if(confirm("Bạn có muốn xóa thông báo này không?") == true)
+			$("#notice" + id).remove();
+	}
+	
+	function generateLink(i)
+	{		
+		var content = $("#txtContent" + i).val();		
+		content = jQuery.trim(content);
+		var id	= $("#txtUserName" + i).val();
+		id = jQuery.trim(id);
+		
+		if(content == "" && id == "")
+			return;
+			
+		if(content == "" && id != "")
+			return;
+			
+		if(content != "" && id == "")
+		{
+			$("#txtNotice" + i).val(content);
+			return;
+		}
+			
+		if(content != "" && id != "")	
+		{
+			var link = "<a target='_blank' href='http://me.zing.vn/profile/"+ id +"'>"+ content +"</a>";
+			$("#txtNotice" + i).val(link);
+			return;
+		}
+	}
+</script>

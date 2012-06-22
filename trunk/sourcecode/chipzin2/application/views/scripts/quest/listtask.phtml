@@ -98,7 +98,7 @@ function changeCheckbox(key) {
 			<input type="text" id="TaskName" name="TaskName" value="<?php echo $val->TaskName?>"/>
 		</td>
 		<td>Task String</td>
-		<td style="width: 400px;">
+		<td>
 			<input type="text" id="TaskString-<?php echo $key?>" name="TaskString" value="<?php echo $val->TaskString?>"  onchange="getvalue('TaskString-<?php echo $key?>')" title="TaskString-string-value-<?php echo $key?>" />
 			<a title="chon" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" onClick="findstring('TaskString-<?php echo $key?>','')"></a>&nbsp;
 			<a title="sua" id="TaskString-string-value-<?php echo $key?>" class="tool-16 edit" href="JavaScript:editstring('<?php echo $val->TaskString?>','TaskString-string-value-<?php echo $key?>');"></a>&nbsp;
@@ -111,7 +111,7 @@ function changeCheckbox(key) {
 		<td>Desc</td>
 		<td><input type="text" id="DescString" name="DescString" value="<?php echo $val->DescString?>"/></td>
 		<td>DescString</td>
-		<td style="width: 400px;">
+		<td>
 			<input type="text" id="DescID-<?php echo $key?>" name="DescID" value="<?php echo $val->DescID?>" onchange="getvalue('DescID-<?php echo $key?>')" title="DescID-string-value-<?php echo $key?>"/>
 			<a title="chn" id="stringadd" class="tool-16 explore" href="JavaScript:void(0);" title = "asds" onClick="findstring('DescID-<?php echo $key?>','')"></a>&nbsp;
 			<a title="sua" id="DescID-string-value-<?php echo $key?>" class="tool-16 edit" href="JavaScript:editstring('<?php echo $val->DescID?>','DescID-string-value-<?php echo $key?>');"></a>&nbsp;

@@ -1,0 +1,307 @@
+<?php if($this->errMsg) :?>
+	<?php $this->showError($this->errMsg)?>
+<?php endif; ?>
+<?php if($this->msg) :?>		
+	<?php $this->showMessage($this->msg)?>	
+<?php 
+endif;
+?>
+<style>
+@import url("<?php echo $this->baseUrl.'/media/css/jsonview.css' ?>");
+</style>
+<script>	
+var screen_w = 800;		
+var screen_w = 600;		
+	$(function(){
+		//screen_h =  $(document).height();		
+		$("div#wrapper #content").css("height",700);
+		//$("div#mywrapper").animate({"height": screen_h - 100}, "slow");
+		
+		
+		JSONVIEWER.init();
+		$.ajax({
+				type: "POST",
+				url: "<?php echo $this->baseUrl?>/compensation/compensation/getdata/",
+				dataType:"json",
+				success:function(data){	
+					var root = $("#tree .ul-node-0 .li-node-0");	
+					
+					var s = JSONVIEWER.processNodes(data,1);
+					//console.log(s);	
+					root.append(s);
+				}
+		});		
+		$("button#view-changed").click(function(){
+			var $tabs = $("#tabs" ).tabs();
+			$tabs.tabs('select', 1); 
+		});
+		$("button#view-value").click(function(){
+			var $tabs = $("#tabs" ).tabs();
+			$tabs.tabs('select', 0); 
+			//$("button#view-value").attr("disabled",true);
+		});
+	});
+	(function($){
+		JSONVIEWER ={
+			init: function() {				
+				this._table = $("div#grid table.values tbody");
+				$("div#tree").delegate(".x-icon.plus","click",function(e){
+					$(this).removeClass("plus").addClass("minus");
+					$(this).parent().find("ul").show();
+					$(this).parent().find("div").show();			
+					e.preventDefault();
+					return false;
+				});
+				$("div#tree").delegate(".x-icon.minus","click",function(e){
+					$(this).removeClass("minus").addClass("plus");
+					$(this).parent().find("div").hide();
+					$(this).parent().find("ul").hide();									
+					e.preventDefault();
+					return false;
+				});
+				$("div#tree").delegate(".x-div","click",function(e){
+					JSONVIEWER._table.html("");
+					var name = $(this).find("span.name").text();
+					var type = $(this).find("span.name").attr("title");
+					var value = $(this).find("span.value").text();	
+						
+					JSONVIEWER.addToGridView(name,type,value);					
+					// e.preventDefault();
+					$(".selected").removeClass("selected");
+					$(this).addClass("selected");
+					var $tabs = $("#tabs" ).tabs();
+					$tabs.tabs('select', 0); 
+					return false;
+				});	
+				$("div#tree").delegate(".x-icon.object","click",function(e){
+					JSONVIEWER._table.html("");
+					var arr_div = $(this).parent().children("*");
+					arr_div.each(function(index){
+						if($(this).hasClass("x-div")){
+							var name = $(this).find("span.name").text();
+							var type = $(this).find("span.name").attr("title");
+							var value = $(this).find("span.value").text();
+							JSONVIEWER.addToGridView(name,type,value);	
+						}else if($(this).hasClass("ul-node")){
+							var name_object = $(this).find(".x-icon.object").eq(0).text();
+							JSONVIEWER.addToGridView(name_object,"object","...	");	
+						}
+						
+					});
+					$(".selected").removeClass("selected");
+					$(this).addClass("selected");
+					var $tabs = $("#tabs" ).tabs();
+					$tabs.tabs('select', 0); 		
+					// e.preventDefault();
+					return false;
+				});
+				$("#tabs" ).tabs({
+					//collapsible: false;
+				});		
+			},
+			processNodes: function(node,level) {
+				if(node==null){
+					return '<span class="x-text value">null</span>';
+				};
+				var return_str = '';
+				var type = jQuery.type(node);								
+				switch(jQuery.type(node))
+				{	
+					case 'boolean':												
+					case 'number':
+						return_str += '<span class="x-text value">'+node+'</span>';
+						break;
+					case 'string':						
+						return_str += '<span class="x-text value">"'+node+'"</span>';
+						break;
+					case 'object':						
+						// $.each(node, function(item,value){								
+							// return_str += JSONVIEWER.processNodes(this,);								
+						// });
+						// break;
+					case 'array':
+						/*object*/						
+						var type_value = "";
+						level++;
+						if(node != null){						
+							$.each(node, function(item,value){								
+								type_value = jQuery.type(value);
+								if(type_value =="object" || type_value=="array"){
+									return_str += '<ul class="ul-node"><li>';
+									for(var i = 0; i<level-1;i++){
+										return_str +='<span class="x-icon line"></span>';
+									}
+									return_str += '<span class="x-icon minus"></span>';
+									return_str += '<span class="x-icon '+type_value+'">'+item+'</span>';									
+								}else{
+									return_str += '<div class="x-div">';
+									for(var i = 0; i<level-1;i++){
+										return_str +='<span class="x-icon line"></span>';
+									}
+									return_str += '<span class="x-icon ebow"></span>';
+									return_str += '<span title="'+type_value+'" class="x-icon name '+type_value+'">'+item+'</span> : ';
+								}
+								if(value==null)	
+									console.log(value);
+								return_str += JSONVIEWER.processNodes(value,level);
+									
+								if(type_value =="object" || type_value=="array"){
+									return_str += '</li></ul>';									
+								}else{
+									return_str +="</div>";
+								}
+							});
+							
+						};
+						break;										
+				}
+				/*Clean up any undefined elements*/
+				return_str = return_str.replace('undefined', '');
+				return return_str;
+			},
+			addToGridView: function(name,type,value){
+				if(type=="object"){
+					this._table.append('<tr><td class="name">'+name+'</td><td>'+type+'</td><td class="value"><input class="disabled" disabled value='+value+' /></td></tr>');				
+				}else{
+					this._table.append('<tr><td class="name">'+name+'</td><td>'+type+'</td><td class="value"><input value='+value+' /></td></tr>');				
+				}
+				
+			}
+		}
+	})(jQuery);
+	function initEvent(){
+		
+		// $("button#load").click(function(){				
+			// $.ajax({
+				// type: "POST",
+				// url: "<?php echo $this->baseUrl?>/compensation/compensation/getdata/",
+				// dataType:"json",
+				// success:function(data){	
+					// var root = $("#tree #ul-node-0");					
+					// buildTree(data,root,0);
+				// }
+			// });
+		// });
+	}
+	
+	// function buildTree(data,root,level){		
+		// $.each(data,function(key,val,level){
+			// addNode(root,level);			
+		// });
+	// }
+	
+	// function addNode(root,level){
+		// var htmlNode = '<li><span class="x-icon "></li>';
+		// $.template( "nodeTemplate", htmlNode );		
+		// root.append(node);
+		// root.append('<span class="x-icon minus"></span>');
+		// root.append('<span class="x-icon object"></span>');
+		// root.append('<span class="x-icon text"></span>');
+		// root.append("</li></ul>");
+	// }
+</script>
+
+
+<div id="mywrapper">
+	<div id="x-toolbar" >
+		<button id="load" class="button">load data</button>
+		<button id="view-value" class="button">view value</button>	
+		<button id="view-changed" class="button">view changed</button>
+	</div>		
+	<div id="tree" class="x-panel">
+		<ul class="ul-node-0" class="ul-node">
+			<li class="li-node-0">
+				<span class="x-icon minus"></span>
+				<span class="x-icon object"></span>
+				<span class="x-text">JSon</span>
+			<!--</li>
+			<li>
+				<span class="x-icon minus"></span>
+				<span class="x-icon object"></span>
+				<span class="x-text">JSon</span>
+				<ul class="x-node">
+					<li>
+					<span class="x-icon ebow"></span>
+					<span class="x-icon minus"></span>
+					<span class="x-icon object"></span>
+					<span class="x-text">JSon</span>
+					<ul class="x-node">
+						<li>
+						<span class="x-icon line"></span><span class="x-icon ebow"></span>
+						<span class="x-icon minus"></span>
+						<span class="x-icon object"></span>
+						<span class="x-text">JSon</span>			
+						</li>
+						<li>
+						<span class="x-icon line"></span><span class="x-icon ebow"></span>
+						<span class="x-icon minus"></span>
+						<span class="x-icon object"></span>
+						<span class="x-text">JSon</span>			
+						</li>
+					</ul>	
+					</li>
+					<li>
+					<span class="x-icon ebow"></span>
+					<span class="x-icon minus"></span>
+					<span class="x-icon array"></span>
+					<span class="x-text">JSon</span>
+					<ul class="x-node">
+						<li>
+						<span class="x-icon line"></span><span class="x-icon ebow"></span>
+						<span class="x-icon minus"></span>
+						<span class="x-icon int"></span>
+						<span class="x-text">tuoi:15</span>			
+						</li>
+						<li>
+						<span class="x-icon ebow-end"></span><span class="x-icon ebow-end"></span>
+						<span class="x-icon minus"></span>
+						<span class="x-icon string"></span>
+						<span class="x-text">name:"thao"</span>			
+						</li>
+					</ul>						
+					</li>
+				</ul>-->
+			</li> 
+		</ul>
+	</div>
+	<div id="slpit"><div class="ct"></div></div>
+	<div id="grid" class="x-panel">
+	<div id="tabs" style="padding:0px">
+		<ul style="display:none">
+			<li><a href="#tabs-1">Nunc tincidunt</a></li>
+			<li><a href="#tabs-2">Proin dolor</a></li>			
+		</ul>
+		<div id="tabs-1" style="padding:0px">
+		<div>
+			<button>Save</button>
+		</div>
+		<table class = "values" style="margin: 0px;width: 100%;">
+		<thead>
+			<tr>
+				<td>name</td>
+				<td>type</td>
+				<td>value</td>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+		</table>
+		</div>
+		<div id="tabs-2">
+			<table style="margin: 0px;width: 100%;">
+				<thead>
+				<tr>
+					<td>name</td>
+					<td>Old value</td>
+					<td>New value</td>
+				</tr>
+				</thead>
+				<tbody>
+			
+				</tbody>
+			</table>
+			</div>
+	</div>
+	</div>
+</div>

@@ -1,6 +1,7 @@
 <?php
 require_once ROOT_APPLICATION_MODELS.DS.'Models_Base.php';
-
+// require_once ROOT_APPLICATION_MODELS.DS.'Models_Item.php';
+// require_once ROOT_APPLICATION_MODELS.DS.'Models_SaleOff_Shop.php';
 
 class Models_Task_Package extends Models_Base
 {
